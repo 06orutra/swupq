@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import Polo from '@/Components/Polo.vue'
 
 defineProps({
     canLogin: Boolean,
@@ -128,6 +129,7 @@ defineProps({
             </div>
         </div>
     </div>
+    <Polo />
 </template>
 
 <style>

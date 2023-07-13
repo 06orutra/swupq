@@ -14,7 +14,7 @@
         </div>
         <!-- If sobre showChatbot para mostrar el chatbot y configurar todo el 
         contenedor del chatbot. El fondo cambia según si es modo claro u oscuro -->
-        <div v-if="showChatbot" class="chatbot-container
+        <div v-if="showChatbot" class="chatbot-container z-10
                 dark:bg-[url('C:\laragon\www\swupq\public\img\FondoOscuroChatBot.jpg')]
                 bg-[url('C:\laragon\www\swupq\public\img\FondoClaroChatBot.jpg')]">
             <!-- CHATBOT CONTENIDO EN EL DESTE -->
@@ -254,7 +254,7 @@ export default {
 
 <style>
 .chatbot-container {
-    top: 70px;
+    top: 40px;
     position: fixed;
     bottom: 10px;
     right: 20px;
@@ -262,7 +262,6 @@ export default {
     overflow-y: scroll;
     max-width: 640px;
     max-height: 1080px;
-
 }
 
 .chatButton {

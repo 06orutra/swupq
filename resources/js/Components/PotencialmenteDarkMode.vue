@@ -108,11 +108,14 @@ const applyScale = () => {
         <div class="grid">
             <div class="col-3">
                 <button class="p-link w-2rem h-2rem" @click="onChangeTheme('bootstrap4-light-blue', 'light')">
+                    <!-- En @click="onChangeTheme('bootstrap4-light-blue', 'light')", se cambia el tema a light blue, y se cambia el modo a light
+                    La dunción de esto es que se cambie el tema a light blue, y se cambie el modo a light. Yep, Modo oscuro y claro
+                    Ergo... puede servir como gatillo ;D y además se puede reutilizar para un botón a parte. -->
                     <img src="/assets/layout/images/themes/bootstrap4-light-blue.svg" class="w-2rem h-2rem" alt="Bootstrap Light Blue" />
                 </button>
             </div>
             <div class="col-3">
-                <button class="p-link w-2rem h-2rem" @click="onChangeTheme('bootstrap4-light-purple', 'light')">
+                <button class="p-link w-2rem h-2rem" @click="onChangeTheme('bootstrap4-light-blue', 'light')">
                     <img src="/assets/layout/images/themes/bootstrap4-light-purple.svg" class="w-2rem h-2rem" alt="Bootstrap Light Purple" />
                 </button>
             </div>

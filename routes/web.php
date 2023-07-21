@@ -3,6 +3,9 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\tb_banner;
+use App\Http\Controllers\HomeController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +38,14 @@ Route::middleware([
     Route::get('/{any?}', function () {
         return Inertia::render('App');
     })->name('dashboard')->where('any','.*');
+
+
+    // ---------- Rutas Home ------------
+    Route::post('/bannerData', [HomeController::class, 'bannerData']);
+
+    Route::post('/registrarBanner', [HomeController::class, 'registrarBanner']);
+
+    Route::post('/eliminarBanner', [HomeController::class, 'eliminarBanner']);
+
+    Route::post('/editarBanner', [HomeController::class, 'editarBanner']);
 });

@@ -16,7 +16,7 @@ const router = createRouter({
                 {
                     path: '/home',
                     name: 'home',
-                    component: () => import('@/Pages/Dashboard.vue'),
+                    component: () => import('@/Pages/Componentes/Home/TabMenu.vue'),
                     children: [{
                         path: '/menu2',
                         name: 'menu2',
@@ -45,32 +45,32 @@ const router = createRouter({
                 }
             ]
         },
-        {
-            path: '/landing',
-            name: 'landing',
-            component: () => import('@/views/pages/Landing.vue')
-        },
-        {
-            path: '/pages/notfound',
-            name: 'notfound',
-            component: () => import('@/views/pages/NotFound.vue')
-        },
+        // {
+        //     path: '/landing',
+        //     name: 'landing',
+        //     component: () => import('@/views/pages/Landing.vue')
+        // },
+        // {
+        //     path: '/pages/notfound',
+        //     name: 'notfound',
+        //     component: () => import('@/views/pages/NotFound.vue')
+        // },
 
-        {
-            path: '/auth/login',
-            name: 'login',
-            component: () => import('@/views/pages/auth/Login.vue')
-        },
-        {
-            path: '/auth/access',
-            name: 'accessDenied',
-            component: () => import('@/views/pages/auth/Access.vue')
-        },
-        {
-            path: '/auth/error',
-            name: 'error',
-            component: () => import('@/views/pages/auth/Error.vue')
-        }
+        // {
+        //     path: '/auth/login',
+        //     name: 'login',
+        //     component: () => import('@/views/pages/auth/Login.vue')
+        // },
+        // {
+        //     path: '/auth/access',
+        //     name: 'accessDenied',
+        //     component: () => import('@/views/pages/auth/Access.vue')
+        // },
+        // {
+        //     path: '/auth/error',
+        //     name: 'error',
+        //     component: () => import('@/views/pages/auth/Error.vue')
+        // }
     ]
 });
 

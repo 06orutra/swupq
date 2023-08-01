@@ -16,7 +16,7 @@ const router = createRouter({
                 {
                     path: '/home',
                     name: 'home',
-                    component: () => import('@/Pages/Dashboard.vue'),
+                    component: () => import('@/Pages/Componentes/Home/TabMenu.vue'),
                     children: [{
                         path: '/menu2',
                         name: 'menu2',
@@ -45,16 +45,16 @@ const router = createRouter({
                 }
             ]
         },
-        {
-            path: '/landing',
-            name: 'landing',
-            component: () => import('@/views/pages/Landing.vue')
-        },
-        {
-            path: '/pages/notfound',
-            name: 'notfound',
-            component: () => import('@/views/pages/NotFound.vue')
-        },
+        // {
+        //     path: '/landing',
+        //     name: 'landing',
+        //     component: () => import('@/views/pages/Landing.vue')
+        // },
+        // {
+        //     path: '/pages/notfound',
+        //     name: 'notfound',
+        //     component: () => import('@/views/pages/NotFound.vue')
+        // },
 
         {
             path: '/auth/login',
@@ -70,8 +70,14 @@ const router = createRouter({
             path: '/auth/error',
             name: 'error',
             component: () => import('@/views/pages/auth/Error.vue')
+        },
+        {
+            path: '/tareas',
+            name: 'tareas',
+            component: import('@/Pages/Tareas.vue')
         }
     ]
 });
+
 
 export default router;

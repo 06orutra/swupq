@@ -70,13 +70,15 @@ const submit = () => {
 
             <div class="mt-4">
                 <div class="flex flex-column">
-                    <label for="password-confirmation" class="text-sm font-semibold">Confirmar contraseña</label>
+                    <label for="password_confirmation" class="text-sm font-semibold">Confirmar contraseña</label>
                     <div class="p-inputgroup mt-2">
                         <span class="p-inputgroup-addon">
                             <i class="pi pi-key"></i>
                         </span>
+
                         <Password id="password-confirmation" v-model="form.password_confirmation" class="flex bg-red-200"
                             :class="{ 'p-invalid': form.errors.password_confirmation }" :feedback="false" toggleMask required />
+
                     </div>
                     <small id="password-error" class="text-sm text-red-600" v-if="form.errors.password_confirmation">
                         {{ form.errors.password_confirmation }}
@@ -90,7 +92,11 @@ const submit = () => {
                         <Checkbox id="terms" v-model:checked="form.terms" name="terms" required />
 
                         <div class="ml-2">
-                            I agree to the <a target="_blank" :href="appRoute('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Terms of Service</a> and <a target="_blank" :href="appRoute('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Privacy Policy</a>
+                            I agree to the <a target="_blank" :href="appRoute('terms.show')"
+                                class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Terms
+                                of Service</a> and <a target="_blank" :href="appRoute('policy.show')"
+                                class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Privacy
+                                Policy</a>
                         </div>
                     </div>
                     <InputError class="mt-2" :message="form.errors.terms" />
@@ -98,13 +104,13 @@ const submit = () => {
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <Link :href="appRoute('login')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    ¿Ya estás registrado?
+                <Link :href="appRoute('login')"
+                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                ¿Ya estás registrado?
                 </Link>
 
-                <Button type="submit" label="Registrarse" :disabled="form.processing" class="ml-4"
-                    :class="{ 'opacity-25': form.processing }" />
-            </div>
-        </form>
-    </AuthenticationCard>
-</template>
+            <Button type="submit" label="Registrarse" :disabled="form.processing" class="ml-4"
+                :class="{ 'opacity-25': form.processing }" />
+        </div>
+    </form>
+</AuthenticationCard></template>

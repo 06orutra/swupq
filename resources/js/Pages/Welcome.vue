@@ -26,10 +26,10 @@ defineProps({
         </div>
     </div>
 -->
-    <Videos />
+    
 
     <AppEstructure>
-        // Aquí va el contenido de la página
+        <Videos />
     </AppEstructure>
 </template>
 

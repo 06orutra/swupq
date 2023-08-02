@@ -2,6 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import Videos from '@/Pages/Componentes/Home/Videos.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
+import imagenesPrueba from '@/Pages/Componentes/Welcome/imagenesPrueba.vue';
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
@@ -30,6 +31,7 @@ defineProps({
 
     <AppEstructure>
         <Videos />
+        <imagenesPrueba />
     </AppEstructure>
 </template>
 

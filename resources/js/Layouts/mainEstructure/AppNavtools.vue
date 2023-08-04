@@ -1,5 +1,47 @@
 <script setup>
 import { ref } from 'vue';
+import { useLayout } from '@/Layouts/composables/layout';
+
+const scales = ref([8, 10, 12, 14, 16, 18, 20]);
+
+const { changeThemeSettings, setScale, layoutConfig } = useLayout();
+
+const onConfigButtonClick = () => {
+    visible.value = !visible.value;
+};
+const onChangeTheme = (theme, mode) => {
+    const elementId = 'theme-css';
+    const linkElement = document.getElementById(elementId);
+    const cloneLinkElement = linkElement.cloneNode(true);
+    const newThemeUrl = linkElement.getAttribute('href').replace(layoutConfig.theme.value, theme);
+    cloneLinkElement.setAttribute('id', elementId + '-clone');
+    cloneLinkElement.setAttribute('href', newThemeUrl);
+    cloneLinkElement.addEventListener('load', () => {
+        linkElement.remove();
+        cloneLinkElement.setAttribute('id', elementId);
+        changeThemeSettings(theme, mode === 'dark');
+    });
+    linkElement.parentNode.insertBefore(cloneLinkElement, linkElement.nextSibling);
+};
+
+const decrementScale = () => {
+    setScale(layoutConfig.scale.value - 2);
+    applyScale();
+};
+//Se disminuye en 2 cada que se apriete el botón de menos
+const incrementScale = () => {
+    setScale(layoutConfig.scale.value + 2);
+    applyScale();
+};
+
+const resetScale = () => {
+    setScale(14);
+    applyScale();
+};
+const applyScale = () => {
+    document.documentElement.style.fontSize = layoutConfig.scale.value + 'px';
+};
+
 const menu = ref();
 const item = ref([
     {
@@ -31,13 +73,16 @@ const toggle = (event) => {
             <template #start>
 
                 <div class="mx-2">
-                    <Button label="A+" class="left font-bold text-xl"></Button>
-                    <Button label="A-" severity="danger" class="right font-bold text-xl" />
+                    <Button label="A+" class="left font-bold text-xl" @click="incrementScale()" :disabled="layoutConfig.scale.value === scales[scales.length - 1]"/>
+                    <i v-for="s in scales" :key="s" :class="{ 'text-primary-500': s === layoutConfig.scale.value }"></i>
+                    <Button label="0" severity="danger" class="center font-bold text-xl bg-gray-500 border-gray-500 border-noround" @click="resetScale()"/>
+                    <Button label="A-" severity="danger" class="right font-bold text-xl" @click="decrementScale()" :disabled="layoutConfig.scale.value === scales[0]"/>
 
                 </div>
                 <div class="mx-2">
-                    <Button icon="pi pi-moon" class="left surface-900 border-900"></Button>
-                    <Button icon="pi pi-sun" class="right surface-500 border-500" />
+                    <Button icon="pi pi-moon" class="left surface-900 border-900" @click="onChangeTheme('bootstrap4-dark-purple', 'dark')">
+                    </Button>
+                    <Button icon="pi pi-sun" class="right surface-500 border-500" @click="onChangeTheme('bootstrap4-light-blue', 'light')"/>
                 </div>
                 <div class="mx-2">
                     <Button icon="pi pi-volume-up" class="left"></Button>
@@ -104,7 +149,7 @@ const toggle = (event) => {
     color: #1B4D9A;
 }
 
-.sii span span {
+.sii span span{
     color: #D71E39;
 }
 
@@ -114,6 +159,10 @@ const toggle = (event) => {
 
 .left,
 .right {
+    width: 40px;
+    height: 25px;
+}
+.center{
     width: 40px;
     height: 25px;
 }

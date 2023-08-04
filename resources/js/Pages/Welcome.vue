@@ -35,8 +35,8 @@ defineProps({
 
 -->
     
-<Polo />
-    <AppEstructure>
+<AppEstructure>
+        <Polo />
         <Videos />
     </AppEstructure>
     <PotencialmenteDarkMode />

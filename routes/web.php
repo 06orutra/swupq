@@ -50,6 +50,13 @@ Route::middleware([
     Route::post('/eliminarBanner', [HomeController::class, 'eliminarBanner']);
 
     Route::post('/editarBanner', [HomeController::class, 'editarBanner']);
+
+    //----------------- Rutas de textosPrueba -----------------
+    
+    Route::post('/textoData', [HomeController::class, 'textoData']);
+
+    Route::post('/registrarTexto', [HomeController::class, 'registrarTexto']);
+    
 });
 
 Route::post('/bannerData', [HomeController::class, 'bannerData']);

@@ -26,6 +26,31 @@ class TextsController extends Controller
         $texto->contenido = $request->contenido;
         $texto->save();
 
-        return response()->json('Banner registered successfully');
+        return response()->json('Text registered successfully');
+    }
+
+    public function editarTexto(Request $request){
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'contenido' => 'required|string|max:255',
+        ]);
+
+        $texto = Texts::find($request->id);
+
+        $texto->titulo = $request->titulo;
+        $texto->contenido = $request->contenido;
+        $texto->save();
+
+        return response()->json('Text edited successfully');
+    }
+
+
+    
+    public function eliminarTexto(Request $request){
+        $texto = Texts::find($request->id);
+        //eliminar la imagen del storage
+        $texto->delete();
+
+        return response()->json('Banner deleted successfully');
     }
 }

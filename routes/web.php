@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\tb_banner;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TextsController;
 use Illuminate\Http\Request;
 
 /*
@@ -53,9 +54,13 @@ Route::middleware([
 
     //----------------- Rutas de textosPrueba -----------------
     
-    Route::post('/textoData', [HomeController::class, 'textoData']);
+    Route::post('/textoData', [TextsController::class, 'textoData']);
 
-    Route::post('/registrarTexto', [HomeController::class, 'registrarTexto']);
+    Route::post('/registrarTexto', [TextsController::class, 'registrarTexto']);
+
+    Route::post('/editarTexto', [TextsController::class, 'editarTexto']);
+
+    Route::post('/eliminarTexto', [TextsController::class, 'eliminarTexto']);
     
 });
 

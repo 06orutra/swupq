@@ -1,0 +1,288 @@
+<template>
+    <div>
+        <br><br><br>
+        <div class="fixed bottom-4 right-4">
+            <button class="chatButton" @click="toggleChatbot">
+                <img src='/storage/img/icon_chatbot.png' alt="Chatbot Icon">
+            </button>
+        </div>
+        <!-- If sobre showChatbot para mostrar el chatbot y configurar todo el 
+        contenedor del chatbot. El fondo cambia según si es modo claro u oscuro -->
+        <div v-if="showChatbot" class="chatbot-container z-30
+                dark:bg-[url('C:\laragon\www\swupq\public\img\FondoOscuroChatBot.jpg')]
+                bg-[url('C:\laragon\www\swupq\public\img\FondoClaroChatBot.jpg')]">
+            <!-- CHATBOT CONTENIDO EN EL DESTE -->
+            <!-- Header del chatbot container -->
+            <div class="
+                bg-gradient-to-r from-red-800 to-blue-900 hover:from-blue-900 hover:to-red-800
+                dark:bg-gradient-to-r dark:from-red-900 dark:to-purple-900 dark:hover:from-purple-900 dark:hover:to-red-900
+                h-3rem flex items-center justify-between px-4 py-4 text-white sticky top-0 z-20
+                text-3xl text-center
+                
+                ">
+                <a>Poli & Polo</a>
+                <!-- Botón para cerrar el chat, su única función es hacer un toggleChatbot
+                        mientras el chat esté abierto. Y cambia de colorcito por el hover owo -->
+                <!-- Descubrimiento: Al usar "h3" o similares con PrimeVue, no se respetan los estilos.
+                Pero si utilizamos "p" o "span" sí se respetan a medias.
+                Con  "a" se respetan al completo. -->
+                <button class="w-24 h-8 bg-red-500 hover:bg-red-300 text-white text-base font-bold rounded-md cursor-pointer" @click="toggleChatbot">X Cerrar</button>
+
+            </div>
+            <!-- SECCIÓN DE MENSAJES -->
+            <div class="px-4 py-6 z-10 ">
+                <!-- Z-10 y Z-20 son las posiciones "delante de..." 
+                    Se crea un div conm un FOR de los mensajes que se agreguen
+                a una key llamada "message.id", que será el número de mensaje actual-->
+                <div v-for="message in messages" :key="message.id" class="flex flex-grow-1">
+                    <!-- Este flex grow ayuda a que no se encimen las cosas-->
+                    <!-- <pre> sirve para... la neta no sé, pero carga un estilo diferente y deja usar saltos de línea en objetos :D De mientras lo quito porque se bugea lo demás xD. La opción definitiva es la propiedad style="white-space: pre-line"-->
+                    <p v-if="message.text" class='rounded-lg py-3 px-4 inline-block mb-2 relative text-2xl font-sans
+                        bg-gray-100 text-gray-800 hover:bg-white float-left ml-2 mr-20 mt-2
+                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500' style="white-space: pre-line">{{ message.text }}</p>
+                    <a v-if="message.link" :href="message.link" target="_blank" class="rounded-lg py-2 px-4 inline-block mb-2 relative text-2xl 
+                        bg-gray-400 text-gray-900 hover:bg-white float-left ml-2 mr-20 mt-2
+                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">{{message.option}}</a>
+                        <!-- Ya viendo esto, se puede decir que se pueden agregar muchas
+                        cosas por cada array del javascript para mandar acá, incluso en mensajes separados y acoplados a diferentes partes.-->
+                </div>
+            </div>
+            <!-- BOTONES DEL CHAT -->
+            <div v-if="showButtons" class="px-4 py-3 text-center">
+                <!-- Generar los botones que están guardados en un array como "currentButtons"
+                    Recibiendo así "handleButtonClick como disparador para la siguiente acción" -->
+                <button v-for="button in currentButtons" :key="button.text" @click="handleButtonClick(button)"
+                    class="m-1 rounded-sm max-w-md w-1/4 relative bottom-2 mt-6 text-2xl cursor-pointer
+                    bg-gradient-to-r from-gray-300 to-gray-500 hover:from-red-500 hover:to-blue-500 text-black
+                    dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-600 dark:hover:from-blue-900 dark:hover:to-purple-900 dark:text-white">
+                    {{ button.text }}
+                </button>
+            </div>
+            <!-- Pequeña leyenda de que el chatbot es hecho en UPQ -->
+            <a class="fixed bottom-0 right-6 mb-4 mr-4 text-gray-500
+                    font-bold text-xs
+                    hover:text-gray-800 dark:text-gray-900 dark:hover:text-gray-200" href="https://www.upq.mx/">Hecho en UPQ</a>
+            <!-- CONTENIDO DEL SHAT -->
+        </div>
+    </div>
+</template>
+
+<script>
+import "/node_modules/primeflex/primeflex.css";
+export default {
+    data() {
+        return {
+            //Se mantiene oculto el chatbot al cargar la página
+            showChatbot: false,
+            //Mensajes del bot nada más iniciar
+            messages: [
+                { 
+                    id: 1, //Identificador meramente para interpretación del código
+                    text: '¡Bienvenido! Somos Poli y Polo.\n¿Necesitas que te demos un ala?', //Textos a mostrar
+                    link: '', //Hipervínculos que tendrán algunos mensajes
+                    option: '',//Texto de los mensajes de hipervínculo. Estos tienen un formato levemente diferente y se llaman sólo si existe una adición link y option en el javascript
+                    user: ''}, //Los mensajes del usuario, solamente un reflejo del botón de selección.
+
+                //Próximamente reemplazable para conectar con una Base de datos
+            ],
+            //newMessageText: '',
+            showButtons: true,
+            currentButtons: [
+                { text: 'Carreras', value: 1 },
+                { text: 'Convocatorias', value: 2 },
+                { text: 'Admisión', value: 3 },
+                { text: 'Tour Cardenal', value: 4 },
+                { text: 'Centro de Idiomas', value: 5 },
+                { text: 'Trámites', value: 6 },
+                { text: 'Posgrados', value: 7 },
+            ],
+        };
+    },
+    methods: {
+        toggleChatbot() {
+            this.showChatbot = !this.showChatbot;
+        },
+
+        handleButtonClick(button) {
+
+            switch (button.value) {
+                case 1:
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        text: 'Nuestra oferta educativa se conforma por 5 ingenierías:\nMecatrónica, Tecnología Automotriz, Tecnologías de Manufactura, Sistemas Computacionales y Redes y Telecomunicaciones.\nAsí como dos licenciaturas:\nNegocios Internacionales y Administración y Gestión Empresarial.',
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        option: 'Mecatrónica',
+                        link: 'https://www.upq.mx/media/curriculum_pdf/mapa_mecatronica_2021.pdf',
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        option: 'Tecnología Automotriz',
+                        link: 'https://www.upq.mx/media/curriculum_pdf/mapa_automotriz.pdf',
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        option: 'Tecnologías de Manufactura',
+                        link: 'https://www.upq.mx/media/curriculum_pdf/mapa_manufactura_2021.pdf',
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        option: 'Sistemas Computacionales',
+                        link: 'https://www.upq.mx/media/curriculum_pdf/mapa_sistemas.pdf',
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        option: 'Redes y Telecomunicaciones',
+                        link: 'https://www.upq.mx/media/curriculum_pdf/MAPA_REDES_Y_TELECOMUNICACIONES.pdf',
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        option: 'Negocios Internacionales',
+                        link: 'https://www.upq.mx/media/curriculum_pdf/mapa_negocios.pdf',                        
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        option: 'Administración y Gestión Empresarial',
+                        link: 'https://www.upq.mx/media/curriculum_pdf/UPQ_Mapa_Curricular_LAGE.pdf',
+                    });
+
+                    break;
+                    //EN TEORÍA debería mandarse un link... EN TEORÍA >:(
+                case 2:
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        text: 'Te comentamos que al año contamos con dos procesos de admisión. La segunda convocatoria ya se encuentra abierta ¡Regístrate!\n\nEl costo del proceso de admisión ronda los 1,500 pesos y el cuatrimestre (una vez admitida) asciende a alrededor de 3,800 pesos.\n\nNuestras carreras se cursan en modalidad escolarizada: es decir, de lunes a viernes, durante el primer año todos los estudiantes cursan el turno matutino (07:00 a 13:40 hrs.), a partir del segundo año puede que curses estudios en el horario vespertino (14:00 a 20:40 hrs.). \nPara más información puedes consultar aquí en la página web o al teléfono:\n442 101 9000 ext. 352, 353 o 354',
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: 'https://drive.google.com/file/d/1YN8lvzfVsKPE1vPHGTxASkxXE77usYhu/view',
+                        //Acá favor de no usar acortadores de links :(
+                            //Ah, y de actualizar las fechas del pdf, que dice 2022 aún :C
+                        option: 'Convocatoria',
+                    });
+                    /* this.currentButtons.splice(0, this.currentButtons.length);
+                    this.currentButtons.push({
+                        text: 'Inscripciones a la universidad',
+                        value: 2.1,
+                    });
+                    this.currentButtons.push({
+                        text: 'Becas y apoyos económicos',
+                        value: 2.2,
+                    });
+                    this.currentButtons.push({
+                        text: 'Movilidad estudiantil',
+                        value: 2.3,
+                    }); */
+                    break;
+                case 3:
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        text: 'El proceso de admisión consta del examen de conocimientos , examen de habilidades del pensamiento y cursos de inducción.\n\nLos cursos (al igual que todas las facetas del proceso de admisión) son sumamente importantes para el cumplimiento exitoso de tu ingreso. Te recomendamos mínimo asistir a 3 de las 4 sesiones.\n\nRecuerda que todo el proceso es en línea. Para más información puedes navegar en la página o preguntar al teléfono 442 101 9000 ext. 352, 353 o 354.',
+                    });
+                    /* this.currentButtons.splice(0, this.currentButtons.length);
+                    this.currentButtons.push({
+                        text: 'Convenios y tratos',
+                        value: 3.1,
+                    });
+                    this.currentButtons.push({
+                        text: 'Ver más información general',
+                        value: 3.2,
+                    }); */
+                    break;
+                case 4:
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        text: 'Gracias por tu interés en los recorridos en nuestras instalaciones, te pedimos que puedas responder este cuestionario y mandarnos una captura de pantalla de que lo has respondido al correo captacion@upq.edu.mx.\n\nPor el momento solo los días martes y jueves se estarán realizando.',
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://forms.gle/M9jtADLP34Zhj2yk6",
+                        option: "Formulario"
+                    })
+                    break;
+                case 5:
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        text: "Sé parte de nuestro Centro de Idiomas UPQ.\n¡Es abierto al público en general a partir de los 15 años!\n\nInscríbete en alguno de nuestros niveles. Más información:\neducacion.continua@upq.edu.mx"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://bit.ly/3iQoNFv",
+                        option: "Inglés"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://bit.ly/3uAPmUK",
+                        option: "Francés"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://bit.ly/38fOA8f",
+                        option: "Alemán"
+                    });
+                    break;
+                
+                case 6:
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        text: "¿Qué tramite te gustaría realizar?"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://bit.ly/3iQoNFv",
+                        option: "Inscripción"
+                    });
+
+                default:
+                    break;
+            }
+
+            setTimeout(() => {
+                this.showButtons = true;
+            }, 500);
+        },
+    },
+};
+
+</script>
+
+<style>
+.chatbot-container {
+  top: 40px;
+  position: fixed;
+  bottom: 10px;
+  left: 50%; /* Centramos el contenedor horizontalmente en la mitad de la pantalla */
+  transform: translateX(-10%); /* Desplazamos el contenedor hacia la izquierda para centrarlo */
+  border-radius: 10px;
+  overflow-y: scroll;
+  max-width: 640px;
+  max-height: 1070px;
+  border: 1px solid black;
+}
+
+.chatButton {
+  background-color: rgb(7, 7, 7);
+  display: flex;
+  flex-direction: column;
+  width: 7vh; /* Ajusta el ancho de acuerdo a tus necesidades */
+  height: 7vh; /* Ajusta la altura de acuerdo a tus necesidades */
+  flex: 1;
+  border: .5px solid rgb(18, 17, 17); /* Borde para visualizar las divisiones */
+  cursor: pointer;
+  position: relative;
+  /* Quitamos 'transform' para eliminar el desplazamiento */
+  margin: 0 auto; /* Añadimos este margen para centrar verticalmente */
+  left: -998.1px; /* Mover 20px a la izquierda */
+  top: -442px; /* Mover 20px hacia arriba */
+}
+
+.chatButton img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+</style>

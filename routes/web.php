@@ -54,7 +54,7 @@ Route::middleware([
 
     //----------------- Rutas de textosPrueba -----------------
     
-    Route::post('/textoData', [TextsController::class, 'textoData']);
+    
 
     Route::post('/registrarTexto', [TextsController::class, 'registrarTexto']);
 
@@ -65,3 +65,6 @@ Route::middleware([
 });
 
 Route::post('/bannerData', [HomeController::class, 'bannerData']);
+
+Route::post('/textoData', [TextsController::class, 'textoData']);
+

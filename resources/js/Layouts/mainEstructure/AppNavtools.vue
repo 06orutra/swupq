@@ -6,9 +6,9 @@ const scales = ref([8, 10, 12, 14, 16, 18, 20]);
 
 const { changeThemeSettings, setScale, layoutConfig } = useLayout();
 
-const onConfigButtonClick = () => {
+/* const onConfigButtonClick = () => {
     visible.value = !visible.value;
-};
+}; */
 const onChangeTheme = (theme, mode) => {
     const elementId = 'theme-css';
     const linkElement = document.getElementById(elementId);
@@ -73,10 +73,10 @@ const toggle = (event) => {
             <template #start>
 
                 <div class="mx-2">
-                    <Button label="A+" class="left font-bold text-xl" @click="incrementScale()" :disabled="layoutConfig.scale.value === scales[scales.length - 1]"/>
+                    <Button icon="pi pi-plus" class=" left font-bold" @click="incrementScale()" :disabled="layoutConfig.scale.value === scales[scales.length - 1]" />
                     <i v-for="s in scales" :key="s" :class="{ 'text-primary-500': s === layoutConfig.scale.value }"></i>
-                    <Button label="0" severity="danger" class="center font-bold text-xl bg-gray-500 border-gray-500 border-noround" @click="resetScale()"/>
-                    <Button label="A-" severity="danger" class="right font-bold text-xl" @click="decrementScale()" :disabled="layoutConfig.scale.value === scales[0]"/>
+                    <Button icon="pi pi-undo" severity="danger" class="center font-bold text-xl bg-gray-500 border-gray-500 border-noround" @click="resetScale()"/>
+                    <Button icon="pi pi-minus" severity="danger" class="right font-bold text-xl" @click="decrementScale()" :disabled="layoutConfig.scale.value === scales[0]"/>
 
                 </div>
                 <div class="mx-2">

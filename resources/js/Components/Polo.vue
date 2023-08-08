@@ -15,8 +15,8 @@
         <!-- If sobre showChatbot para mostrar el chatbot y configurar todo el 
         contenedor del chatbot. El fondo cambia según si es modo claro u oscuro -->
         <div v-if="showChatbot" class="chatbot-container z-10
-                dark:bg-[url('C:\laragon\www\swupq\public\img\FondoOscuroChatBot.jpg')]
-                bg-[url('C:\laragon\www\swupq\public\img\FondoClaroChatBot.jpg')]">
+                dark:bg-[url('/public/img/FondoOscuroChatBot.jpg')]
+                bg-[url('/public/img/FondoClaroChatBot.jpg')]">
             <!-- CHATBOT CONTENIDO EN EL DESTE -->
             <!-- Header del chatbot container -->
             <div class="
@@ -57,7 +57,7 @@
                 <!-- Generar los botones que están guardados en un array como "currentButtons"
                     Recibiendo así "handleButtonClick como disparador para la siguiente acción" -->
                 <button v-for="button in currentButtons" :key="button.text" @click="handleButtonClick(button)"
-                    class="m-1 rounded-sm max-w-md w-1/4 relative bottom-2 mt-6 text-2xl cursor-pointer
+                    class="m-1 rounded-sm w-auto h-auto relative bottom-2 mt-6 text-2xl cursor-pointer p-2.5
                     bg-gradient-to-r from-gray-300 to-gray-500 hover:from-red-500 hover:to-blue-500 text-black
                     dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-600 dark:hover:from-blue-900 dark:hover:to-purple-900 dark:text-white">
                     {{ button.text }}

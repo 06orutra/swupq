@@ -2,8 +2,17 @@
 import { ref } from 'vue';
 import { useLayout } from '@/Layouts/composables/layout';
 
+const isVolumeOn = ref(true); // Inicialmente el volumen está activo
+const toggleVolume = () => {
+    isVolumeOn.value = !isVolumeOn.value;
+}; // Función que cambia el estado del volumen
+
+//Escalas de letra
 const scales = ref([8, 10, 12, 14, 16, 18, 20]);
 
+//changeThemeSettings: Función que cambia el tema de la página
+//setScale: Función que cambia la escala de la letra
+//layoutConfig: Objeto que contiene la configuración del layout
 const { changeThemeSettings, setScale, layoutConfig } = useLayout();
 
 /* const onConfigButtonClick = () => {
@@ -73,10 +82,10 @@ const toggle = (event) => {
             <template #start>
 
                 <div class="mx-2">
-                    <Button icon="pi pi-plus" class=" left font-bold" @click="incrementScale()" :disabled="layoutConfig.scale.value === scales[scales.length - 1]" />
+                    <Button icon="pi pi-search-plus" class=" left font-bold" @click="incrementScale()" :disabled="layoutConfig.scale.value === scales[scales.length - 1]" />
                     <i v-for="s in scales" :key="s" :class="{ 'text-primary-500': s === layoutConfig.scale.value }"></i>
-                    <Button icon="pi pi-undo" severity="danger" class="center font-bold text-xl bg-gray-500 border-gray-500 border-noround" @click="resetScale()"/>
-                    <Button icon="pi pi-minus" severity="danger" class="right font-bold text-xl" @click="decrementScale()" :disabled="layoutConfig.scale.value === scales[0]"/>
+                    <Button icon="pi pi-undo" severity="danger" class="center font-bold text-xl bg-gray-600 border-gray-500 border-noround" @click="resetScale()"/>
+                    <Button icon="pi pi-search-minus" severity="danger" class="right font-bold text-xl" @click="decrementScale()" :disabled="layoutConfig.scale.value === scales[0]"/>
 
                 </div>
                 <div class="mx-2">
@@ -85,9 +94,10 @@ const toggle = (event) => {
                     <Button icon="pi pi-sun" class="right surface-500 border-500" @click="onChangeTheme('bootstrap4-light-blue', 'light')"/>
                 </div>
                 <div class="mx-2">
-                    <Button icon="pi pi-volume-up" class="left"></Button>
-                    <Button icon="pi pi-volume-off" severity="danger" class="right" />
-
+                    <!-- <Button icon="pi pi-volume-up" class="center"></Button> -->
+                    <!-- <Button icon="pi pi-volume-off" severity="danger" class="right" /> -->
+                    <!-- Cambiar el ícono de pi-volume-up por pi-volume-down cuando se haga click-->
+                    <Button :icon="isVolumeOn ? 'pi pi-volume-up' : 'pi pi-volume-off'" :class="['center', isVolumeOn ? 'bg-blue-400' : 'bg-red-500']" @click="toggleVolume" />
                 </div>
 
             </template>

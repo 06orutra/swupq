@@ -2,7 +2,6 @@
 import { Head, Link } from '@inertiajs/vue3';
 
 import Polo from '@/Components/Polo.vue';
-import PotencialmenteDarkMode from '@/Components/PotencialmenteDarkMode.vue';
 
 import Videos from '@/Pages/Componentes/Home/Videos.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
@@ -39,7 +38,6 @@ defineProps({
         <Polo />
         <Videos />
     </AppEstructure>
-    <PotencialmenteDarkMode />
 
 </template>
 

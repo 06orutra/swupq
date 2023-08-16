@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img
-      src='/storage/img/icon_menu.png'
+      src="storage/img/icon_menu.png"
       alt="Menu Icon"
       class="menu-icon"
       @click="showMenu = !showMenu"
@@ -49,12 +49,12 @@ export default {
           textColor: '#ffffff',
           label: 'INSTITUCIÓN',
           subMenuItems: [
-                 { label: '- Mensaje del rector' },
-              { label: '- Directorio' },
-              { label: '- Organigrama' },
-              { label: '- Marco jurídico' },
-              { label: '- Igualdad Laboral y No Discriminacion' },
-              { label: '- Sistema de Gestión de la Calidad' },
+                { label: '- Mensaje del rector' },
+            { label: '- Directorio' },
+            { label: '- Organigrama' },
+            { label: '- Marco jurídico' },
+            { label: '- Igualdad Laboral y No Discriminacion' },
+            { label: '- Sistema de Gestión de la Calidad' },
             ],
           },
           {
@@ -166,33 +166,40 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .menu-icon {
   cursor: pointer;
   width: 7vh;
   height: 7vh;
-  margin-top: 0.6%;
-  margin-left: 2%;
-  margin-right: 2%;
+  margin: 1.5vh 0 0 2.23%;
   border: 1px solid black;
-  position: fixed;
-  left: 22.25%;
-  top: 29%;
-  margin-right: 10%;
+  position: fixed; /* Cambio de absolute a fixed */
+  left: 10px;
+  top: 28.1%; /* Ajusta la posición vertical */
+  z-index: 999;
+}
+
+.content {
+  margin-left: 15%; /* Espacio para el menú desplegado */
+  /* Resto de los estilos para el contenido principal */
 }
 
 .menu {
   list-style-type: none;
   padding: 0;
+  position: fixed;
+  left: 6%; /* Centra horizontalmente */
+  top: calc(37% + 1vh); /* Espaço abaixo do ícone do menu */
+  z-index: 2;
+  width: 15%; /* Largura do menu */
+  background-color: rgba(0, 10, 87, 0.8);
+  transition: transform 0.3s ease; /* Adiciona uma transição suave */
 }
-
 .menu li {
   display: block;
-  position: relative;
-  background: rgba(0, 10, 87, 0.8);
+  background: transparent;
   color: #fff;
-  width: 27%;
-  height: 27%;
 }
 
 .menu .menu-block {
@@ -211,16 +218,15 @@ export default {
   top: 0;
   margin: 0;
   padding: 0;
-  width: 820px; /* Ajustar el ancho para evitar superposición */
+  width: 300px;
   z-index: 2;
+  background-color: rgba(0, 26, 226, 0.8);
 }
 
 .sub-menu-block {
   display: block;
   padding: 10px;
-  background: rgba(0, 26, 226, 0.8);
   transition: background-color 0.3s;
-  
 }
 
 .sub-menu-block:hover {

@@ -1,16 +1,13 @@
 <template>
     <div>
-        <br><br><br>
-        <div class="fixed bottom-4 right-4">
-            <button class="chatButton" @click="toggleChatbot">
-                <img src='/storage/img/icon_chatbot.png' alt="Chatbot Icon">
-            </button>
-        </div>
-        <!-- If sobre showChatbot para mostrar el chatbot y configurar todo el 
-        contenedor del chatbot. El fondo cambia según si es modo claro u oscuro -->
-        <div v-if="showChatbot" class="chatbot-container z-30
-                dark:bg-[url('C:\laragon\www\swupq\public\img\FondoOscuroChatBot.jpg')]
-                bg-[url('C:\laragon\www\swupq\public\img\FondoClaroChatBot.jpg')]">
+      <div class="fixed bottom-4 right-4">
+        <button class="chatButton" @click="toggleChatbot">
+          <img src='/storage/img/icon_chatbot.png' alt="Chatbot Icon">
+        </button>
+      </div>
+      <div v-if="showChatbot" class="chatbot-container">
+        dark:bg-[url('/public/img/FondoOscuroChatBot.jpg')]
+                bg-[url('/public/img/FondoClaroChatBot.jpg')]">
             <!-- CHATBOT CONTENIDO EN EL DESTE -->
             <!-- Header del chatbot container -->
             <div class="
@@ -26,10 +23,10 @@
                 <!-- Descubrimiento: Al usar "h3" o similares con PrimeVue, no se respetan los estilos.
                 Pero si utilizamos "p" o "span" sí se respetan a medias.
                 Con  "a" se respetan al completo. -->
-                <button class="w-24 h-8 bg-red-500 hover:bg-red-300 text-white text-base font-bold rounded-md cursor-pointer" @click="toggleChatbot">X Cerrar</button>
+                <button class="w-32 h-10 bg-red-600 hover:bg-red-400 text-white text-sm font-semibold rounded-full shadow-md cursor-pointer transform hover:scale-105" @click="closeChatAndReset">Cerrar Chat <span class="ml-1">✕</span></button>
+
 
             </div>
-            <!-- SECCIÓN DE MENSAJES -->
             <div class="px-4 py-6 z-10 ">
                 <!-- Z-10 y Z-20 son las posiciones "delante de..." 
                     Se crea un div conm un FOR de los mensajes que se agreguen
@@ -52,7 +49,7 @@
                 <!-- Generar los botones que están guardados en un array como "currentButtons"
                     Recibiendo así "handleButtonClick como disparador para la siguiente acción" -->
                 <button v-for="button in currentButtons" :key="button.text" @click="handleButtonClick(button)"
-                    class="m-1 rounded-sm max-w-md w-1/4 relative bottom-2 mt-6 text-2xl cursor-pointer
+                    class="m-1 rounded-sm w-auto h-auto relative bottom-2 mt-6 text-2xl cursor-pointer p-2.5
                     bg-gradient-to-r from-gray-300 to-gray-500 hover:from-red-500 hover:to-blue-500 text-black
                     dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-600 dark:hover:from-blue-900 dark:hover:to-purple-900 dark:text-white">
                     {{ button.text }}
@@ -61,7 +58,7 @@
             <!-- Pequeña leyenda de que el chatbot es hecho en UPQ -->
             <a class="fixed bottom-0 right-6 mb-4 mr-4 text-gray-500
                     font-bold text-xs
-                    hover:text-gray-800 dark:text-gray-900 dark:hover:text-gray-200" href="https://www.upq.mx/">Hecho en UPQ</a>
+                    hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" href="https://www.upq.mx/">Hecho en UPQ</a>
             <!-- CONTENIDO DEL SHAT -->
         </div>
     </div>
@@ -233,56 +230,133 @@ export default {
                         link: "https://bit.ly/3iQoNFv",
                         option: "Inscripción"
                     });
-
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://www.upq.mx/servicios-estudiantiles/",
+                        option: "Becas"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://www.upq.mx/media/services/03.pdf",
+                        option: "Comprobantes de Estudios"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://www.upq.mx/servicios-estudiantiles/",
+                        option: "Equivalencias"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://www.upq.mx/media/services/01.pdf",
+                        option: "Estacionamiento"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://www.upq.mx/media/services/05.pdf",
+                        option: "Facturación"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://www.upq.mx/media/services/06.pdf",
+                        option: "Reactivar/Liberar pagos"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://www.upq.mx/servicios-estudiantiles/",
+                        option: "Reinscripción"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://www.upq.mx/media/services/04.pdf",
+                        option: "Reposición de credencial"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://www.upq.mx//media/services/02_OIWrE5D.pdf",
+                        option: "Seguro Facultativo"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://www.upq.mx/servicios-estudiantiles/",
+                        option: "Titulación"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://www.upq.mx/transporte/",
+                        option: "Transporte"
+                    });
+                    break;
+                case 7:
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        text: "¡Dale un vistazo a nuestras maestrías!"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://www.upq.mx/maestria/assets/mapa_curricular_maestria.pdf",
+                        option: "MAESTRÍA EN INGENIERÍA EN SISTEMAS PRODUCTIVOS E INDUSTRIA 4.0"
+                    });
+                    this.messages.push({
+                        id: this.messages.length + 1,
+                        link: "https://www.upq.mx/maestria_admin/",
+                        option: "MAESTRÍA EN INGENIERÍA ADMINISTRATIVA"
+                    });
                 default:
                     break;
             }
-
-            setTimeout(() => {
-                this.showButtons = true;
-            }, 500);
-        },
     },
+    closeChatAndReset() {
+                this.showChatbot = false;
+                this.messages = [];
+                this.showButtons = true;
+    }
+  },
 };
-
 </script>
-
 <style>
 .chatbot-container {
-  top: 40px;
-  position: fixed;
-  bottom: 10px;
-  left: 50%; /* Centramos el contenedor horizontalmente en la mitad de la pantalla */
-  transform: translateX(-10%); /* Desplazamos el contenedor hacia la izquierda para centrarlo */
-  border-radius: 10px;
-  overflow-y: scroll;
-  max-width: 640px;
-  max-height: 1070px;
-  border: 1px solid black;
+    top: 40px;
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    border-radius: 10px;
+    overflow-y: scroll;
+    max-width: 640px;
+    max-height: 1080px;
+    border:1px solid black;
+    z-index:999;
 }
 
 .chatButton {
-  background-color: rgb(7, 7, 7);
-  display: flex;
-  flex-direction: column;
-  width: 7vh; /* Ajusta el ancho de acuerdo a tus necesidades */
-  height: 7vh; /* Ajusta la altura de acuerdo a tus necesidades */
-  flex: 1;
-  border: .5px solid rgb(18, 17, 17); /* Borde para visualizar las divisiones */
-  cursor: pointer;
-  position: relative;
-  /* Quitamos 'transform' para eliminar el desplazamiento */
-  margin: 0 auto; /* Añadimos este margen para centrar verticalmente */
-  left: -998.1px; /* Mover 20px a la izquierda */
-  top: -442px; /* Mover 20px hacia arriba */
+    cursor: pointer;
+    width: 7vh;
+    height: 7vh;
+    margin: 1.5vh 0 0 2.23%; /* Ajustar los márgenes para posicionar */
+    border: 1px solid black;
+    position: fixed; /* Cambiado a posición fija */
+    right: 1310px; /* Ajustar la posición horizontal */
+    bottom: 460px; /* Ajustar la posición vertical */
+    z-index: 999; /* Cambiado el valor de z-index para enviar al frente */
+    border:1px solid black;
 }
 
 .chatButton img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
 }
+.chatbot-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
 </style>

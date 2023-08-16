@@ -5,8 +5,8 @@
           <img src='/storage/img/icon_chatbot.png' alt="Chatbot Icon">
         </button>
       </div>
-      <div v-if="showChatbot" class="chatbot-container">
-        dark:bg-[url('/public/img/FondoOscuroChatBot.jpg')]
+      <div v-if="showChatbot" class="chatbot-container z-10
+                dark:bg-[url('/public/img/FondoOscuroChatBot.jpg')]
                 bg-[url('/public/img/FondoClaroChatBot.jpg')]">
             <!-- CHATBOT CONTENIDO EN EL DESTE -->
             <!-- Header del chatbot container -->

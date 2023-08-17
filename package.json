@@ -20,8 +20,6 @@
     },
     "dependencies": {
         "chart.js": "^4.3.0",
-        "primeface": "^0.0.1-security",
-        "primefaces": "^12.0.0",
         "primeflex": "^3.3.1",
         "primeicons": "^6.0.1",
         "primevue": "^3.29.2",

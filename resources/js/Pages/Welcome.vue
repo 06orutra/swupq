@@ -4,6 +4,7 @@ import RedesSociales from '@/Pages/Componentes/RedesSociales.vue';
 import Polo from '@/Components/Polo.vue';
 import Videos from '@/Pages/Componentes/Home/Videos.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
+import imagenesPrueba from '@/Pages/Componentes/Welcome/imagenesPrueba.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -33,9 +34,13 @@ defineProps({
 
 -->
     
+
 <AppEstructure>
         <Polo />
         <Videos />
+
+        <!-- <Videos /> -->
+        <imagenesPrueba />
     </AppEstructure>
 
 <RedesSociales />

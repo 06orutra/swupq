@@ -43,7 +43,7 @@ Route::middleware([
 
 
     // ---------- Rutas Home ------------
-    Route::post('/bannerData', [HomeController::class, 'bannerData']);
+    
 
     Route::post('/registrarBanner', [HomeController::class, 'registrarBanner']);
 
@@ -51,3 +51,5 @@ Route::middleware([
 
     Route::post('/editarBanner', [HomeController::class, 'editarBanner']);
 });
+
+Route::post('/bannerData', [HomeController::class, 'bannerData']);

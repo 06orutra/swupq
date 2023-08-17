@@ -30,7 +30,7 @@ defineProps({
     
 
     <AppEstructure>
-        <Videos />
+        <!-- <Videos /> -->
         <imagenesPrueba />
     </AppEstructure>
 </template>

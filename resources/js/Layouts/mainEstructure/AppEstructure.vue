@@ -9,7 +9,6 @@ import AppNavtools from '@/Layouts/mainEstructure/AppNavtools.vue'
     <div>
         <AppNavtools></AppNavtools>
     </div>
-    <br>
 
     <div>
         <slot></slot>

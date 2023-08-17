@@ -13,7 +13,14 @@ defineProps({
         default: false
     }
 });
-const scales = ref([12, 13, 14, 15, 16]);
+const scales = ref([8, 10, 12, 14, 16, 18, 20]);
+/*Aquí se colocan los tamaños de letra que tendrá la página.
+En este caso, son 7 tamaños de letra, pero se pueden agregar más o quitar, y se representan en la bolita azul que
+indica en qué posición está, respecto a más grande o pequeño según esté cerca de su signo.
+Para agregar más tamaños, solamente hay que agregar un número más en el array, y listo.
+Para controlar el aumento y decremento por click (consecuente con la secuencia de "const scales"), se modifivan
+"const decrementScale" y "const incrementScale" después de "scale.value"
+*/
 const visible = ref(false);
 
 const { changeThemeSettings, setScale, layoutConfig } = useLayout();
@@ -36,13 +43,15 @@ const onChangeTheme = (theme, mode) => {
     linkElement.parentNode.insertBefore(cloneLinkElement, linkElement.nextSibling);
 };
 const decrementScale = () => {
-    setScale(layoutConfig.scale.value - 1);
+    setScale(layoutConfig.scale.value - 2);
     applyScale();
 };
+//Se disminuye en 2 cada que se apriete el botón de menos
 const incrementScale = () => {
-    setScale(layoutConfig.scale.value + 1);
+    setScale(layoutConfig.scale.value + 2);
     applyScale();
 };
+//Se aumenta en 2 cada que se apriete el botón de más
 const applyScale = () => {
     document.documentElement.style.fontSize = layoutConfig.scale.value + 'px';
 };
@@ -99,11 +108,14 @@ const applyScale = () => {
         <div class="grid">
             <div class="col-3">
                 <button class="p-link w-2rem h-2rem" @click="onChangeTheme('bootstrap4-light-blue', 'light')">
+                    <!-- En @click="onChangeTheme('bootstrap4-light-blue', 'light')", se cambia el tema a light blue, y se cambia el modo a light
+                    La dunción de esto es que se cambie el tema a light blue, y se cambie el modo a light. Yep, Modo oscuro y claro
+                    Ergo... puede servir como gatillo ;D y además se puede reutilizar para un botón a parte. -->
                     <img src="/assets/layout/images/themes/bootstrap4-light-blue.svg" class="w-2rem h-2rem" alt="Bootstrap Light Blue" />
                 </button>
             </div>
             <div class="col-3">
-                <button class="p-link w-2rem h-2rem" @click="onChangeTheme('bootstrap4-light-purple', 'light')">
+                <button class="p-link w-2rem h-2rem" @click="onChangeTheme('bootstrap4-light-blue', 'light')">
                     <img src="/assets/layout/images/themes/bootstrap4-light-purple.svg" class="w-2rem h-2rem" alt="Bootstrap Light Purple" />
                 </button>
             </div>

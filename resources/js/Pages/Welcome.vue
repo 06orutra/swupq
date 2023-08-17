@@ -37,8 +37,6 @@ defineProps({
 
 <AppEstructure>
         <Polo />
-        <Videos />
-
         <!-- <Videos /> -->
         <imagenesPrueba />
     </AppEstructure>

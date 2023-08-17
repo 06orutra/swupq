@@ -1,6 +1,5 @@
 <template>
     <div>
-        <br><br><br>
         <div class="fixed bottom-4 right-4">
             <!-- Se llama a la función de ToggleChatbot para que se muestre el chat, así como
             la clase "chatButton" para que se muestre el botón de chatbot del Style -->

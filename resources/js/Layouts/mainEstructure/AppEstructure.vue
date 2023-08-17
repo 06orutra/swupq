@@ -10,6 +10,7 @@ import AppBar from '@/Layouts/mainEstructure/navBar/barStructure.vue';
     <div>
         <AppNavtools></AppNavtools>
     </div>
+    
 
     <div>
         <AppBar />

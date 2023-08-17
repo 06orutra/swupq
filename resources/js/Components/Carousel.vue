@@ -64,30 +64,6 @@ export default {
 
 <style lang="scss">
 
-.carousel {
-    /* Tamaño por defecto (por ejemplo, para dispositivos móviles pequeños) */
-    width: 300px;
-    height: 200px;
-
-    /* Tamaños para tablets o dispositivos móviles más grandes */
-    @media (min-width: 768px) {
-        width: 600px;
-        height: 400px;
-    }
-
-    /* Tamaños para pantallas de escritorio normales */
-    @media (min-width: 1024px) {
-        width: 800px;
-        height: 500px;
-    }
-
-    /* Tamaños para pantallas de escritorio grandes */
-    @media (min-width: 1200px) {
-        width: 1000px;
-        height: 600px;
-    }
-}
-
 .navigate {
     padding: 0 16px;
     height: 100%;

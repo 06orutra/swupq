@@ -1,6 +1,6 @@
 <template>
     <div>
-      <div class="fixed bottom-4 right-4">
+        <div class="fixed">
         <button class="chatButton" @click="toggleChatbot">
           <img src='/storage/img/icon_chatbot.png' alt="Chatbot Icon">
         </button>
@@ -313,8 +313,30 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
+.chatButton {
+  cursor: pointer;
+  width: 7vh;
+  height: 7vh;
+  border: 1px solid black;
+  position: fixed;
+  z-index: 999;
+  transform: translateX(80px) translateY(120px);
+}
+
+
+.chatButton img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
 .chatbot-container {
+
     top: 40px;
     position: fixed;
     bottom: 10px;
@@ -326,37 +348,37 @@ export default {
     border:1px solid black;
     z-index:999;
 }
+@media (max-width: 768px) {
+  .chatButton {
+    width:6vh ;
+    height: 6vh;
+  }
+  .chatbot-container {
+    max-height: 1080px;
+    max-width: 360px;
+  }
+}
 
-.chatButton {
-    cursor: pointer;
-    width: 7vh;
+@media (min-width: 769px) and (max-width: 1200px) {
+    .chatButton {
+    width:7vh ;
     height: 7vh;
-    margin: 1.5vh 0 0 2.23%; /* Ajustar los márgenes para posicionar */
-    border: 1px solid black;
-    position: fixed; /* Cambiado a posición fija */
-    right: 1310px; /* Ajustar la posición horizontal */
-    bottom: 460px; /* Ajustar la posición vertical */
-    z-index: 999; /* Cambiado el valor de z-index para enviar al frente */
-    border:1px solid black;
-}
-
-.chatButton img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 999;
-}
-.chatbot-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
+  }
+  .chatbot-container {
+    max-height: 1080px;
+    max-width: 480px;
+  }
 
 }
 
+@media (min-width: 1201px) {
+    .chatButton {
+    width:7.5vh ;
+    height: 7.5vh;
+  }
+  .chatbot-container {
+    max-height: 1080px;
+    max-width: 640px;
+  }
+}
 </style>

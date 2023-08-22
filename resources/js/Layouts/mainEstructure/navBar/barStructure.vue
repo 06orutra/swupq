@@ -1,49 +1,96 @@
 <template>
-  <div class="contenedor-iconos">
-    <div class="image-container">
-      <img
-        src='/storage/img/icon_logo_UPQ.png'
-        class="logo-img"
-      />
+  <div class="contenedor">
+    <div class="superior">
+      <img src="/storage/img/icon_logo_UPQ.png" class="logo-img" alt="Logo" />
     </div>
-    <div class="icon__menu">
-      <menuvue/>
-    </div>
-    <div class="icon__chatbot">
-      <polovue/>
-    </div>
+    <div class="inferior">
+      <menuvue  class="prueba1"/>
 
+      <polovue  class="pruebas"/>
+    </div>
   </div>
-
 </template>
 
 <script>
-import menuvue from '@/Layouts/mainEstructure/navBar/menu.vue';
-import polovue from '@/Layouts/mainEstructure/navBar/Polo.vue';
+import menuvue from "@/Layouts/mainEstructure/navBar/menu.vue";
+import polovue from "@/Layouts/mainEstructure/navBar/Polo.vue";
 
 export default {
+  name: "App",
   components: {
     menuvue,
-    polovue
+    polovue,
   },
 };
 </script>
+
+
 <style>
-.logo-img {
-  width: 135px;
-  height: 135px;
-  margin-left: 2.25%;
-  position:fixed;
+/* Estilos generales */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Contenedor principal */
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  width: 200px;
+  margin: 1.2%;
+  position: fixed;
   z-index: 999;
+}
+
+/* Parte superior (60%) */
+.superior {
+  flex: 0.6;
+  padding: 10px;
+  position: relative;
+  margin: -3%;
+  
+  /* Estilos para centrar verticalmente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Parte inferior (40%) */
+.inferior {
+  flex: 0.4;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+  position:absolute;
+}
+
+.logo-img {
+  width: 120px;
+  height: 100px;
+  margin-right: 30%;
+}
+@media (max-width: 768px) {
+  .logo-img {
+    width:110px ;
+    height: 90px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    .logo-img {
+    width:115px ;
+    height: 95px;
+  }
 
 }
-.icon__chatbot {
-  z-index:999;
-  position:fixed;
 
+@media (min-width: 1201px) {
+    .logo-img {
+    width:120px;
+    height: 100px;
+  }
 }
-.contenedor-iconos {
-  z-index:999;
-}
+
 </style>
-

@@ -41,6 +41,10 @@
 export default {
   data() {
     return {
+      menuicon: {
+        top: '28.1%', // Ajusta esto a la posición inicial del menú-icon
+        left: '10px', // Ajusta esto a la posición inicial del menú-icon
+      },
       showMenu: false,
       activeSubMenuIndex: null,
       menuItems: [
@@ -172,16 +176,14 @@ export default {
   cursor: pointer;
   width: 7vh;
   height: 7vh;
-  margin: 1.5vh 0 0 2.23%;
   border: 1px solid black;
-  position: fixed; /* Cambio de absolute a fixed */
-  left: 10px;
-  top: 28.1%; /* Ajusta la posición vertical */
+  position: fixed;
   z-index: 999;
+  transform: translateX(20px) translateY(120px);
 }
 
 .content {
-  margin-left: 15%; /* Espacio para el menú desplegado */
+  margin-left: 15%;
   /* Resto de los estilos para el contenido principal */
 }
 
@@ -189,13 +191,14 @@ export default {
   list-style-type: none;
   padding: 0;
   position: fixed;
-  left: 6%; /* Centra horizontalmente */
-  top: calc(37% + 1vh); /* Espaço abaixo do ícone do menu */
-  z-index: 2;
-  width: 15%; /* Largura do menu */
+  left: 6%;
+  top: calc(37% + 1vh);
+  z-index: 999;
+  width: 15%;
   background-color: rgba(0, 10, 87, 0.8);
-  transition: transform 0.3s ease; /* Adiciona uma transição suave */
+  transition: transform 0.5s ease;
 }
+
 .menu li {
   display: block;
   background: transparent;
@@ -212,7 +215,8 @@ export default {
   background-color: rgba(0, 30, 255, 0.8);
 }
 
-.sub-menu {
+/* Corrección de posición y recursividad */
+.menu .sub-menu {
   position: absolute;
   left: 100%;
   top: 0;
@@ -223,13 +227,49 @@ export default {
   background-color: rgba(0, 26, 226, 0.8);
 }
 
-.sub-menu-block {
+.menu .sub-menu-block {
   display: block;
   padding: 10px;
   transition: background-color 0.3s;
 }
 
-.sub-menu-block:hover {
+.menu .sub-menu-block:hover {
   background-color: rgba(0, 10, 87, 0.8);
+}
+@media (max-width: 768px) 
+{.menu-icon {
+    width: 6vh;
+    height: 6vh;
+  }
+  .menu {
+    width: 40%; /* Adjust the width as needed */
+    top: calc(50% + 1vh); /* Adjust the top position as needed */
+  }
+  .menu li {
+    font-size: 12px; /* Adjust the font size as needed */
+  }
+  .menu .menu-block,
+  .menu .sub-menu-block {
+    padding: 5px; /* Adjust the padding as needed */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    .menu-icon {
+    width:7vh ;
+    height: 7vh;
+  }
+  .menu {
+    width:35%;
+    top: calc(50% + 1vh);
+  }
+
+}
+
+@media (min-width: 1201px) {
+    .menu-icon {
+    width:7.5vh ;
+    height: 7.5vh;
+  }
 }
 </style>

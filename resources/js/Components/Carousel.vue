@@ -3,19 +3,20 @@
         <slot :currentSlide="currentSlide" />
 
         <!-- Navegation -->
-        <div class="navigate">
+        <!-- <div class="navigate">
             <div class="toogle-page left">
                 <i @click="prevSlide" class="pi pi-arrow-left"></i>
             </div>
             <div class="toogle-page right">
                 <i @click="nextSlide" class="pi pi-arrow-right"></i>
             </div>
-        </div>
+        </div> -->
 
         <!-- Pagination -->
-        <!-- <div class="pagination">
-            
-        </div> -->
+        <div class="pagination">
+            <span @click="goToSlide(index)" v-for="(slide, index) in getSlideCount" :key="index" :class="{active: index + 1 === currentSlide}">
+            </span>
+        </div>
 
     </div>
 </template>
@@ -28,7 +29,8 @@ export default {
     setup() {
         const currentSlide = ref(1);
         const getSlideCount = ref(null);
-        console.log(getSlideCount.value);
+        const autoPlayEnabled = ref(true);
+        const timeoutDuration = ref(3000);
 
         // Next slide
         const nextSlide = () => {
@@ -40,7 +42,7 @@ export default {
             currentSlide.value += 1;
         };
 
-        // prev slide min
+        // prev slide
         const prevSlide = () => {
             updateSlideCount();
             if(currentSlide.value === 1){
@@ -50,6 +52,21 @@ export default {
             currentSlide.value -= 1;
         }
 
+        const goToSlide = (index) => {
+            currentSlide.value = index + 1;
+        }
+
+        // auto play
+        const autoPlay = () => {
+            setInterval(() => {
+                nextSlide();
+            }, timeoutDuration.value);
+        }
+
+        if (autoPlayEnabled.value) {
+            autoPlay();
+        }
+
         const updateSlideCount = () => {
             getSlideCount.value = document.querySelectorAll('.slide').length;
             console.log(getSlideCount.value);
@@ -57,7 +74,7 @@ export default {
 
         onMounted(updateSlideCount)
 
-        return { currentSlide, nextSlide, prevSlide};
+        return { currentSlide, nextSlide, prevSlide, getSlideCount, goToSlide};
     }
 }
 </script>
@@ -92,6 +109,29 @@ export default {
         height: 40px;
         background-color: black;
         color: white;
+    }
+}
+
+.pagination{
+    position: absolute;
+    bottom: 24px;
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+
+    span {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #fff;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    .active{
+        background-color: #23356A;
     }
 }
 

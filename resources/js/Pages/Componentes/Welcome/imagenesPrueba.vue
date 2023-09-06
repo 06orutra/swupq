@@ -113,5 +113,37 @@ export default {
             object-fit: cover;
         }
     }
-}
-</style>
+
+    @media (max-width: 399px) {
+        height: 30vh;
+    }
+
+    @media (min-width: 400px) and (max-width: 499px) {
+        height: 40vh;
+    }
+
+    @media (min-width: 500px) and (max-width: 599px) {
+        height: 50vh;
+    }
+
+    @media (min-width: 600px) and (max-width: 699px) {
+        height: 60vh;
+    }
+
+    @media (min-width: 700px) and (max-width: 799px) {
+        height: 70vh;
+    }
+
+    @media (min-width: 800px) and (max-width: 899px) {
+        height: 80vh;
+    }
+
+    @media (min-width: 900px) and (max-width: 999px) {
+        height: 90vh;
+    }
+
+    @media (min-width: 1000px) {
+        height: 100vh;
+    }
+
+}</style>

@@ -14,7 +14,8 @@
 
         <!-- Pagination -->
         <div class="pagination">
-            <span @click="goToSlide(index)" v-for="(slide, index) in getSlideCount" :key="index" :class="{active: index + 1 === currentSlide}">
+            <span @click="goToSlide(index)" v-for="(slide, index) in getSlideCount" :key="index"
+                :class="{ active: index + 1 === currentSlide }">
             </span>
         </div>
 
@@ -35,7 +36,7 @@ export default {
         // Next slide
         const nextSlide = () => {
             updateSlideCount();
-            if(currentSlide.value === getSlideCount.value) {
+            if (currentSlide.value === getSlideCount.value) {
                 currentSlide.value = 1;
                 return;
             }
@@ -45,7 +46,7 @@ export default {
         // prev slide
         const prevSlide = () => {
             updateSlideCount();
-            if(currentSlide.value === 1){
+            if (currentSlide.value === 1) {
                 currentSlide.value = getSlideCount.value;
                 return;
             }
@@ -74,13 +75,12 @@ export default {
 
         onMounted(updateSlideCount)
 
-        return { currentSlide, nextSlide, prevSlide, getSlideCount, goToSlide};
+        return { currentSlide, nextSlide, prevSlide, getSlideCount, goToSlide };
     }
 }
 </script>
 
 <style lang="scss">
-
 .navigate {
     padding: 0 16px;
     height: 100%;
@@ -98,7 +98,7 @@ export default {
     .right {
         justify-content: flex-end;
     }
-    
+
     i {
         cursor: pointer;
         display: flex;
@@ -112,9 +112,9 @@ export default {
     }
 }
 
-.pagination{
+.pagination {
     position: absolute;
-    bottom: 24px;
+    bottom: 10px;
     width: 100%;
     display: flex;
     gap: 16px;
@@ -130,9 +130,58 @@ export default {
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     }
 
-    .active{
+    .active {
         background-color: #23356A;
     }
-}
 
+    // Para pantallas pequeñas
+    @media (max-width: 399px) {
+        span {
+            width: 10px;
+            height: 10px;
+        }
+    }
+
+    @media (min-width: 400px) and (max-width: 499px) {
+        span {
+            width: 12px;
+            height: 12px;
+        }
+    }
+
+    @media (min-width: 500px) and (max-width: 599px) {
+        span {
+            width: 14px;
+            height: 14px;
+        }
+    }
+
+    @media (min-width: 600px) and (max-width: 699px) {
+        span {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    @media (min-width: 700px) and (max-width: 799px) {
+        span {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    @media (min-width: 800px) and (max-width: 899px) {
+        span {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    @media (min-width: 900px) {
+        span {
+            width: 25px;
+            height: 25px;
+        }
+    }
+}
 </style>

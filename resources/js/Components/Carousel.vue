@@ -31,7 +31,7 @@ export default {
         const currentSlide = ref(1);
         const getSlideCount = ref(null);
         const autoPlayEnabled = ref(true);
-        const timeoutDuration = ref(3000);
+        const timeoutDuration = ref(5000);
 
         // Next slide
         const nextSlide = () => {

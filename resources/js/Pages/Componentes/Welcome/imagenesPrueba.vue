@@ -88,12 +88,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.imagen-resolucion {
-    width: 500px;
-    height: auto;
-    margin: 15px;
-}
-
 .carousel {
     position: relative;
     max-height: 90vh;
@@ -109,8 +103,7 @@ export default {
 
         img {
             width: 100%;
-            max-height: 100%;
-            object-fit: cover;
+            height: 100%;
         }
     }
 
@@ -146,4 +139,5 @@ export default {
         height: 100vh;
     }
 
-}</style>
+}
+</style>

@@ -5,6 +5,7 @@ import Polo from '@/Components/Polo.vue';
 import Videos from '@/Pages/Componentes/Home/Videos.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import imagenesPrueba from '@/Pages/Componentes/Welcome/imagenesPrueba.vue';
+import TourCardenal from '@/Layouts/homeComponents/TourCardenal.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -39,6 +40,7 @@ defineProps({
         <Polo />
         <!-- <Videos /> -->
         <imagenesPrueba />
+        <TourCardenal/>
     </AppEstructure>
 
 <RedesSociales />

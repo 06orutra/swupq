@@ -11,6 +11,8 @@ import axios from "axios";
 import Toast from "primevue/toast";
 import Carousel from "@/Components/Carousel.vue";
 import Slide from "@/Components/Slide.vue";
+import OpcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
+
 
 
 export default {
@@ -26,6 +28,7 @@ export default {
         Paginator,
         Carousel,
         Slide,
+        OpcionesCarrusel,
     },
     mounted() {
         this.cargarBanner();
@@ -36,6 +39,13 @@ export default {
             this.banner.forEach((image, index) => {
                 image.id = index + 1;
             });
+        },
+
+        updateCarouselSettings(settings) {
+            this.navigation = settings.navigation;
+            this.pagination = settings.pagination;
+            this.startAutoPlay = settings.startAutoPlay;
+            this.timeout = settings.timeout;
         },
 
         cargarBanner() {
@@ -51,34 +61,19 @@ export default {
     data() {
         return {
             banner: [],
+            navigation: localStorage.getItem('navigation') === 'true' || false,
+            pagination: localStorage.getItem('pagination') === 'true' || false,
+            startAutoPlay: localStorage.getItem('startAutoPlay') === 'true' || false,
+            timeout: Number(localStorage.getItem('timeout')) || 5000
         };
     },
 };
 </script>
 
 <template>
-    <!--     <div v-for="datosCard in banner" :key="datosCard">
-        <button>{{ datosCard.id }}</button>
-    </div> -->
-    <!-- Codigo de chucho -->
-    <!-- <div>
-        <Galleria :value="banner" style="width: 40em; margin-bottom: 40px;">
-            <template v-for="datosCard in salida">
-                <img :src="'/storage/' + datosCard.imagen" alt="Card Image" class="imagen-resolucion" />
-            </template>
-                <template #title>{{ datosCard.nombre }}</template>
-                <template #subtitle>{{ datosCard.link }}</template>
-            <template #empty>
-                <div class="flex justify-center align-middle text-xl">
-                    <h2>No se encontraron datos</h2>
-                </div>
-            </template>
-        </Galleria>
-        <Toast />
-    </div>  -->
-
     <!-- Carrusel dinamico -->
-    <Carousel class="carousel" v-slot="{ currentSlide }">
+    <Carousel :navigation="navigation" :pagination="pagination" :startAutoPlay="startAutoPlay" :timeout="timeout"
+        class="carousel" v-slot="{ currentSlide }">
         <Slide v-for="datosCard in banner" :key="datosCard">
             <div v-show="currentSlide === datosCard.id" class="slide-info">
                 <img :src="'/storage/' + datosCard.imagen" alt="" />
@@ -88,12 +83,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.imagen-resolucion {
-    width: 500px;
-    height: auto;
-    margin: 15px;
-}
-
 .carousel {
     position: relative;
     max-height: 90vh;
@@ -109,9 +98,41 @@ export default {
 
         img {
             width: 100%;
-            max-height: 100%;
-            object-fit: cover;
+            height: 100%;
         }
     }
+
+    @media (max-width: 399px) {
+        height: 30vh;
+    }
+
+    @media (min-width: 400px) and (max-width: 499px) {
+        height: 40vh;
+    }
+
+    @media (min-width: 500px) and (max-width: 599px) {
+        height: 50vh;
+    }
+
+    @media (min-width: 600px) and (max-width: 699px) {
+        height: 60vh;
+    }
+
+    @media (min-width: 700px) and (max-width: 799px) {
+        height: 70vh;
+    }
+
+    @media (min-width: 800px) and (max-width: 899px) {
+        height: 80vh;
+    }
+
+    @media (min-width: 900px) and (max-width: 999px) {
+        height: 90vh;
+    }
+
+    @media (min-width: 1000px) {
+        height: 100vh;
+    }
+
 }
 </style>

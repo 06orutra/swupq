@@ -9,6 +9,7 @@ import FileUpload from 'primevue/fileupload';
 import Paginator from 'primevue/paginator';
 import axios from "axios";
 import Toast from "primevue/toast";
+import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 
 
 export default {
@@ -22,6 +23,7 @@ export default {
         FileUpload,
         Toast,
         Paginator,
+        opcionesCarrusel,
     },
 
     mounted() {
@@ -214,10 +216,12 @@ export default {
     <Toolbar class="mb-4">
         <template #start>
             <Button label="Nuevo Registro" icon="pi pi-plus" class="p-button-success !mr-2" @click="openRegistro" />
-
+            <!-- PERSONALIZAR CARRUSEL -->
+            <opcionesCarrusel/>
         </template>
     </Toolbar>
 
+    <!-- Cartas en admin -->
     <div>
         <Card v-for="datosCard in banner" style="width: 40em; margin-bottom: 40px;">
             <template #header>

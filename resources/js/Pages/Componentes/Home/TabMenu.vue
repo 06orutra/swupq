@@ -7,11 +7,11 @@ import TabPanel from 'primevue/tabpanel';
 
 export default {
     components: {
-    TabView,
-    TabPanel,
-    Banner,
-    Videos,
-},
+        TabView,
+        TabPanel,
+        Banner,
+        Videos,
+    },
 }
 </script>
 

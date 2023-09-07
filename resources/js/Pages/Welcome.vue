@@ -1,10 +1,9 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import RedesSociales from '@/Pages/Componentes/RedesSociales.vue';
-import Polo from '@/Components/Polo.vue';
-import Videos from '@/Pages/Componentes/Home/Videos.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import bannerPrincipal from '@/Pages/Componentes/Welcome/bannerPrincipal.vue';
+import TourCardenal from '@/Layouts/homeComponents/TourCardenal.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -19,9 +18,10 @@ defineProps({
     <Head title="Welcome" />
 
 <AppEstructure>
-        <Polo />
+    
         <!-- <Videos /> -->
         <bannerPrincipal />
+        <TourCardenal/>
     </AppEstructure>
 
 <RedesSociales />

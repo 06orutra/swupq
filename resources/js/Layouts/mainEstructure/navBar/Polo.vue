@@ -2,7 +2,7 @@
     <div>
         <div class="fixed">
         <button class="chatButton" @click="toggleChatbot">
-          <img src='/storage/img/icon_chatbot.png' alt="Chatbot Icon">
+          <img src='https://i.scdn.co/image/ab67706c0000bebba14bec178064d5a36c278da8' alt="Chatbot Icon">
         </button>
       </div>
       <div v-if="showChatbot" class="chatbot-container z-10
@@ -382,3 +382,4 @@ export default {
   }
 }
 </style>
+

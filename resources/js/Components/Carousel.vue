@@ -3,17 +3,17 @@
         <slot :currentSlide="currentSlide" />
 
         <!-- Navegation -->
-        <!-- <div class="navigate">
+        <div v-if="navEnabled" class="navigate">
             <div class="toogle-page left">
                 <i @click="prevSlide" class="pi pi-arrow-left"></i>
             </div>
             <div class="toogle-page right">
                 <i @click="nextSlide" class="pi pi-arrow-right"></i>
             </div>
-        </div> -->
+        </div>
 
         <!-- Pagination -->
-        <div class="pagination">
+        <div v-if="paginationEnabled" class="pagination">
             <span @click="goToSlide(index)" v-for="(slide, index) in getSlideCount" :key="index"
                 :class="{ active: index + 1 === currentSlide }">
             </span>
@@ -27,11 +27,15 @@ import { ref, onMounted } from 'vue';
 import 'primeicons/primeicons.css';
 
 export default {
-    setup() {
+    props: ["startAutoPlay", "timeout", "navigation", "pagination"],
+
+    setup(props) {
         const currentSlide = ref(1);
         const getSlideCount = ref(null);
-        const autoPlayEnabled = ref(true);
-        const timeoutDuration = ref(5000);
+        const autoPlayEnabled = ref(props.startAutoPlay === undefined ? true : props.startAutoPlay);
+        const timeoutDuration = ref(props.timeout === undefined ? 5000 : props.timeout);
+        const paginationEnabled = ref(props.pagination === undefined ? true : props.pagination);
+        const navEnabled = ref(props.navigation === undefined ? true : props.navigation);
 
         // Next slide
         const nextSlide = () => {
@@ -75,7 +79,7 @@ export default {
 
         onMounted(updateSlideCount)
 
-        return { currentSlide, nextSlide, prevSlide, getSlideCount, goToSlide };
+        return { currentSlide, nextSlide, prevSlide, getSlideCount, goToSlide, paginationEnabled, navEnabled };
     }
 }
 </script>

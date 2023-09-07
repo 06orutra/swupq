@@ -78,7 +78,7 @@ export default {
     </div>  -->
 
     <!-- Carrusel dinamico -->
-    <Carousel class="carousel" v-slot="{ currentSlide }">
+    <Carousel :navigation="true" :pagination="false" :startAutoPlay="true" :timeout="3000" class="carousel" v-slot="{ currentSlide }">
         <Slide v-for="datosCard in banner" :key="datosCard">
             <div v-show="currentSlide === datosCard.id" class="slide-info">
                 <img :src="'/storage/' + datosCard.imagen" alt="" />

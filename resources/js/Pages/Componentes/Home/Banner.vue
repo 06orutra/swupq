@@ -218,6 +218,7 @@ export default {
         </template>
     </Toolbar>
 
+    <!-- Cartas en admin -->
     <div>
         <Card v-for="datosCard in banner" style="width: 40em; margin-bottom: 40px;">
             <template #header>

@@ -218,9 +218,9 @@ export default {
         </template>
     </Toolbar>
 
-    <div>
-        <Card v-for="datosCard in banner" style="width: 40em; margin-bottom: 40px;">
-            <template #header>
+    <div class="cards-container">
+        <Card v-for="datosCard in banner" class="card">
+            <template #header class="card-header">
                 <img :src="'/storage/' + datosCard.imagen" alt="Card Image" class="imagen-resolucion" />
             </template>
             <template #title> {{ datosCard.nombre }} </template>
@@ -332,12 +332,28 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.imagen-resolucion {
-    width: 500px;
-    /* Establece el ancho deseado */
-    height: auto;
-    /* La altura se ajustará automáticamente para mantener la proporción */
-    //margin para que la imagen no este pegada al borde
-    margin: 15px;
+.card-header {
+    display: flex;
+    justify-content: center;    /* Centra la imagen horizontalmente */
+    align-items: center;        /* Centra la imagen verticalmente */
 }
-</style>
+
+.imagen-resolucion {
+    width: 90%;
+    height: width;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* Para dar un espacio uniforme entre los cards */
+}
+
+.card {
+    
+    /* Esto permite que cada card tome el espacio necesario y se expanda según el contenido */
+    margin: 10px;
+    /* Espacio alrededor de cada card */
+    width: 30em; margin-bottom: 40px;
+}</style>

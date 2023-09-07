@@ -18,7 +18,7 @@ export default {
 <template>
     <AppLayout title="Home">
         <TabView ref="tabview1" class="p-3">
-            <TabPanel header="Banner">
+            <TabPanel header="Banner Principal">
                 <Banner />
             </TabPanel>
             <TabPanel header="Videos">

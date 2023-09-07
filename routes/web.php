@@ -29,6 +29,17 @@ Route::get('/', function () {
     ]);
 });
 
+/*
+ejemplo de como mandar a llamar una vista
+return Inertia::render('Aqui se pone la ruta del archivo en Pages')
+
+Route::get('/prueba', function () {
+    return Inertia::render('Profile/Prueba', [
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});*/
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

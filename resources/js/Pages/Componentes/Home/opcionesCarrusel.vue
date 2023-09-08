@@ -1,18 +1,18 @@
 <template>
-    <div class="carousel-settings">
-        <div>
-            <label>Flechas: </label><input type="checkbox" v-model="navigation">
+    <div class="card flex flex-wrap justify-content-center gap-3">
+        <div class="flex align-items-center">
+            <label class="ml-2">Flechas: </label><input type="checkbox" v-model="navigation">
         </div>
-        <div>
-            <label>Circulos: </label><input type="checkbox" v-model="pagination">
+        <div class="flex align-items-center">
+            <label class="ml-2">Circulos: </label><input type="checkbox" v-model="pagination">
         </div>
-        <div>
-            <label>Auto: </label><input type="checkbox" v-model="startAutoPlay">
+        <div class="flex align-items-center">
+            <label class="ml-2">Auto: </label><input type="checkbox" v-model="startAutoPlay">
         </div>
-        <div>
-            <label>Tiempo: </label><input type="number" v-model="timeout">
+        <div class="flex align-items-center">
+            <label class="ml-2">Tiempo: </label><input type="number" v-model="timeout">
         </div>
-        <button @click="guardarConfiguracion">Guardar Configuración</button>
+        <Button @click="guardarConfiguracion">Guardar Configuración</button>
     </div>
 </template>
 

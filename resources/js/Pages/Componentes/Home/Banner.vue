@@ -216,10 +216,13 @@ export default {
     <Toolbar class="mb-4">
         <template #start>
             <Button label="Nuevo Registro" icon="pi pi-plus" class="p-button-success !mr-2" @click="openRegistro" />
-            <!-- PERSONALIZAR CARRUSEL -->
-            <opcionesCarrusel/>
         </template>
     </Toolbar>
+
+    <!-- PERSONALIZAR CARRUSEL -->
+    <div>
+        <opcionesCarrusel />
+    </div>
 
     <!-- Cartas en admin -->
     <div>
@@ -343,5 +346,10 @@ export default {
     /* La altura se ajustará automáticamente para mantener la proporción */
     //margin para que la imagen no este pegada al borde
     margin: 15px;
+}
+
+.vertical-toolbar .p-toolbar-group-left {
+    flex-direction: column !important;
+    align-items: flex-start !important;
 }
 </style>

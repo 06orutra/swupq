@@ -53,6 +53,7 @@ export default {
                 console.log(response.data);
                 this.banner = response.data;
                 this.assignConsecutiveIDs();
+                this.isBannerLoaded = true;
             }).catch((error) => {
                 console.log(error);
             });
@@ -61,6 +62,7 @@ export default {
     data() {
         return {
             banner: [],
+            isBannerLoaded: false,
             navigation: localStorage.getItem('navigation') === 'true' || false,
             pagination: localStorage.getItem('pagination') === 'true' || false,
             startAutoPlay: localStorage.getItem('startAutoPlay') === 'true' || false,
@@ -72,7 +74,7 @@ export default {
 
 <template>
     <!-- Carrusel dinamico -->
-    <Carousel :navigation="navigation" :pagination="pagination" :startAutoPlay="startAutoPlay" :timeout="timeout"
+    <Carousel v-if="isBannerLoaded" :navigation="navigation" :pagination="pagination" :startAutoPlay="startAutoPlay" :timeout="timeout"
         class="carousel" v-slot="{ currentSlide }">
         <Slide v-for="datosCard in banner" :key="datosCard">
             <div v-show="currentSlide === datosCard.id" class="slide-info">

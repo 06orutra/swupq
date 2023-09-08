@@ -13,16 +13,12 @@ class TbCarruselNoticiasController extends Controller
         return response()->json($datosBanner);
     }
 
-    
     public function registrarBanner(Request $request){
         
         $request->validate([
             'nombre' => 'required|string|max:255',
             'link' => 'required|string|max:255',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000000',
-            //'estado' => 'required|boolean',  // validating estado
-            'fecha_activacion' => 'required|date',  // validating fecha_activacion
-            'fecha_desactivacion' => 'nullable|date'  // validating fecha_desactivacion
         ]);
 
         $date = date('Y-m-d H-i-s');
@@ -36,27 +32,16 @@ class TbCarruselNoticiasController extends Controller
         $banner->nombre = $request->nombre;
         $banner->link = $request->link;
         $banner->imagen = $fotoName;
-        //$banner->estado = $request->estado;  // storing estado
-        $banner->fecha_activacion = $request->fecha_activacion;  // storing fecha_activacion
-        $banner->fecha_desactivacion = $request->fecha_desactivacion;  // storing fecha_desactivacion
         $banner->save();
 
         return response()->json('Banner registered successfully');
     }
 
-        
-        
-    
-
-    
     public function editarBanner(Request $request){
         $request->validate([
             'nombre' => 'required|string|max:255',
             'link' => 'required|string|max:255',
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000000',
-            'estado' => 'required|boolean',  // validating estado
-            'fecha_activacion' => 'required|date',  // validating fecha_activacion
-            'fecha_desactivacion' => 'nullable|date'  // validating fecha_desactivacion
         ]);
 
         $banner = tb_carrusel_noticias::find($request->id);
@@ -76,15 +61,10 @@ class TbCarruselNoticiasController extends Controller
 
         $banner->nombre = $request->nombre;
         $banner->link = $request->link;
-        $banner->estado = $request->estado;  // storing estado
-        $banner->fecha_activacion = $request->fecha_activacion;  // storing fecha_activacion
-        $banner->fecha_desactivacion = $request->fecha_desactivacion;  // storing fecha_desactivacion
         $banner->save();
 
         return response()->json('Banner edited successfully');
     }
-
-        
 
     public function eliminarBanner(Request $request){
         $banner = tb_carrusel_noticias::find($request->id);

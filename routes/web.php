@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\tb_banner;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TbCarruselNoticiasController;
 use Illuminate\Http\Request;
 
 /*
@@ -55,12 +56,21 @@ Route::middleware([
 
     // ---------- Rutas Home ------------
     
+    //****controladores home carusel principal*******
 
     Route::post('/registrarBanner', [HomeController::class, 'registrarBanner']);
 
     Route::post('/eliminarBanner', [HomeController::class, 'eliminarBanner']);
 
     Route::post('/editarBanner', [HomeController::class, 'editarBanner']);
+
+    //****controladores home carusel principal*******
+    Route::post('/registrarBannerNoticias', [TbCarruselNoticiasController::class, 'registrarBanner']);
+
+    Route::post('/eliminarBannerNoticias', [TbCarruselNoticiasController::class, 'eliminarBanner']);
+
+    Route::post('/editarBannerNoticias', [TbCarruselNoticiasController::class, 'editarBanner']);
 });
 
 Route::post('/bannerData', [HomeController::class, 'bannerData']);
+Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'bannerData']);

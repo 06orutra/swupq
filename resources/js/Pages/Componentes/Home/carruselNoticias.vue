@@ -126,7 +126,7 @@ export default {
         editarBanner() {
             this.submitted = true;
             //validar si hay campos vacios
-            if (this.datosArreglo.nombre == null || this.datosArreglo.link == null) {
+            if (this.datosArreglo.nombre == null || this.datosArreglo.link == null ) {
                 // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
@@ -138,9 +138,9 @@ export default {
                 return false;
             }
 
-            //validar que la foto no sea un archivo vacio
-            if (this.datosArreglo.foto == null) {
-                // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
+            // Solo validar la foto si se ha seleccionado una nueva
+            if (this.datosArreglo.foto && this.datosArreglo.foto == null) {
+                // si no hay foto seleccionada, mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
                     summary: "Error",
@@ -155,6 +155,14 @@ export default {
             formData.append('nombre', this.datosArreglo.nombre);
             formData.append('link', this.datosArreglo.link);
             formData.append('foto', this.datosArreglo.foto);
+            formData.append('fecha_activacion', this.fecha_activacion);
+            formData.append('fecha_desactivacion', this.fecha_desactivacion);
+
+            // Agregar la foto al formData solo si se ha seleccionado una nueva
+            if (this.datosArreglo.foto) {
+                formData.append('foto', this.datosArreglo.foto);
+                console.log('Foto seleccionada:', this.datosArreglo.foto); // Ayuda a depurar
+            }
 
             axios.post('/editarBannerNoticias',
                 formData, {
@@ -179,6 +187,7 @@ export default {
         editarSelect(datosArreglo) {
             this.datosArreglo = { ...datosArreglo }; // esto es para que se muestre los datos del datosArregloo en el formulario
             this.editarDialog = true;
+            this.imagePreview = null;
         },
         confirmarEliminar(datosArreglo) {
             this.datosArreglo = datosArreglo;
@@ -210,9 +219,50 @@ export default {
             this.datosArreglo = {};
             this.submitted = false;
             this.dialogTable = true;
+            this.imagePreview = null;
         },
         selectNewPhoto() {
             this.$refs.photoInput.click();
+        },
+
+        estadoStyle(datosCard) {
+            if (!datosCard) {
+                return {};
+            }
+
+            return {
+                color: datosCard.estado == '1' ? 'green' : 'red',
+            };
+        },
+
+        handleFileUpload(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                this.foto = input.files[0];
+
+                // Previsualización de la imagen
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.imagePreview = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+            
+        },
+
+        handleFileUploadEdit(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                this.datosArreglo.foto = input.files[0];
+
+                // Previsualización de la imagen
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.imagePreview = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+
         },
 
     },
@@ -232,11 +282,13 @@ export default {
             fecha_activacion: '',
             fecha_desactivacion: '',
             dates: null,
+            imagePreview: null,
 
         };
     },
 
 };
+
 </script>
 
 <template>
@@ -248,12 +300,17 @@ export default {
     </Toolbar>
 
     <div class="cards-container">
-        <Card v-for="datosCard in banner" class="card">
+        <Card v-for="datosCard in banner" :key="datosCard.id" :style="estadoStyle(datosCard)" class="card">
             <template #header class="card-header">
                 <img :src="'/storage/' + datosCard.imagen" alt="Card Image" class="imagen-resolucion" />
             </template>
-            <template #title> {{ datosCard.nombre }} </template>
-            <template #subtitle> {{ datosCard.link }} </template>
+            <template #title> <span style="color: black;">{{ datosCard.nombre }}</span> <span style="font-size: 70%;">{{
+                datosCard.estado ? "activo" : "inactivo" }}</span> </template>
+            <template #subtitle>
+                <span style="">link:</span>{{ datosCard.link }} <br>
+                fecha de inicio: {{ datosCard.fecha_activacion }} <br>
+                fecha de termino: {{ datosCard.fecha_desactivacion }}
+            </template>
             <template #footer>
                 <Button icon="pi pi-pencil" class="p-button p-button-warning !mr-6" @click="editarSelect(datosCard)" />
                 <Button icon="pi pi-trash" class="p-button p-button-danger" @click="confirmarEliminar(datosCard)" />
@@ -288,6 +345,9 @@ export default {
                     <Calendar dateFormat="yy-mm-dd" id="calendar-24h" v-model="dates" selectionMode="range"
                         :manualInput="false" showTime hourFormat="24" @update:modelValue="separarYAsignarFechas" />
                 </div>
+
+                <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
+                    style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
 
                 <div class="field col-12 md:col-3">
                     <button :type="type" @click.prevent="selectNewPhoto"
@@ -330,6 +390,15 @@ export default {
                     <label for="minmax">Link</label>
                     <InputText inputId="minmax" v-model="datosArreglo.link" :min="0" :max="10000" :showButtons="true" />
                 </div>
+
+                <div class="field col-12 md:col-12">
+                    <label for="minmax">Fecha de inicio y termino de la publicación</label>
+                    <Calendar dateFormat="yy-mm-dd" id="calendar-24h" v-model="dates" selectionMode="range"
+                        :manualInput="false" showTime hourFormat="24" @update:modelValue="separarYAsignarFechas" />
+                </div>
+
+                <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
+                    style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
 
                 <div class="field col-12 md:col-12">
                     <button :type="type" @click.prevent="selectNewPhoto"

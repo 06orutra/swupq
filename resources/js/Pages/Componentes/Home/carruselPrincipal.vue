@@ -113,9 +113,9 @@ export default {
                 return false;
             }
 
-            //validar que la foto no sea un archivo vacio
-            if (this.datosArreglo.foto == null) {
-                // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
+            // Solo validar la foto si se ha seleccionado una nueva
+            if (this.datosArreglo.foto && this.datosArreglo.foto == null) {
+                // si no hay foto seleccionada, mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
                     summary: "Error",
@@ -129,7 +129,12 @@ export default {
             formData.append('id', this.datosArreglo.id);
             formData.append('nombre', this.datosArreglo.nombre);
             formData.append('link', this.datosArreglo.link);
-            formData.append('foto', this.datosArreglo.foto);
+
+            // Agregar la foto al formData solo si se ha seleccionado una nueva
+            if (this.datosArreglo.foto) {
+                formData.append('foto', this.datosArreglo.foto);
+                console.log('Foto seleccionada:', this.datosArreglo.foto); // Ayuda a depurar
+            }
 
             axios.post('/editarBanner',
                 formData, {
@@ -154,6 +159,7 @@ export default {
         editarSelect(datosArreglo) {
             this.datosArreglo = { ...datosArreglo }; // esto es para que se muestre los datos del datosArregloo en el formulario
             this.editarDialog = true;
+            this.imagePreview = null;
         },
         confirmarEliminar(datosArreglo) {
             this.datosArreglo = datosArreglo;
@@ -185,11 +191,42 @@ export default {
             this.datosArreglo = {};
             this.submitted = false;
             this.dialogTable = true;
+            this.imagePreview = null;
         },
         selectNewPhoto() {
             this.$refs.photoInput.click();
         },
 
+
+        handleFileUpload(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                this.foto = input.files[0];
+
+                // Previsualización de la imagen
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.imagePreview = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+
+        },
+
+        handleFileUploadEdit(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                this.datosArreglo.foto = input.files[0];
+
+                // Previsualización de la imagen
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.imagePreview = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+
+        },
     },
     data() {
         return {
@@ -203,6 +240,7 @@ export default {
             editarDialog: false,
             eliminarDialog: false,
             photoInput: null,
+            imagePreview: null,
 
         };
     },
@@ -255,6 +293,9 @@ export default {
                     <InputText inputId="minmax" v-model="link" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
+                <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
+                    style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
+
                 <div class="field col-12 md:col-3">
                     <button :type="type" @click.prevent="selectNewPhoto"
                         class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
@@ -296,6 +337,9 @@ export default {
                     <InputText inputId="minmax" v-model="datosArreglo.link" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
+                <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
+                    style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
+
                 <div class="field col-12 md:col-12">
                     <button :type="type" @click.prevent="selectNewPhoto"
                         class="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest shadow-sm hover:text-gray-300 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
@@ -334,8 +378,10 @@ export default {
 <style lang="scss" scoped>
 .card-header {
     display: flex;
-    justify-content: center;    /* Centra la imagen horizontalmente */
-    align-items: center;        /* Centra la imagen verticalmente */
+    justify-content: center;
+    /* Centra la imagen horizontalmente */
+    align-items: center;
+    /* Centra la imagen verticalmente */
 }
 
 .imagen-resolucion {
@@ -351,9 +397,10 @@ export default {
 }
 
 .card {
-    
+
     /* Esto permite que cada card tome el espacio necesario y se expanda según el contenido */
     margin: 10px;
     /* Espacio alrededor de cada card */
-    width: 30em; margin-bottom: 40px;
+    width: 30em;
+    margin-bottom: 40px;
 }</style>

@@ -54,14 +54,14 @@ class TbCarruselNoticiasController extends Controller
             'nombre' => 'required|string|max:255',
             'link' => 'required|string|max:255',
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000000',
-            'estado' => 'required|boolean',  // validating estado
+            //'estado' => 'required|boolean',  // validating estado
             'fecha_activacion' => 'required|date',  // validating fecha_activacion
             'fecha_desactivacion' => 'nullable|date'  // validating fecha_desactivacion
         ]);
 
         $banner = tb_carrusel_noticias::find($request->id);
 
-        Storage::delete('public/'.$banner->imagen);
+        
 
         if($request->hasFile('foto')){
 
@@ -71,12 +71,18 @@ class TbCarruselNoticiasController extends Controller
             
             //guardar en public en carpeta img, con el nombre de la imagen de fotoName
             $fotoPath = $request->file('foto')->storeAs('public', $fotoName);
+
+            // Luego, eliminar la imagen anterior
+            if ($banner->imagen) {
+                Storage::delete('public/' . $banner->imagen);
+            }
+
             $banner->imagen = $fotoName;
         }
 
         $banner->nombre = $request->nombre;
         $banner->link = $request->link;
-        $banner->estado = $request->estado;  // storing estado
+        //$banner->estado = $request->estado;  // storing estado
         $banner->fecha_activacion = $request->fecha_activacion;  // storing fecha_activacion
         $banner->fecha_desactivacion = $request->fecha_desactivacion;  // storing fecha_desactivacion
         $banner->save();

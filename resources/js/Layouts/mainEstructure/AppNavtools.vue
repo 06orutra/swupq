@@ -76,15 +76,15 @@ const toggle = (event) => {
 </script>
 
 
-<template>
+<template class="w-full" style="width: 100%">
     <div>
-        <Toolbar class="bg-white-alpha-80 p-0">
-            <template #start>
+        <Toolbar class="bg-white-alpha-80 p-0" style="width: 100%;">
+            <template #start style="width: 100%">
 
                 <div class="mx-2">
                     <Button icon="pi pi-search-plus" class=" left font-bold" @click="incrementScale()" :disabled="layoutConfig.scale.value === scales[scales.length - 1]" />
                     <i v-for="s in scales" :key="s" :class="{ 'text-primary-500': s === layoutConfig.scale.value }"></i>
-                    <Button icon="pi pi-undo" severity="danger" class="center font-bold text-xl bg-gray-600 border-gray-500 border-noround" @click="resetScale()"/>
+                    <Button icon="pi pi-undo" severity="danger" class="center font-bold bg-gray-600 border-gray-500 border-noround" @click="resetScale()"/>
                     <Button icon="pi pi-search-minus" severity="danger" class="right font-bold text-xl" @click="decrementScale()" :disabled="layoutConfig.scale.value === scales[0]"/>
 
                 </div>
@@ -102,16 +102,20 @@ const toggle = (event) => {
 
             </template>
 
-            <template #center>
-                <h2 class="title">UNIVERSIDAD <span>POLITÉCNICA</span> DE QUERÉTARO</h2>
+            <template #center class="inline-flex" style="width: 100%">
+                <h2 class="title hidden xl:inline-flex" style="white-space: pre-wrap;">UNIVERSIDAD <span>POLITÉCNICA</span> DE QUERÉTARO</h2>
+                <h2 class="title hidden  md:inline-flex xl:hidden" style="white-space: pre-wrap;">U.P.Q.</h2>
             </template>
 
-            <template #end>
-                <Button label="SII" link class="sii text-4xl">S <span>I<span>I</span></span></Button>
-                <Button type="button" label="COMUNIDAD" @click="toggle" aria-haspopup="true" aria-controls="overlay_menu" rounded class="comuni mr-6"/>
-                <Menu ref="menu" id="overlay_menu" :model="item" :popup="true" />
-                <Toast />
-
+            <template #end style="width: 100%">
+                <div class="relative sm:left-0">
+                    <Button label="SII" link class="sii text-4xl">S <span>I<span>I</span></span></Button>
+                    <!-- <Button type="button" label="COMUNIDAD" @click="toggle" aria-haspopup="true" aria-controls="overlay_menu" rounded class="comuni mr-6"/>
+                    <Menu ref="menu" id="overlay_menu" :model="item" :popup="true"/> -->
+                    <Button type="button" @click="toggle" aria-controls="overlay_menu" rounded class="comuni mr-6 mb-3">
+                        COMUNIDAD<Menu ref="menu" id="overlay_menu" :model="item" :popup="true"/>
+                    </Button>
+                </div>
             </template>
         </Toolbar>
     </div>

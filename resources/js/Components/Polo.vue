@@ -14,9 +14,8 @@
         </div>
         <!-- If sobre showChatbot para mostrar el chatbot y configurar todo el 
         contenedor del chatbot. El fondo cambia según si es modo claro u oscuro -->
-        <div v-if="showChatbot" class="chatbot-container z-10
-                dark:bg-[url('/public/img/FondoOscuroChatBot.jpg')]
-                bg-[url('/public/img/FondoClaroChatBot.jpg')]">
+        <div v-if="showChatbot" class="chatbot-container z-10"
+        style="background: linear-gradient(to bottom right, #c20707, #dd4600, #c28107, #6200d1, #6200d1);">
             <!-- CHATBOT CONTENIDO EN EL DESTE -->
             <!-- Header del chatbot container -->
             <div class="

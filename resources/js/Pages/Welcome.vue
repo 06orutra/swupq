@@ -4,6 +4,8 @@ import RedesSociales from '@/Pages/Componentes/RedesSociales.vue';
 import Polo from '@/Components/Polo.vue';
 import Videos from '@/Pages/Componentes/Home/Videos.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
+import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
+import CarrierBannerTest from '@/Pages/Componentes/CarrierBannerTest.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -35,11 +37,11 @@ defineProps({
     
 <AppEstructure>
         <Polo />
-        <Videos />
     </AppEstructure>
-
-<RedesSociales />
-
+    <CarrierBanner />
+    <!-- <CarrierBannerTest /> -->
+    
+    <RedesSociales />
 </template>
 
 <style></style>

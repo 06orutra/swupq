@@ -1,11 +1,8 @@
+
 <template class="sticky">
-    
-            <div v-for="pos of positions" :key="pos.label" class="flex align-items-center">
-                <RadioButton v-model="position" :value="pos.value" :inputId="pos.label" name="dock" />
-                <label :for="pos.label" class="ml-2"> {{ pos.label }} </label>
-            </div>
-            
-            <Dock :model="redes" class="custom-dock fixed z-1" position="right">
+            <Dock :model="redes" class="custom-dock fixed z-1 hidden
+            lg:inline-flex"
+            position="right">
                 <template #icon="{ item }">
                     <a :href="item.link" target="_blank">
                         <img :alt="item.label" :src="item.icon" style="width:60%"/>
@@ -13,6 +10,16 @@
                 </template>
             </Dock>
             
+            <!-- DOCK cuando la pantalla es demasiado chica, por ejemplo, tablets y teléfonos -->
+            <Dock :model="redes" class="custom-dock fixed z-2 inline-flex
+            lg:hidden"
+            position="top">
+                <template #icon="{ item }">
+                    <a :href="item.link" target="_blank">
+                        <img :alt="item.label" :src="item.icon" style="width:60%"/>
+                    </a>
+                </template>
+            </Dock>
 </template>
 
 <script setup>
@@ -40,7 +47,6 @@
             link: 'https://www.tiktok.com/@upqoficial/'
         }
     ]);
-    const position = ref('right');
     
 </script>
 

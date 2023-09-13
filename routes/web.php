@@ -3,7 +3,6 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Models\tb_banner;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TbCarruselNoticiasController;
 use Illuminate\Http\Request;
@@ -19,8 +18,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::resource('/notas', 'NotaController');
-
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -29,6 +26,13 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::prefix('institucion')->group(function () {
+    Route::get('mascotas', function(){
+        return Inertia::render('Componentes/Institucion/mascotasPrincipal');
+    });
+    Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
+});   
 
 /*
 ejemplo de como mandar a llamar una vista

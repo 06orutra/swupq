@@ -1,6 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import RedesSociales from '@/Pages/Componentes/RedesSociales.vue';
+import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import bannerPrincipal from '@/Pages/Componentes/Welcome/bannerPrincipal.vue';
 import TourCardenal from '@/Layouts/homeComponents/TourCardenal.vue';
@@ -17,15 +17,16 @@ defineProps({
 <template>
     <Head title="Welcome" />
 
-<AppEstructure>
-    
-        <!-- <Videos /> -->
+    <AppEstructure>
+
+
         <bannerPrincipal />
-        <TourCardenal/>
+        <TourCardenal />
+
+
     </AppEstructure>
 
-<RedesSociales />
-
+    <RedesSociales />
 </template>
 
 <style></style>

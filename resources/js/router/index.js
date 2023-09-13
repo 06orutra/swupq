@@ -61,11 +61,6 @@ const router = createRouter({
             name: 'error',
             component: () => import('@/views/pages/auth/Error.vue')
         },
-        {
-            path: '/tareas',
-            name: 'tareas',
-            component: import('@/Pages/Tareas.vue')
-        }
     ]
 });
 

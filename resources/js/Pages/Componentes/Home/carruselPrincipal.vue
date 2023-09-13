@@ -31,7 +31,6 @@ export default {
     methods: {
         cargarBanner() {
             axios.post("/bannerData").then((response) => {
-                console.log(response.data);
                 this.banner = response.data;
             }).catch((error) => {
                 console.log(error);
@@ -403,4 +402,5 @@ export default {
     /* Espacio alrededor de cada card */
     width: 30em;
     margin-bottom: 40px;
-}</style>
+}
+</style>

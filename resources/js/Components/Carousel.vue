@@ -86,13 +86,41 @@ export default {
 
 <style lang="scss">
 .navigate {
-    padding: 0 16px;
+    padding: 0 20px;
     height: 100%;
     width: 100%;
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 399px) {
+        padding: 5px;
+    }
+
+    @media (min-width: 400px) and (max-width: 499px) {
+        padding: 8px;
+    }
+
+    @media (min-width: 500px) and (max-width: 599px) {
+        padding: 10px;
+    }
+
+    @media (min-width: 600px) and (max-width: 699px) {
+        padding: 12px;
+    }
+
+    @media (min-width: 700px) and (max-width: 799px) {
+        padding: 15px;
+    }
+
+    @media (min-width: 800px) and (max-width: 899px) {
+        padding: 18px;
+    }
+
+    @media (min-width: 900px) {
+        padding: 20px;
+    }
 
     .toogle-page {
         display: flex;
@@ -113,6 +141,49 @@ export default {
         height: 40px;
         background-color: black;
         color: white;
+
+        // Para pantallas pequeñas
+        @media (max-width: 399px) {
+            width: 20px;
+            height: 20px;
+            font-size: 0.5rem;
+        }
+
+        @media (min-width: 400px) and (max-width: 499px) {
+            width: 25px;
+            height: 25px;
+            font-size: 0.625rem; 
+        }
+
+        @media (min-width: 500px) and (max-width: 599px) {
+            width: 30px;
+            height: 30px;
+            font-size: 0.75rem; 
+        }
+
+        @media (min-width: 600px) and (max-width: 699px) {
+            width: 35px;
+            height: 35px;
+            font-size: 0.875rem; 
+        }
+
+        @media (min-width: 700px) and (max-width: 799px) {
+            width: 40px;
+            height: 40px;
+            font-size: 1rem; 
+        }
+
+        @media (min-width: 800px) and (max-width: 899px) {
+            width: 45px;
+            height: 45px;
+            font-size: 1.125rem; 
+        }
+
+        @media (min-width: 900px) {
+            width: 50px;
+            height: 50px;
+            font-size: 1.25rem; 
+        }
     }
 }
 

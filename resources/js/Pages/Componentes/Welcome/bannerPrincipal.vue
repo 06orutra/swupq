@@ -13,8 +13,6 @@ import Carousel from "@/Components/Carousel.vue";
 import Slide from "@/Components/Slide.vue";
 import OpcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 
-
-
 export default {
     components: {
         DataTable,

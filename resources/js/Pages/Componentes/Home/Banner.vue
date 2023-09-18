@@ -11,7 +11,6 @@ import axios from "axios";
 import Toast from "primevue/toast";
 import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 
-
 export default {
     components: {
         DataTable,
@@ -205,7 +204,6 @@ export default {
             editarDialog: false,
             eliminarDialog: false,
             photoInput: null,
-
         };
     },
 

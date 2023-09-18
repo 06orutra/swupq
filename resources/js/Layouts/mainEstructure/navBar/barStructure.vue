@@ -70,26 +70,18 @@ body, html {
   width: 120px;
   height: 100px;
   margin-right: 30%;
+  margin-top: -30%;
 }
-@media (max-width: 768px) {
-  .logo-img {
-    width:110px ;
-    height: 90px;
+
+@media (max-width: 520px){
+  .inferior{
+    display: none;
   }
 }
 
-@media (min-width: 769px) and (max-width: 1200px) {
-    .logo-img {
-    width:115px ;
-    height: 95px;
-  }
-
-}
-
-@media (min-width: 1201px) {
-    .logo-img {
-    width:120px;
-    height: 100px;
+@media (max-width: 520px){
+  .superior{
+    display:none;
   }
 }
 

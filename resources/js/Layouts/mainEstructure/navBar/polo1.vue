@@ -312,74 +312,42 @@ export default {
     }
   },
 };
+
 </script>
+
+
 <style scoped>
 .chatButton {
   cursor: pointer;
   width: 7vh;
   height: 7vh;
   border: 1px solid black;
-  position: fixed;
+  position: absolute;
   z-index: 999;
   transform: translateX(80px) translateY(95px);
 }
 
 
 .chatButton img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 999;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
 }
 
 .chatbot-container {
-
     top: 40px;
-    position: fixed;
+    position: absolute;
     bottom: 10px;
     right: 20px;
     border-radius: 10px;
-    overflow-y: scroll;
     max-width: 640px;
     max-height: 1080px;
     border:1px solid black;
     z-index:999;
 }
-@media (max-width: 768px) {
-  .chatButton {
-    width:6vh ;
-    height: 6vh;
-  }
-  .chatbot-container {
-    max-height: 1080px;
-    max-width: 360px;
-  }
-}
 
-@media (min-width: 769px) and (max-width: 1201px) {
-    .chatButton {
-    width:7vh ;
-    height: 7vh;
-  }
-  .chatbot-container {
-    max-height: 1080px;
-    max-width: 480px;
-  }
-
-}
-
-@media (min-width: 1201px) {
-    .chatButton {
-    width:7.5vh ;
-    height: 7.5vh;
-  }
-  .chatbot-container {
-    max-height: 1080px;
-    max-width: 640px;
-  }
-}
 </style>
-

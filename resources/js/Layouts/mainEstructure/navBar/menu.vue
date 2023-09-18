@@ -179,7 +179,7 @@ export default {
   border: 1px solid black;
   position: fixed;
   z-index: 999;
-  transform: translateX(20px) translateY(120px);
+  transform: translateX(20px) translateY(95px);
 }
 
 .content {
@@ -254,7 +254,7 @@ export default {
   }
 }
 
-@media (min-width: 769px) and (max-width: 1200px) {
+@media (min-width: 769px) and (max-width: 1201px) {
     .menu-icon {
     width:7vh ;
     height: 7vh;

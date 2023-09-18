@@ -2,24 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Inertia\Inertia;
-use App\Models\tb_banner;
+use App\Models\tb_carrusel_noticias;
 use Illuminate\Support\Facades\Storage;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
 
-
-class HomeController extends Controller
+class TbCarruselNoticiasController extends Controller
 {
-    public function bannerData()
-    {
-        $datosBanner = tb_banner::all();
+    public function bannerData(){
+        $datosBanner = tb_carrusel_noticias::all();
         return response()->json($datosBanner);
     }
 
-    public function registrarBanner(Request $request)
-    {
-
+    public function registrarBanner(Request $request){
+        
         $request->validate([
             'nombre' => 'required|string|max:255',
             'link' => 'required|string|max:255',
@@ -28,12 +23,12 @@ class HomeController extends Controller
 
         $date = date('Y-m-d H-i-s');
         //obtener el nombre de la imagen
-        $fotoName = $date . '_' . $request->file('foto')->getClientOriginalName();
+        $fotoName = $date.'_'.$request->file('foto')->getClientOriginalName();
         //guardar la imagen public storage
         $fotoPath = $request->file('foto')->storeAs('public', $fotoName);
 
         // Create a new banner instance
-        $banner = new tb_banner;
+        $banner = new tb_carrusel_noticias;
         $banner->nombre = $request->nombre;
         $banner->link = $request->link;
         $banner->imagen = $fotoName;
@@ -42,33 +37,25 @@ class HomeController extends Controller
         return response()->json('Banner registered successfully');
     }
 
-    public function editarBanner(Request $request)
-    {
-
-
+    public function editarBanner(Request $request){
         $request->validate([
             'nombre' => 'required|string|max:255',
             'link' => 'required|string|max:255',
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000000',
         ]);
 
-        $banner = tb_banner::find($request->id);
+        $banner = tb_carrusel_noticias::find($request->id);
 
+        Storage::delete('public/'.$banner->imagen);
 
-        if ($request->hasFile('foto')) {
+        if($request->hasFile('foto')){
 
             $date = date('Y-m-d H-i-s');
             //obtener el nombre de la imagen
-            $fotoName = $date . '_' . $request->file('foto')->getClientOriginalName();
-
+            $fotoName = $date.'_'.$request->file('foto')->getClientOriginalName();
+            
             //guardar en public en carpeta img, con el nombre de la imagen de fotoName
             $fotoPath = $request->file('foto')->storeAs('public', $fotoName);
-
-            // Luego, eliminar la imagen anterior
-            if ($banner->imagen) {
-                Storage::delete('public/' . $banner->imagen);
-            }
-
             $banner->imagen = $fotoName;
         }
 
@@ -79,11 +66,10 @@ class HomeController extends Controller
         return response()->json('Banner edited successfully');
     }
 
-    public function eliminarBanner(Request $request)
-    {
-        $banner = tb_banner::find($request->id);
+    public function eliminarBanner(Request $request){
+        $banner = tb_carrusel_noticias::find($request->id);
         //eliminar la imagen del storage
-        Storage::delete('public/' . $banner->imagen);
+        Storage::delete('public/'.$banner->imagen);
         $banner->delete();
 
         return response()->json('Banner deleted successfully');

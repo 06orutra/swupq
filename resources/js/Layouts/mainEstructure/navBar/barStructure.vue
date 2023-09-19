@@ -39,7 +39,7 @@ body, html {
   flex-direction: column;
   height: 200px;
   width: 200px;
-  margin: 1.2%;
+  margin-top: 4%;
   position: fixed;
   z-index: 999;
 }
@@ -69,7 +69,7 @@ body, html {
 .logo-img {
   width: 120px;
   height: 100px;
-  margin-right: 30%;
+  margin-right: 10%;
   margin-top: -30%;
 }
 

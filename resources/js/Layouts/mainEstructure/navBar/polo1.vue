@@ -349,5 +349,22 @@ export default {
     border:1px solid black;
     z-index:999;
 }
+@media (max-width: 520px) {
+      .chatButton {
+      width:5vh ;
+      height: 5vh;
+    }
+    .chatbot-container {
+    top: 140px;
+    position: absolute;
+    bottom: 10px;
+    right: -350px;
+    border-radius: 10px;
+    max-width: 300Spx;
+    max-height: 200px;
+    border:1px solid black;
+    z-index:999;
+  }
+}
 
 </style>

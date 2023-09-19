@@ -1,11 +1,10 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import RedesSociales from '@/Pages/Componentes/RedesSociales.vue';
-import Polo from '@/Components/Polo.vue';
+/* import Polo from '@/Components/Polo.vue'; Antiguo charbot, o sea que no xd */
 import Videos from '@/Pages/Componentes/Home/Videos.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
-import CarrierBannerTest from '@/Pages/Componentes/CarrierBannerTest.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -36,10 +35,9 @@ defineProps({
 -->
     
 <AppEstructure>
-        <Polo />
+        <!-- <Polo /> Antiguo chatbot, o sea, este no xd -->
     </AppEstructure>
     <CarrierBanner />
-    <!-- <CarrierBannerTest /> -->
     
     <RedesSociales />
 </template>

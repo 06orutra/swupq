@@ -38,8 +38,8 @@ defineProps({
         <!-- <Polo /> Antiguo chatbot, o sea, este no xd -->
     </AppEstructure>
     <CarrierBanner />
+    <RedesSociales/>
     
-    <RedesSociales />
 </template>
 
 <style></style>

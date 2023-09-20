@@ -1,6 +1,6 @@
 
 <template class="sticky">
-            <Dock :model="redes" class="custom-dock fixed z-2 hidden
+            <Dock :model="redes" class="custom-dock fixed mr-2 z-2 hidden
             lg:inline-flex"
             position="right">
                 <template #icon="{ item }">
@@ -11,15 +11,13 @@
             </Dock>
             
             <!-- DOCK cuando la pantalla es demasiado chica, por ejemplo, tablets y teléfonos -->
-            <Dock :model="redes" class="custom-dockTop absolute h-12 z-2 inline-flex
-            lg:hidden"
-            position="top">
-                <template #icon="{ item }">
-                    <a :href="item.link" target="_blank">
-                        <img :alt="item.label" :src="item.icon" style="width:60%"/>
-                    </a>
-                </template>
-            </Dock>
+            <Dock :model="redes" class="custom-dockTop absolute z-2 inline-flex lg:hidden" position="top">
+        <template #icon="{ item }">
+            <a :href="item.link" target="_blank">
+                <img :alt="item.label" :src="item.icon" style="width:60%"/>
+            </a>
+        </template>
+    </Dock>
 </template>
 
 <script setup>
@@ -64,11 +62,11 @@
 .custom-dockTop {
     background-color: transparent;
     border-radius: 10px;
-    padding: 15px;
-    width: 350px;
-    height: 50%;
+    width: 320px;
     transition: all .3s ease;
     cursor: pointer;
-    margin-top: -90px;
+    margin-top: 80px; /* Opcional, si no se requiere, borrar y ya :D */
+    left: 50%; /* Centra horizontalmente */
+    transform: translateX(-50%); /* Ajusta la posición */
 }
 </style>

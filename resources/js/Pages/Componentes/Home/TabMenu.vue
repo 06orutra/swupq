@@ -1,17 +1,17 @@
 <script>
-import carruselPrincipal from "@/Pages/Componentes/Home/carruselPrincipal.vue";
 import carruselNoticias from "@/Pages/Componentes/Home/carruselNoticias.vue";
-import carruselDividido from "@/Pages/Componentes/Home/carruselDividido/carruselDividido.vue";
+import carruselDividido from "@/Pages/Componentes/Home/carruselDividido.vue";
 import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
+import carruselEstructura from "./carruselEstructura.vue";
 
 export default {
     components: {
     TabView,
     TabPanel,
-    carruselPrincipal,
     carruselNoticias,
     carruselDividido,
+    carruselEstructura,
 },
 }
 </script>
@@ -19,7 +19,7 @@ export default {
 <template>
         <TabView ref="tabview1" class="p-3">
             <TabPanel header="Carrusel Principal">
-                <carruselPrincipal />
+                <carruselEstructura :loadDataUrl="'bannerData'" :registerBannerUrl="'/home/registrarBanner'" :editBannerUrl="'/home/editarBanner'" :deleteBannerUrl="'/home/eliminarBanner'"/>
             </TabPanel>
             <TabPanel header="Carrusel Secundario">
                 <carruselNoticias />

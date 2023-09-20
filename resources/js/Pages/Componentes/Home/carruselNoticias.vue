@@ -100,7 +100,7 @@ export default {
             formData.append('fecha_activacion', this.fecha_activacion);
             formData.append('fecha_desactivacion', this.fecha_desactivacion);
 
-            axios.post('/registrarBannerNoticias',
+            axios.post('noticias/registrarBanner',
                 formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -163,7 +163,7 @@ export default {
                 console.log('Foto seleccionada:', this.datosArreglo.foto); // Ayuda a depurar
             }
 
-            axios.post('/editarBannerNoticias',
+            axios.post('noticias/editarBanner',
                 formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -201,7 +201,7 @@ export default {
             };
 
 
-            axios.post('/eliminarBannerNoticias', data).then((response) => {
+            axios.post('noticias/eliminarBanner', data).then((response) => {
                 this.cargarBanner();
                 this.eliminarDialog = false;
                 this.datosArreglo = {};

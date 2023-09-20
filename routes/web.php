@@ -6,6 +6,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TbCarruselNoticiasController;
 use App\Http\Controllers\TbCarruselPrimeroController;
+use App\Http\Controllers\TbCarruselSegundoController;
+use App\Http\Controllers\TbCarruselTercerController;
 use Illuminate\Http\Request;
 
 /*
@@ -32,6 +34,7 @@ Route::prefix('institucion')->group(function () {
     Route::get('mascotas', function(){
         return Inertia::render('Componentes/Institucion/mascotasPrincipal');
     });
+    
     Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
 });   
 
@@ -60,31 +63,27 @@ Route::middleware([
 
 
     // ---------- Rutas Home ------------
+
+    $controllers = [
+        'home' => HomeController::class,
+        'noticias' => TbCarruselNoticiasController::class,
+        'primero' => TbCarruselPrimeroController::class,
+        'segundo' => TbCarruselSegundoController::class,
+        'tercer' => TbCarruselTercerController::class
+    ];
     
-    //****controladores home carusel principal*******
-
-    Route::post('/registrarBanner', [HomeController::class, 'registrarBanner']);
-
-    Route::post('/eliminarBanner', [HomeController::class, 'eliminarBanner']);
-
-    Route::post('/editarBanner', [HomeController::class, 'editarBanner']);
-
-    //****controladores home carusel secundario noticias*******
-    Route::post('/registrarBannerNoticias', [TbCarruselNoticiasController::class, 'registrarBanner']);
-
-    Route::post('/eliminarBannerNoticias', [TbCarruselNoticiasController::class, 'eliminarBanner']);
-
-    Route::post('/editarBannerNoticias', [TbCarruselNoticiasController::class, 'editarBanner']);
-
-    //****controladores home carusel dividido primero*******
-
-    Route::post('/registrarBannerprimero', [TbCarruselPrimeroController::class, 'registrarBanner']);
-
-    Route::post('/eliminarBannerprimero', [TbCarruselPrimeroController::class, 'eliminarBanner']);
-
-    Route::post('/editarBannerprimero', [TbCarruselPrimeroController::class, 'editarBanner']);
+    foreach ($controllers as $prefix => $controller) {
+        Route::prefix($prefix)->group(function () use ($controller) {
+            Route::post('bannerData', [$controller, 'bannerData']);
+            Route::post('registrarBanner', [$controller, 'registrarBanner']);
+            Route::post('eliminarBanner', [$controller, 'eliminarBanner']);
+            Route::post('editarBanner', [$controller, 'editarBanner']);
+        });
+    }
 });
 
 Route::post('/bannerData', [HomeController::class, 'bannerData']);
 Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'bannerData']);
 Route::post('/bannerDataprimero', [TbCarruselPrimeroController::class, 'bannerData']);
+Route::post('/bannerDatasegundo', [TbCarruselSegundoController::class, 'bannerData']);
+Route::post('/bannerDatatercero', [TbCarruselTercerController::class, 'bannerData']);

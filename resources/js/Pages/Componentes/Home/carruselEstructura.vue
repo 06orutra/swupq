@@ -12,7 +12,6 @@ import Toast from "primevue/toast";
 import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 import filterComponent from "@/Pages/Componentes/Home/filterComponent.vue";
 
-
 export default {
     components: {
         DataTable,
@@ -27,7 +26,24 @@ export default {
         opcionesCarrusel,
         filterComponent,
     },
-
+    props: {
+        loadDataUrl: {
+            type: String,
+            required: true
+        },
+        registerBannerUrl: {
+            type: String,
+            required: true
+        },
+        editBannerUrl: {
+            type: String,
+            required: true
+        },
+        deleteBannerUrl: {
+            type: String,
+            required: true
+        },
+    },
     mounted() {
         this.cargarBanner();
     },
@@ -36,7 +52,7 @@ export default {
 
     methods: {
         cargarBanner() {
-            axios.post("/bannerDataprimero").then((response) => {
+            axios.post(this.loadDataUrl).then((response) => {
                 this.banner = response.data;
             }).catch((error) => {
                 console.log(error);
@@ -82,7 +98,7 @@ export default {
             formData.append('link', this.link);
             formData.append('foto', this.foto);
 
-            axios.post('/registrarBannerprimero',
+            axios.post(this.registerBannerUrl,
                 formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -141,7 +157,7 @@ export default {
                 console.log('Foto seleccionada:', this.datosArreglo.foto); // Ayuda a depurar
             }
 
-            axios.post('/editarBannerprimero',
+            axios.post(this.editBannerUrl,
                 formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -178,7 +194,7 @@ export default {
             };
 
 
-            axios.post('/eliminarBannerprimero', data).then((response) => {
+            axios.post(this.deleteBannerUrl, data).then((response) => {
                 this.cargarBanner();
                 this.eliminarDialog = false;
                 this.datosArreglo = {};
@@ -236,7 +252,7 @@ export default {
 
 
         //metodo para input 
-        
+
     },
     data() {
         return {
@@ -264,7 +280,7 @@ export default {
             <Button label="Nuevo Registro" icon="pi pi-plus" class="p-button-success !mr-2" @click="openRegistro" />
         </template>
         <template #end>
-            <filterComponent :valores="banner" /> 
+            <filterComponent :valores="banner" />
         </template>
     </Toolbar>
 

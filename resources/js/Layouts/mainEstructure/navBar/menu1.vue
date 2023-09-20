@@ -237,22 +237,10 @@
     background-color: rgba(0, 10, 87, 0.8);
   }
   
-  @media (min-width: 769px) and (max-width: 1200px) {
+  @media (max-width: 520px) {
       .menu-icon {
-      width:7vh ;
-      height: 7vh;
-    }
-    .menu {
-      width:35%;
-      top: calc(50% + 1vh);
-    }
-  
-  }
-  
-  @media (min-width: 1201px) {
-      .menu-icon {
-      width:7.5vh ;
-      height: 7.5vh;
-    }
+      width:5vh ;
+      height: 5vh;
+        }
   }
   </style>

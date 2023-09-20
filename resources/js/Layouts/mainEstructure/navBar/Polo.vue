@@ -363,6 +363,7 @@ export default {
     .chatButton {
     width:7vh ;
     height: 7vh;
+    margin-left:2%;
   }
   .chatbot-container {
     max-height: 1080px;
@@ -371,10 +372,22 @@ export default {
 
 }
 
-@media (min-width: 1201px) {
+@media (min-width: 1202px) and (max-width: 1920px) {
     .chatButton {
     width:7.5vh ;
     height: 7.5vh;
+    margin-left:1%;
+  }
+  .chatbot-container {
+    max-height: 1080px;
+    max-width: 640px;
+  }
+}
+@media (min-width: 1921px) and (max-width: 2560px) {
+    .chatButton {
+    width:7.5vh ;
+    height: 7.5vh;
+    margin-left:3%;
   }
   .chatbot-container {
     max-height: 1080px;

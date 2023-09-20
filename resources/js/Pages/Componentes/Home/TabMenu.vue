@@ -1,8 +1,7 @@
 <script>
 import carruselPrincipal from "@/Pages/Componentes/Home/carruselPrincipal.vue";
-import Videos from "@/Pages/Componentes/Home/Videos.vue";
 import carruselNoticias from "@/Pages/Componentes/Home/carruselNoticias.vue";
-
+import carruselDividido from "@/Pages/Componentes/Home/carruselDividido/carruselDividido.vue";
 import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
 
@@ -11,27 +10,22 @@ export default {
     TabView,
     TabPanel,
     carruselPrincipal,
-    Videos,
     carruselNoticias,
+    carruselDividido,
 },
 }
 </script>
 
 <template>
-    <AppLayout title="Home">
         <TabView ref="tabview1" class="p-3">
-            <TabPanel header="Banner Principal">
+            <TabPanel header="Carrusel Principal">
                 <carruselPrincipal />
             </TabPanel>
-            <TabPanel header="Banner Noticias">
+            <TabPanel header="Carrusel Secundario">
                 <carruselNoticias />
             </TabPanel>
-            <TabPanel header="Videos">
-                <Videos />
-            </TabPanel>
-            <TabPanel header="Certificaciones">
-                <Certificaciones />
+            <TabPanel header="Carrusel Dividido">
+                <carruselDividido/>
             </TabPanel>
         </TabView>
-    </AppLayout>
 </template>

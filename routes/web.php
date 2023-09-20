@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TbCarruselNoticiasController;
+use App\Http\Controllers\TbCarruselPrimeroController;
 use Illuminate\Http\Request;
 
 /*
@@ -68,13 +69,22 @@ Route::middleware([
 
     Route::post('/editarBanner', [HomeController::class, 'editarBanner']);
 
-    //****controladores home carusel principal*******
+    //****controladores home carusel secundario noticias*******
     Route::post('/registrarBannerNoticias', [TbCarruselNoticiasController::class, 'registrarBanner']);
 
     Route::post('/eliminarBannerNoticias', [TbCarruselNoticiasController::class, 'eliminarBanner']);
 
     Route::post('/editarBannerNoticias', [TbCarruselNoticiasController::class, 'editarBanner']);
+
+    //****controladores home carusel dividido primero*******
+
+    Route::post('/registrarBannerprimero', [TbCarruselPrimeroController::class, 'registrarBanner']);
+
+    Route::post('/eliminarBannerprimero', [TbCarruselPrimeroController::class, 'eliminarBanner']);
+
+    Route::post('/editarBannerprimero', [TbCarruselPrimeroController::class, 'editarBanner']);
 });
 
 Route::post('/bannerData', [HomeController::class, 'bannerData']);
 Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'bannerData']);
+Route::post('/bannerDataprimero', [TbCarruselPrimeroController::class, 'bannerData']);

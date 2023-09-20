@@ -36,7 +36,7 @@ export default {
 
     methods: {
         cargarBanner() {
-            axios.post("/bannerData").then((response) => {
+            axios.post("/bannerDataprimero").then((response) => {
                 this.banner = response.data;
             }).catch((error) => {
                 console.log(error);
@@ -82,7 +82,7 @@ export default {
             formData.append('link', this.link);
             formData.append('foto', this.foto);
 
-            axios.post('/registrarBanner',
+            axios.post('/registrarBannerprimero',
                 formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -141,7 +141,7 @@ export default {
                 console.log('Foto seleccionada:', this.datosArreglo.foto); // Ayuda a depurar
             }
 
-            axios.post('/editarBanner',
+            axios.post('/editarBannerprimero',
                 formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -178,7 +178,7 @@ export default {
             };
 
 
-            axios.post('/eliminarBanner', data).then((response) => {
+            axios.post('/eliminarBannerprimero', data).then((response) => {
                 this.cargarBanner();
                 this.eliminarDialog = false;
                 this.datosArreglo = {};

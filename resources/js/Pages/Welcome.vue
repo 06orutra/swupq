@@ -1,11 +1,11 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import RedesSociales from '@/Pages/Componentes/RedesSociales.vue';
-import Videos from '@/Pages/Componentes/Home/Videos.vue';
+import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
-import imagenesPrueba from '@/Pages/Componentes/Welcome/imagenesPrueba.vue';
+import bannerPrincipal from '@/Pages/Componentes/Welcome/bannerPrincipal.vue';
 import TourCardenal from '@/Layouts/homeComponents/TourCardenal.vue';
 import SplitterVue from '@/Layouts/homeComponents/Splitter.vue';
+import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -19,33 +19,18 @@ defineProps({
 <template>
     <Head title="Welcome" />
 
-    <!--
+    <AppEstructure>
 
-    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-        <div v-if="canLogin" class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-            <Link v-if="$page.props.auth.user" :href="appRoute('dashboard')" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</Link>
 
-            <template v-else>
-                <Link :href="appRoute('login')" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</Link>
-
-                <Link v-if="canRegister" :href="appRoute('register')" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</Link>
-            </template>
-        </div>
-    </div>
-
--->
-    
-
-<AppEstructure>
-    
-        <!-- <Videos /> -->
-        <imagenesPrueba />
-        <TourCardenal/>
+        <bannerPrincipal />
+        <TourCardenal />
         <SplitterVue/>
+
+
     </AppEstructure>
 
-<RedesSociales />
-
+    <!-- <CarrierBanner /> -->
+    <RedesSociales />
 </template>
 
 <style></style>

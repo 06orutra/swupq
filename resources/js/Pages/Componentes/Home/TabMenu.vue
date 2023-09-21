@@ -1,35 +1,31 @@
 <script>
-import Banner from "@/Pages/Componentes/Home/Banner.vue";
-import Videos from "@/Pages/Componentes/Home/Videos.vue";
-
+import carruselNoticias from "@/Pages/Componentes/Home/carruselNoticias.vue";
+import carruselDividido from "@/Pages/Componentes/Home/carruselDividido.vue";
 import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
+import carruselEstructura from "./carruselEstructura.vue";
 
 export default {
     components: {
     TabView,
     TabPanel,
-    Banner,
-    Videos,
+    carruselNoticias,
+    carruselDividido,
+    carruselEstructura,
 },
 }
 </script>
 
 <template>
-    <AppLayout title="Home">
         <TabView ref="tabview1" class="p-3">
-            <TabPanel header="Banner">
-                <Banner />
+            <TabPanel header="Carrusel Principal">
+                <carruselEstructura :loadDataUrl="'bannerData'" :registerBannerUrl="'/home/registrarBanner'" :editBannerUrl="'/home/editarBanner'" :deleteBannerUrl="'/home/eliminarBanner'"/>
             </TabPanel>
-            <TabPanel header="Videos">
-                <Videos />
+            <TabPanel header="Carrusel Secundario">
+                <carruselNoticias />
             </TabPanel>
-            <TabPanel header="Certificaciones">
-                <Certificaciones />
-            </TabPanel>
-            <TabPanel header="Galeria">
-                <Galeria />
+            <TabPanel header="Carrusel Dividido">
+                <carruselDividido/>
             </TabPanel>
         </TabView>
-    </AppLayout>
 </template>

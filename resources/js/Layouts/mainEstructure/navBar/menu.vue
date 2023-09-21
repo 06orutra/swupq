@@ -1,34 +1,20 @@
 <template>
   <div id="app">
-    <img
-      src="storage/img/icon_menu.png"
-      alt="Menu Icon"
-      class="menu-icon"
-      @click="showMenu = !showMenu"
-    />
+    <img src="storage/img/icon_menu.png" alt="Menu Icon" class="menu-icon" @click="showMenu = !showMenu" />
 
     <ul class="menu" v-show="showMenu" @mouseleave="closeActiveSubMenu">
       <li v-for="(menuItem, index) in menuItems" :key="index">
-        <div
-          @mouseover="expandSubMenu(index)"
-          @click="toggleSubMenu(index)"
-          :style="{ color: menuItem.textColor }"
-          :class="{ 'menu-block': true, 'active': menuItem.expanded }"
-        >
+        <div @mouseover="expandSubMenu(index)" @click="toggleSubMenu(index)" style="{ color: menuItem.textColor }"
+          :class="{ 'menu-block': true, 'active': menuItem.expanded }">
           {{ menuItem.label }}
         </div>
         <transition name="fade">
           <ul v-if="menuItem.expanded" class="sub-menu">
-            <li
-              v-for="(subMenuItem, subIndex) in menuItem.subMenuItems"
-              :key="subIndex"
-            >
-              <div
-                :style="{ color: subMenuItem.textColor }"
-                :class="{ 'sub-menu-block': true, 'active': subMenuItem.expanded }"
-              >
+            <li v-for="(subMenuItem, subIndex) in menuItem.subMenuItems" :key="subIndex">
+              <a :href="subMenuItem.link" style="{ color: white, textDecoration: 'none' }"
+                :class="{ 'sub-menu-block': true, 'active': subMenuItem.expanded }" class="sub-menu-link">
                 {{ subMenuItem.label }}
-              </div>
+              </a>
             </li>
           </ul>
         </transition>
@@ -53,97 +39,98 @@ export default {
           textColor: '#ffffff',
           label: 'INSTITUCIÓN',
           subMenuItems: [
-                { label: '- Mensaje del rector' },
-            { label: '- Directorio' },
-            { label: '- Organigrama' },
-            { label: '- Marco jurídico' },
-            { label: '- Igualdad Laboral y No Discriminacion' },
-            { label: '- Sistema de Gestión de la Calidad' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'CARRERAS',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'POSGRADO',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'EDUCACIÓN CONTINUA',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'DEPORTE Y CULTURA',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'VINCULACIÓN',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'SERVICIOS ESTUDIANTILES',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'CONVOCATORIAS',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'CALENDARIO ESCOLAR',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-        ],
-      };
-    },
+            { label: '- Mensaje del rector', link: '/institucion/mascotas' },
+            { label: '- Directorio', link: '/institucion/mascotas' },
+            { label: '- Organigrama', link: '/institucion/mascotas' },
+            { label: '- Marco jurídico', link: '/institucion/mascotas' },
+            { label: '- Igualdad Laboral y No Discriminacion', link: '/institucion/mascotas' },
+            { label: '- Sistema de Gestión de la Calidad', link: '/institucion/mascotas' },
+            { label: '- Mascota', link: '/institucion/mascotas' },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'CARRERAS',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'POSGRADO',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'EDUCACIÓN CONTINUA',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'DEPORTE Y CULTURA',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'VINCULACIÓN',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'SERVICIOS ESTUDIANTILES',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'CONVOCATORIAS',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'CALENDARIO ESCOLAR',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+      ],
+    };
+  },
   methods: {
     expandSubMenu(index) {
       if (this.activeSubMenuIndex !== null) {
@@ -172,6 +159,11 @@ export default {
 
 
 <style scoped>
+.sub-menu-link {
+  color: white;
+  text-decoration: none;
+}
+
 .menu-icon {
   cursor: pointer;
   width: 7vh;
@@ -236,21 +228,27 @@ export default {
 .menu .sub-menu-block:hover {
   background-color: rgba(0, 10, 87, 0.8);
 }
-@media (max-width: 768px) 
-{.menu-icon {
+
+@media (max-width: 768px) {
+  .menu-icon {
     width: 6vh;
     height: 6vh;
   }
+
   .menu {
     width: 20%; /* Adjust the width as needed */
     top: calc(27% + 1vh); /* Adjust the top position as needed */
   }
+
   .menu li {
-    font-size: 12px; /* Adjust the font size as needed */
+    font-size: 12px;
+    /* Adjust the font size as needed */
   }
+
   .menu .menu-block,
   .menu .sub-menu-block {
-    padding: 5px; /* Adjust the padding as needed */
+    padding: 5px;
+    /* Adjust the padding as needed */
   }
 }
 
@@ -260,16 +258,10 @@ export default {
     height: 7vh;
     margin-right:3%;
   }
+
   .menu {
     width:20%;
     top: calc(32% + 1vh);
-  }
-
-}
-
-@media (min-width: 769px) and (max-width: 1330px) {
-    .menu-icon {
-    width:7.5vh ;
     height: 7.5vh;
   }
   .menu {

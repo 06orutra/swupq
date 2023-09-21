@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\tb_carrusel_segundo;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-use App\Models\tb_banner;
 use Illuminate\Support\Facades\Storage;
-use Carbon\Carbon;
 
 
-class HomeController extends Controller
+class TbCarruselSegundoController extends Controller
 {
     public function bannerData()
     {
-        $datosBanner = tb_banner::all();
+        $datosBanner = tb_carrusel_segundo::all();
         return response()->json($datosBanner);
     }
 
@@ -33,7 +31,7 @@ class HomeController extends Controller
         $fotoPath = $request->file('foto')->storeAs('public', $fotoName);
 
         // Create a new banner instance
-        $banner = new tb_banner;
+        $banner = new tb_carrusel_segundo;
         $banner->nombre = $request->nombre;
         $banner->link = $request->link;
         $banner->imagen = $fotoName;
@@ -52,7 +50,7 @@ class HomeController extends Controller
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000000',
         ]);
 
-        $banner = tb_banner::find($request->id);
+        $banner = tb_carrusel_segundo::find($request->id);
 
 
         if ($request->hasFile('foto')) {
@@ -81,7 +79,7 @@ class HomeController extends Controller
 
     public function eliminarBanner(Request $request)
     {
-        $banner = tb_banner::find($request->id);
+        $banner = tb_carrusel_segundo::find($request->id);
         //eliminar la imagen del storage
         Storage::delete('public/' . $banner->imagen);
         $banner->delete();

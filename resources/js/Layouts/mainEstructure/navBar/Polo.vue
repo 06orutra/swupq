@@ -1,13 +1,21 @@
 <template>
     <div>
-        <div class="fixed">
-        <button class="chatButton" @click="toggleChatbot">
-          <img src='http://127.0.0.1:8000/storage/2023-09-07%2017-45-09_WhatsApp%20Image%202023-09-07%20at%2011.44.29%20AM.jpeg' alt="Chatbot Icon">
-        </button>
-      </div>
-      <div v-if="showChatbot" class="chatbot-container z-10
-                dark:bg-[url('/public/img/FondoOscuroChatBot.jpg')]
-                bg-[url('/public/img/FondoClaroChatBot.jpg')]">
+        <br><br><br>
+        <div class="fixed bottom-4 right-4">
+            <!-- Se llama a la función de ToggleChatbot para que se muestre el chat, así como
+            la clase "chatButton" para que se muestre el botón de chatbot del Style -->
+            <button class="chatButton" @click="toggleChatbot">
+                <div>
+                    <img src="https://i.scdn.co/image/ab67706c0000bebba14bec178064d5a36c278da8"
+                        class="w-8rem h-8rem">
+                </div>
+
+            </button>
+        </div>
+        <!-- If sobre showChatbot para mostrar el chatbot y configurar todo el 
+        contenedor del chatbot. El fondo cambia según si es modo claro u oscuro -->
+        <div v-if="showChatbot" class="chatbot-container z-10"
+        style="background: linear-gradient(to bottom right, #c20707, #dd4600, #c28107, #6200d1, #6200d1);">
             <!-- CHATBOT CONTENIDO EN EL DESTE -->
             <!-- Header del chatbot container -->
             <div class="

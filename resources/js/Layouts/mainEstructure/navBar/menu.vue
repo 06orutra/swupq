@@ -171,7 +171,7 @@ export default {
   border: 1px solid black;
   position: fixed;
   z-index: 999;
-  transform: translateX(20px) translateY(120px);
+  transform: translateX(20px) translateY(95px);
 }
 
 .content {
@@ -183,8 +183,8 @@ export default {
   list-style-type: none;
   padding: 0;
   position: fixed;
-  left: 6%;
-  top: calc(37% + 1vh);
+  left: 3%;
+  top: calc(24% + 1vh);
   z-index: 999;
   width: 15%;
   background-color: rgba(0, 10, 87, 0.8);
@@ -236,10 +236,8 @@ export default {
   }
 
   .menu {
-    width: 40%;
-    /* Adjust the width as needed */
-    top: calc(50% + 1vh);
-    /* Adjust the top position as needed */
+    width: 20%; /* Adjust the width as needed */
+    top: calc(27% + 1vh); /* Adjust the top position as needed */
   }
 
   .menu li {
@@ -254,23 +252,28 @@ export default {
   }
 }
 
-@media (min-width: 769px) and (max-width: 1200px) {
-  .menu-icon {
-    width: 7vh;
+@media (min-width: 769px) and (max-width: 1224px) {
+    .menu-icon {
+    width:7vh ;
     height: 7vh;
+    margin-right:3%;
   }
 
   .menu {
-    width: 35%;
-    top: calc(50% + 1vh);
+    width:20%;
+    top: calc(32% + 1vh);
   }
 
 }
 
-@media (min-width: 1201px) {
-  .menu-icon {
-    width: 7.5vh;
+@media (min-width: 769px) and (max-width: 1330px) {
+    .menu-icon {
+    width:7.5vh ;
     height: 7.5vh;
+  }
+  .menu {
+    width:20%;
+    top: calc(27% + 1vh);
   }
 }
 </style>

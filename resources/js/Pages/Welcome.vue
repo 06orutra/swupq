@@ -5,6 +5,7 @@ import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import bannerPrincipal from '@/Pages/Componentes/Welcome/bannerPrincipal.vue';
 import TourCardenal from '@/Layouts/homeComponents/TourCardenal.vue';
 import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
+import SplitterVue from '@/Layouts/homeComponents/Splitter.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -22,12 +23,17 @@ defineProps({
 
 
         <bannerPrincipal />
+        <!-- <div>
+            <CarrierBanner />
+        </div> -->
+        
         <TourCardenal />
+
 
 
     </AppEstructure>
 
-    <CarrierBanner />
+
     <RedesSociales />
 </template>
 

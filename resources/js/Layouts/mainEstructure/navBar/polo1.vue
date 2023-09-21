@@ -1,21 +1,13 @@
 <template>
     <div>
-        <br><br><br>
-        <div class="fixed bottom-4 right-4">
-            <!-- Se llama a la función de ToggleChatbot para que se muestre el chat, así como
-            la clase "chatButton" para que se muestre el botón de chatbot del Style -->
-            <button class="chatButton" @click="toggleChatbot">
-                <div>
-                    <img src="https://i.scdn.co/image/ab67706c0000bebba14bec178064d5a36c278da8"
-                        class="w-8rem h-8rem">
-                </div>
-
-            </button>
-        </div>
-        <!-- If sobre showChatbot para mostrar el chatbot y configurar todo el 
-        contenedor del chatbot. El fondo cambia según si es modo claro u oscuro -->
-        <div v-if="showChatbot" class="chatbot-container z-10"
-        style="background: linear-gradient(to bottom right, #c20707, #dd4600, #c28107, #6200d1, #6200d1);">
+        <div class="fixed">
+        <button class="chatButton" @click="toggleChatbot">
+          <img src='http://127.0.0.1:8000/storage/2023-09-07%2017-45-09_WhatsApp%20Image%202023-09-07%20at%2011.44.29%20AM.jpeg' alt="Chatbot Icon">
+        </button>
+      </div>
+      <div v-if="showChatbot" class="chatbot-container z-10
+                dark:bg-[url('/public/img/FondoOscuroChatBot.jpg')]
+                bg-[url('/public/img/FondoClaroChatBot.jpg')]">
             <!-- CHATBOT CONTENIDO EN EL DESTE -->
             <!-- Header del chatbot container -->
             <div class="
@@ -320,87 +312,59 @@ export default {
     }
   },
 };
+
 </script>
+
+
 <style scoped>
 .chatButton {
   cursor: pointer;
   width: 7vh;
   height: 7vh;
   border: 1px solid black;
-  position: fixed;
+  position: absolute;
   z-index: 999;
   transform: translateX(80px) translateY(95px);
 }
 
 
 .chatButton img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 999;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
 }
 
 .chatbot-container {
-
     top: 40px;
-    position: fixed;
+    position: absolute;
     bottom: 10px;
     right: 20px;
     border-radius: 10px;
-    overflow-y: scroll;
     max-width: 640px;
     max-height: 1080px;
     border:1px solid black;
     z-index:999;
 }
-@media (max-width: 768px) {
-  .chatButton {
-    width:6vh ;
-    height: 6vh;
-  }
-  .chatbot-container {
-    max-height: 1080px;
-    max-width: 360px;
+@media (max-width: 520px) {
+      .chatButton {
+      width:5vh ;
+      height: 5vh;
+    }
+    .chatbot-container {
+    top: 140px;
+    position: absolute;
+    bottom: 10px;
+    right: -350px;
+    border-radius: 10px;
+    max-width: 300Spx;
+    max-height: 200px;
+    border:1px solid black;
+    z-index:999;
   }
 }
 
-@media (min-width: 769px) and (max-width: 1201px) {
-    .chatButton {
-    width:7vh ;
-    height: 7vh;
-    margin-left:2%;
-  }
-  .chatbot-container {
-    max-height: 1080px;
-    max-width: 480px;
-  }
-
-}
-
-@media (min-width: 1202px) and (max-width: 1920px) {
-    .chatButton {
-    width:7.5vh ;
-    height: 7.5vh;
-    margin-left:1%;
-  }
-  .chatbot-container {
-    max-height: 1080px;
-    max-width: 640px;
-  }
-}
-@media (min-width: 1921px) and (max-width: 2560px) {
-    .chatButton {
-    width:7.5vh ;
-    height: 7.5vh;
-    margin-left:3%;
-  }
-  .chatbot-container {
-    max-height: 1080px;
-    max-width: 640px;
-  }
-}
 </style>
-

@@ -5,6 +5,8 @@ import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import carruselPrincipalLogic from '@/Pages/Componentes/Welcome/carruselPrincipalLogic.vue';
 import carruselNoticiasLogic from '@/Pages/Componentes/Welcome/carruselNoticiasLogic.vue';
 import TourCardenal from '@/Layouts/homeComponents/TourCardenal.vue';
+import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
+import SplitterVue from '@/Layouts/homeComponents/Splitter.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -20,7 +22,6 @@ defineProps({
 
     <AppEstructure>
 
-
         <carruselPrincipalLogic />
         <br>
         <carruselNoticiasLogic />
@@ -28,7 +29,9 @@ defineProps({
         <TourCardenal />
 
 
+
     </AppEstructure>
+
 
     <RedesSociales />
 </template>

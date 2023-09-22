@@ -6,7 +6,7 @@ import bannerPrincipal from '@/Pages/Componentes/Welcome/bannerPrincipal.vue';
 import TourCardenal from '@/Layouts/homeComponents/TourCardenal.vue';
 import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
 import SplitterVue from '@/Layouts/homeComponents/Splitter.vue';
-
+import carruselSecundario from './Componentes/Welcome/carruselSecundario.vue';
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
@@ -28,11 +28,11 @@ defineProps({
         </div> -->
         
         <TourCardenal />
+        <carruselSecundario />
 
 
 
     </AppEstructure>
-
 
     <RedesSociales />
 </template>

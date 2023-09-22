@@ -49,7 +49,7 @@ export default {
         },
 
         cargarBanner() {
-            axios.post("/bannerData").then((response) => {
+            axios.post("noticias/bannerData").then((response) => {
                 this.banner = response.data;
                 this.assignConsecutiveIDs();
                 this.isBannerLoaded = true;

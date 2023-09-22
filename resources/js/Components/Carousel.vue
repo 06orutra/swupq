@@ -1,5 +1,6 @@
+
 <template>
-    <div class="carousel">
+    <div class="carousel" ref="rootRef">
         <slot :currentSlide="currentSlide" />
 
         <!-- Navegation -->
@@ -14,8 +15,7 @@
 
         <!-- Pagination -->
         <div v-if="paginationEnabled" class="pagination">
-            <span @click="goToSlide(index)" v-for="(slide, index) in getSlideCount" :key="index"
-                :class="{ active: index + 1 === currentSlide }">
+            <span @click="goToSlide(index)" v-for="(slide, index) in getSlideCount" :key="index" :class="{ active: index + 1 === currentSlide }">
             </span>
         </div>
 
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';  // Import nextTick
 import 'primeicons/primeicons.css';
 
 export default {
@@ -32,6 +32,7 @@ export default {
     setup(props) {
         const currentSlide = ref(1);
         const getSlideCount = ref(null);
+        const rootRef = ref(null);
         const autoPlayEnabled = ref(props.startAutoPlay === undefined ? true : props.startAutoPlay);
         const timeoutDuration = ref(props.timeout === undefined ? 5000 : props.timeout);
         const paginationEnabled = ref(props.pagination === undefined ? true : props.pagination);
@@ -57,6 +58,7 @@ export default {
             currentSlide.value -= 1;
         }
 
+
         const goToSlide = (index) => {
             currentSlide.value = index + 1;
         }
@@ -73,11 +75,17 @@ export default {
         }
 
         const updateSlideCount = () => {
-            getSlideCount.value = document.querySelectorAll('.slide').length;
+            if (rootRef.value) {
+                getSlideCount.value = rootRef.value.querySelectorAll('.slide').length;
+            }
             console.log(getSlideCount.value);
         };
 
-        onMounted(updateSlideCount)
+        onMounted(() => {
+            nextTick(() => {
+                updateSlideCount();
+            });
+        });
 
         return { currentSlide, nextSlide, prevSlide, getSlideCount, goToSlide, paginationEnabled, navEnabled };
     }
@@ -86,41 +94,13 @@ export default {
 
 <style lang="scss">
 .navigate {
-    padding: 0 20px;
+    padding: 0 16px;
     height: 100%;
     width: 100%;
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    @media (max-width: 399px) {
-        padding: 5px;
-    }
-
-    @media (min-width: 400px) and (max-width: 499px) {
-        padding: 8px;
-    }
-
-    @media (min-width: 500px) and (max-width: 599px) {
-        padding: 10px;
-    }
-
-    @media (min-width: 600px) and (max-width: 699px) {
-        padding: 12px;
-    }
-
-    @media (min-width: 700px) and (max-width: 799px) {
-        padding: 15px;
-    }
-
-    @media (min-width: 800px) and (max-width: 899px) {
-        padding: 18px;
-    }
-
-    @media (min-width: 900px) {
-        padding: 20px;
-    }
 
     .toogle-page {
         display: flex;
@@ -141,49 +121,6 @@ export default {
         height: 40px;
         background-color: black;
         color: white;
-
-        // Para pantallas pequeñas
-        @media (max-width: 399px) {
-            width: 20px;
-            height: 20px;
-            font-size: 0.5rem;
-        }
-
-        @media (min-width: 400px) and (max-width: 499px) {
-            width: 25px;
-            height: 25px;
-            font-size: 0.625rem; 
-        }
-
-        @media (min-width: 500px) and (max-width: 599px) {
-            width: 30px;
-            height: 30px;
-            font-size: 0.75rem; 
-        }
-
-        @media (min-width: 600px) and (max-width: 699px) {
-            width: 35px;
-            height: 35px;
-            font-size: 0.875rem; 
-        }
-
-        @media (min-width: 700px) and (max-width: 799px) {
-            width: 40px;
-            height: 40px;
-            font-size: 1rem; 
-        }
-
-        @media (min-width: 800px) and (max-width: 899px) {
-            width: 45px;
-            height: 45px;
-            font-size: 1.125rem; 
-        }
-
-        @media (min-width: 900px) {
-            width: 50px;
-            height: 50px;
-            font-size: 1.25rem; 
-        }
     }
 }
 

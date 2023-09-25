@@ -1,5 +1,6 @@
+
 <template>
-    <div class="carousel">
+    <div class="carousel" ref="rootRef">
         <slot :currentSlide="currentSlide" />
 
         <!-- Navegation -->
@@ -14,8 +15,7 @@
 
         <!-- Pagination -->
         <div v-if="paginationEnabled" class="pagination">
-            <span @click="goToSlide(index)" v-for="(slide, index) in getSlideCount" :key="index"
-                :class="{ active: index + 1 === currentSlide }">
+            <span @click="goToSlide(index)" v-for="(slide, index) in getSlideCount" :key="index" :class="{ active: index + 1 === currentSlide }">
             </span>
         </div>
 
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';  // Import nextTick
 import 'primeicons/primeicons.css';
 
 export default {
@@ -76,6 +76,7 @@ export default {
             currentSlide.value -= 1;
         }
 
+
         const goToSlide = (index) => {
             currentSlide.value = index + 1;
         }
@@ -95,7 +96,11 @@ export default {
             getSlideCount.value = props.slides.length; // Usamos la longitud del prop slides 
         };
 
-        onMounted(updateSlideCount)
+        onMounted(() => {
+            nextTick(() => {
+                updateSlideCount();
+            });
+        });
 
         return { currentSlide, nextSlide, prevSlide, getSlideCount, goToSlide, paginationEnabled, navEnabled };
     }

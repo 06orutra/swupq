@@ -2,7 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
-import bannerPrincipal from '@/Pages/Componentes/Welcome/bannerPrincipal.vue';
+import carruselPrincipalLogic from '@/Pages/Componentes/Welcome/carruselPrincipalLogic.vue';
 import TourCardenal from '@/Layouts/homeComponents/TourCardenal.vue';
 import SplitterVue from '@/Layouts/homeComponents/Splitter.vue';
 import carruselSecundario from './Componentes/Welcome/carruselSecundario.vue';

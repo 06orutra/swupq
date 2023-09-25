@@ -267,7 +267,6 @@ export default {
             eliminarDialog: false,
             photoInput: null,
             imagePreview: null,
-
         };
     },
 

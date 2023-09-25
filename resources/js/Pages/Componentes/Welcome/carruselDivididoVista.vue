@@ -13,8 +13,6 @@ import Carousel from "@/Components/Carousel.vue";
 import Slide from "@/Components/Slide.vue";
 import OpcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 
-
-
 export default {
     components: {
         DataTable,
@@ -29,6 +27,12 @@ export default {
         Carousel,
         Slide,
         OpcionesCarrusel,
+    },
+    props: {
+        loadDataUrl: {
+            type: String,
+            required: true
+        },
     },
     mounted() {
         this.cargarBanner();
@@ -49,7 +53,7 @@ export default {
         },
 
         cargarBanner() {
-            axios.post("/bannerData").then((response) => {
+            axios.post(this.loadDataUrl).then((response) => {
                 this.banner = response.data;
                 this.assignConsecutiveIDs();
                 this.isBannerLoaded = true;

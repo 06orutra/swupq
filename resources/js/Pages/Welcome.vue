@@ -26,7 +26,7 @@ defineProps({
         <!-- <div>
             <CarrierBanner />
         </div> -->
-        
+        <!-- <SplitterVue /> -->
         <TourCardenal />
         <carruselSecundario />
 

@@ -27,18 +27,36 @@ import { ref, onMounted, nextTick } from 'vue';  // Import nextTick
 import 'primeicons/primeicons.css';
 
 export default {
-    props: ["startAutoPlay", "timeout", "navigation", "pagination"],
+    props: {
+        startAutoPlay: {
+            type: Boolean,
+            default: true
+        },
+        timeout: {
+            type: Number,
+            default: 5000
+        },
+        navigation: {
+            type: Boolean,
+            default: true
+        },
+        pagination: {
+            type: Boolean,
+            default: true
+        },
+        slides: {
+            type: Array,
+            required: true
+        }
+    },
 
     setup(props) {
         const currentSlide = ref(1);
-        const getSlideCount = ref(null);
-        const rootRef = ref(null);
-        const autoPlayEnabled = ref(props.startAutoPlay === undefined ? true : props.startAutoPlay);
-        const timeoutDuration = ref(props.timeout === undefined ? 5000 : props.timeout);
-        const paginationEnabled = ref(props.pagination === undefined ? true : props.pagination);
-        const navEnabled = ref(props.navigation === undefined ? true : props.navigation);
-
-        // Next slide
+        const getSlideCount = ref(props.slides.length);
+        const autoPlayEnabled = ref(props.startAutoPlay);
+        const timeoutDuration = ref(props.timeout);
+        const paginationEnabled = ref(props.pagination);
+        const navEnabled = ref(props.navigation);
         const nextSlide = () => {
             updateSlideCount();
             if (currentSlide.value === getSlideCount.value) {
@@ -75,10 +93,7 @@ export default {
         }
 
         const updateSlideCount = () => {
-            if (rootRef.value) {
-                getSlideCount.value = rootRef.value.querySelectorAll('.slide').length;
-            }
-            console.log(getSlideCount.value);
+            getSlideCount.value = props.slides.length; // Usamos la longitud del prop slides 
         };
 
         onMounted(() => {

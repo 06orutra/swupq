@@ -24,7 +24,7 @@ defineProps({
     <AppEstructure>
 
 
-        <bannerPrincipal />
+        <carruselPrincipalLogic />
         <CarrierBanner />
         <carruselSecundario />
         <TourCardenal />

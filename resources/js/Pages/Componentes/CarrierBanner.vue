@@ -173,8 +173,8 @@ el efecto feo de corte -->
 .swiper-slide {
   background-position: center;
   background-size: cover;
-  width: 300px;
-  height: 300px;
+  width: 275px;
+  height: 275px;
 }
 
 

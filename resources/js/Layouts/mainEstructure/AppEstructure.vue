@@ -2,10 +2,11 @@
 import AppFooter from '@/Layouts/mainEstructure/AppFooter.vue';
 import AppNavtools from '@/Layouts/mainEstructure/AppNavtools.vue'
 import AppBar from '@/Layouts/mainEstructure/navBar/barStructure.vue';
+import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
 </script>
 
 <template>
-  <div class="grid-container">
+  <div>
     <div>
       <AppNavtools></AppNavtools>
     </div>
@@ -14,7 +15,6 @@ import AppBar from '@/Layouts/mainEstructure/navBar/barStructure.vue';
       <AppBar />
       <slot></slot>
     </div>
-
     <div>
       <AppFooter />
     </div>

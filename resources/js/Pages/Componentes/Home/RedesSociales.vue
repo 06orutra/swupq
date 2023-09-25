@@ -1,7 +1,7 @@
 
 <template class="sticky">
             <Dock :model="redes" class="custom-dock fixed mr-2 z-2 hidden
-            lg:inline-flex xl:inline-flex"
+            lg:inline-flex"
             position="right">
                 <template #icon="{ item }">
                     <a :href="item.link" target="_blank">

@@ -1,42 +1,57 @@
-<template>
-    <div class="container-4">  
-        <div class="espacio1">
-          <div class="imagen1">
-            <div>
-              <img src="https://wellaggio.com/wp-content/uploads/2015/09/la-importancia-de-las-imagenes-en-el-dise%C3%B1o-web1.jpg">
-            </div>
-          </div>
-        </div>
-      
+<script>
+import carruselDivididoVista from "/resources/js/Pages/Componentes/Welcome/carruselDivididoVista.vue";
+import Videos from "/resources/js/Pages/Componentes/Home/Videos.vue";
 
-        <div class="espacio2">
-          <div class="imagen-2">
-            <img src="https://png.pngtree.com/png-clipart/20210205/ourmid/pngtree-airplane-playground-png-image_2867512.jpg">
-          </div>
+export default {
+  components: {
+    carruselDivididoVista,
+    Videos,
+  }
+};
+</script>
+
+<template>
+  <div class="container-4">
+    <div class="espacio1">
+      <div class="imagen1">
+        <div>
+          <videos/>
         </div>
       </div>
-  </template>
+    </div>
+
+
+    <div class="espacio2">
+      <div class="imagen-2">
+        <carruselDivididoVista :loadDataUrl="'bannerDataprimero'" />
+      </div>
+    </div>
+  </div>
+</template>
   
-  <style>
-  .container-4 {
-    display: flex;
-    height: 45vh;
-  }
+<style>
+.container-4 {
+  display: flex;
+  height: 45vh;
+}
 
-  .espacio1 {
-    background-color: #d000ff; /* Rojo */
-    flex-basis: 50%;
-  }
-  .imagen1{
-    width: 100%;
-  }
+.espacio1 {
+  background-color: #d000ff;
+  /* Rojo */
+  flex-basis: 50%;
+}
 
-  .espacio2 {
-    flex-basis: 50%;
-    background-color: #00dc54; /* Azul */
-  }
-  .imagen-2{
-    width: 100%;
-  }
+.imagen1 {
+  width: 100%;
+}
 
-  </style>
+.espacio2 {
+  flex-basis: 50%;
+  background-color: #00dc54;
+  /* Azul */
+}
+
+.imagen-2 {
+  width: 100%;
+}
+</style>

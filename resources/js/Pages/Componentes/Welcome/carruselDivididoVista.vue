@@ -28,6 +28,12 @@ export default {
         Slide,
         OpcionesCarrusel,
     },
+    props: {
+        loadDataUrl: {
+            type: String,
+            required: true
+        },
+    },
     mounted() {
         this.cargarBanner();
     },
@@ -47,8 +53,7 @@ export default {
         },
 
         cargarBanner() {
-            axios.post("/bannerDataNoticias").then((response) => {
-                console.log(response.data);
+            axios.post(this.loadDataUrl).then((response) => {
                 this.banner = response.data;
                 this.assignConsecutiveIDs();
                 this.isBannerLoaded = true;
@@ -72,7 +77,7 @@ export default {
 
 <template>
     <!-- Carrusel dinamico -->
-    <Carousel v-if="isBannerLoaded" :navigation="navigation" :pagination="pagination" :startAutoPlay="startAutoPlay" :timeout="timeout"
+    <Carousel v-if="isBannerLoaded" :navigation="navigation" :pagination="pagination" :startAutoPlay="startAutoPlay" :timeout="timeout" :slides="banner"
         class="carousel" v-slot="{ currentSlide }">
         <Slide v-for="datosCard in banner" :key="datosCard">
             <div v-show="currentSlide === datosCard.id" class="slide-info">

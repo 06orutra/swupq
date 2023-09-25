@@ -7,25 +7,26 @@ import carruselEstructura from "./carruselEstructura.vue";
 
 export default {
     components: {
-    TabView,
-    TabPanel,
-    carruselNoticias,
-    carruselDividido,
-    carruselEstructura,
-},
+        TabView,
+        TabPanel,
+        carruselNoticias,
+        carruselDividido,
+        carruselEstructura,
+    },
 }
 </script>
 
 <template>
-        <TabView ref="tabview1" class="p-3">
-            <TabPanel header="Carrusel Principal">
-                <carruselEstructura :loadDataUrl="'bannerData'" :registerBannerUrl="'/home/registrarBanner'" :editBannerUrl="'/home/editarBanner'" :deleteBannerUrl="'/home/eliminarBanner'"/>
-            </TabPanel>
-            <TabPanel header="Carrusel Secundario">
-                <carruselNoticias />
-            </TabPanel>
-            <TabPanel header="Carrusel Dividido">
-                <carruselDividido/>
-            </TabPanel>
-        </TabView>
+    <TabView ref="tabview1" class="p-3">
+        <TabPanel header="Carrusel Principal">
+            <carruselEstructura :loadDataUrl="'bannerData'" :registerBannerUrl="'/home/registrarBanner'"
+                :editBannerUrl="'/home/editarBanner'" :deleteBannerUrl="'/home/eliminarBanner'" />
+        </TabPanel>
+        <TabPanel header="Carrusel Secundario">
+            <carruselNoticias />
+        </TabPanel>
+        <TabPanel header="Carrusel Dividido">
+            <carruselDividido />
+        </TabPanel>
+    </TabView>
 </template>

@@ -25,12 +25,10 @@ defineProps({
 
 
         <bannerPrincipal />
-        <!-- <div>
-            <CarrierBanner />
-        </div> -->
-        <!-- <SplitterVue /> -->
-        <TourCardenal />
+        <CarrierBanner />
         <carruselSecundario />
+        <TourCardenal />
+        <SplitterVue />
 
 
 
@@ -39,6 +37,4 @@ defineProps({
     <RedesSociales />
 </template>
 
-<style>
-
-</style>
+<style></style>

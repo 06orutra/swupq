@@ -1,20 +1,28 @@
+<script>
+import carruselDivididoVista from "/resources/js/Pages/Componentes/Welcome/carruselDivididoVista.vue";
+import Videos from "/resources/js/Pages/Componentes/Home/Videos.vue";
+
+export default {
+    components: {
+        carruselDivididoVista,
+        Videos,
+    },
+};
+</script>
+
 <template>
     <div class="cards-container">
         <div class="card">
-            <img src="https://www.comparapps.com/wp-content/uploads/2020/03/imagenes-para-paginas-web.png"
-                class="imagen-resolucion">
+            <Videos/>
         </div>
         <div class="card">
-            <img src="https://www.comparapps.com/wp-content/uploads/2020/03/imagenes-para-paginas-web.png"
-                class="imagen-resolucion">
+            <carruselDivididoVista :loadDataUrl="'bannerDataprimero'" class="imagen-resolucion"/>
         </div>
         <div class="card">
-            <img src="https://www.comparapps.com/wp-content/uploads/2020/03/imagenes-para-paginas-web.png"
-                class="imagen-resolucion">
+            <carruselDivididoVista :loadDataUrl="'bannerDatasegundo'" class="imagen-resolucion"/>
         </div>
         <div class="card">
-            <img src="https://www.comparapps.com/wp-content/uploads/2020/03/imagenes-para-paginas-web.png"
-                class="imagen-resolucion">
+            <carruselDivididoVista :loadDataUrl="'bannerDatatercero'" class="imagen-resolucion"/>
         </div>
     </div>
 </template>

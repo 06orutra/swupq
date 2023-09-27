@@ -11,6 +11,7 @@ import axios from "axios";
 import Toast from "primevue/toast";
 import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 import filterComponent from "@/Pages/Componentes/Home/filterComponent.vue";
+
 export default {
     components: {
         DataTable,

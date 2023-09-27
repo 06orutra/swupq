@@ -208,6 +208,12 @@ export default {
                 console.log(error);
             });
         },
+        updateCarouselSettings(settings) {
+            this.navigation = settings.navigation;
+            this.pagination = settings.pagination;
+            this.startAutoPlay = settings.startAutoPlay;
+            this.timeout = settings.timeout;
+        },
         openRegistro() {
             this.datosArreglo = {};
             this.submitted = false;
@@ -286,7 +292,7 @@ export default {
 
     <!-- PERSONALIZAR CARRUSEL -->
     <div>
-        <opcionesCarrusel />
+        <opcionesCarrusel id="carruselPrincipal" @configuracion-guardada="updateCarouselSettings" />
     </div>
 
     <!-- Cartas en admin -->

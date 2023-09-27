@@ -228,16 +228,16 @@ export default {
 .menu .sub-menu-block:hover {
   background-color: rgba(0, 10, 87, 0.8);
 }
-
-@media (max-width: 768px) {
-  .menu-icon {
+@media (min-width: 521px) and (max-width: 768px) 
+{.menu-icon {
     width: 6vh;
     height: 6vh;
   }
 
   .menu {
     width: 20%; /* Adjust the width as needed */
-    top: calc(27% + 1vh); /* Adjust the top position as needed */
+    top: calc(25% + 1vh); /* Adjust the top position as needed */
+    right:-50%;
   }
 
   .menu li {
@@ -256,24 +256,93 @@ export default {
     .menu-icon {
     width:7vh ;
     height: 7vh;
-    margin-right:3%;
+    margin-right:4%;
   }
 
   .menu {
     width:20%;
-    top: calc(32% + 1vh);
+    top: calc(27% + 1vh);
   }
 
 }
 
-@media (min-width: 769px) and (max-width: 1330px) {
+@media (min-width: 1225px) and (max-width: 1440px) {
     .menu-icon {
     width:7.5vh ;
     height: 7.5vh;
   }
   .menu {
     width:20%;
-    top: calc(27% + 1vh);
+    top: calc(26% + 1vh);
   }
 }
+@media (min-width: 1441px) {
+  .menu-icon {
+    width:7.5vh ;
+    height: 7.5vh;
+  }
+  .menu {
+    width:15%;
+    top: calc(26% + 1vh);
+  }
+}
+@media (max-width: 520px) {
+      .menu-icon {
+        width:4.7vh ;
+      height: 4.7vh;
+      transform: translateX(240px) translateY(4px);
+      margin:.9%;
+      
+        }
+  }
+  @media (min-width: 320px) and (max-width: 520px) {
+  .menu {
+    list-style-type: none;
+    padding: 0;
+    position: fixed; /* Cambia de "absolute" a "relative" para que los elementos se coloquen en el flujo normal del documento */
+    width: 40%; /* Ocupa todo el ancho disponible */
+    background-color: rgba(0, 10, 87, 0.8);
+    transition: transform 0.5s ease;
+    top: calc(-10% + 20vh);
+    left:6%;
+  }
+
+  .menu li {
+    display: block;
+    background: transparent;
+    color: #ffffff;
+  }
+
+  .menu .menu-block {
+    display: block;
+    padding: 10px;
+    transition: background-color 0.3s;
+  }
+
+  .menu .menu-block:hover {
+    background-color: rgba(0, 30, 255, 0.8);
+  }
+
+  .menu .sub-menu {
+    position: absolute;
+    left: 100%; /* Coloca el sub-menú a la derecha del primer bloque */
+    top: 0;
+    margin: 0;
+    padding: 0;
+    width: 250px;
+    z-index: 2;
+    background-color: rgba(0, 26, 226, 0.8);
+  }
+
+  .menu .sub-menu-block {
+    display: block;
+    padding: 10px;
+    transition: background-color 0.3s;
+  }
+
+  .menu .sub-menu-block:hover {
+    background-color: rgba(0, 10, 87, 0.8);
+  }
+}
+
 </style>

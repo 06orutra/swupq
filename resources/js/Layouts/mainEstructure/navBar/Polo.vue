@@ -356,10 +356,11 @@ export default {
     border:1px solid black;
     z-index:999;
 }
-@media (max-width: 768px) {
+@media (min-width: 521px) and (max-width: 768px) {
   .chatButton {
     width:6vh ;
     height: 6vh;
+    margin-left:2%;
   }
   .chatbot-container {
     max-height: 1080px;
@@ -369,8 +370,8 @@ export default {
 
 @media (min-width: 769px) and (max-width: 1201px) {
     .chatButton {
-    width:7vh ;
-    height: 7vh;
+    width:7.5vh ;
+    height: 7.5vh;
     margin-left:2%;
   }
   .chatbot-container {
@@ -384,7 +385,7 @@ export default {
     .chatButton {
     width:7.5vh ;
     height: 7.5vh;
-    margin-left:1%;
+    margin-left:1.5%;
   }
   .chatbot-container {
     max-height: 1080px;
@@ -401,6 +402,24 @@ export default {
     max-height: 1080px;
     max-width: 640px;
   }
+}
+@media (min-width: 320px) and (max-width: 520px) {
+      .chatButton {
+      width:4.7vh ;
+      height: 4.7vh;
+      transform: translateX(180px) translateY(4px);
+      margin:.9%;
+      
+    }
+    .chatbot-container {
+  bottom: 10px;
+  right: 10px; /* Ajusta la posición a tu preferencia */
+  max-width: 360px; /* Ajusta el ancho máximo a tu preferencia */
+  max-height: 100%; /* Permite que el chat se expanda verticalmente */
+  overflow-y: auto; /* Agrega scroll si el contenido es largo */
+  /* Otros estilos aquí... */
+}
+
 }
 </style>
 

@@ -22,42 +22,50 @@ export default {
           2560: {
             slidesPerView: 4, //Controla el número de slides que se muestran
             loopedSlides: 3, //Estos extremos se mostrarán para no cortar de golpe
-            
+            width: '90%',
+            spaceBetween: 150,
           },
           1920: {
             slidesPerView: 4,
             loopedSlides: 3,
-            
+            width: '90%',
+            spaceBetween: 150,
           },
           1440: {
             slidesPerView: 4,
-            loopedSlides: 2,
-            
+            loopedSlides: 3,
+            width: '90%',
+            spaceBetween: 125,
           },
           1024: {
-            slidesPerView: 3,
-            loopedSlides: 2,
-            
+            slidesPerView: 4,
+            loopedSlides: 3,
+            width: '90%',
+            spaceBetween: 100,
           },
           768: {
             slidesPerView: 3,
             loopedSlides: 2,
-            
+            width: '90%',
+            spaceBetween: 100,
           },
           425: {
-            slidesPerView: 1,
-            loopedSlides: 0,
-            
+            slidesPerView: 2,
+            loopedSlides: 1,
+            width: '100%',
+            spaceBetween: 50,
           },
           375: {
-            slidesPerView: 1,
-            loopedSlides: 0,
-            
+            slidesPerView: 2,
+            loopedSlides: 1,
+            width: '100%',
+            spaceBetween: 50,
           },
           320: {
-            slidesPerView: 1,
-            loopedSlides: 0,
-            
+            slidesPerView: 2,
+            loopedSlides: 1,
+            width: '100%',
+            spaceBetween: 50,
           },
 
         };
@@ -118,6 +126,8 @@ export default {
           return breakpoints[windowWidth.value] || closestBreakpoint(windowWidth.value) || {
             slidesPerView: 4,
             loopedSlides: 3,
+            width: '100%',
+            spaceBetween: 150,
           }; //Esto devuelve el valor del objeto breakpoints
         });
       return {
@@ -138,7 +148,7 @@ el efecto feo de corte -->
     :effect="'coverflow'"
     :grabCursor="true"
     :loop="true"
-    :spaceBetween="50"
+    :spaceBetween="swiperOptions.spaceBetween"
     :loopedSlides="swiperOptions.loopedSlides"
     :centeredSlides="true" 
     :pagination="false"
@@ -152,7 +162,9 @@ el efecto feo de corte -->
       modifier: 1,
       scale:1,
       slideShadows: true }" 
-    style="width:85%;"
+    :style="{      
+      width: swiperOptions.width
+    }"
     >
 
     <swiper-slide v-for="(carrera, index) in carreras" :key="index">
@@ -166,15 +178,14 @@ el efecto feo de corte -->
 
 <style scoped>
 .swiper {
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .swiper-slide {
   background-position: center;
   background-size: cover;
-  width: 200px;
-  height: 150px;
+  height: 220px;
 }
 
 

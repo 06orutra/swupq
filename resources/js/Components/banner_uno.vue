@@ -4,8 +4,8 @@
         <div class="imagen">
           <div>
             <img src="https://www.comparapps.com/wp-content/uploads/2020/03/imagenes-para-paginas-web.png">          </div>
+          </div>
         </div>
-      </div>
 
       <div class="espacio-2">
         <div class="imagen2">
@@ -19,24 +19,28 @@
   .container-2 {
     display: flex;
     height: 45vh;
-    width: 100%;
+    flex-direction: row;
   }
   
   .espacio {
-    background-color: #c43333; /* Rojo */
-    flex-basis: 50%;
+    /* background-color: #c43333; Rojo */
+    flex-basis: 100%;
+    flex-direction: row;
+    flex-direction: end;
   }
+
   .imagen{
-    width: 100%;
+    width: 50%;
   }
 
   .espacio-2 {
-    flex-basis: 50%;
-    background-color: #1515c8; /* Azul */
-  }
-  .imagen2{
-    width: 100%;
+    flex-basis: 100%;
+    /* background-color: #1515c8; Azul */
+    flex-direction: column;
   }
 
-  
+  .imagen2{
+    width: 50%;
+  }
+
   </style>

@@ -1,21 +1,13 @@
 <template>
     <div>
-        <br><br><br>
-        <div class="fixed bottom-4 right-4">
-            <!-- Se llama a la función de ToggleChatbot para que se muestre el chat, así como
-            la clase "chatButton" para que se muestre el botón de chatbot del Style -->
-            <button class="chatButton" @click="toggleChatbot">
-                <div>
-                    <img src="https://i.scdn.co/image/ab67706c0000bebba14bec178064d5a36c278da8"
-                        class="w-8rem h-8rem">
-                </div>
-
-            </button>
-        </div>
-        <!-- If sobre showChatbot para mostrar el chatbot y configurar todo el 
-        contenedor del chatbot. El fondo cambia según si es modo claro u oscuro -->
-        <div v-if="showChatbot" class="chatbot-container z-10"
-        style="background: linear-gradient(to bottom right, #c20707, #dd4600, #c28107, #6200d1, #6200d1);">
+        <div class="fixed">
+        <button class="chatButton" @click="toggleChatbot">
+          <img src='http://127.0.0.1:8000/storage/2023-09-07%2017-45-09_WhatsApp%20Image%202023-09-07%20at%2011.44.29%20AM.jpeg' alt="Chatbot Icon">
+        </button>
+      </div>
+      <div v-if="showChatbot" class="chatbot-container z-10
+                dark:bg-[url('/public/img/FondoOscuroChatBot.jpg')]
+                bg-[url('/public/img/FondoClaroChatBot.jpg')]">
             <!-- CHATBOT CONTENIDO EN EL DESTE -->
             <!-- Header del chatbot container -->
             <div class="
@@ -356,10 +348,11 @@ export default {
     border:1px solid black;
     z-index:999;
 }
-@media (max-width: 768px) {
+@media (min-width: 521px) and (max-width: 768px) {
   .chatButton {
     width:6vh ;
     height: 6vh;
+    margin-left:2%;
   }
   .chatbot-container {
     max-height: 1080px;
@@ -369,8 +362,8 @@ export default {
 
 @media (min-width: 769px) and (max-width: 1201px) {
     .chatButton {
-    width:7vh ;
-    height: 7vh;
+    width:7.5vh ;
+    height: 7.5vh;
     margin-left:2%;
   }
   .chatbot-container {
@@ -384,7 +377,7 @@ export default {
     .chatButton {
     width:7.5vh ;
     height: 7.5vh;
-    margin-left:1%;
+    margin-left:1.5%;
   }
   .chatbot-container {
     max-height: 1080px;
@@ -401,6 +394,24 @@ export default {
     max-height: 1080px;
     max-width: 640px;
   }
+}
+@media (min-width: 320px) and (max-width: 520px) {
+      .chatButton {
+      width:4.7vh ;
+      height: 4.7vh;
+      transform: translateX(180px) translateY(4px);
+      margin:.9%;
+      
+    }
+    .chatbot-container {
+  bottom: 10px;
+  right: 10px; /* Ajusta la posición a tu preferencia */
+  max-width: 360px; /* Ajusta el ancho máximo a tu preferencia */
+  max-height: 100%; /* Permite que el chat se expanda verticalmente */
+  overflow-y: auto; /* Agrega scroll si el contenido es largo */
+  /* Otros estilos aquí... */
+}
+
 }
 </style>
 

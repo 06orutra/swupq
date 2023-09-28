@@ -21,11 +21,13 @@
   .container-4 {
     display: flex;
     height: 45vh;
+    flex-direction: column;
   }
 
   .espacio1 {
-    background-color: #d000ff; /* Rojo */
+    background-color: #d000ff; /* Morado */
     flex-basis: 50%;
+    flex-direction: column;
   }
   .imagen1{
     width: 100%;
@@ -33,7 +35,8 @@
 
   .espacio2 {
     flex-basis: 50%;
-    background-color: #00dc54; /* Azul */
+    background-color: #00dc54; /* Verde pobre */
+    flex-direction: column;
   }
   .imagen-2{
     width: 100%;

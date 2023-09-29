@@ -1,6 +1,8 @@
 <script setup>
 import Videos from "@/Pages/Componentes/Home/Videos.vue";
 import carruselImagenes from "./carruselEstructura.vue";
+import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
+
 </script>
 
 
@@ -20,4 +22,3 @@ import carruselImagenes from "./carruselEstructura.vue";
             </TabPanel>
         </TabView>
 </template>
-

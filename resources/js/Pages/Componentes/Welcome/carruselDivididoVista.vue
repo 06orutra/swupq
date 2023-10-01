@@ -33,6 +33,10 @@ export default {
             type: String,
             required: true
         },
+        id: {
+            type: String,
+            required: true
+        },
     },
     mounted() {
         this.cargarBanner();
@@ -66,10 +70,10 @@ export default {
         return {
             banner: [],
             isBannerLoaded: false,
-            navigation: localStorage.getItem('dividedCarousel_navigation') === 'true' || false,
-            pagination: localStorage.getItem('dividedCarousel_pagination') === 'true' || false,
-            startAutoPlay: localStorage.getItem('dividedCarousel_startAutoPlay') === 'true' || false,
-            timeout: Number(localStorage.getItem('dividedCarousel_timeout')) || 5000
+            navigation: localStorage.getItem(this.id + 'navigation') === 'true' || false,
+            pagination: localStorage.getItem(this.id + 'pagination') === 'true' || false,
+            startAutoPlay: localStorage.getItem(this.id + 'startAutoPlay') === 'true' || false,
+            timeout: Number(localStorage.getItem(this.id + 'timeout')) || 5000
         };
     },
 };

@@ -9,7 +9,6 @@ import FileUpload from 'primevue/fileupload';
 import Paginator from 'primevue/paginator';
 import axios from "axios";
 import Toast from "primevue/toast";
-import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 import filterComponent from "@/Pages/Componentes/Home/filterComponent.vue";
 
 export default {
@@ -23,7 +22,6 @@ export default {
         FileUpload,
         Toast,
         Paginator,
-        opcionesCarrusel,
         filterComponent,
     },
     props: {
@@ -208,12 +206,6 @@ export default {
                 console.log(error);
             });
         },
-        updateCarouselSettings(settings) {
-            this.navigation = settings.navigation;
-            this.pagination = settings.pagination;
-            this.startAutoPlay = settings.startAutoPlay;
-            this.timeout = settings.timeout;
-        },
         openRegistro() {
             this.datosArreglo = {};
             this.submitted = false;
@@ -288,12 +280,6 @@ export default {
             <filterComponent :valores="banner" />
         </template>
     </Toolbar>
-
-
-    <!-- PERSONALIZAR CARRUSEL -->
-    <div>
-        <opcionesCarrusel id="carruselPrincipal" @configuracion-guardada="updateCarouselSettings" />
-    </div>
 
     <!-- Cartas en admin -->
     <div class="cards-container">

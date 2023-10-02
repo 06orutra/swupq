@@ -57,13 +57,14 @@ export default {
         },
     },
     data() {
+        const id = 'carruselPrincipal'
         return {
             banner: [],
             isBannerLoaded: false,
-            navigation: localStorage.getItem('navigation') === 'true' || false,
-            pagination: localStorage.getItem('pagination') === 'true' || false,
-            startAutoPlay: localStorage.getItem('startAutoPlay') === 'true' || false,
-            timeout: Number(localStorage.getItem('timeout')) || 5000
+            navigation: localStorage.getItem(id + 'navigation') === 'true' || false,
+            pagination: localStorage.getItem(id + 'pagination') === 'true' || false,
+            startAutoPlay: localStorage.getItem(id + 'startAutoPlay') === 'true' || false,
+            timeout: Number(localStorage.getItem(id + 'timeout')) || 5000
         };
     },
 };
@@ -71,8 +72,8 @@ export default {
 
 <template>
     <!-- Carrusel dinamico -->
-    <Carousel v-if="isBannerLoaded" :navigation="navigation" :pagination="pagination" :startAutoPlay="startAutoPlay" :timeout="timeout" :slides="banner"
-        class="carousel" v-slot="{ currentSlide }">
+    <Carousel v-if="isBannerLoaded" :navigation="navigation" :pagination="pagination" :startAutoPlay="startAutoPlay"
+        :timeout="timeout" :slides="banner" class="carousel" v-slot="{ currentSlide }">
         <Slide v-for="datosCard in banner" :key="datosCard">
             <div v-show="currentSlide === datosCard.id" class="slide-info">
                 <img :src="'/storage/' + datosCard.imagen" alt="" />

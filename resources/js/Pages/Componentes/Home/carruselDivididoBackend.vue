@@ -292,7 +292,7 @@ export default {
 
     <!-- PERSONALIZAR CARRUSEL -->
     <div>
-        <opcionesCarrusel id="carruselPrincipal" @configuracion-guardada="updateCarouselSettings" />
+        <opcionesCarrusel id="carruselDividido" @configuracion-guardada="updateCarouselSettings" />
     </div>
 
     <!-- Cartas en admin -->

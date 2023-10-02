@@ -128,7 +128,7 @@ export default {
             this.separarYAsignarFechas();
             this.submitted = true;
             //validar si hay campos vacios
-            if (this.datosArreglo.nombre == null || this.datosArreglo.link == null || this.datosArreglo.fecha_activacion == null ) {
+            if (this.datosArreglo.nombre == null || this.datosArreglo.link == null || this.datosArreglo.fecha_activacion == null) {
                 // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
@@ -217,6 +217,12 @@ export default {
                 console.log(error);
             });
         },
+        updateCarouselSettings(settings) {
+            this.navigation = settings.navigation;
+            this.pagination = settings.pagination;
+            this.startAutoPlay = settings.startAutoPlay;
+            this.timeout = settings.timeout;
+        },
         openRegistro() {
             this.datosArreglo = {};
             this.submitted = false;
@@ -249,7 +255,7 @@ export default {
                 }
                 reader.readAsDataURL(input.files[0]);
             }
-            
+
         },
 
         handleFileUploadEdit(event) {
@@ -266,6 +272,8 @@ export default {
             }
 
         },
+
+
 
     },
     data() {
@@ -302,7 +310,7 @@ export default {
     </Toolbar>
 
     <div>
-        <opcionesCarrusel />
+        <opcionesCarrusel id="carruselSecundario" @configuracion-guardada="updateCarouselSettings" />
     </div>
 
     <div class="cards-container">
@@ -356,7 +364,7 @@ export default {
                     style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
 
                 <div class="field col-12 md:col-3">
-                    <button  @click.prevent="selectNewPhoto"
+                    <button @click.prevent="selectNewPhoto"
                         class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
                         Seleccione una nueva foto
                     </button>
@@ -407,7 +415,7 @@ export default {
                     style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
 
                 <div class="field col-12 md:col-12">
-                    <button  @click.prevent="selectNewPhoto"
+                    <button @click.prevent="selectNewPhoto"
                         class="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest shadow-sm hover:text-gray-300 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
                         Seleccione una nueva foto
                     </button>

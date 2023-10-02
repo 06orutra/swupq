@@ -1,6 +1,6 @@
 <script setup>
 import Videos from "@/Pages/Componentes/Home/Videos.vue";
-import carruselImagenes from "./carruselEstructura.vue";
+import carruselImagenes from "./carruselDivididoBackend.vue";
 </script>
 
 

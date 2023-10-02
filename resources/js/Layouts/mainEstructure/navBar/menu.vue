@@ -311,7 +311,7 @@
     width:20%;
     top: calc(26% + 1vh);
   }
-}
+
 @media (min-width: 1441px) {
   .menu-icon {
     width:7.5vh ;

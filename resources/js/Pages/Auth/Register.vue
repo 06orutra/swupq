@@ -75,12 +75,13 @@ const submit = () => {
                         <span class="p-inputgroup-addon">
                             <i class="pi pi-key"></i>
                         </span>
-                        <Password id="password_confirmation" v-model="form.password_confirmation" class="flex bg-red-200"
-                            :class="{ 'p-invalid': form.errors.password_confirmation }" :feedback="false" toggleMask
-                            required />
+
+                        <Password id="password-confirmation" v-model="form.password_confirmation" class="flex bg-red-200"
+                            :class="{ 'p-invalid': form.errors.password_confirmation }" :feedback="false" toggleMask required />
+
                     </div>
-                    <small id="password-error" class="text-sm text-red-600" v-if="form.errors.password">
-                        {{ form.errors.password }}
+                    <small id="password-error" class="text-sm text-red-600" v-if="form.errors.password_confirmation">
+                        {{ form.errors.password_confirmation }}
                     </small>
                 </div>
             </div>

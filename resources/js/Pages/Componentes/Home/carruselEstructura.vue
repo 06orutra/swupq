@@ -9,7 +9,8 @@ import FileUpload from 'primevue/fileupload';
 import Paginator from 'primevue/paginator';
 import axios from "axios";
 import Toast from "primevue/toast";
-
+import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
+import filterComponent from "@/Pages/Componentes/Home/filterComponent.vue";
 
 export default {
     components: {
@@ -22,16 +23,36 @@ export default {
         FileUpload,
         Toast,
         Paginator,
+        opcionesCarrusel,
+        filterComponent,
     },
-
+    props: {
+        loadDataUrl: {
+            type: String,
+            required: true
+        },
+        registerBannerUrl: {
+            type: String,
+            required: true
+        },
+        editBannerUrl: {
+            type: String,
+            required: true
+        },
+        deleteBannerUrl: {
+            type: String,
+            required: true
+        },
+    },
     mounted() {
         this.cargarBanner();
     },
 
+
+
     methods: {
         cargarBanner() {
-            axios.post("/bannerData").then((response) => {
-                console.log(response.data);
+            axios.post(this.loadDataUrl).then((response) => {
                 this.banner = response.data;
             }).catch((error) => {
                 console.log(error);
@@ -77,7 +98,7 @@ export default {
             formData.append('link', this.link);
             formData.append('foto', this.foto);
 
-            axios.post('/registrarBanner',
+            axios.post(this.registerBannerUrl,
                 formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -113,9 +134,9 @@ export default {
                 return false;
             }
 
-            //validar que la foto no sea un archivo vacio
-            if (this.datosArreglo.foto == null) {
-                // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
+            // Solo validar la foto si se ha seleccionado una nueva
+            if (this.datosArreglo.foto && this.datosArreglo.foto == null) {
+                // si no hay foto seleccionada, mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
                     summary: "Error",
@@ -129,9 +150,14 @@ export default {
             formData.append('id', this.datosArreglo.id);
             formData.append('nombre', this.datosArreglo.nombre);
             formData.append('link', this.datosArreglo.link);
-            formData.append('foto', this.datosArreglo.foto);
 
-            axios.post('/editarBanner',
+            // Agregar la foto al formData solo si se ha seleccionado una nueva
+            if (this.datosArreglo.foto) {
+                formData.append('foto', this.datosArreglo.foto);
+                console.log('Foto seleccionada:', this.datosArreglo.foto); // Ayuda a depurar
+            }
+
+            axios.post(this.editBannerUrl,
                 formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -154,6 +180,7 @@ export default {
         editarSelect(datosArreglo) {
             this.datosArreglo = { ...datosArreglo }; // esto es para que se muestre los datos del datosArregloo en el formulario
             this.editarDialog = true;
+            this.imagePreview = null;
         },
         confirmarEliminar(datosArreglo) {
             this.datosArreglo = datosArreglo;
@@ -167,7 +194,7 @@ export default {
             };
 
 
-            axios.post('/eliminarBanner', data).then((response) => {
+            axios.post(this.deleteBannerUrl, data).then((response) => {
                 this.cargarBanner();
                 this.eliminarDialog = false;
                 this.datosArreglo = {};
@@ -181,14 +208,56 @@ export default {
                 console.log(error);
             });
         },
+        updateCarouselSettings(settings) {
+            this.navigation = settings.navigation;
+            this.pagination = settings.pagination;
+            this.startAutoPlay = settings.startAutoPlay;
+            this.timeout = settings.timeout;
+        },
         openRegistro() {
             this.datosArreglo = {};
             this.submitted = false;
             this.dialogTable = true;
+            this.imagePreview = null;
         },
         selectNewPhoto() {
             this.$refs.photoInput.click();
         },
+
+
+        handleFileUpload(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                this.foto = input.files[0];
+
+                // Previsualización de la imagen
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.imagePreview = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+
+        },
+
+        handleFileUploadEdit(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                this.datosArreglo.foto = input.files[0];
+
+                // Previsualización de la imagen
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.imagePreview = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+
+        },
+
+
+
+        //metodo para input 
 
     },
     data() {
@@ -203,7 +272,7 @@ export default {
             editarDialog: false,
             eliminarDialog: false,
             photoInput: null,
-
+            imagePreview: null,
         };
     },
 
@@ -214,12 +283,21 @@ export default {
     <Toolbar class="mb-4">
         <template #start>
             <Button label="Nuevo Registro" icon="pi pi-plus" class="p-button-success !mr-2" @click="openRegistro" />
-
+        </template>
+        <template #end>
+            <filterComponent :valores="banner" />
         </template>
     </Toolbar>
 
+
+    <!-- PERSONALIZAR CARRUSEL -->
     <div>
-        <Card v-for="datosCard in banner" style="width: 40em; margin-bottom: 40px;">
+        <opcionesCarrusel id="carruselPrincipal" @configuracion-guardada="updateCarouselSettings" />
+    </div>
+
+    <!-- Cartas en admin -->
+    <div class="cards-container">
+        <Card v-for="datosCard in banner" class="card">
             <template #header>
                 <img :src="'/storage/' + datosCard.imagen" alt="Card Image" class="imagen-resolucion" />
             </template>
@@ -254,6 +332,9 @@ export default {
                     <label for="minmax">Link</label>
                     <InputText inputId="minmax" v-model="link" :min="0" :max="10000" :showButtons="true" />
                 </div>
+
+                <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
+                    style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
 
                 <div class="field col-12 md:col-3">
                     <button :type="type" @click.prevent="selectNewPhoto"
@@ -296,6 +377,9 @@ export default {
                     <InputText inputId="minmax" v-model="datosArreglo.link" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
+                <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
+                    style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
+
                 <div class="field col-12 md:col-12">
                     <button :type="type" @click.prevent="selectNewPhoto"
                         class="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest shadow-sm hover:text-gray-300 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
@@ -332,12 +416,32 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.card-header {
+    display: flex;
+    justify-content: center;
+    /* Centra la imagen horizontalmente */
+    align-items: center;
+    /* Centra la imagen verticalmente */
+}
+
 .imagen-resolucion {
-    width: 500px;
-    /* Establece el ancho deseado */
-    height: auto;
-    /* La altura se ajustará automáticamente para mantener la proporción */
-    //margin para que la imagen no este pegada al borde
-    margin: 15px;
+    width: 90%;
+    height: width;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* Para dar un espacio uniforme entre los cards */
+}
+
+.card {
+
+    /* Esto permite que cada card tome el espacio necesario y se expanda según el contenido */
+    margin: 10px;
+    /* Espacio alrededor de cada card */
+    width: 30em;
+    margin-bottom: 40px;
 }
 </style>

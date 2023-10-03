@@ -1,6 +1,9 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import Videos from '@/Pages/Componentes/Home/Videos.vue';
+import History from '@/Pages/Componentes/History/Historia.vue';
+import Filosofia from '@/Pages/Componentes/Philosophy/Philosophy.vue';
+import ModeloEducativo from'@/Pages/Componentes/ModeloEducativo/Educational.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 defineProps({
     canLogin: Boolean,
@@ -29,7 +32,11 @@ defineProps({
     
 
     <AppEstructure>
-        <Videos />
+        <!-- <Videos />-->
+        <!-- <History />  -->
+        <Filosofia />  
+        <!-- <ModeloEducativo />  --> 
+        <!-- mandamos a llamar en la principal  -->
     </AppEstructure>
 </template>
 

@@ -24,6 +24,7 @@
         "primeicons": "^6.0.1",
         "primevue": "^3.29.2",
         "sass": "^1.62.1",
+        "swiper": "^10.2.0",
         "vue-router": "^4.2.2"
     }
 }

@@ -2,6 +2,9 @@
 import { Head, Link } from '@inertiajs/vue3';
 import Videos from '@/Pages/Componentes/Home/Videos.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
+import History from '@/Pages/Componentes/Home/History.vue'; // Aquí importamos el componente History
+import RectorMessage from '@/Pages/Componentes/Home/RectorMessage.vue'; 
+import LabEq from '@/Pages/Componentes/Home/Laborequality.vue';
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
@@ -29,7 +32,11 @@ defineProps({
     
 
     <AppEstructure>
-        <Videos />
+        <!-- <Videos /> -->
+        <!--<History /> -->
+        <RectorMessage />
+        <LabEq />
+
     </AppEstructure>
 </template>
 

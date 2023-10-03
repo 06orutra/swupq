@@ -4,7 +4,8 @@ import AppTopbar from './AppTopbar.vue';
 import AppFooter from './AppFooter.vue';
 import AppSidebar from './AppSidebar.vue';
 import AppConfig from './AppConfig.vue';
-/* Agregamos Lupita */
+/* Agregamos con Lupita.
+Acá se encuentra toda, o casi toda la configuración */
 import { Head } from '@inertiajs/vue3';
 import { useLayout } from '@/Layouts/composables/layout';
 
@@ -66,9 +67,11 @@ const isOutsideClicked = (event) => {
     </Head> -->
     <Head title="Site UPQ"/>
     <div class="layout-wrapper" :class="containerClass">
-        <app-topbar></app-topbar>
+        <app-topbar class="z-5"></app-topbar>
+        <!-- Barra que dice SITE UPQ en la parte superior junto a los elementos de la barra de navegación -->
         <div class="layout-sidebar">
             <app-sidebar></app-sidebar>
+            <!-- Barra lateral con el menú general -->
         </div>
         <div class="layout-main-container">
             <div class="layout-main">

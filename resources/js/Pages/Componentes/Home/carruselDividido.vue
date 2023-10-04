@@ -1,6 +1,6 @@
 <script>
 import Videos from "@/Pages/Componentes/Home/Videos.vue";
-import carruselImagenes from "./carruselDivididoBackend.vue";
+import carruselImagenes from "./carruselEstructura.vue";
 import opcionesCarrusel from "./opcionesCarrusel.vue";
 
 export default {

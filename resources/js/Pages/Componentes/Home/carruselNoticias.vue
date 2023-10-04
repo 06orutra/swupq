@@ -10,7 +10,6 @@ import Paginator from 'primevue/paginator';
 import axios from "axios";
 import Toast from "primevue/toast";
 import Calendar from 'primevue/calendar';
-import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 
 
 export default {
@@ -24,7 +23,6 @@ export default {
         FileUpload,
         Toast,
         Paginator,
-        opcionesCarrusel,
     },
 
     mounted() {
@@ -217,12 +215,6 @@ export default {
                 console.log(error);
             });
         },
-        updateCarouselSettings(settings) {
-            this.navigation = settings.navigation;
-            this.pagination = settings.pagination;
-            this.startAutoPlay = settings.startAutoPlay;
-            this.timeout = settings.timeout;
-        },
         openRegistro() {
             this.datosArreglo = {};
             this.submitted = false;
@@ -305,13 +297,8 @@ export default {
     <Toolbar class="mb-4">
         <template #start>
             <Button label="Nuevo Registro" icon="pi pi-plus" class="p-button-success !mr-2" @click="openRegistro" />
-
         </template>
     </Toolbar>
-
-    <div>
-        <opcionesCarrusel id="carruselSecundario" @configuracion-guardada="updateCarouselSettings" />
-    </div>
 
     <div class="cards-container">
         <Card v-for="datosCard in banner" :key="datosCard.id" :style="estadoStyle(datosCard)" class="card">

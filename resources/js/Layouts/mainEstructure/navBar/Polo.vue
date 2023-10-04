@@ -1,21 +1,14 @@
 <template>
     <div>
-        <br><br><br>
-        <div class="fixed bottom-4 right-4">
-            <!-- Se llama a la función de ToggleChatbot para que se muestre el chat, así como
-            la clase "chatButton" para que se muestre el botón de chatbot del Style -->
+        <div class="fixed">
             <button class="chatButton" @click="toggleChatbot">
-                <div>
-                    <img src="https://i.scdn.co/image/ab67706c0000bebba14bec178064d5a36c278da8"
-                        class="w-8rem h-8rem">
-                </div>
-
+                <img src='http://127.0.0.1:8000/storage/2023-09-07%2017-45-09_WhatsApp%20Image%202023-09-07%20at%2011.44.29%20AM.jpeg'
+                    alt="Chatbot Icon">
             </button>
         </div>
-        <!-- If sobre showChatbot para mostrar el chatbot y configurar todo el 
-        contenedor del chatbot. El fondo cambia según si es modo claro u oscuro -->
-        <div v-if="showChatbot" class="chatbot-container z-10"
-        style="background: linear-gradient(to bottom right, #c20707, #dd4600, #c28107, #6200d1, #6200d1);">
+        <div v-if="showChatbot" class="chatbot-container z-10
+                dark:bg-[url('/public/img/FondoOscuroChatBot.jpg')]
+                bg-[url('/public/img/FondoClaroChatBot.jpg')]">
             <!-- CHATBOT CONTENIDO EN EL DESTE -->
             <!-- Header del chatbot container -->
             <div class="
@@ -31,7 +24,9 @@
                 <!-- Descubrimiento: Al usar "h3" o similares con PrimeVue, no se respetan los estilos.
                 Pero si utilizamos "p" o "span" sí se respetan a medias.
                 Con  "a" se respetan al completo. -->
-                <button class="w-32 h-10 bg-red-600 hover:bg-red-400 text-white text-sm font-semibold rounded-full shadow-md cursor-pointer transform hover:scale-105" @click="closeChatAndReset">Cerrar Chat <span class="ml-1">✕</span></button>
+                <button
+                    class="w-32 h-10 bg-red-600 hover:bg-red-400 text-white text-sm font-semibold rounded-full shadow-md cursor-pointer transform hover:scale-105"
+                    @click="closeChatAndReset">Cerrar Chat <span class="ml-1">✕</span></button>
 
 
             </div>
@@ -44,11 +39,12 @@
                     <!-- <pre> sirve para... la neta no sé, pero carga un estilo diferente y deja usar saltos de línea en objetos :D De mientras lo quito porque se bugea lo demás xD. La opción definitiva es la propiedad style="white-space: pre-line"-->
                     <p v-if="message.text" class='rounded-lg py-3 px-4 inline-block mb-2 relative text-2xl font-sans
                         bg-gray-100 text-gray-800 hover:bg-white float-left ml-2 mr-20 mt-2
-                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500' style="white-space: pre-line">{{ message.text }}</p>
+                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500' style="white-space: pre-line">{{
+                            message.text }}</p>
                     <a v-if="message.link" :href="message.link" target="_blank" class="rounded-lg py-2 px-4 inline-block mb-2 relative text-2xl 
                         bg-gray-400 text-gray-900 hover:bg-white float-left ml-2 mr-20 mt-2
-                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">{{message.option}}</a>
-                        <!-- Ya viendo esto, se puede decir que se pueden agregar muchas
+                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">{{ message.option }}</a>
+                    <!-- Ya viendo esto, se puede decir que se pueden agregar muchas
                         cosas por cada array del javascript para mandar acá, incluso en mensajes separados y acoplados a diferentes partes.-->
                 </div>
             </div>
@@ -66,7 +62,8 @@
             <!-- Pequeña leyenda de que el chatbot es hecho en UPQ -->
             <a class="fixed bottom-0 right-6 mb-4 mr-4 text-gray-500
                     font-bold text-xs
-                    hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" href="https://www.upq.mx/">Hecho en UPQ</a>
+                    hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" href="https://www.upq.mx/">Hecho
+                en UPQ</a>
             <!-- CONTENIDO DEL SHAT -->
         </div>
     </div>
@@ -81,12 +78,13 @@ export default {
             showChatbot: false,
             //Mensajes del bot nada más iniciar
             messages: [
-                { 
+                {
                     id: 1, //Identificador meramente para interpretación del código
                     text: '¡Bienvenido! Somos Poli y Polo.\n¿Necesitas que te demos un ala?', //Textos a mostrar
                     link: '', //Hipervínculos que tendrán algunos mensajes
                     option: '',//Texto de los mensajes de hipervínculo. Estos tienen un formato levemente diferente y se llaman sólo si existe una adición link y option en el javascript
-                    user: ''}, //Los mensajes del usuario, solamente un reflejo del botón de selección.
+                    user: ''
+                }, //Los mensajes del usuario, solamente un reflejo del botón de selección.
 
                 //Próximamente reemplazable para conectar con una Base de datos
             ],
@@ -144,7 +142,7 @@ export default {
                     this.messages.push({
                         id: this.messages.length + 1,
                         option: 'Negocios Internacionales',
-                        link: 'https://www.upq.mx/media/curriculum_pdf/mapa_negocios.pdf',                        
+                        link: 'https://www.upq.mx/media/curriculum_pdf/mapa_negocios.pdf',
                     });
                     this.messages.push({
                         id: this.messages.length + 1,
@@ -153,7 +151,7 @@ export default {
                     });
 
                     break;
-                    //EN TEORÍA debería mandarse un link... EN TEORÍA >:(
+                //EN TEORÍA debería mandarse un link... EN TEORÍA >:(
                 case 2:
                     this.messages.push({
                         id: this.messages.length + 1,
@@ -163,7 +161,7 @@ export default {
                         id: this.messages.length + 1,
                         link: 'https://drive.google.com/file/d/1YN8lvzfVsKPE1vPHGTxASkxXE77usYhu/view',
                         //Acá favor de no usar acortadores de links :(
-                            //Ah, y de actualizar las fechas del pdf, que dice 2022 aún :C
+                        //Ah, y de actualizar las fechas del pdf, que dice 2022 aún :C
                         option: 'Convocatoria',
                     });
                     /* this.currentButtons.splice(0, this.currentButtons.length);
@@ -227,7 +225,7 @@ export default {
                         option: "Alemán"
                     });
                     break;
-                
+
                 case 6:
                     this.messages.push({
                         id: this.messages.length + 1,
@@ -312,35 +310,35 @@ export default {
                 default:
                     break;
             }
+        },
+        closeChatAndReset() {
+            this.showChatbot = false;
+            this.messages = [];
+            this.showButtons = true;
+        }
     },
-    closeChatAndReset() {
-                this.showChatbot = false;
-                this.messages = [];
-                this.showButtons = true;
-    }
-  },
 };
 </script>
 <style scoped>
 .chatButton {
-  cursor: pointer;
-  width: 7vh;
-  height: 7vh;
-  border: 1px solid black;
-  position: fixed;
-  z-index: 999;
-  transform: translateX(80px) translateY(95px);
+    cursor: pointer;
+    width: 7vh;
+    height: 7vh;
+    border: 1px solid black;
+    position: fixed;
+    z-index: 999;
+    transform: translateX(80px) translateY(95px);
 }
 
 
 .chatButton img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 999;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
 }
 
 .chatbot-container {
@@ -353,73 +351,83 @@ export default {
     overflow-y: scroll;
     max-width: 640px;
     max-height: 1080px;
-    border:1px solid black;
-    z-index:999;
+    border: 1px solid black;
+    z-index: 999;
 }
+
 @media (min-width: 521px) and (max-width: 768px) {
-  .chatButton {
-    width:6vh ;
-    height: 6vh;
-    margin-left:2%;
-  }
-  .chatbot-container {
-    max-height: 1080px;
-    max-width: 360px;
-  }
+    .chatButton {
+        width: 6vh;
+        height: 6vh;
+        margin-left: 2%;
+    }
+
+    .chatbot-container {
+        max-height: 1080px;
+        max-width: 360px;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 1201px) {
     .chatButton {
-    width:7.5vh ;
-    height: 7.5vh;
-    margin-left:2%;
-  }
-  .chatbot-container {
-    max-height: 1080px;
-    max-width: 480px;
-  }
+        width: 7.5vh;
+        height: 7.5vh;
+        margin-left: 2%;
+    }
+
+    .chatbot-container {
+        max-height: 1080px;
+        max-width: 480px;
+    }
 
 }
 
 @media (min-width: 1202px) and (max-width: 1920px) {
     .chatButton {
-    width:7.5vh ;
-    height: 7.5vh;
-    margin-left:1.5%;
-  }
-  .chatbot-container {
-    max-height: 1080px;
-    max-width: 640px;
-  }
+        width: 7.5vh;
+        height: 7.5vh;
+        margin-left: 1.5%;
+    }
+
+    .chatbot-container {
+        max-height: 1080px;
+        max-width: 640px;
+    }
 }
+
 @media (min-width: 1921px) and (max-width: 2560px) {
     .chatButton {
-    width:7.5vh ;
-    height: 7.5vh;
-    margin-left:3%;
-  }
-  .chatbot-container {
-    max-height: 1080px;
-    max-width: 640px;
-  }
-}
-@media (min-width: 320px) and (max-width: 520px) {
-      .chatButton {
-      width:4.7vh ;
-      height: 4.7vh;
-      transform: translateX(180px) translateY(4px);
-      margin:.9%;
-      
+        width: 7.5vh;
+        height: 7.5vh;
+        margin-left: 3%;
     }
+
     .chatbot-container {
-  bottom: 10px;
-  right: 10px; /* Ajusta la posición a tu preferencia */
-  max-width: 360px; /* Ajusta el ancho máximo a tu preferencia */
-  max-height: 100%; /* Permite que el chat se expanda verticalmente */
-  overflow-y: auto; /* Agrega scroll si el contenido es largo */
-  /* Otros estilos aquí... */
+        max-height: 1080px;
+        max-width: 640px;
+    }
 }
 
-}
-</style>
+@media (min-width: 320px) and (max-width: 520px) {
+    .chatButton {
+        width: 4.7vh;
+        height: 4.7vh;
+        transform: translateX(180px) translateY(4px);
+        margin: .9%;
 
+    }
+
+    .chatbot-container {
+        bottom: 10px;
+        right: 10px;
+        /* Ajusta la posición a tu preferencia */
+        max-width: 360px;
+        /* Ajusta el ancho máximo a tu preferencia */
+        max-height: 100%;
+        /* Permite que el chat se expanda verticalmente */
+        overflow-y: auto;
+        /* Agrega scroll si el contenido es largo */
+        /* Otros estilos aquí... */
+    }
+
+}</style>

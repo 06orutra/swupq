@@ -44,11 +44,6 @@ class TbCarruselNoticiasController extends Controller
         return response()->json('Banner registered successfully');
     }
 
-        
-        
-    
-
-    
     public function editarBanner(Request $request){
         $request->validate([
             'nombre' => 'required|string|max:255',

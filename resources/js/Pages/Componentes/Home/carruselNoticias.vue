@@ -29,6 +29,17 @@ export default {
         this.cargarBanner();
     },
 
+    computed: {
+        filteredBanner() {
+            if (!this.searchQuery) {
+                return this.banner;
+            }
+            return this.banner.filter(item =>
+                item.nombre.toLowerCase().includes(this.searchQuery.toLowerCase())
+            );
+        }
+    },
+
     methods: {
 
         cargarBanner() {
@@ -271,6 +282,7 @@ export default {
     data() {
         return {
             banner: [],
+            searchQuery: '',
             nombre: null,
             link: null,
             foto: null,
@@ -298,10 +310,16 @@ export default {
         <template #start>
             <Button label="Nuevo Registro" icon="pi pi-plus" class="p-button-success !mr-2" @click="openRegistro" />
         </template>
+        <template #end>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search" />
+                <InputText v-model="searchQuery" placeholder="Search" />
+            </span>
+        </template>
     </Toolbar>
 
     <div class="cards-container">
-        <Card v-for="datosCard in banner" :key="datosCard.id" :style="estadoStyle(datosCard)" class="card">
+        <Card v-for="datosCard in filteredBanner" :key="datosCard.id" :style="estadoStyle(datosCard)" class="card">
             <template #header class="card-header">
                 <img :src="'/storage/' + datosCard.imagen" alt="Card Image" class="imagen-resolucion" />
             </template>
@@ -343,8 +361,8 @@ export default {
 
                 <div class="field col-12 md:col-12">
                     <label for="minmax">Fecha de inicio y termino de la publicación</label>
-                    <Calendar dateFormat="yy-mm-dd" id="calendar-24h" v-model="dates" selectionMode="range"
-                        :manualInput="false" showTime hourFormat="24" @update:modelValue="separarYAsignarFechas" />
+                    <Calendar dateFormat="yy-mm-dd" v-model="dates" selectionMode="range"
+                        :manualInput="false"  @update:modelValue="separarYAsignarFechas" />
                 </div>
 
                 <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
@@ -394,8 +412,8 @@ export default {
 
                 <div class="field col-12 md:col-12">
                     <label for="minmax">Fecha de inicio y termino de la publicación</label>
-                    <Calendar dateFormat="yy-mm-dd" id="calendar-24h" v-model="dates" selectionMode="range"
-                        :manualInput="false" showTime hourFormat="24" @update:modelValue="separarYAsignarFechas" />
+                    <Calendar dateFormat="yy-mm-dd" v-model="dates" selectionMode="range"
+                        :manualInput="false"  @update:modelValue="separarYAsignarFechas" />
                 </div>
 
                 <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"

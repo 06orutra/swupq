@@ -1,37 +1,44 @@
 <script>
-import carruselPrincipal from "@/Pages/Componentes/Home/carruselPrincipal.vue";
-import Videos from "@/Pages/Componentes/Home/Videos.vue";
 import carruselNoticias from "@/Pages/Componentes/Home/carruselNoticias.vue";
-
+import carruselDividido from "@/Pages/Componentes/Home/carruselDividido.vue";
 import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
+import carruselEstructura from "./carruselEstructura.vue";
+import opcionesCarrusel from "./opcionesCarrusel.vue";
 
 export default {
     components: {
-    TabView,
-    TabPanel,
-    carruselPrincipal,
-    Videos,
-    carruselNoticias,
-},
+        TabView,
+        TabPanel,
+        carruselNoticias,
+        carruselDividido,
+        carruselEstructura,
+        opcionesCarrusel,
+    },
+    methods: {
+        updateCarouselSettings(settings) {
+            this.navigation = settings.navigation;
+            this.pagination = settings.pagination;
+            this.startAutoPlay = settings.startAutoPlay;
+            this.timeout = settings.timeout;
+        }
+    }
 }
 </script>
 
 <template>
-    <AppLayout title="Home">
-        <TabView ref="tabview1" class="p-3">
-            <TabPanel header="Banner Principal">
-                <carruselPrincipal />
-            </TabPanel>
-            <TabPanel header="Banner Noticias">
-                <carruselNoticias />
-            </TabPanel>
-            <TabPanel header="Videos">
-                <Videos />
-            </TabPanel>
-            <TabPanel header="Certificaciones">
-                <Certificaciones />
-            </TabPanel>
-        </TabView>
-    </AppLayout>
+    <TabView ref="tabview1" class="p-3">
+        <TabPanel header="Carrusel Principal">
+            <opcionesCarrusel id="carruselPrincipal" @configuracion-guardada="updateCarouselSettings" />
+            <carruselEstructura :loadDataUrl="'/bannerData'" :registerBannerUrl="'/home/registrarBanner'"
+                :editBannerUrl="'/home/editarBanner'" :deleteBannerUrl="'/home/eliminarBanner'" />
+        </TabPanel>
+        <TabPanel header="Carrusel Secundario">
+            <opcionesCarrusel id="carruselSecundario" @configuracion-guardada="updateCarouselSettings" />
+            <carruselNoticias />
+        </TabPanel>
+        <TabPanel header="Carrusel Dividido">
+            <carruselDividido />
+        </TabPanel>
+    </TabView>
 </template>

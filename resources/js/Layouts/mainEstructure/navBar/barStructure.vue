@@ -4,9 +4,9 @@
       <img src="/storage/img/icon_logo_UPQ.png" class="logo-img" alt="Logo" />
     </div>
     <div class="inferior">
-      <menuvue  class="prueba1"/>
+      <menuvue/>
 
-      <polovue  class="pruebas"/>
+      <polovue/>
     </div>
   </div>
 </template>
@@ -39,7 +39,7 @@ body, html {
   flex-direction: column;
   height: 200px;
   width: 200px;
-  margin: 1.2%;
+  margin-top: 4%;
   position: fixed;
   z-index: 999;
 }
@@ -69,28 +69,17 @@ body, html {
 .logo-img {
   width: 120px;
   height: 100px;
-  margin-right: 30%;
-}
-@media (max-width: 768px) {
-  .logo-img {
-    width:110px ;
-    height: 90px;
-  }
+  margin-right: 10%;
+  margin-top: -30%;
 }
 
-@media (min-width: 769px) and (max-width: 1200px) {
-    .logo-img {
-    width:115px ;
-    height: 95px;
+
+
+@media (max-width: 521px){
+  .superior{
+    display:none;
   }
 
-}
-
-@media (min-width: 1201px) {
-    .logo-img {
-    width:120px;
-    height: 100px;
-  }
 }
 
 </style>

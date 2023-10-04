@@ -18,23 +18,35 @@
 
 <script>
 export default {
+    name: 'OpcionesCarrusel',
+    props: {
+        id: {
+            type: String,
+            required: true
+        }
+    },
     data() {
         return {
-            navigation: localStorage.getItem('navigation') === 'true' || false,
-            pagination: localStorage.getItem('pagination') === 'true' || false,
-            startAutoPlay: localStorage.getItem('startAutoPlay') === 'true' || false,
-            timeout: Number(localStorage.getItem('timeout')) || 5000
+            navigation: localStorage.getItem(this.id + 'navigation') === 'true',
+            pagination: localStorage.getItem(this.id + 'pagination') === 'true',
+            startAutoPlay: localStorage.getItem(this.id + 'startAutoPlay') === 'true',
+            timeout: localStorage.getItem(this.id + 'timeout') || 5000
         };
     },
     methods: {
         guardarConfiguracion() {
-            // Storing the selections to local storage
-            localStorage.setItem('navigation', this.navigation);
-            localStorage.setItem('pagination', this.pagination);
-            localStorage.setItem('startAutoPlay', this.startAutoPlay);
-            localStorage.setItem('timeout', this.timeout);
+            localStorage.setItem(this.id + 'navigation', this.navigation);
+            localStorage.setItem(this.id + 'pagination', this.pagination);
+            localStorage.setItem(this.id + 'startAutoPlay', this.startAutoPlay);
+            localStorage.setItem(this.id + 'timeout', this.timeout);
 
-            // Emitting the event with the selections
+            this.$toast.add({
+                severity: "success",
+                summary: "Éxito",
+                detail: "Se guardaron correctamente tus configuraciones",
+                life: 3000,
+            });
+
             this.$emit('configuracion-guardada', {
                 navigation: this.navigation,
                 pagination: this.pagination,
@@ -43,5 +55,5 @@ export default {
             });
         }
     }
-}
+};
 </script>

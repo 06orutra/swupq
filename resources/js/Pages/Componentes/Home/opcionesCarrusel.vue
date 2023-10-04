@@ -39,6 +39,14 @@ export default {
             localStorage.setItem(this.id + 'pagination', this.pagination);
             localStorage.setItem(this.id + 'startAutoPlay', this.startAutoPlay);
             localStorage.setItem(this.id + 'timeout', this.timeout);
+
+            this.$toast.add({
+                severity: "success",
+                summary: "Éxito",
+                detail: "Se guardaron correctamente tus configuraciones",
+                life: 3000,
+            });
+
             this.$emit('configuracion-guardada', {
                 navigation: this.navigation,
                 pagination: this.pagination,

@@ -208,12 +208,6 @@ export default {
                 console.log(error);
             });
         },
-        updateCarouselSettings(settings) {
-            this.navigation = settings.navigation;
-            this.pagination = settings.pagination;
-            this.startAutoPlay = settings.startAutoPlay;
-            this.timeout = settings.timeout;
-        },
         openRegistro() {
             this.datosArreglo = {};
             this.submitted = false;
@@ -291,9 +285,7 @@ export default {
 
 
     <!-- PERSONALIZAR CARRUSEL -->
-    <div>
-        <opcionesCarrusel id="carruselDividido" @configuracion-guardada="updateCarouselSettings" />
-    </div>
+
 
     <!-- Cartas en admin -->
     <div class="cards-container">

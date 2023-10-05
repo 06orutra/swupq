@@ -1,6 +1,7 @@
 <script>
 
 export default {
+    
     props: {
         loadDataUrl: {
             type: String,
@@ -22,35 +23,28 @@ export default {
     computed: {
         filteredBanner() {
             if (!this.searchQuery) {
-                return this.banner;
+                return this.texto;
             }
-            return this.banner.filter(item =>
-                item.nombre.toLowerCase().includes(this.searchQuery.toLowerCase())
+            return this.texto.filter(item =>
+                item.titulo.toLowerCase().includes(this.searchQuery.toLowerCase())
             );
         }
     },
     mounted() {
-        this.cargarBanner();
+        this.cargarTexto();
     },
     methods: {
-        cargarBanner() {
+        cargarTexto() {
             axios.post(this.loadDataUrl).then((response) => {
-                this.banner = response.data;
+                this.texto = response.data;
             }).catch((error) => {
                 console.log(error);
             });
         },
-        handleFileUpload(event) {
-            this.foto = event.target.files[0];
-        },
-        handleFileUploadEdit(event) {
-            this.datosArreglo.foto = event.target.files[0];
-        },
-
-        registrarBanner() {
+        registrarTexto() {
             this.submitted = true;
             //validar si hay campos vacios
-            if (this.nombre == null || this.link == null) {
+            if (this.titulo == null || this.contenido == null) {
                 // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
@@ -62,23 +56,11 @@ export default {
                 return false;
             }
 
-            //validar que la foto no sea un archivo vacio
-            if (this.foto == null) {
-                // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
-                this.$toast.add({
-                    severity: "error",
-                    summary: "Error",
-                    detail: "Debe seleccionar una foto",
-                    life: 3000,
-                });
-                return false;
-            }
 
 
             const formData = new FormData();
-            formData.append('nombre', this.nombre);
-            formData.append('link', this.link);
-            formData.append('foto', this.foto);
+            formData.append('titulo', this.titulo);
+            formData.append('contenido', this.contenido);
 
             axios.post(this.registerBannerUrl,
                 formData, {
@@ -86,10 +68,9 @@ export default {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then((response) => {
-                this.cargarBanner();
-                this.nombre = null;
-                this.link = null;
-                this.foto = null;
+                this.cargarTexto();
+                this.titulo = null;
+                this.contenido = null;
                 this.dialogTable = false;
                 this.$toast.add({
                     severity: "success",
@@ -101,10 +82,10 @@ export default {
                 console.log(error);
             });
         },
-        editarBanner() {
+        editarTexto() {
             this.submitted = true;
             //validar si hay campos vacios
-            if (this.datosArreglo.nombre == null || this.datosArreglo.link == null) {
+            if (this.datosArreglo.titulo == null || this.datosArreglo.contenido == null) {
                 // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
@@ -116,28 +97,10 @@ export default {
                 return false;
             }
 
-            // Solo validar la foto si se ha seleccionado una nueva
-            if (this.datosArreglo.foto && this.datosArreglo.foto == null) {
-                // si no hay foto seleccionada, mostrar un mensaje de error
-                this.$toast.add({
-                    severity: "error",
-                    summary: "Error",
-                    detail: "Debe seleccionar una foto",
-                    life: 3000,
-                });
-                return false;
-            }
-
             const formData = new FormData();
             formData.append('id', this.datosArreglo.id);
-            formData.append('nombre', this.datosArreglo.nombre);
-            formData.append('link', this.datosArreglo.link);
-
-            // Agregar la foto al formData solo si se ha seleccionado una nueva
-            if (this.datosArreglo.foto) {
-                formData.append('foto', this.datosArreglo.foto);
-                console.log('Foto seleccionada:', this.datosArreglo.foto); // Ayuda a depurar
-            }
+            formData.append('titulo', this.datosArreglo.titulo);
+            formData.append('contenido', this.datosArreglo.contenido);
 
             axios.post(this.editBannerUrl,
                 formData, {
@@ -145,7 +108,7 @@ export default {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then((response) => {
-                this.cargarBanner();
+                this.cargarTexto();
                 this.datosArreglo = {};
                 this.editarDialog = false;
                 this.$toast.add({
@@ -162,13 +125,12 @@ export default {
         editarSelect(datosArreglo) {
             this.datosArreglo = { ...datosArreglo }; // esto es para que se muestre los datos del datosArregloo en el formulario
             this.editarDialog = true;
-            this.imagePreview = null;
         },
         confirmarEliminar(datosArreglo) {
             this.datosArreglo = datosArreglo;
             this.eliminarDialog = true;
         },
-        eliminarBanner() {
+        eliminarTexto() {
 
             //tomar el id de la fila seleccionada
             const data = {
@@ -177,7 +139,7 @@ export default {
 
 
             axios.post(this.deleteBannerUrl, data).then((response) => {
-                this.cargarBanner();
+                this.cargarTexto();
                 this.eliminarDialog = false;
                 this.datosArreglo = {};
                 this.$toast.add({
@@ -194,62 +156,20 @@ export default {
             this.datosArreglo = {};
             this.submitted = false;
             this.dialogTable = true;
-            this.imagePreview = null;
         },
-        selectNewPhoto() {
-            this.$refs.photoInput.click();
-        },
-
-
-        handleFileUpload(event) {
-            const input = event.target;
-            if (input.files && input.files[0]) {
-                this.foto = input.files[0];
-
-                // Previsualización de la imagen
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    this.imagePreview = e.target.result;
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-
-        },
-
-        handleFileUploadEdit(event) {
-            const input = event.target;
-            if (input.files && input.files[0]) {
-                this.datosArreglo.foto = input.files[0];
-
-                // Previsualización de la imagen
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    this.imagePreview = e.target.result;
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-
-        },
-
-
-
         //metodo para input 
 
     },
     data() {
         return {
-            banner: [],
+            texto: [],
+            titulo: null,
+            contenido: null,
             searchQuery: '',
-            nombre: null,
-            link: null,
-            foto: null,
-            uploadedFile: null,
             mensajeSinDatos: "No hay datos disponibles",
             dialogTable: false,
             editarDialog: false,
             eliminarDialog: false,
-            photoInput: null,
-            imagePreview: null,
         };
     },
 
@@ -271,15 +191,12 @@ export default {
 
     <!-- Cartas en admin -->
     <div class="cards-container">
-        <Card v-for="datosCard in filteredBanner" class="card">
-            <template #header>
-                <img :src="'/storage/' + datosCard.imagen" alt="Card Image" class="imagen-resolucion" />
-            </template>
-            <template #title> {{ datosCard.nombre }} </template>
-            <template #subtitle> {{ datosCard.link }} </template>
+        <Card v-for="datosTexto in filteredBanner" style="width: 40em; margin-bottom: 40px;">
+            <template #title> {{ datosTexto.titulo }} </template>
+            <template #subtitle> {{ datosTexto.contenido }} </template>
             <template #footer>
-                <Button icon="pi pi-pencil" class="p-button p-button-warning !mr-6" @click="editarSelect(datosCard)" />
-                <Button icon="pi pi-trash" class="p-button p-button-danger" @click="confirmarEliminar(datosCard)" />
+                <Button icon="pi pi-pencil" class="p-button p-button-warning !mr-6" @click="editarSelect(datosTexto)" />
+                <Button icon="pi pi-trash" class="p-button p-button-danger" @click="confirmarEliminar(datosTexto)" />
             </template>
             <template #empty>
                 <div class="flex justify-center align-middle text-xl">
@@ -294,30 +211,19 @@ export default {
     <Dialog v-model:visible="dialogTable" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" :style="{ width: '25vw' }"
         header="Nuevo Registro" :modal="true" class="p-fluid">
         <div class="field">
-            <form @submit.prevent="registrarBanner">
+            <form @submit.prevent="registrarTexto">
                 <!-- select con opciones -->
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Nombre</label>
-                    <InputText inputId="minmax" v-model="nombre" :min="0" :max="10000" :showButtons="true" />
+                    <label for="minmax">Titulo</label>
+                    <InputText inputId="minmax" v-model="titulo" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Link</label>
-                    <InputText inputId="minmax" v-model="link" :min="0" :max="10000" :showButtons="true" />
+                    <label for="minmax">Contenido</label>
+                    <InputText inputId="minmax" v-model="contenido" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
-                <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
-                    style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
-
-                <div class="field col-12 md:col-3">
-                    <button :type="type" @click.prevent="selectNewPhoto"
-                        class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
-                        Seleccione una nueva foto
-                    </button>
-                    <input ref="photoInput" type="file" class="hidden" @change="handleFileUpload">
-
-                </div>
 
                 <Button type="submit" id="btnRegisrar"
                     class="flex items-center justify-center space-x-2 rounded-md border-2 border-blue-500 px-4 py-2 font-medium text-blue-600 transition hover:bg-blue-500 hover:text-white">
@@ -337,30 +243,18 @@ export default {
     <Dialog v-model:visible="editarDialog" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" :style="{ width: '25vw' }"
         header="Nuevo Registro" :modal="true" class="p-fluid">
         <div class="field">
-            <form @submit.prevent="editarBanner">
+            <form @submit.prevent="editarTexto">
                 <!-- select con opciones -->
                 <InputText id="id" v-model.trim="datosArreglo.id" hidden />
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Nombre</label>
-                    <InputText inputId="minmax" v-model="datosArreglo.nombre" :min="0" :max="10000" :showButtons="true" />
+                    <label for="minmax">Titulo</label>
+                    <InputText inputId="minmax" v-model="datosArreglo.titulo" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Link</label>
-                    <InputText inputId="minmax" v-model="datosArreglo.link" :min="0" :max="10000" :showButtons="true" />
-                </div>
-
-                <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
-                    style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
-
-                <div class="field col-12 md:col-12">
-                    <button :type="type" @click.prevent="selectNewPhoto"
-                        class="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest shadow-sm hover:text-gray-300 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
-                        Seleccione una nueva foto
-                    </button>
-                    <input ref="photoInput" type="file" class="hidden" @change="handleFileUploadEdit">
-
+                    <label for="minmax">Contenido</label>
+                    <InputText inputId="minmax" v-model="datosArreglo.contenido" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <Button type="submit" id="btnRegisrar"
@@ -380,11 +274,11 @@ export default {
     <Dialog v-model:visible="eliminarDialog" :style="{ width: '450px' }" header="Confirmar" :modal="true">
         <div class="confirmation-content flex justify-center items-center">
             <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
-            <span v-if="datosArreglo">¿Confirma eliminar el registro <b>{{ datosArreglo.nombre }}</b>?</span>
+            <span v-if="datosArreglo">¿Confirma eliminar el registro <b>{{ datosArreglo.titulo }}</b>?</span>
         </div>
         <template #footer>
             <Button label="No" icon="pi pi-times" class="p-button-text" @click="eliminarDialog = false" />
-            <Button label="Si" icon="pi pi-check" class="p-button-text" @click="eliminarBanner" />
+            <Button label="Si" icon="pi pi-check" class="p-button-text" @click="eliminarTexto" />
         </template>
     </Dialog>
 </template>

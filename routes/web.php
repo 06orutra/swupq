@@ -8,6 +8,8 @@ use App\Http\Controllers\TbCarruselNoticiasController;
 use App\Http\Controllers\TbCarruselPrimeroController;
 use App\Http\Controllers\TbCarruselSegundoController;
 use App\Http\Controllers\TbCarruselTercerController;
+use App\Http\Controllers\TextoPruebaController;
+use App\Http\Controllers\ImgPruebaController;
 use Illuminate\Http\Request;
 
 /*
@@ -69,7 +71,9 @@ Route::middleware([
         'noticias' => TbCarruselNoticiasController::class,
         'primero' => TbCarruselPrimeroController::class,
         'segundo' => TbCarruselSegundoController::class,
-        'tercer' => TbCarruselTercerController::class
+        'tercer' => TbCarruselTercerController::class,
+        'texto' => TextoPruebaController::class,
+        'img' => ImgPruebaController::class,
     ];
     
     foreach ($controllers as $prefix => $controller) {

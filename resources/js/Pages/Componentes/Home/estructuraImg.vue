@@ -1,6 +1,7 @@
 <script>
 
 export default {
+    
     props: {
         loadDataUrl: {
             type: String,
@@ -50,7 +51,7 @@ export default {
         registrarBanner() {
             this.submitted = true;
             //validar si hay campos vacios
-            if (this.nombre == null || this.link == null) {
+            if (this.nombre == null) {
                 // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
@@ -77,7 +78,6 @@ export default {
 
             const formData = new FormData();
             formData.append('nombre', this.nombre);
-            formData.append('link', this.link);
             formData.append('foto', this.foto);
 
             axios.post(this.registerBannerUrl,
@@ -88,7 +88,6 @@ export default {
             }).then((response) => {
                 this.cargarBanner();
                 this.nombre = null;
-                this.link = null;
                 this.foto = null;
                 this.dialogTable = false;
                 this.$toast.add({
@@ -104,7 +103,7 @@ export default {
         editarBanner() {
             this.submitted = true;
             //validar si hay campos vacios
-            if (this.datosArreglo.nombre == null || this.datosArreglo.link == null) {
+            if (this.datosArreglo.nombre == null) {
                 // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
@@ -131,7 +130,6 @@ export default {
             const formData = new FormData();
             formData.append('id', this.datosArreglo.id);
             formData.append('nombre', this.datosArreglo.nombre);
-            formData.append('link', this.datosArreglo.link);
 
             // Agregar la foto al formData solo si se ha seleccionado una nueva
             if (this.datosArreglo.foto) {
@@ -241,7 +239,6 @@ export default {
             banner: [],
             searchQuery: '',
             nombre: null,
-            link: null,
             foto: null,
             uploadedFile: null,
             mensajeSinDatos: "No hay datos disponibles",
@@ -302,11 +299,6 @@ export default {
                     <InputText inputId="minmax" v-model="nombre" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
-                <div class="field col-12 md:col-12">
-                    <label for="minmax">Link</label>
-                    <InputText inputId="minmax" v-model="link" :min="0" :max="10000" :showButtons="true" />
-                </div>
-
                 <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
                     style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
 
@@ -344,11 +336,6 @@ export default {
                 <div class="field col-12 md:col-12">
                     <label for="minmax">Nombre</label>
                     <InputText inputId="minmax" v-model="datosArreglo.nombre" :min="0" :max="10000" :showButtons="true" />
-                </div>
-
-                <div class="field col-12 md:col-12">
-                    <label for="minmax">Link</label>
-                    <InputText inputId="minmax" v-model="datosArreglo.link" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"

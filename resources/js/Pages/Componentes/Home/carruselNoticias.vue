@@ -43,7 +43,7 @@ export default {
     methods: {
 
         cargarBanner() {
-            axios.post("/bannerDataNoticias").then((response) => {
+            axios.post("/noticias/bannerData").then((response) => {
                 this.banner = response.data;
             }).catch((error) => {
                 console.log(error);
@@ -111,7 +111,7 @@ export default {
             formData.append('fecha_activacion', this.fecha_activacion);
             formData.append('fecha_desactivacion', this.fecha_desactivacion);
 
-            axios.post('noticias/registrarBanner',
+            axios.post('/noticias/registrarBanner',
                 formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -174,7 +174,7 @@ export default {
                 console.log('Foto seleccionada:', this.datosArreglo.foto); // Ayuda a depurar
             }
 
-            axios.post('noticias/editarBanner',
+            axios.post('/noticias/editarBanner',
                 formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -212,7 +212,7 @@ export default {
             };
 
 
-            axios.post('noticias/eliminarBanner', data).then((response) => {
+            axios.post('/noticias/eliminarBanner', data).then((response) => {
                 this.cargarBanner();
                 this.eliminarDialog = false;
                 this.datosArreglo = {};

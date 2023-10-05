@@ -83,7 +83,7 @@ Route::middleware([
 });
 
 Route::post('/bannerData', [HomeController::class, 'bannerData']);
-Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'bannerData']);
+Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'bannerDatafilter']);
 Route::post('/bannerDataprimero', [TbCarruselPrimeroController::class, 'bannerData']);
 Route::post('/bannerDatasegundo', [TbCarruselSegundoController::class, 'bannerData']);
 Route::post('/bannerDatatercero', [TbCarruselTercerController::class, 'bannerData']);

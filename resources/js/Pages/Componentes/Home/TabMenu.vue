@@ -29,6 +29,7 @@ export default {
 <template>
     <TabView ref="tabview1" class="p-3">
         <TabPanel header="Carrusel Principal">
+            <opcionesCarrusel id="carruselPrincipal" @configuracion-guardada="updateCarouselSettings" />
             <carruselEstructura :loadDataUrl="'/bannerData'" :registerBannerUrl="'/home/registrarBanner'"
                 :editBannerUrl="'/home/editarBanner'" :deleteBannerUrl="'/home/eliminarBanner'" />
         </TabPanel>

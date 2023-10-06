@@ -40,13 +40,14 @@
       </objetivos-carrera>
 
       <ciclos-formacion 
-      :ciclos_formacion="['Proporcionar mantenimiento y soporte al sistema y equipos de cómputo para garantizar el correcto funcionamiento de la organización mediante el diagnóstico preventivo / correctivo de componentes (hardware/software).',
-      'Realizar soporte técnico de redes de datos para el correcto funcionamiento de la organización por medio de la verificación de fallas y de sus componentes. Diseñar redes de datos para establecer una comunicación efectiva de la información en la organización,'+ 
-      'mediante el análisis de requerimientos. Determinar los requerimientos funcionales y no funcionales del sistema informático, por medio de metodologías y prototipos de desarrollo para cubrir las necesidades del cliente.',
-      'Desarrollar las soluciones (arquitectura) para satisfacer los requerimientos del cliente, mediante lenguajes de programación. Diseñar centro de datos para el correcto control de la información a través de la síntesis de requerimientos organizacionales.'+ 
-      'Diseñar la arquitectura (hardware/software) para garantizar el correcto funcionamiento de la información y toma de decisiones de la organización mediante estrategias de TIC.']">
+    :ciclos_formacion="['Proporcionar mantenimiento y soporte al sistema y equipos de cómputo para garantizar el correcto funcionamiento de la organización mediante el diagnóstico preventivo / correctivo de componentes (hardware/software).',
+    'Realizar soporte técnico de redes de datos para el correcto funcionamiento de la organización por medio de la verificación de fallas y de sus componentes. Diseñar redes de datos para establecer una comunicación efectiva de la información en la organización,'+ 
+    'mediante el análisis de requerimientos. Determinar los requerimientos funcionales y no funcionales del sistema informático, por medio de metodologías y prototipos de desarrollo para cubrir las necesidades del cliente.',
+    'Desarrollar las soluciones (arquitectura) para satisfacer los requerimientos del cliente, mediante lenguajes de programación. Diseñar centro de datos para el correcto control de la información a través de la síntesis de requerimientos organizacionales.'+ 
+    'Diseñar la arquitectura (hardware/software) para garantizar el correcto funcionamiento de la información y toma de decisiones de la organización mediante estrategias de TIC.']">
 
-      </ciclos-formacion>
+    </ciclos-formacion>
+
     </section>
 </template>
 
@@ -65,7 +66,7 @@ export default defineComponent({
       'perfiles-carrera':PerfilesCarrera,
       'descargas-carrera':DescargasCarrera,
       'objetivos-carrera':ObjetivosCarrera,
-      'ciclos-formacion ':CiclosFormacion,
+      'ciclos-formacion':CiclosFormacion,
     },
   // Propiedades del componente (opcional)
   props: {

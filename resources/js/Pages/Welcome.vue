@@ -4,8 +4,9 @@ import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import bannerPrincipal from '@/Pages/Componentes/Welcome/bannerPrincipal.vue';
 import TourCardenal from '@/Layouts/homeComponents/TourCardenal.vue';
-import SplitterVue from '@/Layouts/homeComponents/Splitter.vue';
 import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
+// import Barra from '@/Layouts/homeComponents/BuscaIdentifica.vue';
+// import KaroVue from '@/Layouts/homeComponents/Karo.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -20,12 +21,11 @@ defineProps({
     <Head title="Welcome" />
 
     <AppEstructure>
-
-
         <bannerPrincipal />
         <TourCardenal />
-        <SplitterVue/>
-
+        <!-- <Barra/>
+        <KaroVue/>
+        <Barra></Barra> -->
 
     </AppEstructure>
 

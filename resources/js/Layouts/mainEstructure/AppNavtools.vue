@@ -30,6 +30,7 @@
               />
             </div>
             <div class="mx-2">
+              <!-- Botones de DARK MODE, SOL Y VOLUMEN -->
               <Button
                 icon="pi pi-moon"
                 class="left surface-900 border-900"
@@ -47,6 +48,7 @@
                 :class="['center', isVolumeOn ? 'bg-blue-400' : 'bg-red-500']"
                 @click="toggleVolume"
               />
+              <!-- Aqui acaban -->
             </div>
           </template>
           <template #center class="inline-flex" style="width: 100%">
@@ -215,5 +217,40 @@
   .right {
     border-radius: 0 25px 25px 0;
   }
+
+@media (min-width: 380px) and (max-width: 521px) {
+  .right {
+    margin-right: 20px; /* Ajusta el valor según la cantidad de espacio que desees */
+  }
+
+  .left.surface-900.border-900 {
+    margin-left: 20px; /* Ajusta el valor según la cantidad de espacio que desees */
+  }
+  
+  .center {
+    margin-left: 15px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 379px) {
+  .right {
+    margin-right: 20px; /* Ajusta el valor según la cantidad de espacio que desees */
+  }
+
+  .left.surface-900.border-900 {
+    margin-left: 20px; /* Ajusta el valor según la cantidad de espacio que desees */
+  }
+}
+
+@media (min-width: 300px) and (max-width: 375px) {
+  .right {
+    margin-right: 5px; /* Ajusta el valor según la cantidad de espacio que desees */
+  }
+
+  .left.surface-900.border-900 {
+    margin-left: 5px; /* Ajusta el valor según la cantidad de espacio que desees */
+  }
+}
+
   </style>
   

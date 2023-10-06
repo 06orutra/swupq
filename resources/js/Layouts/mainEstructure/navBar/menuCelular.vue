@@ -1,30 +1,30 @@
 <template>
-    <div id="app">
+    <div id="app-clone">
       <img
         src="storage/img/icon_menu.png"
-        alt="Menu Icon"
-        class="menu-icon"
+        alt="Menu Icon clone"
+        class="menu-icon2"
         @click="showMenu = !showMenu"
       />
   
-      <ul class="menu" v-show="showMenu" @mouseleave="closeActiveSubMenu">
+      <ul class="menu2" v-show="showMenu" @mouseleave="closeActiveSubMenu">
         <li v-for="(menuItem, index) in menuItems" :key="index">
           <div
-            @mouseover="expandSubMenu(index)"
+            @click="toggleSubMenu(index)"
             :style="{ color: menuItem.textColor }"
-            :class="{ 'menu-block': true, 'active': menuItem.expanded }"
+            :class="{ 'menu-block2': true, 'active': menuItem.expanded }"
           >
             {{ menuItem.label }}
           </div>
           <transition name="fade">
-            <ul v-if="menuItem.expanded" class="sub-menu">
+            <ul v-if="menuItem.expanded" class="sub-menu2">
               <li
                 v-for="(subMenuItem, subIndex) in menuItem.subMenuItems"
                 :key="subIndex"
               >
                 <div
                   :style="{ color: subMenuItem.textColor }"
-                  :class="{ 'sub-menu-block': true, 'active': subMenuItem.expanded }"
+                  :class="{ 'sub-menu-block2': true, 'active': subMenuItem.expanded }"
                 >
                   {{ subMenuItem.label }}
                 </div>
@@ -40,7 +40,7 @@
   export default {
     data() {
       return {
-        menuicon:{
+        menuicon2: {
           top: '28.1%', // Ajusta esto a la posición inicial del menú-icon
           left: '10px', // Ajusta esto a la posición inicial del menú-icon
         },
@@ -190,19 +190,14 @@
         this.activeSubMenuIndex = null;
       }
     },
-    closeMenuAndSubMenu() {
-      if (this.showMenu || this.activeSubMenuIndex !== null) {
-        this.showMenu = false;
-        this.activeSubMenuIndex = null;
-      }
-    },
-  },  
+  },
+
 };
 </script>
 
 
 <style scoped>
-.menu-icon {
+.menu-icon2 {
   cursor: pointer;
   width: 7vh;
   height: 7vh;
@@ -212,12 +207,12 @@
   transform: translateX(20px) translateY(95px);
 }
 
-.content {
+.content2 {
   margin-left: 15%;
   /* Resto de los estilos para el contenido principal */
 }
 
-.menu {
+.menu2 {
   list-style-type: none;
   padding: 0;
   position: fixed;
@@ -229,75 +224,71 @@
   transition: transform 0.5s ease;
 }
 
-.menu li {
+.menu2 li {
   display: block;
   background: transparent;
   color: #fff;
 }
 
-.menu .menu-block {
+.menu2 .menu-block2 {
   display: block;
   padding: 10px;
   transition: background-color 0.3s;
 }
 
-.menu .menu-block:hover {
-  background-color: rgba(0, 30, 255, 0.8);
-}
 
 /* Corrección de posición y recursividad */
-.menu .sub-menu {
+.menu2 .sub-menu2 {
   position: absolute;
   left: 100%;
-  top: 0;
-  margin-left: 0;
+  margin: 0;
   padding: 10;
   width: 300px;
   z-index: 2;
   background-color: rgba(0, 26, 226, 0.8);
 }
 
-.menu .sub-menu-block {
+.menu2 .sub-menu-block2 {
   display: block;
   padding: 10px;
   transition: background-color 0.3s;
 }
 
-.menu .sub-menu-block:hover {
+.menu2 .sub-menu-block2:hover {
   background-color: rgba(0, 10, 87, 0.8);
 }
-@media (min-width: 521px) and (max-width: 768px) {
-  .menu-icon {
+@media (min-width: 521px) and (max-width: 768px) 
+{.menu-icon2 {
     width: 6vh;
     height: 6vh;
   }
-  .menu {
+  .menu2 {
     width: 20%; /* Adjust the width as needed */
     top: calc(25% + 1vh); /* Adjust the top position as needed */
     right:-50%;
   }
-  .menu li {
+  .menu2 li {
     font-size: 12px; /* Adjust the font size as needed */
   }
-  .menu .menu-block,
-  .menu .sub-menu-block {
+  .menu2 .menu-block2,
+  .menu2 .sub-menu-block2 {
     padding: 5px; /* Adjust the padding as needed */
   }
 }
 
 @media (min-width: 769px) and (max-width: 1224px) {
-  .menu-icon {
+    .menu-icon2 {
     width:7vh ;
     height: 7vh;
     margin-right:4%;
   }
   
-  .content {
-    margin-left: 20%;
+  .content2 {
+    margin-left: 15%;
     /* Resto de los estilos para el contenido principal */
   }
   
-  .menu {
+  .menu2 {
     width:20%;
     top: calc(27% + 1vh);
   }
@@ -305,34 +296,34 @@
 }
 
 @media (min-width: 1225px) and (max-width: 1440px) {
-  .menu-icon {
-    width:7.5vh ;
-    height: 7.5vh;
+    .menu-icon2 {
+      width:7.5vh ;
+      height: 7.5vh;
+    }
+    .menu2 {
+      width:15%;
+      top: calc(26% + 1vh);
+    }
   }
-  .menu {
-    width:15%;
+  .menu2 {
+    width:20%;
     top: calc(26% + 1vh);
   }
-}
-.menu {
-  width:20%;
-  top: calc(28% + 1vh);
-}
 
 @media (min-width: 1441px) {
-  .menu-icon {
+  .menu-icon2 {
     width:7.5vh ;
     height: 7.5vh;
   }
-  .menu {
+  .menu2 {
     width:15%;
-    top: calc(32% + 1vh);
+    top: calc(26% + 1vh);
   }
 }
 
 /* Estilo para la vista movil, acomoda los botones de forma automatica con coordenadas */
 @media (max-width: 520px) {
-  .menu-icon {
+  .menu-icon2 {
     width:4.7vh ;
     height: 4.7vh;
     transform: translateX(240px) translateY(4px);
@@ -340,7 +331,7 @@
   }
 }
 @media (min-width: 320px) and (max-width: 520px) {
-  .menu {
+  .menu2 {
     list-style-type: none;
     padding: 0;
     position: fixed; /* Cambia de "absolute" a "relative" para que los elementos se coloquen en el flujo normal del documento */
@@ -351,23 +342,23 @@
     left:6%;
   }
 
-  .menu li {
+  .menu2 li {
     display: block;
     background: transparent;
     color: #ffffff;
   }
 
-  .menu .menu-block {
+  .menu2 .menu-block {
     display: block;
     padding: 10px;
     transition: background-color 0.3s;
   }
 
-  .menu .menu-block:hover {
+  .menu2 .menu-block2:hover {
     background-color: rgba(0, 30, 255, 0.8);
   }
 
-  .menu .sub-menu {
+  .menu2 .sub-menu2 {
     position: absolute;
     left: 100%; /* Coloca el sub-menú a la derecha del primer bloque */
     top: 0;
@@ -378,15 +369,20 @@
     background-color: rgba(0, 26, 226, 0.8);
   }
 
-  .menu .sub-menu-block {
+  .menu2 .sub-menu-block2 {
     display: block;
     padding: 10px;
     transition: background-color 0.3s;
   }
 
-  .menu .sub-menu-block:hover {
+  .menu2 .sub-menu-block2:hover {
     background-color: rgba(0, 10, 87, 0.8);
   }
 }
 
+@media (max-width: 319px){
+  .menu2, .sub-menu2, .menu-icon2{
+    display:none;
+  }
+}
 </style>

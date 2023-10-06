@@ -44,11 +44,22 @@ Route::prefix('institucion')->group(function () {
     Route::get('laborEq', function () {
         return Inertia::render('Componentes/Institucion/Laborequality');
     });
-
-
-
+    
     Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
-});
+
+    Route::get('ubicacion', function(){
+        return Inertia::render('Componentes/Institucion/location');
+    });
+    Route::get('historia', function(){
+        return Inertia::render('Componentes/Institucion/Historia');
+    });
+    Route::get('modeloEducacional', function(){
+        return Inertia::render('Componentes/Institucion/Educational');
+    });
+    Route::get('filosofia', function(){
+        return Inertia::render('Componentes/Institucion/Philosophy');
+    });
+});   
 
 /*
 ejemplo de como mandar a llamar una vista

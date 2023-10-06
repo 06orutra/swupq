@@ -5,11 +5,11 @@
         <div class="content">
             <h1 class="title">Sitios de interés</h1>
             <div class="image-container">
-                <a href="https://www.gob.mx/sep" target="_blank"><img src="storage/img/sep.svg" alt="sep" height="60px"></a>
-                <a href="https://conahcyt.mx/" target="_blank"><img src="storage/img/conacyt.svg" alt="conacyt" height="60px"></a>
-                <a href="https://coepesqro.org.mx/" target="_blank"><img src="storage/img/coepes.svg" alt="coepes" height="50px"></a>
-                <a href="https://www.conricyt.mx/" target="_blank"><img src="storage/img/conricyt.svg" alt="conricyt" height="50px"></a>
-                <a href="https://www.concyteq.org/" target="_blank"><img src="storage/img/concyteq.svg" alt="concyteq" height="60px"></a> <!-- Al pendiente con el link, que la página "oficial" está suspendida por x motivo -->
+                <a href="https://www.gob.mx/sep/" target="_blank"><img src="/storage/img/sep.svg" alt="sep" height="60px"></a>
+                <a href="https://conahcyt.mx/" target="_blank"><img src="/storage/img/conacyt.svg" alt="conacyt" height="60px"></a>
+                <a href="https://coepesqro.org.mx/" target="_blank"><img src="/storage/img/coepes.svg" alt="coepes" height="50px"></a>
+                <a href="https://www.conricyt.mx/" target="_blank"><img src="/storage/img/conricyt.svg" alt="conricyt" height="50px"></a>
+                <a href="https://www.concyteq.org/" target="_blank"><img src="/storage/img/concyteq.svg" alt="concyteq" height="60px"></a> <!-- Al pendiente con el link, que la página "oficial" está suspendida por x motivo -->
             </div>
         </div>
     </div>
@@ -17,13 +17,13 @@
     <footer class="footer">
         <div class="container pr-2 md:pr-4">
             <div class="imag">
-                <img src="storage/img/queretaro.svg" alt="qro" height="100px">
-                <img src="storage/img/utp.svg" alt="utp" height="100px">
-                <img src="storage/img/igualdadlogo.svg" alt="igual" height="100px">
-                <img src="storage/img/certificacionISO.svg" alt="iso" height="100px">
-                <img src="storage/img/Promotor.png" alt="prom" height="100px">
-                <img src="storage/img/transparencia.svg" alt="trans" height="100px">
-                <img class="pl-3 sm:pl-0" src="storage/img/avisoprivacidad.svg" alt="aviso" height="100px">
+                <img src="/storage/img/queretaro.svg" alt="qro" height="100px">
+                <img src="/storage/img/utp.svg" alt="utp" height="100px">
+                <img src="/storage/img/igualdadlogo.svg" alt="igual" height="100px">
+                <img src="/storage/img/certificacionISO.svg" alt="iso" height="100px">
+                <img src="/storage/img/Promotor.png" alt="prom" height="100px">
+                <img src="/storage/img/transparencia.svg" alt="trans" height="100px">
+                <img class="pl-3 sm:pl-0" src="/storage/img/avisoprivacidad.svg" alt="aviso" height="100px">
             </div>
             <div class="row">
                 <div class="footer-col">
@@ -53,10 +53,10 @@
                 <div class="footer-col">
                     <h4>Redes sociales</h4>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/UPQoficial/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/UPQoficial" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/soyupq/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/school/upq/mycompany/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>

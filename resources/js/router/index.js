@@ -42,6 +42,22 @@ const router = createRouter({
                     path: '/profile',
                     name: 'profile',
                     component: () => import('@/Pages/Profile/Show.vue')
+                },
+                {
+                    path: '/chatbot',
+                    name: 'chatbot',
+                    component: () => import('@/Pages/Profile/Show.vue')
+                },
+                {
+                    path: '/mascotas',
+                    name: 'mascotas',
+                    component: () => import('@/Pages/Componentes/Home/TabMenu.vue'),
+                    children: [{
+                        path: '/menu2',
+                        name: 'menu2',
+                        component: () => import('@/Pages/Dashboard.vue'),
+                    }]
+
                 }
             ]
         },

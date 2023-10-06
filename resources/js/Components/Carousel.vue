@@ -1,5 +1,6 @@
+
 <template>
-    <div class="carousel">
+    <div class="carousel" ref="rootRef">
         <slot :currentSlide="currentSlide" />
 
         <!-- Navegation -->
@@ -14,8 +15,7 @@
 
         <!-- Pagination -->
         <div v-if="paginationEnabled" class="pagination">
-            <span @click="goToSlide(index)" v-for="(slide, index) in getSlideCount" :key="index"
-                :class="{ active: index + 1 === currentSlide }">
+            <span @click="goToSlide(index)" v-for="(slide, index) in getSlideCount" :key="index" :class="{ active: index + 1 === currentSlide }">
             </span>
         </div>
 
@@ -23,21 +23,40 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';  // Import nextTick
 import 'primeicons/primeicons.css';
 
 export default {
-    props: ["startAutoPlay", "timeout", "navigation", "pagination"],
+    props: {
+        startAutoPlay: {
+            type: Boolean,
+            default: true
+        },
+        timeout: {
+            type: Number,
+            default: 5000
+        },
+        navigation: {
+            type: Boolean,
+            default: true
+        },
+        pagination: {
+            type: Boolean,
+            default: true
+        },
+        slides: {
+            type: Array,
+            required: true
+        }
+    },
 
     setup(props) {
         const currentSlide = ref(1);
-        const getSlideCount = ref(null);
-        const autoPlayEnabled = ref(props.startAutoPlay === undefined ? true : props.startAutoPlay);
-        const timeoutDuration = ref(props.timeout === undefined ? 5000 : props.timeout);
-        const paginationEnabled = ref(props.pagination === undefined ? true : props.pagination);
-        const navEnabled = ref(props.navigation === undefined ? true : props.navigation);
-
-        // Next slide
+        const getSlideCount = ref(props.slides.length);
+        const autoPlayEnabled = ref(props.startAutoPlay);
+        const timeoutDuration = ref(props.timeout);
+        const paginationEnabled = ref(props.pagination);
+        const navEnabled = ref(props.navigation);
         const nextSlide = () => {
             updateSlideCount();
             if (currentSlide.value === getSlideCount.value) {
@@ -57,6 +76,7 @@ export default {
             currentSlide.value -= 1;
         }
 
+
         const goToSlide = (index) => {
             currentSlide.value = index + 1;
         }
@@ -73,11 +93,14 @@ export default {
         }
 
         const updateSlideCount = () => {
-            getSlideCount.value = document.querySelectorAll('.slide').length;
-            console.log(getSlideCount.value);
+            getSlideCount.value = props.slides.length; // Usamos la longitud del prop slides 
         };
 
-        onMounted(updateSlideCount)
+        onMounted(() => {
+            nextTick(() => {
+                updateSlideCount();
+            });
+        });
 
         return { currentSlide, nextSlide, prevSlide, getSlideCount, goToSlide, paginationEnabled, navEnabled };
     }
@@ -141,50 +164,50 @@ export default {
     // Para pantallas pequeñas
     @media (max-width: 399px) {
         span {
-            width: 10px;
-            height: 10px;
+            width: 5px;
+            height: 5px;
         }
     }
 
     @media (min-width: 400px) and (max-width: 499px) {
         span {
-            width: 12px;
-            height: 12px;
+            width: 7px;
+            height: 7px;
         }
     }
 
     @media (min-width: 500px) and (max-width: 599px) {
         span {
-            width: 14px;
-            height: 14px;
+            width: 9px;
+            height: 9px;
         }
     }
 
     @media (min-width: 600px) and (max-width: 699px) {
         span {
-            width: 16px;
-            height: 16px;
+            width: 11px;
+            height: 11px;
         }
     }
 
     @media (min-width: 700px) and (max-width: 799px) {
         span {
-            width: 18px;
-            height: 18px;
+            width: 13px;
+            height: 13px;
         }
     }
 
     @media (min-width: 800px) and (max-width: 899px) {
         span {
-            width: 20px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
         }
     }
 
     @media (min-width: 900px) {
         span {
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
         }
     }
 }

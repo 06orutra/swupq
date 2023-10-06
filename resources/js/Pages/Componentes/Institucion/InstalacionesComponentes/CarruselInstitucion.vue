@@ -90,11 +90,6 @@ onMounted(() => {
       thumbnailStyle: 'display: block; max-height: 70px;'
     },
     {
-      itemImageSrc: 'https://www.upq.mx/media/institucion/IMG_7404.jpg',
-      thumbnailImageSrc: 'https://www.upq.mx/media/institucion/IMG_7404.jpg',
-      thumbnailStyle: 'display: block; max-height: 70px;'
-    },
-    {
       itemImageSrc: 'https://www.upq.mx/media/institucion/12_INSTALACIONES.jpg',
       thumbnailImageSrc: 'https://www.upq.mx/media/institucion/12_INSTALACIONES.jpg',
       thumbnailStyle: 'display: block; max-height: 70px;'
@@ -102,11 +97,6 @@ onMounted(() => {
     {
       itemImageSrc: 'https://www.upq.mx/media/institucion/17_INSTALACIONES.png',
       thumbnailImageSrc: 'https://www.upq.mx/media/institucion/17_INSTALACIONES.png',
-      thumbnailStyle: 'display: block; max-height: 70px;'
-    },
-    {
-      itemImageSrc: 'https://www.upq.mx/media/institucion/IMG_8609.jpg',
-      thumbnailImageSrc: 'https://www.upq.mx/media/institucion/IMG_8609.jpg',
       thumbnailStyle: 'display: block; max-height: 70px;'
     },
     {

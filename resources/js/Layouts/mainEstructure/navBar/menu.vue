@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img
-      src="storage/img/icon_menu.png"
+      src="/storage/img/icon_menu.png"
       alt="Menu Icon"
       class="menu-icon"
       @click="showMenu = !showMenu"

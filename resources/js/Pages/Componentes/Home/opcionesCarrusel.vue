@@ -9,7 +9,7 @@
         <div class="flex align-items-center">
             <label class="ml-2">Auto: </label><input type="checkbox" v-model="startAutoPlay">
         </div>
-        <div class="flex align-items-center">
+        <div class="tiempo-container flex align-items-center">
             <label class="ml-2">Tiempo: </label><input type="number" v-model="timeout">
         </div>
         <Button @click="guardarConfiguracion">Guardar Configuración</button>
@@ -57,3 +57,21 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+.tiempo-container {
+    flex-direction: row;
+}
+
+/* Estilos para pantallas móviles */
+@media (max-width: 768px) {
+    .tiempo-container {
+        flex-direction: column;
+    }
+    .tiempo-container label {
+        margin-bottom: 8px;
+    }
+}
+
+
+</style>

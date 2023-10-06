@@ -1,7 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import Videos from '@/Pages/Componentes/Home/Videos.vue';
-import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import TourCardenal from '@/Layouts/homeComponents/TourCardenal.vue';
 import SplitterVue from '@/Layouts/homeComponents/Splitter.vue';
@@ -23,7 +22,7 @@ import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
 
     </AppEstructure>
 
-    <RedesSociales />
+
 </template>
 
 <style></style>

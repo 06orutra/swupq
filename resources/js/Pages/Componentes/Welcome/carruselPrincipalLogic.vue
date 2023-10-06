@@ -11,7 +11,6 @@ import axios from "axios";
 import Toast from "primevue/toast";
 import Carousel from "@/Components/Carousel.vue";
 import Slide from "@/Components/Slide.vue";
-import OpcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 
 export default {
     components: {
@@ -26,7 +25,6 @@ export default {
         Paginator,
         Carousel,
         Slide,
-        OpcionesCarrusel,
     },
     mounted() {
         this.cargarBanner();

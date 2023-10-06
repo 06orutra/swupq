@@ -44,9 +44,20 @@ const router = createRouter({
                     component: () => import('@/Pages/Profile/Show.vue')
                 },
                 {
-                    path: '/historia',
-                    name: 'historia',
-                    component: () => import('@/Pages/Dashboard.vue')
+                    path: '/chatbot',
+                    name: 'chatbot',
+                    component: () => import('@/Pages/Profile/Show.vue')
+                },
+                {
+                    path: '/mascotas',
+                    name: 'mascotas',
+                    component: () => import('@/Pages/Componentes/Home/TabMenu.vue'),
+                    children: [{
+                        path: '/menu2',
+                        name: 'menu2',
+                        component: () => import('@/Pages/Dashboard.vue'),
+                    }]
+
                 }
             ]
         },

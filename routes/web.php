@@ -44,6 +44,10 @@ Route::prefix('institucion')->group(function () {
     Route::get('laborEq', function () {
         return Inertia::render('Componentes/Institucion/Laborequality');
     });
+    Route::get('instalaciones', function(){
+        return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
+    });
+    
     
     Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
 

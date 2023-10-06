@@ -2,14 +2,13 @@
 import { Head, Link } from '@inertiajs/vue3';
 import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
-import Mascotas from '@/Pages/Componentes/Institucion/InstitucionComponentes/Mascotas.vue';
-import ImagenMascotas from '@/Pages/Componentes/Institucion/InstitucionComponentes/ImagenMascotas.vue';
-import NoteMascotas from '@/Pages/Componentes/Institucion/InstitucionComponentes/NoteMascotas.vue';
-import NoteMPoliPolo from '@/Pages/Componentes/Institucion/InstitucionComponentes/NotePoliPolo.vue';
-import Spotypoli from '@/Pages/Componentes/Institucion/InstitucionComponentes/Spotypoli.vue';
-import Spotypolo from '@/Pages/Componentes/Institucion/InstitucionComponentes/Spotypolo.vue';
-import Notaspoty from '@/Pages/Componentes/Institucion/InstitucionComponentes/Notaspoty.vue';
-
+import Mascotas from '@/Pages/Componentes/Institucion/MascotasComponentes/Mascotas.vue';
+import ImagenMascotas from '@/Pages/Componentes/Institucion/MascotasComponentes/ImagenMascotas.vue';
+import NoteMascotas from '@/Pages/Componentes/Institucion/MascotasComponentes/NoteMascotas.vue';
+import NoteMPoliPolo from '@/Pages/Componentes/Institucion/MascotasComponentes/NotePoliPolo.vue';
+import Spotypoli from '@/Pages/Componentes/Institucion/MascotasComponentes/Spotypoli.vue';
+import Spotypolo from '@/Pages/Componentes/Institucion/MascotasComponentes/Spotypolo.vue';
+import Notaspoty from '@/Pages/Componentes/Institucion/MascotasComponentes/Notaspoty.vue';
 
 defineProps({
   canLogin: Boolean,

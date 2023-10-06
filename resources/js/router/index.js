@@ -17,11 +17,11 @@ const router = createRouter({
                     path: '/home',
                     name: 'home',
                     component: () => import('@/Pages/Componentes/Home/TabMenu.vue'),
-                    children: [{
-                        path: '/menu2',
-                        name: 'menu2',
-                        component: () => import('@/Pages/Dashboard.vue'),
-                    }]
+                },
+                {
+                    path:'/institucion',
+                    name:'institucion',
+                    component:() => import('@/Pages/Componentes/institucion/institucionAdmin/TabInstitucion.vue'),
                 },
                 {
                     path: '/carreras',

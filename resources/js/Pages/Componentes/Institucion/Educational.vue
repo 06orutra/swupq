@@ -171,6 +171,7 @@ data() {
             </div>
         </div>
       </div>
+      
         <div class="modal" :class="{ 'active': showModal }">
             <div class="modal-content">
               <div class="modal-body">

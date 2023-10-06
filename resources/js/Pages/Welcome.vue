@@ -1,9 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-/*import Videos from '@/Pages/Componentes/Home/Videos.vue';*/
-import History from '@/Pages/Componentes/History/Historia.vue';
-import Filosofia from '@/Pages/Componentes/Philosophy/Philosophy.vue';
-import ModeloEducativo from'@/Pages/Componentes/ModeloEducativo/Educational.vue';
+import Videos from '@/Pages/Componentes/Home/Videos.vue';
 import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import carruselPrincipalLogic from '@/Pages/Componentes/Welcome/carruselPrincipalLogic.vue';
@@ -24,12 +21,8 @@ defineProps({
 
 <template>
     <Head title="Welcome" />
-
-    <AppEstructure>
-        <!-- <Videos />-->
-        <!-- <History />  -->
-        <Filosofia />  
-        <!-- <ModeloEducativo />  --> 
+    
+    <AppEstructure>          
         <!-- mandamos a llamar en la principal  -->
 
 

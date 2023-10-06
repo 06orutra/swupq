@@ -1,8 +1,6 @@
 <template>
     <div :class="['video-component', { 'admin-view': isAdmin }]">
-        <iframe ref="videoElement" :src="currentEmbedUrl" frameborder="0" allowfullscreen class="fullscreen-video">
-        </iframe>
-        <div class="language-selector" @click="toggleLanguages">
+        <div class="language-selector" @click="toggleLanguages" @touchstart.prevent="toggleLanguages">
             <span class="dots">•••</span>
             <ul v-if="showLanguages">
                 <li @click="changeVideo('Español')">Español</li>
@@ -11,6 +9,8 @@
                 <li @click="changeVideo('Portugués')">Portugués</li>
             </ul>
         </div>
+        <iframe ref="videoElement" :src="currentEmbedUrl" frameborder="0" allowfullscreen class="fullscreen-video">
+        </iframe>
     </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
             showLanguages: false,
             videos: {
                 'Español': 'https://youtu.be/koWfeJPQkEk',
-                'Inglés': 'https://www.youtube.com/watch?v=SPYNKhGIwaE&ab_channel=ClaseLibre',
+                'Inglés': 'https://youtu.be/YQ3GDTqI-yQ',
                 'Francés': 'https://youtu.be/XDdznpG5NIU',
                 'Portugués': 'https://youtu.be/guJvmvDDSAk'
             },

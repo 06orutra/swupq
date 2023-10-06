@@ -164,50 +164,50 @@ export default {
     // Para pantallas pequeñas
     @media (max-width: 399px) {
         span {
-            width: 10px;
-            height: 10px;
+            width: 5px;
+            height: 5px;
         }
     }
 
     @media (min-width: 400px) and (max-width: 499px) {
         span {
-            width: 12px;
-            height: 12px;
+            width: 7px;
+            height: 7px;
         }
     }
 
     @media (min-width: 500px) and (max-width: 599px) {
         span {
-            width: 14px;
-            height: 14px;
+            width: 9px;
+            height: 9px;
         }
     }
 
     @media (min-width: 600px) and (max-width: 699px) {
         span {
-            width: 16px;
-            height: 16px;
+            width: 11px;
+            height: 11px;
         }
     }
 
     @media (min-width: 700px) and (max-width: 799px) {
         span {
-            width: 18px;
-            height: 18px;
+            width: 13px;
+            height: 13px;
         }
     }
 
     @media (min-width: 800px) and (max-width: 899px) {
         span {
-            width: 20px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
         }
     }
 
     @media (min-width: 900px) {
         span {
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
         }
     }
 }

@@ -14,6 +14,7 @@ const model = ref([
             { label: 'Carreras', icon: 'pi pi-fw pi-book', to: '/carreras' },
             { label: 'Posgrado', icon: 'pi pi-fw pi-briefcase', to: '/posgrado' },
             { label: 'Noticias', icon: 'pi pi-fw pi-megaphone', to: '/noticias' },
+            { label: 'Mascotas', icon: 'pi pi-fw pi-megaphone', to: '/mascotas' },
         ]
     }
 ]);

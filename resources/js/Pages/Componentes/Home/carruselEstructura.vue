@@ -1,31 +1,6 @@
 <script>
-import DataTable from "primevue/datatable";
-import InputText from "primevue/inputtext";
-import Column from "primevue/column";
-import Button from "primevue/button";
-import Card from 'primevue/card';
-import Dialog from 'primevue/dialog';
-import FileUpload from 'primevue/fileupload';
-import Paginator from 'primevue/paginator';
-import axios from "axios";
-import Toast from "primevue/toast";
-import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
-import filterComponent from "@/Pages/Componentes/Home/filterComponent.vue";
 
 export default {
-    components: {
-        DataTable,
-        Column,
-        InputText,
-        Button,
-        Card,
-        Dialog,
-        FileUpload,
-        Toast,
-        Paginator,
-        opcionesCarrusel,
-        filterComponent,
-    },
     props: {
         loadDataUrl: {
             type: String,
@@ -44,12 +19,19 @@ export default {
             required: true
         },
     },
+    computed: {
+        filteredBanner() {
+            if (!this.searchQuery) {
+                return this.banner;
+            }
+            return this.banner.filter(item =>
+                item.nombre.toLowerCase().includes(this.searchQuery.toLowerCase())
+            );
+        }
+    },
     mounted() {
         this.cargarBanner();
     },
-
-
-
     methods: {
         cargarBanner() {
             axios.post(this.loadDataUrl).then((response) => {
@@ -257,6 +239,7 @@ export default {
     data() {
         return {
             banner: [],
+            searchQuery: '',
             nombre: null,
             link: null,
             foto: null,
@@ -279,19 +262,16 @@ export default {
             <Button label="Nuevo Registro" icon="pi pi-plus" class="p-button-success !mr-2" @click="openRegistro" />
         </template>
         <template #end>
-            <filterComponent :valores="banner" />
+            <span class="p-input-icon-left">
+                <i class="pi pi-search" />
+                <InputText v-model="searchQuery" placeholder="Search" />
+            </span>
         </template>
     </Toolbar>
 
-
-    <!-- PERSONALIZAR CARRUSEL -->
-    <div>
-        <opcionesCarrusel />
-    </div>
-
     <!-- Cartas en admin -->
     <div class="cards-container">
-        <Card v-for="datosCard in banner" class="card">
+        <Card v-for="datosCard in filteredBanner" class="card">
             <template #header>
                 <img :src="'/storage/' + datosCard.imagen" alt="Card Image" class="imagen-resolucion" />
             </template>

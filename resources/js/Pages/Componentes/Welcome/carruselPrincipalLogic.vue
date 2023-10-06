@@ -11,7 +11,6 @@ import axios from "axios";
 import Toast from "primevue/toast";
 import Carousel from "@/Components/Carousel.vue";
 import Slide from "@/Components/Slide.vue";
-import OpcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 
 export default {
     components: {
@@ -26,7 +25,6 @@ export default {
         Paginator,
         Carousel,
         Slide,
-        OpcionesCarrusel,
     },
     mounted() {
         this.cargarBanner();
@@ -57,13 +55,14 @@ export default {
         },
     },
     data() {
+        const id = 'carruselPrincipal'
         return {
             banner: [],
             isBannerLoaded: false,
-            navigation: localStorage.getItem('navigation') === 'true' || false,
-            pagination: localStorage.getItem('pagination') === 'true' || false,
-            startAutoPlay: localStorage.getItem('startAutoPlay') === 'true' || false,
-            timeout: Number(localStorage.getItem('timeout')) || 5000
+            navigation: localStorage.getItem(id + 'navigation') === 'true' || false,
+            pagination: localStorage.getItem(id + 'pagination') === 'true' || false,
+            startAutoPlay: localStorage.getItem(id + 'startAutoPlay') === 'true' || false,
+            timeout: Number(localStorage.getItem(id + 'timeout')) || 5000
         };
     },
 };
@@ -71,8 +70,8 @@ export default {
 
 <template>
     <!-- Carrusel dinamico -->
-    <Carousel v-if="isBannerLoaded" :navigation="navigation" :pagination="pagination" :startAutoPlay="startAutoPlay" :timeout="timeout" :slides="banner"
-        class="carousel" v-slot="{ currentSlide }">
+    <Carousel v-if="isBannerLoaded" :navigation="navigation" :pagination="pagination" :startAutoPlay="startAutoPlay"
+        :timeout="timeout" :slides="banner" class="carousel" v-slot="{ currentSlide }">
         <Slide v-for="datosCard in banner" :key="datosCard">
             <div v-show="currentSlide === datosCard.id" class="slide-info">
                 <img :src="'/storage/' + datosCard.imagen" alt="" />
@@ -103,34 +102,42 @@ export default {
 
     @media (max-width: 399px) {
         height: 30vh;
+        margin-top: 80px;
     }
 
     @media (min-width: 400px) and (max-width: 499px) {
         height: 40vh;
+        margin-top: 80px;
     }
 
     @media (min-width: 500px) and (max-width: 599px) {
         height: 50vh;
+        margin-top: 50px;
     }
 
     @media (min-width: 600px) and (max-width: 699px) {
         height: 60vh;
+        margin-top: 50px;
     }
 
     @media (min-width: 700px) and (max-width: 799px) {
         height: 70vh;
+        margin-top: 50px;
     }
 
     @media (min-width: 800px) and (max-width: 899px) {
         height: 80vh;
+        margin-top: 70px;
     }
 
     @media (min-width: 900px) and (max-width: 999px) {
         height: 90vh;
+        margin-top: 70px;
     }
 
     @media (min-width: 1000px) {
         height: 100vh;
+        margin-top: 50px;
     }
 
 }

@@ -30,6 +30,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/movilidad-academica', function(){
+    return Inertia::render('Componentes/Servicios_Universitarios/movilidadAcademica');
+});
+
 Route::prefix('institucion')->group(function () {
     Route::get('mascotas', function(){
         return Inertia::render('Componentes/Institucion/mascotasPrincipal');

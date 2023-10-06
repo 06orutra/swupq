@@ -5,6 +5,8 @@ import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
 import carruselEstructura from "./carruselEstructura.vue";
 import opcionesCarrusel from "./opcionesCarrusel.vue";
+import estructuraTextos from "./estructuraTextos.vue";
+import estructuraImg from "./estructuraImg.vue";
 
 export default {
     components: {
@@ -14,6 +16,8 @@ export default {
         carruselDividido,
         carruselEstructura,
         opcionesCarrusel,
+        estructuraTextos,
+        estructuraImg,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -39,6 +43,14 @@ export default {
         </TabPanel>
         <TabPanel header="Carrusel Dividido">
             <carruselDividido />
+        </TabPanel>
+        <TabPanel header="textos">
+            <estructuraTextos :loadDataUrl="'/texto/bannerData'" :registerBannerUrl="'/texto/registrarBanner'"
+                :editBannerUrl="'/texto/editarBanner'" :deleteBannerUrl="'/texto/eliminarBanner'"  />
+        </TabPanel>
+        <TabPanel header="Imagenes">
+            <estructuraImg :loadDataUrl="'/img/bannerData'" :registerBannerUrl="'/img/registrarBanner'"
+                :editBannerUrl="'/img/editarBanner'" :deleteBannerUrl="'/img/eliminarBanner'"  />
         </TabPanel>
     </TabView>
 </template>

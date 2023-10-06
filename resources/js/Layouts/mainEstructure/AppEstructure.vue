@@ -3,6 +3,9 @@ import AppFooter from '@/Layouts/mainEstructure/AppFooter.vue';
 import AppNavtools from '@/Layouts/mainEstructure/AppNavtools.vue'
 import AppBar from '@/Layouts/mainEstructure/navBar/barStructure.vue';
 import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
+import carruselPrincipalLogic from '@/Pages/Componentes/Welcome/carruselPrincipalLogic.vue';
+import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
+
 </script>
 
 <template>
@@ -13,7 +16,9 @@ import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
 
     <div class="prueba">
       <AppBar />
+      <carruselPrincipalLogic />
       <slot></slot>
+      <RedesSociales />
     </div>
     <div>
       <AppFooter />

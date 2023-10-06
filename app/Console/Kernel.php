@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
+    $schedule->call('TbCarruselNoticiasController@actualizarEstadoBanner')->dailyAt('00:00');
     }
 
     /**

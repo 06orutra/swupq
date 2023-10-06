@@ -1,0 +1,4 @@
+    *---Finalmente, recuerda que aunque el comando php artisan schedule:list 
+        te muestre cuándo se "debería" ejecutar la tarea, la tarea real se
+        ejecutará solo si el CRON en tu servidor está configurado correctamente
+        y está llamando a php artisan schedule:run cada minuto.

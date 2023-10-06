@@ -3,9 +3,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 
-import History from '@/Pages/Componentes/Home/History.vue'; // Aquí importamos el componente History
-import RectorMessage from '@/Pages/Componentes/Home/RectorMessage.vue'; 
-import LabEq from '@/Pages/Componentes/Home/Laborequality.vue';
+
 
 import carruselPrincipalLogic from '@/Pages/Componentes/Welcome/carruselPrincipalLogic.vue';
 import TourCardenal from '@/Layouts/homeComponents/TourCardenal.vue';
@@ -29,8 +27,6 @@ defineProps({
 
     <AppEstructure>
 
-        <RectorMessage />
-        <LabEq />
 
         <carruselPrincipalLogic />
         <CarrierBanner />

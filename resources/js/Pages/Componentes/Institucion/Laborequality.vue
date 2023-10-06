@@ -7,7 +7,13 @@ export default {
 
           }
         
-        }};
+        },
+      data() {
+        return {
+        title: "POLÍTICA DE IGUALDAD LABORAL Y NO DISCRIMINACIÓN",
+        parrafo1: "La Universidad Politécnica de Querétaro manifiesta el compromiso con la promoción, respeto y protección de los derechos humanos, por lo que en la esfera de su competencia garantizará la igualdad sustantiva entre mujeres y hombres en el ejercicio de sus derechos laborales y la no discriminación en los servicios que ofrece así como en sus condiciones de trabajo, quedando prohibido el maltrato, violencia y segregación de las autoridades hacia el personal y entre el personal en materia de cualquier forma de distinción, exclusión o restricción basada en el origen étnico o nacional, apariencia física, cultura, sexo, género, idioma, edad, discapacidad, condición social, economía, de salud o jurídica, embarazo, lengua, religión, opiniones, preferencias sexuales, estado civil o conyugal, situación migratoria o cualquier otra, que tenga por efecto impedir o anular el reconocimiento o el ejercicio de los derechos y la igualdad real de oportunidades a los miembros de la Comunidad Universitaria dentro de sus instalaciones.",
+        }
+    }};
 
 </script>
 
@@ -24,19 +30,19 @@ export default {
         </div>
 
         <div class="title pt-14">
-            <p>POLÍTICA DE IGUALDAD LABORAL Y NO DISCRIMINACIÓN</p>
+            <p>{{ title }}</p>
                 <div class="line" style="margin: 20px auto; width: 70%;">
                 </div>
 
                 <div class="text-align: center; col-md-8 offset-md-2 text-justify text-xl" style="width: 80%; margin: 0 auto;">
                     <p class="font-normal" style="margin-top: 2em; margin-bottom:1em; color: black; width: 100%">
-                        La Universidad Politécnica de Querétaro manifiesta el compromiso con la promoción, respeto y protección de los derechos humanos, por lo que en la esfera de su competencia garantizará la igualdad sustantiva entre mujeres y hombres en el ejercicio de sus derechos laborales y la no discriminación en los servicios que ofrece así como en sus condiciones de trabajo, quedando prohibido el maltrato, violencia y segregación de las autoridades hacia el personal y entre el personal en materia de cualquier forma de distinción, exclusión o restricción basada en el origen étnico o nacional, apariencia física, cultura, sexo, género, idioma, edad, discapacidad, condición social, economía, de salud o jurídica, embarazo, lengua, religión, opiniones, preferencias sexuales, estado civil o conyugal, situación migratoria o cualquier otra, que tenga por efecto impedir o anular el reconocimiento o el ejercicio de los derechos y la igualdad real de oportunidades a los miembros de la Comunidad Universitaria dentro de sus instalaciones.
+                      {{parrafo1}}
                     </p>
                 </div>
 
               
 
-                <div class="relative items-left w-full h-96 overflow-hidden">
+                <div class="contenedorrr relative w-full h-96 overflow-hidden items">
                   <img class="absolute inset-0 w-full h-full object-cover z-1 " src="https://www.upq.mx/igualdad_laboral/images/fondo_banner_2-01.svg?crc=3799554246" alt="Fondo de banner">
                   <div class="flex justify-center items-center h-full">
                       <div class="text-center">
@@ -49,7 +55,7 @@ export default {
               </div>
               
 
-                <div class="contenedor pt-50 relative ">
+                <div class="contenedor  relative ">
                   <img src="https://www.upq.mx/igualdad_laboral/images/comiteeticanov2021.jpg?crc=449875955" alt="Imagen 1" class="imagen grande" >
                   <img src="https://www.upq.mx/igualdad_laboral/images/letrero_comite.svg?crc=369507292" alt="Imagen 2" class="imagen pequena" >
                 </div> 
@@ -90,6 +96,82 @@ export default {
                   </div>
                       
                 </div>
+
+                <div class="contenedorrr relative w-full h-96 overflow-hidden items">
+                  <img class="absolute inset-0 w-full h-full object-cover z-1 " src="https://www.upq.mx/igualdad_laboral/images/fondo_banner_3-01.svg?crc=4066401794" alt="Fondo de banner">
+                  <div class="flex justify-center items-center h-full">
+                      <div class="text-center">
+                          <button class="bg-red-800 bg-opacity-100 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded z-2 absolute" @click="redirectToPDF('https://mail.google.com/mail/u/0/#inbox')">
+                              ASESORÍA Y DENUNCIAS
+                              <p class="text-xs">ENVIANOS UN MENSAJE </p>
+                              comite.de.etica@upq.edu.mx
+                          </button>
+                      </div>
+                  </div>
+              </div>
+              <div  class="flex justify-between button-container"> 
+                <div class="main-menu">
+
+                  <!-- Protocolo de Violencia Laboral -->
+                    <div class="">
+                        <div
+                          class="option2 bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
+                          style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-06.svg?crc=292774967');">
+                          <button clasx s="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/')"></button>
+                          
+                        </div>
+                      <div class="button-text font-light">Protocolo de Violencia Laboral</div>
+                    </div>
+                  <!-- Protocolo de Hostigamiento y Acoso Sexual -->
+                    <div class="">
+                      <div
+                        class="option bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
+                        style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-04.svg?crc=378829962');">
+                        <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/')"></button>
+                        
+                      </div>
+                     <div class="button-text font-light">Protocolo de Hostigamiento y Acoso Sexual</div>
+                    </div>
+                  <!-- Protocolo para Discriminacion -->
+                  <div class="">
+                    <div
+                      class="option2 bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
+                      style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-05.svg?crc=505331560');">
+                      <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/')"></button>
+                      
+                     </div>
+                   <div class="button-text font-light">Protocolo para Discriminacion</div>
+                  </div>
+                </div>
+              </div>
+
+              <div  class="flex justify-between button-container"> 
+                <div class="main-menu">
+
+                  <!-- Plan de Accesibilidad -->
+                    <div class="">
+                        <div
+                          class="option2 bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
+                          style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-07.svg?crc=423873761');">
+                          <button clasx s="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/plan-de-accesibilidad-upq_2021.pdf')"></button>
+                          
+                        </div>
+                      <div class="button-text font-light">Plan de Accesibilidad</div>
+                    </div>
+                  <!-- Programa de Protección Civil  -->
+                    <div class="">
+                      <div
+                        class="option bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
+                        style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-08.svg?crc=4225580983');">
+                        <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/programa-interno-de-protecci%c3%b3n-civil-de-la-upq%2c-13-de-julio.pdf')"></button>
+                        
+                      </div>
+                     <div class="button-text font-light">Programa de Protección Civil</div>
+                    </div>
+                </div>
+              </div>
+                
+                
 
 
                
@@ -241,6 +323,8 @@ export default {
     z-index: 2;
     opacity: 0.8;
   }
+  .contenedorrr:hover .imagen {-webkit-transform:scale(1.3);transform:scale(1.3);}
+   .contenedorrr {overflow:hidden;}
   
   
     </style>

@@ -31,12 +31,22 @@ Route::get('/', function () {
 });
 
 Route::prefix('institucion')->group(function () {
-    Route::get('mascotas', function(){
+    Route::get('mascotas', function () {
         return Inertia::render('Componentes/Institucion/mascotasPrincipal');
     });
-    
+
+    Route::get('messageRector', function () {
+        return Inertia::render('Componentes/Institucion/rectorMessage');
+    });
+
+    Route::get('laborEq', function () {
+        return Inertia::render('Componentes/Institucion/Laborequality');
+    });
+
+
+
     Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
-});   
+});
 
 /*
 ejemplo de como mandar a llamar una vista
@@ -54,12 +64,12 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-/*     Route::get('/dashboard', function () {
+    /*     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard'); */
     Route::get('/{any?}', function () {
         return Inertia::render('App');
-    })->name('dashboard')->where('any','.*');
+    })->name('dashboard')->where('any', '.*');
 
 
     // ---------- Rutas Home ------------
@@ -71,7 +81,7 @@ Route::middleware([
         'segundo' => TbCarruselSegundoController::class,
         'tercer' => TbCarruselTercerController::class
     ];
-    
+
     foreach ($controllers as $prefix => $controller) {
         Route::prefix($prefix)->group(function () use ($controller) {
             Route::post('bannerData', [$controller, 'bannerData']);

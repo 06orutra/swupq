@@ -15,7 +15,7 @@ const model = ref([
             { label: 'Posgrado', icon: 'pi pi-fw pi-briefcase', to: '/posgrado' },
             { label: 'Noticias', icon: 'pi pi-fw pi-megaphone', to: '/noticias' },
             { label: 'Historia', icon: 'pi pi-fw pi-megaphone', to: '/noticias' },
-            { label: 'Mensaje del rector ', icon: 'pi pi-fw pi-megaphone', to: '/message' },
+            { label: 'Mensaje del rector ', icon: 'pi pi-fw pi-comment', to: '/message' },
         ]
     }
 ]);

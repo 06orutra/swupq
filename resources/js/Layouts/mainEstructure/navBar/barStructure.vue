@@ -4,9 +4,9 @@
       <img src="/storage/img/icon_logo_UPQ.png" class="logo-img" alt="Logo" />
     </div>
     <div class="inferior">
-      <menuvue  class="prueba1"/>
+      <menuvue/>
 
-      <polovue  class="pruebas"/>
+      <polovue/>
     </div>
   </div>
 </template>
@@ -73,16 +73,13 @@ body, html {
   margin-top: -30%;
 }
 
-@media (max-width: 520px){
-  .inferior{
-    display: none;
-  }
-}
 
-@media (max-width: 520px){
+
+@media (max-width: 521px){
   .superior{
     display:none;
   }
+
 }
 
 </style>

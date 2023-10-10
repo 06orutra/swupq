@@ -10,6 +10,7 @@ use App\Http\Controllers\TbCarruselSegundoController;
 use App\Http\Controllers\TbCarruselTercerController;
 use App\Http\Controllers\TextoPruebaController;
 use App\Http\Controllers\ImgPruebaController;
+use App\Http\Controllers\MensajeRectorController;
 use Illuminate\Http\Request;
 
 /*
@@ -99,6 +100,7 @@ Route::middleware([
         'tercer' => TbCarruselTercerController::class,
         'texto' => TextoPruebaController::class,
         'img' => ImgPruebaController::class,
+        'rector' => MensajeRectorController::class,
     ];
 
     foreach ($controllers as $prefix => $controller) {

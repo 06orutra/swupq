@@ -5,16 +5,19 @@ import carruselEstructura from "@/Pages/Componentes/Home/carruselEstructura.vue"
 import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 import estructuraTextos from "@/Pages/Componentes/Home/estructuraTextos.vue";
 import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
+import mensajeRector from "@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue";
+import MensajeRector from '@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue';
 
 export default {
     components: {
-        TabView,
-        TabPanel,
-        carruselEstructura,
-        opcionesCarrusel,
-        estructuraTextos,
-        estructuraImg,
-    },
+    TabView,
+    TabPanel,
+    carruselEstructura,
+    opcionesCarrusel,
+    estructuraTextos,
+    estructuraImg,
+    MensajeRector
+},
     methods: {
         updateCarouselSettings(settings) {
             this.navigation = settings.navigation;
@@ -41,5 +44,9 @@ export default {
             <estructuraImg :loadDataUrl="'/img/bannerData'" :registerBannerUrl="'/img/registrarBanner'"
                 :editBannerUrl="'/img/editarBanner'" :deleteBannerUrl="'/img/eliminarBanner'"  />
         </TabPanel>
+        <TabPanel header="Rector">
+            <MensajeRector/>
+        </TabPanel>
+
     </TabView>
 </template>

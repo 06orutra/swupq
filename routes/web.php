@@ -10,6 +10,7 @@ use App\Http\Controllers\TbCarruselSegundoController;
 use App\Http\Controllers\TbCarruselTercerController;
 use App\Http\Controllers\TextoPruebaController;
 use App\Http\Controllers\ImgPruebaController;
+use App\Http\Controllers\NotaMascotaController;
 use Illuminate\Http\Request;
 
 /*
@@ -39,14 +40,6 @@ Route::get('/movilidad-academica', function(){
 Route::prefix('institucion')->group(function () {
     Route::get('mascotas', function () {
         return Inertia::render('Componentes/Institucion/mascotasPrincipal');
-    });
-
-    Route::get('messageRector', function () {
-        return Inertia::render('Componentes/Institucion/rectorMessage');
-    });
-
-    Route::get('laborEq', function () {
-        return Inertia::render('Componentes/Institucion/Laborequality');
     });
     Route::get('instalaciones', function(){
         return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
@@ -103,6 +96,7 @@ Route::middleware([
         'tercer' => TbCarruselTercerController::class,
         'texto' => TextoPruebaController::class,
         'img' => ImgPruebaController::class,
+        'Nmascota' => NotaMascotaController::class,
     ];
 
     foreach ($controllers as $prefix => $controller) {

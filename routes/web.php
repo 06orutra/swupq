@@ -11,6 +11,7 @@ use App\Http\Controllers\TbCarruselTercerController;
 use App\Http\Controllers\TextoPruebaController;
 use App\Http\Controllers\ImgPruebaController;
 use App\Http\Controllers\NotaMascotaController;
+use App\Http\Controllers\MensajePoliPoloController;
 use Illuminate\Http\Request;
 
 /*
@@ -93,6 +94,7 @@ Route::middleware([
         'texto' => TextoPruebaController::class,
         'img' => ImgPruebaController::class,
         'Nmascota' => NotaMascotaController::class,
+        'mensaje' => MensajePoliPoloController::class,
     ];
 
     foreach ($controllers as $prefix => $controller) {

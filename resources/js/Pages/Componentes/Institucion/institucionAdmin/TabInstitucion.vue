@@ -5,7 +5,7 @@ import carruselEstructura from "@/Pages/Componentes/Home/carruselEstructura.vue"
 import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 import estructuraTextos from "@/Pages/Componentes/Home/estructuraTextos.vue";
 import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
-import NotaMascotas from "@/Pages/Componentes/Institucion/institucionAdmin/NotaMascotas.vue";
+import Mascotas from "@/Pages/Componentes/Institucion/institucionAdmin/Mascotas.vue";
 
 export default {
     components: {
@@ -15,7 +15,7 @@ export default {
         opcionesCarrusel,
         estructuraTextos,
         estructuraImg,
-        NotaMascotas,
+        Mascotas,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -35,8 +35,8 @@ export default {
             <carruselEstructura :loadDataUrl="'/bannerData'" :registerBannerUrl="'/home/registrarBanner'"
                 :editBannerUrl="'/home/editarBanner'" :deleteBannerUrl="'/home/eliminarBanner'" />
         </TabPanel>
-        <TabPanel header="Nota Mascotas">
-            <NotaMascotas/>
+        <TabPanel header="Mascotas">
+            <Mascotas/>
         </TabPanel>
     </TabView>
 </template>

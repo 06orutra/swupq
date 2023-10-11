@@ -7,6 +7,7 @@ import estructuraTextos from "@/Pages/Componentes/Home/estructuraTextos.vue";
 import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
 import NotaMascotas from "@/Pages/Componentes/Institucion/institucionAdmin/NotaMascotas.vue";
 import MensajeRector from '@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue';
+import cicloAlumando from '@/Pages/Componentes/Institucion/institucionAdmin/cicloAlumnado.vue';
 
 export default {
     components: {
@@ -18,6 +19,7 @@ export default {
         estructuraImg,
         MensajeRector,
         NotaMascotas,
+        cicloAlumando,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -42,6 +44,9 @@ export default {
         </TabPanel>
         <TabPanel header="Rector">
             <MensajeRector/>
+        </TabPanel>
+        <TabPanel header="Ciclo en curso">
+            <cicloAlumando/>
         </TabPanel>
 
     </TabView>

@@ -12,6 +12,7 @@ use App\Http\Controllers\TextoPruebaController;
 use App\Http\Controllers\ImgPruebaController;
 use App\Http\Controllers\NotaMascotaController;
 use App\Http\Controllers\MensajeRectorController;
+use App\Http\Controllers\CicloController;
 use Illuminate\Http\Request;
 
 /*
@@ -99,6 +100,7 @@ Route::middleware([
         'img' => ImgPruebaController::class,
         'Nmascota' => NotaMascotaController::class,
         'rector' => MensajeRectorController::class,
+        'ciclo' => CicloController::class,
     ];
 
     foreach ($controllers as $prefix => $controller) {

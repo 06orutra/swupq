@@ -13,7 +13,11 @@ const model = ref([
             { label: 'Home', icon: 'pi pi-fw pi-home', to: '/home' },
             { label: 'Carreras', icon: 'pi pi-fw pi-book', to: '/carreras' },
             { label: 'Institución', icon: 'pi pi-fw pi-megaphone', to: '/',
-                items: [{ label: 'Mascotas', to: '/mascotas'}],
+                items: [
+                    { label: 'Mascotas', to: '/mascotas'},
+                {
+                    label: 'Ciclo', to: '/ciclo'
+                }],
             },
             { label: 'Posgrado', icon: 'pi pi-fw pi-briefcase', to: '/posgrado' },
             { label: 'Noticias', icon: 'pi pi-fw pi-megaphone', to: '/noticias' },

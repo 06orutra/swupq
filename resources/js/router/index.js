@@ -21,11 +21,16 @@ const router = createRouter({
                 {
                     path:'/institucion',
                     name:'institucion',
-                    component:() => import('@/Pages/Componentes/institucion/institucionAdmin/TabInstitucion.vue'),
+                    component:() => import('@/Pages/Componentes/Institucion/institucionAdmin/TabInstitucion.vue'),
                     children: [{
                         path: '/mascotas',
                         name: 'Mascotas',
                         component: () => import('@/Pages/Componentes/Institucion/institucionAdmin/NotaMascotas.vue'),
+                        },
+                    {
+                        path: '/ciclo',
+                        name: 'Ciclo',
+                        component: () => import('@/Pages/Componentes/Institucion/institucionAdmin/Ciclo.vue'),
                     }]
                 },
                 {

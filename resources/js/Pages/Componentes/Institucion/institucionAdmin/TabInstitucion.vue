@@ -5,18 +5,20 @@ import carruselEstructura from "@/Pages/Componentes/Home/carruselEstructura.vue"
 import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 import estructuraTextos from "@/Pages/Componentes/Home/estructuraTextos.vue";
 import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
-import NotaMascotas from "@/Pages/Componentes/Institucion/institucionAdmin/NotaMascotas.vue";
+import mensajeRector from "@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue";
+import MensajeRector from '@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue';
 
 export default {
     components: {
-        TabView,
-        TabPanel,
-        carruselEstructura,
-        opcionesCarrusel,
-        estructuraTextos,
-        estructuraImg,
-        NotaMascotas,
-    },
+    TabView,
+    TabPanel,
+    carruselEstructura,
+    opcionesCarrusel,
+    estructuraTextos,
+    estructuraImg,
+    NotaMascotas,
+    MensajeRector,
+},
     methods: {
         updateCarouselSettings(settings) {
             this.navigation = settings.navigation;
@@ -38,5 +40,9 @@ export default {
         <TabPanel header="Nota Mascotas">
             <NotaMascotas/>
         </TabPanel>
+        <TabPanel header="Rector">
+            <MensajeRector/>
+        </TabPanel>
+
     </TabView>
 </template>

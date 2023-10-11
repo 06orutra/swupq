@@ -6,6 +6,7 @@ import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 import estructuraTextos from "@/Pages/Componentes/Home/estructuraTextos.vue";
 import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
 import NotaMascotas from "@/Pages/Componentes/Institucion/institucionAdmin/NotaMascotas.vue";
+import MensajeRector from '@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue';
 
 export default {
     components: {
@@ -15,6 +16,7 @@ export default {
         opcionesCarrusel,
         estructuraTextos,
         estructuraImg,
+        MensajeRector,
         NotaMascotas,
     },
     methods: {
@@ -38,5 +40,9 @@ export default {
         <TabPanel header="Nota Mascotas">
             <NotaMascotas/>
         </TabPanel>
+        <TabPanel header="Rector">
+            <MensajeRector/>
+        </TabPanel>
+
     </TabView>
 </template>

@@ -21,12 +21,7 @@ const router = createRouter({
                 {
                     path:'/institucion',
                     name:'institucion',
-                    component:() => import('@/Pages/Componentes/institucion/institucionAdmin/TabInstitucion.vue'),
-                    children: [{
-                        path: '/mascotas',
-                        name: 'Mascotas',
-                        component: () => import('@/Pages/Componentes/Institucion/institucionAdmin/NotaMascotas.vue'),
-                    }]
+                    component:() => import('@/Pages/Componentes/institucion/institucionAdmin/TabInstitucion.vue')
                 },
                 {
                     path: '/carreras',

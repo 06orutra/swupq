@@ -1,29 +1,32 @@
 <template>
-    <div class="container-4"> 
-         
-        <div class="espacio1">
-          <div class="imagen1">
-            <div>
-                <h1>HOLAS 2</h1></div>
-          </div>
-        </div>
+  <div class="Contenedor1">
+    <img src="http://127.0.0.1:8000/storage/2023-10-11%2015-26-43_BIBLIOTECA.png">
+  </div>
 
-        <div class="espacio2">
-          <div class="imagen-2">
-            <div>
-                <h1>HOlas</h1>
-            </div>
-          </div>
+  <div class="container-4">  
+    <div class="espacio1">
+      <div class="imagen1">
+        <div>
+            <h1>HOLAS 2</h1></div>
         </div>
+      </div>
 
-        <div class="espacio3">
-          <div class="imagen-3">
-            <div>
-                <h1>HOLAS 3</h1>
-            </div>
+      <div class="espacio2">
+        <div class="imagen-2">
+          <div>
+              <h1>HOlas</h1>
           </div>
         </div>
-        
+      </div>
+
+      <div class="espacio3">
+        <div class="imagen-3">
+          <div>
+            <h1>HOLAS 3</h1>
+          </div>
+        </div>
+      </div>
+
     </div>
 </template>
 

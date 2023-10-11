@@ -75,6 +75,7 @@ export default {
     top: 30px;
     left: 10px;
   }
+  
 }
 @media (min-width: 1280px){
   .contenedor{
@@ -86,6 +87,12 @@ export default {
     top: 95px;
     left: 10px;
   }
+  .logo-img {
+  width: 120px;
+  height: 100px;
+  margin-right: -40%;
+  margin-top: -30%;
+}
 }
 
 @media (max-width: 521px){

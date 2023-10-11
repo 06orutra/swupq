@@ -5,8 +5,8 @@ import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import bannerPrincipal from '@/Pages/Componentes/Welcome/bannerPrincipal.vue';
 import TourCardenal from '@/Layouts/homeComponents/TourCardenal.vue';
 import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
-// import Barra from '@/Layouts/homeComponents/BuscaIdentifica.vue';
-// import KaroVue from '@/Layouts/homeComponents/Karo.vue';
+import Barra from '@/Layouts/homeComponents/BuscaIdentifica.vue';
+import KaroVue from '@/Layouts/homeComponents/Karo.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -25,7 +25,7 @@ defineProps({
         <TourCardenal />
         <!-- <Barra/>
         <KaroVue/>
-        <Barra></Barra> -->
+        <Barra/> -->
 
     </AppEstructure>
 

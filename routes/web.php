@@ -10,7 +10,9 @@ use App\Http\Controllers\TbCarruselSegundoController;
 use App\Http\Controllers\TbCarruselTercerController;
 use App\Http\Controllers\TextoPruebaController;
 use App\Http\Controllers\ImgPruebaController;
+use App\Http\Controllers\FilosofiaController;
 use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +49,6 @@ Route::prefix('institucion')->group(function () {
     Route::get('instalaciones', function(){
         return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
     });
-    
     
     Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
 
@@ -99,7 +100,9 @@ Route::middleware([
         'tercer' => TbCarruselTercerController::class,
         'texto' => TextoPruebaController::class,
         'img' => ImgPruebaController::class,
+        'filosofia' => FilosofiaController::class,
     ];
+    // se declarar variables, 
 
     foreach ($controllers as $prefix => $controller) {
         Route::prefix($prefix)->group(function () use ($controller) {

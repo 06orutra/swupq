@@ -5,6 +5,7 @@ import carruselEstructura from "@/Pages/Componentes/Home/carruselEstructura.vue"
 import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 import estructuraTextos from "@/Pages/Componentes/Home/estructuraTextos.vue";
 import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
+import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofia.vue";
 
 export default {
     components: {
@@ -14,6 +15,7 @@ export default {
         opcionesCarrusel,
         estructuraTextos,
         estructuraImg,
+        filosofia,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -35,11 +37,14 @@ export default {
         </TabPanel>
         <TabPanel header="textos">
             <estructuraTextos :loadDataUrl="'/texto/bannerData'" :registerBannerUrl="'/texto/registrarBanner'"
-                :editBannerUrl="'/texto/editarBanner'" :deleteBannerUrl="'/texto/eliminarBanner'"  />
+                :editBannerUrl="'/texto/editarBanner'" :deleteBannerUrl="'/texto/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Imagenes">
             <estructuraImg :loadDataUrl="'/img/bannerData'" :registerBannerUrl="'/img/registrarBanner'"
-                :editBannerUrl="'/img/editarBanner'" :deleteBannerUrl="'/img/eliminarBanner'"  />
+                :editBannerUrl="'/img/editarBanner'" :deleteBannerUrl="'/img/eliminarBanner'" />
+        </TabPanel>
+        <TabPanel header="Filosofía">
+            <filosofia />
         </TabPanel>
     </TabView>
 </template>

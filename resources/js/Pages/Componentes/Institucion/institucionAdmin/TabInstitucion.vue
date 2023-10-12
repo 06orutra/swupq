@@ -8,6 +8,7 @@ import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
 import NotaMascotas from "@/Pages/Componentes/Institucion/institucionAdmin/NotaMascotas.vue";
 import MensajeRector from '@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue';
 import cicloAlumando from '@/Pages/Componentes/Institucion/institucionAdmin/cicloAlumnado.vue';
+import modalModEdu from '@/Pages/Componentes/Institucion/institucionAdmin/modalModEdu.vue'
 
 export default {
     components: {
@@ -20,6 +21,7 @@ export default {
         MensajeRector,
         NotaMascotas,
         cicloAlumando,
+        modalModEdu,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -47,6 +49,9 @@ export default {
         </TabPanel>
         <TabPanel header="Ciclo en curso">
             <cicloAlumando/>
+        </TabPanel>
+        <TabPanel header="Modal (Bolitas)">
+            <modalModEdu/>
         </TabPanel>
 
     </TabView>

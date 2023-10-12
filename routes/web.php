@@ -13,6 +13,7 @@ use App\Http\Controllers\ImgPruebaController;
 use App\Http\Controllers\NotaMascotaController;
 use App\Http\Controllers\MensajeRectorController;
 use App\Http\Controllers\CicloController;
+use App\Http\Controllers\ModEduModalController;
 use Illuminate\Http\Request;
 
 /*
@@ -101,6 +102,7 @@ Route::middleware([
         'Nmascota' => NotaMascotaController::class,
         'rector' => MensajeRectorController::class,
         'ciclo' => CicloController::class,
+        'modalModEdu' => ModEduModalController::class,
     ];
 
     foreach ($controllers as $prefix => $controller) {

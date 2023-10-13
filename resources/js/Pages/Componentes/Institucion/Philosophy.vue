@@ -16,6 +16,7 @@ export default {
   },
   mounted() {
     this.cargarTexto();
+    this.cargarImg();
 
     const loaders = document.querySelectorAll('.loader');
     const acordeones = document.querySelectorAll('.acordion-item');
@@ -107,16 +108,23 @@ export default {
 
     cargarTexto() {
       axios.post('/filosofias/bannerData').then((response) => {
-          this.texto = response.data;
-          this.texto.forEach(modulo => {
-            this.acordeones.push({
-              title: modulo.titulo,
-              content: modulo.contenido,
-              open: false,
-            });
+        this.texto = response.data;
+        this.texto.forEach(modulo => {
+          this.acordeones.push({
+            title: modulo.titulo,
+            content: modulo.contenido,
+            open: false,
           });
+        });
       }).catch((error) => {
-          console.log(error);
+        console.log(error);
+      });
+    },
+    cargarImg() {
+      axios.post(this.loadDataUrl).then((response) => {
+        this.img = response.data;
+      }).catch((error) => {
+        console.log(error);
       });
     },
   },
@@ -129,6 +137,7 @@ export default {
 
   data() {
     return {
+      img: [],
       texto: [],
       modalTitle: '',
       modalContent: '',
@@ -141,7 +150,6 @@ export default {
 
 
 <template>
-
   <AppEstructure>
 
     <!--    <div class="banner">                               
@@ -707,7 +715,8 @@ export default {
   }
 }
 
-/* display:initial */</style>
+/* display:initial */
+</style>
 
 
 

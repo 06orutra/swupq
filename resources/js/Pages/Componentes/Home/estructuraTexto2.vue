@@ -192,8 +192,9 @@ export default {
     <!-- Cartas en admin -->
     <div class="cards-container">
         <Card v-for="datosTexto in filteredBanner" style="width: 40em; margin-bottom: 40px;">
-            <template #title> Titulo: {{ datosTexto.titulo }} </template>
-            <template #subtitle> Contenido: {{ datosTexto.contenido }} </template>
+            <template #subtitle> link poli: {{ datosTexto.titulo }} <br>
+                link polo: {{ datosTexto.contenido }}</template>
+        
             <template #footer>
                 <Button icon="pi pi-pencil" class="p-button p-button-warning !mr-6" @click="editarSelect(datosTexto)" />
                 <Button icon="pi pi-trash" class="p-button p-button-danger" @click="confirmarEliminar(datosTexto)" />
@@ -215,12 +216,12 @@ export default {
                 <!-- select con opciones -->
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Titulo</label>
+                    <label for="minmax">Link spoty poli</label>
                     <InputText inputId="minmax" v-model="titulo" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Contenido</label>
+                    <label for="minmax">Link spoty poli</label>
                     <InputText inputId="minmax" v-model="contenido" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
@@ -248,12 +249,12 @@ export default {
                 <InputText id="id" v-model.trim="datosArreglo.id" hidden />
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Titulo</label>
+                    <label for="minmax">Link spoty poli</label>
                     <InputText inputId="minmax" v-model="datosArreglo.titulo" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Contenido</label>
+                    <label for="minmax">Link spoty poli</label>
                     <InputText inputId="minmax" v-model="datosArreglo.contenido" :min="0" :max="10000" :showButtons="true" />
                 </div>
 

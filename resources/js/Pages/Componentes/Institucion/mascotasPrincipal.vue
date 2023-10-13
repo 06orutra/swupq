@@ -9,13 +9,6 @@ import Spotypoli from '@/Pages/Componentes/Institucion/MascotasComponentes/Spoty
 import Spotypolo from '@/Pages/Componentes/Institucion/MascotasComponentes/Spotypolo.vue';
 import Notaspoty from '@/Pages/Componentes/Institucion/MascotasComponentes/Notaspoty.vue';
 
-defineProps({
-  canLogin: Boolean,
-  canRegister: Boolean,
-  laravelVersion: String,
-  phpVersion: String,
-});
-
 </script>
 
 <template>

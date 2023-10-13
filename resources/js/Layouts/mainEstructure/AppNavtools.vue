@@ -4,23 +4,51 @@
       <Toolbar class="bg-white-alpha-80 p-0" style="width: 100%;">
         <template #start style="width: 100%">
           <div class="mx-2">
-            <Button icon="pi pi-search-plus" class="left font-bold" @click="incrementScale"
-              :disabled="layoutConfig.scale.value === scales[scales.length - 1]" />
-            <i v-for="s in scales" :key="s" :class="{ 'text-primary-500': s === layoutConfig.scale.value }"></i>
-            <Button icon="pi pi-undo" severity="danger"
-              class="center font-bold bg-gray-600 border-gray-500 border-noround" @click="resetScale" />
-            <Button icon="pi pi-search-minus" severity="danger" class="right font-bold text-xl" @click="decrementScale"
-              :disabled="layoutConfig.scale.value === scales[0]" />
+            <Button
+              icon="pi pi-search-plus"
+              class="left font-bold"
+              @click="incrementScale"
+              :disabled="layoutConfig.scale.value === scales[scales.length - 1]"
+            />
+            <i
+              v-for="s in scales"
+              :key="s"
+              :class="{ 'text-primary-500': s === layoutConfig.scale.value }"
+            ></i>
+            <Button
+              icon="pi pi-undo"
+              severity="danger"
+              class="center font-bold bg-gray-600 border-gray-500 border-noround"
+              @click="resetScale"
+            />
+            <Button
+              icon="pi pi-search-minus"
+              severity="danger"
+              class="right font-bold text-xl"
+              @click="decrementScale"
+              :disabled="layoutConfig.scale.value === scales[0]"
+            />
           </div>
           <div class="mx-2">
-            <Button icon="pi pi-moon" class="left surface-900 border-900"
-              @click="onChangeTheme('bootstrap4-dark-purple', 'dark')"></Button>
-            <Button icon="pi pi-sun" class="right surface-500 border-500"
-              @click="onChangeTheme('bootstrap4-light-blue', 'light')" />
+            <!-- Botones de DARK MODE, SOL Y VOLUMEN -->
+            <Button
+              icon="pi pi-moon"
+              class="left surface-900 border-900"
+              @click="onChangeTheme('bootstrap4-dark-purple', 'dark')"
+            ></Button>
+            <Button
+              icon="pi pi-sun"
+              class="right surface-500 border-500"
+              @click="onChangeTheme('bootstrap4-light-blue', 'light')"
+            />
           </div>
           <div class="mx-2">
-            <Button :icon="isVolumeOn ? 'pi pi-volume-up' : 'pi pi-volume-off'"
-              :class="['center', isVolumeOn ? 'bg-blue-400' : 'bg-red-500']" @click="toggleVolume" />
+            <Button
+              :icon="isVolumeOn ? 'pi pi-volume-up' : 'pi pi-volume-off'"
+              :class="['center', isVolumeOn ? 'bg-blue-400' : 'bg-red-500']"
+              @click="toggleVolume"
+            />
+            <!-- Aqui acaban -->
           </div>
         </template>
         <template #center class="inline-flex" style="width: 100%">
@@ -33,15 +61,26 @@
         </template>
         <template #end style="width: 100%">
           <div class="relative sm:left-0">
-            <Button label="SII" link class="sii text-4xl">S <span>I<span>I</span></span></Button>
-            <Button type="button" @click="toggle" aria-controls="overlay_menu" rounded class="comuni mr-6 mb-3">
+            <Button
+              label="SII"
+              link
+              class="sii text-4xl"
+              >S <span>I<span>I</span></span
+            ></Button>
+            <Button
+              type="button"
+              @click="toggle"
+              aria-controls="overlay_menu"
+              rounded
+              class="comuni mr-6 mb-3"
+            >
               COMUNIDAD
               <Menu ref="menu" id="overlay_menu" :model="item" :popup="true" />
             </Button>
             <div v-if="windowWidth >= 320 && windowWidth <= 520">
               <menuvue />
               <polovue />
-            </div>
+          </div>
           </div>
         </template>
       </Toolbar>
@@ -178,4 +217,42 @@ const applyScale = () => {
 .right {
   border-radius: 0 25px 25px 0;
 }
+
+/*Ajusta la vista a partir de 245px */
+@media (min-width: 380px) and (max-width: 521px) {
+.right {
+  margin-right: 45px; /* Ajusta el valor según la cantidad de espacio que desees */
+}
+
+.left.surface-900.border-900 {
+  margin-left: 40px; /* Ajusta el valor según la cantidad de espacio que desees */
+}
+
+.center {
+  margin-left: 0px;
+}
+}
+
+/*Ajusta a partir del 375px*/
+@media (min-width: 322px) and (max-width: 379px) {
+  .right {
+    margin-right: 30px; /* Ajusta el valor según la cantidad de espacio que desees */
+  }
+
+  .left.surface-900.border-900 {
+    margin-left: 20px; /* Ajusta el valor según la cantidad de espacio que desees */
+  }
+}
+
+/*Ajusta a partir del 320px*/
+@media (min-width: 300px) and (max-width: 321px) {
+.right {
+  margin-right: 4px; /* Ajusta el valor según la cantidad de espacio que desees */
+}
+
+.left.surface-900.border-900 {
+  margin-left: 20px; /* Ajusta el valor según la cantidad de espacio que desees */
+}
+}
+
 </style>

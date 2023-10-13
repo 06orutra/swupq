@@ -11,6 +11,8 @@ use App\Http\Controllers\TbCarruselTercerController;
 use App\Http\Controllers\TextoPruebaController;
 use App\Http\Controllers\ImgPruebaController;
 use App\Http\Controllers\FilosofiaController;
+use App\Http\Controllers\FilosofiaImgController;
+
 use Illuminate\Http\Request;
 
 
@@ -101,6 +103,7 @@ Route::middleware([
         'texto' => TextoPruebaController::class,
         'img' => ImgPruebaController::class,
         'filosofia' => FilosofiaController::class,
+        'filosofiaImg' => FilosofiaImgController::class,
     ];
     // se declarar variables, 
 

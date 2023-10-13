@@ -1,6 +1,6 @@
 <script setup>
 import estructuraTextos from '@/Pages/Componentes/Home/estructuraTextos.vue'
-
+import estructuraImg from '@/Pages/Componentes/Home/estructuraImg.vue'
 </script>
 
 
@@ -11,8 +11,8 @@ import estructuraTextos from '@/Pages/Componentes/Home/estructuraTextos.vue'
                 :editBannerUrl="'/filosofia/editarBanner'" :deleteBannerUrl="'/filosofia/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Imagenes">
-            <estructuraTextos :loadDataUrl="'/filosofia/bannerData'" :registerBannerUrl="'/filosofia/registrarBanner'"
-                :editBannerUrl="'/filosofia/editarBanner'" :deleteBannerUrl="'/filosofia/eliminarBanner'" />
+            <estructuraImg :loadDataUrl="'/filosofiaImg/bannerData'" :registerBannerUrl="'/filosofiaImg/registrarBanner'"
+                :editBannerUrl="'/filosofiaImg/editarBanner'" :deleteBannerUrl="'/filosofiaImg/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Valores">
             <estructuraTextos :loadDataUrl="'/filosofia/bannerData'" :registerBannerUrl="'/filosofia/registrarBanner'"

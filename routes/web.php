@@ -113,7 +113,7 @@ Route::middleware([
         });
     }
 });
-
+Route::post('/filosofias/bannerData', [FilosofiaController::class, 'bannerData']);
 Route::post('/bannerData', [HomeController::class, 'bannerData']);
 Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'bannerDatafilter']);
 Route::post('/bannerDataprimero', [TbCarruselPrimeroController::class, 'bannerData']);

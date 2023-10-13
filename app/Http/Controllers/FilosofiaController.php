@@ -16,7 +16,7 @@ class FilosofiaController extends Controller
         
         $request->validate([
             'titulo' => 'required|string|max:255',
-            'contenido' => 'required|string|max:255',
+            'contenido' => 'required|string|max:1000',
         ]);
 
         // Create a new banner instance
@@ -31,7 +31,7 @@ class FilosofiaController extends Controller
     public function editarBanner(Request $request){
         $request->validate([
             'titulo' => 'required|string|max:255',
-            'contenido' => 'required|string|max:255',
+            'contenido' => 'required|string|max:1000',
         ]);
 
         $texto = filosofia::find($request->id);

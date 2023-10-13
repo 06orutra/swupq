@@ -1,7 +1,7 @@
 <template>
   <div class="w-full" style="width: 100%">
     <div class="floating-component">
-      <Toolbar class="bg-white-alpha-80 p-0" style="width: 100%;">
+      <Toolbar class="bg-gray-alpha-80 p-0" style="width: 100%;">
         <template #start style="width: 100%">
           <div class="mx-2">
             <Button
@@ -138,6 +138,11 @@ const onChangeTheme = (theme, mode) => {
     changeThemeSettings(theme, mode === 'dark');
   });
   linkElement.parentNode.insertBefore(cloneLinkElement, linkElement.nextSibling);
+  if (mode === 'dark') {
+    document.body.classList.add('dark-mode');
+  } else {
+    document.body.classList.remove('dark-mode');
+  }
 };
 
 const decrementScale = () => {
@@ -174,6 +179,7 @@ const applyScale = () => {
   background-color: #24356A;
   height: 25px;
   font-weight: bold;
+  color: white;
 }
 
 .title {
@@ -186,10 +192,20 @@ const applyScale = () => {
   color: #D71E39;
 }
 
+.dark-mode .title {
+  color: #1B4D9A;
+}
+
+
 .sii {
   color: #24356A;
   font-weight: bold;
 }
+
+.dark-mode .sii {
+  color: #1B4D9A;
+}
+
 
 .sii span {
   color: #1B4D9A;

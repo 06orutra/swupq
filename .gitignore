@@ -1,7 +1,7 @@
 /.phpunit.cache
 node_modules/
-storage/*
-!public/storage/img/
+/storage/*
+!/storage/img/
 /public/build
 /public/hot
 vendor/

@@ -143,6 +143,10 @@ const applyScale = () => {
   color: white;
 }
 
+.dark-mode .comuni:hover {
+  background-color: #0076f4;
+}
+
 .title {
   color: #24356A;
   font-weight: bold;
@@ -154,7 +158,7 @@ const applyScale = () => {
 }
 
 .dark-mode .title {
-  color: #1B4D9A;
+  color: white;
 }
 
 
@@ -164,8 +168,9 @@ const applyScale = () => {
 }
 
 .dark-mode .sii {
-  color: #1B4D9A;
+  color: white;
 }
+
 
 
 .sii span {

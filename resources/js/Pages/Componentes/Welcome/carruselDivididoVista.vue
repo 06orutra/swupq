@@ -94,6 +94,13 @@ export default {
     max-height: 90vh;
     height: 90vh;
 
+    img[src$=".svg"] {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
+
     .slide-info {
         position: absolute;
         top: 0;

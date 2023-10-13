@@ -15,6 +15,8 @@ export default {
     SwiperSlide,
   },
   mounted() {
+    this.cargarTexto();
+
     const loaders = document.querySelectorAll('.loader');
     const acordeones = document.querySelectorAll('.acordion-item');
 
@@ -102,6 +104,21 @@ export default {
       // Abre o cierra el acordeón actual
       this.acordeones[index].open = !this.acordeones[index].open;
     },
+
+    cargarTexto() {
+      axios.post('/filosofias/bannerData').then((response) => {
+          this.texto = response.data;
+          this.texto.forEach(modulo => {
+            this.acordeones.push({
+              title: modulo.titulo,
+              content: modulo.contenido,
+              open: false,
+            });
+          });
+      }).catch((error) => {
+          console.log(error);
+      });
+    },
   },
 
   setup() {
@@ -112,40 +129,11 @@ export default {
 
   data() {
     return {
+      texto: [],
       modalTitle: '',
       modalContent: '',
       showModal: false,
-
-      listAccordionIndex: 0,
-      acordeones: [
-        {
-          title: "Objetivos de la calidad",
-          content: "Los objetivos de la calidad que la Universidad Politécnica de Querétaro ha establecido como compromiso para la prestación de su Servicio Educativo son: 1. Calidad: Asegurar la calidad educativa de la Universidad Politécnica de Querétaro. 2. Enfoque al cliente: Satisfacer las necesidades educativas del alumnado. 3. Pertinencia: Asegurar la pertinencia del Servicio Educativo a través del grado de satisfacción medido en los procesos de Estancias y Estadías y de Seguimiento a Egresadas y Egresados.4. Mejora continua: Desempeñar acciones que ayuden a fortalecer, desarrollar y potencializar los recursos de la Universidad Politécnica de Querétaro.",
-          points: [
-            "Calidad: Asegurar la calidad educativa de la Universidad Politécnica de Querétaro.",
-            "Enfoque al cliente: Satisfacer las necesidades educativas del alumnado.",
-            "Pertinencia: Asegurar la pertinencia del Servicio Educativo a través del grado de satisfacción medido en los procesos de Estancias y Estadías y de Seguimiento a Egresadas y Egresados.",
-            "Mejora continua: Desempeñar acciones que ayuden a fortalecer, desarrollar y potencializar los recursos de la Universidad Politécnica de Querétaro.",
-          ],
-          open: false,
-        },
-        {
-          title: "Misión",
-          content: "Somos una institución pública de educación superior con una oferta educativa de calidad con una visión global y con acento Automotriz, que cumple con estándares y certificaciones de formación profesional y desarrollo humano, mediante una formación integral para generar capital humano que sea agente de cambio, que contribuya y se vincule con el sector productivo, reconociendo las tendencias que demanda la industria 4.0, economía circular, innovación y la responsabilidad social empresarial; nos comprometemos con el bienestar, el desarrollo social y tecnológico, con la equidad, pertinencia de nuestros programas educativos y una estrategia de sustentabilidad y sostenibilidad.",
-          open: false,
-        },
-        {
-          title: "Visión",
-          content: "Aspiramos a ser para el año 2030 la institución de educación superior más grande del subsistema educativo tecnológico, politécnico y con acento Automotriz. Alcanzar los estándares de excelencia educativa, desarrollo tecnológico, científico y de energías limpias, manteniendo el liderazgo universitario con vocación industrial del estado.",
-          open: false,
-        },
-        {
-          title: "Política de la calidad",
-          content: " La Universidad Politécnica de Querétaro establece el compromiso de apoyar su Misión y Visión, orientar su proceso de Operación Académica y Administración Escolar, satisfacer la responsabilidad social y gestionar la propiedad intelectual, para brindar servicios de educación superior que satisfagan consistentemente los requisitos de nuestro alumnado y partes interesadas con un enfoque de mejora continua basado en la implementación, operación y eficacia de un Sistema de Gestión de la Calidad.",
-          open: false,
-        },
-
-      ],
+      acordeones: [], // inicializa acordeones como un array vacío
     };
   },
 };

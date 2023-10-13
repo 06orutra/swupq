@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('filosofias', function (Blueprint $table) {
             $table->id();
             $table->String('titulo');
-            $table->String('contenido');
+            $table->longText('contenido');
             $table->timestamps();
         });
     }

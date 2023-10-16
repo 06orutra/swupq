@@ -5,7 +5,7 @@ import carruselEstructura from "@/Pages/Componentes/Home/carruselEstructura.vue"
 import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 import estructuraTextos from "@/Pages/Componentes/Home/estructuraTextos.vue";
 import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
-import mensajeRector from "@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue";
+import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofia.vue";
 import MensajeRector from '@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue';
 
 export default {
@@ -16,8 +16,9 @@ export default {
     opcionesCarrusel,
     estructuraTextos,
     estructuraImg,
-    MensajeRector
-},
+    MensajeRector,
+    filosofia,
+    },
     methods: {
         updateCarouselSettings(settings) {
             this.navigation = settings.navigation;
@@ -26,7 +27,7 @@ export default {
             this.timeout = settings.timeout;
         }
     }
-}
+};
 </script>
 
 <template>
@@ -38,11 +39,14 @@ export default {
         </TabPanel>
         <TabPanel header="textos">
             <estructuraTextos :loadDataUrl="'/texto/bannerData'" :registerBannerUrl="'/texto/registrarBanner'"
-                :editBannerUrl="'/texto/editarBanner'" :deleteBannerUrl="'/texto/eliminarBanner'"  />
+                :editBannerUrl="'/texto/editarBanner'" :deleteBannerUrl="'/texto/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Imagenes">
             <estructuraImg :loadDataUrl="'/img/bannerData'" :registerBannerUrl="'/img/registrarBanner'"
-                :editBannerUrl="'/img/editarBanner'" :deleteBannerUrl="'/img/eliminarBanner'"  />
+                :editBannerUrl="'/img/editarBanner'" :deleteBannerUrl="'/img/eliminarBanner'" />
+        </TabPanel>
+        <TabPanel header="Filosofía">
+            <filosofia />
         </TabPanel>
         <TabPanel header="Rector">
             <MensajeRector/>

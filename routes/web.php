@@ -12,7 +12,10 @@ use App\Http\Controllers\TextoPruebaController;
 use App\Http\Controllers\ImgPruebaController;
 use App\Http\Controllers\MensajeRectorController;
 use App\Http\Controllers\InformeRectorController;
+use App\Http\Controllers\FilosofiaController;
+use App\Http\Controllers\FilosofiaImgController;
 use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +52,6 @@ Route::prefix('institucion')->group(function () {
     Route::get('instalaciones', function(){
         return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
     });
-    
     
     Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
 
@@ -103,7 +105,10 @@ Route::middleware([
         'img' => ImgPruebaController::class,
         'rector' => MensajeRectorController::class,
         'informe' => InformeRectorController::class,
+        'filosofia' => FilosofiaController::class,
+        'filosofiaImg' => FilosofiaImgController::class,
     ];
+    // se declarar variables, 
 
     foreach ($controllers as $prefix => $controller) {
         Route::prefix($prefix)->group(function () use ($controller) {
@@ -114,7 +119,7 @@ Route::middleware([
         });
     }
 });
-
+Route::post('/filosofias/bannerData', [FilosofiaController::class, 'bannerData']);
 Route::post('/bannerData', [HomeController::class, 'bannerData']);
 Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'bannerDatafilter']);
 Route::post('/bannerDataprimero', [TbCarruselPrimeroController::class, 'bannerData']);

@@ -3,13 +3,75 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  data() {
+    return {
+      modalTitle: '',
+      modalContent: '',
+      showModal: false,
+      acordeones: [
+        {
+          title: "Objetivos de la calidad",
+          content: "Los objetivos de la calidad que la Universidad Politécnica de Querétaro ha establecido como compromiso para la prestación de su Servicio Educativo son: 1. Calidad: Asegurar la calidad educativa de la Universidad Politécnica de Querétaro. 2. Enfoque al cliente: Satisfacer las necesidades educativas del alumnado. 3. Pertinencia: Asegurar la pertinencia del Servicio Educativo a través del grado de satisfacción medido en los procesos de Estancias y Estadías y de Seguimiento a Egresadas y Egresados.4. Mejora continua: Desempeñar acciones que ayuden a fortalecer, desarrollar y potencializar los recursos de la Universidad Politécnica de Querétaro.",
+          open: false,
+        },
+        {
+          title: "Misión",
+          content: "Somos una institución pública de educación superior con una oferta educativa de calidad con una visión global y con acento Automotriz, que cumple con estándares y certificaciones de formación profesional y desarrollo humano, mediante una formación integral para generar capital humano que sea agente de cambio, que contribuya y se vincule con el sector productivo, reconociendo las tendencias que demanda la industria 4.0, economía circular, innovación y la responsabilidad social empresarial; nos comprometemos con el bienestar, el desarrollo social y tecnológico, con la equidad, pertinencia de nuestros programas educativos y una estrategia de sustentabilidad y sostenibilidad.",
+          open: false,
+        },
+        {
+          title: "Visión",
+          content: "Aspiramos a ser para el año 2030 la institución de educación superior más grande del subsistema educativo tecnológico, politécnico y con acento Automotriz. Alcanzar los estándares de excelencia educativa, desarrollo tecnológico, científico y de energías limpias, manteniendo el liderazgo universitario con vocación industrial del estado.",
+          open: false,
+        },
+        {
+          title: "Política de la calidad",
+          content: " La Universidad Politécnica de Querétaro establece el compromiso de apoyar su Misión y Visión, orientar su proceso de Operación Académica y Administración Escolar, satisfacer la responsabilidad social y gestionar la propiedad intelectual, para brindar servicios de educación superior que satisfagan consistentemente los requisitos de nuestro alumnado y partes interesadas con un enfoque de mejora continua basado en la implementación, operación y eficacia de un Sistema de Gestión de la Calidad.",
+          open: false,
+        },
+      ],
+      modules: [Autoplay, Pagination, Navigation],
+      showCarousel: true,
+      windowWidth: window.innerWidth,
+      showCarousel: window.innerWidth > 425,
+
+    };
+  },
+  methods: {
+    openModal(title, content) {
+      this.modalTitle = title;
+      this.modalContent = content;
+      this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
+    },
+    toggleAccordion(index) {
+      this.acordeones[index].open = !this.acordeones[index].open;
+    },
+    setup() {
+      Swiper.use([Autoplay, Pagination, Navigation]); // Configura los módulos
+
+      return {
+      };
+    },
+    handleResize() {
+      this.windowWidth = window.innerWidth;
+      this.showCarousel = this.windowWidth > 425;
+    },
+  },
   mounted() {
     const loaders = document.querySelectorAll('.loader');
     const acordeones = document.querySelectorAll('.acordion-item');
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
 
     loaders.forEach(loader => {
       const text = loader.querySelector('.text');
@@ -25,40 +87,10 @@ export default {
       });
 
       loader.addEventListener('click', () => {
-        const titles = [
-          "TRANSPARENCIA",
-          "SERVICIO",
-          "IGUALDAD",
-          "RESPONSABILIDAD",
-          "RESPETO",
-          "HONRADEZ",
-          "LIDERAZGO",
-          "GENEROSIDAD",
-          "BIEN COMÚN",
-          "JUSTICIA",
-          "INTEGRIDAD",
-          "COLABORACIÓN",
-          "EMPATÍA",
-          "PUNTUALIDAD",
-          "SOLIDARIDAD",
-        ];
-
-        const contents = [
-          "Hacer uso responsable y claro en el manejo de los recursos institucionales.",
-          "Participar de forma activa, actuando siempre con calidad en el servicio y la gestión de toda actividad académica.",
-          "Prestar nuestros servicios sin discriminación alguna y otorgando un trato justo y equitativo, así como, las herramientas necesarias para su completo goce, sin importar raza, sexo, religión, género, nacionalidad o discapacidad.",
-          "Cumplir con nuestras obligaciones con plena conciencia de nuestros actos y sus repercusiones.",
-          "Reconocer, aceptar, apreciar y valorar las cualidades y los derechos de todos y todas.",
-          "Actuar siempre con la verdad y a sabiendas de que el cargo que se ostenta es para hacer el bien a los demás y no utilizar el cargo, para obtener algún beneficio personal o a favor de terceros, actuando con honestidad respetando siempre nuestros principios éticos.",
-          "Ser promotores de los valores y principios de la Universidad, a través del ejemplo personal para orientar y ayudar a nuestros semejantes en su desarrollo humano y profesional.",
-          "Actuar siempre de manera solidaria con todos los miembros de la comunidad universitaria.",
-          "Todas las decisiones y acciones deben estar dirigidas a la satisfacción de las necesidades e intereses de la Universidad, por encima de intereses particulares. El compromiso con el bien común implica que la y el servicio público y la educación superior, patrimonio de todo mexicano, sólo se justifica y legitima cuando se procura este bien por encima de los intereses particulares o de grupo.",
-          "Obrar en apego a las normas sociales respetando la verdad y la igualdad.",
-          "Actuar con honestidad, atendiendo siempre a la verdad. Conduciéndose de esta manera, se fomentará la credibilidad en la Universidad y se contribuirá a generar una cultura de confianza y apego a la verdad.",
-          "Participar en los esfuerzos colectivos sin tener en cuenta el beneficio personal e individual sino el beneficio para el bien común de nuestra sociedad universitaria.",
-        ];
-
-        this.openModal(titles[loader.dataset.index], contents[loader.dataset.index]);
+        this.openModal(
+          this.acordeones[loader.dataset.index].title,
+          this.acordeones[loader.dataset.index].content
+        );
       });
     });
 
@@ -74,75 +106,8 @@ export default {
       });
     });
   },
-
-  methods: {
-    openModal(title, content) {
-      this.modalTitle = title;
-      this.modalContent = content;
-      this.showModal = true;
-    },
-    closeModal() {
-      this.showModal = false;
-    },
-    toggleAcordeon(index) {
-      // Cierra todos los acordeones
-      this.acordeones.forEach((acordeon, i) => {
-        if (i !== index) {
-          acordeon.open = false;
-        }
-      });
-
-      // Abre o cierra el acordeón actual
-      this.acordeones[index].open = !this.acordeones[index].open;
-    },
-  },
-  components: {
-    Swiper,
-    SwiperSlide,
-  },
-  setup() {
-    return {
-      modules: [Autoplay, Pagination, Navigation],
-    };
-  },
-
-  data() {
-    return {
-      modalTitle: '',
-      modalContent: '',
-      showModal: false,
-
-      listAccordionIndex: 0,
-      acordeones: [
-        {
-        title: "Objetivos de la calidad",
-        content: "Los objetivos de la calidad que la Universidad Politécnica de Querétaro ha establecido como compromiso para la prestación de su Servicio Educativo son: 1. Calidad: Asegurar la calidad educativa de la Universidad Politécnica de Querétaro. 2. Enfoque al cliente: Satisfacer las necesidades educativas del alumnado. 3. Pertinencia: Asegurar la pertinencia del Servicio Educativo a través del grado de satisfacción medido en los procesos de Estancias y Estadías y de Seguimiento a Egresadas y Egresados.4. Mejora continua: Desempeñar acciones que ayuden a fortalecer, desarrollar y potencializar los recursos de la Universidad Politécnica de Querétaro.",
-        points: [
-          "Calidad: Asegurar la calidad educativa de la Universidad Politécnica de Querétaro.",
-          "Enfoque al cliente: Satisfacer las necesidades educativas del alumnado.",
-          "Pertinencia: Asegurar la pertinencia del Servicio Educativo a través del grado de satisfacción medido en los procesos de Estancias y Estadías y de Seguimiento a Egresadas y Egresados.",
-          "Mejora continua: Desempeñar acciones que ayuden a fortalecer, desarrollar y potencializar los recursos de la Universidad Politécnica de Querétaro.",
-        ],
-        open: false,
-      },
-      {
-          title: "Misión",
-          content: "Somos una institución pública de educación superior con una oferta educativa de calidad con una visión global y con acento Automotriz, que cumple con estándares y certificaciones de formación profesional y desarrollo humano, mediante una formación integral para generar capital humano que sea agente de cambio, que contribuya y se vincule con el sector productivo, reconociendo las tendencias que demanda la industria 4.0, economía circular, innovación y la responsabilidad social empresarial; nos comprometemos con el bienestar, el desarrollo social y tecnológico, con la equidad, pertinencia de nuestros programas educativos y una estrategia de sustentabilidad y sostenibilidad.",
-          open: false,
-        },
-        {
-          title: "Visión",
-          content: "Aspiramos a ser para el año 2030 la institución de educación superior más grande del subsistema educativo tecnológico, politécnico y con acento Automotriz. Alcanzar los estándares de excelencia educativa, desarrollo tecnológico, científico y de energías limpias, manteniendo el liderazgo universitario con vocación industrial del estado.",
-          open: false,
-        },
-        {
-          title: "Política de la calidad",
-          content: " La Universidad Politécnica de Querétaro establece el compromiso de apoyar su Misión y Visión, orientar su proceso de Operación Académica y Administración Escolar, satisfacer la responsabilidad social y gestionar la propiedad intelectual, para brindar servicios de educación superior que satisfagan consistentemente los requisitos de nuestro alumnado y partes interesadas con un enfoque de mejora continua basado en la implementación, operación y eficacia de un Sistema de Gestión de la Calidad.",
-          open: false,
-        },
-        
-      ],
-    };
+  beforeDestroy() {
+  window.removeEventListener('resize', this.handleResize);
   },
 };
 </script>
@@ -160,7 +125,7 @@ export default {
     <!-- Acordeon -->
     <div class="p-20">
       <div class="flex"> 
-        <div class="w-1/3">
+        <div class="w-1/3" v-if="showCarousel"> 
           <div class="img_1 mt-5">
             <swiper
               :spaceBetween="30"
@@ -222,6 +187,7 @@ export default {
         </div>
 
         <!-- Primeros valores -->
+        <div class="loaderss">
         <div class="vertical-column circle-container">
             <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/1.jpeg')" data-index="0" @click="openModal('TRANSPARENCIA', 'Hacer uso responsable y claro en el manejo de los recursos institucionales.')">
               <div class="loader" id="loader1">
@@ -344,7 +310,8 @@ export default {
             </div>
           </div> 
 
-          </div>
+        </div>
+      </div>
 
         <div class="modal" :class="{ 'active': showModal }">
             <div class="modal-content">
@@ -505,6 +472,7 @@ export default {
     max-width: 800px;
     margin: auto;
     margin-top: 15px;
+    justify-content: center;
   } 
   .toggle-acordion h2{
     text-align: center;
@@ -576,28 +544,27 @@ export default {
 }
 
 @media (max-width: 425px) {
-  .vertical-column {
-    flex-direction: column; /* Cambiar a disposición vertical */
-    margin-right: 0; /* Eliminar el margen derecho */
-    margin-bottom: 20px; /* Ajustar el margen inferior en dispositivos más pequeños */
-  }
-  .circule{
-    margin-top: 30px;
-  }
-
-  .vertical-column {
-    /* Cambia la disposición a vertical */
+  .loaderss {
+    display: flex;
+    flex-direction: column; /* Cambia a disposición vertical */
     margin-right: 0; /* Elimina el margen derecho */
-    margin-bottom: 20px; /* Ajusta el margen inferior en dispositivos más pequeños */
-    display: initial;
+    margin-bottom: 20px; /* Añade margen inferior para separar los loaders */
+    justify-content: center; /* Centra verticalmente los loaders */
+    align-items: center; /* Centra horizontalmente los loaders */
+  }
+  .vertical-column {
+    display: initial; /* Restablece la disposición a su valor predeterminado */
+    margin-right: 0; /* Elimina el margen derecho */
+    margin-bottom: 20px; /* Añade margen inferior para separar los círculos */
+    align-items: center; /* Centra horizontalmente los círculos */
+    justify-content: center; /* Centra verticalmente los círculos */
   }
   .img_1 {
-    max-width: 100%; /* Ajustar el tamaño máximo de la imagen al 100% del contenedor */
+    max-width: 100%; /* Ajusta el tamaño máximo de la imagen al 100% del contenedor */
     height: auto; /* Permite que la altura se ajuste automáticamente según el ancho */
-    margin: 0 auto; /* Centrar horizontalmente la imagen */
+    margin: 0 auto; /* Centra horizontalmente la imagen */
     z-index: 1;
   }
-
   .toggle-acordion {
     position: relative;
     z-index: 0;
@@ -609,6 +576,7 @@ export default {
   .vertical-column{
     flex-direction: row;
     justify-content: space-between;
+    justify-content: center;
   }
   .circle-container {
     display: flex;
@@ -650,7 +618,6 @@ export default {
   }
 }
 
-/* display:initial */
 </style>
 
 

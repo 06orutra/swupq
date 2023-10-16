@@ -18,14 +18,6 @@ export default {
             type: String,
             required: true
         },
-        titulo: {
-            type: String,
-            required: true
-        },
-        subtitulo: {
-            type: String,
-            required: true
-        },
     },
     computed: {
         filteredBanner() {
@@ -306,12 +298,12 @@ export default {
                 <!-- select con opciones -->
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">{{this.titulo}}</label>
+                    <label for="minmax">Nombre</label>
                     <InputText inputId="minmax" v-model="nombre" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">{{this.subtitulo}}</label>
+                    <label for="minmax">Link</label>
                     <InputText inputId="minmax" v-model="link" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
@@ -350,12 +342,12 @@ export default {
                 <InputText id="id" v-model.trim="datosArreglo.id" hidden />
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">{{this.titulo}}</label>
+                    <label for="minmax">Nombre</label>
                     <InputText inputId="minmax" v-model="datosArreglo.nombre" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">{{this.subtitulo}}</label>
+                    <label for="minmax">Link</label>
                     <InputText inputId="minmax" v-model="datosArreglo.link" :min="0" :max="10000" :showButtons="true" />
                 </div>
 

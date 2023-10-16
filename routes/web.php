@@ -12,7 +12,7 @@ use App\Http\Controllers\TextoPruebaController;
 use App\Http\Controllers\ImgPruebaController;
 use App\Http\Controllers\FilosofiaController;
 use App\Http\Controllers\FilosofiaImgController;
-use App\Http\Controllers\FilosofiaValorController;
+
 use Illuminate\Http\Request;
 
 
@@ -104,7 +104,6 @@ Route::middleware([
         'img' => ImgPruebaController::class,
         'filosofia' => FilosofiaController::class,
         'filosofiaImg' => FilosofiaImgController::class,
-        'filosofiaValor' => FilosofiaValorController::class,
     ];
     // se declarar variables, 
 
@@ -117,7 +116,6 @@ Route::middleware([
         });
     }
 });
-Route::post('/filosofiaimg/bannerData', [FilosofiaImgController::class, 'bannerData']);
 Route::post('/filosofias/bannerData', [FilosofiaController::class, 'bannerData']);
 Route::post('/bannerData', [HomeController::class, 'bannerData']);
 Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'bannerDatafilter']);

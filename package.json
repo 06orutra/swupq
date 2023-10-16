@@ -28,6 +28,7 @@
         "sass": "^1.62.1",
         "slider": "^1.0.4",
         "swiper": "^10.2.0",
-        "vue-router": "^4.2.2"
+        "vue-router": "^4.2.2",
+        "vuetify": "^3.3.21"
     }
 }

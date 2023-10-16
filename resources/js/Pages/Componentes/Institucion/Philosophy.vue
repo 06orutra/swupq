@@ -121,7 +121,7 @@ export default {
       });
     },
     cargarImg() {
-      axios.post(this.loadDataUrl).then((response) => {
+      axios.post('/filosofiaimg/bannerData').then((response) => {
         this.img = response.data;
       }).catch((error) => {
         console.log(error);
@@ -169,11 +169,9 @@ export default {
               delay: 2500,
               disableOnInteraction: false,
             }" :pagination="{
-  clickable: true,
-}" :navigation="true" :modules="modules" class="mySwiper">
-              <swiper-slide><img src="https://www.upq.mx/assets/images/uno.png"></swiper-slide>
-              <swiper-slide><img src="https://www.upq.mx/assets/images/dos.png"></swiper-slide>
-              <swiper-slide><img src="https://www.upq.mx/assets/images/tres.png"></swiper-slide>
+                clickable: true,
+                }" :navigation="true" :modules="modules" class="mySwiper">
+              <swiper-slide v-for="datosimg in img" ><img :src="'/storage/' + datosimg.imagen" alt="Card Image" class="imagen-resolucion" /></swiper-slide>
             </swiper>
           </div>
         </div>

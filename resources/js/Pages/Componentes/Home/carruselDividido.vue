@@ -28,13 +28,13 @@ export default {
         </TabPanel>
         <TabPanel header="Carrusel 1">
             <opcionesCarrusel id="carruselDividido" @configuracion-guardada="updateCarouselSettings" />
-            <carruselImagenes :loadDataUrl="'/bannerDataprimero'" :registerBannerUrl="'primero/registrarBanner'" :editBannerUrl="'primero/editarBanner'" :deleteBannerUrl="'primero/eliminarBanner'" />
+            <carruselImagenes :titulo="'Nombre'" :subtitulo="'Link'" :loadDataUrl="'/bannerDataprimero'" :registerBannerUrl="'primero/registrarBanner'" :editBannerUrl="'primero/editarBanner'" :deleteBannerUrl="'primero/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Carrusel 2">
-            <carruselImagenes :loadDataUrl="'/bannerDatasegundo'" :registerBannerUrl="'segundo/registrarBanner'" :editBannerUrl="'segundo/editarBanner'" :deleteBannerUrl="'segundo/eliminarBanner'" />
+            <carruselImagenes :titulo="'Nombre'" :subtitulo="'Link'" :loadDataUrl="'/bannerDatasegundo'" :registerBannerUrl="'segundo/registrarBanner'" :editBannerUrl="'segundo/editarBanner'" :deleteBannerUrl="'segundo/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Carrusel 3">
-            <carruselImagenes :loadDataUrl="'/bannerDatatercero'" :registerBannerUrl="'tercer/registrarBanner'" :editBannerUrl="'tercer/editarBanner'" :deleteBannerUrl="'tercer/eliminarBanner'" />
+            <carruselImagenes :titulo="'Nombre'" :subtitulo="'Link'" :loadDataUrl="'/bannerDatatercero'" :registerBannerUrl="'tercer/registrarBanner'" :editBannerUrl="'tercer/editarBanner'" :deleteBannerUrl="'tercer/eliminarBanner'" />
         </TabPanel>
     </TabView>
 </template>

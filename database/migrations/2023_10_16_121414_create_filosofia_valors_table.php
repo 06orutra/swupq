@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('filosofia_valors', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('link');
+            $table->longText('link');
             $table->string('imagen');
             $table->timestamps();
         });

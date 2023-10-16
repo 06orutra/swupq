@@ -4,11 +4,10 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
-
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import axios from 'axios'; // Asegúrese de que axios esté correctamente importado
 
 export default {
-
   components: {
     AppEstructure,
     Swiper,
@@ -17,74 +16,10 @@ export default {
   mounted() {
     this.cargarTexto();
     this.cargarImg();
-
-    const loaders = document.querySelectorAll('.loader');
-    const acordeones = document.querySelectorAll('.acordion-item');
-
-    loaders.forEach(loader => {
-      const text = loader.querySelector('.text');
-
-      loader.addEventListener('mouseenter', () => {
-        loader.classList.add('active');
-        text.style.opacity = '0';
-      });
-
-      loader.addEventListener('mouseleave', () => {
-        loader.classList.remove('active');
-        text.style.opacity = '1';
-      });
-
-      loader.addEventListener('click', () => {
-        const titles = [
-          "TRANSPARENCIA",
-          "SERVICIO",
-          "IGUALDAD",
-          "RESPONSABILIDAD",
-          "RESPETO",
-          "HONRADEZ",
-          "LIDERAZGO",
-          "GENEROSIDAD",
-          "BIEN COMÚN",
-          "JUSTICIA",
-          "INTEGRIDAD",
-          "COLABORACIÓN",
-          "EMPATÍA",
-          "PUNTUALIDAD",
-          "SOLIDARIDAD",
-        ];
-
-        const contents = [
-          "Hacer uso responsable y claro en el manejo de los recursos institucionales.",
-          "Participar de forma activa, actuando siempre con calidad en el servicio y la gestión de toda actividad académica.",
-          "Prestar nuestros servicios sin discriminación alguna y otorgando un trato justo y equitativo, así como, las herramientas necesarias para su completo goce, sin importar raza, sexo, religión, género, nacionalidad o discapacidad.",
-          "Cumplir con nuestras obligaciones con plena conciencia de nuestros actos y sus repercusiones.",
-          "Reconocer, aceptar, apreciar y valorar las cualidades y los derechos de todos y todas.",
-          "Actuar siempre con la verdad y a sabiendas de que el cargo que se ostenta es para hacer el bien a los demás y no utilizar el cargo, para obtener algún beneficio personal o a favor de terceros, actuando con honestidad respetando siempre nuestros principios éticos.",
-          "Ser promotores de los valores y principios de la Universidad, a través del ejemplo personal para orientar y ayudar a nuestros semejantes en su desarrollo humano y profesional.",
-          "Actuar siempre de manera solidaria con todos los miembros de la comunidad universitaria.",
-          "Todas las decisiones y acciones deben estar dirigidas a la satisfacción de las necesidades e intereses de la Universidad, por encima de intereses particulares. El compromiso con el bien común implica que la y el servicio público y la educación superior, patrimonio de todo mexicano, sólo se justifica y legitima cuando se procura este bien por encima de los intereses particulares o de grupo.",
-          "Obrar en apego a las normas sociales respetando la verdad y la igualdad.",
-          "Actuar con honestidad, atendiendo siempre a la verdad. Conduciéndose de esta manera, se fomentará la credibilidad en la Universidad y se contribuirá a generar una cultura de confianza y apego a la verdad.",
-          "Participar en los esfuerzos colectivos sin tener en cuenta el beneficio personal e individual sino el beneficio para el bien común de nuestra sociedad universitaria.",
-        ];
-
-        this.openModal(titles[loader.dataset.index], contents[loader.dataset.index]);
-      });
-    });
-
-    acordeones.forEach(acordeon => {
-      acordeon.addEventListener('click', () => {
-        // Cierra todos los acordeones
-        acordeones.forEach(element => {
-          element.classList.remove('active');
-        });
-
-        // Abre o cierra el acordeón actual
-        acordeon.classList.toggle('active');
-      });
+    this.cargarValor().then(() => {
+      this.$nextTick(this.inicializarInteracciones);
     });
   },
-
   methods: {
     openModal(title, content) {
       this.modalTitle = title;
@@ -95,17 +30,13 @@ export default {
       this.showModal = false;
     },
     toggleAcordeon(index) {
-      // Cierra todos los acordeones
       this.acordeones.forEach((acordeon, i) => {
         if (i !== index) {
           acordeon.open = false;
         }
       });
-
-      // Abre o cierra el acordeón actual
       this.acordeones[index].open = !this.acordeones[index].open;
     },
-
     cargarTexto() {
       axios.post('/filosofias/bannerData').then((response) => {
         this.texto = response.data;
@@ -121,33 +52,68 @@ export default {
       });
     },
     cargarImg() {
-      axios.post(this.loadDataUrl).then((response) => {
+      axios.post('/filosofiaImg/bannerData').then((response) => {
         this.img = response.data;
       }).catch((error) => {
         console.log(error);
       });
     },
-  },
+    cargarValor() {
+      return axios.post('/filosofiaVal/bannerData').then((response) => {
+        this.valor = response.data;
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    inicializarInteracciones() {
+      const loaders = document.querySelectorAll('.loader');
+      loaders.forEach(loader => {
+        const text = loader.querySelector('.text');
 
+        loader.addEventListener('mouseenter', () => {
+          loader.classList.add('active');
+          text.style.opacity = '0';
+        });
+
+        loader.addEventListener('mouseleave', () => {
+          loader.classList.remove('active');
+          text.style.opacity = '1';
+        });
+
+        loader.addEventListener('click', () => {
+          this.openModal(titles[loader.dataset.index], contents[loader.dataset.index]);
+        });
+      });
+
+      const acordeones = document.querySelectorAll('.acordion-item');
+      acordeones.forEach(acordeon => {
+        acordeon.addEventListener('click', () => {
+          acordeones.forEach(element => {
+            element.classList.remove('active');
+          });
+          acordeon.classList.toggle('active');
+        });
+      });
+    },
+  },
   setup() {
     return {
       modules: [Autoplay, Pagination, Navigation],
     };
   },
-
   data() {
     return {
+      valor: [],
       img: [],
       texto: [],
       modalTitle: '',
       modalContent: '',
       showModal: false,
-      acordeones: [], // inicializa acordeones como un array vacío
+      acordeones: [],
     };
   },
 };
 </script>
-
 
 <template>
   <AppEstructure>
@@ -171,9 +137,8 @@ export default {
             }" :pagination="{
   clickable: true,
 }" :navigation="true" :modules="modules" class="mySwiper">
-              <swiper-slide><img src="https://www.upq.mx/assets/images/uno.png"></swiper-slide>
-              <swiper-slide><img src="https://www.upq.mx/assets/images/dos.png"></swiper-slide>
-              <swiper-slide><img src="https://www.upq.mx/assets/images/tres.png"></swiper-slide>
+              <swiper-slide v-for="datosimg in img"><img :src="'/storage/' + datosimg.imagen"
+                  alt="Card Image" /></swiper-slide>
             </swiper>
           </div>
         </div>
@@ -214,7 +179,7 @@ export default {
           <hr>
         </header>
       </div>
-
+      {{ valor }}
       <!-- Primeros valores -->
       <div class="vertical-column circle-container">
         <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/1.jpeg')"
@@ -225,13 +190,7 @@ export default {
           </div>
         </div>
 
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/2.jpeg')"
-          data-index="0"
-          @click="openModal('SERVICIO', 'Participar de forma activa, actuando siempre con calidad en el servicio y la gestión de toda actividad académica.')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">SERVICIO</div>
-          </div>
-        </div>
+
 
         <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/3.jpeg')"
           data-index="0"
@@ -241,8 +200,7 @@ export default {
           </div>
         </div>
 
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/4.jpeg')"
-          data-index="0"
+        <div class="background-image circle" data-index="0"
           @click="openModal('RESPONSABILIDAD', 'Cumplir con nuestras obligaciones con plena conciencia de nuestros actos y sus repercusiones.')">
           <div class="loader" id="loader2">
             <div class="text" id="text2">RESPONSABILIDAD</div>
@@ -251,113 +209,20 @@ export default {
 
       </div>
 
-      <!-- Segundos valores -->
       <div class="vertical-column circle-container">
 
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/5.jpeg')"
-          data-index="0"
-          @click="openModal('RESPETO', 'Reconocer, acpetar, apreciar y valorar las cualidades y los derechos de todos y todas.')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">RESPETO</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/6.jpeg')"
-          data-index="0"
-          @click="openModal('HONRADEZ', 'Actuar siempre con la veerdad y a sabiendas de que el cargo que se ostenta es para hacer el bien a los demás y no utilizar el cargo, para obtener algún beneficio persoal o a favor de terceros, actuando con honestidad respetando siempre nuestros principios éticos.')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">HONRADEZ</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/7.jpeg')"
-          data-index="0"
-          @click="openModal('LIDERAZGO', 'Ser promotores de los valores y principios de la Universidad, a través del ejemplo personal para orientar y ayudar a nuestros semejantes en su desarrollo humano y profesional.')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">LIDERAZGO</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/8.jpeg')"
-          data-index="0"
-          @click="openModal('GENEROSIDAD', 'Actuar siempre de manera solidaria con todos los miembros de la comunidad universitaria.')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">GENEROSIDAD</div>
+        <div v-for="item in valor" :key="item.id">
+          <div class="background-image circle" data-index="0" @click="openModal(item.nombre, item.link)">
+            <img :src="'/storage/' + item.imagen" alt="Valor Image" class="circle-img"/>
+            <div class="loader" id="loader2">
+              <div class="text" id="text2">{{ item.nombre }}</div>
+            </div>
           </div>
         </div>
 
       </div>
 
-      <!-- Terceros valores -->
-      <div class="vertical-column circle-container">
 
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/9.jpeg')"
-          data-index="0"
-          @click="openModal('BIEN COMÚN', 'Todas las decisiones y acciones deben esstar dirigidas a la satisfacción de las necesidades e intereses de la Universidad, por encima de intereses particulares. El compromiso con el bien común implica que la y el servicio público y la educación superior, patrimonio de todo mexicano, sólo se justifica y legitima cuando se procura este bien por encima de los intereses particulaes o de grupo.')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">BIEN COMÚN</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/10.jpeg')"
-          data-index="0"
-          @click="openModal('JUSTICIA', 'Obrar en apego a las normas sociales respetando la verdad y la igualdad.')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">JUSTICIA</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/11.jpeg')"
-          data-index="0"
-          @click="openModal('INTEGRIDAD', 'Actuar con honestidad, atendiendo siempre a la verdad. Conduciéndose de esta manera, se fomentará la credibilidad en la Universidad y se contribuirá a generar una cultura de confianza y apego a la verdad.')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">INTEGRIDAD</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/12.jpeg')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">#VALORES</div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Cuartos valores -->
-      <div class="vertical-column circle-container">
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/12.jpeg')"
-          data-index="0"
-          @click="openModal('COLABORACIÓN', 'Participar en los esfuerzos colectivos sin tener en cuenta el beneficio personal e individual sino el beneficio para el bien común de nuestra sociedad universitaria.')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">COLABORACIÓN</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/9.jpeg')"
-          data-index="0"
-          @click="openModal('EMPATÍA', 'Comprender y respetar los puntos de vista, sentimientos y pensamientos de otras personas, aunque sean diferentes a los propios.')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">EMPATÍA</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/1.jpeg')"
-          data-index="0"
-          @click="openModal('PUNTUALIDAD', 'Participar en los esfuerzos colectivos sin tener en cuenta el beneficio personal e individual sino el beneficio para el bien común de nuestra sociedad universitaria.')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">PUNTUALIDAD</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/7.jpeg')"
-          data-index="0">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">SOLIDARIDAD</div>
-          </div>
-        </div>
-
-      </div>
 
       <div class="modal" :class="{ 'active': showModal }">
         <div class="modal-content">
@@ -378,6 +243,13 @@ export default {
    
 
 <style scoped>
+  .circle-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1; /* Asegura que la imagen esté debajo del texto y del loader */
+  }
 /* Círculos de valores */
 .modal {
   display: none;
@@ -441,6 +313,7 @@ export default {
   overflow: hidden;
   transition: transform 1.9s ease;
   background-color: transparent;
+  z-index: 2; /* Asegura que el loader esté sobre la imagen */
 }
 
 #loader1 {
@@ -449,6 +322,7 @@ export default {
   border-right: 13px solid #f3f3f3;
   border-bottom: 13px solid #f3f3f3;
   transition: transform 1.9s ease;
+  z-index: 2; /* Asegura que el loader esté sobre la imagen */
 }
 
 #loader2 {
@@ -457,6 +331,7 @@ export default {
   border-right: 13px solid #f3f3f3;
   border-bottom: 13px solid #f3f3f3;
   transition: transform 1.9s ease;
+  z-index: 2; /* Asegura que el loader esté sobre la imagen */
 }
 
 .vertical-column {

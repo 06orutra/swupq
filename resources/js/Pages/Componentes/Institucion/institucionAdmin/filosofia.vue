@@ -16,8 +16,8 @@ import carruselEstructura from '../../Home/carruselEstructura.vue';
                 :editBannerUrl="'/filosofiaImg/editarBanner'" :deleteBannerUrl="'/filosofiaImg/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Valores">
-            <carruselEstructura :Titulo="'Valor'" :Subtitulo="'Descripción'" :loadDataUrl="'/filosofia/bannerData'" :registerBannerUrl="'/filosofia/registrarBanner'"
-                :editBannerUrl="'/filosofia/editarBanner'" :deleteBannerUrl="'/filosofia/eliminarBanner'" />
+            <carruselEstructura :Titulo="'Valor'" :Subtitulo="'Descripción'" :loadDataUrl="'/filosofiaValor/bannerData'" :registerBannerUrl="'/filosofiaValor/registrarBanner'"
+                :editBannerUrl="'/filosofiaValor/editarBanner'" :deleteBannerUrl="'/filosofiaValor/eliminarBanner'" />
         </TabPanel>
     </TabView>
 </template>

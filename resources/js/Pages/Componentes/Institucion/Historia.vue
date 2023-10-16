@@ -52,13 +52,13 @@ export default {
 
 
 <template>
-  <div class="banner">                               
+  <!-- <div class="banner">                               
     <img src="https://www.upq.mx/media/slider/HISTORIA.png" alt="" class="h-full w-full">                
-  </div>
+  </div> -->
 
   <br><br>
-  <p class="text-left ml-5 text-3xl text-blue-800 ">Historia</p>
-  <div class="card flex mt-10" style="white-space: pre-line">
+  <!-- <p class="text-left ml-5 text-3xl text-blue-800 ">Historia</p> -->
+  <div class="card flex mt-10" style="white-space: pre-line; text-align: justify;">
     <p class="ml-5 w-1/3">
     {{ texto1 }}
     </p>
@@ -71,7 +71,7 @@ export default {
     <div class="video-container flex flex-col w-1/3 ml-5 mr-5">
 
       <!--Video-->
-      <div class="">
+      <div class="video">
         <iframe width="450" height="300" src="https://www.youtube.com/embed/Yznna4O5tK8" title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -84,8 +84,8 @@ export default {
           delay: 2500,
           disableOnInteraction: false,
         }" :pagination="{
-  clickable: true,
-}" :navigation="true" :modules="modules" class="mySwiper">
+          clickable: true,
+        }" :navigation="true" :modules="modules" class="mySwiper">
           <swiper-slide><img src="https://www.upq.mx/media/slider/MENSAJE_RECTORA.png"></swiper-slide>
           <swiper-slide><img src="https://www.upq.mx/media/slider/MENSAJE_RECTORA.png"></swiper-slide>
           <swiper-slide><img src="https://www.upq.mx/media/slider/MENSAJE_RECTORA.png"></swiper-slide>
@@ -102,8 +102,8 @@ export default {
           delay: 2500,
           disableOnInteraction: false,
         }" :pagination="{
-  clickable: true,
-}" :navigation="true" :modules="modules" class="mySwiper">
+          clickable: true,
+        }" :navigation="true" :modules="modules" class="mySwiper">
           <swiper-slide><img src="https://www.upq.mx/media/slider/MENSAJE_RECTORA.png"></swiper-slide>
           <swiper-slide><img src="https://www.upq.mx/media/slider/MENSAJE_RECTORA.png"></swiper-slide>
           <swiper-slide><img src="https://www.upq.mx/media/slider/MENSAJE_RECTORA.png"></swiper-slide>
@@ -115,13 +115,14 @@ export default {
           <swiper-slide><img src="https://www.upq.mx/media/slider/MENSAJE_RECTORA.png"></swiper-slide>
         </swiper>
       </div>
+
     </div>
+
   </div>
 </template>
 
 
 <style scoped>
-/* Estilos generales para dispositivos móviles (menos de 768px) */
 .swiper {
   width: 100%;
   flex-wrap: wrap;
@@ -142,5 +143,24 @@ export default {
   object-fit: cover;
 }
 
-
+@media screen and (max-width: 1024px){
+  .video {
+    max-width: 100%; 
+    overflow: hidden; 
+    width: 100%; 
+    height: auto;
+  }
+}
+@media screen and (max-width: 425px) {
+  .video,
+  .img-carrusel {
+    display: none;
+  }
+  .card {
+    display: block; 
+  }
+  .ml-5 {
+    margin-left: 0 !important;
+  }
+}
 </style>

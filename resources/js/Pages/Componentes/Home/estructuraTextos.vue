@@ -260,7 +260,7 @@ export default {
 
                 <div class="field col-12 md:col-12">
                     <label for="minmax">{{ this.Subtitulo }}</label>
-                    <InputText inputId="minmax" v-model="datosArreglo.contenido" :min="0" :max="10000"
+                    <InputText inputId="minmax" v-model="datosArreglo.contenido" :min="0" :max="100000"
                         :showButtons="true" />
                 </div>
 

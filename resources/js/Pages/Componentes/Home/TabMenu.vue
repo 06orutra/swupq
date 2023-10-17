@@ -44,13 +44,5 @@ export default {
         <TabPanel header="Carrusel Dividido">
             <carruselDividido />
         </TabPanel>
-        <TabPanel header="textos">
-            <estructuraTextos :loadDataUrl="'/texto/bannerData'" :registerBannerUrl="'/texto/registrarBanner'"
-                :editBannerUrl="'/texto/editarBanner'" :deleteBannerUrl="'/texto/eliminarBanner'"  />
-        </TabPanel>
-        <TabPanel header="Imagenes">
-            <estructuraImg :loadDataUrl="'/img/bannerData'" :registerBannerUrl="'/img/registrarBanner'"
-                :editBannerUrl="'/img/editarBanner'" :deleteBannerUrl="'/img/eliminarBanner'"  />
-        </TabPanel>
     </TabView>
 </template>

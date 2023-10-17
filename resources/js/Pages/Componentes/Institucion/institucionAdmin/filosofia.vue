@@ -7,6 +7,10 @@ import carruselEstructura from '../../Home/carruselEstructura.vue';
 
 <template>
     <TabView ref="tabview1" class="p-3">
+        <TabPanel header="Carrusel Principal">
+            <carruselEstructura :Titulo="'Titulo'" :Subtitulo="'Link'" :loadDataUrl="'/filosofiaImgPrinc/bannerData'" :registerBannerUrl="'/filosofiaImgPrinc/registrarBanner'"
+                :editBannerUrl="'/filosofiaImgPrinc/editarBanner'" :deleteBannerUrl="'/filosofiaImgPrinc/eliminarBanner'" />
+        </TabPanel>
         <TabPanel header="Filosofía">
             <estructuraTextos :Titulo="'Filosofía'" :Subtitulo="'Contenido'" :loadDataUrl="'/filosofia/bannerData'" :registerBannerUrl="'/filosofia/registrarBanner'"
                 :editBannerUrl="'/filosofia/editarBanner'" :deleteBannerUrl="'/filosofia/eliminarBanner'" />

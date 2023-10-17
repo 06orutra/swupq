@@ -38,19 +38,21 @@ export default {
       this.acordeones[index].open = !this.acordeones[index].open;
     },
     cargarTexto() {
-      axios.post('/filosofias/bannerData').then((response) => {
-        this.texto = response.data;
-        this.texto.forEach(modulo => {
-          this.acordeones.push({
-            title: modulo.titulo,
-            content: modulo.contenido,
-            open: false,
-          });
+    axios.post('/filosofias/bannerData').then((response) => {
+      this.texto = response.data;
+      this.texto.forEach(modulo => {
+        // Reemplaza los saltos de línea con <br>
+        let contenidoFormateado = modulo.contenido.replace(/\n/g, '<br>');
+        this.acordeones.push({
+          title: modulo.titulo,
+          content: contenidoFormateado, // Usa el contenido formateado aquí
+          open: false,
         });
-      }).catch((error) => {
-        console.log(error);
       });
-    },
+    }).catch((error) => {
+      console.log(error);
+    });
+  },
     cargarImg() {
       axios.post('/filosofiaImg/bannerData').then((response) => {
         this.img = response.data;
@@ -81,7 +83,7 @@ export default {
         });
 
         loader.addEventListener('click', () => {
-          this.openModal(titles[loader.dataset.index], contents[loader.dataset.index]);
+          this.openModal(title[loader.dataset.index], contents[loader.dataset.index]);
         });
       });
 
@@ -116,17 +118,8 @@ export default {
 </script>
 
 <template>
-  <AppEstructure>
+  <AppEstructure :controllerName="'/filosofiaImgPrinc/bannerData'">
 
-    <!--    <div class="banner">                               
-        <img src="https://www.upq.mx/media/slider/FILOSOFIA.png" alt="" class="h-full w-full">
-    </div>
-
-    <div class="w-full" style="background-color: #800020; padding: 20px; " >
-        <h1 style="color: white;  margin-left: 50px; font-size: 25px;"><b>FILOSOFÍA</b></h1>
-    </div> -->
-
-    <!-- Acordeon -->
     <div class="p-20">
       <div class="flex">
         <div class="w-1/3">
@@ -179,47 +172,16 @@ export default {
           <hr>
         </header>
       </div>
-      {{ valor }}
-      <!-- Primeros valores -->
-      <div class="vertical-column circle-container">
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/1.jpeg')"
-          data-index="0"
-          @click="openModal('TRANSPARENCIA', 'Hacer uso responsable y claro en el manejo de los recursos institucionales.')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">TRANSPARENCIA</div>
-          </div>
-        </div>
 
-
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/3.jpeg')"
-          data-index="0"
-          @click="openModal('IGUALDAD', 'Prestar nuestros servicios sin discriminación alguna y otorgando un trato justo y equitativo, así como, las herramientas necesarias para su completo goce, sin importar raza, sexo, religión, género, nacionalidad o discapacidad.')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">IGUALDAD</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" data-index="0"
-          @click="openModal('RESPONSABILIDAD', 'Cumplir con nuestras obligaciones con plena conciencia de nuestros actos y sus repercusiones.')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">RESPONSABILIDAD</div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="vertical-column circle-container">
-
-        <div v-for="item in valor" :key="item.id">
+      <div class="circle-container">
+        <div v-for="item in valor" :key="item.id" class="circle-wrapper">
           <div class="background-image circle" data-index="0" @click="openModal(item.nombre, item.link)">
-            <img :src="'/storage/' + item.imagen" alt="Valor Image" class="circle-img"/>
+            <img :src="'/storage/' + item.imagen" alt="Valor Image" class="circle-img" />
             <div class="loader" id="loader2">
               <div class="text" id="text2">{{ item.nombre }}</div>
             </div>
           </div>
         </div>
-
       </div>
 
 
@@ -243,13 +205,42 @@ export default {
    
 
 <style scoped>
-  .circle-img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1; /* Asegura que la imagen esté debajo del texto y del loader */
-  }
+.circle-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  /* Espacio entre los elementos */
+  padding: 0 20px;
+  /* Añadir un poco de padding al contenedor para evitar que los círculos estén demasiado cerca del borde de la pantalla */
+}
+
+.circle-wrapper {
+  flex: 1;
+  max-width: 300px;
+  /* Ancho máximo de cada círculo */
+}
+
+.background-image.circle {
+  position: relative;
+  width: 100%;
+  /* Asegurarse de que cada círculo tenga un ancho responsivo */
+  height: 0;
+  padding-bottom: 100%;
+  /* Mantener la relación de aspecto 1:1 */
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.circle-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  /* Asegura que la imagen esté debajo del texto y del loader */
+}
+
 /* Círculos de valores */
 .modal {
   display: none;
@@ -313,7 +304,8 @@ export default {
   overflow: hidden;
   transition: transform 1.9s ease;
   background-color: transparent;
-  z-index: 2; /* Asegura que el loader esté sobre la imagen */
+  z-index: 2;
+  /* Asegura que el loader esté sobre la imagen */
 }
 
 #loader1 {
@@ -322,7 +314,8 @@ export default {
   border-right: 13px solid #f3f3f3;
   border-bottom: 13px solid #f3f3f3;
   transition: transform 1.9s ease;
-  z-index: 2; /* Asegura que el loader esté sobre la imagen */
+  z-index: 2;
+  /* Asegura que el loader esté sobre la imagen */
 }
 
 #loader2 {
@@ -331,7 +324,8 @@ export default {
   border-right: 13px solid #f3f3f3;
   border-bottom: 13px solid #f3f3f3;
   transition: transform 1.9s ease;
-  z-index: 2; /* Asegura que el loader esté sobre la imagen */
+  z-index: 2;
+  /* Asegura que el loader esté sobre la imagen */
 }
 
 .vertical-column {
@@ -545,8 +539,10 @@ export default {
     flex-wrap: wrap;
     /* Permite que los elementos se envuelvan en dos filas */
     justify-content: space-between;
-    /* Espacio entre los círculos */
-    justify-content: center;
+
+    gap: 20px;
+    /* Espacio entre los elementos */
+
   }
 
   .circle {
@@ -590,8 +586,7 @@ export default {
   }
 }
 
-/* display:initial */
-</style>
+/* display:initial */</style>
 
 
 

@@ -69,6 +69,12 @@ Route::prefix('institucion')->group(function () {
     Route::get('filosofia', function(){
         return Inertia::render('Componentes/Institucion/Philosophy');
     });
+    Route::get('marcoJuridico', function(){
+        return Inertia::render('Componentes/Institucion/LegalFramework');
+    });
+    Route::get('lenguaExtranjera', function(){
+        return Inertia::render('Componentes/Institucion/Foreignlanguage');
+    });
 });   
 
 /*

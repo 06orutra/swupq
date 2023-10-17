@@ -519,7 +519,6 @@ export default {
     /* Centrar horizontalmente la imagen */
     z-index: 1;
   }
-
   .toggle-acordion {
     position: relative;
     z-index: 0;

@@ -2,7 +2,7 @@
     <div>
         <div class="fixed">
             <button class="chatButton" @click="toggleChatbot">
-                <img src='/storage/img/icon_chatbot.svg'
+                <img src='http://127.0.0.1:8000/storage/2023-09-07%2017-45-09_WhatsApp%20Image%202023-09-07%20at%2011.44.29%20AM.jpeg'
                     alt="Chatbot Icon">
             </button>
         </div>
@@ -327,7 +327,7 @@ export default {
     border: 1px solid black;
     position: fixed;
     z-index: 999;
-    transform: translateX(80px) translateY(95px);
+    transform: translateX(80px) translateY(105px);
 }
 
 
@@ -342,7 +342,6 @@ export default {
 }
 
 .chatbot-container {
-
     top: 40px;
     position: fixed;
     bottom: 10px;
@@ -355,11 +354,33 @@ export default {
     z-index: 999;
 }
 
-@media (min-width: 521px) and (max-width: 768px) {
+@media (min-width: 2560px) {
+    .chatButton img {
+    width: 3vh;
+    height: 3vh;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+  .chatButton {
+    cursor: pointer;
+    width: 3px;
+    height: 3px;
+    border: 1% solid black;
+    position: fixed;
+    z-index: 999;
+    transform: translateX(40px) translateY(105px);
+  }
+}
+
+@media (min-width: 521px) and (max-width: 769px) {
     .chatButton {
-        width: 6vh;
-        height: 6vh;
+        width: 5vh;
+        height: 5vh;
         margin-left: 2%;
+        transform: translateX(77px) translateY(75px);
     }
 
     .chatbot-container {
@@ -368,25 +389,55 @@ export default {
     }
 }
 
-@media (min-width: 769px) and (max-width: 1201px) {
+@media (min-width: 1024px) and (max-width:1201px) {
+    .chatButton {
+        width: 5vh;
+        height: 5vh;
+        margin-left: 1.5%;
+        transform: translateX(77px) translateY(75px);
+    }
+    .chatbot-container {
+        max-height: 1080px;
+        max-width: 480px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1020px) {
     .chatButton {
         width: 7.5vh;
         height: 7.5vh;
         margin-left: 2%;
     }
-
     .chatbot-container {
         max-height: 1080px;
         max-width: 480px;
     }
-
 }
 
-@media (min-width: 1202px) and (max-width: 1920px) {
+
+@media (min-width: 1201px) and (max-width: 1441px) {
     .chatButton {
-        width: 7.5vh;
-        height: 7.5vh;
+        width: 6.5vh;
+        height: 6.5vh;
         margin-left: 1.5%;
+    }
+    .chatButton img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 999;
+    }
+}
+
+@media (min-width: 1442px) and (max-width: 1920px) {
+    .chatButton {
+        width: 6vh;
+        height: 6vh;
+        margin-left: 1.5%;
+        transform: translateX(74px) translateY(105px);
     }
 
     .chatbot-container {
@@ -394,17 +445,24 @@ export default {
         max-width: 640px;
     }
 }
+
 
 @media (min-width: 1921px) and (max-width: 2560px) {
     .chatButton {
-        width: 7.5vh;
-        height: 7.5vh;
-        margin-left: 3%;
+        width: 6vh;
+        height: 6vh;
+        margin-left: 2%;
+        transform: translateX(80px) translateY(150px);
     }
 
     .chatbot-container {
         max-height: 1080px;
         max-width: 640px;
+    }
+    .chatButton img {
+        width: 6vh;
+        height: 6vh;
+        z-index: 999;
     }
 }
 
@@ -414,9 +472,7 @@ export default {
         height: 4.7vh;
         transform: translateX(180px) translateY(4px);
         margin: .9%;
-
     }
-
     .chatbot-container {
         bottom: 10px;
         right: 10px;
@@ -429,5 +485,5 @@ export default {
         /* Agrega scroll si el contenido es largo */
         /* Otros estilos aquí... */
     }
-
-}</style>
+}
+</style>

@@ -42,23 +42,25 @@ export default {
 
               
 
-                <div class="contenedorrr relative w-full h-96 overflow-hidden items">
-                  <img class="absolute inset-0 w-full h-full object-cover z-1 " src="https://www.upq.mx/igualdad_laboral/images/fondo_banner_2-01.svg?crc=3799554246" alt="Fondo de banner">
-                  <div class="flex justify-center items-center h-full">
-                      <div class="text-center">
-                          <button class="bg-blue-800 bg-opacity-100 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded z-2 absolute" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/pol%c3%adtica-de-igualdad-laboral-y-no-discriminaci%c3%b3n..pdf')">
-                              CONSULTA AQUÍ
-                              <p class="text-xs">POLÍTICA DE IGUALDAD LABORAL Y NO DISCRIMINACIÓN A DETALLE</p>
-                          </button>
-                      </div>
+                <div class="contenedoor">
+                  <div class="parallax">
+                    <div class="caja">
+                        <a href="https://www.upq.mx/igualdad_laboral/assets/pol%c3%adtica-de-igualdad-laboral-y-no-discriminaci%c3%b3n..pdf" target="_blank">
+                            <p><strong>CONSULTA AQUÍ</strong></p>
+                            <P class="font-normal" style="line-height: 1.5;">POLITICA DE IGUALAD LABORAL Y NO DISCRIMINACIÓN A DETALLE</P>
+                        </a>
+                    </div>
                   </div>
-              </div>
+                </div>
               
-
-                <div class="contenedor  relative ">
-                  <img src="https://www.upq.mx/igualdad_laboral/images/comiteeticanov2021.jpg?crc=449875955" alt="Imagen 1" class="imagen grande" >
-                  <img src="https://www.upq.mx/igualdad_laboral/images/letrero_comite.svg?crc=369507292" alt="Imagen 2" class="imagen pequena" >
-                </div> 
+                <div class="contenedoor2 ">
+                  <div class="parallax3">
+                
+                    <div class="caja2">
+                        <img src="https://www.upq.mx/igualdad_laboral/images/letrero_comite.svg?crc=369507292" alt="" style="opacity: 0.8;">          
+                    </div>
+                  </div>
+                </div>
 
                 <div  class="flex justify-between button-container"> 
                   <div class="main-menu">
@@ -66,81 +68,94 @@ export default {
                     <!-- Acta de instalación -->
                       <div class="">
                           <div
-                            class="option2 bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
+                            class="option2 bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
                             style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-01.svg?crc=4137336014');">
-                            <button clasx s="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/miembros-del-comit%c3%a9-de-%c3%a9tica-upq_2021.docx.pdf')"></button>
+                            <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/miembros-del-comit%c3%a9-de-%c3%a9tica-upq_2021.docx.pdf')"></button>
                             
                           </div>
-                        <div class="button-text font-light">Acta de instalación</div>
+                          <div class="button-text-container">
+                            <div class="button-text font-light">Acta de instalación</div>
+                          </div>
                       </div>
                     <!-- Código de Ética  -->
                       <div class="">
                         <div
-                          class="option bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
+                          class="option bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
                           style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-02.svg?crc=533964385');">
                           <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/miembros-del-comit%c3%a9-de-%c3%a9tica-upq_2021.docx.pdf')"></button>
                           
                         </div>
-                       <div class="button-text font-light">Código de Etica</div>
+                        <div class="button-text-container">
+                          <div class="button-text font-light">Código de Ética</div>
+                        </div>
                       </div>
                     <!-- Lineamientos -->
                     <div class="">
                       <div
-                        class="option2 bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
+                        class="option2 bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
                         style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-03.svg?crc=3860671546');">
                         <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/miembros-del-comit%c3%a9-de-%c3%a9tica-upq_2021.docx.pdf')"></button>
                         
                        </div>
-                     <div class="button-text font-light">Lineamientos</div>
+                       <div class="button-text-container">
+                        <div class="button-text font-light">Lineamientos</div>
+                      </div>
                     </div>
                   </div>
                       
                 </div>
 
-                <div class="contenedorrr relative w-full h-96 overflow-hidden items">
-                  <img class="absolute inset-0 w-full h-full object-cover z-1 " src="https://www.upq.mx/igualdad_laboral/images/fondo_banner_3-01.svg?crc=4066401794" alt="Fondo de banner">
-                  <div class="flex justify-center items-center h-full">
-                      <div class="text-center">
-                          <button class="bg-red-800 bg-opacity-100 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded z-2 absolute" @click="redirectToPDF('https://mail.google.com/mail/u/0/#inbox')">
-                              ASESORÍA Y DENUNCIAS
-                              <p class="text-xs">ENVIANOS UN MENSAJE </p>
-                              comite.de.etica@upq.edu.mx
-                          </button>
-                      </div>
+              <p class="text-black pt-14"><strong>POLÍTICA DE IGUALDAD LABORAL Y NO DISCRIMINACIÓN</strong></p>
+              <div class="contenedoor">
+                <div class="parallax2">
+                  <div class="caja">
+                      <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank">
+                          <p><strong>ASESORÍA Y DENUNCIAS</strong></p>
+                          <P class="font-normal" style="line-height: 1;">ENVIANOS UN MENSAJE </P>
+                          <P class="font-normal" style="line-height: 1;">comite.de.etica@upq.edu.mx </P>
+                      </a>
                   </div>
+                </div>
               </div>
+
               <div  class="flex justify-between button-container"> 
                 <div class="main-menu">
 
                   <!-- Protocolo de Violencia Laboral -->
                     <div class="">
                         <div
-                          class="option2 bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
+                          class="option2 bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
                           style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-06.svg?crc=292774967');">
-                          <button clasx s="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/')"></button>
+                          <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/')"></button>
                           
                         </div>
-                      <div class="button-text font-light">Protocolo de Violencia Laboral</div>
+                        <div class="button-text-container">
+                          <div class="button-text font-light">Protocolo de Violencia Laboral</div>
+                        </div>
                     </div>
                   <!-- Protocolo de Hostigamiento y Acoso Sexual -->
                     <div class="">
                       <div
-                        class="option bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
+                        class="option bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
                         style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-04.svg?crc=378829962');">
                         <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/')"></button>
                         
                       </div>
-                     <div class="button-text font-light">Protocolo de Hostigamiento y Acoso Sexual</div>
+                      <div class="button-text-container">
+                        <div class="button-text font-light">Protocolo de Hostigamiento y Acoso Sexual</div>
+                      </div>
                     </div>
                   <!-- Protocolo para Discriminacion -->
                   <div class="">
                     <div
-                      class="option2 bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
+                      class="option2 bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
                       style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-05.svg?crc=505331560');">
                       <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/')"></button>
                       
                      </div>
-                   <div class="button-text font-light">Protocolo para Discriminacion</div>
+                     <div class="button-text-container">
+                      <div class="button-text font-light">Protocolo para Discriminacion</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -151,31 +166,29 @@ export default {
                   <!-- Plan de Accesibilidad -->
                     <div class="">
                         <div
-                          class="option2 bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
+                          class="option2 bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
                           style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-07.svg?crc=423873761');">
-                          <button clasx s="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/plan-de-accesibilidad-upq_2021.pdf')"></button>
+                          <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/plan-de-accesibilidad-upq_2021.pdf')"></button>
                           
                         </div>
-                      <div class="button-text font-light">Plan de Accesibilidad</div>
+                        <div class="button-text-container">
+                          <div class="button-text font-light">Plan de Accesibilidad</div>
+                        </div>
                     </div>
                   <!-- Programa de Protección Civil  -->
                     <div class="">
                       <div
-                        class="option bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
+                        class="option bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
                         style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-08.svg?crc=4225580983');">
                         <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/programa-interno-de-protecci%c3%b3n-civil-de-la-upq%2c-13-de-julio.pdf')"></button>
                         
                       </div>
-                     <div class="button-text font-light">Programa de Protección Civil</div>
+                      <div class="button-text-container">
+                        <div class="button-text font-light">Programa de Protección Civil</div>
+                      </div>
                     </div>
                 </div>
               </div>
-                
-                
-
-
-               
-                    
                 </div>
     </div>
     
@@ -214,16 +227,23 @@ export default {
     .shadow-md {
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
+    .button-text-container {
+      text-align: center;
+      max-width: 14rem; /* O el ancho que desees */
+      margin: 0 auto; /* Centra el contenido horizontalmente */
+    }
     .button-text {
       margin-top: 0.5rem;
       color: black;
       font-style: not-italic;
-  
+      max-height: 6em; /* o cualquier otra altura máxima deseada */
+      overflow: hidden;
+      word-wrap: break-word; /* para la separacion de palabras muy grandes */
     }
-    /*FHGJBFJC*/
+    /*estilos del contenedor para los botones circulares*/
     *{
-      margin: 0;
-      padding: 0;
+      margin: 0.5;
+      padding: 0.5;
       box-sizing: border-box;
       text-decoration: none;
       font-family: sans-serif;
@@ -237,7 +257,6 @@ export default {
       text-align: center;
       margin-top: 80px;
     }
-    
     .main-menu {
       width: 100%;
       margin: auto;
@@ -246,11 +265,10 @@ export default {
       flex-wrap: wrap;
       justify-content: space-evenly;
     }
-    
     .main-menu a{
       cursor: default;
     }
-    
+     /*estilos para las sombras rojas*/
     .main-menu .option{
       width: 200px;
       height: 200px;
@@ -262,7 +280,11 @@ export default {
       cursor: pointer;
       transition: all 300ms;
     }
-    
+    .main-menu .option:hover{
+      box-shadow: 5px 5px 0px 0px #800020, 10px 10px 14px #CC365B;
+      transform: translate(-5px, -5px);
+    }
+     /*estilos para las sombras azules*/
     .main-menu .option2{
       width: 200px;
       height: 200px;
@@ -273,60 +295,116 @@ export default {
       border-radius: 10px;
       cursor: pointer;
       transition: all 300ms;
-  }
-    .main-menu .option:hover{
-      box-shadow: 5px 5px 0px 0px #800020, 10px 10px 14px #CC365B;
-      transform: translate(-5px, -5px);
     }
     .main-menu .option2:hover{
       box-shadow: 5px 5px 0px 0px #08162fe6, 10px 10px 14px #3d67afe6;
       transform: translate(-5px, -5px);
-  }
-    
+    }
+     /*hace que todo lo que este dentro del contenedor se acomode automaticamente */
     .button-container {
       display: flex;
       justify-content: space-between;
-    }    
-  
- 
+      
+    }  
+    
+    /*estilos para los contenedores de los banners con imagen en movimiento*/
+    .contenedoor {
+      width: 100%;
+      height: 300px;
+      max-height: 100%; /* Evita que el contenedor supere su altura máxima */
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      z-index: 999;
+      top: 0px;
+      left: 0px;
+    }
+    .contenedoor2 {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      z-index: 999;
+      top:30px;
+      left: 0px;
+    }
+    .parallax {
+      background-image: url('https://www.upq.mx/igualdad_laboral/images/fondo_banner_2-01.svg?crc=3799554246');
+      background-size: cover;
+      background-attachment: fixed; /* Esto crea el efecto de parallax */
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: -10;
+      background-position: center center;
+    }
+    .parallax2 {
+      background-image: url('https://www.upq.mx/igualdad_laboral/images/fondo_banner_3-01.svg?crc=4066401794');
+      background-size: cover;
+      background-attachment: fixed; /* Esto crea el efecto de parallax */
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: -10;
+      background-position: center center;
+    }
+    .parallax3 {
+      background-image: url('https://www.upq.mx/igualdad_laboral/images/comiteeticanov2021.jpg?crc=449875955');
+      background-size: cover;
+      width: 100%;
+      height: 600px;
+      position:static;
+      z-index: -10;
+      background-position: center center;
+    }
+    .caja{
+      border: 2px solid rgb(255, 255, 255);
+      border-radius: 10px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 800px;
+      margin: auto; /* Centra el contenido */
+      padding: 20px;
+      text-align: center;
+      font-size: 20px;
+      margin-bottom: 5px;
+      color: white;
+      transition: border-color 0.3s, background-color 0.3s;
+      z-index: -2;
+    }
+    .caja2{
+      position: relative;
+      top: 74%;
+      left: 0%;
+      width: 80%; 
+    }
 
-  .contenedor {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    min-height: 100vh;
-    position: relative;
-  }
+    .caja:hover {
+      border-color: rgb(19, 18, 18); /* Cambia el color del borde a rojo al pasar el mouse */
+      background-color: rgba(255, 255, 255, 0.571); /* Cambia el fondo a blanco al pasar el mouse */
+      color:rgb(19, 18, 18);
+    }
 
-  .imagen {
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
-  }
+    .caja a {
+      text-decoration: none; /* Quita el subrayado del enlace */
+      color: inherit; /* Hereda el color del texto de la caja */
+      display: block; /* Hace que el enlace ocupe todo el espacio de la caja */
+      width: 100%;
+      height: 100%;
+    }
 
-  .grande {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-  }
-
-  .pequena {
-    width: 83.3333%;
-    position: absolute;
-    top: 87.8%;
-    left: 40%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    opacity: 0.8;
-  }
-  .contenedorrr:hover .imagen {-webkit-transform:scale(1.3);transform:scale(1.3);}
-   .contenedorrr {overflow:hidden;}
-  
-  
+    @media (max-width: 767px) {
+      .carrucel {
+        height: 300px; /* Ajusta la altura según sea necesario */
+      }
+      .caja {
+        padding: 1%;
+        font-size: 16px; /* Ajusta el tamaño de la fuente según sea necesario */   
+      }
+    }
     </style>
       
       

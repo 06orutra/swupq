@@ -26,8 +26,9 @@
 
 <script>
 
+
 export default {
-  import { route } from '';
+
   data() {
     return {
       menuicon: {
@@ -42,13 +43,13 @@ export default {
           textColor: '#ffffff',
           label: 'INSTITUCIÓN',
           subMenuItems: [
-            { label: '- Mensaje del rector', routeName: 'nombreRuta' },
-            { label: '- Filosofía', routeName: '/institucion/filosofia/' },
-            { label: '- Directorio' },
-            { label: '- Organigrama' },
-            { label: '- Marco jurídico' },
-            { label: '- Igualdad Laboral y No Discriminacion' },
-            { label: '- Sistema de Gestión de la Calidad' },
+            { label: '- Mensaje del rector', routeName: '/institucion/filosofia' },
+            { label: '- Filosofía', routeName: 'institucion/filosofia/' },
+            { label: '- Directorio', routeName: 'institucion/filosofia' },
+            { label: '- Organigrama', routeName: '/institucion/filosofia/' },
+            { label: '- Marco jurídico', routeName: '/institucion/filosofia/' },
+            { label: '- Igualdad Laboral y No Discriminacion', routeName: '/institucion/filosofia/' },
+            { label: '- Sistema de Gestión de la Calidad', routeName: '/institucion/filosofia/' },
           ],
         },
         {
@@ -136,7 +137,8 @@ export default {
   },
   methods: {
     navigateToRoute(routeName) {
-      window.location.href = route(routeName).url();
+      window.location.href = routeName;
+      console.log('hola: ' + routeName);
     },
 
     expandSubMenu(index) {

@@ -14,6 +14,9 @@ use App\Http\Controllers\FilosofiaController;
 use App\Http\Controllers\FilosofiaImgController;
 use App\Http\Controllers\FilosofiaValorController;
 use App\Http\Controllers\FilosofiaImgPrincController;
+use App\Http\Controllers\HistoriaImgPrincController;
+use App\Http\Controllers\HistoriaTextoController;
+use App\Http\Controllers\HistoriaCarruselController;
 
 
 use Illuminate\Http\Request;
@@ -32,10 +35,7 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+
     ]);
 });
 
@@ -115,6 +115,9 @@ Route::middleware([
         'filosofiaImg' => FilosofiaImgController::class,
         'filosofiaValor' => FilosofiaValorController::class,
         'filosofiaImgPrinc' => FilosofiaImgPrincController::class,
+        'historiaImgPrinc' => HistoriaImgPrincController::class,
+        'historiaTexto' => HistoriaTextoController::class,
+        'historiaCarrusel' => HistoriaCarruselController::class,
     ];
     // se declarar variables, 
 
@@ -127,6 +130,9 @@ Route::middleware([
         });
     }
 });
+Route::post('/historiaCarrusels/bannerData', [HistoriaCarruselController::class, 'bannerData']);
+Route::post('/historiaTextos/bannerData', [HistoriaTextoController::class, 'bannerData']);
+Route::post('/historiaImgPrinc/bannerData', [HistoriaImgPrincController::class, 'bannerData']);
 Route::post('/filosofiaImgPrinc/bannerData', [FilosofiaImgPrincController::class, 'bannerData']);
 Route::post('/filosofiaVal/bannerData', [FilosofiaValorController::class, 'bannerData']);
 Route::post('/filosofiaImg/bannerData', [FilosofiaImgController::class, 'bannerData']);

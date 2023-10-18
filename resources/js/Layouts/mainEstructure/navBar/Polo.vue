@@ -2,7 +2,7 @@
     <div>
         <div class="fixed">
             <button class="chatButton" @click="toggleChatbot">
-                <img src='http://127.0.0.1:8000/storage/2023-09-07%2017-45-09_WhatsApp%20Image%202023-09-07%20at%2011.44.29%20AM.jpeg'
+                <img src='/storage/img/boton_chatbot.svg'
                     alt="Chatbot Icon">
             </button>
         </div>
@@ -391,8 +391,8 @@ export default {
 
 @media (min-width: 1024px) and (max-width:1201px) {
     .chatButton {
-        width: 5vh;
-        height: 5vh;
+        width: 6vh;
+        height: 6vh;
         margin-left: 1.5%;
         transform: translateX(77px) translateY(75px);
     }

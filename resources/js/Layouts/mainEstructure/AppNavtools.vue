@@ -182,10 +182,6 @@ const applyScale = () => {
   color: white;
 }
 
-.dark-mode .comuni:hover {
-  background-color: #0076f4;
-}
-
 .title {
   color: #24356A;
   font-weight: bold;
@@ -197,7 +193,7 @@ const applyScale = () => {
 }
 
 .dark-mode .title {
-  color: white;
+  color: #1B4D9A;
 }
 
 
@@ -207,9 +203,8 @@ const applyScale = () => {
 }
 
 .dark-mode .sii {
-  color: white;
+  color: #1B4D9A;
 }
-
 
 
 .sii span {
@@ -247,7 +242,7 @@ const applyScale = () => {
   }
 }
 
-/*Ajusta a partir del 375px*/
+
 @media (min-width: 322px) and (max-width: 379px) {
 
   .left.surface-900.border-900 {
@@ -255,7 +250,7 @@ const applyScale = () => {
   }
 }
 
-/*Ajusta a partir del 320px*/
+
 @media (min-width: 300px) and (max-width: 321px) {
   .right {
     margin-right: 0px; /* Ajusta el valor según la cantidad de espacio que desees */

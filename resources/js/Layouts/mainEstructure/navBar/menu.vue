@@ -268,7 +268,7 @@ methods: {
 
 /*Vista del tamanño del icono de menu en 768px */
 @media (min-width: 521px) and (max-width: 769px) {
-  /*Este estilo es para el tamaño del icono*/
+
   .menu-icon {
     width:5vh ;
     height: 5vh;
@@ -285,18 +285,18 @@ methods: {
     /* Resto de los estilos para el contenido principal */
   }
 }
-/*Aqui se modifica la posocion del menu para la resolucion en 768px*/
+
 .menu {
 width:20%;
 top: calc(34% + 1vh);
 }
 
 
-/*Vista 1024px*/
+
 @media (min-width: 1024px) and (max-width:1201px) {
   .menu-icon {
-    width: 5vh ;
-    height: 5vh;
+    width: 6vh ;
+    height: 6vh;
     cursor: pointer;
     border: 1px solid black;
     position: fixed;
@@ -310,7 +310,6 @@ top: calc(34% + 1vh);
   }
 }
 
-/*Vista normal, ajuste del menu y submenu*/
 @media (min-width: 1202px) and (max-width: 1499px) {
   .menu-icon {
     width: 6.5vh ;
@@ -335,7 +334,7 @@ top: calc(34% + 1vh);
   }
 }
 
-/*Vista 4k*/
+
 @media (min-width: 1921px) and (max-width:2560px) {
   .menu-icon {
     width: 6vh ;
@@ -350,7 +349,7 @@ top: calc(34% + 1vh);
 }
 
 /* Estilo para la vista movil, acomoda los botones de forma automatica con coordenadas */
-/*Este sirve para la vision movil*/
+
 @media (min-width:420px) and (max-width: 520px) {
   .menu-icon {
     width:4.7vh ;
@@ -377,7 +376,7 @@ top: calc(34% + 1vh);
   }
 }
 
-/*vista movil*/
+
 @media (max-width: 320px) {
   .menu-icon {
     width:4.7vh ;
@@ -392,8 +391,7 @@ top: calc(34% + 1vh);
   }
 }
 
-/*Aqui se terminan los estilos de reposicionamiento */
-/* e inician los de vista movil*/
+
 @media (min-width: 370px) and (max-width: 415px) {
   .menu-icon {
     width: 4.7vh;

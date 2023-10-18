@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img
-      src="/storage/img/icon_menu.png"
+      src="/storage/img/icon_menu.svg"
       alt="Menu Icon"
       class="menu-icon"
       @click="showMenu = !showMenu"
@@ -11,7 +11,6 @@
       <li v-for="(menuItem, index) in menuItems" :key="index">
         <div
           @mouseover="expandSubMenu(index)"
-          @click="toggleSubMenu(index)"
           :style="{ color: menuItem.textColor }"
           :class="{ 'menu-block': true, 'active': menuItem.expanded }"
         >
@@ -41,7 +40,7 @@
 export default {
   data() {
     return {
-      menuicon: {
+      menuicon:{
         top: '28.1%', // Ajusta esto a la posición inicial del menú-icon
         left: '10px', // Ajusta esto a la posición inicial del menú-icon
       },
@@ -187,102 +186,29 @@ methods: {
     if (this.activeSubMenuIndex !== null) {
       this.menuItems[this.activeSubMenuIndex].expanded = false;
       this.activeSubMenuIndex = null;
+      this.showMenu = false;
+      this.activeSubMenuIndex = null;
     }
   },
-},
+  closeMenuAndSubMenu() {
+    if (this.showMenu || this.activeSubMenuIndex !== null) {
+      this.showMenu = false;
+      this.activeSubMenuIndex = null;
+    }
+  },
+},  
 };
 </script>
 
-
 <style scoped>
 .menu-icon {
-cursor: pointer;
-width: 7vh;
-height: 7vh;
-border: 1px solid black;
-position: fixed;
-z-index: 999;
-transform: translateX(20px) translateY(95px);
-}
-
-.content {
-margin-left: 15%;
-/* Resto de los estilos para el contenido principal */
-}
-
-.menu {
-list-style-type: none;
-padding: 0;
-position: fixed;
-left: 3%;
-top: calc(24% + 1vh);
-z-index: 999;
-width: 15%;
-background-color: rgba(0, 10, 87, 0.8);
-transition: transform 0.5s ease;
-}
-
-.menu li {
-display: block;
-background: transparent;
-color: #fff;
-}
-
-.menu .menu-block {
-display: block;
-padding: 10px;
-transition: background-color 0.3s;
-}
-
-.menu .menu-block:hover {
-background-color: rgba(0, 30, 255, 0.8);
-}
-
-/* Corrección de posición y recursividad */
-.menu .sub-menu {
-position: absolute;
-left: 100%;
-top: 0;
-margin: 0;
-padding: 0;
-width: 300px;
-z-index: 2;
-background-color: rgba(0, 26, 226, 0.8);
-}
-
-.menu .sub-menu-block {
-display: block;
-padding: 10px;
-transition: background-color 0.3s;
-}
-
-.menu .sub-menu-block:hover {
-background-color: rgba(0, 10, 87, 0.8);
-}
-@media (min-width: 521px) and (max-width: 768px) 
-{.menu-icon {
-  width: 6vh;
-  height: 6vh;
-}
-.menu {
-  width: 20%; /* Adjust the width as needed */
-  top: calc(25% + 1vh); /* Adjust the top position as needed */
-  right:-50%;
-}
-.menu li {
-  font-size: 12px; /* Adjust the font size as needed */
-}
-.menu .menu-block,
-.menu .sub-menu-block {
-  padding: 5px; /* Adjust the padding as needed */
-}
-}
-
-@media (min-width: 769px) and (max-width: 1224px) {
-  .menu-icon {
-  width:7vh ;
+  cursor: pointer;
+  width: 7vh;
   height: 7vh;
-  margin-right:4%;
+  border: 1px solid black;
+  position: fixed;
+  z-index: 999;
+  transform: translateX(40px) translateY(105px);
 }
 
 .content {
@@ -291,62 +217,21 @@ background-color: rgba(0, 10, 87, 0.8);
 }
 
 .menu {
-  width:20%;
-  top: calc(27% + 1vh);
-}
-
-}
-
-@media (min-width: 1225px) and (max-width: 1440px) {
-  .menu-icon {
-    width:7.5vh ;
-    height: 7.5vh;
-  }
-  .menu {
-    width:15%;
-    top: calc(26% + 1vh);
-  }
-}
-.menu {
-  width:20%;
-  top: calc(26% + 1vh);
-}
-
-@media (min-width: 1441px) {
-.menu-icon {
-  width:7.5vh ;
-  height: 7.5vh;
-}
-.menu {
-  width:15%;
-  top: calc(26% + 1vh);
-}
-}
-@media (max-width: 520px) {
-    .menu-icon {
-      width:4.7vh ;
-    height: 4.7vh;
-    transform: translateX(240px) translateY(4px);
-    margin:.9%;
-    
-      }
-}
-@media (min-width: 320px) and (max-width: 520px) {
-.menu {
   list-style-type: none;
   padding: 0;
-  position: fixed; /* Cambia de "absolute" a "relative" para que los elementos se coloquen en el flujo normal del documento */
-  width: 40%; /* Ocupa todo el ancho disponible */
+  position: fixed;
+  left: 3%;
+  top: calc(24% + 1vh);
+  z-index: 999;
+  width: 15%;
   background-color: rgba(0, 10, 87, 0.8);
   transition: transform 0.5s ease;
-  top: calc(-10% + 20vh);
-  left:6%;
 }
 
 .menu li {
   display: block;
   background: transparent;
-  color: #ffffff;
+  color: #fff;
 }
 
 .menu .menu-block {
@@ -359,13 +244,14 @@ background-color: rgba(0, 10, 87, 0.8);
   background-color: rgba(0, 30, 255, 0.8);
 }
 
+/* Corrección de posición y recursividad */
 .menu .sub-menu {
   position: absolute;
-  left: 100%; /* Coloca el sub-menú a la derecha del primer bloque */
+  left: 100%;
   top: 0;
-  margin: 0;
+  margin-left: 0;
   padding: 0;
-  width: 250px;
+  width: 300px;
   z-index: 2;
   background-color: rgba(0, 26, 226, 0.8);
 }
@@ -379,6 +265,144 @@ background-color: rgba(0, 10, 87, 0.8);
 .menu .sub-menu-block:hover {
   background-color: rgba(0, 10, 87, 0.8);
 }
+
+/*Vista del tamanño del icono de menu en 768px */
+@media (min-width: 521px) and (max-width: 769px) {
+
+  .menu-icon {
+    width:5vh ;
+    height: 5vh;
+    margin-right:4%;
+    transform: translateX(45px) translateY(75px);
+  }
+  .menu {
+    width:15%;
+    left: 5%;
+    top: calc(2% + 1vh);
+  }
+  .content {
+    margin-left: 20%;
+    /* Resto de los estilos para el contenido principal */
+  }
+}
+
+.menu {
+width:20%;
+top: calc(34% + 1vh);
+}
+
+
+
+@media (min-width: 1024px) and (max-width:1201px) {
+  .menu-icon {
+    width: 6vh ;
+    height: 6vh;
+    cursor: pointer;
+    border: 1px solid black;
+    position: fixed;
+    z-index: 999;
+    transform: translateX(45px) translateY(75px);
+  }
+  .menu {
+    width:20%;
+    left: 5.5%;
+    top: calc(25.6% + 1vh);
+  }
+}
+
+@media (min-width: 1202px) and (max-width: 1499px) {
+  .menu-icon {
+    width: 6.5vh ;
+    height: 6.5vh;
+  }
+  .menu {
+    width:15%;
+    left: 3.5%;
+    top: calc(27.7% + 1vh);
+  }
+}
+
+@media (min-width: 1500px) and (max-width: 1920px) {
+  .menu-icon {
+    width: 6vh ;
+    height: 6vh;
+  }
+  .menu {
+    width:15%;
+    left: 2.7%;
+    top: calc(25.5% + 1vh);
+  }
+}
+
+
+@media (min-width: 1921px) and (max-width:2560px) {
+  .menu-icon {
+    width: 6vh ;
+    height: 6vh;
+    transform: translateX(40px) translateY(150px);
+  }
+  .menu {
+    width:8%;
+    left: 2%;
+    top: calc(22% + 1vh);
+  }
+}
+
+/* Estilo para la vista movil, acomoda los botones de forma automatica con coordenadas */
+
+@media (min-width:420px) and (max-width: 520px) {
+  .menu-icon {
+    width:4.7vh ;
+    height: 4.7vh;
+    transform: translateX(240px) translateY(5px);
+    margin:.9%;
+  }
+  .menu {
+    width:40%;
+    left: 4.5%;
+    top: calc(7% + 1vh);
+  }
+}
+
+@media (min-width: 522px) and (max-width: 769px) {
+  .menu-icon {
+    width: 5vh ;
+    height: 5vh;
+  }
+  .menu {
+    width:26%;
+    left: 4.5%;
+    top: calc(26.2% + 1vh);
+  }
+}
+
+
+@media (max-width: 320px) {
+  .menu-icon {
+    width:4.7vh ;
+    height: 4.7vh;
+    margin:0%;
+    transform: translateX(240px) translateY(8px);
+  }
+  .menu {
+    width:40%;
+    left: 4.5%;
+    top: calc(7% + 1vh);
+  }
+}
+
+
+@media (min-width: 370px) and (max-width: 415px) {
+  .menu-icon {
+    width: 4.7vh;
+    height: 4.7vh;
+    transform: translateX(240px) translateY(8px);
+  }
+  .menu {
+    width:40%;
+    left: 4.5%;
+    top: calc(7% + 1vh);
+  }
 }
 
 </style>

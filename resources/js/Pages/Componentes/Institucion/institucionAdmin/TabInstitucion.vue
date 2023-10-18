@@ -10,6 +10,8 @@ import MensajeRector from '@/Pages/Componentes/Institucion/institucionAdmin/mens
 import cicloAlumando from '@/Pages/Componentes/Institucion/institucionAdmin/cicloAlumnado.vue';
 import modalModEdu from '@/Pages/Componentes/Institucion/institucionAdmin/modalModEdu.vue';
 import informesModEdu from '@/Pages/Componentes/Institucion/institucionAdmin/informesModEdu.vue';
+import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofia.vue";
+import historia from './historia.vue';
 
 export default {
     components: {
@@ -24,6 +26,8 @@ export default {
         cicloAlumando,
         modalModEdu,
         informesModEdu,
+        filosofia,
+        historia,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -48,6 +52,20 @@ export default {
         </TabPanel>
         <TabPanel header="Rector">
             <MensajeRector/>
+        </TabPanel>
+        <TabPanel header="textos">
+            <estructuraTextos :loadDataUrl="'/texto/bannerData'" :registerBannerUrl="'/texto/registrarBanner'"
+                :editBannerUrl="'/texto/editarBanner'" :deleteBannerUrl="'/texto/eliminarBanner'" />
+        </TabPanel>
+        <TabPanel header="Imagenes">
+            <estructuraImg :loadDataUrl="'/img/bannerData'" :registerBannerUrl="'/img/registrarBanner'"
+                :editBannerUrl="'/img/editarBanner'" :deleteBannerUrl="'/img/eliminarBanner'" />
+        </TabPanel>
+        <TabPanel header="Historia">
+            <historia />
+        </TabPanel>
+        <TabPanel header="Filosofía">
+            <filosofia />
         </TabPanel>
         <TabPanel header="Ciclo en curso">
             <cicloAlumando/>

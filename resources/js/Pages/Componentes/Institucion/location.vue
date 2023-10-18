@@ -84,13 +84,13 @@ export default {
   <div class="popup-content"> 
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" style="color: #fff; text-align: left;"">Ubicación de la Universidad</h4>
+        <h4 class="modal-title" style="color: #fff; text-align: left; font-size: 25px;">Ubicación de la Universidad</h4>
       </div>
       <div class="modal-body">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3736.0105098241406!2d-100.27699468507546!3d20.54675088626154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d3452b278e7259%3A0xeb40a967d716216c!2sUniversidad+Polit%C3%A9cnica+de+Quer%C3%A9taro!5e0!3m2!1ses-419!2smx!4v1520618862387" width="100%" height="480" frameborder="0" style="border:0" allowfullscreen=""></iframe>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" @click="closeMapModal">Cerrar</button>
+        <button type="button" class="btn btn-default" @click="closeMapModal">Cerrar</button>
         <button type="button" class="btn btn-primary" @click="openInNewTab('https://www.google.com/maps/place/Universidad+Politécnica+de+Querétaro/@20.5467559,-100.2769947,17z/data=!3m1!4b1!4m5!3m4!1s0x85d3452b278e7259:0xeb40a967d716216c!8m2!3d20.5467509!4d-100.274806')">Ver en Google Maps</button>
       </div>
     </div>
@@ -207,7 +207,28 @@ export default {
   border-top-right-radius: 0.3rem;
   box-sizing: border-box;
 }
-
+.btn-default{
+  font-size: 17px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  border-color:#ccc;
+  border-width: 1px;
+  padding: 6px 12px;
+  border-radius: 7px;
+}
+.btn-primary{
+  font-size: 17px;
+  line-height: 1.6;
+  color: #fff;
+  background-color: #8C2437;
+  border-color:#8C2437;
+  border-width: 1px;
+  padding: 6px 12px;
+  border-radius: 7px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
 @media (min-width: 768px) {
   .image-and-contact{
   display: flex;

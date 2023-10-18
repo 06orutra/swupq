@@ -15,7 +15,17 @@ use App\Http\Controllers\MensajeRectorController;
 use App\Http\Controllers\CicloController;
 use App\Http\Controllers\ModEduModalController;
 use App\Http\Controllers\ModEduInformeController;
+use App\Http\Controllers\FilosofiaController;
+use App\Http\Controllers\FilosofiaImgController;
+use App\Http\Controllers\FilosofiaValorController;
+use App\Http\Controllers\FilosofiaImgPrincController;
+use App\Http\Controllers\HistoriaImgPrincController;
+use App\Http\Controllers\HistoriaTextoController;
+use App\Http\Controllers\HistoriaCarruselController;
+
+
 use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +40,7 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+
     ]);
 });
 
@@ -46,6 +53,25 @@ Route::prefix('servicios-universitarios')->group(function() {
 Route::prefix('institucion')->group(function () {
     Route::get('filosofia', function(){
         return Inertia::render('Componentes/Institucion/Philosophy');
+    Route::get('mascotas', function () {
+        return Inertia::render('Componentes/Institucion/mascotasPrincipal');
+    });
+
+    Route::get('messageRector', function () {
+        return Inertia::render('Componentes/Institucion/rectorMessage');
+    });
+
+    Route::get('laborEq', function () {
+        return Inertia::render('Componentes/Institucion/Laborequality');
+    });
+    Route::get('instalaciones', function(){
+        return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
+    });
+    
+    Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
+
+    Route::get('ubicacion', function(){
+        return Inertia::render('Componentes/Institucion/location');
     });
     Route::get('historia', function(){
         return Inertia::render('Componentes/Institucion/Historia');
@@ -62,10 +88,17 @@ Route::prefix('institucion')->group(function () {
     Route::get('ubicacion', function(){
         return Inertia::render('Componentes/Institucion/location');
     });
+});
     
     //¿Esto qué es xd?
     Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
 
+    Route::get('marcoJuridico', function(){
+        return Inertia::render('Componentes/Institucion/LegalFramework');
+    });
+    Route::get('lenguaExtranjera', function(){
+        return Inertia::render('Componentes/Institucion/Foreignlanguage');
+    });
 });   
 
 /*
@@ -107,7 +140,15 @@ Route::middleware([
         'ciclo' => CicloController::class,
         'modalModEdu' => ModEduModalController::class,
         'informesModEdu' => ModEduInformeController::class,
+        'filosofia' => FilosofiaController::class,
+        'filosofiaImg' => FilosofiaImgController::class,
+        'filosofiaValor' => FilosofiaValorController::class,
+        'filosofiaImgPrinc' => FilosofiaImgPrincController::class,
+        'historiaImgPrinc' => HistoriaImgPrincController::class,
+        'historiaTexto' => HistoriaTextoController::class,
+        'historiaCarrusel' => HistoriaCarruselController::class,
     ];
+    // se declarar variables, 
 
     foreach ($controllers as $prefix => $controller) {
         Route::prefix($prefix)->group(function () use ($controller) {
@@ -123,6 +164,13 @@ Route::middleware([
 Route::post('/modeduCiclo/bannerData', [CicloController::class, 'bannerData']);
 
 //Rutas por defecto?
+Route::post('/historiaCarrusels/bannerData', [HistoriaCarruselController::class, 'bannerData']);
+Route::post('/historiaTextos/bannerData', [HistoriaTextoController::class, 'bannerData']);
+Route::post('/historiaImgPrinc/bannerData', [HistoriaImgPrincController::class, 'bannerData']);
+Route::post('/filosofiaImgPrinc/bannerData', [FilosofiaImgPrincController::class, 'bannerData']);
+Route::post('/filosofiaVal/bannerData', [FilosofiaValorController::class, 'bannerData']);
+Route::post('/filosofiaImg/bannerData', [FilosofiaImgController::class, 'bannerData']);
+Route::post('/filosofias/bannerData', [FilosofiaController::class, 'bannerData']);
 Route::post('/bannerData', [HomeController::class, 'bannerData']);
 Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'bannerDatafilter']);
 Route::post('/bannerDataprimero', [TbCarruselPrimeroController::class, 'bannerData']);

@@ -34,7 +34,7 @@ export default {
     <TabView ref="tabview1" class="p-3">
         <TabPanel header="Carrusel Principal">
             <opcionesCarrusel id="carruselPrincipal" @configuracion-guardada="updateCarouselSettings" />
-            <carruselEstructura :loadDataUrl="'/bannerData'" :registerBannerUrl="'/home/registrarBanner'"
+            <carruselEstructura :Titulo="'Titulo'" :Subtitulo="'Link'" :loadDataUrl="'/bannerData'" :registerBannerUrl="'/home/registrarBanner'"
                 :editBannerUrl="'/home/editarBanner'" :deleteBannerUrl="'/home/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Carrusel Secundario">
@@ -43,14 +43,6 @@ export default {
         </TabPanel>
         <TabPanel header="Carrusel Dividido">
             <carruselDividido />
-        </TabPanel>
-        <TabPanel header="textos">
-            <estructuraTextos :loadDataUrl="'/texto/bannerData'" :registerBannerUrl="'/texto/registrarBanner'"
-                :editBannerUrl="'/texto/editarBanner'" :deleteBannerUrl="'/texto/eliminarBanner'"  />
-        </TabPanel>
-        <TabPanel header="Imagenes">
-            <estructuraImg :loadDataUrl="'/img/bannerData'" :registerBannerUrl="'/img/registrarBanner'"
-                :editBannerUrl="'/img/editarBanner'" :deleteBannerUrl="'/img/eliminarBanner'"  />
         </TabPanel>
     </TabView>
 </template>

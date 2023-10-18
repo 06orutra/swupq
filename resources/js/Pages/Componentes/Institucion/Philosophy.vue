@@ -4,84 +4,22 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
-
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import axios from 'axios'; // Asegúrese de que axios esté correctamente importado
 
 export default {
-
   components: {
     AppEstructure,
     Swiper,
     SwiperSlide,
   },
   mounted() {
-    const loaders = document.querySelectorAll('.loader');
-    const acordeones = document.querySelectorAll('.acordion-item');
-
-    loaders.forEach(loader => {
-      const text = loader.querySelector('.text');
-
-      loader.addEventListener('mouseenter', () => {
-        loader.classList.add('active');
-        text.style.opacity = '0';
-      });
-
-      loader.addEventListener('mouseleave', () => {
-        loader.classList.remove('active');
-        text.style.opacity = '1';
-      });
-
-      loader.addEventListener('click', () => {
-        const titles = [
-          "TRANSPARENCIA",
-          "SERVICIO",
-          "IGUALDAD",
-          "RESPONSABILIDAD",
-          "RESPETO",
-          "HONRADEZ",
-          "LIDERAZGO",
-          "GENEROSIDAD",
-          "BIEN COMÚN",
-          "JUSTICIA",
-          "INTEGRIDAD",
-          "COLABORACIÓN",
-          "EMPATÍA",
-          "PUNTUALIDAD",
-          "SOLIDARIDAD",
-        ];
-
-        const contents = [
-          "Hacer uso responsable y claro en el manejo de los recursos institucionales.",
-          "Participar de forma activa, actuando siempre con calidad en el servicio y la gestión de toda actividad académica.",
-          "Prestar nuestros servicios sin discriminación alguna y otorgando un trato justo y equitativo, así como, las herramientas necesarias para su completo goce, sin importar raza, sexo, religión, género, nacionalidad o discapacidad.",
-          "Cumplir con nuestras obligaciones con plena conciencia de nuestros actos y sus repercusiones.",
-          "Reconocer, aceptar, apreciar y valorar las cualidades y los derechos de todos y todas.",
-          "Actuar siempre con la verdad y a sabiendas de que el cargo que se ostenta es para hacer el bien a los demás y no utilizar el cargo, para obtener algún beneficio personal o a favor de terceros, actuando con honestidad respetando siempre nuestros principios éticos.",
-          "Ser promotores de los valores y principios de la Universidad, a través del ejemplo personal para orientar y ayudar a nuestros semejantes en su desarrollo humano y profesional.",
-          "Actuar siempre de manera solidaria con todos los miembros de la comunidad universitaria.",
-          "Todas las decisiones y acciones deben estar dirigidas a la satisfacción de las necesidades e intereses de la Universidad, por encima de intereses particulares. El compromiso con el bien común implica que la y el servicio público y la educación superior, patrimonio de todo mexicano, sólo se justifica y legitima cuando se procura este bien por encima de los intereses particulares o de grupo.",
-          "Obrar en apego a las normas sociales respetando la verdad y la igualdad.",
-          "Actuar con honestidad, atendiendo siempre a la verdad. Conduciéndose de esta manera, se fomentará la credibilidad en la Universidad y se contribuirá a generar una cultura de confianza y apego a la verdad.",
-          "Participar en los esfuerzos colectivos sin tener en cuenta el beneficio personal e individual sino el beneficio para el bien común de nuestra sociedad universitaria.",
-        ];
-
-        this.openModal(titles[loader.dataset.index], contents[loader.dataset.index]);
-      });
-    });
-
-    acordeones.forEach(acordeon => {
-      acordeon.addEventListener('click', () => {
-        // Cierra todos los acordeones
-        acordeones.forEach(element => {
-          element.classList.remove('active');
-        });
-
-        // Abre o cierra el acordeón actual
-        acordeon.classList.toggle('active');
-      });
+    this.cargarTexto();
+    this.cargarImg();
+    this.cargarValor().then(() => {
+      this.$nextTick(this.inicializarInteracciones);
     });
   },
-
   methods: {
     openModal(title, content) {
       this.modalTitle = title;
@@ -92,79 +30,96 @@ export default {
       this.showModal = false;
     },
     toggleAcordeon(index) {
-      // Cierra todos los acordeones
       this.acordeones.forEach((acordeon, i) => {
         if (i !== index) {
           acordeon.open = false;
         }
       });
-
-      // Abre o cierra el acordeón actual
       this.acordeones[index].open = !this.acordeones[index].open;
     },
+    cargarTexto() {
+    axios.post('/filosofias/bannerData').then((response) => {
+      this.texto = response.data;
+      this.texto.forEach(modulo => {
+        // Reemplaza los saltos de línea con <br>
+        let contenidoFormateado = modulo.contenido.replace(/\n/g, '<br>');
+        this.acordeones.push({
+          title: modulo.titulo,
+          content: contenidoFormateado, // Usa el contenido formateado aquí
+          open: false,
+        });
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
   },
+    cargarImg() {
+      axios.post('/filosofiaImg/bannerData').then((response) => {
+        this.img = response.data;
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    cargarValor() {
+      return axios.post('/filosofiaVal/bannerData').then((response) => {
+        this.valor = response.data;
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    inicializarInteracciones() {
+      const loaders = document.querySelectorAll('.loader');
+      loaders.forEach(loader => {
+        const text = loader.querySelector('.text');
 
+        loader.addEventListener('mouseenter', () => {
+          loader.classList.add('active');
+          text.style.opacity = '0';
+        });
+
+        loader.addEventListener('mouseleave', () => {
+          loader.classList.remove('active');
+          text.style.opacity = '1';
+        });
+
+        loader.addEventListener('click', () => {
+          this.openModal(title[loader.dataset.index], contents[loader.dataset.index]);
+        });
+      });
+
+      const acordeones = document.querySelectorAll('.acordion-item');
+      acordeones.forEach(acordeon => {
+        acordeon.addEventListener('click', () => {
+          acordeones.forEach(element => {
+            element.classList.remove('active');
+          });
+          acordeon.classList.toggle('active');
+        });
+      });
+    },
+  },
   setup() {
     return {
       modules: [Autoplay, Pagination, Navigation],
     };
   },
-
   data() {
     return {
+      valor: [],
+      img: [],
+      texto: [],
       modalTitle: '',
       modalContent: '',
       showModal: false,
-
-      listAccordionIndex: 0,
-      acordeones: [
-        {
-          title: "Objetivos de la calidad",
-          content: "Los objetivos de la calidad que la Universidad Politécnica de Querétaro ha establecido como compromiso para la prestación de su Servicio Educativo son: 1. Calidad: Asegurar la calidad educativa de la Universidad Politécnica de Querétaro. 2. Enfoque al cliente: Satisfacer las necesidades educativas del alumnado. 3. Pertinencia: Asegurar la pertinencia del Servicio Educativo a través del grado de satisfacción medido en los procesos de Estancias y Estadías y de Seguimiento a Egresadas y Egresados.4. Mejora continua: Desempeñar acciones que ayuden a fortalecer, desarrollar y potencializar los recursos de la Universidad Politécnica de Querétaro.",
-          points: [
-            "Calidad: Asegurar la calidad educativa de la Universidad Politécnica de Querétaro.",
-            "Enfoque al cliente: Satisfacer las necesidades educativas del alumnado.",
-            "Pertinencia: Asegurar la pertinencia del Servicio Educativo a través del grado de satisfacción medido en los procesos de Estancias y Estadías y de Seguimiento a Egresadas y Egresados.",
-            "Mejora continua: Desempeñar acciones que ayuden a fortalecer, desarrollar y potencializar los recursos de la Universidad Politécnica de Querétaro.",
-          ],
-          open: false,
-        },
-        {
-          title: "Misión",
-          content: "Somos una institución pública de educación superior con una oferta educativa de calidad con una visión global y con acento Automotriz, que cumple con estándares y certificaciones de formación profesional y desarrollo humano, mediante una formación integral para generar capital humano que sea agente de cambio, que contribuya y se vincule con el sector productivo, reconociendo las tendencias que demanda la industria 4.0, economía circular, innovación y la responsabilidad social empresarial; nos comprometemos con el bienestar, el desarrollo social y tecnológico, con la equidad, pertinencia de nuestros programas educativos y una estrategia de sustentabilidad y sostenibilidad.",
-          open: false,
-        },
-        {
-          title: "Visión",
-          content: "Aspiramos a ser para el año 2030 la institución de educación superior más grande del subsistema educativo tecnológico, politécnico y con acento Automotriz. Alcanzar los estándares de excelencia educativa, desarrollo tecnológico, científico y de energías limpias, manteniendo el liderazgo universitario con vocación industrial del estado.",
-          open: false,
-        },
-        {
-          title: "Política de la calidad",
-          content: " La Universidad Politécnica de Querétaro establece el compromiso de apoyar su Misión y Visión, orientar su proceso de Operación Académica y Administración Escolar, satisfacer la responsabilidad social y gestionar la propiedad intelectual, para brindar servicios de educación superior que satisfagan consistentemente los requisitos de nuestro alumnado y partes interesadas con un enfoque de mejora continua basado en la implementación, operación y eficacia de un Sistema de Gestión de la Calidad.",
-          open: false,
-        },
-
-      ],
+      acordeones: [],
     };
   },
 };
 </script>
 
-
 <template>
+  <AppEstructure :controllerName="'/filosofiaImgPrinc/bannerData'">
 
-  <AppEstructure>
-
-    <!--    <div class="banner">                               
-        <img src="https://www.upq.mx/media/slider/FILOSOFIA.png" alt="" class="h-full w-full">
-    </div>
-
-    <div class="w-full" style="background-color: #800020; padding: 20px; " >
-        <h1 style="color: white;  margin-left: 50px; font-size: 25px;"><b>FILOSOFÍA</b></h1>
-    </div> -->
-
-    <!-- Acordeon -->
     <div class="p-20">
       <div class="flex">
         <div class="w-1/3">
@@ -175,9 +130,8 @@ export default {
             }" :pagination="{
   clickable: true,
 }" :navigation="true" :modules="modules" class="mySwiper">
-              <swiper-slide><img src="https://www.upq.mx/assets/images/uno.png"></swiper-slide>
-              <swiper-slide><img src="https://www.upq.mx/assets/images/dos.png"></swiper-slide>
-              <swiper-slide><img src="https://www.upq.mx/assets/images/tres.png"></swiper-slide>
+              <swiper-slide v-for="datosimg in img"><img :src="'/storage/' + datosimg.imagen"
+                  alt="Card Image" /></swiper-slide>
             </swiper>
           </div>
         </div>
@@ -219,149 +173,18 @@ export default {
         </header>
       </div>
 
-      <!-- Primeros valores -->
-      <div class="vertical-column circle-container">
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/1.jpeg')"
-          data-index="0"
-          @click="openModal('TRANSPARENCIA', 'Hacer uso responsable y claro en el manejo de los recursos institucionales.')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">TRANSPARENCIA</div>
+      <div class="circle-container">
+        <div v-for="item in valor" :key="item.id" class="circle-wrapper">
+          <div class="background-image circle" data-index="0" @click="openModal(item.nombre, item.link)">
+            <img :src="'/storage/' + item.imagen" alt="Valor Image" class="circle-img" />
+            <div class="loader" id="loader2">
+              <div class="text" id="text2">{{ item.nombre }}</div>
+            </div>
           </div>
         </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/2.jpeg')"
-          data-index="0"
-          @click="openModal('SERVICIO', 'Participar de forma activa, actuando siempre con calidad en el servicio y la gestión de toda actividad académica.')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">SERVICIO</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/3.jpeg')"
-          data-index="0"
-          @click="openModal('IGUALDAD', 'Prestar nuestros servicios sin discriminación alguna y otorgando un trato justo y equitativo, así como, las herramientas necesarias para su completo goce, sin importar raza, sexo, religión, género, nacionalidad o discapacidad.')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">IGUALDAD</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/4.jpeg')"
-          data-index="0"
-          @click="openModal('RESPONSABILIDAD', 'Cumplir con nuestras obligaciones con plena conciencia de nuestros actos y sus repercusiones.')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">RESPONSABILIDAD</div>
-          </div>
-        </div>
-
       </div>
 
-      <!-- Segundos valores -->
-      <div class="vertical-column circle-container">
 
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/5.jpeg')"
-          data-index="0"
-          @click="openModal('RESPETO', 'Reconocer, acpetar, apreciar y valorar las cualidades y los derechos de todos y todas.')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">RESPETO</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/6.jpeg')"
-          data-index="0"
-          @click="openModal('HONRADEZ', 'Actuar siempre con la veerdad y a sabiendas de que el cargo que se ostenta es para hacer el bien a los demás y no utilizar el cargo, para obtener algún beneficio persoal o a favor de terceros, actuando con honestidad respetando siempre nuestros principios éticos.')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">HONRADEZ</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/7.jpeg')"
-          data-index="0"
-          @click="openModal('LIDERAZGO', 'Ser promotores de los valores y principios de la Universidad, a través del ejemplo personal para orientar y ayudar a nuestros semejantes en su desarrollo humano y profesional.')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">LIDERAZGO</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/8.jpeg')"
-          data-index="0"
-          @click="openModal('GENEROSIDAD', 'Actuar siempre de manera solidaria con todos los miembros de la comunidad universitaria.')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">GENEROSIDAD</div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Terceros valores -->
-      <div class="vertical-column circle-container">
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/9.jpeg')"
-          data-index="0"
-          @click="openModal('BIEN COMÚN', 'Todas las decisiones y acciones deben esstar dirigidas a la satisfacción de las necesidades e intereses de la Universidad, por encima de intereses particulares. El compromiso con el bien común implica que la y el servicio público y la educación superior, patrimonio de todo mexicano, sólo se justifica y legitima cuando se procura este bien por encima de los intereses particulaes o de grupo.')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">BIEN COMÚN</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/10.jpeg')"
-          data-index="0"
-          @click="openModal('JUSTICIA', 'Obrar en apego a las normas sociales respetando la verdad y la igualdad.')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">JUSTICIA</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/11.jpeg')"
-          data-index="0"
-          @click="openModal('INTEGRIDAD', 'Actuar con honestidad, atendiendo siempre a la verdad. Conduciéndose de esta manera, se fomentará la credibilidad en la Universidad y se contribuirá a generar una cultura de confianza y apego a la verdad.')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">INTEGRIDAD</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/12.jpeg')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">#VALORES</div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Cuartos valores -->
-      <div class="vertical-column circle-container">
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/12.jpeg')"
-          data-index="0"
-          @click="openModal('COLABORACIÓN', 'Participar en los esfuerzos colectivos sin tener en cuenta el beneficio personal e individual sino el beneficio para el bien común de nuestra sociedad universitaria.')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">COLABORACIÓN</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/9.jpeg')"
-          data-index="0"
-          @click="openModal('EMPATÍA', 'Comprender y respetar los puntos de vista, sentimientos y pensamientos de otras personas, aunque sean diferentes a los propios.')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">EMPATÍA</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/1.jpeg')"
-          data-index="0"
-          @click="openModal('PUNTUALIDAD', 'Participar en los esfuerzos colectivos sin tener en cuenta el beneficio personal e individual sino el beneficio para el bien común de nuestra sociedad universitaria.')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">PUNTUALIDAD</div>
-          </div>
-        </div>
-
-        <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/filosofia/7.jpeg')"
-          data-index="0">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">SOLIDARIDAD</div>
-          </div>
-        </div>
-
-      </div>
 
       <div class="modal" :class="{ 'active': showModal }">
         <div class="modal-content">
@@ -382,6 +205,42 @@ export default {
    
 
 <style scoped>
+.circle-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  /* Espacio entre los elementos */
+  padding: 0 20px;
+  /* Añadir un poco de padding al contenedor para evitar que los círculos estén demasiado cerca del borde de la pantalla */
+}
+
+.circle-wrapper {
+  flex: 1;
+  max-width: 300px;
+  /* Ancho máximo de cada círculo */
+}
+
+.background-image.circle {
+  position: relative;
+  width: 100%;
+  /* Asegurarse de que cada círculo tenga un ancho responsivo */
+  height: 0;
+  padding-bottom: 100%;
+  /* Mantener la relación de aspecto 1:1 */
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.circle-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  /* Asegura que la imagen esté debajo del texto y del loader */
+}
+
 /* Círculos de valores */
 .modal {
   display: none;
@@ -445,6 +304,8 @@ export default {
   overflow: hidden;
   transition: transform 1.9s ease;
   background-color: transparent;
+  z-index: 2;
+  /* Asegura que el loader esté sobre la imagen */
 }
 
 #loader1 {
@@ -453,6 +314,8 @@ export default {
   border-right: 13px solid #f3f3f3;
   border-bottom: 13px solid #f3f3f3;
   transition: transform 1.9s ease;
+  z-index: 2;
+  /* Asegura que el loader esté sobre la imagen */
 }
 
 #loader2 {
@@ -461,6 +324,8 @@ export default {
   border-right: 13px solid #f3f3f3;
   border-bottom: 13px solid #f3f3f3;
   transition: transform 1.9s ease;
+  z-index: 2;
+  /* Asegura que el loader esté sobre la imagen */
 }
 
 .vertical-column {
@@ -654,7 +519,6 @@ export default {
     /* Centrar horizontalmente la imagen */
     z-index: 1;
   }
-
   .toggle-acordion {
     position: relative;
     z-index: 0;
@@ -674,8 +538,10 @@ export default {
     flex-wrap: wrap;
     /* Permite que los elementos se envuelvan en dos filas */
     justify-content: space-between;
-    /* Espacio entre los círculos */
-    justify-content: center;
+
+    gap: 20px;
+    /* Espacio entre los elementos */
+
   }
 
   .circle {

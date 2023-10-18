@@ -377,8 +377,8 @@ export default {
 
 @media (min-width: 521px) and (max-width: 769px) {
     .chatButton {
-        width: 5vh;
-        height: 5vh;
+        width: 7vh;
+        height: 7vh;
         margin-left: 2%;
         transform: translateX(77px) translateY(75px);
     }
@@ -386,19 +386,6 @@ export default {
     .chatbot-container {
         max-height: 1080px;
         max-width: 360px;
-    }
-}
-
-@media (min-width: 1024px) and (max-width:1201px) {
-    .chatButton {
-        width: 6vh;
-        height: 6vh;
-        margin-left: 1.5%;
-        transform: translateX(77px) translateY(75px);
-    }
-    .chatbot-container {
-        max-height: 1080px;
-        max-width: 480px;
     }
 }
 
@@ -415,10 +402,23 @@ export default {
 }
 
 
-@media (min-width: 1201px) and (max-width: 1441px) {
+@media (min-width: 1024px) and (max-width:1201px) {
     .chatButton {
         width: 6.5vh;
         height: 6.5vh;
+        margin-left: 1.5%;
+        transform: translateX(77px) translateY(75px);
+    }
+    .chatbot-container {
+        max-height: 1080px;
+        max-width: 480px;
+    }
+}
+
+@media (min-width: 1201px) and (max-width: 1441px) {
+    .chatButton {
+        width: 7vh;
+        height: 7vh;
         margin-left: 1.5%;
     }
     .chatButton img {
@@ -432,12 +432,27 @@ export default {
     }
 }
 
-@media (min-width: 1442px) and (max-width: 1920px) {
+@media (min-width: 1442px) and (max-width: 1500px) {
     .chatButton {
         width: 6vh;
         height: 6vh;
         margin-left: 1.5%;
         transform: translateX(74px) translateY(105px);
+    }
+
+    .chatbot-container {
+        max-height: 1080px;
+        max-width: 640px;
+    }
+}
+
+
+@media (min-width: 1500px) and (max-width: 1920px) {
+    .chatButton {
+        width: 7.5vh;
+        height: 7.5vh;
+        margin-left: 1.5%;
+        transform: translateX(76px) translateY(103px);
     }
 
     .chatbot-container {

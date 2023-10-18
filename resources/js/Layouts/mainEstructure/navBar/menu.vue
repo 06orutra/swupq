@@ -220,8 +220,8 @@ methods: {
   list-style-type: none;
   padding: 0;
   position: fixed;
-  left: 3%;
-  top: calc(24% + 1vh);
+  left: 4%;
+  top: calc(32% + 1vh);
   z-index: 999;
   width: 15%;
   background-color: rgba(0, 10, 87, 0.8);
@@ -286,17 +286,12 @@ methods: {
   }
 }
 
-.menu {
-width:20%;
-top: calc(34% + 1vh);
-}
-
 
 
 @media (min-width: 1024px) and (max-width:1201px) {
   .menu-icon {
-    width: 6vh ;
-    height: 6vh;
+    width: 6.5vh ;
+    height: 6.5vh;
     cursor: pointer;
     border: 1px solid black;
     position: fixed;
@@ -306,31 +301,45 @@ top: calc(34% + 1vh);
   .menu {
     width:20%;
     left: 5.5%;
-    top: calc(25.6% + 1vh);
+    top: calc(34% + 1vh);
   }
 }
 
-@media (min-width: 1202px) and (max-width: 1499px) {
+@media (min-width: 1201px) and (max-width: 1441px) {
   .menu-icon {
-    width: 6.5vh ;
-    height: 6.5vh;
+    width: 7vh ;
+    height: 7vh;
   }
   .menu {
     width:15%;
     left: 3.5%;
-    top: calc(27.7% + 1vh);
+    top: calc(28% + 1vh);
   }
 }
 
-@media (min-width: 1500px) and (max-width: 1920px) {
+@media (min-width: 1442px) and (max-width: 1500px) {
   .menu-icon {
-    width: 6vh ;
-    height: 6vh;
+    width: 7.5vh ;
+    height: 7.5vh;
   }
   .menu {
     width:15%;
-    left: 2.7%;
-    top: calc(25.5% + 1vh);
+    left: 3.5%;
+    top: calc(30% + 1vh);
+  }
+}
+
+
+@media (min-width: 1500px) and (max-width: 1920px) {
+  .menu-icon {
+    width: 7.5vh ;
+    height: 7.5vh;
+    transform: translateX(42px) translateY(103px);
+  }
+  .menu {
+    width:15%;
+    left: 3.5%;
+    top: calc(33% + 1vh);
   }
 }
 
@@ -344,7 +353,7 @@ top: calc(34% + 1vh);
   .menu {
     width:8%;
     left: 2%;
-    top: calc(22% + 1vh);
+    top: calc(20% + 1vh);
   }
 }
 
@@ -360,19 +369,19 @@ top: calc(34% + 1vh);
   .menu {
     width:40%;
     left: 4.5%;
-    top: calc(7% + 1vh);
+    top: calc(9.5% + 1vh);
   }
 }
 
 @media (min-width: 522px) and (max-width: 769px) {
   .menu-icon {
-    width: 5vh ;
-    height: 5vh;
+    width: 7vh ;
+    height: 7vh;
   }
   .menu {
     width:26%;
     left: 4.5%;
-    top: calc(26.2% + 1vh);
+    top: calc(35.5% + 1vh);
   }
 }
 
@@ -387,7 +396,7 @@ top: calc(34% + 1vh);
   .menu {
     width:40%;
     left: 4.5%;
-    top: calc(7% + 1vh);
+    top: calc(9.5% + 1vh);
   }
 }
 
@@ -401,7 +410,7 @@ top: calc(34% + 1vh);
   .menu {
     width:40%;
     left: 4.5%;
-    top: calc(7% + 1vh);
+    top: calc(9.5% + 1vh);
   }
 }
 

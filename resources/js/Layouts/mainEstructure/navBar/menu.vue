@@ -286,8 +286,6 @@ methods: {
   }
 }
 
-
-
 @media (min-width: 1024px) and (max-width:1201px) {
   .menu-icon {
     width: 6.5vh ;
@@ -329,7 +327,6 @@ methods: {
   }
 }
 
-
 @media (min-width: 1500px) and (max-width: 1920px) {
   .menu-icon {
     width: 7.5vh ;
@@ -342,7 +339,6 @@ methods: {
     top: calc(33% + 1vh);
   }
 }
-
 
 @media (min-width: 1921px) and (max-width:2560px) {
   .menu-icon {
@@ -385,7 +381,6 @@ methods: {
   }
 }
 
-
 @media (max-width: 320px) {
   .menu-icon {
     width:4.7vh ;
@@ -399,7 +394,6 @@ methods: {
     top: calc(9.5% + 1vh);
   }
 }
-
 
 @media (min-width: 370px) and (max-width: 415px) {
   .menu-icon {

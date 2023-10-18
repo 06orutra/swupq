@@ -401,7 +401,6 @@ export default {
     }
 }
 
-
 @media (min-width: 1024px) and (max-width:1201px) {
     .chatButton {
         width: 6.5vh;
@@ -446,13 +445,12 @@ export default {
     }
 }
 
-
 @media (min-width: 1500px) and (max-width: 1920px) {
     .chatButton {
         width: 7.5vh;
         height: 7.5vh;
         margin-left: 1.5%;
-        transform: translateX(76px) translateY(103px);
+        transform: translateX(80px) translateY(103px);
     }
 
     .chatbot-container {

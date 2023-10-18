@@ -320,14 +320,14 @@ export default {
       left: 0px;
     }
     .contenedoor2 {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      display: flex;
-      z-index: 999;
-      top:30px;
-      left: 0px;
-    }
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    z-index: 999;
+    top: 30px;
+    left: 0px;
+}
     .parallax {
       background-image: url('https://www.upq.mx/igualdad_laboral/images/fondo_banner_2-01.svg?crc=3799554246');
       background-size: cover;
@@ -349,14 +349,14 @@ export default {
       background-position: center center;
     }
     .parallax3 {
-      background-image: url('https://www.upq.mx/igualdad_laboral/images/comiteeticanov2021.jpg?crc=449875955');
-      background-size: cover;
-      width: 100%;
-      height: 600px;
-      position:static;
-      z-index: -10;
-      background-position: center center;
-    }
+    background-image: url('https://www.upq.mx/igualdad_laboral/images/comiteeticanov2021.jpg?crc=449875955');
+    background-size: cover;
+    width: 100%;
+    height: 600px;
+    position: relative; /* Cambiado de "static" a "relative" */
+    z-index: -10;
+    background-position: center center;
+}
     .caja{
       border: 2px solid rgb(255, 255, 255);
       border-radius: 10px;
@@ -375,12 +375,12 @@ export default {
       transition: border-color 0.3s, background-color 0.3s;
       z-index: -2;
     }
-    .caja2{
-      position: relative;
-      top: 74%;
-      left: 0%;
-      width: 80%; 
-    }
+    .caja2 {
+    position: absolute; /* Cambiado de "relative" a "absolute" */
+    bottom: 0; /* Posiciona la parte inferior de .caja2 en la parte inferior del div padre */
+    left: 0%;
+    width: 80%;
+}
 
     .caja:hover {
       border-color: rgb(19, 18, 18); /* Cambia el color del borde a rojo al pasar el mouse */

@@ -73,7 +73,7 @@ export default {
                 });
                 return false;
             }
-
+            this.isLoading = true;
 
             const formData = new FormData();
             formData.append('nombre', this.nombre);
@@ -97,14 +97,16 @@ export default {
                     detail: "Registro exitoso",
                     life: 3000,
                 });
+                this.isLoading = false;
             }).catch((error) => {
                 console.log(error);
+                this.isLoading = false;
             });
         },
         editarBanner() {
             this.submitted = true;
             //validar si hay campos vacios
-            if (this.datosArreglo.nombre == null || this.datosArreglo.link == null) {
+            if (this.datosArreglo.nombre == null || this.datosArreglo.nombre == '' || this.datosArreglo.link == null || this.datosArreglo.link == '') {
                 // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
@@ -127,6 +129,7 @@ export default {
                 });
                 return false;
             }
+            this.isLoading = true;
 
             const formData = new FormData();
             formData.append('id', this.datosArreglo.id);
@@ -154,8 +157,10 @@ export default {
                     detail: "Edicion exitosa",
                     life: 3000,
                 });
+                this.isLoading = false;
             }).catch((error) => {
                 console.log(error);
+                this.isLoading = false;
             });
 
         },
@@ -195,6 +200,10 @@ export default {
             this.submitted = false;
             this.dialogTable = true;
             this.imagePreview = null;
+
+            this.nombre = null;
+            this.link = null;
+            this.foto = null;
         },
         selectNewPhoto() {
             this.$refs.photoInput.click();
@@ -228,13 +237,7 @@ export default {
                 }
                 reader.readAsDataURL(input.files[0]);
             }
-
         },
-
-
-
-        //metodo para input 
-
     },
     data() {
         return {
@@ -250,6 +253,7 @@ export default {
             eliminarDialog: false,
             photoInput: null,
             imagePreview: null,
+            isLoading: false,
         };
     },
 
@@ -319,9 +323,12 @@ export default {
 
                 </div>
 
-                <Button type="submit" id="btnRegisrar"
+                <Button type="submit" id="btnRegisrar" :disabled="isLoading"
                     class="flex items-center justify-center space-x-2 rounded-md border-2 border-blue-500 px-4 py-2 font-medium text-blue-600 transition hover:bg-blue-500 hover:text-white">
-                    <span> Registrar </span>
+                    <span v-if="!isLoading"> Registrar </span>
+                    <span v-else>
+                        <i class="pi pi-spin pi-spinner"></i>
+                    </span>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
                             <path fill-rule="evenodd"
@@ -363,9 +370,12 @@ export default {
 
                 </div>
 
-                <Button type="submit" id="btnRegisrar"
+                <Button type="submit" id="btnRegisrar" :disabled="isLoading"
                     class="flex items-center justify-center space-x-2 rounded-md border-2 border-blue-500 px-4 py-2 font-medium text-blue-600 transition hover:bg-blue-500 hover:text-white">
-                    <span> Registrar </span>
+                    <span v-if="!isLoading"> Registrar </span>
+                    <span v-else>
+                        <i class="pi pi-spin pi-spinner"></i>
+                    </span>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
                             <path fill-rule="evenodd"

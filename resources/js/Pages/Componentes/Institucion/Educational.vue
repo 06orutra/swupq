@@ -1,14 +1,25 @@
 <script>
+import axios from 'axios';
+
 export default {
   mounted() {
+    //Función para mandar a llamar el texto de la base de datos
+    this.cargarTexto();
+    //Función para los círculos del modelo educativo
+    this.cargarModal();
+    //Función para los informes del rector
+    this.cargarInformes();
+
+
+    //Cosas del módulo como tal:
     const loaders = document.querySelectorAll('.loader');
 
     loaders.forEach(loader => {
-      const text = loader.querySelector('.text'); 
+      const text = loader.querySelector('.text');
 
       loader.addEventListener('mouseenter', () => {
         loader.classList.add('active');
-        text.style.opacity = '0'; 
+        text.style.opacity = '0';
       });
 
       loader.addEventListener('mouseleave', () => {
@@ -32,6 +43,7 @@ export default {
           "MOVILIDAD NACIONAL E INTERNACIONAL"
         ];
 
+
         const contents = [
           "Los Planes Curriculares están diseñados para la acreditación del dominio de competencias profesionales en áreas científico-tecnológicas, culturales y sociales que formen profesionistas de alta calidad que puedan competir a nivel internacional.",
           "Ofrecemos una formación a través de la especialización tecnológica y participación altamente competitiva en el sector industrial en beneficio del desarrollo estatal, regional y nacional.",
@@ -44,43 +56,47 @@ export default {
           "El proceso de globalización económica requiere impulsar el desarrollo de aptitudes para la evaluación y participación",
         ];
 
+
         this.openModal(titles[index], contents[index]);
       });
     });
 
     function startCounter(elementId, endNumber) {
-            let counter = 1;
-            const element = document.getElementById(elementId);
-            const totalSteps = Math.ceil(1500 / 15);
+      let counter = 1;
+      const element = document.getElementById(elementId);
+      const totalSteps = Math.ceil(1500 / 15);
 
-            const increment = endNumber / totalSteps;
+      const increment = endNumber / totalSteps;
 
-            const intervalId = setInterval(() => {
-                counter += increment;
-                element.textContent = Math.round(counter);
+      const intervalId = setInterval(() => {
+        counter += increment;
+        element.textContent = Math.round(counter);
 
-                if (counter >= endNumber) {
-                    clearInterval(intervalId);
-                }
-            }, 10);
+        if (counter >= endNumber) {
+          clearInterval(intervalId);
         }
-        window.onload = () => {
-        startCounter("counter1", 769);
-        startCounter("counter2", 474);
-        startCounter("counter3", 659); 
-        startCounter("counter4", 587); 
-        startCounter("counter5", 208);
-        startCounter("counter6", 541);
-        startCounter("counter7", 985);
-        startCounter("counter8", 4229);
+      }, 10);
+    }
+    window.onload = () => {
+      startCounter("counter1", 769);
+      startCounter("counter2", 474);
+      startCounter("counter3", 659);
+      startCounter("counter4", 587);
+      startCounter("counter5", 208);
+      startCounter("counter6", 541);
+      startCounter("counter7", 985);
+      startCounter("counter8", 4229);
     };
-    },
+  },
 
-data() {
+  data() {
     return {
       modalTitle: '',
       modalContent: '',
       showModal: false,
+      texto: [],
+      modal: [],
+      informes: [],
     };
   },
   methods: {
@@ -92,202 +108,285 @@ data() {
     closeModal() {
       this.showModal = false;
     },
+    //Para ver si el index es par o impar :D
+    getIndex(index) {
+      return index % 2 === 0 ? 2 : 1;
+    },
+    //Método de carga del texto de "Alumnado Inscrito Ciclo Escolar[...]"
+    cargarTexto() {
+      axios.post('/modeduCiclo/bannerData').then((response) => {
+        this.texto = response.data;
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    //Método del modal (las bolitas)
+    cargarModal() {
+      axios.post('/modalModEdu/bannerData').then((response) => {
+        this.modal = response.data;
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    cargarInformes(){
+      axios.post('/informesModEdu/bannerData').then((response) => {
+        this.informes = response.data;
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
   },
-  };
+
+};
 </script>
 
 <template>
-    <div class="mx-auto">                    
-        <div class="banner">                               
-            <img src="https://www.upq.mx/media/slider/MODELOEDUCATIVO.png" alt="" class="h-full w-full">                
-        </div> 
-        
-        
-        <div class="w-full" style="background-color: #800020; text-align: left; padding: 20px; " >
-           <h2 style="color: white;"><b>MODELO EDUCATIVO</b></h2>
-        </div> 
-        
-        <!--loader-->
-        <section>
-      <div class="loader-container">
-          <div class="vertical-column circle-container">
-            <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/modelo-educativo/4.png')">
-              <div class="loader" id="loader1">
-                  <div class="text" id="text1">MODELO POR COMPETENCIAS</div>
-              </div>
+  <div class="mx-auto">
+    <div class="banner">
+      <img src="https://www.upq.mx/media/slider/MODELOEDUCATIVO.png" alt="" class="h-full w-full">
+    </div>
+
+
+    <div class="w-full" style="background-color: #800020; text-align: left; padding: 20px; ">
+      <h2 style="color: white;"><b>MODELO EDUCATIVO</b></h2>
+    </div>
+
+    <!--loader y los modales. El color del background se define por el id%2
+        La imagen (aún no) la obtiene desde lo subido a la tabla modalModEdu
+        la descripción al abrir el modal la obtiene del apartado "Link" en la tabla
+        Y finalmente, el título, tanto dentro como fuera del Modal, se obtiene por el
+        apartado "nombre" en la tabla modalModEdu-->
+    <section>
+      <div class="vertical-column circle-container">
+        <!-- <div
+      v-for="(datosModal, index) in modal"
+      :key="index"
+      class="background-image circle"
+      :style="'background-image: url(https://www.upq.mx/assets/modelo-educativo/4.png)'"
+    >
+      <div class="loader" :id="'loader' + getIndex(index)">
+        <div class="text" :id="'text' + getIndex(index)">{{ datosModal.nombre }}</div>
+      </div> -->
+
+        <!-- Comienza el recorrido para el modal (bolitas) -->
+
+        <div class="background-image circle"
+          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/4.png')">
+          <div class="loader" id="loader1">
+            <div class="text" id="text1">MODELO POR COMPETENCIAS</div>
+          </div>
         </div>
 
-            <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/modelo-educativo/3.png')">
-              <div class="loader" id="loader2"> 
-                  <div class="text" id="text2">VINCULACIÓN CON LA INDUSTRIA</div>
-              </div>
-              </div> 
-
-            <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/modelo-educativo/8.png')">
-              <div class="loader" id="loader1"> 
-                  <div class="text" id="text1">ESTANCIAS Y ESTADÍAS</div>
-              </div>
-              </div> 
+        <div class="background-image circle"
+          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/3.png')">
+          <div class="loader" id="loader2">
+            <div class="text" id="text2">VINCULACIÓN CON LA INDUSTRIA</div>
+          </div>
         </div>
 
-        <div class="vertical-column circle-container">
-          <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/modelo-educativo/1.png')">
-            <div class="loader" id="loader2">
-              <div class="text" id="text2">LENGUA EXTRANJERA</div>
-            </div>
-            </div> 
-        
-
-          <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/modelo-educativo/9.png')">
-            <div class="loader" id="loader1"> 
-              <div class="text" id="text1">PROGRAMAS Y TUTORÍAS</div>
-              </div>
-            </div>
-
-          <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/modelo-educativo/5.png')">
-            <div class="loader" id="loader2"> 
-                <div class="text" id="text6">FORMACIÓN INTEGRAL</div>
-            </div>
-            </div> 
-        </div>
-
-        <div class="vertical-column circle-container">
-            <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/modelo-educativo/7.png')">
-              <div class="loader" id="loader1"> 
-                  <div class="text" id="text1">INFRAESTRUCUTRA DE CALIDAD</div>
-              </div>
-              </div> 
-
-            <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/modelo-educativo/6.png')">
-              <div class="loader" id="loader2"> 
-                  <div class="text" id="text2">AMPLIA OCUPACIÓN DE EGRESADAS Y EGRESADOS</div>
-              </div>
-              </div> 
-
-            <div class="background-image circle" style="background-image: url('https://www.upq.mx/assets/modelo-educativo/2.png')">
-                <div class="loader" id="loader1"> 
-                  <div class="text" id="text1">MOVILIDAD NACIONAL E INTERNACIONAL</div>
-                </div> 
-            </div>
+        <div class="background-image circle"
+          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/8.png')">
+          <div class="loader" id="loader1">
+            <div class="text" id="text1">ESTANCIAS Y ESTADÍAS</div>
+          </div>
         </div>
       </div>
-      
-        <div class="modal" :class="{ 'active': showModal }">
-            <div class="modal-content">
-              <div class="modal-body">
-                <h3 style="margin-bottom: 2em; text-align: center; color:#fff"><b>{{ modalTitle }}</b></h3>
-                <p>{{ modalContent }}</p>
-              </div>
-              <div class="modal-button" style="margin-top: 30px;">
-                <button type="button"  class="btn btn-primary" @click="closeModal" style="border-radius: 0">CERRAR</button>
-              </div>
-            </div>
-        </div>
-        <br><br><br>
-        </section>
 
-        <!-- Carreras -->
-        <section>
-          <hr>
-          <br> <br>
-          <div class="container text-center">
-            <header>
-              <h1 style="color: #414141;">ALUMNADO INSCRITO CICLO ESCOLAR 
-                <br>
-                SEPTIEMBRE - DICIEMBRE 2023
-              </h1>
-              <hr>
-            </header>
+      <div class="vertical-column circle-container">
+        <div class="background-image circle"
+          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/1.png')">
+          <div class="loader" id="loader2">
+            <div class="text" id="text2">LENGUA EXTRANJERA</div>
           </div>
-          
-          <div>
-          <div class=" row box-gadient box-blue">
-            <div class="col-xs-6 col-sm-6 col-3 col-md-3" style="background:#6D0A16; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
-              <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-05.png" style="max-height: 100px; margin:0 0 16px 0;">
-              <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter1">
-                770
-              </h2>
-              <p style="font-size: 1.3em; margin: 0;">Ingeniería Mecatrónica</p>
-            </div>
+        </div>
 
-              <div class="col-xs-12 col-sm-6 col-3 col-md-3" style="background:#37A6DE; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
-                  <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-02.png" style="max-height: 100px; margin: 0 0 16px 0;">
-                  <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter2">
-                      474
-                  </h2>
-                  <p style="font-size: 1.3em; ;">Ingeniería en Sistemas Computacionales</p>
-              </div>
 
-              <div class="col-xs-6 col-sm-6 col-3 col-md-3" style="background:#3e0b60; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
-                  <img src="https://www.upq.mx/media/careers/logo_white/AUTOMOTRIZ.png" style="max-height: 100px; margin: 0 0 16px 0;">
-                  <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter3">
-                      659
-                  </h2>
-                  <p style="font-size: 1.3em;;">Ingeniería en Tecnología Automotriz</p>
-              </div>
+        <div class="background-image circle"
+          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/9.png')">
+          <div class="loader" id="loader1">
+            <div class="text" id="text1">PROGRAMAS Y TUTORÍAS</div>
+          </div>
+        </div>
 
-              <div class="col-xs-6 col-sm-6 col-3 col-md-3" style="background:#182353; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
-                <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-041.png" style="max-height: 100px; margin: 0 0 16px 0">
-                <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter4">
-                  587
-                </h2>
-                <p style="font-size: 1.3em;">Ingeniería en Tecnología de Manufactura</p>
-              </div>
+        <div class="background-image circle"
+          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/5.png')">
+          <div class="loader" id="loader2">
+            <div class="text" id="text6">FORMACIÓN INTEGRAL</div>
+          </div>
+        </div>
+      </div>
 
-            </div>
+      <div class="vertical-column circle-container">
+        <div class="background-image circle"
+          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/7.png')">
+          <div class="loader" id="loader1">
+            <div class="text" id="text1">INFRAESTRUCUTRA DE CALIDAD</div>
+          </div>
+        </div>
 
-          <div class=" row box-gadient box-blue">
+        <div class="background-image circle"
+          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/6.png')">
+          <div class="loader" id="loader2">
+            <div class="text" id="text2">AMPLIA OCUPACIÓN DE EGRESADAS Y EGRESADOS</div>
+          </div>
+        </div>
 
-              <div class="col-xs-6 col-sm-6 col-3 col-md-3" style="background:#8eae25; -webkit-transition: background 1s; transition: background 1s; color: white; text-align:center;">
-                <img src="https://www.upq.mx/media/careers/logo_white/REDES-01white.png" style="max-height: 100px; margin:0 0 16px 0;">
-                <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive; " id="counter5">
-                  208
-                </h2>
-                <p style="font-size: 1.3em;">Ingeniería en Redes y Telecomunicaciones</p>
-              </div>
+        <div class="background-image circle"
+          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/2.png')">
+          <div class="loader" id="loader1">
+            <div class="text" id="text1">MOVILIDAD NACIONAL E INTERNACIONAL</div>
+          </div>
+        </div>
+      </div>
+  
 
-              <div class="col-xs-6 col-sm-6 col-3 col-md-3" style="background:#ce172d; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
-                <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-06_1.png" style="max-height: 100px; margin:0 0 16px 0;">
-                <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive;" id="counter6">
-                  541
-                </h2>
-                <p style="font-size: 1.3em;">Licenciatura en Administración y Gestión Empresarial</p>
-              </div>
+  <div class="modal" :class="{ 'active': showModal }">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h3 style="margin-bottom: 2em; text-align: center; color:#fff"><b>{{ modalTitle }}</b></h3>
+        <p>{{ modalContent }}</p>
+      </div>
+      <div class="modal-button" style="margin-top: 30px;">
+        <button type="button" class="btn btn-primary" @click="closeModal" style="border-radius: 0">CERRAR</button>
+      </div>
+    </div>
+  </div>
+  <br><br><br>
+  </section>
 
-              <div class="col-xs-6 col-sm-6 col-3 col-md-3" style="background:#000000; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
-                <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-07.png" style="max-height: 100px; margin:0 0 16px 0;">
-                <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive;" id="counter7">
-                  985
-                </h2>
-                <p style="font-size: 1.3em;">Licenciatura en Negocios Internacionales</p>
-              </div>
+  <!-- Carreras -->
+  <section>
+    <hr>
+    <br> <br>
+    <div v-for="datosTexto in texto" class="container text-center">
+      <header>
+        <!-- Esto mostrará solamente el contenido de la primera tabla
+              de la sección en la base de datos, es decir, solamente el
+              primer (y en teoría, único) registro en el admin. -->
+        <h1 style="color: #414141;"> {{ datosTexto.titulo }}
+          <br>
+          {{ datosTexto.contenido }}
+          <br>
+        </h1>
+        <hr>
+      </header>
+    </div>
+    <div v-for="datosModal in modal" class="container text-center">
+      <h1>
+        {{ datosModal.nombre }}
+      </h1>
+      <img :src="'/storage/' + datosModal.imagen" alt="" style="max-height: 150px; margin:0 0 16px 0;">
 
-              <div class="col-xs-6 col-sm-6 col-3 col-md-3" style="background:#8C2437; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
-                <img src="https://www.upq.mx/assets/logos/logo-white.svg" style="max-height: 100px; margin:0 0 16px 0;">
-                <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive;" id="counter8">
-                  4229
-                </h2>
-                <p style="font-size: 1.3em;">Total del Alumnado inscrito</p>
-              </div>
-            </div>
-
-          </div> 
-          <hr><br>
-        </section>
-        
 
     </div>
 
+    <div>
+      <div class=" row box-gadient box-blue">
+        <div class="col-xs-6 col-sm-6 col-3 col-md-3"
+          style="background:#6D0A16; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
+          <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-05.png"
+            style="max-height: 100px; margin:0 0 16px 0;">
+          <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter1">
+            770
+          </h2>
+          <p style="font-size: 1.3em; margin: 0;">Ingeniería Mecatrónica</p>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-3 col-md-3"
+          style="background:#37A6DE; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
+          <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-02.png"
+            style="max-height: 100px; margin: 0 0 16px 0;">
+          <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter2">
+            474
+          </h2>
+          <p style="font-size: 1.3em; ;">Ingeniería en Sistemas Computacionales</p>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-3 col-md-3"
+          style="background:#3e0b60; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
+          <img src="https://www.upq.mx/media/careers/logo_white/AUTOMOTRIZ.png"
+            style="max-height: 100px; margin: 0 0 16px 0;">
+          <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter3">
+            659
+          </h2>
+          <p style="font-size: 1.3em;;">Ingeniería en Tecnología Automotriz</p>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-3 col-md-3"
+          style="background:#182353; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
+          <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-041.png"
+            style="max-height: 100px; margin: 0 0 16px 0">
+          <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter4">
+            587
+          </h2>
+          <p style="font-size: 1.3em;">Ingeniería en Tecnología de Manufactura</p>
+        </div>
+
+      </div>
+
+      <div class=" row box-gadient box-blue">
+
+        <div class="col-xs-6 col-sm-6 col-3 col-md-3"
+          style="background:#8eae25; -webkit-transition: background 1s; transition: background 1s; color: white; text-align:center;">
+          <img src="https://www.upq.mx/media/careers/logo_white/REDES-01white.png"
+            style="max-height: 100px; margin:0 0 16px 0;">
+          <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive; " id="counter5">
+            208
+          </h2>
+          <p style="font-size: 1.3em;">Ingeniería en Redes y Telecomunicaciones</p>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-3 col-md-3"
+          style="background:#ce172d; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
+          <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-06_1.png"
+            style="max-height: 100px; margin:0 0 16px 0;">
+          <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive;" id="counter6">
+            541
+          </h2>
+          <p style="font-size: 1.3em;">Licenciatura en Administración y Gestión Empresarial</p>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-3 col-md-3"
+          style="background:#000000; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
+          <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-07.png"
+            style="max-height: 100px; margin:0 0 16px 0;">
+          <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive;" id="counter7">
+            985
+          </h2>
+          <p style="font-size: 1.3em;">Licenciatura en Negocios Internacionales</p>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-3 col-md-3"
+          style="background:#8C2437; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
+          <img src="https://www.upq.mx/assets/logos/logo-white.svg" style="max-height: 100px; margin:0 0 16px 0;">
+          <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive;" id="counter8">
+            4229
+          </h2>
+          <p style="font-size: 1.3em;">Total del Alumnado inscrito</p>
+        </div>
+      </div>
+      <p class="text-center">Cosito de los informes uwu</p><br>
+      <div v-for="informe in informes" class="container text-center">
+        <a :href="informe.contenido" target="_blank">
+          {{ informe.titulo }}
+        </a>
+        </div>
+    </div>
+    <hr><br>
+  </section>
+
+  </div>
 </template>
 
 <style>
 .container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
+
 /* Espacio de cada cuadrado */
 .col-xs-6,
 .col-sm-6,
@@ -298,7 +397,8 @@ data() {
   justify-content: center;
   text-align: center;
 }
-.row{
+
+.row {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -306,21 +406,24 @@ data() {
   transform: scale(1.0);
   width: 100%;
 }
+
 /* Estilos para las carreras */
-p{
+p {
   display: block;
   -webkit-margin-before: 0.1 em;
   -webkit-margin-after: 0.1em;
   -webkit-margin-start: 0px;
   -webkit-margin-end: 0px;
 }
-body{
+
+body {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   font-size: 20px;
   line-height: 1.7;
 }
-h2{  
+
+h2 {
   margin: 0 0 32px 0;
   position: relative;
   color: white;
@@ -341,25 +444,29 @@ h2{
   align-items: center;
   flex-direction: column;
 }
-.modal-content{
+
+.modal-content {
   max-width: 700px;
-  max-height: 700px; 
+  max-height: 700px;
   background: rgba(8, 22, 47, 0.9);
   border-radius: 10px;
   padding: 25px;
   text-align: justify;
-  font-family: 'Open Sans',Arial,Helvetica,sans-serif;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 }
+
 .modal-body {
-  font-family: 'Open Sans',Arial,Helvetica,sans-serif;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   color: #fff;
   font-size: 22px;
-  max-height: 300px; 
+  max-height: 300px;
   overflow-y: auto;
 }
+
 .modal-button {
   text-align: center;
 }
+
 .modal-button button {
   background-color: #8C2437;
   color: #fff;
@@ -369,56 +476,64 @@ h2{
   cursor: pointer;
   font-size: 16px;
 }
+
 .modal-button button:hover {
-  background-color: #6B1B2D; 
+  background-color: #6B1B2D;
 }
+
 .modal.active {
   display: flex;
 }
+
 .loader {
   width: 320px;
   height: 320px;
   border-radius: 50%;
   position: relative;
   overflow: hidden;
-  transition: transform 1.9s ease; 
+  transition: transform 1.9s ease;
   background-color: transparent;
 }
-#loader1{
+
+#loader1 {
   border: 13px solid #08162fe6;
   border-top: 13px solid #08162fe6;
   border-right: 13px solid #f3f3f3;
   border-bottom: 13px solid #f3f3f3;
   transition: transform 1.9s ease;
 }
-#loader2{
+
+#loader2 {
   border: 13px solid #8C2437;
   border-top: 13px solid #8C2437;
   border-right: 13px solid #f3f3f3;
   border-bottom: 13px solid #f3f3f3;
   transition: transform 1.9s ease;
 }
+
 .vertical-column {
   display: flex;
   flex-direction: row;
-  align-items: center; 
+  align-items: center;
   margin-bottom: 40px;
   margin-right: 30px;
   justify-content: space-around;
   margin-top: 30px;
 }
+
 .circle {
   width: 100px;
   height: 100px;
   background-color: #f3f3f3;
 }
+
 .text {
   width: 100%;
   height: 100%;
-  background-color: rgba(140, 36, 55,0.8); 
-  color: #fff; 
+  background-color: rgba(140, 36, 55, 0.8);
+  color: #fff;
   text-align: center;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   line-height: 2;
@@ -426,23 +541,26 @@ h2{
   top: 0;
   left: 0;
   background-attachment: fixed;
-  pointer-events:none; 
-  transition: opacity 0.2s ease; 
-  font-size: 22px; 
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  font-size: 22px;
   font-weight: bold;
 }
+
 #text1 {
-  background-color: rgba(8,22,47,0.8); 
+  background-color: rgba(8, 22, 47, 0.8);
 }
+
 .background-image {
   width: 320px;
   height: 320px;
-  border-radius: 50%; 
+  border-radius: 50%;
   overflow: hidden;
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 .background-image::before {
   content: "";
   display: block;
@@ -453,52 +571,61 @@ h2{
   background-position: center center;
   position: absolute;
 }
+
 .loader.active {
   transform: rotate(360deg) !important;
 }
-.loader:hover .text{
-    opacity: 0;
+
+.loader:hover .text {
+  opacity: 0;
 }
 
 /* Elementos responsive */
 @media (max-width: 425px) {
   .vertical-column {
-    flex-direction: column; 
-    margin-right: 0; 
-    margin-bottom: 20px; 
+    flex-direction: column;
+    margin-right: 0;
+    margin-bottom: 20px;
   }
-  .circule{
+
+  .circule {
     margin-top: 30px;
   }
+
   .box-gadient {
     display: flex;
-    flex-direction: column; /* Alinea los cuadros verticalmente */
+    flex-direction: column;
+    /* Alinea los cuadros verticalmente */
   }
+
   .col-xs-6,
   .col-sm-6,
   .col-3,
   .col-md-3 {
-    width: 100%; /* Ancho completo para que los cuadros ocupen toda la pantalla */
-    margin-bottom: 0px; /* Espacio inferior entre cuadros */
+    width: 100%;
+    /* Ancho completo para que los cuadros ocupen toda la pantalla */
+    margin-bottom: 0px;
+    /* Espacio inferior entre cuadros */
   }
 }
 
 @media (max-width: 768px) and (min-width: 426px) {
-  .vertical-column{
+  .vertical-column {
     flex-direction: row;
     justify-content: space-between;
   }
-  .circle{
+
+  .circle {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
     margin-right: 0;
   }
+
   .circle-container {
     display: flex;
     justify-content: space-between;
-}   
-}
-</style>
+  }
+}</style>

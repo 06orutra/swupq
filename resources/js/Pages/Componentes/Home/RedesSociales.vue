@@ -31,7 +31,7 @@
         },
         {
             label: 'Twitter',
-            icon: 'https://img.icons8.com/?size=512&id=13963&format=png',
+            icon: 'https://img.icons8.com/?size=512&id=de4vjQ6J061l&format=png',
             link: 'https://twitter.com/UPQoficial'
         },
         {

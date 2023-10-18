@@ -11,7 +11,9 @@ use App\Http\Controllers\TbCarruselTercerController;
 use App\Http\Controllers\TextoPruebaController;
 use App\Http\Controllers\ImgPruebaController;
 use App\Http\Controllers\MensajePoliPoloController;
-use App\Http\Controllers\SpotyPoliPoloController;
+use App\Http\Controllers\SpotypoliController;
+use App\Http\Controllers\SpotypoloController;
+use App\Http\Controllers\CarruselMascotaController;
 use Illuminate\Http\Request;
 
 /*
@@ -41,8 +43,6 @@ Route::prefix('institucion')->group(function () {
     Route::get('instalaciones', function(){
         return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
     });
-    
-    
     Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
 
     Route::get('ubicacion', function(){
@@ -94,7 +94,9 @@ Route::middleware([
         'texto' => TextoPruebaController::class,
         'img' => ImgPruebaController::class,
         'mensaje' => MensajePoliPoloController::class,
-        'spotypp' => SpotyPoliPoloController::class,
+        'spotypoli' => SpotypoliController::class,
+        'spotypolo' => SpotypoloController::class,
+        'Cmascotas' => CarruselMascotaController::class,
     ];
 
     foreach ($controllers as $prefix => $controller) {
@@ -106,6 +108,8 @@ Route::middleware([
         });
     }
 });
+
+// Route::post('/obtener-link', [SpotyPoliPoloController::class, 'bannerData']);
 
 Route::post('/bannerData', [HomeController::class, 'bannerData']);
 Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'bannerDatafilter']);

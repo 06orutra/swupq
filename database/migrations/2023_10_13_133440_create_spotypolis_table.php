@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carrusel_mascotas', function (Blueprint $table) {
+        Schema::create('spotypolis', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
             $table->string('link');
-            $table->string('imagen');
-            $table->boolean('Poli_o_Polo');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('carrusel_mascotas');
+        Schema::dropIfExists('spotypolis');
     }
 };

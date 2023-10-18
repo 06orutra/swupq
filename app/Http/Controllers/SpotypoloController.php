@@ -2,27 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mensaje_PoliPolo;
+use App\Models\Spotypolo;
 use Illuminate\Http\Request;
 
-class MensajePoliPoloController extends Controller
+class SpotypoloController extends Controller
 {
     public function bannerData(){
-        $datosTexto = Mensaje_PoliPolo::all();d
+        $datosTexto = Spotypolo::all();
         return response()->json($datosTexto);
     }
 
     public function registrarBanner(Request $request){
         
         $request->validate([
-            'titulo' => 'required|string|max:255',
-            'contenido' => 'required|string|max:255',
+            'link' => 'required|string|max:255',
         ]);
 
         // Create a new banner instance
-        $texto = new Mensaje_PoliPolo();
-        $texto->titulo = $request->titulo;
-        $texto->contenido = $request->contenido;
+        $texto = new Spotypolo();
+        $texto->link = $request->link;
         $texto->save();
 
         return response()->json('Text registered successfully');
@@ -30,14 +28,12 @@ class MensajePoliPoloController extends Controller
 
     public function editarBanner(Request $request){
         $request->validate([
-            'titulo' => 'required|string|max:255',
-            'contenido' => 'required|string|max:255',
+            'link' => 'required|string|max:255',
         ]);
 
-        $texto = Mensaje_PoliPolo::find($request->id);
+        $texto = Spotypolo::find($request->id);
 
-        $texto->titulo = $request->titulo;
-        $texto->contenido = $request->contenido;
+        $texto->link = $request->link;
         $texto->save();
 
         return response()->json('Text edited successfully');
@@ -46,9 +42,9 @@ class MensajePoliPoloController extends Controller
 
     
     public function eliminarBanner(Request $request){
-        $texto = Mensaje_PoliPolo::find($request->id);
+        $texto = Spotypolo::find($request->id);
         $texto->delete();
 
         return response()->json('Banner deleted successfully');
-    }  
+    }
 }

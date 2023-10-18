@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('spoty_poli_polos', function (Blueprint $table) {
+        Schema::create('spotypolos', function (Blueprint $table) {
             $table->id();
-            $table->String('titulo');
-            $table->String('contenido');
+            $table->string('link');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('spoty_poli_polos');
+        Schema::dropIfExists('spotypolos');
     }
 };

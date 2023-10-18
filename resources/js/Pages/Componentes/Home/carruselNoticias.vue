@@ -203,7 +203,11 @@ export default {
             this.datosArreglo = { ...datosArreglo }; // esto es para que se muestre los datos del datosArregloo en el formulario
             this.editarDialog = true;
             this.imagePreview = null;
-            this.dates = [];
+
+            const fechaActivacion = new Date(datosArreglo.fecha_activacion);
+            const fechaDesactivacion = new Date(datosArreglo.fecha_desactivacion);
+
+            this.dates = [fechaActivacion, fechaDesactivacion];
         },
         confirmarEliminar(datosArreglo) {
             this.datosArreglo = datosArreglo;

@@ -43,6 +43,16 @@ Route::prefix('institucion')->group(function () {
     Route::get('instalaciones', function(){
         return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
     });
+
+    Route::get('laborEq', function () {
+        return Inertia::render('Componentes/Institucion/Laborequality');
+    });
+    Route::get('sistemaGestion', function () {
+        return Inertia::render('Componentes/Institucion/qualityManagement');
+    });
+
+
+
     Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
 
     Route::get('ubicacion', function(){

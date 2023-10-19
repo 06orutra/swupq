@@ -266,30 +266,10 @@ methods: {
   background-color: rgba(0, 10, 87, 0.8);
 }
 
-/*Vista del tamanño del icono de menu en 768px */
-@media (min-width: 521px) and (max-width: 769px) {
-
-  .menu-icon {
-    width:5vh ;
-    height: 5vh;
-    margin-right:4%;
-    transform: translateX(45px) translateY(75px);
-  }
-  .menu {
-    width:15%;
-    left: 5%;
-    top: calc(2% + 1vh);
-  }
-  .content {
-    margin-left: 20%;
-    /* Resto de los estilos para el contenido principal */
-  }
-}
-
 @media (min-width: 1024px) and (max-width:1201px) {
   .menu-icon {
-    width: 6.5vh ;
-    height: 6.5vh;
+    width: 43px ;
+    height: 43px;
     cursor: pointer;
     border: 1px solid black;
     position: fixed;
@@ -298,58 +278,60 @@ methods: {
   }
   .menu {
     width:20%;
-    left: 5.5%;
-    top: calc(34% + 1vh);
+    left: 55px;
+    top: 230px;
   }
 }
 
 @media (min-width: 1201px) and (max-width: 1441px) {
   .menu-icon {
-    width: 7vh ;
-    height: 7vh;
+    width: 55px;
+    height: 55px;
+    transform: translateX(43px) translateY(105px);
   }
   .menu {
     width:15%;
-    left: 3.5%;
-    top: calc(28% + 1vh);
+    left: 50px;
+    top: 247px;
   }
 }
 
-@media (min-width: 1442px) and (max-width: 1500px) {
+@media (min-width: 1442px) and (max-width: 1499px) {
   .menu-icon {
-    width: 7.5vh ;
-    height: 7.5vh;
+    width: 55px ;
+    height: 55px;
+    transform: translateX(42px) translateY(105px);
   }
   .menu {
     width:15%;
-    left: 3.5%;
-    top: calc(30% + 1vh);
+    left: 52px;
+    top: 250px;
   }
 }
 
 @media (min-width: 1500px) and (max-width: 1920px) {
   .menu-icon {
-    width: 7.5vh ;
-    height: 7.5vh;
+    width: 55px ;
+    height: 55px;
     transform: translateX(42px) translateY(103px);
   }
   .menu {
     width:15%;
-    left: 3.5%;
-    top: calc(33% + 1vh);
+    left: 53px;
+    top: 250px;
   }
 }
 
-@media (min-width: 1921px) and (max-width:2560px) {
+@media (min-width: 1921px) and (max-width:2561px) {
   .menu-icon {
-    width: 6vh ;
-    height: 6vh;
+    width: 85px ;
+    height: 85px;
     transform: translateX(40px) translateY(150px);
   }
   .menu {
     width:8%;
-    left: 2%;
-    top: calc(20% + 1vh);
+    left: 50px;
+    top: 325px;
   }
 }
 
@@ -357,54 +339,55 @@ methods: {
 
 @media (min-width:420px) and (max-width: 520px) {
   .menu-icon {
-    width:4.7vh ;
-    height: 4.7vh;
-    transform: translateX(240px) translateY(5px);
+    width:30px ;
+    height: 30px;
+    transform: translateX(240px) translateY(10px);
     margin:.9%;
   }
   .menu {
     width:40%;
-    left: 4.5%;
-    top: calc(9.5% + 1vh);
+    left: 0%;
+    top: 69px;
   }
 }
 
 @media (min-width: 522px) and (max-width: 769px) {
   .menu-icon {
-    width: 7vh ;
-    height: 7vh;
+    width: 43px ;
+    height: 43px;
+    transform: translateX(46px) translateY(75px);
   }
   .menu {
     width:26%;
-    left: 4.5%;
-    top: calc(35.5% + 1vh);
+    left:37px;
+    top: 235px;
   }
 }
 
 @media (max-width: 320px) {
   .menu-icon {
-    width:4.7vh ;
-    height: 4.7vh;
+    width:30px ;
+    height: 30px;
     margin:0%;
     transform: translateX(240px) translateY(8px);
   }
   .menu {
     width:40%;
-    left: 4.5%;
-    top: calc(9.5% + 1vh);
+    left: 0%;
+    top: 70px;
   }
 }
 
-@media (min-width: 370px) and (max-width: 415px) {
+@media (min-width: 321px) and (max-width: 415px) {
   .menu-icon {
-    width: 4.7vh;
-    height: 4.7vh;
+    width: 30px;
+    height: 30px;
     transform: translateX(240px) translateY(8px);
   }
   .menu {
     width:40%;
-    left: 4.5%;
-    top: calc(9.5% + 1vh);
+    left: 0%;
+    top:70px;
   }
 }
 

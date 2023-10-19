@@ -8,6 +8,8 @@ import estructuraTexto2 from "@/Pages/Componentes/Home/estructuraTexto2.vue";
 import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
 import estructuraimagen2 from "@/Pages/Componentes/Home/estructuraimagen2.vue";
 import Mascotas from "@/Pages/Componentes/Institucion/institucionAdmin/Mascotas.vue";
+import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofia.vue";
+import historia from './historia.vue';
 
 export default {
     components: {
@@ -20,6 +22,8 @@ export default {
         estructuraImg,
         estructuraimagen2,
         Mascotas,
+        filosofia,
+        historia,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -41,11 +45,17 @@ export default {
         </TabPanel>
         <TabPanel header="textos">
             <estructuraTextos :loadDataUrl="'/texto/bannerData'" :registerBannerUrl="'/texto/registrarBanner'"
-                :editBannerUrl="'/texto/editarBanner'" :deleteBannerUrl="'/texto/eliminarBanner'"  />
+                :editBannerUrl="'/texto/editarBanner'" :deleteBannerUrl="'/texto/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Imagenes">
             <estructuraImg :loadDataUrl="'/img/bannerData'" :registerBannerUrl="'/img/registrarBanner'"
-                :editBannerUrl="'/img/editarBanner'" :deleteBannerUrl="'/img/eliminarBanner'"  />
+                :editBannerUrl="'/img/editarBanner'" :deleteBannerUrl="'/img/eliminarBanner'" />
+        </TabPanel>
+        <TabPanel header="Historia">
+            <historia />
+        </TabPanel>
+        <TabPanel header="Filosofía">
+            <filosofia />
         </TabPanel>
         <TabPanel header="Mascotas">
             <Mascotas/>

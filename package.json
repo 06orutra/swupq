@@ -29,6 +29,7 @@
         "slider": "^1.0.4",
         "swiper": "^10.3.0",
         "vue-carousel": "^0.18.0",
-        "vue-router": "^4.2.2"
+        "vue-router": "^4.2.2",
+        "ziggy-js": "^1.8.1"
     }
 }

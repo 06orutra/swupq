@@ -26,6 +26,9 @@ export default {
         Carousel,
         Slide,
     },
+    props:{
+        controllerName: String
+    },
     mounted() {
         this.cargarBanner();
     },
@@ -45,7 +48,7 @@ export default {
         },
 
         cargarBanner() {
-            axios.post("/bannerData").then((response) => {
+            axios.post(this.controllerName).then((response) => {
                 this.banner = response.data;
                 this.assignConsecutiveIDs();
                 this.isBannerLoaded = true;
@@ -85,6 +88,13 @@ export default {
     position: relative;
     max-height: 90vh;
     height: 90vh;
+
+    img[src$=".svg"] {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
 
     .slide-info {
         position: absolute;

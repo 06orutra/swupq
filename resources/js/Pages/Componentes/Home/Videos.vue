@@ -12,10 +12,9 @@
                 <path d="M19.1 18h-6.2" />
             </svg>
             <ul v-if="showLanguages">
-                <li @click="changeVideo('Español')">Español</li>
-                <li @click="changeVideo('Inglés')">Inglés</li>
-                <li @click="changeVideo('Francés')">Francés</li>
-                <li @click="changeVideo('Portugués')">Portugués</li>
+                <li v-for="language in lenguajesDisponibles" :key="language" @click="changeVideo(language)">
+                    {{ language }}
+                </li>
             </ul>
         </div>
         <iframe ref="videoElement" :src="currentEmbedUrl" frameborder="0" allowfullscreen class="fullscreen-video">
@@ -24,17 +23,20 @@
 </template>
 
 <script>
+
 export default {
+    mounted() {
+        this.cargarTexto();
+    },
     data() {
         return {
+            lenguajesDisponibles: [], // nueva variable para almacenar los lenguajes disponibles
+            texto: [],
             showLanguages: false,
             videos: {
-                'Español': 'https://youtu.be/koWfeJPQkEk',
-                'Inglés': 'https://youtu.be/YQ3GDTqI-yQ',
-                'Francés': 'https://youtu.be/XDdznpG5NIU',
-                'Portugués': 'https://youtu.be/guJvmvDDSAk'
+
             },
-            currentUrl: 'https://youtu.be/koWfeJPQkEk',
+            currentUrl: '',
             isAdmin: true,
         }
     },
@@ -47,6 +49,43 @@ export default {
         }
     },
     methods: {
+        cargarTexto() {
+            axios.post("/videolenguajes")
+                .then((response) => {
+                    this.videos = {};
+                    this.lenguajesDisponibles = []; // restablecer los lenguajes disponibles
+
+                    response.data.forEach((item, index) => {
+                        const tituloTraducido = this.traducirTitulo(item.titulo);
+                        if (item.contenido.includes("youtube.com")) {
+                            this.videos[tituloTraducido] = this.convertirUrlYoutube(item.contenido);
+                            this.lenguajesDisponibles.push(tituloTraducido); // agregar el lenguaje a la lista
+
+                            // Si es el primer elemento, actualizar currentUrl
+                            if (index === 0) {
+                                this.currentUrl = this.convertirUrlYoutube(item.contenido);
+                            }
+                        }
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        // Método para convertir URLs normales de YouTube a formato corto
+        convertirUrlYoutube(url) {
+            return url.replace("https://www.youtube.com/watch?v=", "https://youtu.be/");
+        },
+
+        // Método para traducir el título si es necesario
+        traducirTitulo(titulo) {
+            const traducciones = {
+                'English': 'Inglés',
+                // Agrega más traducciones según sea necesario
+            };
+
+            return traducciones[titulo] || titulo;
+        },
         toggleLanguages() {
             this.showLanguages = !this.showLanguages;
         },
@@ -115,4 +154,5 @@ export default {
     background-color: #fff;
     margin-top: 5px;
     cursor: pointer;
-}</style>
+}
+</style>

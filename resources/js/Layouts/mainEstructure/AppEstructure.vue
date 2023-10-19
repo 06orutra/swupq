@@ -1,10 +1,15 @@
 <script setup>
+import { defineProps } from 'vue'
 import AppFooter from '@/Layouts/mainEstructure/AppFooter.vue';
 import AppNavtools from '@/Layouts/mainEstructure/AppNavtools.vue'
 import AppBar from '@/Layouts/mainEstructure/navBar/barStructure.vue';
 import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
 import carruselPrincipalLogic from '@/Pages/Componentes/Welcome/carruselPrincipalLogic.vue';
 import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
+
+const props = defineProps({
+  controllerName: String,
+})
 
 </script>
 
@@ -16,7 +21,7 @@ import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 
     <div class="prueba">
       <AppBar />
-      <carruselPrincipalLogic />
+      <carruselPrincipalLogic :controllerName="controllerName"/>
       <slot></slot>
       <RedesSociales />
     </div>

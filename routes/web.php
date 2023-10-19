@@ -12,6 +12,13 @@ use App\Http\Controllers\TextoPruebaController;
 use App\Http\Controllers\ImgPruebaController;
 use App\Http\Controllers\FilosofiaController;
 use App\Http\Controllers\FilosofiaImgController;
+use App\Http\Controllers\FilosofiaValorController;
+use App\Http\Controllers\FilosofiaImgPrincController;
+use App\Http\Controllers\HistoriaImgPrincController;
+use App\Http\Controllers\HistoriaTextoController;
+use App\Http\Controllers\HistoriaCarruselController;
+use App\Http\Controllers\VideoLenguajeController;
+
 
 use Illuminate\Http\Request;
 
@@ -29,10 +36,7 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+
     ]);
 });
 
@@ -66,7 +70,18 @@ Route::prefix('institucion')->group(function () {
     Route::get('filosofia', function(){
         return Inertia::render('Componentes/Institucion/Philosophy');
     });
+    Route::get('marcoJuridico', function(){
+        return Inertia::render('Componentes/Institucion/LegalFramework');
+    });
 });   
+
+Route::prefix('FormacionIntegral')->group(function () {
+
+    Route::get('lenguaExtranjera', function(){
+        return Inertia::render('Componentes/FormacionIntegral/lenguaExtran');
+    });
+});   
+
 
 /*
 ejemplo de como mandar a llamar una vista
@@ -96,6 +111,7 @@ Route::middleware([
 
     $controllers = [
         'home' => HomeController::class,
+        'videoLenguaje' => VideoLenguajeController::class,
         'noticias' => TbCarruselNoticiasController::class,
         'primero' => TbCarruselPrimeroController::class,
         'segundo' => TbCarruselSegundoController::class,
@@ -104,6 +120,11 @@ Route::middleware([
         'img' => ImgPruebaController::class,
         'filosofia' => FilosofiaController::class,
         'filosofiaImg' => FilosofiaImgController::class,
+        'filosofiaValor' => FilosofiaValorController::class,
+        'filosofiaImgPrinc' => FilosofiaImgPrincController::class,
+        'historiaImgPrinc' => HistoriaImgPrincController::class,
+        'historiaTexto' => HistoriaTextoController::class,
+        'historiaCarrusel' => HistoriaCarruselController::class,
     ];
     // se declarar variables, 
 
@@ -116,7 +137,14 @@ Route::middleware([
         });
     }
 });
+Route::post('/historiaCarrusels/bannerData', [HistoriaCarruselController::class, 'bannerData']);
+Route::post('/historiaTextos/bannerData', [HistoriaTextoController::class, 'bannerData']);
+Route::post('/historiaImgPrinc/bannerData', [HistoriaImgPrincController::class, 'bannerData']);
+Route::post('/filosofiaImgPrinc/bannerData', [FilosofiaImgPrincController::class, 'bannerData']);
+Route::post('/filosofiaVal/bannerData', [FilosofiaValorController::class, 'bannerData']);
+Route::post('/filosofiaImg/bannerData', [FilosofiaImgController::class, 'bannerData']);
 Route::post('/filosofias/bannerData', [FilosofiaController::class, 'bannerData']);
+Route::post('/videolenguajes', [ VideoLenguajeController::class, 'bannerData']);
 Route::post('/bannerData', [HomeController::class, 'bannerData']);
 Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'bannerDatafilter']);
 Route::post('/bannerDataprimero', [TbCarruselPrimeroController::class, 'bannerData']);

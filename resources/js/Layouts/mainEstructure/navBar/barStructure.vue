@@ -65,32 +65,71 @@ export default {
   margin-top: -30%;
 }
 
-@media (max-width: 521px){
+@media (min-width: 1024px) and (max-width:1201px) {
   .contenedor{
     display: flex;
     flex-direction: column;
     height: 100px;
     position: fixed;
     z-index: 999;
-    top: 30px;
-    left: 10px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .contenedor{
-    display: flex;
-    flex-direction: column;
-    height: 100px;
-    position: fixed;
-    z-index: 999;
-    top: 95px;
+    top: 125px;
     left: 10px;
   }
   .logo-img {
     width: 120px;
     height: 100px;
+    margin-right: -35%;
+    margin-top: -30%;
+  }
+}
+
+@media (min-width: 1202px) and (max-width: 1441px) {
+  .contenedor{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: 999;
+    top: 100px;
+    left: 10px;
+  }
+  .logo-img {
+    width: 130px;
+    height: 130px;
     margin-right: -40%;
+    margin-top: -30%;
+  }
+}
+
+@media (min-width: 1442px) and (max-width: 1920px) {
+  .contenedor{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: 999;
+    top: 105px;
+    left: 10px;
+  }
+  .logo-img {
+    width: 130px;
+    height: 130px;
+    margin-right: -40%;
+    margin-top: -30%;
+  }
+}
+
+@media (min-width: 1921px) and (max-width: 2560px) {
+  .contenedor{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: 999;
+    top: 105px;
+    left: 10px;
+  }
+  .logo-img {
+    width: 200px;
+    height: 200px;
+    margin-right: -20%;
     margin-top: -30%;
   }
 }
@@ -108,8 +147,20 @@ export default {
     height: 100px;
     position: fixed;
     z-index: 999;
-    top: px;
-    left: 85px;
+    top: 25px;
+    left: 120px;
+  }
+}
+
+@media (min-width: 522px) and (max-width: 769px) {
+  .contenedor{
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    position: fixed;
+    z-index: 999;
+    top: 130px;
+    left: -10px;
   }
 }
 
@@ -121,7 +172,7 @@ export default {
     position: fixed;
     z-index: 999;
     top: 30px;
-    left: 40px;
+    left: 75px;
   }
 }
 
@@ -133,7 +184,7 @@ export default {
     position: fixed;
     z-index: 999;
     top: 30px;
-    left: 15px;
+    left: 20px;
   }
 }
 

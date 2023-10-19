@@ -208,7 +208,7 @@ methods: {
   border: 1px solid black;
   position: fixed;
   z-index: 999;
-  transform: translateX(20px) translateY(95px);
+  transform: translateX(40px) translateY(105px);
 }
 
 .content {
@@ -220,8 +220,8 @@ methods: {
   list-style-type: none;
   padding: 0;
   position: fixed;
-  left: 3%;
-  top: calc(24% + 1vh);
+  left: 4%;
+  top: calc(32% + 1vh);
   z-index: 999;
   width: 15%;
   background-color: rgba(0, 10, 87, 0.8);
@@ -266,132 +266,128 @@ methods: {
   background-color: rgba(0, 10, 87, 0.8);
 }
 
-/*Vista del tamanño del icono de menu en 768px */
-@media (min-width: 701px) {
-  /*Este estilo es para el tamaño del icono*/
+@media (min-width: 1024px) and (max-width:1201px) {
   .menu-icon {
-    width:6vh ;
-    height: 6vh;
-    margin-right:4%;
+    width: 43px ;
+    height: 43px;
+    cursor: pointer;
+    border: 1px solid black;
+    position: fixed;
+    z-index: 999;
+    transform: translateX(45px) translateY(75px);
   }
-
-  .content {
-    margin-left: 20%;
-    /* Resto de los estilos para el contenido principal */
+  .menu {
+    width:20%;
+    left: 55px;
+    top: 230px;
   }
 }
-/*Aqui se modifica la posocion del menu para la resolucion en 768px*/
-.menu {
-width:20%;
-top: calc(36% + 1vh);
-}
 
-/*Vista 1024px*/
-@media (min-width: 1001px){
+@media (min-width: 1201px) and (max-width: 1441px) {
   .menu-icon {
-    width:7.5vh ;
-    height: 7.5vh;
+    width: 55px;
+    height: 55px;
+    transform: translateX(43px) translateY(105px);
   }
   .menu {
     width:15%;
-    top: calc(38% + 1vh);
+    left: 50px;
+    top: 247px;
   }
 }
 
-/*Vista normal, ajuste del menu y submenu*/
-@media(min-width: 1141px) {
+@media (min-width: 1442px) and (max-width: 1499px) {
   .menu-icon {
-    width:7.5vh ;
-    height: 7.5vh;
+    width: 55px ;
+    height: 55px;
+    transform: translateX(42px) translateY(105px);
   }
   .menu {
     width:15%;
-    top: calc(30% + 1vh);
+    left: 52px;
+    top: 250px;
   }
 }
 
-/*Vista 4k*/
-@media (min-width: 2560px) {
+@media (min-width: 1500px) and (max-width: 1920px) {
   .menu-icon {
-    width:7.5vh ;
-    height: 7.5vh;
+    width: 55px ;
+    height: 55px;
+    transform: translateX(42px) translateY(103px);
   }
   .menu {
     width:15%;
-    top: calc(19% + 1vh);
+    left: 53px;
+    top: 250px;
+  }
+}
+
+@media (min-width: 1921px) and (max-width:2561px) {
+  .menu-icon {
+    width: 85px ;
+    height: 85px;
+    transform: translateX(40px) translateY(150px);
+  }
+  .menu {
+    width:8%;
+    left: 50px;
+    top: 325px;
   }
 }
 
 /* Estilo para la vista movil, acomoda los botones de forma automatica con coordenadas */
-/*Este sirve para la vision movil*/
-@media (max-width: 520px) {
+
+@media (min-width:420px) and (max-width: 520px) {
   .menu-icon {
-    width:4.7vh ;
-    height: 4.7vh;
-    transform: translateX(275px) translateY(4px);
+    width:30px ;
+    height: 30px;
+    transform: translateX(240px) translateY(10px);
     margin:.9%;
+  }
+  .menu {
+    width:40%;
+    left: 0%;
+    top: 69px;
   }
 }
 
-/*vista movil*/
+@media (min-width: 522px) and (max-width: 769px) {
+  .menu-icon {
+    width: 43px ;
+    height: 43px;
+    transform: translateX(46px) translateY(75px);
+  }
+  .menu {
+    width:26%;
+    left:37px;
+    top: 235px;
+  }
+}
+
 @media (max-width: 320px) {
   .menu-icon {
-    width:4.7vh ;
-    height: 4.7vh;
-    transform: translateX(245px) translateY(4px);
-    margin:.9%;
+    width:30px ;
+    height: 30px;
+    margin:0%;
+    transform: translateX(240px) translateY(8px);
+  }
+  .menu {
+    width:40%;
+    left: 0%;
+    top: 70px;
   }
 }
 
-/*Aqui se terminan los estilos de reposicionamiento */
-/* e inician los de vista movil*/
-@media (min-width: 320px) and (max-width: 520px) {
+@media (min-width: 321px) and (max-width: 415px) {
+  .menu-icon {
+    width: 30px;
+    height: 30px;
+    transform: translateX(240px) translateY(8px);
+  }
   .menu {
-    list-style-type: none;
-    padding: 0;
-    position: fixed; /* Cambia de "absolute" a "relative" para que los elementos se coloquen en el flujo normal del documento */
-    width: 40%; /* Ocupa todo el ancho disponible */
-    background-color: rgba(0, 10, 87, 0.8);
-    transition: transform 0.5s ease;
-    top: calc(-10% + 20vh);
-    left:6%;
-  }
-
-  .menu li {
-    display: block;
-    background: transparent;
-    color: #ffffff;
-  }
-
-  .menu .menu-block {
-    display: block;
-    padding: 10px;
-    transition: background-color 0.3s;
-  }
-
-  .menu .menu-block:hover {
-    background-color: rgba(0, 30, 255, 0.8);
-  }
-
-  .menu .sub-menu {
-    position: absolute;
-    left: 100%; /* Coloca el sub-menú a la derecha del primer bloque */
-    top: 0;
-    margin: 0;
-    padding: 0;
-    width: 250px;
-    z-index: 2;
-    background-color: rgba(0, 26, 226, 0.8);
-  }
-
-  .menu .sub-menu-block {
-    display: block;
-    padding: 10px;
-    transition: background-color 0.3s;
-  }
-
-  .menu .sub-menu-block:hover {
-    background-color: rgba(0, 10, 87, 0.8);
+    width:40%;
+    left: 0%;
+    top:70px;
   }
 }
 

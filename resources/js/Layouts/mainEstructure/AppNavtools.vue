@@ -182,10 +182,6 @@ const applyScale = () => {
   color: white;
 }
 
-.dark-mode .comuni:hover {
-  background-color: #0076f4;
-}
-
 .title {
   color: #24356A;
   font-weight: bold;
@@ -197,7 +193,7 @@ const applyScale = () => {
 }
 
 .dark-mode .title {
-  color: white;
+  color: #1B4D9A;
 }
 
 
@@ -207,9 +203,8 @@ const applyScale = () => {
 }
 
 .dark-mode .sii {
-  color: white;
+  color: #1B4D9A;
 }
-
 
 
 .sii span {
@@ -241,39 +236,29 @@ const applyScale = () => {
 
 /*Ajusta la vista a partir de 245px */
 @media (min-width: 380px) and (max-width: 521px) {
-.right {
-  margin-right: 45px; /* Ajusta el valor según la cantidad de espacio que desees */
+
+  .left.surface-900.border-900 {
+    margin-left: 130px; /* Ajusta el valor según la cantidad de espacio que desees */
+  }
 }
 
-.left.surface-900.border-900 {
-  margin-left: 40px; /* Ajusta el valor según la cantidad de espacio que desees */
-}
 
-.center {
-  margin-left: 0px;
-}
-}
-
-/*Ajusta a partir del 375px*/
 @media (min-width: 322px) and (max-width: 379px) {
+
+  .left.surface-900.border-900 {
+    margin-left: 80px; /* Ajusta el valor según la cantidad de espacio que desees */
+  }
+}
+
+
+@media (min-width: 300px) and (max-width: 321px) {
   .right {
-    margin-right: 30px; /* Ajusta el valor según la cantidad de espacio que desees */
+    margin-right: 0px; /* Ajusta el valor según la cantidad de espacio que desees */
   }
 
   .left.surface-900.border-900 {
-    margin-left: 20px; /* Ajusta el valor según la cantidad de espacio que desees */
+    margin-left: 25px; /* Ajusta el valor según la cantidad de espacio que desees */
   }
-}
-
-/*Ajusta a partir del 320px*/
-@media (min-width: 300px) and (max-width: 321px) {
-.right {
-  margin-right: 4px; /* Ajusta el valor según la cantidad de espacio que desees */
-}
-
-.left.surface-900.border-900 {
-  margin-left: 20px; /* Ajusta el valor según la cantidad de espacio que desees */
-}
 }
 
 </style>

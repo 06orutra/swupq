@@ -26,6 +26,9 @@ export default {
         Carousel,
         Slide,
     },
+    props:{
+        controllerName: String
+    },
     mounted() {
         this.cargarBanner();
     },
@@ -45,7 +48,7 @@ export default {
         },
 
         cargarBanner() {
-            axios.post("/bannerData").then((response) => {
+            axios.post(this.controllerName).then((response) => {
                 this.banner = response.data;
                 this.assignConsecutiveIDs();
                 this.isBannerLoaded = true;

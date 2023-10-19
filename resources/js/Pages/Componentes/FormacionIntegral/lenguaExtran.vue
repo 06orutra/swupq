@@ -153,7 +153,7 @@ methods: {
           </div> 
         </div>
 
-     
+    
         <div class="p-1 w-2/3 ml-10">
           <div class="toggle-acordion">
             <div class="heading-title heading-border-bottom">

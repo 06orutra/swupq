@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carrusel_mascotas', function (Blueprint $table) {
+        Schema::create('carrusel_instalaciones', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('imagen');
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('carrusel_mascotas');
+        Schema::dropIfExists('carrusel_instalaciones');
     }
 };

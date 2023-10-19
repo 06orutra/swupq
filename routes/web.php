@@ -22,6 +22,7 @@ use App\Http\Controllers\HistoriaImgPrincController;
 use App\Http\Controllers\HistoriaTextoController;
 use App\Http\Controllers\HistoriaCarruselController;
 use App\Http\Controllers\VideoLenguajeController;
+use App\Http\Controllers\CarruselInstalacionesController;
 
 
 use Illuminate\Http\Request;
@@ -125,6 +126,8 @@ Route::middleware([
         'historiaImgPrinc' => HistoriaImgPrincController::class,
         'historiaTexto' => HistoriaTextoController::class,
         'historiaCarrusel' => HistoriaCarruselController::class,
+        'Cinstalaciones' => CarruselInstalacionesController::class,
+        
     ];
     // se declarar variables, 
 

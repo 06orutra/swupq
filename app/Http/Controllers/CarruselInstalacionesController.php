@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CarruselMascota;
+use App\Models\CarruselInstalaciones;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class CarruselMascotaController extends Controller
+class CarruselInstalacionesController extends Controller
 {
     public function bannerData()
     {
-        $datosBanner = CarruselMascota::all();
+        $datosBanner = CarruselInstalaciones::all();
         return response()->json($datosBanner);
     }
 
@@ -29,7 +29,7 @@ class CarruselMascotaController extends Controller
         $fotoPath = $request->file('foto')->storeAs('public', $fotoName);
 
         // Create a new banner instance
-        $banner = new CarruselMascota;
+        $banner = new CarruselInstalaciones;
         $banner->nombre = $request->nombre;
         $banner->imagen = $fotoName;
         $banner->save();
@@ -44,7 +44,7 @@ class CarruselMascotaController extends Controller
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000000',
         ]);
 
-        $banner = CarruselMascota::find($request->id);
+        $banner = CarruselInstalaciones::find($request->id);
 
         if ($request->hasFile('foto')) {
             $date = date('Y-m-d H-i-s');
@@ -66,7 +66,7 @@ class CarruselMascotaController extends Controller
 
     public function eliminarBanner(Request $request)
     {
-        $banner = CarruselMascota::find($request->id);
+        $banner = CarruselInstalaciones::find($request->id);
         //eliminar la imagen del storage
         Storage::delete('public/' . $banner->imagen);
         $banner->delete();

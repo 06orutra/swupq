@@ -1,7 +1,7 @@
 <script setup>
 import estructuraTextos from '@/Pages/Componentes/Home/estructuraTextos.vue';
 import estructuraTexto2 from '@/Pages/Componentes/Home/estructuraTexto2.vue';
-import estructuraimagen2 from '@/Pages/Componentes/Home/estructuraimagen2.vue';
+import estructuraImg from '@/Pages/Componentes/Home/estructuraImg.vue';
 </script>
 
 <template>
@@ -18,7 +18,7 @@ import estructuraimagen2 from '@/Pages/Componentes/Home/estructuraimagen2.vue';
         :editBannerUrl="'/spotypolo/editarBanner'" :deleteBannerUrl="'/spotypolo/eliminarBanner'" />
         </TabPanel> 
         <TabPanel header="Carrusel Mascotas">
-            <estructuraimagen2 :loadDataUrl="'/Cmascotas/bannerData'" :registerBannerUrl="'/Cmascotas/registrarBanner'"
+            <estructuraImg :loadDataUrl="'/Cmascotas/bannerData'" :registerBannerUrl="'/Cmascotas/registrarBanner'"
         :editBannerUrl="'/Cmascotas/editarBanner'" :deleteBannerUrl="'/Cmascotas/eliminarBanner'" />
         </TabPanel>
     </TabView>

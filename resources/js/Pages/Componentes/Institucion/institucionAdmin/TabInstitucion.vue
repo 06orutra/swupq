@@ -6,9 +6,9 @@ import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 import estructuraTextos from "@/Pages/Componentes/Home/estructuraTextos.vue";
 import estructuraTexto2 from "@/Pages/Componentes/Home/estructuraTexto2.vue";
 import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
-import estructuraimagen2 from "@/Pages/Componentes/Home/estructuraimagen2.vue";
 import Mascotas from "@/Pages/Componentes/Institucion/institucionAdmin/Mascotas.vue";
 import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofia.vue";
+import Instalaciones from "@/Pages/Componentes/Institucion/institucionAdmin/Instalaciones.vue";
 import historia from './historia.vue';
 
 export default {
@@ -20,10 +20,10 @@ export default {
         estructuraTextos,
         estructuraTexto2,
         estructuraImg,
-        estructuraimagen2,
         Mascotas,
         filosofia,
         historia,
+        Instalaciones,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -59,6 +59,9 @@ export default {
         </TabPanel>
         <TabPanel header="Mascotas">
             <Mascotas/>
+        </TabPanel>
+        <TabPanel header="Instalaciones">
+            <Instalaciones/>
         </TabPanel>
     </TabView>
 </template>

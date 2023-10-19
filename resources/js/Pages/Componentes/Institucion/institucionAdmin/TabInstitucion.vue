@@ -10,6 +10,7 @@ import MensajeRector from '@/Pages/Componentes/Institucion/institucionAdmin/mens
 import modeloEducativo from './modeloEducativo.vue';
 import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofia.vue";
 import historia from './historia.vue';
+import ubicacion from './ubicacion.vue';
 
 export default {
     components: {
@@ -24,6 +25,7 @@ export default {
         filosofia,
         historia,
         modeloEducativo,
+        ubicacion,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -65,6 +67,9 @@ export default {
         </TabPanel>
         <TabPanel header="Modelo Educativo">
             <modeloEducativo />
+        </TabPanel>
+        <TabPanel header="Ubicación">
+            <ubicacion />
         </TabPanel>
 
     </TabView>

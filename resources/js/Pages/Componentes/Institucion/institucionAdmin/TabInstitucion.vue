@@ -7,9 +7,7 @@ import estructuraTextos from "@/Pages/Componentes/Home/estructuraTextos.vue";
 import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
 import NotaMascotas from "@/Pages/Componentes/Institucion/institucionAdmin/NotaMascotas.vue";
 import MensajeRector from '@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue';
-import cicloAlumando from '@/Pages/Componentes/Institucion/institucionAdmin/cicloAlumnado.vue';
-import modalModEdu from '@/Pages/Componentes/Institucion/institucionAdmin/modalModEdu.vue';
-import informesModEdu from '@/Pages/Componentes/Institucion/institucionAdmin/informesModEdu.vue';
+import modeloEducativo from './modeloEducativo.vue';
 import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofia.vue";
 import historia from './historia.vue';
 
@@ -23,11 +21,9 @@ export default {
         estructuraImg,
         MensajeRector,
         NotaMascotas,
-        cicloAlumando,
-        modalModEdu,
-        informesModEdu,
         filosofia,
         historia,
+        modeloEducativo,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -67,14 +63,8 @@ export default {
         <TabPanel header="Filosofía">
             <filosofia />
         </TabPanel>
-        <TabPanel header="Ciclo en curso">
-            <cicloAlumando/>
-        </TabPanel>
-        <TabPanel header="Modal (Bolitas)">
-            <modalModEdu/>
-        </TabPanel>
-        <TabPanel header="Informes del Rector">
-            <informesModEdu/>
+        <TabPanel header="Modelo Educativo">
+            <modeloEducativo />
         </TabPanel>
 
     </TabView>

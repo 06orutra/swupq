@@ -39,20 +39,19 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-
-    ]);
+    return Inertia::render('Welcome', []);
 });
 
-Route::prefix('servicios-universitarios')->group(function() {
-    Route::get('/movilidad-academica', function(){
+Route::prefix('servicios-universitarios')->group(function () {
+    Route::get('/movilidad-academica', function () {
         return Inertia::render('Componentes/Servicios_Universitarios/movilidadAcademica');
     });
 });
 //Institución: Ordenado Alfabéticamente
 Route::prefix('institucion')->group(function () {
-    Route::get('filosofia', function(){
+    Route::get('filosofia', function () {
         return Inertia::render('Componentes/Institucion/Philosophy');
+    });
     Route::get('mascotas', function () {
         return Inertia::render('Componentes/Institucion/mascotasPrincipal');
     });
@@ -64,42 +63,42 @@ Route::prefix('institucion')->group(function () {
     Route::get('laborEq', function () {
         return Inertia::render('Componentes/Institucion/Laborequality');
     });
-    Route::get('instalaciones', function(){
+    Route::get('instalaciones', function () {
         return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
     });
-    
+
     Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
 
-    Route::get('ubicacion', function(){
+    Route::get('ubicacion', function () {
         return Inertia::render('Componentes/Institucion/location');
     });
-    Route::get('historia', function(){
+    Route::get('historia', function () {
         return Inertia::render('Componentes/Institucion/Historia');
     });
-    Route::get('instalaciones', function(){
+    Route::get('instalaciones', function () {
         return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
     });
     Route::get('mascotas', function () {
         return Inertia::render('Componentes/Institucion/mascotasPrincipal');
     });
-    Route::get('/modelo-educativo', function(){
+    Route::get('/modelo-educativo', function () {
         return Inertia::render('Componentes/Institucion/Educational');
     });
-    Route::get('ubicacion', function(){
+    Route::get('ubicacion', function () {
         return Inertia::render('Componentes/Institucion/location');
     });
 });
-    
-    //¿Esto qué es xd?
-    Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
 
-    Route::get('marcoJuridico', function(){
-        return Inertia::render('Componentes/Institucion/LegalFramework');
-    });
-    Route::get('lenguaExtranjera', function(){
-        return Inertia::render('Componentes/Institucion/Foreignlanguage');
-    });
-});   
+//¿Esto qué es xd?
+Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
+
+Route::get('marcoJuridico', function () {
+    return Inertia::render('Componentes/Institucion/LegalFramework');
+});
+Route::get('lenguaExtranjera', function () {
+    return Inertia::render('Componentes/Institucion/Foreignlanguage');
+});
+
 
 /*
 ejemplo de como mandar a llamar una vista

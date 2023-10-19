@@ -1,65 +1,24 @@
 <script>
 import axios from 'axios';
+import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 
 export default {
+  components: {
+    AppEstructure,
+  },
+
   mounted() {
     //Función para mandar a llamar el texto de la base de datos
     this.cargarTexto();
     //Función para los círculos del modelo educativo
-    this.cargarModal();
+    this.cargarModal().then(() => {
+      this.$nextTick(this.inicializarInteracciones);
+    });
     //Función para los informes del rector
     this.cargarInformes();
 
 
     //Cosas del módulo como tal:
-    const loaders = document.querySelectorAll('.loader');
-
-    loaders.forEach(loader => {
-      const text = loader.querySelector('.text');
-
-      loader.addEventListener('mouseenter', () => {
-        loader.classList.add('active');
-        text.style.opacity = '0';
-      });
-
-      loader.addEventListener('mouseleave', () => {
-        loader.classList.remove('active');
-        text.style.opacity = '1';
-      });
-    });
-
-
-    loaders.forEach((loader, index) => {
-      loader.addEventListener('click', () => {
-        const titles = [
-          "MODELO POR COMPETENCIAS",
-          "VINCULACIÓN CON LA INDUSTRIA",
-          "ESTANCIAS Y ESTADÍAS",
-          "LENGUA EXTRANJERA",
-          "PROGRAMAS Y TUTORÍAS",
-          "FORMACIÓN INTEGRAL",
-          "INFRAESTRUCTURA DE CALIDAD",
-          "AMPLIA OCUPACIÓN DE EGRESADAS Y EGRESADOS",
-          "MOVILIDAD NACIONAL E INTERNACIONAL"
-        ];
-
-
-        const contents = [
-          "Los Planes Curriculares están diseñados para la acreditación del dominio de competencias profesionales en áreas científico-tecnológicas, culturales y sociales que formen profesionistas de alta calidad que puedan competir a nivel internacional.",
-          "Ofrecemos una formación a través de la especialización tecnológica y participación altamente competitiva en el sector industrial en beneficio del desarrollo estatal, regional y nacional.",
-          "Importantes asignaturas que permiten a nuestras y nuestros estudiantes insertarse en el desarrollo de proyectos en la empresa, con el din de adquirir las habilidades y competencias requeridas para la resolución de problemas en su área de especialidad.",
-          "Nuestro eficaz sistema de enseñanza del idioma inglés incluido en el Plan de Estudios de todos nuestros Programas Educativos, permite a nuestros estudiantes aprender y dominar el idioma como segunda lengua.",
-          "Con el apoyo de los docentes, el alumnado recibe orientación para la toma de descisiones académicas, para fortalecer el avance y conclusión de sus estudios en tiempo y forma.",
-          "Sólida formación en valores para el buen desempeño e integración en distintos ambientes de trabajo, lo cual genera un alto grado de aceptación de nuestras egresadas y egresados en la industria.",
-          "Laboratorios y talleres con alta especialización tecnológica, amplios espacios para actividades desportivas y aulas con equipamiento funcional para los mejores ambientes de aprendizaje del alumnado.",
-          "Mediante la titulación automática, nuestras egresadas y nuestros egresados tienen la posibilidad de integrarse de manera inmediata al campo de trabajo en su área de especialidad.",
-          "El proceso de globalización económica requiere impulsar el desarrollo de aptitudes para la evaluación y participación",
-        ];
-
-
-        this.openModal(titles[index], contents[index]);
-      });
-    });
 
     function startCounter(elementId, endNumber) {
       let counter = 1;
@@ -122,7 +81,7 @@ export default {
     },
     //Método del modal (las bolitas)
     cargarModal() {
-      axios.post('/modalModEdu/bannerData').then((response) => {
+      return axios.post('/modalModEdu/bannerData').then((response) => {
         this.modal = response.data;
       }).catch((error) => {
         console.log(error);
@@ -134,7 +93,27 @@ export default {
       }).catch((error) => {
         console.log(error);
       });
-    }
+    },
+    inicializarInteracciones() {
+      const loaders = document.querySelectorAll('.loader');
+      loaders.forEach(loader => {
+        const text = loader.querySelector('.text');
+
+        loader.addEventListener('mouseenter', () => {
+          loader.classList.add('active');
+          text.style.opacity = '0';
+        });
+
+        loader.addEventListener('mouseleave', () => {
+          loader.classList.remove('active');
+          text.style.opacity = '1';
+        });
+
+        loader.addEventListener('click', () => {
+          this.openModal(title[loader.dataset.index], contents[loader.dataset.index]);
+        });
+      });
+    },
   },
 
 };
@@ -157,88 +136,16 @@ export default {
         Y finalmente, el título, tanto dentro como fuera del Modal, se obtiene por el
         apartado "nombre" en la tabla modalModEdu-->
     <section>
-      <div class="vertical-column circle-container">
-        <!-- <div
-      v-for="(datosModal, index) in modal"
-      :key="index"
-      class="background-image circle"
-      :style="'background-image: url(https://www.upq.mx/assets/modelo-educativo/4.png)'"
-    >
-      <div class="loader" :id="'loader' + getIndex(index)">
-        <div class="text" :id="'text' + getIndex(index)">{{ datosModal.nombre }}</div>
-      </div> -->
-
-        <!-- Comienza el recorrido para el modal (bolitas) -->
-
-        <div class="background-image circle"
-          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/4.png')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">MODELO POR COMPETENCIAS</div>
-          </div>
-        </div>
-
-        <div class="background-image circle"
-          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/3.png')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">VINCULACIÓN CON LA INDUSTRIA</div>
-          </div>
-        </div>
-
-        <div class="background-image circle"
-          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/8.png')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">ESTANCIAS Y ESTADÍAS</div>
+      <div class="circle-container">
+        <div v-for="(item, index) in modal" :key="item.id" class="circle-wrapper">
+          <div class="background-image circle" data-index="0" @click="openModal(item.nombre, item.link)">
+            <img :src="'/storage/' + item.imagen" alt="Valor Image" class="circle-img" />
+            <div class="loader" :id="'loader' + getIndex(index)">
+              <div class="text" :id="'text' + getIndex(index)">{{ item.nombre }}</div>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="vertical-column circle-container">
-        <div class="background-image circle"
-          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/1.png')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">LENGUA EXTRANJERA</div>
-          </div>
-        </div>
-
-
-        <div class="background-image circle"
-          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/9.png')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">PROGRAMAS Y TUTORÍAS</div>
-          </div>
-        </div>
-
-        <div class="background-image circle"
-          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/5.png')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text6">FORMACIÓN INTEGRAL</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="vertical-column circle-container">
-        <div class="background-image circle"
-          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/7.png')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">INFRAESTRUCUTRA DE CALIDAD</div>
-          </div>
-        </div>
-
-        <div class="background-image circle"
-          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/6.png')">
-          <div class="loader" id="loader2">
-            <div class="text" id="text2">AMPLIA OCUPACIÓN DE EGRESADAS Y EGRESADOS</div>
-          </div>
-        </div>
-
-        <div class="background-image circle"
-          style="background-image: url('https://www.upq.mx/assets/modelo-educativo/2.png')">
-          <div class="loader" id="loader1">
-            <div class="text" id="text1">MOVILIDAD NACIONAL E INTERNACIONAL</div>
-          </div>
-        </div>
-      </div>
-  
 
   <div class="modal" :class="{ 'active': showModal }">
     <div class="modal-content">
@@ -270,14 +177,6 @@ export default {
         </h1>
         <hr>
       </header>
-    </div>
-    <div v-for="datosModal in modal" class="container text-center">
-      <h1>
-        {{ datosModal.nombre }}
-      </h1>
-      <img :src="'/storage/' + datosModal.imagen" alt="" style="max-height: 150px; margin:0 0 16px 0;">
-
-
     </div>
 
     <div>
@@ -376,6 +275,7 @@ export default {
   </section>
 
   </div>
+  <AppEstructure/>
 </template>
 
 <style>
@@ -527,6 +427,128 @@ h2 {
   background-color: #f3f3f3;
 }
 
+.circle-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  /* Espacio entre los elementos */
+  padding: 0 20px;
+  /* Añadir un poco de padding al contenedor para evitar que los círculos estén demasiado cerca del borde de la pantalla */
+}
+
+.circle-wrapper {
+  flex: 1;
+  max-width: 300px;
+  /* Ancho máximo de cada círculo */
+}
+
+.background-image.circle {
+  position: relative;
+  width: 100%;
+  /* Asegurarse de que cada círculo tenga un ancho responsivo */
+  height: 0;
+  padding-bottom: 100%;
+  /* Mantener la relación de aspecto 1:1 */
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.circle-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  /* Asegura que la imagen esté debajo del texto y del loader */
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* .modal-content {
+  max-width: 700px;
+  max-height: 700px;
+  background: rgba(8, 22, 47, 0.9);
+  border-radius: 10px;
+  padding: 25px;
+  text-align: justify;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+}
+
+.modal-body {
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  color: #fff;
+  font-size: 22px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.modal-button {
+  text-align: center;
+}
+
+.modal-button button {
+  background-color: #8C2437;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal-button button:hover {
+  background-color: #6B1B2D;
+}
+
+.modal.active {
+  display: flex;
+} */
+
+.loader {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  transition: transform 1.9s ease;
+  background-color: transparent;
+  z-index: 2;
+  /* Asegura que el loader esté sobre la imagen */
+}
+
+#loader1 {
+  border: 13px solid #08162fe6;
+  border-top: 13px solid #08162fe6;
+  border-right: 13px solid #f3f3f3;
+  border-bottom: 13px solid #f3f3f3;
+  transition: transform 1.9s ease;
+  z-index: 2;
+  /* Asegura que el loader esté sobre la imagen */
+}
+
+#loader2 {
+  border: 13px solid #8C2437;
+  border-top: 13px solid #8C2437;
+  border-right: 13px solid #f3f3f3;
+  border-bottom: 13px solid #f3f3f3;
+  transition: transform 1.9s ease;
+  z-index: 2;
+  /* Asegura que el loader esté sobre la imagen */
+}
+
 .text {
   width: 100%;
   height: 100%;
@@ -581,7 +603,7 @@ h2 {
 }
 
 /* Elementos responsive */
-@media (max-width: 425px) {
+@media (max-width: 768px) {
   .vertical-column {
     flex-direction: column;
     margin-right: 0;
@@ -609,23 +631,5 @@ h2 {
   }
 }
 
-@media (max-width: 768px) and (min-width: 426px) {
-  .vertical-column {
-    flex-direction: row;
-    justify-content: space-between;
-  }
 
-  .circle {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    margin-right: 0;
-  }
-
-  .circle-container {
-    display: flex;
-    justify-content: space-between;
-  }
-}</style>
+</style>

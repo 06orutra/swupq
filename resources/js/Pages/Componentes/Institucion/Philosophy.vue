@@ -166,9 +166,9 @@ export default {
     <!-- Valores (modal) -->
     <section>
       <br> <br>
-      <div class="container text-center">
+      <div class="text-center">
         <header>
-          <h1 style="color: #414141;">Valores</h1>
+          <h1 class="text-center" style="color: #414141;">Valores</h1><br>
           <hr>
         </header>
       </div>

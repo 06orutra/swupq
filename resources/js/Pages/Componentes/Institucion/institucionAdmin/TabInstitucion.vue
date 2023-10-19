@@ -4,7 +4,10 @@ import TabPanel from 'primevue/tabpanel';
 import carruselEstructura from "@/Pages/Componentes/Home/carruselEstructura.vue";
 import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 import estructuraTextos from "@/Pages/Componentes/Home/estructuraTextos.vue";
+import estructuraTexto2 from "@/Pages/Componentes/Home/estructuraTexto2.vue";
 import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
+import estructuraimagen2 from "@/Pages/Componentes/Home/estructuraimagen2.vue";
+import Mascotas from "@/Pages/Componentes/Institucion/institucionAdmin/Mascotas.vue";
 
 export default {
     components: {
@@ -13,7 +16,10 @@ export default {
         carruselEstructura,
         opcionesCarrusel,
         estructuraTextos,
+        estructuraTexto2,
         estructuraImg,
+        estructuraimagen2,
+        Mascotas,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -40,6 +46,9 @@ export default {
         <TabPanel header="Imagenes">
             <estructuraImg :loadDataUrl="'/img/bannerData'" :registerBannerUrl="'/img/registrarBanner'"
                 :editBannerUrl="'/img/editarBanner'" :deleteBannerUrl="'/img/eliminarBanner'"  />
+        </TabPanel>
+        <TabPanel header="Mascotas">
+            <Mascotas/>
         </TabPanel>
     </TabView>
 </template>

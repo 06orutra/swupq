@@ -9,7 +9,12 @@ use App\Http\Controllers\TbCarruselPrimeroController;
 use App\Http\Controllers\TbCarruselSegundoController;
 use App\Http\Controllers\TbCarruselTercerController;
 use App\Http\Controllers\TextoPruebaController;
+use App\Http\Controllers\SpotypoliController;
+use App\Http\Controllers\SpotypoloController;
+use App\Http\Controllers\MensajePoliPoloController;
 use App\Http\Controllers\ImgPruebaController;
+use App\Http\Controllers\CarruselMascotaController;
+
 use Illuminate\Http\Request;
 
 /*
@@ -91,6 +96,10 @@ Route::middleware([
         'tercer' => TbCarruselTercerController::class,
         'texto' => TextoPruebaController::class,
         'img' => ImgPruebaController::class,
+        'spotypoli' => SpotypoliController::class,
+        'spotypolo' => SpotypoloController::class,
+        'mensaje' => MensajePoliPoloController::class,
+        'Cmascotas' => CarruselMascotaController::class,
     ];
 
     foreach ($controllers as $prefix => $controller) {

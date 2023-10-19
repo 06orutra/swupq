@@ -14,9 +14,6 @@ export default {
     this.cargarModal().then(() => {
       this.$nextTick(this.inicializarInteracciones);
     });
-    //Función para los informes del rector
-    this.cargarInformes();
-
 
     //Cosas del módulo como tal:
 
@@ -55,7 +52,7 @@ export default {
       showModal: false,
       texto: [],
       modal: [],
-      informes: [],
+
     };
   },
   methods: {
@@ -87,13 +84,7 @@ export default {
         console.log(error);
       });
     },
-    cargarInformes(){
-      axios.post('/informesModEdu/bannerData').then((response) => {
-        this.informes = response.data;
-      }).catch((error) => {
-        console.log(error);
-      });
-    },
+    
     inicializarInteracciones() {
       const loaders = document.querySelectorAll('.loader');
       loaders.forEach(loader => {
@@ -264,12 +255,6 @@ export default {
           <p style="font-size: 1.3em;">Total del Alumnado inscrito</p>
         </div>
       </div>
-      <p class="text-center">Cosito de los informes uwu</p><br>
-      <div v-for="informe in informes" class="container text-center">
-        <a :href="informe.contenido" target="_blank">
-          {{ informe.titulo }}
-        </a>
-        </div>
     </div>
     <hr><br>
   </section>
@@ -353,6 +338,9 @@ h2 {
   padding: 25px;
   text-align: justify;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  margin-top: 10%;
+  margin-bottom:10%
+  
 }
 
 .modal-body {

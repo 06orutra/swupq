@@ -6,6 +6,6 @@ import estructuraTextos from '@/Pages/Componentes/Home/estructuraTextos.vue';
 </script>
 
 <template>
-    <estructuraTextos :loadDataUrl="'/ciclo/bannerData'" :registerBannerUrl="'/ciclo/registrarBanner'"
+    <estructuraTextos :Titulo="'Introducción'" :Subtitulo="'Ciclo en curso'" :loadDataUrl="'/ciclo/bannerData'" :registerBannerUrl="'/ciclo/registrarBanner'"
         :editBannerUrl="'/ciclo/editarBanner'" :deleteBannerUrl="'/ciclo/eliminarBanner'" />
 </template>

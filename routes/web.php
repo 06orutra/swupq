@@ -14,7 +14,6 @@ use App\Http\Controllers\NotaMascotaController;
 use App\Http\Controllers\MensajeRectorController;
 use App\Http\Controllers\CicloController;
 use App\Http\Controllers\ModEduModalController;
-use App\Http\Controllers\ModEduInformeController;
 use App\Http\Controllers\FilosofiaController;
 use App\Http\Controllers\FilosofiaImgController;
 use App\Http\Controllers\FilosofiaValorController;
@@ -138,7 +137,6 @@ Route::middleware([
         'rector' => MensajeRectorController::class,
         'ciclo' => CicloController::class,
         'modalModEdu' => ModEduModalController::class,
-        'informesModEdu' => ModEduInformeController::class,
         'filosofia' => FilosofiaController::class,
         'filosofiaImg' => FilosofiaImgController::class,
         'filosofiaValor' => FilosofiaValorController::class,

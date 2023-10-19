@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('link');
             $table->string('imagen');
+            $table->boolean('Poli_o_Polo');
             $table->timestamps();
         });
     }

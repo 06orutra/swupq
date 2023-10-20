@@ -6,9 +6,9 @@ import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 import estructuraTextos from "@/Pages/Componentes/Home/estructuraTextos.vue";
 import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
 import NotaMascotas from "@/Pages/Componentes/Institucion/institucionAdmin/NotaMascotas.vue";
-import MensajeRector from '@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue';
 import modeloEducativo from './modeloEducativo.vue';
 import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofia.vue";
+import MensajeRector from '@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue';
 import historia from './historia.vue';
 import ubicacion from './ubicacion.vue';
 
@@ -26,6 +26,7 @@ export default {
         historia,
         modeloEducativo,
         ubicacion,
+
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -35,7 +36,7 @@ export default {
             this.timeout = settings.timeout;
         }
     }
-}
+};
 </script>
 
 <template>

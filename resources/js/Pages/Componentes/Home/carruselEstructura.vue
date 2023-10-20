@@ -1,31 +1,6 @@
 <script>
-import DataTable from "primevue/datatable";
-import InputText from "primevue/inputtext";
-import Column from "primevue/column";
-import Button from "primevue/button";
-import Card from 'primevue/card';
-import Dialog from 'primevue/dialog';
-import FileUpload from 'primevue/fileupload';
-import Paginator from 'primevue/paginator';
-import axios from "axios";
-import Toast from "primevue/toast";
-import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
-import filterComponent from "@/Pages/Componentes/Home/filterComponent.vue";
 
 export default {
-    components: {
-        DataTable,
-        Column,
-        InputText,
-        Button,
-        Card,
-        Dialog,
-        FileUpload,
-        Toast,
-        Paginator,
-        opcionesCarrusel,
-        filterComponent,
-    },
     props: {
         loadDataUrl: {
             type: String,
@@ -43,13 +18,28 @@ export default {
             type: String,
             required: true
         },
+        Titulo: {
+            type: String,
+            required: true
+        },
+        Subtitulo:{
+            type: String,
+            required: true
+        },
+    },
+    computed: {
+        filteredBanner() {
+            if (!this.searchQuery) {
+                return this.banner;
+            }
+            return this.banner.filter(item =>
+                item.nombre.toLowerCase().includes(this.searchQuery.toLowerCase())
+            );
+        }
     },
     mounted() {
         this.cargarBanner();
     },
-
-
-
     methods: {
         cargarBanner() {
             axios.post(this.loadDataUrl).then((response) => {
@@ -91,7 +81,7 @@ export default {
                 });
                 return false;
             }
-
+            this.isLoading = true;
 
             const formData = new FormData();
             formData.append('nombre', this.nombre);
@@ -115,14 +105,16 @@ export default {
                     detail: "Registro exitoso",
                     life: 3000,
                 });
+                this.isLoading = false;
             }).catch((error) => {
                 console.log(error);
+                this.isLoading = false;
             });
         },
         editarBanner() {
             this.submitted = true;
             //validar si hay campos vacios
-            if (this.datosArreglo.nombre == null || this.datosArreglo.link == null) {
+            if (this.datosArreglo.nombre == null || this.datosArreglo.nombre == '' || this.datosArreglo.link == null || this.datosArreglo.link == '') {
                 // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
@@ -145,6 +137,7 @@ export default {
                 });
                 return false;
             }
+            this.isLoading = true;
 
             const formData = new FormData();
             formData.append('id', this.datosArreglo.id);
@@ -172,8 +165,10 @@ export default {
                     detail: "Edicion exitosa",
                     life: 3000,
                 });
+                this.isLoading = false;
             }).catch((error) => {
                 console.log(error);
+                this.isLoading = false;
             });
 
         },
@@ -213,6 +208,10 @@ export default {
             this.submitted = false;
             this.dialogTable = true;
             this.imagePreview = null;
+
+            this.nombre = null;
+            this.link = null;
+            this.foto = null;
         },
         selectNewPhoto() {
             this.$refs.photoInput.click();
@@ -246,17 +245,12 @@ export default {
                 }
                 reader.readAsDataURL(input.files[0]);
             }
-
         },
-
-
-
-        //metodo para input 
-
     },
     data() {
         return {
             banner: [],
+            searchQuery: '',
             nombre: null,
             link: null,
             foto: null,
@@ -267,7 +261,7 @@ export default {
             eliminarDialog: false,
             photoInput: null,
             imagePreview: null,
-
+            isLoading: false,
         };
     },
 
@@ -280,19 +274,16 @@ export default {
             <Button label="Nuevo Registro" icon="pi pi-plus" class="p-button-success !mr-2" @click="openRegistro" />
         </template>
         <template #end>
-            <filterComponent :valores="banner" />
+            <span class="p-input-icon-left">
+                <i class="pi pi-search" />
+                <InputText v-model="searchQuery" placeholder="Search" />
+            </span>
         </template>
     </Toolbar>
 
-
-    <!-- PERSONALIZAR CARRUSEL -->
-    <div>
-        <opcionesCarrusel />
-    </div>
-
     <!-- Cartas en admin -->
     <div class="cards-container">
-        <Card v-for="datosCard in banner" class="card">
+        <Card v-for="datosCard in filteredBanner" class="card">
             <template #header>
                 <img :src="'/storage/' + datosCard.imagen" alt="Card Image" class="imagen-resolucion" />
             </template>
@@ -319,12 +310,12 @@ export default {
                 <!-- select con opciones -->
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Nombre</label>
+                    <label for="minmax">{{ this.Titulo }}</label>
                     <InputText inputId="minmax" v-model="nombre" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Link</label>
+                    <label for="minmax">{{ this.Subtitulo }}</label>
                     <InputText inputId="minmax" v-model="link" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
@@ -340,9 +331,12 @@ export default {
 
                 </div>
 
-                <Button type="submit" id="btnRegisrar"
+                <Button type="submit" id="btnRegisrar" :disabled="isLoading"
                     class="flex items-center justify-center space-x-2 rounded-md border-2 border-blue-500 px-4 py-2 font-medium text-blue-600 transition hover:bg-blue-500 hover:text-white">
-                    <span> Registrar </span>
+                    <span v-if="!isLoading"> Registrar </span>
+                    <span v-else>
+                        <i class="pi pi-spin pi-spinner"></i>
+                    </span>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
                             <path fill-rule="evenodd"
@@ -363,12 +357,12 @@ export default {
                 <InputText id="id" v-model.trim="datosArreglo.id" hidden />
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Nombre</label>
+                    <label for="minmax">{{ this.Titulo }}</label>
                     <InputText inputId="minmax" v-model="datosArreglo.nombre" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Link</label>
+                    <label for="minmax">{{ this.Subtitulo }}</label>
                     <InputText inputId="minmax" v-model="datosArreglo.link" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
@@ -384,9 +378,12 @@ export default {
 
                 </div>
 
-                <Button type="submit" id="btnRegisrar"
+                <Button type="submit" id="btnRegisrar" :disabled="isLoading"
                     class="flex items-center justify-center space-x-2 rounded-md border-2 border-blue-500 px-4 py-2 font-medium text-blue-600 transition hover:bg-blue-500 hover:text-white">
-                    <span> Registrar </span>
+                    <span v-if="!isLoading"> Registrar </span>
+                    <span v-else>
+                        <i class="pi pi-spin pi-spinner"></i>
+                    </span>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
                             <path fill-rule="evenodd"

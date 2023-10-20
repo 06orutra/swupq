@@ -1,170 +1,147 @@
 <template>
-    <div id="app">
-      <img
-        src="storage/img/icon_menu.png"
-        alt="Menu Icon"
-        class="menu-icon"
-        @click="showMenu = !showMenu"
-      />
-  
-      <ul class="menu" v-show="showMenu" @mouseleave="closeActiveSubMenu">
-        <li v-for="(menuItem, index) in menuItems" :key="index">
-          <div
-            @mouseover="expandSubMenu(index)"
-            :style="{ color: menuItem.textColor }"
-            :class="{ 'menu-block': true, 'active': menuItem.expanded }"
-          >
-            {{ menuItem.label }}
-          </div>
-          <transition name="fade">
-            <ul v-if="menuItem.expanded" class="sub-menu">
-              <li
-                v-for="(subMenuItem, subIndex) in menuItem.subMenuItems"
-                :key="subIndex"
+  <div id="app">
+    <img
+      src="/storage/img/icon_menu.svg"
+      alt="Menu Icon"
+      class="menu-icon"
+      @click="showMenu = !showMenu"
+    />
+
+    <ul class="menu" v-show="showMenu" @mouseleave="closeActiveSubMenu">
+      <li v-for="(menuItem, index) in menuItems" :key="index">
+        <div
+          @mouseover="expandSubMenu(index)"
+          :style="{ color: menuItem.textColor }"
+          :class="{ 'menu-block': true, 'active': menuItem.expanded }"
+        >
+          {{ menuItem.label }}
+        </div>
+        <transition name="fade">
+          <ul v-if="menuItem.expanded" class="sub-menu">
+            <li
+              v-for="(subMenuItem, subIndex) in menuItem.subMenuItems"
+              :key="subIndex"
+            >
+              <div
+                :style="{ color: subMenuItem.textColor }"
+                :class="{ 'sub-menu-block': true, 'active': subMenuItem.expanded }"
               >
-                <div
-                  :style="{ color: subMenuItem.textColor }"
-                  :class="{ 'sub-menu-block': true, 'active': subMenuItem.expanded }"
-                >
-                  {{ subMenuItem.label }}
-                </div>
-              </li>
-            </ul>
-          </transition>
-        </li>
-      </ul>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        menuicon:{
-          top: '28.1%', // Ajusta esto a la posición inicial del menú-icon
-          left: '10px', // Ajusta esto a la posición inicial del menú-icon
-        },
-        showMenu: false,
-        activeSubMenuIndex: null,
-        menuItems: [
+                {{ subMenuItem.label }}
+              </div>
+            </li>
+          </ul>
+        </transition>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      menuicon:{
+        top: '28.1%', // Ajusta esto a la posición inicial del menú-icon
+        left: '10px', // Ajusta esto a la posición inicial del menú-icon
+      },
+      showMenu: false,
+      activeSubMenuIndex: null,
+      menuItems: [
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'INSTITUCIÓN',
+          subMenuItems: [
+                { label: '- Mensaje del rector' },
+            { label: '- Directorio' },
+            { label: '- Organigrama' },
+            { label: '- Marco jurídico' },
+            { label: '- Igualdad Laboral y No Discriminacion' },
+            { label: '- Sistema de Gestión de la Calidad' },
+            ],
+          },
           {
             expanded: false,
             textColor: '#ffffff',
-            label: 'INSTITUCIÓN',
+            label: 'CARRERAS',
             subMenuItems: [
-                  { label: '- Mensaje del rector' },
-              { label: '- Directorio' },
-              { label: '- Organigrama' },
-              { label: '- Marco jurídico' },
-              { label: '- Igualdad Laboral y No Discriminacion' },
-              { label: '- Sistema de Gestión de la Calidad' },
-              ],
-            },
-            {
-              expanded: false,
-              textColor: '#ffffff',
-              label: 'CARRERAS',
-              subMenuItems: [
-                { label: 'Opción 1' },
-                { label: 'Opción 2' },
-                { label: 'Opción 3' },
-              ],
-            },
-            {
-              expanded: false,
-              textColor: '#ffffff',
-              label: 'POSGRADO',
-              subMenuItems: [
-                { label: 'Opción 1' },
-                { label: 'Opción 2' },
-                { label: 'Opción 3' },
-              ],
-            },
-            {
-              expanded: false,
-              textColor: '#ffffff',
-              label: 'EDUCACIÓN CONTINUA',
-              subMenuItems: [
-                { label: 'Opción 1' },
-                { label: 'Opción 2' },
-                { label: 'Opción 3' },
-              ],
-            },
-            {
-              expanded: false,
-              textColor: '#ffffff',
-              label: 'DEPORTE Y CULTURA',
-              subMenuItems: [
-                { label: 'Opción 1' },
-                { label: 'Opción 2' },
-                { label: 'Opción 3' },
-              ],
-            },
-            {
-              expanded: false,
-              textColor: '#ffffff',
-              label: 'VINCULACIÓN',
-              subMenuItems: [
-                { label: 'Opción 1' },
-                { label: 'Opción 2' },
-                { label: 'Opción 3' },
-              ],
-            },
-            {
-              expanded: false,
-              textColor: '#ffffff',
-              label: 'SERVICIOS ESTUDIANTILES',
-              subMenuItems: [
-                { label: 'Opción 1' },
-                { label: 'Opción 2' },
-                { label: 'Opción 3' },
-              ],
-            },
-            {
-              expanded: false,
-              textColor: '#ffffff',
-              label: 'CONVOCATORIAS',
-              subMenuItems: [
-                { label: 'Opción 1' },
-                { label: 'Opción 2' },
-                { label: 'Opción 3' },
-              ],
-            },
-            {
-              expanded: false,
-              textColor: '#ffffff',
-              label: 'CALENDARIO ESCOLAR',
-              subMenuItems: [
-                { label: 'Opción 1' },
-                { label: 'Opción 2' },
-                { label: 'Opción 3' },
-              ],
-            },
-          ],
-        };
-      },
-    methods: {
-      expandSubMenu(index) {
-        if (this.activeSubMenuIndex !== null) {
-          this.menuItems[this.activeSubMenuIndex].expanded = false;
-        }
-        this.menuItems[index].expanded = true;
-        this.activeSubMenuIndex = index;
-      },
-      toggleSubMenu(index) {
-        if (this.activeSubMenuIndex !== null && this.activeSubMenuIndex !== index) {
-          this.menuItems[this.activeSubMenuIndex].expanded = false;
-        }
-  
-        this.menuItems[index].expanded = !this.menuItems[index].expanded;
-        this.activeSubMenuIndex = this.menuItems[index].expanded ? index : null;
-      },
-      closeActiveSubMenu() {
-        if (this.activeSubMenuIndex !== null) {
-          this.menuItems[this.activeSubMenuIndex].expanded = false;
-          this.activeSubMenuIndex = null;
-        }
-      },
+              { label: 'Opción 1' },
+              { label: 'Opción 2' },
+              { label: 'Opción 3' },
+            ],
+          },
+          {
+            expanded: false,
+            textColor: '#ffffff',
+            label: 'POSGRADO',
+            subMenuItems: [
+              { label: 'Opción 1' },
+              { label: 'Opción 2' },
+              { label: 'Opción 3' },
+            ],
+          },
+          {
+            expanded: false,
+            textColor: '#ffffff',
+            label: 'EDUCACIÓN CONTINUA',
+            subMenuItems: [
+              { label: 'Opción 1' },
+              { label: 'Opción 2' },
+              { label: 'Opción 3' },
+            ],
+          },
+          {
+            expanded: false,
+            textColor: '#ffffff',
+            label: 'DEPORTE Y CULTURA',
+            subMenuItems: [
+              { label: 'Opción 1' },
+              { label: 'Opción 2' },
+              { label: 'Opción 3' },
+            ],
+          },
+          {
+            expanded: false,
+            textColor: '#ffffff',
+            label: 'VINCULACIÓN',
+            subMenuItems: [
+              { label: 'Opción 1' },
+              { label: 'Opción 2' },
+              { label: 'Opción 3' },
+            ],
+          },
+          {
+            expanded: false,
+            textColor: '#ffffff',
+            label: 'SERVICIOS ESTUDIANTILES',
+            subMenuItems: [
+              { label: 'Opción 1' },
+              { label: 'Opción 2' },
+              { label: 'Opción 3' },
+            ],
+          },
+          {
+            expanded: false,
+            textColor: '#ffffff',
+            label: 'CONVOCATORIAS',
+            subMenuItems: [
+              { label: 'Opción 1' },
+              { label: 'Opción 2' },
+              { label: 'Opción 3' },
+            ],
+          },
+          {
+            expanded: false,
+            textColor: '#ffffff',
+            label: 'CALENDARIO ESCOLAR',
+            subMenuItems: [
+              { label: 'Opción 1' },
+              { label: 'Opción 2' },
+              { label: 'Opción 3' },
+            ],
+          },
+        ],
+      };
     },
   methods: {
     expandSubMenu(index) {
@@ -190,16 +167,40 @@
         this.activeSubMenuIndex = null;
       }
     },
-    closeMenuAndSubMenu() {
-      if (this.showMenu || this.activeSubMenuIndex !== null) {
-        this.showMenu = false;
-        this.activeSubMenuIndex = null;
-      }
-    },
-  },  
+  },
+methods: {
+  expandSubMenu(index) {
+    if (this.activeSubMenuIndex !== null) {
+      this.menuItems[this.activeSubMenuIndex].expanded = false;
+    }
+    this.menuItems[index].expanded = true;
+    this.activeSubMenuIndex = index;
+  },
+  toggleSubMenu(index) {
+    if (this.activeSubMenuIndex !== null && this.activeSubMenuIndex !== index) {
+      this.menuItems[this.activeSubMenuIndex].expanded = false;
+    }
+
+    this.menuItems[index].expanded = !this.menuItems[index].expanded;
+    this.activeSubMenuIndex = this.menuItems[index].expanded ? index : null;
+  },
+  closeActiveSubMenu() {
+    if (this.activeSubMenuIndex !== null) {
+      this.menuItems[this.activeSubMenuIndex].expanded = false;
+      this.activeSubMenuIndex = null;
+      this.showMenu = false;
+      this.activeSubMenuIndex = null;
+    }
+  },
+  closeMenuAndSubMenu() {
+    if (this.showMenu || this.activeSubMenuIndex !== null) {
+      this.showMenu = false;
+      this.activeSubMenuIndex = null;
+    }
+  },
+},  
 };
 </script>
-
 
 <style scoped>
 .menu-icon {
@@ -209,7 +210,7 @@
   border: 1px solid black;
   position: fixed;
   z-index: 999;
-  transform: translateX(20px) translateY(95px);
+  transform: translateX(40px) translateY(105px);
 }
 
 .content {
@@ -221,8 +222,8 @@
   list-style-type: none;
   padding: 0;
   position: fixed;
-  left: 3%;
-  top: calc(24% + 1vh);
+  left: 4%;
+  top: calc(32% + 1vh);
   z-index: 999;
   width: 15%;
   background-color: rgba(0, 10, 87, 0.8);
@@ -251,7 +252,7 @@
   left: 100%;
   top: 0;
   margin-left: 0;
-  padding: 10;
+  padding: 0;
   width: 300px;
   z-index: 2;
   background-color: rgba(0, 26, 226, 0.8);
@@ -269,123 +270,124 @@
 @media (min-width: 521px) and (max-width: 768px) {
   .menu-icon {
     width: 6vh;
-    height: 6vh;
+    height: 43px;
+    cursor: pointer;
+    border: 1px solid black;
+    position: fixed;
+    z-index: 999;
+    transform: translateX(45px) translateY(75px);
   }
-  .menu {
-    width: 20%; /* Adjust the width as needed */
-    top: calc(25% + 1vh); /* Adjust the top position as needed */
-    right:-50%;
-  }
-  .menu li {
-    font-size: 12px; /* Adjust the font size as needed */
-  }
-  .menu .menu-block,
-  .menu .sub-menu-block {
-    padding: 5px; /* Adjust the padding as needed */
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1224px) {
-  .menu-icon {
-    width:7vh ;
-    height: 7vh;
-    margin-right:4%;
-  }
-  
-  .content {
-    margin-left: 20%;
-    /* Resto de los estilos para el contenido principal */
-  }
-  
   .menu {
     width:20%;
-    top: calc(27% + 1vh);
+    left: 55px;
+    top: 230px;
   }
-
 }
 
-@media (min-width: 1225px) and (max-width: 1440px) {
+@media (min-width: 1201px) and (max-width: 1441px) {
   .menu-icon {
-    width:7.5vh ;
-    height: 7.5vh;
+    width: 55px;
+    height: 55px;
   }
   .menu {
     width:15%;
-    top: calc(26% + 1vh);
+    left: 50px;
+    top: 247px;
   }
 }
-.menu {
-  width:20%;
-  top: calc(28% + 1vh);
-}
 
-@media (min-width: 1441px) {
+@media (min-width: 1442px) and (max-width: 1499px) {
   .menu-icon {
-    width:7.5vh ;
-    height: 7.5vh;
+    width: 55px ;
+    height: 55px;
+    transform: translateX(42px) translateY(105px);
   }
   .menu {
     width:15%;
-    top: calc(32% + 1vh);
+    left: 52px;
+    top: 250px;
+  }
+}
+
+@media (min-width: 1500px) and (max-width: 1920px) {
+  .menu-icon {
+    width: 55px ;
+    height: 55px;
+    transform: translateX(42px) translateY(103px);
+  }
+  .menu {
+    width:15%;
+    left: 53px;
+    top: 250px;
+  }
+}
+
+@media (min-width: 1921px) and (max-width:2561px) {
+  .menu-icon {
+    width: 85px ;
+    height: 85px;
+    transform: translateX(40px) translateY(150px);
+  }
+  .menu {
+    width:8%;
+    left: 50px;
+    top: 325px;
   }
 }
 
 /* Estilo para la vista movil, acomoda los botones de forma automatica con coordenadas */
-@media (max-width: 520px) {
+
+@media (min-width:420px) and (max-width: 520px) {
   .menu-icon {
-    width:4.7vh ;
-    height: 4.7vh;
-    transform: translateX(240px) translateY(4px);
+    width:30px ;
+    height: 30px;
+    transform: translateX(240px) translateY(10px);
     margin:.9%;
   }
-}
-@media (min-width: 320px) and (max-width: 520px) {
   .menu {
-    list-style-type: none;
-    padding: 0;
-    position: fixed; /* Cambia de "absolute" a "relative" para que los elementos se coloquen en el flujo normal del documento */
-    width: 40%; /* Ocupa todo el ancho disponible */
-    background-color: rgba(0, 10, 87, 0.8);
-    transition: transform 0.5s ease;
-    top: calc(-10% + 20vh);
-    left:6%;
+    width:40%;
+    left: 0%;
+    top: 69px;
   }
+}
 
-  .menu li {
-    display: block;
-    background: transparent;
-    color: #ffffff;
+@media (min-width: 522px) and (max-width: 769px) {
+  .menu-icon {
+    width: 43px ;
+    height: 43px;
+    transform: translateX(46px) translateY(75px);
   }
-
-  .menu .menu-block {
-    display: block;
-    padding: 10px;
-    transition: background-color 0.3s;
+  .menu {
+    width:26%;
+    left:37px;
+    top: 235px;
   }
+}
 
-  .menu .menu-block:hover {
-    background-color: rgba(0, 30, 255, 0.8);
+@media (max-width: 320px) {
+  .menu-icon {
+    width:30px ;
+    height: 30px;
+    margin:0%;
+    transform: translateX(240px) translateY(8px);
   }
-
-  .menu .sub-menu {
-    position: absolute;
-    left: 100%; /* Coloca el sub-menú a la derecha del primer bloque */
-    top: 0;
-    margin: 0;
-    padding: 0;
-    width: 250px;
-    z-index: 2;
-    background-color: rgba(0, 26, 226, 0.8);
+  .menu {
+    width:40%;
+    left: 0%;
+    top: 70px;
   }
+}
 
-  .menu .sub-menu-block {
-    display: block;
-    padding: 10px;
-    transition: background-color 0.3s;
+@media (min-width: 321px) and (max-width: 415px) {
+  .menu-icon {
+    width: 30px;
+    height: 30px;
+    transform: translateX(240px) translateY(8px);
   }
-
-  .menu .sub-menu-block:hover {
-    background-color: rgba(0, 10, 87, 0.8);
+  .menu {
+    width:40%;
+    left: 0%;
+    top:70px;
   }
 }
 

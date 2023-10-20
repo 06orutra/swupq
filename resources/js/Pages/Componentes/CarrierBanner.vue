@@ -22,42 +22,50 @@ export default {
           2560: {
             slidesPerView: 4, //Controla el número de slides que se muestran
             loopedSlides: 3, //Estos extremos se mostrarán para no cortar de golpe
-            swiperWidth: '90%' //Se manipula al ancho del swiper en conjunto, no de cada slide
+            width: '90%',
+            spaceBetween: 150,
           },
           1920: {
             slidesPerView: 4,
             loopedSlides: 3,
-            swiperWidth: '80%'
+            width: '90%',
+            spaceBetween: 150,
           },
           1440: {
             slidesPerView: 4,
-            loopedSlides: 2,
-            swiperWidth: '80%'
+            loopedSlides: 3,
+            width: '90%',
+            spaceBetween: 125,
           },
           1024: {
-            slidesPerView: 3,
-            loopedSlides: 2,
-            swiperWidth: '80%'
+            slidesPerView: 4,
+            loopedSlides: 3,
+            width: '90%',
+            spaceBetween: 100,
           },
           768: {
             slidesPerView: 3,
             loopedSlides: 2,
-            swiperWidth: '80%'
+            width: '90%',
+            spaceBetween: 100,
           },
           425: {
-            slidesPerView: 1,
-            loopedSlides: 0,
-            swiperWidth: '60%'
+            slidesPerView: 2,
+            loopedSlides: 1,
+            width: '100%',
+            spaceBetween: 50,
           },
           375: {
-            slidesPerView: 1,
-            loopedSlides: 0,
-            swiperWidth: '60%'
+            slidesPerView: 2,
+            loopedSlides: 1,
+            width: '100%',
+            spaceBetween: 50,
           },
           320: {
-            slidesPerView: 1,
-            loopedSlides: 0,
-            swiperWidth: '60%'
+            slidesPerView: 2,
+            loopedSlides: 1,
+            width: '100%',
+            spaceBetween: 50,
           },
 
         };
@@ -118,7 +126,8 @@ export default {
           return breakpoints[windowWidth.value] || closestBreakpoint(windowWidth.value) || {
             slidesPerView: 4,
             loopedSlides: 3,
-            swiperWidth: '80%'
+            width: '100%',
+            spaceBetween: 150,
           }; //Esto devuelve el valor del objeto breakpoints
         });
       return {
@@ -139,6 +148,7 @@ el efecto feo de corte -->
     :effect="'coverflow'"
     :grabCursor="true"
     :loop="true"
+    :spaceBetween="swiperOptions.spaceBetween"
     :loopedSlides="swiperOptions.loopedSlides"
     :centeredSlides="true" 
     :pagination="false"
@@ -146,18 +156,20 @@ el efecto feo de corte -->
     :modules="modules"
     :autoplay="{ delay: 2500, disableOnInteraction: false }" 
     :coverflowEffect="{
-      rotate: 50,
+      rotate: 20,
       stretch: 10,
       depth: 100,
       modifier: 1,
       scale:1,
       slideShadows: true }" 
-    :style="{width: swiperOptions.swiperWidth}"
+    :style="{      
+      width: swiperOptions.width
+    }"
     >
 
     <swiper-slide v-for="(carrera, index) in carreras" :key="index">
       <a :href="carrera.link" target="_blank">
-        <img :alt="carrera.label" :src="carrera.icon" style="width:100%; height: 90%"/>
+        <img :alt="carrera.label" :src="carrera.icon" style="width: 100%; height: 100%"/>
       </a>
     </swiper-slide>
   </swiper>
@@ -166,15 +178,14 @@ el efecto feo de corte -->
 
 <style scoped>
 .swiper {
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .swiper-slide {
   background-position: center;
   background-size: cover;
-  width: 300px;
-  height: 300px;
+  height: 220px;
 }
 
 

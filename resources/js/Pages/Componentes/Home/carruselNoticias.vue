@@ -29,10 +29,21 @@ export default {
         this.cargarBanner();
     },
 
+    computed: {
+        filteredBanner() {
+            if (!this.searchQuery) {
+                return this.banner;
+            }
+            return this.banner.filter(item =>
+                item.nombre.toLowerCase().includes(this.searchQuery.toLowerCase())
+            );
+        }
+    },
+
     methods: {
 
         cargarBanner() {
-            axios.post("/bannerDataNoticias").then((response) => {
+            axios.post("/noticias/bannerData").then((response) => {
                 this.banner = response.data;
             }).catch((error) => {
                 console.log(error);
@@ -91,7 +102,7 @@ export default {
                 });
                 return false;
             }
-
+            this.isLoading = true;
 
             const formData = new FormData();
             formData.append('nombre', this.nombre);
@@ -100,7 +111,7 @@ export default {
             formData.append('fecha_activacion', this.fecha_activacion);
             formData.append('fecha_desactivacion', this.fecha_desactivacion);
 
-            axios.post('noticias/registrarBanner',
+            axios.post('/noticias/registrarBanner',
                 formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -117,8 +128,10 @@ export default {
                     detail: "Registro exitoso",
                     life: 3000,
                 });
+                this.isLoading = false;
             }).catch((error) => {
                 console.log(error);
+                this.isLoading = false;
             });
             this.dates = [];
         },
@@ -126,7 +139,7 @@ export default {
             this.separarYAsignarFechas();
             this.submitted = true;
             //validar si hay campos vacios
-            if (this.datosArreglo.nombre == null || this.datosArreglo.link == null || this.datosArreglo.fecha_activacion == null ) {
+            if (this.datosArreglo.nombre == null || this.datosArreglo.nombre == '' || this.datosArreglo.link == null || this.datosArreglo.link == '') {
                 // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
@@ -149,6 +162,7 @@ export default {
                 });
                 return false;
             }
+            this.isLoading = true;
 
             const formData = new FormData();
             formData.append('id', this.datosArreglo.id);
@@ -163,7 +177,7 @@ export default {
                 console.log('Foto seleccionada:', this.datosArreglo.foto); // Ayuda a depurar
             }
 
-            axios.post('noticias/editarBanner',
+            axios.post('/noticias/editarBanner',
                 formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -178,8 +192,10 @@ export default {
                     detail: "Edicion exitosa",
                     life: 3000,
                 });
+                this.isLoading = false;
             }).catch((error) => {
                 console.log(error);
+                this.isLoading = false;
             });
 
         },
@@ -187,7 +203,11 @@ export default {
             this.datosArreglo = { ...datosArreglo }; // esto es para que se muestre los datos del datosArregloo en el formulario
             this.editarDialog = true;
             this.imagePreview = null;
-            this.dates = [];
+
+            const fechaActivacion = new Date(datosArreglo.fecha_activacion);
+            const fechaDesactivacion = new Date(datosArreglo.fecha_desactivacion);
+
+            this.dates = [fechaActivacion, fechaDesactivacion];
         },
         confirmarEliminar(datosArreglo) {
             this.datosArreglo = datosArreglo;
@@ -201,7 +221,7 @@ export default {
             };
 
 
-            axios.post('noticias/eliminarBanner', data).then((response) => {
+            axios.post('/noticias/eliminarBanner', data).then((response) => {
                 this.cargarBanner();
                 this.eliminarDialog = false;
                 this.datosArreglo = {};
@@ -220,6 +240,11 @@ export default {
             this.submitted = false;
             this.dialogTable = true;
             this.imagePreview = null;
+
+            this.nombre = null;
+            this.link = null;
+            this.dates = null;
+            this.foto = null;
         },
         selectNewPhoto() {
             this.$refs.photoInput.click();
@@ -247,7 +272,7 @@ export default {
                 }
                 reader.readAsDataURL(input.files[0]);
             }
-            
+
         },
 
         handleFileUploadEdit(event) {
@@ -265,10 +290,13 @@ export default {
 
         },
 
+
+
     },
     data() {
         return {
             banner: [],
+            searchQuery: '',
             nombre: null,
             link: null,
             foto: null,
@@ -283,7 +311,7 @@ export default {
             fecha_desactivacion: '',
             dates: null,
             imagePreview: null,
-
+            isLoading: false,
         };
     },
 
@@ -295,12 +323,17 @@ export default {
     <Toolbar class="mb-4">
         <template #start>
             <Button label="Nuevo Registro" icon="pi pi-plus" class="p-button-success !mr-2" @click="openRegistro" />
-
+        </template>
+        <template #end>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search" />
+                <InputText v-model="searchQuery" placeholder="Search" />
+            </span>
         </template>
     </Toolbar>
 
     <div class="cards-container">
-        <Card v-for="datosCard in banner" :key="datosCard.id" :style="estadoStyle(datosCard)" class="card">
+        <Card v-for="datosCard in filteredBanner" :key="datosCard.id" :style="estadoStyle(datosCard)" class="card">
             <template #header class="card-header">
                 <img :src="'/storage/' + datosCard.imagen" alt="Card Image" class="imagen-resolucion" />
             </template>
@@ -342,15 +375,15 @@ export default {
 
                 <div class="field col-12 md:col-12">
                     <label for="minmax">Fecha de inicio y termino de la publicación</label>
-                    <Calendar dateFormat="yy-mm-dd" id="calendar-24h" v-model="dates" selectionMode="range"
-                        :manualInput="false" showTime hourFormat="24" @update:modelValue="separarYAsignarFechas" />
+                    <Calendar dateFormat="yy-mm-dd" v-model="dates" selectionMode="range" :manualInput="false"
+                        @update:modelValue="separarYAsignarFechas" />
                 </div>
 
                 <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
                     style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
 
                 <div class="field col-12 md:col-3">
-                    <button  @click.prevent="selectNewPhoto"
+                    <button @click.prevent="selectNewPhoto"
                         class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
                         Seleccione una nueva foto
                     </button>
@@ -359,9 +392,12 @@ export default {
 
 
 
-                <Button type="submit" id="btnRegisrar"
+                <Button type="submit" id="btnRegisrar" :disabled="isLoading"
                     class="flex items-center justify-center space-x-2 rounded-md border-2 border-blue-500 px-4 py-2 font-medium text-blue-600 transition hover:bg-blue-500 hover:text-white">
-                    <span> Registrar </span>
+                    <span v-if="!isLoading"> Registrar </span>
+                    <span v-else>
+                        <i class="pi pi-spin pi-spinner"></i>
+                    </span>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
                             <path fill-rule="evenodd"
@@ -393,15 +429,15 @@ export default {
 
                 <div class="field col-12 md:col-12">
                     <label for="minmax">Fecha de inicio y termino de la publicación</label>
-                    <Calendar dateFormat="yy-mm-dd" id="calendar-24h" v-model="dates" selectionMode="range"
-                        :manualInput="false" showTime hourFormat="24" @update:modelValue="separarYAsignarFechas" />
+                    <Calendar dateFormat="yy-mm-dd" v-model="dates" selectionMode="range" :manualInput="false"
+                        @update:modelValue="separarYAsignarFechas" />
                 </div>
 
                 <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
                     style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
 
                 <div class="field col-12 md:col-12">
-                    <button  @click.prevent="selectNewPhoto"
+                    <button @click.prevent="selectNewPhoto"
                         class="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest shadow-sm hover:text-gray-300 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
                         Seleccione una nueva foto
                     </button>
@@ -409,9 +445,12 @@ export default {
 
                 </div>
 
-                <Button type="submit" id="btnRegisrar"
+                <Button type="submit" id="btnRegisrar" :disabled="isLoading"
                     class="flex items-center justify-center space-x-2 rounded-md border-2 border-blue-500 px-4 py-2 font-medium text-blue-600 transition hover:bg-blue-500 hover:text-white">
-                    <span> Registrar </span>
+                    <span v-if="!isLoading"> Registrar </span>
+                    <span v-else>
+                        <i class="pi pi-spin pi-spinner"></i>
+                    </span>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
                             <path fill-rule="evenodd"

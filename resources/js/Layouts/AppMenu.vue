@@ -7,11 +7,13 @@ const model = ref([
     {
         label: 'Menú',
         items: [
-            { label: 'Menú', icon: 'pi pi-fw pi-list', to: '/',
+/*             { label: 'Menú', icon: 'pi pi-fw pi-list', to: '/',
                 items: [{ label: 'Menú'}]
-            },
+            }, */
             { label: 'Home', icon: 'pi pi-fw pi-home', to: '/home' },
+            { label: 'Institución', icon: 'pi pi-fw pi-megaphone', to: '/institucion' },
             { label: 'Carreras', icon: 'pi pi-fw pi-book', to: '/carreras' },
+            { label: 'Formación Integral', icon: 'pi pi-fw pi-briefcase', to: '/FormacionIntegral' },
             { label: 'Posgrado', icon: 'pi pi-fw pi-briefcase', to: '/posgrado' },
             { label: 'Noticias', icon: 'pi pi-fw pi-megaphone', to: '/noticias' },
         ]

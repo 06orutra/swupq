@@ -22,8 +22,14 @@ use App\Http\Controllers\HistoriaImgPrincController;
 use App\Http\Controllers\HistoriaTextoController;
 use App\Http\Controllers\HistoriaCarruselController;
 use App\Http\Controllers\VideoLenguajeController;
+use App\Http\Controllers\RectoriaController;
 use App\Http\Controllers\CarruselInstalacionesController;
-
+use App\Http\Controllers\SecretariaAcademicaController;
+use App\Http\Controllers\SecretariaAdministrativaController;
+use App\Http\Controllers\AbogadoGeneralController;
+use App\Http\Controllers\DireccionTecnologiaInfomacionComunicacionController;
+use App\Http\Controllers\DireccionPlaneacionController;
+use App\Http\Controllers\DireccionVinculacionController;
 
 use Illuminate\Http\Request;
 
@@ -127,6 +133,13 @@ Route::middleware([
         'historiaTexto' => HistoriaTextoController::class,
         'historiaCarrusel' => HistoriaCarruselController::class,
         'Cinstalaciones' => CarruselInstalacionesController::class,
+        'rectoria' => RectoriaController::class,
+        'Sacademica' => SecretariaAcademicaController::class,
+        'Sadministrativa' => SecretariaAdministrativaController::class,
+        'AboGeneral' => AbogadoGeneralController::class,
+        'DPlanneacion' => DireccionPlaneacionController::class,
+        'DTecInfCom' => DireccionTecnologiaInfomacionComunicacionController::class,
+        'Dvinculacion' => DireccionVinculacionController::class,
         
     ];
     // se declarar variables, 

@@ -9,6 +9,7 @@ import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
 import Mascotas from "@/Pages/Componentes/Institucion/institucionAdmin/Mascotas.vue";
 import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofia.vue";
 import Instalaciones from "@/Pages/Componentes/Institucion/institucionAdmin/Instalaciones.vue";
+import Directorios from "@/Pages/Componentes/Institucion/institucionAdmin/Directorios.vue";
 import historia from './historia.vue';
 
 export default {
@@ -24,6 +25,7 @@ export default {
         filosofia,
         historia,
         Instalaciones,
+        Directorios,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -62,6 +64,9 @@ export default {
         </TabPanel>
         <TabPanel header="Instalaciones">
             <Instalaciones/>
+        </TabPanel>
+        <TabPanel header="Directorios">
+            <Directorios/>
         </TabPanel>
     </TabView>
 </template>

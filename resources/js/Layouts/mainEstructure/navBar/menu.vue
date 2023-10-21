@@ -284,6 +284,23 @@ methods: {
   }
 }
 
+@media (min-width: 1024px) and (max-width: 1201px) {
+  .menu-icon {
+    width: 43px;
+    height: 43px;
+    cursor: pointer;
+    border: 1px solid black;
+    position: fixed;
+    z-index: 999;
+    transform: translateX(45px) translateY(75px);
+  }
+  .menu {
+    width:20%;
+    left: 55px;
+    top: 230px;
+  }
+}
+
 @media (min-width: 1201px) and (max-width: 1441px) {
   .menu-icon {
     width: 55px;

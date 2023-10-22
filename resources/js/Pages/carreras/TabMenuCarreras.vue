@@ -1,0 +1,115 @@
+<template>
+    <section class="administrador-carreras">
+        <tab-view class="p-3">
+          
+            <!--apartado para la seleccion de los colores de la carrera-->
+            <tab-panel :header="headers['identidad_carrera']">
+              <identidad-carrera title="Paleta de colores"></identidad-carrera>
+            </tab-panel>
+            
+        
+        </tab-view>  
+    </section>
+</template>
+
+<script>
+import { defineComponent } from 'vue';
+import TabView from 'primevue/tabview';
+import ColoresCarrera from '@/Pages/carreras/Components/IdentidadCarrera.vue';
+import TabPanel from 'primevue/tabpanel';
+
+export default defineComponent({
+  // Propiedades del componente (opcional)
+  name:'AdministradorCarreras',
+  components: {
+    'tab-view':TabView,
+    'tab-panel':TabPanel,
+    'identidad-carrera':ColoresCarrera,
+  },
+  props: {
+    headers:{
+      type:Object,
+      default:{
+        identidad_carrera:'Identidad de la carrera',
+        estructura:'Estructura de la carrera',
+        textos:'Textos de la carrera',
+        imagenes:'Imagenes de la carrera',}
+    }
+  },
+
+  // Setup del componente (opcional)
+  setup(props) {
+    // Lógica del componente y definición de datos
+    // Puedes utilizar las funciones reactivas de Vue para definir el estado del componente.
+    // Ejemplo:
+    // const count = ref(0);
+
+    // Métodos personalizados
+    // Ejemplo:
+    // function increment() {
+    //   count.value++;
+    // }
+
+    // Retornar datos y métodos que deseas utilizar en la plantilla
+    return {
+      // count,
+      // increment,
+    };
+  },
+
+  // Lifecycle hooks (opcional)
+  // Puedes utilizar los hooks como onCreated, onMounted, onUpdated, etc.
+  // Ejemplo:
+  // onCreated() {
+  //   console.log('El componente ha sido creado');
+  // },
+
+  // Filtros (opcional)
+  // Puedes utilizar el método setup para definir filtros personalizados.
+  // Ejemplo:
+  // setup() {
+  //   Vue.filter('uppercase', (value) => {
+  //     return value.toUpperCase();
+  //   });
+  // },
+
+  // Watchers (opcional)
+  // Puedes utilizar el método watch para observar cambios en las propiedades o datos del componente.
+  // Ejemplo:
+  // watch: {
+  //   title(newValue, oldValue) {
+  //     console.log('El título ha cambiado de:', oldValue, 'a:', newValue);
+  //   },
+  // },
+
+  // Componentes hijos (opcional)
+  // Si este componente va a utilizar otros componentes internamente, se pueden importar aquí.
+  // Ejemplo:
+  // components: {
+  //   ChildComponent,
+  // },
+
+  // Directivas (opcional)
+  // Puedes definir directivas personalizadas para este componente.
+  // Ejemplo:
+  // directives: {
+  //   focus: {
+  //     // Definición de la directiva
+  //     // ...
+  //   },
+  // },
+
+  // Otras opciones del componente (opcional)
+  // Puedes definir otras opciones según tus necesidades.
+});
+</script>
+
+<style scoped>
+/* Estilos del componente (opcional) */
+/* Puedes definir estilos específicos para este componente aquí */
+/* Ejemplo:
+h1 {
+  color: blue;
+}
+*/
+</style>

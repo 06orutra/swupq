@@ -1,27 +1,47 @@
 <template>
   <div class="card">
-    <div class="medida">
-      <div class="card-title"><strong>Polo y Poli</strong></div>
+    <div class="medida" v-for="msj in mensajepp" :key="msj.id">
+      <div class="card-title">
+        <strong> {{ msj.titulo }}</strong>
+      </div>
       <div class="card-content">
-        <br>
-        Gracias a nuestra ubicación, en las inmediaciones de la Universidad Politécnica de Querétaro es posible encontrar
-        una gran cantidad de fauna salvaje que da vida y color a nuestra institución. De entre las diferentes especies que
-        aquí habitan, destaca la presencia del “Mosquero Cardenal”, un ave de un intenso plumaje rojo que al emprender el
-        vuelo despliega no solo su colorido plumaje, sino también su fuerza, calidez y vibrante energía.
-        <br><br><br>
-        Así nacen Polo y Poli, un par de cardenales cuyas características principales son la astucia, disciplina, pasión y
-        vitalidad. Polo y Poli destacan en todo lo que hacen, ya sea en las aulas preparando sus proyectos escolares, en
-        las canchas practicando algún deporte o sobre el escenario mientras demuestran alguno de sus múltiples talentos.
-        <br><br><br>
-        ¡Somos Cardenales!, ¡Somos UPQ!
+       {{ msj.contenido }}
       </div>
     </div>
   </div>
 </template>
-  
-<script>
 
+
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      mensajepp: [], // Propiedad para almacenar los mensajes y enlaces
+    };
+  },
+  
+  mounted() {
+    this.loadmensajepp();
+  },
+
+  methods: {
+    loadmensajepp() {
+      // Realiza una solicitud HTTP para obtener los mensajes y enlaces desde el controlador de Laravel
+      axios
+        .post('/MensajePoliPolo/bannerData')
+        .then((response) => {
+          this.mensajepp = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
+  },
+};
 </script>
+
   
 <style scoped>
 .medida {

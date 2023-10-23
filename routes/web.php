@@ -153,6 +153,10 @@ Route::middleware([
         });
     }
 });
+
+Route::post('/MensajePoliPolo/bannerData', [MensajePoliPoloController::class, 'bannerData']);
+Route::post('/Spotypoli/bannerData', [SpotypoliController::class, 'bannerData']);
+Route::post('/Spotypolo/bannerData', [SpotypoloController::class, 'bannerData']);
 Route::post('/historiaCarrusels/bannerData', [HistoriaCarruselController::class, 'bannerData']);
 Route::post('/historiaTextos/bannerData', [HistoriaTextoController::class, 'bannerData']);
 Route::post('/historiaImgPrinc/bannerData', [HistoriaImgPrincController::class, 'bannerData']);

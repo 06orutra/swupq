@@ -146,6 +146,10 @@ Route::middleware([
         });
     }
 });
+Route::post('/pdfPrueba/bannerData', [PdfPruebaController::class, 'bannerData']);
+Route::post('/lenguaExtraObjetivo/bannerData', [LenguaExtraObjetivosController::class, 'bannerData']);
+Route::post('/lenguaExtraImgSecundario/bannerData', [LenguaExtraImgSecundarioController::class, 'bannerData']);
+Route::post('/lenguaExtraImgPrincipal/bannerData', [LenguaExtraImgPrincipalController::class, 'bannerData']);
 Route::post('/historiaCarrusels/bannerData', [HistoriaCarruselController::class, 'bannerData']);
 Route::post('/historiaTextos/bannerData', [HistoriaTextoController::class, 'bannerData']);
 Route::post('/historiaImgPrinc/bannerData', [HistoriaImgPrincController::class, 'bannerData']);

@@ -18,6 +18,11 @@ use App\Http\Controllers\HistoriaImgPrincController;
 use App\Http\Controllers\HistoriaTextoController;
 use App\Http\Controllers\HistoriaCarruselController;
 use App\Http\Controllers\VideoLenguajeController;
+use App\Http\Controllers\LenguaExtraImgPrincipalController;
+use App\Http\Controllers\LenguaExtraImgSecundarioController;
+use App\Http\Controllers\LenguaExtraObjetivosController;
+use App\Http\Controllers\PdfPruebaController;
+
 
 
 use Illuminate\Http\Request;
@@ -125,6 +130,10 @@ Route::middleware([
         'historiaImgPrinc' => HistoriaImgPrincController::class,
         'historiaTexto' => HistoriaTextoController::class,
         'historiaCarrusel' => HistoriaCarruselController::class,
+        'lenguaExtraImgPrincipal' => LenguaExtraImgPrincipalController::class,
+        'lenguaExtraImgSecundario' => LenguaExtraImgSecundarioController::class,
+        'lenguaExtraObjetivo' => LenguaExtraObjetivosController::class,
+        'pdfPrueba' => PdfPruebaController::class,
     ];
     // se declarar variables, 
 

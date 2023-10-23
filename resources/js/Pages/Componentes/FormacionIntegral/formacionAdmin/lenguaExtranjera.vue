@@ -2,17 +2,27 @@
 import estructuraTextos from '@/Pages/Componentes/Home/estructuraTextos.vue'
 import estructuraImg from '@/Pages/Componentes/Home/estructuraImg.vue'
 import carruselEstructura from '../../Home/carruselEstructura.vue';
+import estructuraPdf from '../../Home/estructuraPdf.vue';
 </script>
 
 
 <template>
     <TabView ref="tabview1" class="p-3">
         <TabPanel header="Carrusel Principal">
-            <carruselEstructura :Titulo="'Titulo'" :Subtitulo="'Link'" :loadDataUrl="'/historiaImgPrinc/bannerData'" :registerBannerUrl="'/historiaImgPrinc/registrarBanner'"
-                :editBannerUrl="'/historiaImgPrinc/editarBanner'" :deleteBannerUrl="'/historiaImgPrinc/eliminarBanner'" />
+            <estructuraImg :loadDataUrl="'/lenguaExtraImgPrincipal/bannerData'" :registerBannerUrl="'/lenguaExtraImgPrincipal/registrarBanner'"
+                :editBannerUrl="'/lenguaExtraImgPrincipal/editarBanner'" :deleteBannerUrl="'/lenguaExtraImgPrincipal/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Carrusel secundario">
-            
+            <estructuraImg :loadDataUrl="'/lenguaExtraImgSecundario/bannerData'" :registerBannerUrl="'/lenguaExtraImgSecundario/registrarBanner'"
+                :editBannerUrl="'/lenguaExtraImgSecundario/editarBanner'" :deleteBannerUrl="'/lenguaExtraImgSecundario/eliminarBanner'" />
+        </TabPanel>
+        <TabPanel header="Objetivos">
+            <estructuraTextos :Titulo="'Objetivo'" :Subtitulo="'Contenido'" :loadDataUrl="'/lenguaExtraObjetivo/bannerData'" :registerBannerUrl="'/lenguaExtraObjetivo/registrarBanner'"
+                :editBannerUrl="'/lenguaExtraObjetivo/editarBanner'" :deleteBannerUrl="'/lenguaExtraObjetivo/eliminarBanner'" />
+        </TabPanel>
+        <TabPanel header="pdf">
+            <estructuraPdf :loadDataUrl="'/pdfPrueba/bannerData'" :registerBannerUrl="'/pdfPrueba/registrarBanner'"
+                :editBannerUrl="'/pdfPrueba/editarBanner'" :deleteBannerUrl="'/pdfPrueba/eliminarBanner'" />
         </TabPanel>
 
     </TabView>

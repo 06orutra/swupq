@@ -2,6 +2,7 @@
 import estructuraTextos from '@/Pages/Componentes/Home/estructuraTextos.vue'
 import estructuraImg from '@/Pages/Componentes/Home/estructuraImg.vue'
 import carruselEstructura from '../../Home/carruselEstructura.vue';
+import estructuraPdf from '../../Home/estructuraPdf.vue';
 </script>
 
 
@@ -19,7 +20,10 @@ import carruselEstructura from '../../Home/carruselEstructura.vue';
             <estructuraTextos :Titulo="'Objetivo'" :Subtitulo="'Contenido'" :loadDataUrl="'/lenguaExtraObjetivo/bannerData'" :registerBannerUrl="'/lenguaExtraObjetivo/registrarBanner'"
                 :editBannerUrl="'/lenguaExtraObjetivo/editarBanner'" :deleteBannerUrl="'/lenguaExtraObjetivo/eliminarBanner'" />
         </TabPanel>
-        
+        <TabPanel header="pdf">
+            <estructuraPdf :loadDataUrl="'/pdfPrueba/bannerData'" :registerBannerUrl="'/pdfPrueba/registrarBanner'"
+                :editBannerUrl="'/pdfPrueba/editarBanner'" :deleteBannerUrl="'/pdfPrueba/eliminarBanner'" />
+        </TabPanel>
 
     </TabView>
 </template>

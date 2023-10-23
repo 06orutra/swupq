@@ -111,6 +111,7 @@ export default {
 </script>
 
 <template>
+  <AppEstructure>
   <div class="mx-auto">
     <div class="banner">
       <img src="https://www.upq.mx/media/slider/MODELOEDUCATIVO.png" alt="" class="h-full w-full">
@@ -260,7 +261,7 @@ export default {
   </section>
 
   </div>
-  <AppEstructure/>
+</AppEstructure>
 </template>
 
 <style>

@@ -41,6 +41,7 @@ export default {
 </script>
 
 <template>
+  <AppEstructure>
   <div class="container">
     <div class="row">
       <!-- Div que contiene la imagen -->
@@ -113,7 +114,7 @@ export default {
     </div>
   </div>
 </div>
-<AppEstructure/>
+</AppEstructure>
 </template>
 
 <style scoped>

@@ -30,6 +30,12 @@ use App\Http\Controllers\AbogadoGeneralController;
 use App\Http\Controllers\DireccionTecnologiaInfomacionComunicacionController;
 use App\Http\Controllers\DireccionPlaneacionController;
 use App\Http\Controllers\DireccionVinculacionController;
+use App\Http\Controllers\LenguaExtraImgPrincipalController;
+use App\Http\Controllers\LenguaExtraImgSecundarioController;
+use App\Http\Controllers\LenguaExtraObjetivosController;
+use App\Http\Controllers\PdfPruebaController;
+
+
 
 use Illuminate\Http\Request;
 
@@ -141,6 +147,10 @@ Route::middleware([
         'DTecInfCom' => DireccionTecnologiaInfomacionComunicacionController::class,
         'Dvinculacion' => DireccionVinculacionController::class,
         
+        'lenguaExtraImgPrincipal' => LenguaExtraImgPrincipalController::class,
+        'lenguaExtraImgSecundario' => LenguaExtraImgSecundarioController::class,
+        'lenguaExtraObjetivo' => LenguaExtraObjetivosController::class,
+        'pdfPrueba' => PdfPruebaController::class,
     ];
     // se declarar variables, 
 

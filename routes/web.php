@@ -40,7 +40,7 @@ Route::prefix('institucion')->group(function () {
     Route::get('mascotas', function () {
         return Inertia::render('Componentes/Institucion/mascotasPrincipal');
     });
-    Route::get('instalaciones', function(){
+    Route::get('instalaciones', function () {
         return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
     });
 
@@ -50,24 +50,27 @@ Route::prefix('institucion')->group(function () {
     Route::get('sistemaGestion', function () {
         return Inertia::render('Componentes/Institucion/qualityManagement');
     });
+    Route::get('mensajeRector', function () {
+        return Inertia::render('Componentes/Institucion/rectorMessage');
+    });
 
 
 
     Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
 
-    Route::get('ubicacion', function(){
+    Route::get('ubicacion', function () {
         return Inertia::render('Componentes/Institucion/location');
     });
-    Route::get('historia', function(){
+    Route::get('historia', function () {
         return Inertia::render('Componentes/Institucion/Historia');
     });
-    Route::get('modeloEducacional', function(){
+    Route::get('modeloEducacional', function () {
         return Inertia::render('Componentes/Institucion/Educational');
     });
-    Route::get('filosofia', function(){
+    Route::get('filosofia', function () {
         return Inertia::render('Componentes/Institucion/Philosophy');
     });
-});   
+});
 
 /*
 ejemplo de como mandar a llamar una vista

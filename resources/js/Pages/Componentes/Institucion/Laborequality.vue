@@ -1,6 +1,7 @@
 <script>
 export default {
             name: 'BannerComponent',
+    /* método que te dirreccionan a los pdfs */        
     methods: {
       redirectToPDF(pdfUrl) {
         window.open(pdfUrl, '_blank');
@@ -12,6 +13,35 @@ export default {
         return {
         title: "POLÍTICA DE IGUALDAD LABORAL Y NO DISCRIMINACIÓN",
         parrafo1: "La Universidad Politécnica de Querétaro manifiesta el compromiso con la promoción, respeto y protección de los derechos humanos, por lo que en la esfera de su competencia garantizará la igualdad sustantiva entre mujeres y hombres en el ejercicio de sus derechos laborales y la no discriminación en los servicios que ofrece así como en sus condiciones de trabajo, quedando prohibido el maltrato, violencia y segregación de las autoridades hacia el personal y entre el personal en materia de cualquier forma de distinción, exclusión o restricción basada en el origen étnico o nacional, apariencia física, cultura, sexo, género, idioma, edad, discapacidad, condición social, economía, de salud o jurídica, embarazo, lengua, religión, opiniones, preferencias sexuales, estado civil o conyugal, situación migratoria o cualquier otra, que tenga por efecto impedir o anular el reconocimiento o el ejercicio de los derechos y la igualdad real de oportunidades a los miembros de la Comunidad Universitaria dentro de sus instalaciones.",
+        sugerenciasLink: 'https://mail.google.com/mail/u/0/#inbox',
+
+      images: {
+        banner: "https://www.upq.mx/igualdad_laboral/images/270320_banner-igualdad-2020.jpg?crc=3862696609",
+        letrero: "https://www.upq.mx/igualdad_laboral/images/letrero_comite.svg?crc=369507292",
+        fondo1: "https://www.upq.mx/igualdad_laboral/images/fondo_banner_2-01.svg?crc=3799554246",
+        fondo2: "https://www.upq.mx/igualdad_laboral/images/fondo_banner_3-01.svg?crc=4066401794",
+        fondo3: "https://www.upq.mx/igualdad_laboral/images/comiteeticanov2021.jpg?crc=449875955",
+        icon1: "https://www.upq.mx/igualdad_laboral/images/icono_pagina-01.svg?crc=4137336014",
+        icon2: "https://www.upq.mx/igualdad_laboral/images/icono_pagina-02.svg?crc=533964385",
+        icon3: "https://www.upq.mx/igualdad_laboral/images/icono_pagina-03.svg?crc=3860671546",
+        icon4: "https://www.upq.mx/igualdad_laboral/images/icono_pagina-06.svg?crc=292774967",
+        icon5: "https://www.upq.mx/igualdad_laboral/images/icono_pagina-04.svg?crc=378829962",
+        icon6: "https://www.upq.mx/igualdad_laboral/images/icono_pagina-05.svg?crc=505331560",
+        icon7: "https://www.upq.mx/igualdad_laboral/images/icono_pagina-07.svg?crc=423873761",
+        icon8: "https://www.upq.mx/igualdad_laboral/images/icono_pagina-08.svg?crc=4225580983",
+      },
+      pdfLinks: {
+        politica: "https://www.upq.mx/igualdad_laboral/assets/pol%c3%adtica-de-igualdad-laboral-y-no-discriminaci%c3%b3n..pdf",
+        actaInstalacion: "https://www.upq.mx/igualdad_laboral/assets/miembros-del-comit%c3%a9-de-%c3%a9tica-upq_2021.docx.pdf",
+        codigoEtica: "https://www.upq.mx/igualdad_laboral/assets/miembros-del-comit%c3%a9-de-%c3%a9tica-upq_2021.docx.pdf",
+        lineamientos: "https://www.upq.mx/igualdad_laboral/assets/miembros-del-comit%c3%a9-de-%c3%a9tica-upq_2021.docx.pdf",
+        asesoriaDenuncias: "https://mail.google.com/mail/u/0/#inbox",
+        protocoloViolencia: "https://www.upq.mx/igualdad_laboral/",
+        protocoloAcosoSexual: "https://www.upq.mx/igualdad_laboral/",
+        protocoloDiscriminacion: "https://www.upq.mx/igualdad_laboral/",
+        planAccesibilidad: "https://www.upq.mx/igualdad_laboral/assets/plan-de-accesibilidad-upq_2021.pdf",
+        programaProteccionCivil: "https://www.upq.mx/igualdad_laboral/assets/programa-interno-de-protecci%c3%b3n-civil-de-la-upq%2c-13-de-julio.pdf"
+      }
         }
     }};
 
@@ -22,7 +52,7 @@ export default {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div>
         <div class="img_laboreq">                         
-            <img class=" h-full w-full " src="https://www.upq.mx/igualdad_laboral/images/270320_banner-igualdad-2020.jpg?crc=3862696609" alt="" >
+            <img class=" h-full w-full " :src="images.banner" alt="" >
         </div>  
     
         <div class=" banner_eq w-full" >
@@ -39,13 +69,10 @@ export default {
                       {{parrafo1}}
                     </p>
                 </div>
-
-              
-
                 <div class="contenedoor">
-                  <div class="parallax">
+                  <div class="parallax" :style="{ backgroundImage: 'url(' + images.fondo1 + ')' }">
                     <div class="caja">
-                        <a href="https://www.upq.mx/igualdad_laboral/assets/pol%c3%adtica-de-igualdad-laboral-y-no-discriminaci%c3%b3n..pdf" target="_blank">
+                        <a :href="pdfLinks.politica" target="_blank">
                             <p><strong>CONSULTA AQUÍ</strong></p>
                             <P class="font-normal" style="line-height: 1.5;">POLITICA DE IGUALAD LABORAL Y NO DISCRIMINACIÓN A DETALLE</P>
                         </a>
@@ -54,10 +81,9 @@ export default {
                 </div>
               
                 <div class="contenedoor2 ">
-                  <div class="parallax3">
-                
+                  <div class="parallax3 " :style="{ backgroundImage: 'url(' + images.fondo3 + ')' }">
                     <div class="caja2">
-                        <img src="https://www.upq.mx/igualdad_laboral/images/letrero_comite.svg?crc=369507292" alt="" style="opacity: 0.8;">          
+                        <img class="letrero" :src="images.letrero" alt="" style="opacity: 0.8;">          
                     </div>
                   </div>
                 </div>
@@ -69,8 +95,8 @@ export default {
                       <div class="">
                           <div
                             class="option2 bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
-                            style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-01.svg?crc=4137336014');">
-                            <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/miembros-del-comit%c3%a9-de-%c3%a9tica-upq_2021.docx.pdf')"></button>
+                            :style="{ backgroundImage: 'url(' + images.icon1 + ')' }">
+                            <button class="pdf-button" @click="redirectToPDF(pdfLinks.actaInstalacion)"></button>
                             
                           </div>
                           <div class="button-text-container">
@@ -81,8 +107,8 @@ export default {
                       <div class="">
                         <div
                           class="option bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
-                          style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-02.svg?crc=533964385');">
-                          <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/miembros-del-comit%c3%a9-de-%c3%a9tica-upq_2021.docx.pdf')"></button>
+                          :style="{ backgroundImage: 'url(' + images.icon2 + ')' }">
+                          <button class="pdf-button" @click="redirectToPDF(pdfLinks.codigoEtica)"></button>
                           
                         </div>
                         <div class="button-text-container">
@@ -93,8 +119,8 @@ export default {
                     <div class="">
                       <div
                         class="option2 bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
-                        style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-03.svg?crc=3860671546');">
-                        <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/miembros-del-comit%c3%a9-de-%c3%a9tica-upq_2021.docx.pdf')"></button>
+                        :style="{ backgroundImage: 'url(' + images.icon3 + ')' }">
+                        <button class="pdf-button" @click="redirectToPDF(pdfLinks.lineamientos)"></button>
                         
                        </div>
                        <div class="button-text-container">
@@ -107,9 +133,9 @@ export default {
 
               <p class="text-black pt-14"><strong>POLÍTICA DE IGUALDAD LABORAL Y NO DISCRIMINACIÓN</strong></p>
               <div class="contenedoor">
-                <div class="parallax2">
+                <div class="parallax2" :style="{ backgroundImage: 'url(' + images.fondo2 + ')' }">
                   <div class="caja">
-                      <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank">
+                      <a :href="sugerenciasLink" target="_blank">
                           <p><strong>ASESORÍA Y DENUNCIAS</strong></p>
                           <P class="font-normal" style="line-height: 1;">ENVIANOS UN MENSAJE </P>
                           <P class="font-normal" style="line-height: 1;">comite.de.etica@upq.edu.mx </P>
@@ -125,8 +151,8 @@ export default {
                     <div class="">
                         <div
                           class="option2 bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
-                          style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-06.svg?crc=292774967');">
-                          <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/')"></button>
+                          :style="{ backgroundImage: 'url(' + images.icon4 + ')' }">
+                          <button class="pdf-button" @click="redirectToPDF(pdfLinks.protocoloViolencia)"></button>
                           
                         </div>
                         <div class="button-text-container">
@@ -137,8 +163,8 @@ export default {
                     <div class="">
                       <div
                         class="option bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
-                        style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-04.svg?crc=378829962');">
-                        <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/')"></button>
+                        :style="{ backgroundImage: 'url(' + images.icon5 + ')' }">
+                        <button class="pdf-button" @click="redirectToPDF(pdfLinks.protocoloAcosoSexual)"></button>
                         
                       </div>
                       <div class="button-text-container">
@@ -149,8 +175,8 @@ export default {
                   <div class="">
                     <div
                       class="option2 bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
-                      style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-05.svg?crc=505331560');">
-                      <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/')"></button>
+                      :style="{ backgroundImage: 'url(' + images.icon6 + ')' }">
+                      <button class="pdf-button" @click="redirectToPDF(pdfLinks.protocoloDiscriminacion)"></button>
                       
                      </div>
                      <div class="button-text-container">
@@ -167,8 +193,8 @@ export default {
                     <div class="">
                         <div
                           class="option2 bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
-                          style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-07.svg?crc=423873761');">
-                          <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/plan-de-accesibilidad-upq_2021.pdf')"></button>
+                          :style="{ backgroundImage: 'url(' + images.icon7 + ')' }">
+                          <button class="pdf-button" @click="redirectToPDF(pdfLinks.planAccesibilidad)"></button>
                           
                         </div>
                         <div class="button-text-container">
@@ -179,8 +205,8 @@ export default {
                     <div class="">
                       <div
                         class="option bg-no-repeat border-circle bg-center w-14rem h-14rem z-4 relative shadow-md"
-                        style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-08.svg?crc=4225580983');">
-                        <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/programa-interno-de-protecci%c3%b3n-civil-de-la-upq%2c-13-de-julio.pdf')"></button>
+                        :style="{ backgroundImage: 'url(' + images.icon8 + ')' }">
+                        <button class="pdf-button" @click="redirectToPDF(pdfLinks.programaProteccionCivil)"></button>
                         
                       </div>
                       <div class="button-text-container">
@@ -319,17 +345,7 @@ export default {
       top: 0px;
       left: 0px;
     }
-    .contenedoor2 {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: flex;
-    z-index: 999;
-    top: 30px;
-    left: 0px;
-}
     .parallax {
-      background-image: url('https://www.upq.mx/igualdad_laboral/images/fondo_banner_2-01.svg?crc=3799554246');
       background-size: cover;
       background-attachment: fixed; /* Esto crea el efecto de parallax */
       width: 100%;
@@ -339,7 +355,6 @@ export default {
       background-position: center center;
     }
     .parallax2 {
-      background-image: url('https://www.upq.mx/igualdad_laboral/images/fondo_banner_3-01.svg?crc=4066401794');
       background-size: cover;
       background-attachment: fixed; /* Esto crea el efecto de parallax */
       width: 100%;
@@ -348,15 +363,6 @@ export default {
       z-index: -10;
       background-position: center center;
     }
-    .parallax3 {
-    background-image: url('https://www.upq.mx/igualdad_laboral/images/comiteeticanov2021.jpg?crc=449875955');
-    background-size: cover;
-    width: 100%;
-    height: 600px;
-    position: relative; /* Cambiado de "static" a "relative" */
-    z-index: -10;
-    background-position: center center;
-}
     .caja{
       border: 2px solid rgb(255, 255, 255);
       border-radius: 10px;
@@ -375,13 +381,6 @@ export default {
       transition: border-color 0.3s, background-color 0.3s;
       z-index: -2;
     }
-    .caja2 {
-    position: absolute; /* Cambiado de "relative" a "absolute" */
-    bottom: 0; /* Posiciona la parte inferior de .caja2 en la parte inferior del div padre */
-    left: 0%;
-    width: 80%;
-}
-
     .caja:hover {
       border-color: rgb(19, 18, 18); /* Cambia el color del borde a rojo al pasar el mouse */
       background-color: rgba(255, 255, 255, 0.571); /* Cambia el fondo a blanco al pasar el mouse */
@@ -395,7 +394,39 @@ export default {
       width: 100%;
       height: 100%;
     }
-
+    /*estilos para el contenedor del coite de ética*/
+    .contenedoor2 {
+      width: 100%;
+      height: 600px; /* Cambiado a 600px */
+      position: relative;
+      display: flex;
+      z-index: 999;
+      top: 30px;
+      left: 0;
+    }
+    
+    .parallax3 {
+      background-size: cover;
+      width: 100%;
+      height: 100%; /* Cambiado a 100% */
+      max-height: 100%;
+      position: relative;
+      z-index: -10;
+      background-position: center center;
+    }
+    
+    .caja2 {
+      position: absolute;
+      bottom: 0;
+      left: 0%;
+      width: 80%;
+    }
+    
+    .letrero {
+      position: absolute;
+      bottom: 0;
+      left: 0%;
+    }
     @media (max-width: 767px) {
       .carrucel {
         height: 300px; /* Ajusta la altura según sea necesario */
@@ -403,6 +434,15 @@ export default {
       .caja {
         padding: 1%;
         font-size: 16px; /* Ajusta el tamaño de la fuente según sea necesario */   
+      }
+    }
+    @media screen and (max-width: 768px) {
+      .contenedoor2 {
+        height: auto; /* Cambiado a auto */
+      }
+    
+      .parallax3 {
+        height: 300px; /* Altura deseada para pantallas pequeñas */
       }
     }
     </style>

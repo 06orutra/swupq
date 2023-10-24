@@ -81,9 +81,27 @@
            class="long-text-area"/>
         </div>  
 
+        <!--seleccionar una imagen de la carrera-->
+        <div class="flex flex-column vision image-picker-objetivos-carrera">
+          <h6>Imagen de la carrera</h6>
+          <file-upload mode="basic" name="demo[]" :maxFileSize="1000000"
+          chooseLabel="Cargar imagen" accept="image/png,image/jpeg,image/jpg"
+          />
+        </div>
+
       </div>
 
     </section>
+
+    <!--este apartado es para los documentos, plan de estudios y el folleto digital-->
+    <hr>
+    <section class="documentos-carrera">
+      <h6>Plan de estudios y folleto digital</h6>
+      
+
+    </section>
+
+
 
     <!--este apartado es para el perfil de egreso de la carrera-->
     <hr>
@@ -101,7 +119,7 @@
 
     <!--seccion que corresponde a los ciclos de formacion-->
     <hr>
-    <section class="registrar-ciclos-formacion">
+    <section class="registrar-ciclos-formacion" >
       <div class="title-selection-ciclos-formacion">
           <h5>Ciclos de formación</h5>
       </div>
@@ -109,13 +127,23 @@
 
         <div class="flex flex-row contain-ciclo-formacion distribuir-equitativ">
 
-            <pv-input-number id="number-input" placeholder="Numero ciclo"/>
-
+            <pv-input-number id="number-input" placeholder="Numero ciclo" 
+            class=""/>
             <pv-input-text type="text" class="long-input-text-ciclo" placeholder="Descripción"/>
+            <pv-button label="Agregar" type="button" severity="secondary" rounded/>
 
         </div>
 
       </div>
+      <br>
+
+      <div class="card ciclos-agregados">
+        <data-table :value="ciclos_formacion" showGridlines tableStyle="min-width: 50rem">
+            <column-dt field="numero_ciclo" header="Número de ciclo" style="width: 20%;"></column-dt>
+            <column-dt field="descripcion" header="Descripción"></column-dt>
+        </data-table>
+      </div>
+
     </section>
 
 
@@ -142,6 +170,12 @@ import InputNumber from 'primevue/inputnumber';
 
 import Textarea from 'primevue/textarea';
 
+import FileUpload from 'primevue/fileupload';
+
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import ColumnGroup from 'primevue/columngroup';   // optional
+import Row from 'primevue/row';       
 
 
 export default defineComponent({
@@ -153,6 +187,11 @@ export default defineComponent({
     'pv-input-text':InputText,
     'pv-input-number':InputNumber,
     'pv-txt-area':Textarea,
+    'file-upload':FileUpload,
+    'data-table':DataTable,
+    'column-dt':Column,
+    'column-group-dt':ColumnGroup,
+    'row-dt':Row,
   },
   props: {
     title: {
@@ -168,6 +207,22 @@ export default defineComponent({
     let colorSecundario = ref('f700ff');
     let colorTerciario = ref('00ff73');
 
+    /*Informacion estatica de prueba para mostrar los ciclos de formacion*/
+    const ciclos_formacion = [
+        {
+          numero_ciclo: 1,
+          descripcion: 'Ciclo de formación 1',
+        },
+      {
+        numero_ciclo: 2,
+        descripcion: 'Ciclo de formación 2',
+      },
+      {
+        numero_ciclo: 3,
+        descripcion: 'Ciclo de formación 3',
+      }
+    ];
+
 
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
@@ -175,6 +230,7 @@ export default defineComponent({
       colorPrimario,
       colorSecundario,
       colorTerciario,
+      ciclos_formacion,
     };
   },
 
@@ -258,6 +314,7 @@ export default defineComponent({
 .long-input-text-ciclo{
   width: 50vw;
 }
+
 
 </style>
 

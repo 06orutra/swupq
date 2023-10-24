@@ -93,6 +93,46 @@
 
     </section>
 
+    <!--esta seccion corresponde al apartado del perfil de ingreso-->
+    <hr>
+    <section class="perfil-ingreso">
+      <div class="title-pefil-ingreso">
+        <h5>Perfil de ingreso</h5>
+      </div>
+
+      <div class="gap-3 flex flex-column conocimientos">
+
+        <h6>Conocimientos</h6>
+        <!--agregar un nuevo conocimiento-->
+        <div class=" entrada-conocimiento">
+          Nombre del conocimiento:
+          <pv-input-text placeholder="ejem. Física" class="medium-input-lenght"/>&nbsp
+          <pv-button label="Agregar conocimiento" type="button" severity="secondary" rounded 
+          @click="getConocimientos"/>
+        </div>
+
+        <!--seleccionar un conocimiento existente-->
+        <div class="select-conocimiento">
+          Selccionar conocimientos:
+          <multi-select v-model="conocimientos_selected" display="chip" :options="conocimientos" 
+          optionLabel="nombre" placeholder="Selecciona conocimientos"
+            :maxSelectedLabels="3" class="w-full md:w-30rem"  />
+        </div>
+
+
+
+        <div class="view-selected-conocimientos">
+          <!--mostrar los conocimientos que se ha agregado-->
+          <strong>Conocimientos seleccionados</strong>
+          <ul>
+            <li v-for="(elm,index) in conocimientos_selected" :key="index">{{ elm.nombre }}</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </section>
+
     <!--este apartado es para los documentos, plan de estudios y el folleto digital-->
     <hr>
     <section class="documentos-carrera">
@@ -210,6 +250,10 @@ import ColumnGroup from 'primevue/columngroup';   // optional
 import Row from 'primevue/row';       
 
 
+
+import MultiSelect from 'primevue/multiselect';
+
+
 export default defineComponent({
   name:'ColoresCarrera',
   components: {
@@ -224,6 +268,7 @@ export default defineComponent({
     'column-dt':Column,
     'column-group-dt':ColumnGroup,
     'row-dt':Row,
+    'multi-select':MultiSelect,
   },
   props: {
     title: {
@@ -255,6 +300,24 @@ export default defineComponent({
       }
     ];
 
+    /*Informacion estatica de prueba para mostrar los conocimientos*/
+      const conocimientos = ref([
+        {nombre:'Física'},
+        {nombre:'Matemáticas'},
+        {nombre:'Química'},
+        {nombre:'Biología'},
+    ]);
+      const conocimientos_selected = ref([]);
+
+
+    function getConocimientos(){
+      const conocimientos_marcados = [];
+      conocimientos_selected.value.forEach(element => {
+        conocimientos_marcados.push(element.nombre);
+      });
+
+      console.table(conocimientos_marcados);
+    }  
 
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
@@ -263,6 +326,9 @@ export default defineComponent({
       colorSecundario,
       colorTerciario,
       ciclos_formacion,
+      conocimientos,
+      conocimientos_selected,
+      getConocimientos,
     };
   },
 
@@ -349,6 +415,10 @@ export default defineComponent({
 
 .long-input-url{
   width: 40vw;
+}
+
+.medium-input-lenght{
+  width: 30vw;
 }
 
 

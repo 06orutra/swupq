@@ -131,6 +131,38 @@
 
       </div>
 
+      <div class="separador"> </div>
+
+      <br>
+      <div class="gap-3 flex flex-column habilidades">
+
+        <h6>Habilidades</h6>
+        <!--agregar una nueva habilidad-->
+        <div class=" entrada-habilidad">
+          Nombre de la habilidad:
+          <pv-input-text placeholder="ejem. Creatividad" class="medium-input-lenght"/>&nbsp
+          <pv-button label="Agregar habilidad" type="button" severity="secondary" rounded 
+          @click="getHabilidades"/>
+        </div>
+
+        <!--seleccionar una habilidad existente-->
+        <div class="select-habilidad">
+          Selccionar habilidad:
+          <multi-select v-model="habilidades_selected" display="chip" :options="habilidades" 
+          optionLabel="nombre" placeholder="Selecciona habilidades"
+            :maxSelectedLabels="3" class="w-full md:w-30rem"  />
+        </div>
+
+        <div class="view-selected-habilidades">
+          <!--mostrar los conocimientos que se ha agregado-->
+          <strong>habilidades seleccionadas</strong>
+          <ul>
+            <li v-for="(elm,index) in habilidades_selected" :key="index">{{ elm.nombre }}</li>
+          </ul>
+        </div>
+
+      </div>
+
     </section>
 
     <!--este apartado es para los documentos, plan de estudios y el folleto digital-->
@@ -319,6 +351,25 @@ export default defineComponent({
       console.table(conocimientos_marcados);
     }  
 
+
+    /*Informacion estatica de prueba para mostrar las habilidades*/
+        const habilidades = ref([
+        {nombre:'Creatividad'},
+        {nombre:'Lectura y redacción'},
+        {nombre:'Relaciones Humanas'},
+        {nombre:'Pensamiento critico'},
+    ]);
+    const habilidades_selected = ref([]);
+
+    function getHabilidades(){
+      const habilidades_marcadas = [];
+      habilidades_selected.value.forEach(element => {
+        habilidades_marcadas.push(element.nombre);
+      });
+
+      console.table(habilidades_marcadas);
+    }  
+
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
       //metodos
@@ -329,6 +380,9 @@ export default defineComponent({
       conocimientos,
       conocimientos_selected,
       getConocimientos,
+      habilidades,
+      habilidades_selected,
+      getHabilidades,
     };
   },
 
@@ -419,6 +473,12 @@ export default defineComponent({
 
 .medium-input-lenght{
   width: 30vw;
+}
+
+.separador{
+  width: 98%;
+  border:2px solid #c0c0c0;
+  border-radius: 2px;
 }
 
 

@@ -96,8 +96,40 @@
     <!--este apartado es para los documentos, plan de estudios y el folleto digital-->
     <hr>
     <section class="documentos-carrera">
-      <h6>Plan de estudios y folleto digital</h6>
-      
+      <h5>Plan de estudios y folleto digital</h5>
+
+      <div class="flex flex-column controls-plan-estuidos-folleto-digital">
+
+          <div class="flex flex-column gap-3 plan-estudios-data">
+              <span>Titulo:
+                <pv-input-text placeholder="Plan de estudios"/>
+              </span>
+
+              <span>Url documento:
+                <pv-input-text placeholder="https://plan-estudios-carrera" class="long-input-url"/>
+              </span>
+
+              <span>Url imagen de fondo:
+                <pv-input-text placeholder="https://my_background_image" class="long-input-url"/>
+              </span>
+          </div>
+          <br>
+
+          <div class="flex flex-column gap-3 folleto-digital-data">
+            <span>Titulo:
+                <pv-input-text placeholder="Folleto digital"/>
+              </span>
+
+              <span>Url documento:
+                <pv-input-text placeholder="https://folleto-digital" class="long-input-url"/>
+              </span>
+
+              <span>Url imagen de fondo:
+                <pv-input-text placeholder="https://my_background_image" class="long-input-url"/>
+              </span>
+          </div>
+
+      </div>
 
     </section>
 
@@ -313,6 +345,10 @@ export default defineComponent({
 
 .long-input-text-ciclo{
   width: 50vw;
+}
+
+.long-input-url{
+  width: 40vw;
 }
 
 

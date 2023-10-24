@@ -123,7 +123,7 @@
 
         <div class="view-selected-conocimientos">
           <!--mostrar los conocimientos que se ha agregado-->
-          <strong>Conocimientos seleccionados</strong>
+          <strong>conocimientos seleccionados</strong>
           <ul>
             <li v-for="(elm,index) in conocimientos_selected" :key="index">{{ elm.nombre }}</li>
           </ul>
@@ -132,6 +132,7 @@
       </div>
 
       <div class="separador"> </div>
+      <!--apartado para las habilidades de la carrera-->
 
       <br>
       <div class="gap-3 flex flex-column habilidades">
@@ -154,10 +155,43 @@
         </div>
 
         <div class="view-selected-habilidades">
-          <!--mostrar los conocimientos que se ha agregado-->
+          <!--mostrar las habilidaes que se ha agregado-->
           <strong>habilidades seleccionadas</strong>
           <ul>
             <li v-for="(elm,index) in habilidades_selected" :key="index">{{ elm.nombre }}</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="separador"> </div>
+      <!--apartado para las actitudes de la carrera-->
+
+      <br>
+      <div class="gap-3 flex flex-column actitudes">
+
+        <h6>Actitudes</h6>
+        <!--agregar una nueva actitud-->
+        <div class=" entrada-actitud">
+          Nombre de la actitud:
+          <pv-input-text placeholder="ejem. Compromiso" class="medium-input-lenght"/>&nbsp
+          <pv-button label="Agregar actitud" type="button" severity="secondary" rounded 
+          @click="getActitudes"/>
+        </div>
+
+        <!--seleccionar una actitud existente-->
+        <div class="select-actitud">
+          Selccionar actitud:
+          <multi-select v-model="actitudes_selected" display="chip" :options="actitudes" 
+          optionLabel="nombre" placeholder="Selecciona actitudes"
+            :maxSelectedLabels="3" class="w-full md:w-30rem"  />
+        </div>
+
+        <div class="view-selected-actitudes">
+          <!--mostrar las actitudes que se ha agregado-->
+          <strong>actitudes seleccionadas</strong>
+          <ul>
+            <li v-for="(elm,index) in actitudes_selected" :key="index">{{ elm.nombre }}</li>
           </ul>
         </div>
 
@@ -370,6 +404,24 @@ export default defineComponent({
       console.table(habilidades_marcadas);
     }  
 
+    /*Informacion estatica de prueba para mostrar las habilidades*/
+        const actitudes = ref([
+        {nombre:'Compromiso'},
+        {nombre:'Proactivo'},
+        {nombre:'Creatividad'},
+        {nombre:'Responsabilidad'},
+    ]);
+    const actitudes_selected = ref([]);
+
+    function getActitudes(){
+      const actitudes_marcadas = [];
+      actitudes_selected.value.forEach(element => {
+        actitudes_marcadas.push(element.nombre);
+      });
+
+      console.table(actitudes_marcadas);
+    }  
+
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
       //metodos
@@ -383,6 +435,9 @@ export default defineComponent({
       habilidades,
       habilidades_selected,
       getHabilidades,
+      actitudes,
+      actitudes_selected,
+      getActitudes,
     };
   },
 

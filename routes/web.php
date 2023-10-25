@@ -164,6 +164,8 @@ Route::middleware([
     }
 });
 
+Route::post('/CarruselInstalaciones/bannerData', [CarruselInstalacionesController::class, 'bannerData']);
+Route::post('/CarruselMascota/bannerData', [CarruselMascotaController::class, 'bannerData']);
 Route::post('/MensajePoliPolo/bannerData', [MensajePoliPoloController::class, 'bannerData']);
 Route::post('/Spotypoli/bannerData', [SpotypoliController::class, 'bannerData']);
 Route::post('/Spotypolo/bannerData', [SpotypoloController::class, 'bannerData']);

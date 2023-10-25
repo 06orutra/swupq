@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('mensaje_poli_polos', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->string('contenido');
+            $table->text('contenido');
             $table->timestamps();
         });
     }

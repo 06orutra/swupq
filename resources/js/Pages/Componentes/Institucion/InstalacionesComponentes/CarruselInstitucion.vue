@@ -31,32 +31,7 @@
 export default {
   data() {
     return {
-      images: [
-        {
-          itemImageSrc: 'https://www.upq.mx/media/institucion/02_INSTALACIONES.png',
-          thumbnailImageSrc: 'https://www.upq.mx/media/institucion/02_INSTALACIONES.png',
-          alt: 'Description for Image 1',
-          title: 'Title 1'
-        },
-        {
-          itemImageSrc: 'https://www.upq.mx/media/institucion/05_INSTALACIONES.png',
-          thumbnailImageSrc: 'https://www.upq.mx/media/institucion/05_INSTALACIONES.png',
-          alt: 'Description for Image 2',
-          title: 'Title 2'
-        },
-        {
-          itemImageSrc: 'https://www.upq.mx/media/institucion/16_INSTALACIONES.png',
-          thumbnailImageSrc: 'https://www.upq.mx/media/institucion/16_INSTALACIONES.png',
-          alt: 'Description for Image 3',
-          title: 'Title 3'
-        },
-        {
-          itemImageSrc: 'https://www.upq.mx/media/institucion/17_INSTALACIONES.png',
-          thumbnailImageSrc: 'https://www.upq.mx/media/institucion/17_INSTALACIONES.png',
-          alt: 'Description for Image 4',
-          title: 'Title 4'
-        },
-      ],
+      images: [],
       position: "bottom",
       positionOptions: [
         {
@@ -77,6 +52,27 @@ export default {
         }
       ]
     };
+  },
+  mounted() {
+    this.cargarDatosDesdeLaBaseDeDatos();
+  },
+  methods: {
+    cargarDatosDesdeLaBaseDeDatos() {
+      // Realiza una solicitud a tu punto final de base de datos
+      axios.post('/CarruselInstalaciones/bannerData')
+        .then((response) => {
+          this.images = response.data.map(item => {
+            return {
+              itemImageSrc: '/storage/' + item.imagen,
+              alt: item.alt,
+              // Otras propiedades si las tienes en tu base de datos
+            };
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   }
 };
 </script>

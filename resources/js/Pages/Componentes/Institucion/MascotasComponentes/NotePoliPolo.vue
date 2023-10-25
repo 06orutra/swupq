@@ -2,15 +2,14 @@
   <div class="card">
     <div class="medida" v-for="msj in mensajepp" :key="msj.id">
       <div class="card-title">
-        <strong> {{ msj.titulo }}</strong>
+        <strong>{{ msj.titulo }}</strong>
       </div>
       <div class="card-content">
-       {{ msj.contenido }}
+        {{ msj.contenido }}
       </div>
     </div>
   </div>
 </template>
-
 
 <script>
 import axios from "axios";
@@ -42,7 +41,6 @@ export default {
 };
 </script>
 
-  
 <style scoped>
 .medida {
   width: 600px;
@@ -64,6 +62,7 @@ export default {
   font-size: 16px;
   color: #666666;
   text-align: justify;
+  white-space: pre-line;
 }
 
 .card {
@@ -75,10 +74,7 @@ export default {
   border-bottom-right-radius: 0.50rem;
 }
 
-@media (max-width: 2560px) {
-
-  
-}
+@media (max-width: 2560px) {}
 
 @media (max-width: 1024px) {
   .card{

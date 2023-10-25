@@ -1,7 +1,6 @@
 <script>
 
 export default {
-
     props: {
         loadDataUrl: {
             type: String,
@@ -16,6 +15,10 @@ export default {
             required: true
         },
         deleteBannerUrl: {
+            type: String,
+            required: true
+        },
+        Titulo: {
             type: String,
             required: true
         },
@@ -79,6 +82,7 @@ export default {
                 return false;
             }
 
+            this.isLoading = true;
 
             const formData = new FormData();
             formData.append('nombre', this.nombre);
@@ -92,10 +96,10 @@ export default {
                 }
             }).then((response) => {
                 this.cargarBanner();
-                this.pdfPreview = null; // Resetea la vista previa del PDF
-                this.pdfFile = null;
                 this.nombre = null;
                 this.foto = null;
+                this.pdfPreview = null; // Resetea la vista previa del PDF
+                this.pdfFile = null;
                 this.dialogTable = false;
                 this.$toast.add({
                     severity: "success",
@@ -103,14 +107,16 @@ export default {
                     detail: "Registro exitoso",
                     life: 3000,
                 });
+                this.isLoading = false;
             }).catch((error) => {
                 console.log(error);
+                this.isLoading = false;
             });
         },
         editarBanner() {
             this.submitted = true;
             //validar si hay campos vacios
-            if (this.datosArreglo.nombre == null) {
+            if (this.datosArreglo.nombre == null || this.datosArreglo.nombre == '') {
                 // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
@@ -133,6 +139,8 @@ export default {
                 });
                 return false;
             }
+
+            this.isLoading = true;
 
             const formData = new FormData();
             formData.append('id', this.datosArreglo.id);
@@ -161,8 +169,10 @@ export default {
                     detail: "Edicion exitosa",
                     life: 3000,
                 });
+                this.isLoading = false;
             }).catch((error) => {
                 console.log(error);
+                this.isLoading = false;
             });
 
         },
@@ -172,6 +182,14 @@ export default {
             this.imagePreview = null;
             this.pdfPreview = null; // Resetea la vista previa del PDF
             this.pdfFile = null;
+
+            if (datosArreglo.pdfPath) { // asumiendo que datosArreglo tiene una propiedad pdfPath que almacena la ruta del PDF
+                this.pdfPreview = "/storage/pdfs/" + datosArreglo.pdfPath;
+            } else {
+                this.pdfPreview = null;
+            }
+
+            this.editarDialog = true;
         },
         confirmarEliminar(datosArreglo) {
             this.datosArreglo = datosArreglo;
@@ -204,7 +222,8 @@ export default {
             this.submitted = false;
             this.dialogTable = true;
             this.imagePreview = null;
-            this.pdfPreview = null; // Resetea la vista previa del PDF
+            this.nombre = null;
+            this.foto = null;
             this.pdfFile = null;
         },
         selectNewPhoto() {
@@ -242,8 +261,8 @@ export default {
                 }
                 reader.readAsDataURL(input.files[0]);
             }
-
         },
+
 
         handlePdfUpload(event) {
             const file = event.target.files[0];
@@ -253,18 +272,16 @@ export default {
             }
         },
 
-
-
         //metodo para input 
 
     },
     data() {
         return {
-            pdfFile: null,
             banner: [],
             searchQuery: '',
             nombre: null,
             foto: null,
+            pdfFile: null,
             uploadedFile: null,
             mensajeSinDatos: "No hay datos disponibles",
             dialogTable: false,
@@ -273,6 +290,7 @@ export default {
             photoInput: null,
             imagePreview: null,
             pdfPreview: null,
+            isLoading: false,
         };
     },
 
@@ -348,9 +366,12 @@ export default {
                     <input ref="pdf" type="file" class="hidden" @change="handlePdfUpload">
                 </div>
 
-                <Button type="submit" id="btnRegisrar"
+                <Button type="submit" id="btnRegisrar" :disabled="isLoading"
                     class="flex items-center justify-center space-x-2 rounded-md border-2 border-blue-500 px-4 py-2 font-medium text-blue-600 transition hover:bg-blue-500 hover:text-white">
-                    <span> Registrar </span>
+                    <span v-if="!isLoading"> Registrar </span>
+                    <span v-else>
+                        <i class="pi pi-spin pi-spinner"></i>
+                    </span>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
                             <path fill-rule="evenodd"
@@ -399,9 +420,12 @@ export default {
 
                 </div>
 
-                <Button type="submit" id="btnRegisrar"
+                <Button type="submit" id="btnRegisrar" :disabled="isLoading"
                     class="flex items-center justify-center space-x-2 rounded-md border-2 border-blue-500 px-4 py-2 font-medium text-blue-600 transition hover:bg-blue-500 hover:text-white">
-                    <span> Registrar </span>
+                    <span v-if="!isLoading"> Registrar </span>
+                    <span v-else>
+                        <i class="pi pi-spin pi-spinner"></i>
+                    </span>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
                             <path fill-rule="evenodd"

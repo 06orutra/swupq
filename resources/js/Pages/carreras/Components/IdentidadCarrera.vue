@@ -289,7 +289,7 @@
             <pv-input-text type="text" class="long-input-text-ciclo" placeholder="Descripción"
             v-model="ciclo_form.descripcion"/>
 
-            <pv-button label="Agregar" type="button" severity="secondary" />
+            <pv-button label="Agregar" type="button" severity="secondary" @click="addCicloFormacion"/>
 
         </div>
 
@@ -549,6 +549,16 @@ export default defineComponent({
     ];
 
     /*  funciones */
+
+    function addCicloFormacion(){
+      ciclos_formacion.value.push(ciclo_form.value);
+      ciclo_form.value = {
+        numero_ciclo : 1,
+        descripcion : '',
+      };
+    }
+
+
     function getConocimientos(){
       const conocimientos_marcados = [];
       conocimientos_selected.value.forEach(element => {
@@ -623,6 +633,7 @@ export default defineComponent({
       actitudes_selected,
       tarjetas_informativas,
       //metodos
+      addCicloFormacion,
       getConocimientos,
       getHabilidades,
       getActitudes,

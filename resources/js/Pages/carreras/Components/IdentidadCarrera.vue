@@ -4,7 +4,8 @@
     <section class="nombre-carrera">
       <div class="nombre-de-la-carrera">
           <p>Nombre de la carrera:&nbsp
-            <pv-input-text type="text" placeholder="Carrera" class="long-input-text"/>
+            <pv-input-text type="text" placeholder="Carrera" 
+            class="long-input-text" v-model="nombre_carrera"/>
           </p>
       </div>
     </section>
@@ -16,16 +17,16 @@
         </div>
           <!--Apartado para mostrar los colores que se estan seleccionando-->
           <div class="card flex gap-1 show-palete-color margin-bottom-custom">
-            <div class="item" id="palete-pc" :style="{backgroundColor: '#'+colorPrimario }"></div> 
-            <div class="item" id="palete-sc" :style="{backgroundColor: '#'+colorSecundario }"></div>
-            <div class="item" id="palete-tc" :style="{backgroundColor: '#'+colorTerciario }"></div>
+            <div class="item" id="palete-pc" :style="{backgroundColor: '#'+colores_carrera.colorPrimario }"></div> 
+            <div class="item" id="palete-sc" :style="{backgroundColor: '#'+colores_carrera.colorSecundario }"></div>
+            <div class="item" id="palete-tc" :style="{backgroundColor: '#'+colores_carrera.colorTerciario }"></div>
           </div>
 
         <div class="card flex flex-row distribuir-equitativ color-picker-controls">  <!--card flex flex-row align-items-center -->
               <!--color picker para el color primario-->
             <div class="color-primario">  
               <span>Color primario:
-                <color-picker  inputId="cp-primary-color" v-model="colorPrimario" 
+                <color-picker  inputId="cp-primary-color" v-model="colores_carrera.colorPrimario" 
                 ></color-picker>
               </span>
             </div>
@@ -34,7 +35,7 @@
             <!--color picker para el color secundario-->
             <div class="color-secundario">
               <span>Color secundario:
-                <color-picker  inputId="cp-secundary-color" v-model="colorSecundario"
+                <color-picker  inputId="cp-secundary-color" v-model="colores_carrera.colorSecundario"
               ></color-picker>
               </span>
             </div>
@@ -42,7 +43,7 @@
             <!--color picker para el color secundario-->
             <div class="color-terciario">
               <span>Color terciario:
-                <color-picker  inputId="cp-terciary-color" v-model="colorTerciario"
+                <color-picker  inputId="cp-terciary-color" v-model="colores_carrera.colorTerciario"
                 ></color-picker>
               </span>
             </div>
@@ -64,21 +65,21 @@
         <div class="flex flex-column plan-estudios">
           <h6>Objetivos del plan de estudios</h6>
           <pv-txt-area rows="5"  autoResize  placeholder="Descripción del plan de estudios" 
-           class="long-text-area"/>
+           class="long-text-area" v-model="objetivos_plan_estudios.plan_estudios"/>
         </div>  
 
           <!--mision de la carrera-->
         <div class="flex flex-column mision">
           <h6>Misión</h6>
           <pv-txt-area rows="5"  autoResize  placeholder="Descripción de la misión" 
-           class="long-text-area"/>
+           class="long-text-area" v-model="objetivos_plan_estudios.mision"/>
         </div>  
 
           <!--vision de la carrera-->
         <div class="flex flex-column vision">
           <h6>Visión</h6>
           <pv-txt-area rows="5"  autoResize  placeholder="Descripción de la visión" 
-           class="long-text-area"/>
+           class="long-text-area" v-model="objetivos_plan_estudios.vision"/>
         </div>  
 
         <!--seleccionar una imagen de la carrera-->
@@ -267,7 +268,7 @@
       
       <div class="controls-perfil-egreso">
         <pv-txt-area rows="5"  autoResize  placeholder="Descripción del perfil de egreso" 
-        class="long-text-area"/>
+        class="long-text-area" v-model="perfil_egreso"/>
       </div>
 
     </section>
@@ -447,9 +448,35 @@ export default defineComponent({
 
   // Setup del componente (opcional)
   setup(props) {
-    let colorPrimario = ref('5427d9');
-    let colorSecundario = ref('f700ff');
-    let colorTerciario = ref('00ff73');
+
+    /*v-models para campos del formualrio*/
+    let nombre_carrera = ref('');
+
+    /*colores de la carrera por defecto de los colorpicker*/
+    const colores_carrera = ref({
+      colorPrimario : '5427d9',
+      colorSecundario : 'f700ff',
+      colorTerciario : '00ff73',
+    });
+
+
+    /*objetivos del plan de estudios*/
+    const objetivos_plan_estudios = ref({
+      plan_estudios : '',
+      mision : '',
+      vision : '',
+    });
+
+    /*perfil de ingreso*/
+    const perfil_ingreso = ref({
+      conocimientos : [],
+      habilidades : [],
+      actitudes : [],
+      video : '',
+    });
+
+    let perfil_egreso = ref('');
+
 
     /*Informacion estatica de prueba para mostrar los ciclos de formacion*/
     const ciclos_formacion = [
@@ -468,7 +495,7 @@ export default defineComponent({
     ];
 
     /*Informacion estatica de prueba para mostrar los conocimientos*/
-      const conocimientos = ref([
+    const conocimientos = ref([
         {nombre:'Física'},
         {nombre:'Matemáticas'},
         {nombre:'Química'},
@@ -477,18 +504,8 @@ export default defineComponent({
       const conocimientos_selected = ref([]);
 
 
-    function getConocimientos(){
-      const conocimientos_marcados = [];
-      conocimientos_selected.value.forEach(element => {
-        conocimientos_marcados.push(element.nombre);
-      });
-
-      console.table(conocimientos_marcados);
-    }  
-
-
     /*Informacion estatica de prueba para mostrar las habilidades*/
-        const habilidades = ref([
+    const habilidades = ref([
         {nombre:'Creatividad'},
         {nombre:'Lectura y redacción'},
         {nombre:'Relaciones Humanas'},
@@ -496,17 +513,8 @@ export default defineComponent({
     ]);
     const habilidades_selected = ref([]);
 
-    function getHabilidades(){
-      const habilidades_marcadas = [];
-      habilidades_selected.value.forEach(element => {
-        habilidades_marcadas.push(element.nombre);
-      });
-
-      console.table(habilidades_marcadas);
-    }  
-
     /*Informacion estatica de prueba para mostrar las habilidades*/
-        const actitudes = ref([
+    const actitudes = ref([
         {nombre:'Compromiso'},
         {nombre:'Proactivo'},
         {nombre:'Creatividad'},
@@ -514,17 +522,8 @@ export default defineComponent({
     ]);
     const actitudes_selected = ref([]);
 
-    function getActitudes(){
-      const actitudes_marcadas = [];
-      actitudes_selected.value.forEach(element => {
-        actitudes_marcadas.push(element.nombre);
-      });
-
-      console.table(actitudes_marcadas);
-    }  
-
     /*Informacion estatica de prueba para mostrar las tarjetas informativas agregadas*/
-      const tarjetas_informativas = [
+    const tarjetas_informativas = [
         {
           descripcion: "Tarjeta informativa 1",
           url_direccion_imagen: 'https://ejemplo_icono_1',
@@ -539,32 +538,83 @@ export default defineComponent({
       }
     ];
 
+    /*  funciones */
+    function getConocimientos(){
+      const conocimientos_marcados = [];
+      conocimientos_selected.value.forEach(element => {
+        conocimientos_marcados.push(element.nombre);
+      });
+
+      console.table(conocimientos_marcados);
+    }  
+
+    function getHabilidades(){
+      const habilidades_marcadas = [];
+      habilidades_selected.value.forEach(element => {
+        habilidades_marcadas.push(element.nombre);
+      });
+
+      console.table(habilidades_marcadas);
+    }  
+
+    
+    function getActitudes(){
+      const actitudes_marcadas = [];
+      actitudes_selected.value.forEach(element => {
+        actitudes_marcadas.push(element.nombre);
+      });
+
+      console.table(actitudes_marcadas);
+    }  
+
     function mostrarImagen(url_imagen){
       alert('redirigiendo a...'+url_imagen);
     }
 
+
     function submitForm(){
-      alert('Guardando...');
       //document.getElementById('form-carreras').submit();
+    
+
+      /*
+      //formatemos los datos para enviarlos al backend
+      const formData = new FormData();
+      formData.append('nombre', this.nombre); //llave-valor
+
+      axios.post('url_de_la_ruta_para_guardar_la_carrera',
+          formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+      }).then(function (response) {
+          console.log(response);
+      }).catch(function (error) {
+          console.log(error);
+      }).finally(function () {
+          //limpiamos los campos del formulario
+      });
+      */
+
     }
 
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
-      //metodos
-      colorPrimario,
-      colorSecundario,
-      colorTerciario,
+      nombre_carrera,
+      colores_carrera,
+      objetivos_plan_estudios,
+      perfil_egreso,
       ciclos_formacion,
       conocimientos,
       conocimientos_selected,
-      getConocimientos,
       habilidades,
       habilidades_selected,
-      getHabilidades,
       actitudes,
       actitudes_selected,
-      getActitudes,
       tarjetas_informativas,
+      //metodos
+      getConocimientos,
+      getHabilidades,
+      getActitudes,
       mostrarImagen,
       submitForm,
     };

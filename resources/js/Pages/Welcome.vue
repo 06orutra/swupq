@@ -6,6 +6,7 @@ import TourCardenal from '@/Layouts/homeComponents/TourCardenal.vue';
 import SplitterVue from '@/Layouts/homeComponents/Splitter.vue';
 import carruselSecundario from './Componentes/Welcome/carruselSecundario.vue';
 import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
+import Directorio from '@/Layouts/homeComponents/Directorio.vue';
 
 </script>
 
@@ -17,6 +18,7 @@ import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
         <CarrierBanner />
         <carruselSecundario />
         <TourCardenal />
+        <Directorio />
         <SplitterVue />
 
     </AppEstructure>

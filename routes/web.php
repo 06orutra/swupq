@@ -24,6 +24,7 @@ use App\Http\Controllers\HistoriaCarruselController;
 use App\Http\Controllers\UbicacionController;
 use App\Http\Controllers\InformeRectorController;
 use App\Http\Controllers\RectorBannerController;
+use App\Http\Controllers\RectorParagraphsController;
 use Illuminate\Http\Request;
 
 /*
@@ -147,6 +148,7 @@ Route::middleware([
         'ubicacion' => UbicacionController::class,
         'informe' => InformeRectorController::class,
         'rectorBanner' => RectorBannerController::class,
+        'rectorParrafo' => RectorParagraphsController::class,
     ];
     // se declarar variables, 
 

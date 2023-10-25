@@ -1,6 +1,6 @@
 <template>
 
-<form action="">
+<form >
     <section class="nombre-carrera">
       <div class="nombre-de-la-carrera">
           <p>Nombre de la carrera:&nbsp
@@ -107,7 +107,7 @@
         <div class=" entrada-conocimiento">
           Nombre del conocimiento:
           <pv-input-text placeholder="ejem. Física" class="medium-input-lenght"/>&nbsp
-          <pv-button label="Agregar conocimiento" type="button" severity="secondary" rounded 
+          <pv-button label="Agregar conocimiento" type="button" severity="secondary"  
           @click="getConocimientos"/>
         </div>
 
@@ -142,7 +142,7 @@
         <div class=" entrada-habilidad">
           Nombre de la habilidad:
           <pv-input-text placeholder="ejem. Creatividad" class="medium-input-lenght"/>&nbsp
-          <pv-button label="Agregar habilidad" type="button" severity="secondary" rounded 
+          <pv-button label="Agregar habilidad" type="button" severity="secondary"  
           @click="getHabilidades"/>
         </div>
 
@@ -175,7 +175,7 @@
         <div class=" entrada-actitud">
           Nombre de la actitud:
           <pv-input-text placeholder="ejem. Compromiso" class="medium-input-lenght"/>&nbsp
-          <pv-button label="Agregar actitud" type="button" severity="secondary" rounded 
+          <pv-button label="Agregar actitud" type="button" severity="secondary"  
           @click="getActitudes"/>
         </div>
 
@@ -194,6 +194,23 @@
             <li v-for="(elm,index) in actitudes_selected" :key="index">{{ elm.nombre }}</li>
           </ul>
         </div>
+
+
+      </div>
+
+      
+      <div class="separador"> </div>
+      <br>
+
+      <div class=" video-perfil-ingreso">
+        <h6>Video de la carrera</h6>
+
+      <div class="gap-3 flex flex-row controls-video-perfil-ingreso">
+        <span>Direccion del video:
+        <pv-input-text placeholder="https://www.youtube.com/watch?v=o7oJGLzxikw&ab_channel=CanalOficialUPQ" 
+        class="long-input-url-2"/>
+        </span>
+      </div>
 
       </div>
 
@@ -268,7 +285,7 @@
             <pv-input-number id="number-input" placeholder="Numero ciclo" 
             class=""/>
             <pv-input-text type="text" class="long-input-text-ciclo" placeholder="Descripción"/>
-            <pv-button label="Agregar" type="button" severity="secondary" rounded/>
+            <pv-button label="Agregar" type="button" severity="secondary" />
 
         </div>
 
@@ -284,13 +301,97 @@
 
     </section>
 
+    <!--esta seccion corresponde al apartado de la pagina principal y sus iconos-->
+    <hr>
+
+    <section class="flex flex-column gap-3 pagina-principal-carrera">
+      <div class="title-pagina-principal">
+          <h5>Página principal</h5>
+      </div>
+
+      <div class="imagen-pagina-principal">
+        <h6>Imagen de la página principal</h6>
+
+        <div class="flex flex-row gap-2 controls-image-main-screen">
+          <span>Dirección imagen:
+            <pv-input-text type="text" placeholder="https://my_background_main_screen_carrer"
+            class="long-input-url-2"/>
+          </span>
+        </div>
+      </div>
+
+      <div class="separador"></div>
+
+      <div class="controls-tarjetas-informativas">
+        <h6>Tarjetas informativas</h6>
+
+        <div class="entrada-tarjeta-informativa">
+          <table>
+            <tr>
+              <td>
+                Descripcion:
+              </td>
+              <td>
+                <pv-input-text type="text" placeholder="ejem. Titulación automatica" class="long-input-text"/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Direccion imagen:
+              </td>
+              <td>
+                <pv-input-text type="text" placeholder="ejem. https://my_icono" class="long-input-text"/>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" align="center">
+                <pv-button type="button" severity="secondary" label="Agregar" />
+              </td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+
+
+      <!--en este aprtado se mostraran las tarjetas informativas que se vayan agregando-->
+      <div class="card tarjetas-informativas-agregadas centrar">
+
+          <table border='1' class="table-tarjetas-informativas">
+            <colgroup>
+              <col style="width: 20%;">
+              <col style="width: 70%;">
+              <col style="width: 10%;">
+            </colgroup>
+            <thead>
+              <th>Descripcion</th>
+              <th>Direccion imagen</th>
+              <th>Ver imagen</th>
+            </thead>
+
+            <tbody>
+              <tr v-for="(elem,index) in tarjetas_informativas" :key="index">
+                <td>{{ elem.descripcion }}</td>
+                <td>{{ elem.url_direccion_imagen }}</td>
+                <td align="center">
+                  <pv-button icon="pi pi-search" severity="success" aria-label="Search" 
+                  @:click="mostrarImagen(elem.url_direccion_imagen)" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+      </div>
+
+    </section>
+    
+
 
 
     <br>
 
     <div class="control-submit">
-          <pv-button  label="Guardar" id="id-btn-guardar" type="submit"/>
-          
+          <pv-button  label="Guardar carrera" id="id-btn-guardar" type="submit"/>     
     </div>
 
     </form>
@@ -422,6 +523,26 @@ export default defineComponent({
       console.table(actitudes_marcadas);
     }  
 
+    /*Informacion estatica de prueba para mostrar las tarjetas informativas agregadas*/
+      const tarjetas_informativas = [
+        {
+          descripcion: "Tarjeta informativa 1",
+          url_direccion_imagen: 'https://ejemplo_icono_1',
+        },
+      {
+        descripcion: "Tarjeta informativa 2",
+          url_direccion_imagen: 'https://ejemplo_icono_2',      
+      },
+      {
+        descripcion: "Tarjeta informativa 3",
+          url_direccion_imagen: 'https://ejemplo_icono_3',      
+      }
+    ];
+
+    function mostrarImagen(url_imagen){
+      alert('redirigiendo a...'+url_imagen);
+    }
+
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
       //metodos
@@ -438,6 +559,8 @@ export default defineComponent({
       actitudes,
       actitudes_selected,
       getActitudes,
+      tarjetas_informativas,
+      mostrarImagen,
     };
   },
 
@@ -490,6 +613,10 @@ export default defineComponent({
 
 <style scoped>
 
+.centrar{
+  justify-content: center;
+}
+
 .item {
   flex: 1;
   text-align: center;
@@ -509,6 +636,11 @@ export default defineComponent({
   justify-content: space-around;
 }
 
+.distribuir-justamente{
+  display: flex;
+  justify-content: space-between;
+}
+
 .margin-bottom-custom{
   margin-bottom: 1rem;
 }
@@ -526,15 +658,44 @@ export default defineComponent({
   width: 40vw;
 }
 
+.long-input-url-2{
+  width: 55vw;
+}
+
 .medium-input-lenght{
   width: 30vw;
 }
 
 .separador{
   width: 98%;
-  border:2px solid #c0c0c0;
+  border:1px solid #dbd8d8;
   border-radius: 2px;
 }
+
+.table-tarjetas-informativas {
+    border-collapse: collapse;
+    width: 100%;
+    border: 2px solid #333; /* Borde exterior de la tabla */
+  }
+
+  .table-tarjetas-informativas th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Borde inferior para las celdas */
+  }
+
+  .table-tarjetas-informativas th {
+    background-color: #333; /* Fondo para los encabezados */
+    color: white; /* Color de texto para los encabezados */
+  }
+
+  .table-tarjetas-informativas tr:nth-child(even) {
+    background-color: #f2f2f2; /* Fondo alternado para filas pares */
+  }
+
+  .table-tarjetas-informativas tr:hover {
+    background-color: #ddd; /* Fondo cuando el cursor está sobre una fila */
+  }
 
 
 </style>

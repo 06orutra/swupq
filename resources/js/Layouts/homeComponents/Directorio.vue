@@ -310,7 +310,7 @@ export default {
   box-sizing: border-box;
 }
 
-/* .column-left {
+.column-left {
   margin-left: 78px;
 }
 
@@ -321,7 +321,7 @@ export default {
 
 .column-right {
   margin-right: 10px;
-} */
+}
 
 h4 {
   font-size: 1.25em;

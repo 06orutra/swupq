@@ -284,8 +284,11 @@
         <div class="flex flex-row contain-ciclo-formacion distribuir-equitativ">
 
             <pv-input-number id="number-input" placeholder="Numero ciclo" 
-            class=""/>
-            <pv-input-text type="text" class="long-input-text-ciclo" placeholder="Descripción"/>
+            class="" v-model="ciclo_form.numero_ciclo"/>
+
+            <pv-input-text type="text" class="long-input-text-ciclo" placeholder="Descripción"
+            v-model="ciclo_form.descripcion"/>
+
             <pv-button label="Agregar" type="button" severity="secondary" />
 
         </div>
@@ -416,10 +419,8 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import ColumnGroup from 'primevue/columngroup';   // optional
 import Row from 'primevue/row';       
-
-
-
 import MultiSelect from 'primevue/multiselect';
+
 
 
 export default defineComponent({
@@ -465,6 +466,7 @@ export default defineComponent({
       plan_estudios : '',
       mision : '',
       vision : '',
+      url_imagen : '', //por definir bien su tipo de dato
     });
 
     /*perfil de ingreso*/
@@ -477,9 +479,17 @@ export default defineComponent({
 
     let perfil_egreso = ref('');
 
+    /*ciclos de formacion*/
 
+    /*modelo para el ciclo entrante*/
+    let ciclo_form = ref({
+      numero_ciclo : 1,
+      descripcion : '',
+    });
+
+    /*estructura para la lista de ciclos agregadas */
     /*Informacion estatica de prueba para mostrar los ciclos de formacion*/
-    const ciclos_formacion = [
+    const ciclos_formacion = ref([
         {
           numero_ciclo: 1,
           descripcion: 'Ciclo de formación 1',
@@ -492,7 +502,7 @@ export default defineComponent({
         numero_ciclo: 3,
         descripcion: 'Ciclo de formación 3',
       }
-    ];
+    ]);
 
     /*Informacion estatica de prueba para mostrar los conocimientos*/
     const conocimientos = ref([
@@ -603,6 +613,7 @@ export default defineComponent({
       colores_carrera,
       objetivos_plan_estudios,
       perfil_egreso,
+      ciclo_form,
       ciclos_formacion,
       conocimientos,
       conocimientos_selected,

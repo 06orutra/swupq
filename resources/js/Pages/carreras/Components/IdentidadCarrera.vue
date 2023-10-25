@@ -1,6 +1,6 @@
 <template>
 
-<form >
+<form id="form-carreras"> <!--@sumbit="submitForm(event)-->
     <section class="nombre-carrera">
       <div class="nombre-de-la-carrera">
           <p>Nombre de la carrera:&nbsp
@@ -391,7 +391,7 @@
     <br>
 
     <div class="control-submit">
-          <pv-button  label="Guardar carrera" id="id-btn-guardar" type="submit"/>     
+          <pv-button  label="Guardar carrera" id="id-btn-guardar" type="button" @click="submitForm"/>     
     </div>
 
     </form>
@@ -543,6 +543,11 @@ export default defineComponent({
       alert('redirigiendo a...'+url_imagen);
     }
 
+    function submitForm(){
+      alert('Guardando...');
+      //document.getElementById('form-carreras').submit();
+    }
+
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
       //metodos
@@ -561,6 +566,7 @@ export default defineComponent({
       getActitudes,
       tarjetas_informativas,
       mostrarImagen,
+      submitForm,
     };
   },
 

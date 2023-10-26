@@ -209,7 +209,7 @@
       <div class="gap-3 flex flex-row controls-video-perfil-ingreso">
         <span>Direccion del video:
         <pv-input-text placeholder="https://www.youtube.com/watch?v=o7oJGLzxikw&ab_channel=CanalOficialUPQ" 
-        class="long-input-url-2"/>
+        class="long-input-url-2" v-model="perfil_ingreso.video"/>
         </span>
       </div>
 
@@ -226,30 +226,36 @@
 
           <div class="flex flex-column gap-3 plan-estudios-data">
               <span>Titulo:
-                <pv-input-text placeholder="Plan de estudios"/>
+                <pv-input-text placeholder="Plan de estudios" 
+                v-model="plan_estudios_folleto_digital.plan_estudios.titulo"/>
               </span>
 
               <span>Url documento:
-                <pv-input-text placeholder="https://plan-estudios-carrera" class="long-input-url"/>
+                <pv-input-text placeholder="https://plan-estudios-carrera" class="long-input-url"
+                v-model="plan_estudios_folleto_digital.plan_estudios.url_documento"/>
               </span>
 
               <span>Url imagen de fondo:
-                <pv-input-text placeholder="https://my_background_image" class="long-input-url"/>
+                <pv-input-text placeholder="https://my_background_image" class="long-input-url"
+                v-model="plan_estudios_folleto_digital.plan_estudios.url_imagen_fondo"/>
               </span>
           </div>
           <br>
 
           <div class="flex flex-column gap-3 folleto-digital-data">
             <span>Titulo:
-                <pv-input-text placeholder="Folleto digital"/>
+                <pv-input-text placeholder="Folleto digital"
+                v-model="plan_estudios_folleto_digital.folleto_digital.titulo"/>
               </span>
 
               <span>Url documento:
-                <pv-input-text placeholder="https://folleto-digital" class="long-input-url"/>
+                <pv-input-text placeholder="https://folleto-digital" class="long-input-url"
+                v-model="plan_estudios_folleto_digital.folleto_digital.url_documento"/>
               </span>
 
               <span>Url imagen de fondo:
-                <pv-input-text placeholder="https://my_background_image" class="long-input-url"/>
+                <pv-input-text placeholder="https://my_background_image" class="long-input-url"
+                v-model="plan_estudios_folleto_digital.folleto_digital.url_imagen_fondo"/>
               </span>
           </div>
 
@@ -547,6 +553,21 @@ export default defineComponent({
     ]);
     const actitudes_selected = ref([]);
 
+    /* Plan de estudios y folleto digital*/
+    const plan_estudios_folleto_digital = ref({
+        plan_estudios:{
+            titulo:'',
+            url_documento:'',
+            url_imagen_fondo:'',  
+
+        },
+        folleto_digital:{
+          titulo:'',
+          url_documento:'',
+          url_imagen_fondo:'', 
+        }
+    });
+
     /*Informacion estatica de prueba para mostrar las tarjetas informativas agregadas*/
     const tarjetas_informativas = [
         {
@@ -644,6 +665,8 @@ export default defineComponent({
       actitud,
       actitudes,
       actitudes_selected,
+      perfil_ingreso,
+      plan_estudios_folleto_digital,
       tarjetas_informativas,
       //metodos
       addCicloFormacion,

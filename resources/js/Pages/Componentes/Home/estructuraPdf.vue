@@ -82,6 +82,17 @@ export default {
                 return false;
             }
 
+            if (this.pdfFile == null) {
+                // si no hay PDF seleccionado, mostrar un mensaje de error
+                this.$toast.add({
+                    severity: "error",
+                    summary: "Error",
+                    detail: "Debe seleccionar un archivo PDF",
+                    life: 3000,
+                });
+                return false;
+            }
+
             this.isLoading = true;
 
             const formData = new FormData();
@@ -98,7 +109,6 @@ export default {
                 this.cargarBanner();
                 this.nombre = null;
                 this.foto = null;
-                this.pdfPreview = null; // Resetea la vista previa del PDF
                 this.pdfFile = null;
                 this.dialogTable = false;
                 this.$toast.add({
@@ -152,6 +162,11 @@ export default {
                 console.log('Foto seleccionada:', this.datosArreglo.foto); // Ayuda a depurar
             }
 
+            if (this.pdfFile) {
+                formData.append('pdf', this.pdfFile);
+                console.log('PDF seleccionado:', this.pdfFile.name); // Ayuda a depurar
+            }
+
             axios.post(this.editBannerUrl,
                 formData, {
                 headers: {
@@ -170,6 +185,7 @@ export default {
                     life: 3000,
                 });
                 this.isLoading = false;
+
             }).catch((error) => {
                 console.log(error);
                 this.isLoading = false;
@@ -177,19 +193,15 @@ export default {
 
         },
         editarSelect(datosArreglo) {
-            this.datosArreglo = { ...datosArreglo }; // esto es para que se muestre los datos del datosArregloo en el formulario
+            this.datosArreglo = { ...datosArreglo };
             this.editarDialog = true;
             this.imagePreview = null;
-            this.pdfPreview = null; // Resetea la vista previa del PDF
-            this.pdfFile = null;
 
-            if (datosArreglo.pdfPath) { // asumiendo que datosArreglo tiene una propiedad pdfPath que almacena la ruta del PDF
-                this.pdfPreview = "/storage/pdfs/" + datosArreglo.pdfPath;
+            if (datosArreglo.pdf) {
+                this.pdfPreview = "/storage/pdfs/" + datosArreglo.pdf;
             } else {
                 this.pdfPreview = null;
             }
-
-            this.editarDialog = true;
         },
         confirmarEliminar(datosArreglo) {
             this.datosArreglo = datosArreglo;
@@ -225,6 +237,7 @@ export default {
             this.nombre = null;
             this.foto = null;
             this.pdfFile = null;
+            this.pdfPreview = null;
         },
         selectNewPhoto() {
             this.$refs.photoInput.click();

@@ -30,12 +30,12 @@ class PdfPruebaController extends Controller
 
         
         $pdfName = time() . '_' . $request->file('pdf')->getClientOriginalName();
-        $request->file('pdf')->storeAs('public/pdfs', $pdfName);
+        $pdfPath = $request->file('pdf')->storeAs('public/pdfs', $pdfName);
 
         $banner = new PdfPrueba();
         $banner->nombre = $request->nombre;
         $banner->imagen = $fotoName;
-        $banner->pdf = $request->pdf;
+        $banner->pdf = $pdfName;
         $banner->save();
 
         return response()->json('Banner registrado exitosamente');
@@ -71,9 +71,15 @@ class PdfPruebaController extends Controller
 
         // Procesar PDF
         if ($request->hasFile('pdf')) {
-            Storage::delete('public/pdfs/' . $banner->pdf);
+            // Guardar el nuevo PDF y actualizar el nombre en la base de datos
             $pdfName = time() . '_' . $request->file('pdf')->getClientOriginalName();
-            $request->file('pdf')->storeAs('public/pdfs', $pdfName);
+            $pdfPath = $request->file('pdf')->storeAs('public/pdfs', $pdfName);
+
+            // Eliminar el PDF anterior del servidor
+            if ($banner->pdf) {
+                Storage::delete('public/pdfs/' . $banner->pdf);
+            }
+
             $banner->pdf = $pdfName;
         }
 

@@ -54,7 +54,7 @@ export default {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <div class="mx-auto">
-    <div class="bg-white overflow-hidden shadow-6 sm:border-round-lg">
+    <div class="overflow-hidden shadow-6 sm:border-round-lg">
 
       <AppEstructure :controllerName="'/rectorBanner/bannerData'">
 
@@ -75,7 +75,8 @@ export default {
 
           </div>
           <div>
-            <select v-model="selectedOption" @change="handleSelection">
+            <label for="seleccionarPDF">Informes del rector:</label>
+            <select v-model="selectedOption" @change="handleSelection" id="seleccionarPDF">
               <option value="indiana">Indiana</option>
               <option value="michigan">Michigan</option>
               <option value="ohio">Ohio</option>

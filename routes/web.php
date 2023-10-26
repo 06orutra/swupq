@@ -25,6 +25,7 @@ use App\Http\Controllers\UbicacionController;
 use App\Http\Controllers\InformeRectorController;
 use App\Http\Controllers\RectorBannerController;
 use App\Http\Controllers\RectorParagraphsController;
+use App\Http\Controllers\EducationalBannersController;
 use Illuminate\Http\Request;
 
 /*
@@ -149,6 +150,7 @@ Route::middleware([
         'informe' => InformeRectorController::class,
         'rectorBanner' => RectorBannerController::class,
         'rectorParrafo' => RectorParagraphsController::class,
+        'educationalBanner' => EducationalBannersController::class,
     ];
     // se declarar variables, 
 

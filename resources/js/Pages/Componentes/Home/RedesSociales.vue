@@ -1,25 +1,4 @@
 
-<template class="sticky">
-            <Dock :model="redes" class="custom-dock fixed mr-2 z-2 hidden
-            lg:inline-flex"
-            position="right">
-                <template #icon="{ item }">
-                    <a :href="item.link" target="_blank">
-                        <img :alt="item.label" :src="item.icon" style="width:60%"/>
-                    </a>
-                </template>
-            </Dock>
-            
-            <!-- DOCK cuando la pantalla es demasiado chica, por ejemplo, tablets y teléfonos -->
-            <Dock :model="redes" class="custom-dockTop absolute z-2 hidden sm:inline-flex lg:hidden" position="top">
-        <template #icon="{ item }">
-            <a :href="item.link" target="_blank">
-                <img :alt="item.label" :src="item.icon" class="sm:w-2/3 w-5/12"/>
-            </a>
-        </template>
-    </Dock>
-</template>
-
 <script setup>
     import { ref } from "vue";
 
@@ -43,10 +22,36 @@
             label: 'TikTok',
             icon: 'https://img.icons8.com/?size=512&id=118640&format=png',
             link: 'https://www.tiktok.com/@upqoficial/'
+        },
+        {
+            label: 'LinkedIn',
+            icon: 'https://img.icons8.com/?size=300&id=8808&format=png',
+            link: 'https://www.linkedin.com/school/upq/'
         }
     ]);
     
 </script>
+
+<template class="sticky">
+            <Dock :model="redes" class="custom-dock fixed mr-2 z-2 hidden
+            lg:inline-flex"
+            position="right">
+                <template #icon="{ item }">
+                    <a :href="item.link" target="_blank">
+                        <img :alt="item.label" :src="item.icon" style="width:60%"/>
+                    </a>
+                </template>
+            </Dock>
+            
+            <!-- DOCK cuando la pantalla es demasiado chica, por ejemplo, tablets y teléfonos -->
+            <Dock :model="redes" class="custom-dockTop absolute z-2 hidden sm:inline-flex lg:hidden" position="top">
+        <template #icon="{ item }">
+            <a :href="item.link" target="_blank">
+                <img :alt="item.label" :src="item.icon" class="sm:w-2/3 w-5/12"/>
+            </a>
+        </template>
+    </Dock>
+</template>
 
 <style scoped>
 .custom-dock {
@@ -62,7 +67,7 @@
 .custom-dockTop {
     background-color: transparent;
     border-radius: 10px;
-    width: 300px;
+    width: 400px;
     transition: all .3s ease;
     cursor: pointer;
     margin-top: 80px; /* Opcional, si no se requiere, borrar y ya :D */

@@ -111,12 +111,8 @@ export default {
 </script>
 
 <template>
-  <AppEstructure>
+  <AppEstructure :controllerName="'/educationalBanner/bannerData'">
   <div class="mx-auto">
-    <div class="banner">
-      <img src="https://www.upq.mx/media/slider/MODELOEDUCATIVO.png" alt="" class="h-full w-full">
-    </div>
-
 
     <div class="w-full" style="background-color: #800020; text-align: left; padding: 20px; ">
       <h2 style="color: white;"><b>MODELO EDUCATIVO</b></h2>
@@ -128,6 +124,7 @@ export default {
         Y finalmente, el título, tanto dentro como fuera del Modal, se obtiene por el
         apartado "nombre" en la tabla modalModEdu-->
     <section>
+      <br>
       <div class="circle-container">
         <div v-for="(item, index) in modal" :key="item.id" class="circle-wrapper">
           <div class="background-image circle" data-index="0" @click="openModal(item.nombre, item.link)">

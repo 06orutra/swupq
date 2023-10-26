@@ -84,10 +84,16 @@
 
         <!--seleccionar una imagen de la carrera-->
         <div class="flex flex-column vision image-picker-objetivos-carrera">
-          <h6>Imagen de la carrera</h6>
+          <h6>Dirección imagen de la carrera</h6>
+          <!--
           <file-upload mode="basic" name="demo[]" :maxFileSize="1000000"
           chooseLabel="Cargar imagen" accept="image/png,image/jpeg,image/jpg"
           />
+          -->
+
+          <pv-input-text placeholder="https://ingenieria_autotriz_escudo_imagen" class="long-input-url-2" 
+          v-model=" objetivos_plan_estudios.url_imagen"/>
+         
         </div>
 
       </div>
@@ -650,7 +656,17 @@ export default defineComponent({
 
     function submitForm(){
       //document.getElementById('form-carreras').submit();
-    
+    const formData = new FormData();
+    formData.append('nombre', nombre_carrera.value); //agregamos el nombre de la carrera
+    formData.append('colores', colores_carrera.value); //agregamos los colores de la carrera
+    formData.append('objetivos_carrera',objetivos_plan_estudios.value); //agregamos los objetivos de la carrera
+    formData.append('perfil_ingreso',perfil_ingreso.value); //agregamos el perfil de ingreso
+    formData.append('plan_estudios_folleto_digital',plan_estudios_folleto_digital); //agregamos el plan de estudios y el folleto digital 
+    formData.append('perfil_egreso',perfil_egreso.value); //agregamos el perfil de egreso
+    formData.append('ciclos_formacion',ciclos_formacion.value); //agregamos los ciclos de formacion
+    //agregamos la informacion de la pagina principal e iconos de informacion
+    formData.append('pagina_principal',pagina_principal.value);
+
 
       /*
       //formatemos los datos para enviarlos al backend

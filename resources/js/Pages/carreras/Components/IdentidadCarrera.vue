@@ -325,7 +325,7 @@
         <div class="flex flex-row gap-2 controls-image-main-screen">
           <span>Dirección imagen:
             <pv-input-text type="text" placeholder="https://my_background_main_screen_carrer"
-            class="long-input-url-2"/>
+            class="long-input-url-2" v-model="pagina_principal.url_imagen"/>
           </span>
         </div>
       </div>
@@ -342,7 +342,8 @@
                 Descripcion:
               </td>
               <td>
-                <pv-input-text type="text" placeholder="ejem. Titulación automatica" class="long-input-text"/>
+                <pv-input-text type="text" placeholder="ejem. Titulación automatica" 
+                class="long-input-text" v-model="tarjeta_informativa.descripcion"/>
               </td>
             </tr>
             <tr>
@@ -350,12 +351,14 @@
                 Direccion imagen:
               </td>
               <td>
-                <pv-input-text type="text" placeholder="ejem. https://my_icono" class="long-input-text"/>
+                <pv-input-text type="text" placeholder="ejem. https://my_icono" 
+                class="long-input-text" v-model="tarjeta_informativa.url_direccion_imagen"/>
               </td>
             </tr>
             <tr>
               <td colspan="2" align="center">
-                <pv-button type="button" severity="secondary" label="Agregar" />
+                <pv-button type="button" severity="secondary" label="Agregar" 
+                @click="addTarjetaInformativa"/>
               </td>
             </tr>
           </table>
@@ -568,8 +571,19 @@ export default defineComponent({
         }
     });
 
+    /*modelo para la tarjeta informativa */
+    const tarjeta_informativa = ref({
+      descripcion:'',
+      url_direccion_imagen:'',
+    });
+    /*modelo para la pagina principal */
+    const pagina_principal = ref({
+      url_imagen:'',
+      tarjetas_informativas_pp:[],
+    });
+
     /*Informacion estatica de prueba para mostrar las tarjetas informativas agregadas*/
-    const tarjetas_informativas = [
+    const tarjetas_informativas = ref([
         {
           descripcion: "Tarjeta informativa 1",
           url_direccion_imagen: 'https://ejemplo_icono_1',
@@ -582,7 +596,7 @@ export default defineComponent({
         descripcion: "Tarjeta informativa 3",
           url_direccion_imagen: 'https://ejemplo_icono_3',      
       }
-    ];
+    ]);
 
     /*  funciones */
 
@@ -616,6 +630,17 @@ export default defineComponent({
       actitud.value = {
         nombre:'',
       }
+    }
+
+    function addTarjetaInformativa(){
+      //alert(`agregando tarjeta informativa...\n${tarjeta_informativa.value.descripcion}\n${tarjeta_informativa.value.url_direccion_imagen}`);
+      tarjetas_informativas.value.push(tarjeta_informativa.value);
+      pagina_principal.value.tarjetas_informativas_pp.push(tarjeta_informativa.value);
+
+      tarjeta_informativa.value = {
+        descripcion:'',
+        url_direccion_imagen:'',
+      };
     }
 
     function mostrarImagen(url_imagen){
@@ -667,12 +692,15 @@ export default defineComponent({
       actitudes_selected,
       perfil_ingreso,
       plan_estudios_folleto_digital,
+      pagina_principal,
+      tarjeta_informativa,
       tarjetas_informativas,
       //metodos
       addCicloFormacion,
       addConocimiento,
       addHabilidad,
       addActitud,
+      addTarjetaInformativa,
       mostrarImagen,
       submitForm,
     };

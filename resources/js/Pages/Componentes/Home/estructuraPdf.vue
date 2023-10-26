@@ -22,6 +22,10 @@ export default {
             type: String,
             required: true
         },
+        Subtitulo: {
+            type: String,
+            required: true
+        },
     },
     computed: {
         filteredBanner() {
@@ -330,7 +334,7 @@ export default {
                 <img :src="'/storage/' + datosCard.imagen" alt="Card Image" class="imagen-resolucion" />
             </template>
             <template #title> {{ datosCard.nombre }} </template>
-            <template #subtitle> {{ datosCard.link }} </template>
+            <template #subtitle> {{ datosCard.pdf }} </template>
             <template #footer>
                 <Button icon="pi pi-pencil" class="p-button p-button-warning !mr-6" @click="editarSelect(datosCard)" />
                 <Button icon="pi pi-trash" class="p-button p-button-danger" @click="confirmarEliminar(datosCard)" />
@@ -423,7 +427,7 @@ export default {
                         <embed :src="pdfPreview" type="application/pdf" width="100%" height="500px">
                     </div>
 
-                    <div class="field col-12 md:col-3">
+                    <div class="field col-12 md:col-12">
                         <button :type="type" @click.prevent="selectNewPdf"
                             class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
                             Seleccione un archivo pdf

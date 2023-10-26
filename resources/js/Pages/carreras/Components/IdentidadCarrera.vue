@@ -107,9 +107,9 @@
         <!--agregar un nuevo conocimiento-->
         <div class=" entrada-conocimiento">
           Nombre del conocimiento:
-          <pv-input-text placeholder="ejem. Física" class="medium-input-lenght"/>&nbsp
+          <pv-input-text placeholder="ejem. Física" class="medium-input-lenght" v-model="conocimiento.nombre"/>&nbsp
           <pv-button label="Agregar conocimiento" type="button" severity="secondary"  
-          @click="getConocimientos"/>
+          @click="addConocimiento"/>
         </div>
 
         <!--seleccionar un conocimiento existente-->
@@ -142,9 +142,9 @@
         <!--agregar una nueva habilidad-->
         <div class=" entrada-habilidad">
           Nombre de la habilidad:
-          <pv-input-text placeholder="ejem. Creatividad" class="medium-input-lenght"/>&nbsp
+          <pv-input-text placeholder="ejem. Creatividad" class="medium-input-lenght" v-model="habilidad.nombre"/>&nbsp
           <pv-button label="Agregar habilidad" type="button" severity="secondary"  
-          @click="getHabilidades"/>
+          @click="addHabilidad"/>
         </div>
 
         <!--seleccionar una habilidad existente-->
@@ -175,9 +175,9 @@
         <!--agregar una nueva actitud-->
         <div class=" entrada-actitud">
           Nombre de la actitud:
-          <pv-input-text placeholder="ejem. Compromiso" class="medium-input-lenght"/>&nbsp
+          <pv-input-text placeholder="ejem. Compromiso" class="medium-input-lenght" v-model="actitud.nombre"/>&nbsp
           <pv-button label="Agregar actitud" type="button" severity="secondary"  
-          @click="getActitudes"/>
+          @click="addActitud"/>
         </div>
 
         <!--seleccionar una actitud existente-->
@@ -504,6 +504,11 @@ export default defineComponent({
       }
     ]);
 
+    /* modelo para el conocimiento entrante*/
+    let conocimiento = ref({
+      nombre : '',
+    });
+
     /*Informacion estatica de prueba para mostrar los conocimientos*/
     const conocimientos = ref([
         {nombre:'Física'},
@@ -511,8 +516,13 @@ export default defineComponent({
         {nombre:'Química'},
         {nombre:'Biología'},
     ]);
-      const conocimientos_selected = ref([]);
 
+    const conocimientos_selected = ref([]);
+
+    /*modelo para la habilidad entrante*/ 
+    let habilidad = ref({
+      nombre : '',
+    });
 
     /*Informacion estatica de prueba para mostrar las habilidades*/
     const habilidades = ref([
@@ -522,6 +532,11 @@ export default defineComponent({
         {nombre:'Pensamiento critico'},
     ]);
     const habilidades_selected = ref([]);
+
+    /*modelo para la actitud*/
+    let actitud =ref({
+      nombre:'',
+    });
 
     /*Informacion estatica de prueba para mostrar las habilidades*/
     const actitudes = ref([
@@ -558,34 +573,29 @@ export default defineComponent({
       };
     }
 
+    function addConocimiento(){
+      conocimientos_selected.value.push(conocimiento.value);
+      conocimientos.value.push(conocimiento.value);
+      conocimiento.value = {
+        nombre : '',
+      };
+    }
 
-    function getConocimientos(){
-      const conocimientos_marcados = [];
-      conocimientos_selected.value.forEach(element => {
-        conocimientos_marcados.push(element.nombre);
-      });
+    function addHabilidad(){
+      habilidades_selected.value.push(habilidad.value);
+      habilidades.value.push(habilidad.value);
+      habilidad.value ={
+        nombre : '',
+      }
+    }
 
-      console.table(conocimientos_marcados);
-    }  
-
-    function getHabilidades(){
-      const habilidades_marcadas = [];
-      habilidades_selected.value.forEach(element => {
-        habilidades_marcadas.push(element.nombre);
-      });
-
-      console.table(habilidades_marcadas);
-    }  
-
-    
-    function getActitudes(){
-      const actitudes_marcadas = [];
-      actitudes_selected.value.forEach(element => {
-        actitudes_marcadas.push(element.nombre);
-      });
-
-      console.table(actitudes_marcadas);
-    }  
+    function addActitud(){
+      actitudes_selected.value.push(actitud.value);
+      actitudes.value.push(actitud.value);
+      actitud.value = {
+        nombre:'',
+      }
+    }
 
     function mostrarImagen(url_imagen){
       alert('redirigiendo a...'+url_imagen);
@@ -626,17 +636,20 @@ export default defineComponent({
       ciclo_form,
       ciclos_formacion,
       conocimientos,
+      conocimiento,
       conocimientos_selected,
+      habilidad,
       habilidades,
       habilidades_selected,
+      actitud,
       actitudes,
       actitudes_selected,
       tarjetas_informativas,
       //metodos
       addCicloFormacion,
-      getConocimientos,
-      getHabilidades,
-      getActitudes,
+      addConocimiento,
+      addHabilidad,
+      addActitud,
       mostrarImagen,
       submitForm,
     };

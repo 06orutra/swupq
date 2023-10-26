@@ -644,7 +644,7 @@ export default defineComponent({
     }
 
     function mostrarImagen(url_imagen){
-      alert('redirigiendo a...'+url_imagen);
+      window.open(url_imagen, '_blank');
     }
 
 

@@ -163,6 +163,8 @@ export default {
       if (this.activeSubMenuIndex !== null) {
         this.menuItems[this.activeSubMenuIndex].expanded = false;
         this.activeSubMenuIndex = null;
+        this.showMenu = false;
+        this.activeSubMenuIndex = null;
       }
     },
   },
@@ -265,10 +267,26 @@ methods: {
 .menu .sub-menu-block:hover {
   background-color: rgba(0, 10, 87, 0.8);
 }
-
-@media (min-width: 1024px) and (max-width:1201px) {
+@media (min-width: 521px) and (max-width: 768px) {
   .menu-icon {
-    width: 43px ;
+    width: 6vh;
+    height: 43px;
+    cursor: pointer;
+    border: 1px solid black;
+    position: fixed;
+    z-index: 999;
+    transform: translateX(45px) translateY(75px);
+  }
+  .menu {
+    width:20%;
+    left: 55px;
+    top: 230px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1201px) {
+  .menu-icon {
+    width: 43px;
     height: 43px;
     cursor: pointer;
     border: 1px solid black;
@@ -287,7 +305,6 @@ methods: {
   .menu-icon {
     width: 55px;
     height: 55px;
-    transform: translateX(43px) translateY(105px);
   }
   .menu {
     width:15%;

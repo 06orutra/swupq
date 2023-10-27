@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\historia_texto;
+use App\Models\video_lenguaje;
 use Illuminate\Http\Request;
 
-class HistoriaTextoController extends Controller
+class VideoLenguajeController extends Controller
 {
     public function bannerData(){
-        $datosTexto = historia_texto::all();
+        $datosTexto = video_lenguaje::all();
         return response()->json($datosTexto);
     }
 
@@ -16,11 +16,11 @@ class HistoriaTextoController extends Controller
         
         $request->validate([
             'titulo' => 'required|string|max:255',
-            'contenido' => 'required|string|max:10000',
+            'contenido' => 'required|string|max:255',
         ]);
 
         // Create a new banner instance
-        $texto = new historia_texto();
+        $texto = new video_lenguaje();
         $texto->titulo = $request->titulo;
         $texto->contenido = $request->contenido;
         $texto->save();
@@ -31,10 +31,10 @@ class HistoriaTextoController extends Controller
     public function editarBanner(Request $request){
         $request->validate([
             'titulo' => 'required|string|max:255',
-            'contenido' => 'required|string|max:10000',
+            'contenido' => 'required|string|max:255',
         ]);
 
-        $texto = historia_texto::find($request->id);
+        $texto = video_lenguaje::find($request->id);
 
         $texto->titulo = $request->titulo;
         $texto->contenido = $request->contenido;
@@ -46,7 +46,7 @@ class HistoriaTextoController extends Controller
 
     
     public function eliminarBanner(Request $request){
-        $texto = historia_texto::find($request->id);
+        $texto =video_lenguaje::find($request->id);
         $texto->delete();
 
         return response()->json('Banner deleted successfully');

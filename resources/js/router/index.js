@@ -24,6 +24,11 @@ const router = createRouter({
                     component:() => import('@/Pages/Componentes/Institucion/institucionAdmin/TabInstitucion.vue')
                 },
                 {
+                    path:'/FormacionIntegral',
+                    name:'FormacionIntegral',
+                    component:() => import('@/Pages/Componentes/FormacionIntegral/formacionAdmin/tabFormacion.vue'),
+                },
+                {
                     path: '/carreras',
                     name: 'carreras',
                     component: () => import('@/Pages/Dashboard.vue')

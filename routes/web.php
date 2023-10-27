@@ -26,6 +26,12 @@ use App\Http\Controllers\InformeRectorController;
 use App\Http\Controllers\RectorBannerController;
 use App\Http\Controllers\RectorParagraphsController;
 use App\Http\Controllers\EducationalBannersController;
+use App\Http\Controllers\VideoLenguajeController;
+use App\Http\Controllers\LenguaExtraImgPrincipalController;
+use App\Http\Controllers\LenguaExtraImgSecundarioController;
+use App\Http\Controllers\LenguaExtraObjetivosController;
+use App\Http\Controllers\PdfPruebaController;
+
 use Illuminate\Http\Request;
 
 /*
@@ -100,6 +106,18 @@ Route::get('lenguaExtranjera', function () {
     return Inertia::render('Componentes/Institucion/Foreignlanguage');
 });
 
+    Route::get('marcoJuridico', function(){
+        return Inertia::render('Componentes/Institucion/LegalFramework');
+    });
+ 
+
+Route::prefix('FormacionIntegral')->group(function () {
+
+    Route::get('lenguaExtranjera', function(){
+        return Inertia::render('Componentes/FormacionIntegral/lenguaExtran');
+    });
+});   
+
 
 /*
 ejemplo de como mandar a llamar una vista
@@ -129,6 +147,7 @@ Route::middleware([
 
     $controllers = [
         'home' => HomeController::class,
+        'videoLenguaje' => VideoLenguajeController::class,
         'noticias' => TbCarruselNoticiasController::class,
         'primero' => TbCarruselPrimeroController::class,
         'segundo' => TbCarruselSegundoController::class,
@@ -151,6 +170,10 @@ Route::middleware([
         'rectorBanner' => RectorBannerController::class,
         'rectorParrafo' => RectorParagraphsController::class,
         'educationalBanner' => EducationalBannersController::class,
+        'lenguaExtraImgPrincipal' => LenguaExtraImgPrincipalController::class,
+        'lenguaExtraImgSecundario' => LenguaExtraImgSecundarioController::class,
+        'lenguaExtraObjetivo' => LenguaExtraObjetivosController::class,
+        'pdfPrueba' => PdfPruebaController::class,
     ];
     // se declarar variables, 
 
@@ -175,6 +198,7 @@ Route::post('/filosofiaImgPrinc/bannerData', [FilosofiaImgPrincController::class
 Route::post('/filosofiaVal/bannerData', [FilosofiaValorController::class, 'bannerData']);
 Route::post('/filosofiaImg/bannerData', [FilosofiaImgController::class, 'bannerData']);
 Route::post('/filosofias/bannerData', [FilosofiaController::class, 'bannerData']);
+Route::post('/videolenguajes', [ VideoLenguajeController::class, 'bannerData']);
 Route::post('/bannerData', [HomeController::class, 'bannerData']);
 Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'bannerDatafilter']);
 Route::post('/bannerDataprimero', [TbCarruselPrimeroController::class, 'bannerData']);

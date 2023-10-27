@@ -22,10 +22,6 @@ export default {
             type: String,
             required: true
         },
-        Subtitulo: {
-            type: String,
-            required: true
-        },
     },
     computed: {
         filteredBanner() {
@@ -55,10 +51,14 @@ export default {
             this.datosArreglo.foto = event.target.files[0];
         },
 
+        handlePdfUpload() {
+            this.banner.pdf = this.$refs.pdf.files[0];
+        },
+
         registrarBanner() {
             this.submitted = true;
             //validar si hay campos vacios
-            if (this.nombre == null || this.link == null) {
+            if (this.nombre == null) {
                 // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
@@ -81,12 +81,24 @@ export default {
                 });
                 return false;
             }
+
+            if (this.pdfFile == null) {
+                // si no hay PDF seleccionado, mostrar un mensaje de error
+                this.$toast.add({
+                    severity: "error",
+                    summary: "Error",
+                    detail: "Debe seleccionar un archivo PDF",
+                    life: 3000,
+                });
+                return false;
+            }
+
             this.isLoading = true;
 
             const formData = new FormData();
             formData.append('nombre', this.nombre);
-            formData.append('link', this.link);
             formData.append('foto', this.foto);
+            formData.append('pdf', this.pdfFile); // Usa pdfFile aquí
 
             axios.post(this.registerBannerUrl,
                 formData, {
@@ -96,8 +108,8 @@ export default {
             }).then((response) => {
                 this.cargarBanner();
                 this.nombre = null;
-                this.link = null;
                 this.foto = null;
+                this.pdfFile = null;
                 this.dialogTable = false;
                 this.$toast.add({
                     severity: "success",
@@ -114,7 +126,7 @@ export default {
         editarBanner() {
             this.submitted = true;
             //validar si hay campos vacios
-            if (this.datosArreglo.nombre == null || this.datosArreglo.nombre == '' || this.datosArreglo.link == null || this.datosArreglo.link == '') {
+            if (this.datosArreglo.nombre == null || this.datosArreglo.nombre == '') {
                 // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
@@ -137,17 +149,22 @@ export default {
                 });
                 return false;
             }
+
             this.isLoading = true;
 
             const formData = new FormData();
             formData.append('id', this.datosArreglo.id);
             formData.append('nombre', this.datosArreglo.nombre);
-            formData.append('link', this.datosArreglo.link);
 
             // Agregar la foto al formData solo si se ha seleccionado una nueva
             if (this.datosArreglo.foto) {
                 formData.append('foto', this.datosArreglo.foto);
                 console.log('Foto seleccionada:', this.datosArreglo.foto); // Ayuda a depurar
+            }
+
+            if (this.pdfFile) {
+                formData.append('pdf', this.pdfFile);
+                console.log('PDF seleccionado:', this.pdfFile.name); // Ayuda a depurar
             }
 
             axios.post(this.editBannerUrl,
@@ -158,6 +175,8 @@ export default {
             }).then((response) => {
                 this.cargarBanner();
                 this.datosArreglo = {};
+                this.pdfPreview = null; // Resetea la vista previa del PDF
+                this.pdfFile = null;
                 this.editarDialog = false;
                 this.$toast.add({
                     severity: "success",
@@ -166,6 +185,7 @@ export default {
                     life: 3000,
                 });
                 this.isLoading = false;
+
             }).catch((error) => {
                 console.log(error);
                 this.isLoading = false;
@@ -173,9 +193,15 @@ export default {
 
         },
         editarSelect(datosArreglo) {
-            this.datosArreglo = { ...datosArreglo }; // esto es para que se muestre los datos del datosArregloo en el formulario
+            this.datosArreglo = { ...datosArreglo };
             this.editarDialog = true;
             this.imagePreview = null;
+
+            if (datosArreglo.pdf) {
+                this.pdfPreview = "/storage/pdfs/" + datosArreglo.pdf;
+            } else {
+                this.pdfPreview = null;
+            }
         },
         confirmarEliminar(datosArreglo) {
             this.datosArreglo = datosArreglo;
@@ -187,6 +213,8 @@ export default {
             const data = {
                 id: this.datosArreglo.id,
             };
+
+
             axios.post(this.deleteBannerUrl, data).then((response) => {
                 this.cargarBanner();
                 this.eliminarDialog = false;
@@ -206,15 +234,18 @@ export default {
             this.submitted = false;
             this.dialogTable = true;
             this.imagePreview = null;
-
             this.nombre = null;
-            this.link = null;
             this.foto = null;
+            this.pdfFile = null;
+            this.pdfPreview = null;
         },
         selectNewPhoto() {
             this.$refs.photoInput.click();
         },
 
+        selectNewPdf() {
+            this.$refs.pdf.click();
+        },
 
         handleFileUpload(event) {
             const input = event.target;
@@ -244,14 +275,26 @@ export default {
                 reader.readAsDataURL(input.files[0]);
             }
         },
+
+
+        handlePdfUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                this.pdfPreview = URL.createObjectURL(file);
+                this.pdfFile = file; // Almacena el archivo PDF en la variable pdfFile
+            }
+        },
+
+        //metodo para input 
+
     },
     data() {
         return {
             banner: [],
             searchQuery: '',
             nombre: null,
-            link: null,
             foto: null,
+            pdfFile: null,
             uploadedFile: null,
             mensajeSinDatos: "No hay datos disponibles",
             dialogTable: false,
@@ -259,6 +302,7 @@ export default {
             eliminarDialog: false,
             photoInput: null,
             imagePreview: null,
+            pdfPreview: null,
             isLoading: false,
         };
     },
@@ -308,13 +352,8 @@ export default {
                 <!-- select con opciones -->
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">{{ this.Titulo }}</label>
+                    <label for="minmax">Nombre</label>
                     <InputText inputId="minmax" v-model="nombre" :min="0" :max="10000" :showButtons="true" />
-                </div>
-
-                <div class="field col-12 md:col-12">
-                    <label for="minmax">{{ this.Subtitulo }}</label>
-                    <InputText inputId="minmax" v-model="link" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
@@ -326,7 +365,18 @@ export default {
                         Seleccione una nueva foto
                     </button>
                     <input ref="photoInput" type="file" class="hidden" @change="handleFileUpload">
+                </div>
 
+                <div v-if="pdfPreview" class="pdf-preview">
+                    <embed :src="pdfPreview" type="application/pdf" width="100%" height="500px">
+                </div>
+
+                <div class="field col-12 md:col-3">
+                    <button :type="type" @click.prevent="selectNewPdf"
+                        class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
+                        Seleccione un archivo pdf
+                    </button>
+                    <input ref="pdf" type="file" class="hidden" @change="handlePdfUpload">
                 </div>
 
                 <Button type="submit" id="btnRegisrar" :disabled="isLoading"
@@ -355,13 +405,8 @@ export default {
                 <InputText id="id" v-model.trim="datosArreglo.id" hidden />
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">{{ this.Titulo }}</label>
+                    <label for="minmax">Nombre</label>
                     <InputText inputId="minmax" v-model="datosArreglo.nombre" :min="0" :max="10000" :showButtons="true" />
-                </div>
-
-                <div class="field col-12 md:col-12">
-                    <label for="minmax">{{ this.Subtitulo }}</label>
-                    <InputText inputId="minmax" v-model="datosArreglo.link" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
@@ -373,6 +418,18 @@ export default {
                         Seleccione una nueva foto
                     </button>
                     <input ref="photoInput" type="file" class="hidden" @change="handleFileUploadEdit">
+
+                    <div v-if="pdfPreview" class="pdf-preview">
+                        <embed :src="pdfPreview" type="application/pdf" width="100%" height="500px">
+                    </div>
+
+                    <div class="field col-12 md:col-3">
+                        <button :type="type" @click.prevent="selectNewPdf"
+                            class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
+                            Seleccione un archivo pdf
+                        </button>
+                        <input ref="pdf" type="file" class="hidden" @change="handlePdfUpload">
+                    </div>
 
                 </div>
 

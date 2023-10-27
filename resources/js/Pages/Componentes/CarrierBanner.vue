@@ -78,37 +78,37 @@ export default {
         const carreras = ref([
             {
                 label: 'Ingeniería en Redes y Telecomunicaciones',
-                icon: 'storage/img/carriers/IRT.png',
+                icon: 'storage/img/carriers/IRT.svg',
                 link: 'https://www.upq.mx/oferta-academica/ingenieria-en-redes-y-telecomunicaciones/'
             },
             {
                 label: 'Ingeniería en Tecnologías de Manufactura',
-                icon: 'storage/img/carriers/ITM.png',
+                icon: 'storage/img/carriers/ITM.svg',
                 link: 'https://www.upq.mx/oferta-academica/ingenieria-en-tecnologias-de-manufactura/'
             },
             {
                 label: 'Ingeniería Mecatrónica',
-                icon: 'storage/img/carriers/IM.png',
+                icon: 'storage/img/carriers/IM.svg',
                 link: 'https://www.upq.mx/oferta-academica/ingenieria-mecatronica/'
             },
             {
                 label: 'Ingeniería en Tecnología Automotriz',
-                icon: 'storage/img/carriers/ITA.png',
+                icon: 'storage/img/carriers/ITA.svg',
                 link: 'https://www.upq.mx/oferta-academica/ingenieria-en-tecnologia-automotriz/'
             },
             {
                 label: 'Ingeniería en Sistemas Computacionales',
-                icon: 'storage/img/carriers/ISC.png',
+                icon: 'storage/img/carriers/ISC.svg',
                 link: 'https://www.upq.mx/oferta-academica/ingenieria-en-sistemas-computacionales/'
             },
             {
                 label: 'Licenciatura en Negocios Internacionales',
-                icon: 'storage/img/carriers/LNI.png',
+                icon: 'storage/img/carriers/LNI.svg',
                 link: 'https://www.upq.mx/oferta-academica/licenciatura-en-negocios-internacionales/'
             },
             {
                 label: 'Licenciatura en Administración y Gestión Empresarial',
-                icon: 'storage/img/carriers/LAGE.png',
+                icon: 'storage/img/carriers/LAGE.svg',
                 link: 'https://www.upq.mx/oferta-academica/licenciatura-en-administracion-y-gestion-empresari/'
             },
             

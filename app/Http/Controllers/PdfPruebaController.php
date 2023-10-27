@@ -2,28 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\pdfPrueba;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-use App\Models\tb_banner;
 use Illuminate\Support\Facades\Storage;
-use Carbon\Carbon;
 
-
-class HomeController extends Controller
+class PdfPruebaController extends Controller
 {
     public function bannerData()
     {
-        $datosBanner = tb_banner::all();
+        $datosBanner = PdfPrueba::all();
         return response()->json($datosBanner);
     }
 
     public function registrarBanner(Request $request)
     {
-
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'link' => 'required|string|max:255',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000000',
+            'pdf' => 'required|mimes:pdf|max:1000000',
         ]);
 
         $date = date('Y-m-d H-i-s');
@@ -32,27 +28,30 @@ class HomeController extends Controller
         //guardar la imagen public storage
         $fotoPath = $request->file('foto')->storeAs('public', $fotoName);
 
-        // Create a new banner instance
-        $banner = new tb_banner;
+        
+        $pdfName = time() . '_' . $request->file('pdf')->getClientOriginalName();
+        $pdfPath = $request->file('pdf')->storeAs('public/pdfs', $pdfName);
+
+        $banner = new PdfPrueba();
         $banner->nombre = $request->nombre;
-        $banner->link = $request->link;
         $banner->imagen = $fotoName;
+        $banner->pdf = $pdfName;
         $banner->save();
 
-        return response()->json('Banner registered successfully');
+        return response()->json('Banner registrado exitosamente');
     }
 
     public function editarBanner(Request $request)
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'link' => 'required|string|max:255',
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000000',
+            'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000000',
+            'pdf' => 'mimes:pdf|max:1000000',
         ]);
 
-        $banner = tb_banner::find($request->id);
+        $banner = PdfPrueba::find($request->id);
 
-
+        // Procesar imagen
         if ($request->hasFile('foto')) {
 
             $date = date('Y-m-d H-i-s');
@@ -70,20 +69,34 @@ class HomeController extends Controller
             $banner->imagen = $fotoName;
         }
 
-        $banner->nombre = $request->nombre;
-        $banner->link = $request->link;
-        $banner->save();
+        // Procesar PDF
+        if ($request->hasFile('pdf')) {
+            // Guardar el nuevo PDF y actualizar el nombre en la base de datos
+            $pdfName = time() . '_' . $request->file('pdf')->getClientOriginalName();
+            $pdfPath = $request->file('pdf')->storeAs('public/pdfs', $pdfName);
 
-        return response()->json('Banner edited successfully');
+            // Eliminar el PDF anterior del servidor
+            if ($banner->pdf) {
+                Storage::delete('public/pdfs/' . $banner->pdf);
+            }
+
+            $banner->pdf = $pdfName;
+        }
+
+        $banner->nombre = $request->nombre;
+        $banner->save();
+        return response()->json('Banner editado exitosamente');
     }
 
     public function eliminarBanner(Request $request)
     {
-        $banner = tb_banner::find($request->id);
-        //eliminar la imagen del storage
-        Storage::delete('public/' . $banner->imagen);
-        $banner->delete();
+        $banner = PdfPrueba::find($request->id);
 
-        return response()->json('Banner deleted successfully');
+        // Eliminar imagen y PDF
+        Storage::delete('public/' . $banner->imagen);
+        Storage::delete('public/pdfs/' . $banner->pdf);
+
+        $banner->delete();
+        return response()->json('Banner eliminado exitosamente');
     }
 }

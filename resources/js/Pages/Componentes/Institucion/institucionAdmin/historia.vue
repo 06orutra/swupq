@@ -18,9 +18,6 @@ import carruselEstructura from '../../Home/carruselEstructura.vue';
             <estructuraTextos :Titulo="'Historia'" :Subtitulo="'Contenido'" :loadDataUrl="'/historiaTexto/bannerData'" :registerBannerUrl="'/historiaTexto/registrarBanner'"
                 :editBannerUrl="'/historiaTexto/editarBanner'" :deleteBannerUrl="'/historiaTexto/eliminarBanner'" />
         </TabPanel>
-        <TabPanel header="Video">
-            <h1>Falta estructura y crud de video</h1>    
-        </TabPanel>
         <TabPanel header="Carruseles">
             <estructuraImg :loadDataUrl="'/historiaCarrusel/bannerData'" :registerBannerUrl="'/historiaCarrusel/registrarBanner'"
                 :editBannerUrl="'/historiaCarrusel/editarBanner'" :deleteBannerUrl="'/historiaCarrusel/eliminarBanner'" />

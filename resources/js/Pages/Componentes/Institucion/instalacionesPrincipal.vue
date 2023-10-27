@@ -9,7 +9,7 @@ import CarruselInstitucion from '@/Pages/Componentes/Institucion/InstalacionesCo
 
 <template>
   <div>
-    <AppEstructure>
+    <AppEstructure :controllerName="'/BannerMascotas/bannerData'">
       <div >
         <CarruselInstitucion/>
       </div>
@@ -19,17 +19,6 @@ import CarruselInstitucion from '@/Pages/Componentes/Institucion/InstalacionesCo
 </template>
   
 <style scoped>
-
-.textoinstitucion{
-  color: white;
-  font-size: 25px;
-  font-family: Arial;
-  height: 100%; /* Añade una altura al elemento .textomascota */
-  display: flex;
-  align-items: center;
-  margin-left: auto; /* Moverá el texto hacia la derecha */
-  width: 80%; /* Ancho para centrarlo en una tercera parte */
-}
 
 
 @media (max-width: 2560px) {

@@ -6,6 +6,10 @@ import estructuraImg from '@/Pages/Componentes/Home/estructuraImg.vue';
 
 <template>
     <TabView ref="tabview1" class="p-3">
+        <TabPanel header="banner Mascotas">
+            <estructuraImg :loadDataUrl="'/BannerMascotas/bannerData'" :registerBannerUrl="'/BannerMascotas/registrarBanner'"
+                :editBannerUrl="'/BannerMascotas/editarBanner'" :deleteBannerUrl="'/BannerMascotas/eliminarBanner'" />
+        </TabPanel>
         <TabPanel header="Mensaje Poli&Polo">
             <estructuraTextos :loadDataUrl="'/mensaje/bannerData'" :registerBannerUrl="'/mensaje/registrarBanner'"
                 :editBannerUrl="'/mensaje/editarBanner'" :deleteBannerUrl="'/mensaje/eliminarBanner'" />

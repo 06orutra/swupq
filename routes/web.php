@@ -34,6 +34,9 @@ use App\Http\Controllers\LenguaExtraImgPrincipalController;
 use App\Http\Controllers\LenguaExtraImgSecundarioController;
 use App\Http\Controllers\LenguaExtraObjetivosController;
 use App\Http\Controllers\PdfPruebaController;
+use App\Http\Controllers\BannerMascotasController;
+use App\Http\Controllers\BannerInstalacionesController;
+use App\Http\Controllers\BannerDirectorioController;
 
 
 
@@ -146,11 +149,13 @@ Route::middleware([
         'DPlanneacion' => DireccionPlaneacionController::class,
         'DTecInfCom' => DireccionTecnologiaInfomacionComunicacionController::class,
         'Dvinculacion' => DireccionVinculacionController::class,
-        
         'lenguaExtraImgPrincipal' => LenguaExtraImgPrincipalController::class,
         'lenguaExtraImgSecundario' => LenguaExtraImgSecundarioController::class,
         'lenguaExtraObjetivo' => LenguaExtraObjetivosController::class,
         'pdfPrueba' => PdfPruebaController::class,
+        'BannerMascotas' => BannerMascotasController::class,
+        'BannerDirectorio' => BannerDirectorioController::class,
+        'BannerInstalaciones' => BannerInstalacionesController::class,
     ];
     // se declarar variables, 
 
@@ -164,6 +169,11 @@ Route::middleware([
     }
 });
 
+
+
+Route::post('/BannerInstalaciones/bannerData', [BannerInstalacionesController::class, 'bannerData']);
+Route::post('/BannerDirectorio/bannerData', [BannerDirectorioController::class, 'bannerData']);
+Route::post('/BannerMascotas/bannerData', [BannerMascotasController::class, 'bannerData']);
 Route::post('/CarruselInstalaciones/bannerData', [CarruselInstalacionesController::class, 'bannerData']);
 Route::post('/CarruselMascota/bannerData', [CarruselMascotaController::class, 'bannerData']);
 Route::post('/MensajePoliPolo/bannerData', [MensajePoliPoloController::class, 'bannerData']);

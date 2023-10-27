@@ -20,12 +20,14 @@ defineProps({
 
 <template>
   <div>
-    <AppEstructure>
+    <AppEstructure :controllerName="'/BannerInstalaciones/bannerData'">
       <div class="colorprincipal">
-        <Mascotas />
-        <div class="mascotas-note ">
+        <div >
+          <Mascotas />
+          <div class="mascotas-note ">
           <NoteMascotas/>
           <NoteMPoliPolo />
+        </div>
         </div>
         <div Style="center">
           <Notaspoty/>
@@ -66,7 +68,7 @@ defineProps({
   .mascotas-note {
   display: flex;
   justify-content: center;
-}
+ }
 }
 @media (max-width: 1440px) {
   

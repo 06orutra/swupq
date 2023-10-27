@@ -1,9 +1,14 @@
 <script setup>
 import estructuraTextos from '@/Pages/Componentes/Home/estructuraTextos.vue';
+import estructuraImg from '@/Pages/Componentes/Home/estructuraImg.vue';
 </script>
 
 <template>
      <TabView ref="tabview1" class="p-3">
+        <TabPanel header="Banner Directorio">
+            <estructuraImg :loadDataUrl="'/BannerDirectorio/bannerData'" :registerBannerUrl="'/BannerDirectorio/registrarBanner'"
+        :editBannerUrl="'/BannerDirectorio/editarBanner'" :deleteBannerUrl="'/BannerDirectorio/eliminarBanner'" />
+        </TabPanel>
         <TabPanel header="Rectorpìa">
             <estructuraTextos :loadDataUrl="'/rectoria/bannerData'" :registerBannerUrl="'/rectoria/registrarBanner'"
         :editBannerUrl="'/rectoria/editarBanner'" :deleteBannerUrl="'/rectoria/eliminarBanner'" />

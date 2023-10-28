@@ -1,8 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
-import carruselPrincipalLogic from '@/Pages/Componentes/Welcome/carruselPrincipalLogic.vue';
 import TourCardenal from '@/Layouts/homeComponents/TourCardenal.vue';
 import SplitterVue from '@/Layouts/homeComponents/Splitter.vue';
 import carruselSecundario from './Componentes/Welcome/carruselSecundario.vue';
@@ -20,22 +18,20 @@ defineProps({
 
 <template>
     <Head title="Welcome" />
+    
+    <AppEstructure :controllerName="'/bannerData'">          
+        <!-- mandamos a llamar en la principal  -->
 
-    <AppEstructure>
-
-
-        <carruselPrincipalLogic />
         <CarrierBanner />
         <carruselSecundario />
         <TourCardenal />
         <SplitterVue />
 
-
-
     </AppEstructure>
 
     <RedesSociales />
     <!--<Carrers/>-->
+
 </template>
 
 <style></style>

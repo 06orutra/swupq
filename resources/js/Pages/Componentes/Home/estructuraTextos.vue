@@ -1,7 +1,7 @@
 <script>
 
 export default {
-    
+
     props: {
         loadDataUrl: {
             type: String,
@@ -16,6 +16,14 @@ export default {
             required: true
         },
         deleteBannerUrl: {
+            type: String,
+            required: true
+        },
+        Titulo: {
+            type: String,
+            required: true
+        },
+        Subtitulo: {
             type: String,
             required: true
         },
@@ -55,8 +63,6 @@ export default {
                 //cerrar el dialogo
                 return false;
             }
-
-
 
             const formData = new FormData();
             formData.append('titulo', this.titulo);
@@ -215,13 +221,13 @@ export default {
                 <!-- select con opciones -->
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Titulo</label>
+                    <label for="minmax">{{ this.Titulo }}</label>
                     <InputText inputId="minmax" v-model="titulo" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Contenido</label>
-                    <InputText inputId="minmax" v-model="contenido" :min="0" :max="10000" :showButtons="true" />
+                    <label for="minmax">{{ this.Subtitulo }}</label>
+                    <Textarea inputId="minmax" v-model="contenido" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
 
@@ -248,13 +254,13 @@ export default {
                 <InputText id="id" v-model.trim="datosArreglo.id" hidden />
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Titulo</label>
+                    <label for="minmax">{{ this.Titulo }}</label>
                     <InputText inputId="minmax" v-model="datosArreglo.titulo" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <div class="field col-12 md:col-12">
-                    <label for="minmax">Contenido</label>
-                    <InputText inputId="minmax" v-model="datosArreglo.contenido" :min="0" :max="10000" :showButtons="true" />
+                    <label for="minmax">{{ this.Subtitulo }}</label>
+                    <Textarea inputId="minmax" v-model="datosArreglo.contenido" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <Button type="submit" id="btnRegisrar"

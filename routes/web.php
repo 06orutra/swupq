@@ -85,6 +85,9 @@ Route::prefix('institucion')->group(function () {
     Route::get('marcoJuridico', function(){
         return Inertia::render('Componentes/Institucion/LegalFramework');
     });
+    Route::get('directorio', function(){
+        return Inertia::render('Componentes/Institucion/Directorio');
+    });
 });   
 
 Route::prefix('FormacionIntegral')->group(function () {
@@ -169,8 +172,13 @@ Route::middleware([
     }
 });
 
-
-
+Route::post('/Sadministrativa/bannerData', [SecretariaAdministrativaController::class, 'bannerData']);
+Route::post('/Sacademica/bannerData', [SecretariaAcademicaController::class, 'bannerData']);
+Route::post('/rectoria/bannerData', [RectoriaController::class, 'bannerData']);
+Route::post('/DTecInfCom/bannerData', [DireccionTecnologiaInfomacionComunicacionController::class, 'bannerData']);
+Route::post('/AboGeneral/bannerData', [AbogadoGeneralController::class, 'bannerData']);
+Route::post('/Dvinculacion/bannerData', [DireccionVinculacionController::class, 'bannerData']);
+Route::post('/DPlanneacion/bannerData', [DireccionPlaneacionController::class, 'bannerData']);
 Route::post('/BannerInstalaciones/bannerData', [BannerInstalacionesController::class, 'bannerData']);
 Route::post('/BannerDirectorio/bannerData', [BannerDirectorioController::class, 'bannerData']);
 Route::post('/BannerMascotas/bannerData', [BannerMascotasController::class, 'bannerData']);

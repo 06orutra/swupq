@@ -7,6 +7,19 @@
         </div>
       </template>
     </Carousel>
+    <div>
+          <div class="mascotas-note ">
+            <NoteMascotas />
+            <NoteMPoliPolo />
+          </div>
+        </div>
+        <div Style="center">
+          <Notaspoty />
+        </div>
+        <div class="mascotas-note ">
+          <Spotypoli />
+          <Spotypolo />
+        </div>
   </div>
 </template>
 
@@ -47,6 +60,12 @@ const cargarDatosRector = () => {
 onMounted(() => {
   cargarDatosRector();
 });
+
+import NoteMascotas from '@/Pages/Componentes/Institucion/MascotasComponentes/NoteMascotas.vue';
+import NoteMPoliPolo from '@/Pages/Componentes/Institucion/MascotasComponentes/NotePoliPolo.vue';
+import Spotypoli from '@/Pages/Componentes/Institucion/MascotasComponentes/Spotypoli.vue';
+import Spotypolo from '@/Pages/Componentes/Institucion/MascotasComponentes/Spotypolo.vue';
+import Notaspoty from '@/Pages/Componentes/Institucion/MascotasComponentes/Notaspoty.vue';
 </script>
 
 <style scoped>
@@ -67,4 +86,38 @@ onMounted(() => {
     width: 100%; /* Cambia al 100% en pantallas más pequeñas */
   }
 }
+.colorprincipal {
+  background-color: transparent
+}
+
+
+
+@media (max-width: 2560px) {
+  .mascotas-note {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1440px) {}
+
+@media (max-width: 1024px) {}
+
+@media (max-width: 768px) {
+  .Notes {
+    margin: 0 0px;
+  }
+
+  .mascotas-note {
+    display: initial;
+    justify-content: space-between;
+    /* Ajusta el espacio entre los componentes según tus necesidades */
+  }
+}
+
+@media (max-width: 425px) {}
+
+@media (max-width: 375px) {}
+
+@media (max-width: 320px) {}
 </style>

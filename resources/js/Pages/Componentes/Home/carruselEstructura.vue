@@ -22,7 +22,7 @@ export default {
             type: String,
             required: true
         },
-        Subtitulo:{
+        Subtitulo: {
             type: String,
             required: true
         },
@@ -187,8 +187,6 @@ export default {
             const data = {
                 id: this.datosArreglo.id,
             };
-
-
             axios.post(this.deleteBannerUrl, data).then((response) => {
                 this.cargarBanner();
                 this.eliminarDialog = false;

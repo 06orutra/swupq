@@ -1,7 +1,6 @@
 <script>
 
 export default {
-
     props: {
         loadDataUrl: {
             type: String,
@@ -16,6 +15,14 @@ export default {
             required: true
         },
         deleteBannerUrl: {
+            type: String,
+            required: true
+        },
+        Titulo: {
+            type: String,
+            required: true
+        },
+        Subtitulo: {
             type: String,
             required: true
         },
@@ -79,6 +86,18 @@ export default {
                 return false;
             }
 
+            if (this.pdfFile == null) {
+                // si no hay PDF seleccionado, mostrar un mensaje de error
+                this.$toast.add({
+                    severity: "error",
+                    summary: "Error",
+                    detail: "Debe seleccionar un archivo PDF",
+                    life: 3000,
+                });
+                return false;
+            }
+
+            this.isLoading = true;
 
             const formData = new FormData();
             formData.append('nombre', this.nombre);
@@ -92,10 +111,9 @@ export default {
                 }
             }).then((response) => {
                 this.cargarBanner();
-                this.pdfPreview = null; // Resetea la vista previa del PDF
-                this.pdfFile = null;
                 this.nombre = null;
                 this.foto = null;
+                this.pdfFile = null;
                 this.dialogTable = false;
                 this.$toast.add({
                     severity: "success",
@@ -103,14 +121,16 @@ export default {
                     detail: "Registro exitoso",
                     life: 3000,
                 });
+                this.isLoading = false;
             }).catch((error) => {
                 console.log(error);
+                this.isLoading = false;
             });
         },
         editarBanner() {
             this.submitted = true;
             //validar si hay campos vacios
-            if (this.datosArreglo.nombre == null) {
+            if (this.datosArreglo.nombre == null || this.datosArreglo.nombre == '') {
                 // si alguno de los campos esta vacio, no enviar el formulario y mostrar un mensaje de error
                 this.$toast.add({
                     severity: "error",
@@ -134,6 +154,8 @@ export default {
                 return false;
             }
 
+            this.isLoading = true;
+
             const formData = new FormData();
             formData.append('id', this.datosArreglo.id);
             formData.append('nombre', this.datosArreglo.nombre);
@@ -142,6 +164,11 @@ export default {
             if (this.datosArreglo.foto) {
                 formData.append('foto', this.datosArreglo.foto);
                 console.log('Foto seleccionada:', this.datosArreglo.foto); // Ayuda a depurar
+            }
+
+            if (this.pdfFile) {
+                formData.append('pdf', this.pdfFile);
+                console.log('PDF seleccionado:', this.pdfFile.name); // Ayuda a depurar
             }
 
             axios.post(this.editBannerUrl,
@@ -161,17 +188,24 @@ export default {
                     detail: "Edicion exitosa",
                     life: 3000,
                 });
+                this.isLoading = false;
+
             }).catch((error) => {
                 console.log(error);
+                this.isLoading = false;
             });
 
         },
         editarSelect(datosArreglo) {
-            this.datosArreglo = { ...datosArreglo }; // esto es para que se muestre los datos del datosArregloo en el formulario
+            this.datosArreglo = { ...datosArreglo };
             this.editarDialog = true;
             this.imagePreview = null;
-            this.pdfPreview = null; // Resetea la vista previa del PDF
-            this.pdfFile = null;
+
+            if (datosArreglo.pdf) {
+                this.pdfPreview = "/storage/pdfs/" + datosArreglo.pdf;
+            } else {
+                this.pdfPreview = null;
+            }
         },
         confirmarEliminar(datosArreglo) {
             this.datosArreglo = datosArreglo;
@@ -204,8 +238,10 @@ export default {
             this.submitted = false;
             this.dialogTable = true;
             this.imagePreview = null;
-            this.pdfPreview = null; // Resetea la vista previa del PDF
+            this.nombre = null;
+            this.foto = null;
             this.pdfFile = null;
+            this.pdfPreview = null;
         },
         selectNewPhoto() {
             this.$refs.photoInput.click();
@@ -242,8 +278,8 @@ export default {
                 }
                 reader.readAsDataURL(input.files[0]);
             }
-
         },
+
 
         handlePdfUpload(event) {
             const file = event.target.files[0];
@@ -253,18 +289,16 @@ export default {
             }
         },
 
-
-
         //metodo para input 
 
     },
     data() {
         return {
-            pdfFile: null,
             banner: [],
             searchQuery: '',
             nombre: null,
             foto: null,
+            pdfFile: null,
             uploadedFile: null,
             mensajeSinDatos: "No hay datos disponibles",
             dialogTable: false,
@@ -273,6 +307,7 @@ export default {
             photoInput: null,
             imagePreview: null,
             pdfPreview: null,
+            isLoading: false,
         };
     },
 
@@ -299,7 +334,7 @@ export default {
                 <img :src="'/storage/' + datosCard.imagen" alt="Card Image" class="imagen-resolucion" />
             </template>
             <template #title> {{ datosCard.nombre }} </template>
-            <template #subtitle> {{ datosCard.link }} </template>
+            <template #subtitle> {{ datosCard.pdf }} </template>
             <template #footer>
                 <Button icon="pi pi-pencil" class="p-button p-button-warning !mr-6" @click="editarSelect(datosCard)" />
                 <Button icon="pi pi-trash" class="p-button p-button-danger" @click="confirmarEliminar(datosCard)" />
@@ -348,9 +383,12 @@ export default {
                     <input ref="pdf" type="file" class="hidden" @change="handlePdfUpload">
                 </div>
 
-                <Button type="submit" id="btnRegisrar"
+                <Button type="submit" id="btnRegisrar" :disabled="isLoading"
                     class="flex items-center justify-center space-x-2 rounded-md border-2 border-blue-500 px-4 py-2 font-medium text-blue-600 transition hover:bg-blue-500 hover:text-white">
-                    <span> Registrar </span>
+                    <span v-if="!isLoading"> Registrar </span>
+                    <span v-else>
+                        <i class="pi pi-spin pi-spinner"></i>
+                    </span>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
                             <path fill-rule="evenodd"
@@ -389,7 +427,7 @@ export default {
                         <embed :src="pdfPreview" type="application/pdf" width="100%" height="500px">
                     </div>
 
-                    <div class="field col-12 md:col-3">
+                    <div class="field col-12 md:col-12">
                         <button :type="type" @click.prevent="selectNewPdf"
                             class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
                             Seleccione un archivo pdf
@@ -399,9 +437,12 @@ export default {
 
                 </div>
 
-                <Button type="submit" id="btnRegisrar"
+                <Button type="submit" id="btnRegisrar" :disabled="isLoading"
                     class="flex items-center justify-center space-x-2 rounded-md border-2 border-blue-500 px-4 py-2 font-medium text-blue-600 transition hover:bg-blue-500 hover:text-white">
-                    <span> Registrar </span>
+                    <span v-if="!isLoading"> Registrar </span>
+                    <span v-else>
+                        <i class="pi pi-spin pi-spinner"></i>
+                    </span>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
                             <path fill-rule="evenodd"

@@ -5,21 +5,20 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
+import bolitas_pdf from './bolitas_pdf.vue';
 
 export default {
   components: {
     Swiper,
     SwiperSlide,
     AppEstructure,
+    bolitas_pdf,
   },
   data() {
     return {
       pdf: [],
       img: [],
       texto: [],
-      modalTitle: '',
-      modalContent: '',
-      showModal: false,
       objetivoCLEItems: [],
       showMapModal: {
         modal1: false,
@@ -66,7 +65,7 @@ export default {
   mounted() {
     this.cargarImg();
     this.cargarTexto();
-    this.cargarPdf();
+    /* this.cargarPdf();
     const loaders = document.querySelectorAll('.loader');
 
     loaders.forEach((loader, index) => {
@@ -90,7 +89,7 @@ export default {
           }
         }
       });
-    });
+    }); */
   },
   methods: {
     cargarTexto() {
@@ -153,6 +152,7 @@ export default {
 
  
 <template>
+  
   <AppEstructure :controllerName="'/lenguaExtraImgPrincipal/bannerData'">
     <!-- Carrusel e información -->
     <section>
@@ -204,9 +204,9 @@ export default {
         </header>
       </div>
       {{ pdf }}
-
-      <div class="loader-container">
-        <div class="vertical-column circle-container">
+      <bolitas_pdf />
+      <!-- <div class="loader-container">
+        <div class="vertical-column circle-container" >
           <div class="loader-wrapper" @click="openMapModal('modal1')">
             <div class="background-image circle"
               style="background-image: url('https://www.upq.mx/assets/language/1.jpeg')">
@@ -218,6 +218,22 @@ export default {
         </div>
 
       </div>
+
+      <div class="loader-container">
+        <div class="vertical-column circle-container" v-for="item in pdf" :key="item.id" >
+          <div class="loader-wrapper" @click="openMapModal('modal1')">
+            <div class="background-image circle">
+            <img :src="'/storage/' + item.imagen" alt="Valor Image" class="circle-img" />
+              <div class="loader" id="loader1"></div>
+            </div>
+            <h5 style="text-align:center">Niveles de Inglés</h5>
+            <h6 style="text-align:center">Conoce los niveles de inglés.</h6>
+          </div>
+        </div>
+
+      </div> -->
+
+      
 
       <!-- Modal como un pop-up -->
       <div v-if="showMapModal.modal1" class="popup-modal">
@@ -276,6 +292,80 @@ export default {
 </template>
 
 <style scoped>
+#text1 {
+  background-color: rgba(8, 22, 47, 0.8);
+}
+.text {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(140, 36, 55, 0.8);
+  color: #fff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-attachment: fixed;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  font-size: 22px;
+  font-weight: bold;
+}
+#loader2 {
+  border: 13px solid #8C2437;
+  border-top: 13px solid #8C2437;
+  border-right: 13px solid #f3f3f3;
+  border-bottom: 13px solid #f3f3f3;
+  transition: transform 1.9s ease;
+  z-index: 2;
+  /* Asegura que el loader esté sobre la imagen */
+}
+.loader {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  transition: transform 1.9s ease;
+  background-color: transparent;
+  z-index: 2;
+  /* Asegura que el loader esté sobre la imagen */
+}
+.background-image.circle {
+  position: relative;
+  width: 100%;
+  /* Asegurarse de que cada círculo tenga un ancho responsivo */
+  height: 0;
+  padding-bottom: 100%;
+  /* Mantener la relación de aspecto 1:1 */
+  border-radius: 50%;
+  overflow: hidden;
+}
+.circle-wrapper {
+  flex: 1;
+  max-width: 300px;
+  /* Ancho máximo de cada círculo */
+}
+.circle-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  /* Espacio entre los elementos */
+  padding: 0 20px;
+  /* Añadir un poco de padding al contenedor para evitar que los círculos estén demasiado cerca del borde de la pantalla */
+}
+.circle-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  /* Asegura que la imagen esté debajo del texto y del loader */
+}
 /* carrusel y texto (section 1)*/
 .mySwiper {
   max-height: 400px;
@@ -368,7 +458,7 @@ div.heading-title h3 {
 
 
 /* Loaders (section 2) */
-.loader {
+/* .loader {
   width: 320px;
   height: 320px;
   border-radius: 50%;
@@ -376,6 +466,7 @@ div.heading-title h3 {
   overflow: hidden;
   transition: transform 1.9s ease;
   background-color: transparent;
+  z-index: 2;
 
 }
 
@@ -430,7 +521,7 @@ div.heading-title h3 {
 
 .loader.active {
   transform: rotate(360deg) !important;
-}
+} */
 
 /* Contenido dentro del modal */
 .popup-modal {
@@ -623,18 +714,18 @@ p {
     justify-content: space-between;
   }
 
-  .circle {
+/*   .circle {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
     margin-right: 0;
-  }
+  } */
 
-  .circle-container {
+/*   .circle-container {
     display: flex;
     justify-content: space-between;
-  }
+  } */
 }
 </style>

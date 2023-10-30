@@ -22,7 +22,9 @@ use App\Http\Controllers\LenguaExtraImgPrincipalController;
 use App\Http\Controllers\LenguaExtraImgSecundarioController;
 use App\Http\Controllers\LenguaExtraObjetivosController;
 use App\Http\Controllers\PdfPruebaController;
-
+use App\Http\Controllers\DesarrolloHumnPrincController;
+use App\Http\Controllers\DesarrolloHumnTextoController;
+use App\Http\Controllers\DesarrolloHumnDesarrollosController;
 
 
 use Illuminate\Http\Request;
@@ -85,6 +87,10 @@ Route::prefix('FormacionIntegral')->group(function () {
     Route::get('lenguaExtranjera', function(){
         return Inertia::render('Componentes/FormacionIntegral/lenguaExtran');
     });
+
+    Route::get('DesarrolloHumano', function(){
+        return Inertia::render('Componentes/FormacionIntegral/desarrolloHumano');
+    });
 });   
 
 
@@ -134,6 +140,9 @@ Route::middleware([
         'lenguaExtraImgSecundario' => LenguaExtraImgSecundarioController::class,
         'lenguaExtraObjetivo' => LenguaExtraObjetivosController::class,
         'pdfPrueba' => PdfPruebaController::class,
+        'desarrolloHumnPrinc' => DesarrolloHumnPrincController::class,
+        'desarrolloHumnTexto' => DesarrolloHumnTextoController::class,
+        'desarrolloHumnDesarrollos' => DesarrolloHumnDesarrollosController::class,
     ];
     // se declarar variables, 
 
@@ -146,6 +155,9 @@ Route::middleware([
         });
     }
 });
+Route::post('/desarrolloHumnDesarrollo/bannerData', [DesarrolloHumnDesarrollosController::class, 'bannerData']);
+Route::post('/desarrolloHumnTexto/bannerData', [DesarrolloHumnTextoController::class, 'bannerData']);
+Route::post('/desarrolloHumnPrincs/bannerData', [DesarrolloHumnPrincController::class, 'bannerData']);
 Route::post('/pdfPrueba/bannerData', [PdfPruebaController::class, 'bannerData']);
 Route::post('/lenguaExtraObjetivo/bannerData', [LenguaExtraObjetivosController::class, 'bannerData']);
 Route::post('/lenguaExtraImgSecundario/bannerData', [LenguaExtraImgSecundarioController::class, 'bannerData']);

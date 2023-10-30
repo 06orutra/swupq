@@ -12,7 +12,6 @@ import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
     <Head title="Welcome" />
     
     <AppEstructure :controllerName="'/bannerData'">          
-        <!-- mandamos a llamar en la principal  -->
 
         <CarrierBanner />
         <carruselSecundario />

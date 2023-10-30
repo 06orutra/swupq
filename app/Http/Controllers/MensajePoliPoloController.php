@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Nota_Mascota;
+use App\Models\Mensaje_PoliPolo;
 use Illuminate\Http\Request;
 
-class NotaMascotaController extends Controller
+class MensajePoliPoloController extends Controller
 {
     public function bannerData(){
-        $datosTexto = Nota_Mascota::all();
+        $datosTexto = Mensaje_PoliPolo::all();d
         return response()->json($datosTexto);
     }
 
@@ -20,7 +20,7 @@ class NotaMascotaController extends Controller
         ]);
 
         // Create a new banner instance
-        $texto = new Nota_Mascota();
+        $texto = new Mensaje_PoliPolo();
         $texto->titulo = $request->titulo;
         $texto->contenido = $request->contenido;
         $texto->save();
@@ -34,7 +34,7 @@ class NotaMascotaController extends Controller
             'contenido' => 'required|string|max:255',
         ]);
 
-        $texto = Nota_Mascota::find($request->id);
+        $texto = Mensaje_PoliPolo::find($request->id);
 
         $texto->titulo = $request->titulo;
         $texto->contenido = $request->contenido;
@@ -46,7 +46,7 @@ class NotaMascotaController extends Controller
 
     
     public function eliminarBanner(Request $request){
-        $texto = Nota_Mascota::find($request->id);
+        $texto = Mensaje_PoliPolo::find($request->id);
         $texto->delete();
 
         return response()->json('Banner deleted successfully');

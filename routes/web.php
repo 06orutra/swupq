@@ -31,7 +31,10 @@ use App\Http\Controllers\LenguaExtraImgPrincipalController;
 use App\Http\Controllers\LenguaExtraImgSecundarioController;
 use App\Http\Controllers\LenguaExtraObjetivosController;
 use App\Http\Controllers\PdfPruebaController;
-
+use App\Http\Controllers\MensajePoliPoloController;
+use App\Http\Controllers\SpotypoliController;
+use App\Http\Controllers\SpotypoloController;
+use App\Http\Controllers\CarruselMascotaController;
 use Illuminate\Http\Request;
 
 /*
@@ -62,16 +65,20 @@ Route::prefix('institucion')->group(function () {
     Route::get('mascotas', function () {
         return Inertia::render('Componentes/Institucion/mascotasPrincipal');
     });
-
-    Route::get('messageRector', function () {
-        return Inertia::render('Componentes/Institucion/rectorMessage');
-    });
-
     Route::get('laborEq', function () {
         return Inertia::render('Componentes/Institucion/Laborequality');
     });
     Route::get('instalaciones', function () {
         return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
+    });
+    Route::get('laborEq', function () {
+        return Inertia::render('Componentes/Institucion/Laborequality');
+    });
+    Route::get('sistemaGestion', function () {
+        return Inertia::render('Componentes/Institucion/qualityManagement');
+    });
+    Route::get('mensajeRector', function () {
+        return Inertia::render('Componentes/Institucion/rectorMessage');
     });
 
     Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
@@ -82,6 +89,7 @@ Route::prefix('institucion')->group(function () {
     Route::get('historia', function () {
         return Inertia::render('Componentes/Institucion/Historia');
     });
+
     Route::get('instalaciones', function () {
         return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
     });
@@ -90,6 +98,9 @@ Route::prefix('institucion')->group(function () {
     });
     Route::get('/modelo-educativo', function () {
         return Inertia::render('Componentes/Institucion/Educational');
+    });
+    Route::get('filosofia', function () {
+        return Inertia::render('Componentes/Institucion/Philosophy');
     });
     Route::get('ubicacion', function () {
         return Inertia::render('Componentes/Institucion/location');
@@ -116,7 +127,7 @@ Route::prefix('FormacionIntegral')->group(function () {
     Route::get('lenguaExtranjera', function(){
         return Inertia::render('Componentes/FormacionIntegral/lenguaExtran');
     });
-});   
+});
 
 
 /*
@@ -174,6 +185,10 @@ Route::middleware([
         'lenguaExtraImgSecundario' => LenguaExtraImgSecundarioController::class,
         'lenguaExtraObjetivo' => LenguaExtraObjetivosController::class,
         'pdfPrueba' => PdfPruebaController::class,
+        'mensaje' => MensajePoliPoloController::class,
+        'spotypoli' => SpotypoliController::class,
+        'spotypolo' => SpotypoloController::class,
+        'Cmascotas' => CarruselMascotaController::class,
     ];
     // se declarar variables, 
 
@@ -199,6 +214,8 @@ Route::post('/filosofiaVal/bannerData', [FilosofiaValorController::class, 'banne
 Route::post('/filosofiaImg/bannerData', [FilosofiaImgController::class, 'bannerData']);
 Route::post('/filosofias/bannerData', [FilosofiaController::class, 'bannerData']);
 Route::post('/videolenguajes', [ VideoLenguajeController::class, 'bannerData']);
+// Route::post('/obtener-link', [SpotyPoliPoloController::class, 'bannerData']);
+
 Route::post('/bannerData', [HomeController::class, 'bannerData']);
 Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'bannerDatafilter']);
 Route::post('/bannerDataprimero', [TbCarruselPrimeroController::class, 'bannerData']);

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nota__mascotas', function (Blueprint $table) {
+        Schema::create('mensaje__poli_polos', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
             $table->string('contenido');
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nota__mascotas');
+        Schema::dropIfExists('mensaje__poli_polos');
     }
 };

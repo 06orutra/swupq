@@ -11,6 +11,7 @@ import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofi
 import MensajeRector from '@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue';
 import historia from './historia.vue';
 import ubicacion from './ubicacion.vue';
+import Mascotas from "@/Pages/Componentes/Institucion/institucionAdmin/Mascotas.vue";
 
 export default {
     components: {
@@ -26,7 +27,7 @@ export default {
         historia,
         modeloEducativo,
         ubicacion,
-
+        Mascotas,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -46,8 +47,8 @@ export default {
             <carruselEstructura :loadDataUrl="'/bannerData'" :registerBannerUrl="'/home/registrarBanner'"
                 :editBannerUrl="'/home/editarBanner'" :deleteBannerUrl="'/home/eliminarBanner'" />
         </TabPanel>
-        <TabPanel header="Nota Mascotas">
-            <NotaMascotas/>
+        <TabPanel header="Mascotas">
+            <Mascotas/>
         </TabPanel>
         <TabPanel header="Rector">
             <MensajeRector/>

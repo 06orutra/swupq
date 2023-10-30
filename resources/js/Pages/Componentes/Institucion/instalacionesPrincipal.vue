@@ -9,7 +9,7 @@ import CarruselInstitucion from '@/Pages/Componentes/Institucion/InstalacionesCo
 
 <template>
   <div>
-    <AppEstructure :controllerName="'/BannerMascotas/bannerData'">
+    <AppEstructure :controllerName="'/BannerInstalaciones/bannerData'">
       <div >
         <CarruselInstitucion/>
       </div>

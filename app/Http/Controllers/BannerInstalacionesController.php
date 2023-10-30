@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\BannerInstalaciones;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class BannerInstalacionesController extends Controller
 {

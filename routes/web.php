@@ -38,6 +38,9 @@ use App\Http\Controllers\BannerMascotasController;
 use App\Http\Controllers\BannerInstalacionesController;
 use App\Http\Controllers\BannerDirectorioController;
 
+use App\Http\Controllers\DesarrolloHumnPrincController;
+use App\Http\Controllers\DesarrolloHumnTextoController;
+use App\Http\Controllers\DesarrolloHumnDesarrollosController;
 
 
 use Illuminate\Http\Request;
@@ -94,6 +97,10 @@ Route::prefix('FormacionIntegral')->group(function () {
 
     Route::get('lenguaExtranjera', function(){
         return Inertia::render('Componentes/FormacionIntegral/lenguaExtran');
+    });
+
+    Route::get('DesarrolloHumano', function(){
+        return Inertia::render('Componentes/FormacionIntegral/desarrolloHumano');
     });
 });   
 
@@ -159,6 +166,9 @@ Route::middleware([
         'BannerMascotas' => BannerMascotasController::class,
         'BannerDirectorio' => BannerDirectorioController::class,
         'BannerInstalaciones' => BannerInstalacionesController::class,
+        'desarrolloHumnPrinc' => DesarrolloHumnPrincController::class,
+        'desarrolloHumnTexto' => DesarrolloHumnTextoController::class,
+        'desarrolloHumnDesarrollos' => DesarrolloHumnDesarrollosController::class,
     ];
     // se declarar variables, 
 
@@ -187,6 +197,13 @@ Route::post('/CarruselMascota/bannerData', [CarruselMascotaController::class, 'b
 Route::post('/MensajePoliPolo/bannerData', [MensajePoliPoloController::class, 'bannerData']);
 Route::post('/Spotypoli/bannerData', [SpotypoliController::class, 'bannerData']);
 Route::post('/Spotypolo/bannerData', [SpotypoloController::class, 'bannerData']);
+Route::post('/desarrolloHumnDesarrollo/bannerData', [DesarrolloHumnDesarrollosController::class, 'bannerData']);
+Route::post('/desarrolloHumnTexto/bannerData', [DesarrolloHumnTextoController::class, 'bannerData']);
+Route::post('/desarrolloHumnPrincs/bannerData', [DesarrolloHumnPrincController::class, 'bannerData']);
+Route::post('/pdfPrueba/bannerData', [PdfPruebaController::class, 'bannerData']);
+Route::post('/lenguaExtraObjetivo/bannerData', [LenguaExtraObjetivosController::class, 'bannerData']);
+Route::post('/lenguaExtraImgSecundario/bannerData', [LenguaExtraImgSecundarioController::class, 'bannerData']);
+Route::post('/lenguaExtraImgPrincipal/bannerData', [LenguaExtraImgPrincipalController::class, 'bannerData']);
 Route::post('/historiaCarrusels/bannerData', [HistoriaCarruselController::class, 'bannerData']);
 Route::post('/historiaTextos/bannerData', [HistoriaTextoController::class, 'bannerData']);
 Route::post('/historiaImgPrinc/bannerData', [HistoriaImgPrincController::class, 'bannerData']);

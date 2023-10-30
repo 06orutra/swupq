@@ -22,20 +22,22 @@ class PdfPruebaController extends Controller
             'pdf' => 'required|mimes:pdf|max:1000000',
         ]);
 
+        $date = date('Y-m-d H-i-s');
+        //obtener el nombre de la imagen
+        $fotoName = $date . '_' . $request->file('foto')->getClientOriginalName();
+        //guardar la imagen public storage
+        $fotoPath = $request->file('foto')->storeAs('public', $fotoName);
+
+        
+        $pdfName = time() . '_' . $request->file('pdf')->getClientOriginalName();
+        $pdfPath = $request->file('pdf')->storeAs('public/pdfs', $pdfName);
+
         $banner = new PdfPrueba();
         $banner->nombre = $request->nombre;
-        
-        // Procesar imagen
-        $imagenName = time() . '_' . $request->file('foto')->getClientOriginalName();
-        $request->file('foto')->storeAs('public/', $imagenName);
-        $banner->imagen = $imagenName;
-        
-        // Procesar PDF
-        $pdfName = time() . '_' . $request->file('pdf')->getClientOriginalName();
-        $request->file('pdf')->storeAs('public/pdfs', $pdfName);
+        $banner->imagen = $fotoName;
         $banner->pdf = $pdfName;
-
         $banner->save();
+
         return response()->json('Banner registrado exitosamente');
     }
 
@@ -48,24 +50,40 @@ class PdfPruebaController extends Controller
         ]);
 
         $banner = PdfPrueba::find($request->id);
-        $banner->nombre = $request->nombre;
-        
+
         // Procesar imagen
-        if ($request->hasFile('imagen')) {
-            Storage::delete('public/imagenes/' . $banner->imagen);
-            $imagenName = time() . '_' . $request->file('imagen')->getClientOriginalName();
-            $request->file('imagen')->storeAs('public/', $imagenName);
-            $banner->imagen = $imagenName;
+        if ($request->hasFile('foto')) {
+
+            $date = date('Y-m-d H-i-s');
+            //obtener el nombre de la imagen
+            $fotoName = $date . '_' . $request->file('foto')->getClientOriginalName();
+
+            //guardar en public en carpeta img, con el nombre de la imagen de fotoName
+            $fotoPath = $request->file('foto')->storeAs('public', $fotoName);
+
+            // Luego, eliminar la imagen anterior
+            if ($banner->imagen) {
+                Storage::delete('public/' . $banner->imagen);
+            }
+
+            $banner->imagen = $fotoName;
         }
-        
+
         // Procesar PDF
         if ($request->hasFile('pdf')) {
-            Storage::delete('public/pdfs/' . $banner->pdf);
+            // Guardar el nuevo PDF y actualizar el nombre en la base de datos
             $pdfName = time() . '_' . $request->file('pdf')->getClientOriginalName();
-            $request->file('pdf')->storeAs('public/pdfs', $pdfName);
+            $pdfPath = $request->file('pdf')->storeAs('public/pdfs', $pdfName);
+
+            // Eliminar el PDF anterior del servidor
+            if ($banner->pdf) {
+                Storage::delete('public/pdfs/' . $banner->pdf);
+            }
+
             $banner->pdf = $pdfName;
         }
 
+        $banner->nombre = $request->nombre;
         $banner->save();
         return response()->json('Banner editado exitosamente');
     }
@@ -73,11 +91,11 @@ class PdfPruebaController extends Controller
     public function eliminarBanner(Request $request)
     {
         $banner = PdfPrueba::find($request->id);
-        
+
         // Eliminar imagen y PDF
         Storage::delete('public/' . $banner->imagen);
         Storage::delete('public/pdfs/' . $banner->pdf);
-        
+
         $banner->delete();
         return response()->json('Banner eliminado exitosamente');
     }

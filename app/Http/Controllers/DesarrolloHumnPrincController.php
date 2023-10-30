@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\desarrolloHumn_princ;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-use App\Models\tb_banner;
 use Illuminate\Support\Facades\Storage;
-use Carbon\Carbon;
 
-
-class HomeController extends Controller
+class DesarrolloHumnPrincController extends Controller
 {
     public function bannerData()
     {
-        $datosBanner = tb_banner::all();
+        $datosBanner = desarrolloHumn_princ::all();
         return response()->json($datosBanner);
     }
 
@@ -22,7 +19,6 @@ class HomeController extends Controller
 
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'link' => 'required|string|max:255',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000000',
         ]);
 
@@ -33,9 +29,8 @@ class HomeController extends Controller
         $fotoPath = $request->file('foto')->storeAs('public', $fotoName);
 
         // Create a new banner instance
-        $banner = new tb_banner;
+        $banner = new desarrolloHumn_princ;
         $banner->nombre = $request->nombre;
-        $banner->link = $request->link;
         $banner->imagen = $fotoName;
         $banner->save();
 
@@ -44,13 +39,14 @@ class HomeController extends Controller
 
     public function editarBanner(Request $request)
     {
+
+
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'link' => 'required|string|max:255',
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000000',
         ]);
 
-        $banner = tb_banner::find($request->id);
+        $banner =desarrolloHumn_princ::find($request->id);
 
 
         if ($request->hasFile('foto')) {
@@ -71,7 +67,6 @@ class HomeController extends Controller
         }
 
         $banner->nombre = $request->nombre;
-        $banner->link = $request->link;
         $banner->save();
 
         return response()->json('Banner edited successfully');
@@ -79,7 +74,7 @@ class HomeController extends Controller
 
     public function eliminarBanner(Request $request)
     {
-        $banner = tb_banner::find($request->id);
+        $banner = desarrolloHumn_princ::find($request->id);
         //eliminar la imagen del storage
         Storage::delete('public/' . $banner->imagen);
         $banner->delete();

@@ -6,14 +6,12 @@
                 </a>
         </div>
 </template>
-    
+
 <style scoped>
 .img-reset {
-        border: 0 !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        display: block;
+        fill: cover;
         width: 100%;
+        height: 100%;
 }
 </style>
     

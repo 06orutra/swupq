@@ -1,7 +1,9 @@
 <script setup>
 import carruselEstructura from '@/Pages/Componentes/Home/carruselEstructura.vue';
 import estructuraTextos from '@/Pages/Componentes/Home/estructuraTextos.vue';
+import estructuraPdf from '@/Pages/Componentes/Home/estructuraPdf.vue';
 import estructuraImg from '@/Pages/Componentes/Home/estructuraImg.vue';
+
 </script>
 
 <template>
@@ -12,7 +14,7 @@ import estructuraImg from '@/Pages/Componentes/Home/estructuraImg.vue';
                 :editBannerUrl="'/rector/editarBanner'" :deleteBannerUrl="'/rector/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Informes del Rector">
-            <estructuraTextos :Titulo="'Título o Fecha de Subida'" :Subtitulo="'Enlace'" :loadDataUrl="'informe/bannerData'" :registerBannerUrl="'/informe/registrarBanner'"
+            <estructuraPdf :Titulo="'Título o Fecha de Subida'" :Subtitulo="'Enlace'" :loadDataUrl="'informe/bannerData'" :registerBannerUrl="'/informe/registrarBanner'"
                 :editBannerUrl="'/informe/editarBanner'" :deleteBannerUrl="'/informe/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Banner">

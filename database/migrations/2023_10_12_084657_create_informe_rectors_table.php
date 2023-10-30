@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('informe_rectors', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->string('contenido');
+            $table->string('nombre');
+            $table->string('pdf');
+            $table->string('imagen');
             $table->timestamps();
         });
     }

@@ -20,10 +20,63 @@
 
     <!--apartado para modificar la carrera-->
 
-    <div class="controls-carrera-modificar">
+    <div class="controls-carrera-modificar" >
+        <div class="container-carrera-modificar" v-if="isConsultedCarrera">
+            <form > <!--(inicio) formulario para actualizar los datos de la carrera-->
+                <!--apartado para el nombre de la carrera-->
+                <section class="modificar-nombre-carrera">
+                    <div class="modificar-nombre-de-la-carrera">
+                        <p>Nombre de la carrera:&nbsp
+                            <inputtext-pv type="text" placeholder="Carrera" 
+                            class="long-input-text" v-model="nuevo_nombre_carrera"/>
+                        </p>
+                    </div>
+                </section>
+                <!--apartado para los colores de la carrera-->
+                <section class="modificar-colores-carrera">
+                    <div class="modificar-title-selection-colors">
+                    <h5>Colores de la carrera</h5>
+                    </div>
+                    <!--Apartado para mostrar los colores que se estan seleccionando-->
+                    <div class="card flex gap-1 show-palete-color margin-bottom-custom">
+                        <div class="item" id="palete-pc" :style="{backgroundColor: '#'+colores_carrera.colorPrimario }"></div> 
+                        <div class="item" id="palete-sc" :style="{backgroundColor: '#'+colores_carrera.colorSecundario }"></div>
+                        <div class="item" id="palete-tc" :style="{backgroundColor: '#'+colores_carrera.colorTerciario }"></div>
+                    </div>
 
-        <div class="btn-carrera-modificar">
-            <button-pv label="Guardar" type="button" id="btn-modificar-carrera"/>
+                    <div class="card flex flex-row distribuir-equitativ modificar-color-picker-controls">  <!--card flex flex-row align-items-center -->
+                        <!--color picker para el color primario-->
+                        <div class="color-primario">  
+                        <span>Color primario:
+                            <color-picker  inputId="mcp-primary-color" v-model="colores_carrera.colorPrimario" 
+                            ></color-picker>
+                        </span>
+                        </div>
+
+
+                        <!--color picker para el color secundario-->
+                        <div class="color-secundario">
+                        <span>Color secundario:
+                            <color-picker  inputId="mcp-secundary-color" v-model="colores_carrera.colorSecundario"
+                        ></color-picker>
+                        </span>
+                        </div>
+
+                        <!--color picker para el color secundario-->
+                        <div class="color-terciario">
+                        <span>Color terciario:
+                            <color-picker  inputId="mcp-terciary-color" v-model="colores_carrera.colorTerciario"
+                            ></color-picker>
+                        </span>
+                        </div>
+                    </div>
+
+                </section>
+
+                <div class="btn-carrera-modificar">
+                    <button-pv label="Guardar" type="button" id="btn-modificar-carrera"/>
+                </div>
+            </form><!--(final) formulario para actualizar los datos de la carrera-->
         </div>
     </div>
 
@@ -39,6 +92,8 @@ import axios from 'axios';
 import Dropdown from 'primevue/dropdown';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
+import InputText from 'primevue/inputtext';
+import Colorpicker from 'primevue/colorpicker';
 
 
 export default defineComponent({
@@ -47,6 +102,8 @@ export default defineComponent({
     'dropdown-pv':Dropdown,
     'button-pv':Button,
     'dialog-pv':Dialog,	
+    'inputtext-pv':InputText,
+    'color-picker':Colorpicker,
   },
   props: {
     title: {
@@ -54,6 +111,10 @@ export default defineComponent({
       default: 'Modificar carrera',
     },
     url_getCarreras:{
+        type:String,
+        required:true
+    },
+    url_getDataCarrera:{
         type:String,
         required:true
     },
@@ -72,6 +133,7 @@ export default defineComponent({
   setup(props) {
     let selectedCarrera = ref('');
     const visibleDialog = ref(false);
+    const isConsultedCarrera = ref(false);
 
     function loadCarreras(){
       console.log("Cargando carreras disponibles (MC)...");
@@ -91,7 +153,15 @@ export default defineComponent({
         return;
       }
       console.log('Cargando la info de la carrera:'+selectedCarrera.value.carrera_nombre);
-      //axios.post()
+      /*
+      axios.post(props.url_getDataCarrera,selectedCarrera.value.carrera_nombre).then((response) => {
+        datos_carrera = response.data;
+      }).catch((error) => {
+          console.log(error);
+      }).finally(() => {
+          console.log('Peticion finalizada...');
+      })
+      */
     }
 
     function disabledBtn() {
@@ -102,6 +172,7 @@ export default defineComponent({
     return {
       selectedCarrera,
       visibleDialog,
+      isConsultedCarrera,//para saber si se consulto una carrera
       loadCarreras,
       loadCarreraData,
       disabledBtn,
@@ -109,7 +180,7 @@ export default defineComponent({
     };
   },
   mounted(){
-    this.disabledBtn();
+    //this.disabledBtn();
     this.loadCarreras();
   },
 

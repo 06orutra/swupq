@@ -2,9 +2,14 @@
     <section class="administrador-carreras">
         <tab-view class="p-3">
           
-            <!--apartado para la seleccion de los colores de la carrera-->
+            <!--apartado para la seccion de registro de una carrera-->
             <tab-panel :header="headers['identidad_carrera']">
               <identidad-carrera title="Paleta de colores"></identidad-carrera>
+            </tab-panel>
+
+            <!--apartado para la seccion para elminar una carrera-->
+            <tab-panel header="Eliminar carrera">
+                <carrera-eliminar title="Eliminar carrera" url_getCarreras="/carreras/carreras-disponibles"/>
             </tab-panel>
             
         
@@ -16,6 +21,7 @@
 import { defineComponent } from 'vue';
 import TabView from 'primevue/tabview';
 import ColoresCarrera from '@/Pages/carreras/Components/IdentidadCarrera.vue';
+import CarreraEliminar from '@/Pages/carreras/Components/EliminarCarrera.vue';
 import TabPanel from 'primevue/tabpanel';
 
 export default defineComponent({
@@ -25,6 +31,7 @@ export default defineComponent({
     'tab-view':TabView,
     'tab-panel':TabPanel,
     'identidad-carrera':ColoresCarrera,
+    'carrera-eliminar':CarreraEliminar,
   },
   props: {
     headers:{

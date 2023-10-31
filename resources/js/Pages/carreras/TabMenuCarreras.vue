@@ -11,6 +11,11 @@
             <tab-panel header="Eliminar carrera">
                 <carrera-eliminar title="Eliminar carrera" url_getCarreras="/carreras/carreras-disponibles"/>
             </tab-panel>
+
+            <!--apartado para la seccion para modificar una carrera-->
+            <tab-panel header="Modificar carrera">
+              <carrera-modificar title="Modificar carrera" url_getCarreras="/carreras/carreras-disponibles"/>
+            </tab-panel>  
             
         
         </tab-view>  
@@ -22,6 +27,7 @@ import { defineComponent } from 'vue';
 import TabView from 'primevue/tabview';
 import ColoresCarrera from '@/Pages/carreras/Components/IdentidadCarrera.vue';
 import CarreraEliminar from '@/Pages/carreras/Components/EliminarCarrera.vue';
+import CarreraModificar from '@/Pages/carreras/Components/ModificarCarrera.vue';
 import TabPanel from 'primevue/tabpanel';
 
 export default defineComponent({
@@ -32,6 +38,7 @@ export default defineComponent({
     'tab-panel':TabPanel,
     'identidad-carrera':ColoresCarrera,
     'carrera-eliminar':CarreraEliminar,
+    'carrera-modificar':CarreraModificar,
   },
   props: {
     headers:{

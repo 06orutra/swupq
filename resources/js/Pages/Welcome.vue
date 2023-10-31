@@ -7,13 +7,6 @@ import carruselSecundario from './Componentes/Welcome/carruselSecundario.vue';
 import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
 import Carrers from '@/carreras/Carreras.vue';
 
-defineProps({
-    canLogin: Boolean,
-    canRegister: Boolean,
-    laravelVersion: String,
-    phpVersion: String,
-});
-
 </script>
 
 <template>
@@ -28,8 +21,6 @@ defineProps({
         <SplitterVue />
 
     </AppEstructure>
-
-    <RedesSociales />
     <!--<Carrers/>-->
 
 </template>

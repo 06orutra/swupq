@@ -39,16 +39,16 @@
                     </div>
                     <!--Apartado para mostrar los colores que se estan seleccionando-->
                     <div class="card flex gap-1 show-palete-color margin-bottom-custom">
-                        <div class="item" id="palete-pc" :style="{backgroundColor: '#'+colores_carrera.colorPrimario }"></div> 
-                        <div class="item" id="palete-sc" :style="{backgroundColor: '#'+colores_carrera.colorSecundario }"></div>
-                        <div class="item" id="palete-tc" :style="{backgroundColor: '#'+colores_carrera.colorTerciario }"></div>
+                        <div class="item" id="palete-pc" :style="{backgroundColor: '#'+modificarColoresCarrera.colorPrimario }"></div> 
+                        <div class="item" id="palete-sc" :style="{backgroundColor: '#'+modificarColoresCarrera.colorSecundario }"></div>
+                        <div class="item" id="palete-tc" :style="{backgroundColor: '#'+modificarColoresCarrera.colorTerciario }"></div>
                     </div>
 
                     <div class="card flex flex-row distribuir-equitativ modificar-color-picker-controls">  <!--card flex flex-row align-items-center -->
                         <!--color picker para el color primario-->
                         <div class="color-primario">  
                         <span>Color primario:
-                            <color-picker  inputId="mcp-primary-color" v-model="colores_carrera.colorPrimario" 
+                            <color-picker  inputId="mcp-primary-color" v-model="modificarColoresCarrera.colorPrimario" 
                             ></color-picker>
                         </span>
                         </div>
@@ -57,7 +57,7 @@
                         <!--color picker para el color secundario-->
                         <div class="color-secundario">
                         <span>Color secundario:
-                            <color-picker  inputId="mcp-secundary-color" v-model="colores_carrera.colorSecundario"
+                            <color-picker  inputId="mcp-secundary-color" v-model="modificarColoresCarrera.colorSecundario"
                         ></color-picker>
                         </span>
                         </div>
@@ -65,13 +65,229 @@
                         <!--color picker para el color secundario-->
                         <div class="color-terciario">
                         <span>Color terciario:
-                            <color-picker  inputId="mcp-terciary-color" v-model="colores_carrera.colorTerciario"
+                            <color-picker  inputId="mcp-terciary-color" v-model="modificarColoresCarrera.colorTerciario"
                             ></color-picker>
                         </span>
                         </div>
                     </div>
 
                 </section>
+
+                <section class="modificar-objetivos-carrera">
+                    <div class="modificar-title-objetivos-carrera">
+                      <h5>Objetivos de la carrera</h5>
+                  </div>
+
+                  <div class="flex flex-column gap-2 modificar-controls-objetivos-carreras">
+
+                    <!--objetivos del plan de estudios-->
+                    <div class="flex flex-column modificar-plan-estudios">
+                      <h6>Objetivos del plan de estudios</h6>
+                      <txt-area-pv rows="5"  autoResize  placeholder="Descripción del plan de estudios" 
+                      class="long-text-area" />
+                    </div>  
+
+                    <!--mision de la carrera-->
+                    <div class="flex flex-column modificar-mision">
+                      <h6>Misión</h6>
+                      <txt-area-pv rows="5"  autoResize  placeholder="Descripción de la misión" 
+                      class="long-text-area" />
+                    </div>  
+
+                    <!--vision de la carrera-->
+                    <div class="flex flex-column modificar-vision">
+                      <h6>Visión</h6>
+                      <txt-area-pv rows="5"  autoResize  placeholder="Descripción de la visión" 
+                      class="long-text-area" />
+                    </div>  
+
+                    <!--seleccionar una imagen de la carrera-->
+                    <div class="flex flex-column vision modificar-image-picker-objetivos-carrera">
+                      <h6>Dirección imagen de la carrera</h6>
+                      <!--
+                      <file-upload mode="basic" name="demo[]" :maxFileSize="1000000"
+                      chooseLabel="Cargar imagen" accept="image/png,image/jpeg,image/jpg"
+                      />
+                      -->
+                      <inputtext-pv placeholder="https://ingenieria_autotriz_escudo_imagen" class="long-input-url-2" 
+                      />
+                    
+                    </div>
+
+
+
+                  </div>
+
+                </section>
+                <!--esta seccion corresponde al apartado del perfil de ingreso-->
+                <hr>
+                <section class="modificar-perfil-ingreso">
+                    <div class="modificar-title-pefil-ingreso">
+                      <h5>Perfil de ingreso</h5>
+                    </div>
+
+                    <div class="gap-3 flex flex-column modificar-conocimientos">
+
+                      <h6>Conocimientos</h6>
+                      <!--agregar un nuevo conocimiento-->
+                      <div class=" modificar-entrada-conocimiento">
+                        Nombre del conocimiento:
+                        <inputtext-pv placeholder="ejem. Física" class="medium-input-lenght"/>&nbsp
+                        <pv-button label="Agregar conocimiento" type="button" severity="secondary"  
+                        @click=""/>
+                      </div>
+
+                      <!--seleccionar un conocimiento existente-->
+                      <div class="modificar-select-conocimiento">
+                        Selccionar conocimientos:
+                        <multi-select  display="chip" :options="conocimientos" 
+                        optionLabel="nombre" placeholder="Selecciona conocimientos"
+                          :maxSelectedLabels="3" class="w-full md:w-30rem"  />
+                      </div>
+
+                      <div class="modificar-view-selected-conocimientos">
+                        <!--mostrar los conocimientos que se ha agregado-->
+                        <strong>conocimientos seleccionados</strong>
+                        <ul>
+                          <li ></li>
+                        </ul>
+                      </div>
+
+                    </div>
+
+                    <div class="separador"> </div>
+                    <!--apartado para las habilidades de la carrera-->
+
+                    <br>
+                    <div class="gap-3 flex flex-column modificar-habilidades">
+
+                      <h6>Habilidades</h6>
+                      <!--agregar una nueva habilidad-->
+                      <div class=" modificar-entrada-habilidad">
+                        Nombre de la habilidad:
+                        <inputtext-pv placeholder="ejem. Creatividad" class="medium-input-lenght" />&nbsp
+                        <pv-button label="Agregar habilidad" type="button" severity="secondary"  
+                        @click=""/>
+                      </div>
+
+                      <!--seleccionar una habilidad existente-->
+                      <div class="modificar-select-habilidad">
+                        Selccionar habilidad:
+                        <multi-select  display="chip" :options="habilidades" 
+                        optionLabel="nombre" placeholder="Selecciona habilidades"
+                          :maxSelectedLabels="3" class="w-full md:w-30rem"  />
+                      </div>
+
+                      <div class="view-selected-habilidades">
+                        <!--mostrar las habilidaes que se ha agregado-->
+                        <strong>habilidades seleccionadas</strong>
+                        <ul>
+                          <li ></li>
+                        </ul>
+                      </div>
+
+                    </div>
+
+                    <div class="separador"> </div>
+                    <!--apartado para las actitudes de la carrera-->
+
+                    <br>
+                    <div class="gap-3 flex flex-column modificar-actitudes">
+
+                      <h6>Actitudes</h6>
+                      <!--agregar una nueva actitud-->
+                      <div class=" modificar-entrada-actitud">
+                        Nombre de la actitud:
+                        <inputtext-pv placeholder="ejem. Compromiso" class="medium-input-lenght" />&nbsp
+                        <pv-button label="Agregar actitud" type="button" severity="secondary"  
+                        @click=""/>
+                      </div>
+
+                      <!--seleccionar una actitud existente-->
+                      <div class="modificar-select-actitud">
+                        Selccionar actitud:
+                        <multi-select  display="chip" :options="actitudes" 
+                        optionLabel="nombre" placeholder="Selecciona actitudes"
+                          :maxSelectedLabels="3" class="w-full md:w-30rem"  />
+                      </div>
+
+                      <div class="modificar-view-selected-actitudes">
+                        <!--mostrar las actitudes que se ha agregado-->
+                        <strong>actitudes seleccionadas</strong>
+                        <ul>
+                          <li ></li>
+                        </ul>
+                      </div>
+
+
+                    </div>
+
+                    
+                    <div class="separador"> </div>
+                    <br>
+
+                    <div class=" modificar-video-perfil-ingreso">
+                      <h6>Video de la carrera</h6>
+
+                    <div class="gap-3 flex flex-row modificar-controls-video-perfil-ingreso">
+                      <span>Direccion del video:
+                      <inputtext-pv placeholder="https://www.youtube.com/watch?v=o7oJGLzxikw&ab_channel=CanalOficialUPQ" 
+                      class="long-input-url-2" />
+                      </span>
+                    </div>
+
+                    </div>
+
+                </section>
+
+                
+                <!--este apartado es para modificar los documentos, plan de estudios y el folleto digital-->
+                <hr>
+                <section class="modificar-documentos-carrera">
+                  <h5>Plan de estudios y folleto digital</h5>
+
+                  <div class="flex flex-column modificar-controls-plan-estuidos-folleto-digital">
+
+                      <div class="flex flex-column gap-3 modificar-plan-estudios-data">
+                          <span>Titulo:
+                            <inputtext-pv placeholder="Plan de estudios" 
+                           />
+                          </span>
+
+                          <span>Url documento:
+                            <inputtext-pv placeholder="https://plan-estudios-carrera" class="long-input-url"
+                            />
+                          </span>
+
+                          <span>Url imagen de fondo:
+                            <inputtext-pv placeholder="https://my_background_image" class="long-input-url"
+                            />
+                          </span>
+                      </div>
+                      <br>
+
+                      <div class="flex flex-column gap-3 modificar-folleto-digital-data">
+                        <span>Titulo:
+                            <inputtext-pv placeholder="Folleto digital"
+                            />
+                          </span>
+
+                          <span>Url documento:
+                            <inputtext-pv placeholder="https://folleto-digital" class="long-input-url"
+                            />
+                          </span>
+
+                          <span>Url imagen de fondo:
+                            <inputtext-pv placeholder="https://my_background_image" class="long-input-url"
+                           />
+                          </span>
+                      </div>
+
+                  </div>
+
+                </section>
+
+
 
                 <div class="btn-carrera-modificar">
                     <button-pv label="Guardar" type="button" id="btn-modificar-carrera"/>
@@ -94,6 +310,7 @@ import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import InputText from 'primevue/inputtext';
 import Colorpicker from 'primevue/colorpicker';
+import Textarea from 'primevue/textarea';
 
 
 export default defineComponent({
@@ -104,6 +321,7 @@ export default defineComponent({
     'dialog-pv':Dialog,	
     'inputtext-pv':InputText,
     'color-picker':Colorpicker,
+    'txt-area-pv':Textarea,
   },
   props: {
     title: {
@@ -133,7 +351,13 @@ export default defineComponent({
   setup(props) {
     let selectedCarrera = ref('');
     const visibleDialog = ref(false);
-    const isConsultedCarrera = ref(false);
+    const isConsultedCarrera = ref(true);
+
+    const modificarColoresCarrera = ref({
+      colorPrimario:'000000',
+      colorSecundario:'000000',
+      colorTerciario:'000000'
+    });
 
     function loadCarreras(){
       console.log("Cargando carreras disponibles (MC)...");
@@ -173,6 +397,7 @@ export default defineComponent({
       selectedCarrera,
       visibleDialog,
       isConsultedCarrera,//para saber si se consulto una carrera
+      modificarColoresCarrera,
       loadCarreras,
       loadCarreraData,
       disabledBtn,
@@ -224,11 +449,87 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Estilos del componente (opcional) */
-/* Puedes definir estilos específicos para este componente aquí */
-/* Ejemplo:
-h1 {
-  color: blue;
+.centrar{
+  justify-content: center;
 }
-*/
+
+.item {
+  flex: 1;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 18px;
+  height: 30vh;
+  /*width: 30vh;*/
+}
+
+.long-input-text{
+  width: 50vw;
+}
+
+.distribuir-equitativ{
+  display: flex;
+  justify-content: space-around;
+}
+
+.distribuir-justamente{
+  display: flex;
+  justify-content: space-between;
+}
+
+.margin-bottom-custom{
+  margin-bottom: 1rem;
+}
+
+.long-text-area{
+  width: 65vw;
+
+}
+
+.long-input-text-ciclo{
+  width: 50vw;
+}
+
+.long-input-url{
+  width: 40vw;
+}
+
+.long-input-url-2{
+  width: 55vw;
+}
+
+.medium-input-lenght{
+  width: 30vw;
+}
+
+.separador{
+  width: 98%;
+  border:1px solid #dbd8d8;
+  border-radius: 2px;
+}
+
+.table-tarjetas-informativas {
+    border-collapse: collapse;
+    width: 100%;
+    border: 2px solid #333; /* Borde exterior de la tabla */
+  }
+
+  .table-tarjetas-informativas th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Borde inferior para las celdas */
+  }
+
+  .table-tarjetas-informativas th {
+    background-color: #333; /* Fondo para los encabezados */
+    color: white; /* Color de texto para los encabezados */
+  }
+
+  .table-tarjetas-informativas tr:nth-child(even) {
+    background-color: #f2f2f2; /* Fondo alternado para filas pares */
+  }
+
+  .table-tarjetas-informativas tr:hover {
+    background-color: #ddd; /* Fondo cuando el cursor está sobre una fila */
+  }
 </style>

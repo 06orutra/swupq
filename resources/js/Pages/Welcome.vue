@@ -13,7 +13,7 @@ import Directorio from '@/Layouts/homeComponents/Directorio.vue';
 <template>
     <Head title="Welcome" />
     
-    <AppEstructure>  
+    <AppEstructure :controllerName="'/bannerData'">          
 
         <CarrierBanner />
         <carruselSecundario />

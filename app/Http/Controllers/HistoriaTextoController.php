@@ -31,7 +31,7 @@ class HistoriaTextoController extends Controller
     public function editarBanner(Request $request){
         $request->validate([
             'titulo' => 'required|string|max:255',
-            'contenido' => 'required|string|max:255',
+            'contenido' => 'required|string|max:10000',
         ]);
 
         $texto = historia_texto::find($request->id);

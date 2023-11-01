@@ -44,8 +44,6 @@ class HomeController extends Controller
 
     public function editarBanner(Request $request)
     {
-
-
         $request->validate([
             'nombre' => 'required|string|max:255',
             'link' => 'required|string|max:255',

@@ -12,7 +12,7 @@
 .medida {
   width: 600px;
   height: 200px;
-  background-color: #ffffff;
+  background-color: transparent;
   text-align: center;
   display: flex;
   /* Agregamos display: flex; */

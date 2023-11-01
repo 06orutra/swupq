@@ -287,8 +287,54 @@
 
                 </section>
 
+                <!--este apartado es para el perfil de egreso de la carrera-->
+                <hr>
+                <section class="modificar-perfil-egreso-carrera">
+                  <div class="modificar-title-perfil-egreso-carrera">
+                      <h5>Pefil de egreso</h5>
+                  </div>
+                  
+                  <div class="modificar-controls-perfil-egreso">
+                    <txt-area-pv rows="5"  autoResize  placeholder="Descripción del perfil de egreso" 
+                    class="long-text-area" />
+                  </div>
+
+                </section>
+
+                <!--seccion que corresponde a los ciclos de formacion-->
+                <hr>
+                <section class="modificar-ciclos-formacion" >
+                  <div class="modificar-title-selection-ciclos-formacion">
+                      <h5>Ciclos de formación</h5>
+                  </div>
+                  <div class="modificar-controls-ciclos-formacion ">
+
+                    <div class="flex flex-row modificar-contain-ciclo-formacion distribuir-equitativ">
+
+                        <input-number-pv id="number-input" placeholder="Numero ciclo" 
+                        class="" />
+
+                        <inputtext-pv type="text" class="long-input-text-ciclo" placeholder="Descripción"
+                        />
+
+                        <button-pv label="Agregar" type="button" severity="secondary" />
+
+                    </div>
+
+                  </div>
+                  <br>
+
+                  <div class="card ciclos-agregados">
+                    <data-table :value="ciclos_formacion" showGridlines tableStyle="min-width: 50rem">
+                        <column-dt field="numero_ciclo" header="Número de ciclo" style="width: 20%;"></column-dt>
+                        <column-dt field="descripcion" header="Descripción"></column-dt>
+                    </data-table>
+                  </div>
+
+                </section>
 
 
+                <br>
                 <div class="btn-carrera-modificar">
                     <button-pv label="Guardar" type="button" id="btn-modificar-carrera"/>
                 </div>
@@ -311,6 +357,13 @@ import Dialog from 'primevue/dialog';
 import InputText from 'primevue/inputtext';
 import Colorpicker from 'primevue/colorpicker';
 import Textarea from 'primevue/textarea';
+import InputNumber from 'primevue/inputnumber';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import ColumnGroup from 'primevue/columngroup';   // optional
+import Row from 'primevue/row';       
+import MultiSelect from 'primevue/multiselect';
+import FileUpload from 'primevue/fileupload';
 
 
 export default defineComponent({
@@ -322,6 +375,13 @@ export default defineComponent({
     'inputtext-pv':InputText,
     'color-picker':Colorpicker,
     'txt-area-pv':Textarea,
+    'input-number-pv':InputNumber,
+    'file-upload':FileUpload,
+    'data-table':DataTable,
+    'column-dt':Column,
+    'column-group-dt':ColumnGroup,
+    'row-dt':Row,
+    'multi-select':MultiSelect,
   },
   props: {
     title: {
@@ -354,9 +414,9 @@ export default defineComponent({
     const isConsultedCarrera = ref(true);
 
     const modificarColoresCarrera = ref({
-      colorPrimario:'000000',
-      colorSecundario:'000000',
-      colorTerciario:'000000'
+      colorPrimario:'004000',
+      colorSecundario:'0f0000',
+      colorTerciario:'00c000'
     });
 
     function loadCarreras(){

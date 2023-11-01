@@ -133,7 +133,7 @@
                       <div class=" modificar-entrada-conocimiento">
                         Nombre del conocimiento:
                         <inputtext-pv placeholder="ejem. Física" class="medium-input-lenght"/>&nbsp
-                        <pv-button label="Agregar conocimiento" type="button" severity="secondary"  
+                        <button-pv label="Agregar conocimiento" type="button" severity="secondary"  
                         @click=""/>
                       </div>
 
@@ -166,7 +166,7 @@
                       <div class=" modificar-entrada-habilidad">
                         Nombre de la habilidad:
                         <inputtext-pv placeholder="ejem. Creatividad" class="medium-input-lenght" />&nbsp
-                        <pv-button label="Agregar habilidad" type="button" severity="secondary"  
+                        <button-pv label="Agregar habilidad" type="button" severity="secondary"  
                         @click=""/>
                       </div>
 
@@ -199,7 +199,7 @@
                       <div class=" modificar-entrada-actitud">
                         Nombre de la actitud:
                         <inputtext-pv placeholder="ejem. Compromiso" class="medium-input-lenght" />&nbsp
-                        <pv-button label="Agregar actitud" type="button" severity="secondary"  
+                        <button-pv label="Agregar actitud" type="button" severity="secondary"  
                         @click=""/>
                       </div>
 
@@ -316,7 +316,6 @@
 
                         <inputtext-pv type="text" class="long-input-text-ciclo" placeholder="Descripción"
                         />
-
                         <button-pv label="Agregar" type="button" severity="secondary" />
 
                     </div>
@@ -329,6 +328,93 @@
                         <column-dt field="numero_ciclo" header="Número de ciclo" style="width: 20%;"></column-dt>
                         <column-dt field="descripcion" header="Descripción"></column-dt>
                     </data-table>
+                  </div>
+
+                </section>
+
+                    <!--esta seccion corresponde al apartado de la pagina principal y sus iconos-->
+                <hr>
+
+                <section class="flex flex-column gap-3 modificar-pagina-principal-carrera">
+                  <div class="modificar-title-pagina-principal">
+                      <h5>Página principal</h5>
+                  </div>
+
+                  <div class="modificar-imagen-pagina-principal">
+                    <h6>Imagen de la página principal</h6>
+
+                    <div class="flex flex-row gap-2 modificar-controls-image-main-screen">
+                      <span>Dirección imagen:
+                        <inputtext-pv type="text" placeholder="https://my_background_main_screen_carrer"
+                        class="long-input-url-2" />
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="separador"></div>
+
+                  <div class="modificar-controls-tarjetas-informativas">
+                    <h6>Tarjetas informativas</h6>
+
+                    <div class="modificar-entrada-tarjeta-informativa">
+                      <table>
+                        <tr>
+                          <td>
+                            Descripcion:
+                          </td>
+                          <td>
+                            <inputtext-pv type="text" placeholder="ejem. Titulación automatica" 
+                            class="long-input-text" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            Direccion imagen:
+                          </td>
+                          <td>
+                            <inputtext-pv type="text" placeholder="ejem. https://my_icono" 
+                            class="long-input-text" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" align="center">
+                            <button-pv type="button" severity="secondary" label="Agregar" 
+                            @click=""/>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+
+                  </div>
+
+
+                  <!--en este aprtado se mostraran las tarjetas informativas que se vayan agregando-->
+                  <div class="card modificar-tarjetas-informativas-agregadas centrar">
+
+                      <table border='1' class="table-tarjetas-informativas">
+                        <colgroup>
+                          <col style="width: 20%;">
+                          <col style="width: 70%;">
+                          <col style="width: 10%;">
+                        </colgroup>
+                        <thead>
+                          <th>Descripcion</th>
+                          <th>Direccion imagen</th>
+                          <th>Ver imagen</th>
+                        </thead>
+
+                        <tbody>
+                          <tr v-for="(elem,index) in tarjetas_informativas" :key="index">
+                            <td>{{ elem.descripcion }}</td>
+                            <td>{{ elem.url_direccion_imagen }}</td>
+                            <td align="center">
+                              <button-pv icon="pi pi-search" severity="success" aria-label="Search" 
+                              @:click="" />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
                   </div>
 
                 </section>

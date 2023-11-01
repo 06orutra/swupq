@@ -459,6 +459,10 @@ export default defineComponent({
       type: String,
       default: 'Colores de la carrera'
     },
+    url_insertarCarrera:{
+      type:String,
+      required:true,
+    }
 
   },
 

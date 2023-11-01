@@ -3,7 +3,7 @@
         <tab-view class="p-3">
           
             <!--apartado para la seccion de registro de una carrera-->
-            <tab-panel :header="headers['identidad_carrera']">
+            <tab-panel :header="headers['registro_carrera']">
               <identidad-carrera title="Paleta de colores"></identidad-carrera>
             </tab-panel>
 
@@ -26,7 +26,7 @@
 <script>
 import { defineComponent } from 'vue';
 import TabView from 'primevue/tabview';
-import ColoresCarrera from '@/Pages/carreras/Components/IdentidadCarrera.vue';
+import RegistrarCarrera from '@/Pages/carreras/Components/IdentidadCarrera.vue';
 import CarreraEliminar from '@/Pages/carreras/Components/EliminarCarrera.vue';
 import CarreraModificar from '@/Pages/carreras/Components/ModificarCarrera.vue';
 import TabPanel from 'primevue/tabpanel';
@@ -37,7 +37,7 @@ export default defineComponent({
   components: {
     'tab-view':TabView,
     'tab-panel':TabPanel,
-    'identidad-carrera':ColoresCarrera,
+    'identidad-carrera':RegistrarCarrera,
     'carrera-eliminar':CarreraEliminar,
     'carrera-modificar':CarreraModificar,
   },
@@ -45,7 +45,7 @@ export default defineComponent({
     headers:{
       type:Object,
       default:{
-        identidad_carrera:'Identidad de la carrera',
+        registro_carrera:'Registrar carrera',
         estructura:'Estructura de la carrera',
         textos:'Textos de la carrera',
         imagenes:'Imagenes de la carrera',}

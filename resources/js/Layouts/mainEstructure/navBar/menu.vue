@@ -168,37 +168,38 @@ export default {
       }
     },
   },
-methods: {
-  expandSubMenu(index) {
-    if (this.activeSubMenuIndex !== null) {
-      this.menuItems[this.activeSubMenuIndex].expanded = false;
-    }
-    this.menuItems[index].expanded = true;
-    this.activeSubMenuIndex = index;
-  },
-  toggleSubMenu(index) {
-    if (this.activeSubMenuIndex !== null && this.activeSubMenuIndex !== index) {
-      this.menuItems[this.activeSubMenuIndex].expanded = false;
-    }
+  methods: {
+    expandSubMenu(index) {
+      if (this.activeSubMenuIndex !== null) {
+        this.menuItems[this.activeSubMenuIndex].expanded = false;
+      }
+      this.menuItems[index].expanded = true;
+      this.activeSubMenuIndex = index;
+    },
+    toggleSubMenu(index) {
+      if (this.activeSubMenuIndex !== null && this.activeSubMenuIndex !== index) {
+        this.menuItems[this.activeSubMenuIndex].expanded = false;
+      }
 
-    this.menuItems[index].expanded = !this.menuItems[index].expanded;
-    this.activeSubMenuIndex = this.menuItems[index].expanded ? index : null;
+      this.menuItems[index].expanded = !this.menuItems[index].expanded;
+      this.activeSubMenuIndex = this.menuItems[index].expanded ? index : null;
+    },
+    closeActiveSubMenu() {
+      if (this.activeSubMenuIndex !== null) {
+        this.menuItems[this.activeSubMenuIndex].expanded = false;
+        this.activeSubMenuIndex = null;
+        this.showMenu = false;
+        this.activeSubMenuIndex = null;
+      }
+      
+    },
+    closeMenuAndSubMenu() {
+      if (this.showMenu || this.activeSubMenuIndex !== null) {
+        this.showMenu = false;
+        this.activeSubMenuIndex = null;
+      }
+    },
   },
-  closeActiveSubMenu() {
-    if (this.activeSubMenuIndex !== null) {
-      this.menuItems[this.activeSubMenuIndex].expanded = false;
-      this.activeSubMenuIndex = null;
-      this.showMenu = false;
-      this.activeSubMenuIndex = null;
-    }
-  },
-  closeMenuAndSubMenu() {
-    if (this.showMenu || this.activeSubMenuIndex !== null) {
-      this.showMenu = false;
-      this.activeSubMenuIndex = null;
-    }
-  },
-},  
 };
 </script>
 

@@ -21,6 +21,7 @@ use App\Http\Controllers\VideoLenguajeController;
 use App\Http\Controllers\LenguaExtraImgPrincipalController;
 use App\Http\Controllers\LenguaExtraImgSecundarioController;
 use App\Http\Controllers\LenguaExtraObjetivosController;
+use App\Http\Controllers\MascotasController;
 
 
 use Illuminate\Http\Request;
@@ -131,6 +132,7 @@ Route::middleware([
         'lenguaExtraImgPrincipal' => LenguaExtraImgPrincipalController::class,
         'lenguaExtraImgSecundario' => LenguaExtraImgSecundarioController::class,
         'lenguaExtraObjetivo' => LenguaExtraObjetivosController::class,
+        'Mascotas' => MascotasController::class,
     ];
     // se declarar variables, 
 

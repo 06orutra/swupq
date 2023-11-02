@@ -4,7 +4,7 @@
           
             <!--apartado para la seccion de registro de una carrera-->
             <tab-panel :header="headers['registro_carrera']">
-              <identidad-carrera title="Paleta de colores"></identidad-carrera>
+              <identidad-carrera title="Paleta de colores" url_insertarCarrera="/carreras/insertar-carrera"></identidad-carrera>
             </tab-panel>
 
             <!--apartado para la seccion para elminar una carrera-->

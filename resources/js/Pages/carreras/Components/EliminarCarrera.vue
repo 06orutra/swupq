@@ -16,13 +16,17 @@
 
     <hr>
 
-    <div class="ver-carrera-eliminar">
+    <div class="container-carrera-eliminar">
+      <div class="ver-carrera-eliminar" v-if="carreraConsultada">
 
-      <div class="controls-eliminar-carrera">
-        <button-pv label="Elminar carrera" type="button" id="btn-delete-carrera" 
-        @click="eliminarCarrera" />
+        <div class="controls-eliminar-carrera">
+          <button-pv label="Elminar carrera" disabled type="button" id="btn-delete-carrera" 
+          @click="eliminarCarrera"  />
+        </div>
+
       </div>
     </div>
+
 
 
  </section>
@@ -70,6 +74,7 @@ export default defineComponent({
     let selectedCarrera = ref('');
     let carreras_disponibles = ref([]);
     const visibleDialog = ref(false);
+    const carreraConsultada = ref(false);
 
     function loadCarreras(){
       console.log("Cargando carreras disponibles...");
@@ -95,22 +100,18 @@ export default defineComponent({
     function eliminarCarrera(){
       console.log('Eliminando la carrera:'+selectedCarrera.value.carrera_nombre);
     }
-    function disabledBtn(){
-      document.getElementById('btn-delete-carrera').disabled = true;
-    }
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
       selectedCarrera,
       visibleDialog,
+      carreraConsultada,
       loadCarreras,
       loadCarreraData,
       eliminarCarrera,
-      disabledBtn,
     };
   },
   mounted(){
     this.loadCarreras();
-    this.disabledBtn();
   },
 
   // Lifecycle hooks (opcional)

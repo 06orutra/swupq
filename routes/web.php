@@ -23,7 +23,7 @@ use App\Http\Controllers\LenguaExtraImgSecundarioController;
 use App\Http\Controllers\LenguaExtraObjetivosController;
 use App\Http\Controllers\PdfPruebaController;
 
-
+use App\Http\Controllers\CarreraController;
 
 use Illuminate\Http\Request;
 
@@ -163,3 +163,26 @@ Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'banner
 Route::post('/bannerDataprimero', [TbCarruselPrimeroController::class, 'bannerData']);
 Route::post('/bannerDatasegundo', [TbCarruselSegundoController::class, 'bannerData']);
 Route::post('/bannerDatatercero', [TbCarruselTercerController::class, 'bannerData']);
+
+
+
+/* rutas para el apartado de carreras*/
+// Ruta para mostrar el json de los archivos subidos
+Route::get('data', [CarreraController::class, 'index']) -> name('data');
+
+//Ruta para mostrar el formulario de carreras
+Route::get('carrera', [CarreraController::class, 'myform']) -> name('carrera');
+//Ruta para subir el formulario de carreras
+Route::post('/carrera-insertar', [CarreraController::class, 'store']);
+
+//Ruta para actualizar el formulario de carreras
+Route::get('carrera/{id}/edit', [CarreraController::class, 'edit']) -> name('carrera.edit');
+
+//Ruta para actualizar el formulario de carreras
+Route::put('carrera/{id}', [CarreraController::class, 'update']) -> name('carrera.update');
+
+//Ruta para eliminar el formulario de carreras
+Route::delete('carrera/{id}', [CarreraController::class, 'destroy']) -> name('carrera.destroy');
+
+//ruta de insercion de prueba
+Route::post('/carrera-prueba', [CarreraController::class, 'guardar'])->name('carrera.prueba');

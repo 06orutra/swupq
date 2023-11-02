@@ -422,7 +422,7 @@
 
                 <br>
                 <div class="btn-carrera-modificar">
-                    <button-pv label="Guardar" type="button" id="btn-modificar-carrera"/>
+                    <button-pv label="Guardar" type="button" id="btn-modificar-carrera" disabled/>
                 </div>
             </form><!--(final) formulario para actualizar los datos de la carrera-->
         </div>
@@ -497,7 +497,7 @@ export default defineComponent({
   setup(props) {
     let selectedCarrera = ref('');
     const visibleDialog = ref(false);
-    const isConsultedCarrera = ref(true);
+    const isConsultedCarrera = ref(false);
 
     const modificarColoresCarrera = ref({
       colorPrimario:'004000',
@@ -534,10 +534,6 @@ export default defineComponent({
       */
     }
 
-    function disabledBtn() {
-      document.getElementById('btn-modificar-carrera').disabled = true;
-    }
-
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
       selectedCarrera,
@@ -546,12 +542,10 @@ export default defineComponent({
       modificarColoresCarrera,
       loadCarreras,
       loadCarreraData,
-      disabledBtn,
       // increment,
     };
   },
   mounted(){
-    //this.disabledBtn();
     this.loadCarreras();
   },
 

@@ -436,6 +436,7 @@ import ColumnGroup from 'primevue/columngroup';   // optional
 import Row from 'primevue/row';       
 import MultiSelect from 'primevue/multiselect';
 
+import axios from 'axios';
 
 
 export default defineComponent({
@@ -670,6 +671,21 @@ export default defineComponent({
     formData.append('ciclos_formacion',ciclos_formacion.value); //agregamos los ciclos de formacion
     //agregamos la informacion de la pagina principal e iconos de informacion
     formData.append('pagina_principal',pagina_principal.value);
+
+      axios.post(props.url_insertarCarrera,formData,{
+        headers:{
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function(response){
+        
+        console.log(response);
+
+      }).catch(function(error){
+        console.error(error);
+
+      }).finally(function(){
+        console.log("Peticion finalizada...");
+      })
 
 
       /*

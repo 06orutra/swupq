@@ -145,36 +145,16 @@ class CarreraController extends Controller
     }
 
     public function guardar(Request $request){
-        /*
-        $datos = [
-            "nombre_carrera" => $request->nombre,
-            "colores" => [],
-            "objetivos" => [
-                "plan_estudios" => $plan_estudios,
-                "vision" => $vision,
-                "mision" => $mision,
-                "url_imagen" => $url_imagen
-            ],
-            "perfil_egreso"=>$request->perfil_egreso,
-            "inicio" => $inicio
-        ];
-        */
-        /*
-        // Agregar colores al arreglo dinámicamente
-        foreach ($colores as $index => $color) {
-        $datos["colores"]["color_" . ($index + 1)] = $color;
-        }
-        */
 
         $datos = [
-            'nombre_carrera' => $request->nombre,  
-            'colores' => $request->colores,
-            'objetivos_carrera'=> $request->objetivos_carrera,
-            'perfil_ingreso' => $request->perfil_ingreso,
-            'plan_estudios_folleto_digital' => $request->plan_estudios_folleto_digital,
-            'perfil_egreso' => $request->perfil_egreso,   
-            'ciclos_formacion'=> $request->ciclos_formacion,
-            'pagina_principal' => $request->pagina_principal,
+            'nombre_carrera' => $request->input('nombre'),  
+            'colores' => json_decode($request->input('colores')),  
+            'objetivos_carrera'=> json_decode($request->input('objetivos_carrera')),
+            'perfil_ingreso' => json_decode($request->input('perfil_ingreso')),
+            'plan_estudios_folleto_digital' => json_decode($request->input('plan_estudios_folleto_digital')),
+            'perfil_egreso' => $request->input('perfil_egreso'),   
+            'ciclos_formacion'=> json_decode($request->input('ciclos_formacion')),
+            'pagina_principal' => json_decode($request->input('pagina_principal')),
         ];
 
         $json = json_encode($datos, JSON_UNESCAPED_SLASHES);

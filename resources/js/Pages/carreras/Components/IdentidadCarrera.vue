@@ -663,14 +663,14 @@ export default defineComponent({
       //document.getElementById('form-carreras').submit();
     const formData = new FormData();
     formData.append('nombre', nombre_carrera.value); //agregamos el nombre de la carrera
-    formData.append('colores', colores_carrera.value); //agregamos los colores de la carrera
-    formData.append('objetivos_carrera',objetivos_plan_estudios.value); //agregamos los objetivos de la carrera
-    formData.append('perfil_ingreso',perfil_ingreso.value); //agregamos el perfil de ingreso
-    formData.append('plan_estudios_folleto_digital',plan_estudios_folleto_digital); //agregamos el plan de estudios y el folleto digital 
+    formData.append('colores', JSON.stringify(colores_carrera.value)); //agregamos los colores de la carrera
+    formData.append('objetivos_carrera',JSON.stringify(objetivos_plan_estudios.value)); //agregamos los objetivos de la carrera
+    formData.append('perfil_ingreso',JSON.stringify(perfil_ingreso.value)); //agregamos el perfil de ingreso
+    formData.append('plan_estudios_folleto_digital',JSON.stringify(plan_estudios_folleto_digital.value)); //agregamos el plan de estudios y el folleto digital 
     formData.append('perfil_egreso',perfil_egreso.value); //agregamos el perfil de egreso
-    formData.append('ciclos_formacion',ciclos_formacion.value); //agregamos los ciclos de formacion
+    formData.append('ciclos_formacion',JSON.stringify(ciclos_formacion.value)); //agregamos los ciclos de formacion
     //agregamos la informacion de la pagina principal e iconos de informacion
-    formData.append('pagina_principal',pagina_principal.value);
+    formData.append('pagina_principal',JSON.stringify(pagina_principal.value));
 
       axios.post(props.url_insertarCarrera,formData,{
         headers:{

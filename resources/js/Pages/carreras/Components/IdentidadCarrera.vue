@@ -121,7 +121,7 @@
         <!--seleccionar un conocimiento existente-->
         <div class="select-conocimiento">
           Selccionar conocimientos:
-          <multi-select v-model="conocimientos_selected" display="chip" :options="conocimientos" 
+          <multi-select v-model="perfil_ingreso.conocimientos" display="chip" :options="conocimientos" 
           optionLabel="nombre" placeholder="Selecciona conocimientos"
             :maxSelectedLabels="3" class="w-full md:w-30rem"  />
         </div>
@@ -132,7 +132,7 @@
           <!--mostrar los conocimientos que se ha agregado-->
           <strong>conocimientos seleccionados</strong>
           <ul>
-            <li v-for="(elm,index) in conocimientos_selected" :key="index">{{ elm.nombre }}</li>
+            <li v-for="(elm,index) in perfil_ingreso.conocimientos" :key="index">{{ elm.nombre }}</li>
           </ul>
         </div>
 
@@ -156,7 +156,7 @@
         <!--seleccionar una habilidad existente-->
         <div class="select-habilidad">
           Selccionar habilidad:
-          <multi-select v-model="habilidades_selected" display="chip" :options="habilidades" 
+          <multi-select v-model="perfil_ingreso.habilidades" display="chip" :options="habilidades" 
           optionLabel="nombre" placeholder="Selecciona habilidades"
             :maxSelectedLabels="3" class="w-full md:w-30rem"  />
         </div>
@@ -165,7 +165,7 @@
           <!--mostrar las habilidaes que se ha agregado-->
           <strong>habilidades seleccionadas</strong>
           <ul>
-            <li v-for="(elm,index) in habilidades_selected" :key="index">{{ elm.nombre }}</li>
+            <li v-for="(elm,index) in perfil_ingreso.habilidades" :key="index">{{ elm.nombre }}</li>
           </ul>
         </div>
 
@@ -189,7 +189,7 @@
         <!--seleccionar una actitud existente-->
         <div class="select-actitud">
           Selccionar actitud:
-          <multi-select v-model="actitudes_selected" display="chip" :options="actitudes" 
+          <multi-select v-model="perfil_ingreso.actitudes" display="chip" :options="actitudes" 
           optionLabel="nombre" placeholder="Selecciona actitudes"
             :maxSelectedLabels="3" class="w-full md:w-30rem"  />
         </div>
@@ -198,7 +198,7 @@
           <!--mostrar las actitudes que se ha agregado-->
           <strong>actitudes seleccionadas</strong>
           <ul>
-            <li v-for="(elm,index) in actitudes_selected" :key="index">{{ elm.nombre }}</li>
+            <li v-for="(elm,index) in perfil_ingreso.actitudes" :key="index">{{ elm.nombre }}</li>
           </ul>
         </div>
 
@@ -620,7 +620,8 @@ export default defineComponent({
     }
 
     function addConocimiento(){
-      conocimientos_selected.value.push(conocimiento.value);
+      //conocimientos_selected.value.push(conocimiento.value);
+      perfil_ingreso.conocimientos.push(conocimiento.value);
       conocimientos.value.push(conocimiento.value);
       conocimiento.value = {
         nombre : '',
@@ -628,6 +629,7 @@ export default defineComponent({
     }
 
     function addHabilidad(){
+      perfil_ingreso.habilidades.push(habilidad.value);
       habilidades_selected.value.push(habilidad.value);
       habilidades.value.push(habilidad.value);
       habilidad.value ={
@@ -636,6 +638,7 @@ export default defineComponent({
     }
 
     function addActitud(){
+      perfil_ingreso.actitudes.push(actitud.value);
       actitudes_selected.value.push(actitud.value);
       actitudes.value.push(actitud.value);
       actitud.value = {

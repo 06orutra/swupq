@@ -144,6 +144,7 @@ class CarreraController extends Controller
                 'id' => $registro->id,
                 'nombre_carrera'=> json_decode($registro->datos)->nombre_carrera,
                 'url_imagen' => json_decode($registro->datos)->objetivos_carrera->url_imagen,
+                'colores'=> json_decode($registro->datos)->colores,
             ];
         });
         

@@ -12,7 +12,13 @@
                     <img :src="carreraCard.url_imagen" alt="Card Image" class="imagen-resolucion" />
                 </template>
                 <template #title> {{carreraCard.nombre_carrera}} </template>
-                <template #subtitle><p> {{carreraCard.url_imagen}}</p></template>
+                <template #subtitle>
+                    <div class="container-palette-color row-div">
+                        <div class="color-primary item" :style="{backgroundColor: '#'+carreraCard.colores.colorPrimario }"></div>
+                        <div class="color-secundary item" :style="{backgroundColor: '#'+carreraCard.colores.colorSecundario }"></div>
+                        <div class="color-ternary item" :style="{backgroundColor: '#'+carreraCard.colores.colorTerciario }"></div>
+                    </div>
+                </template>
                 <template #footer>
 
                     <button-pv icon="pi pi-pencil" class="p-button p-button-warning" 
@@ -190,5 +196,21 @@ margin-bottom: 40px;
     justify-content: center;
     align-items: center;
 
+}
+
+/*para darle forma a los items que representaran la paleta de colores de la carrera*/
+.item{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin: 2px 2px 2px 2px;
+}
+
+
+.row-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 </style>

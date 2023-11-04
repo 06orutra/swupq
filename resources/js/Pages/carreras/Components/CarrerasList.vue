@@ -5,16 +5,21 @@
         <div class="centrar title">
             <h4>Carreras</h4>
         </div>
-        <div class="cards-container" v-if="cartasPrueba">
-            <card-pv v-for="(carreraCard,index) in cartasPrueba" :key="index+carreraCard.nombre" class="card"> <!--v-for="datosCard in filteredBanner"-->
+        <div class="cards-container" v-if="carrerasLoaded">
+            <card-pv v-for="carreraCard in carrerasLoaded" :key="carreraCard.id" class="card"> <!--v-for="datosCard in filteredBanner"-->
                 <template #header>
-                    <img :src="carreraCard.img" alt="Card Image" class="imagen-resolucion" /> <!--'/storage/' + carreraCard.img-->
+                    <!--<img :src="carreraCard.img" alt="Card Image" class="imagen-resolucion" />--> <!--'/storage/' + carreraCard.img-->
+                    <img :src="carreraCard.url_imagen" alt="Card Image" class="imagen-resolucion" />
                 </template>
-                <template #title> {{carreraCard.nombre}} </template>
-                <template #subtitle> {{carreraCard.link}}</template>
+                <template #title> {{carreraCard.nombre_carrera}} </template>
+                <template #subtitle><p> {{carreraCard.url_imagen}}</p></template>
                 <template #footer>
-                    <button-pv icon="pi pi-pencil" class="p-button p-button-warning" />
-                    <button-pv icon="pi pi-trash" class="p-button p-button-danger"  />
+
+                    <button-pv icon="pi pi-pencil" class="p-button p-button-warning" 
+                    @click="editarCarrera(carreraCard.id,carreraCard.nombre_carrera)"/>
+                    <button-pv icon="pi pi-trash" class="p-button p-button-danger" 
+                    @click="eliminarCarrera(carreraCard.id,carreraCard.nombre_carrera)" />
+
                 </template>
                 <template #empty>
                     <div class="flex justify-center align-middle text-xl">
@@ -23,12 +28,16 @@
                 </template>
             </card-pv>
         </div>
+        <div v-else><!--por si no hay ningun registro en la base de datos-->
+            <h4><span>NO HAY CARRERAS REGISTRADAS AUN</span></h4>
+        </div>
     </section>
 
 </template>
 
 <script>
 import { defineComponent } from 'vue';
+import { ref } from 'vue';
 //compnentes de primevue
 import Card from 'primevue/card';
 import Button from 'primevue/button';
@@ -53,6 +62,8 @@ export default defineComponent({
   // Setup del componente (opcional)
   setup(props) {
 
+    //variables de prueba, para cargar las carreras en la lista de cards
+    /*
     const cartasPrueba = [
     {nombre:'Filosofia', link:'https://www.google.com/',
          img:'https://images.ecestaticos.com/eJpF9C7qs7nMMSPadj5u1uQeukQ=/131x0:863x548/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Ffa6%2Ff7f%2Fe35%2Ffa6f7fe357cc232cf1771a4ce7bc5fb0.jpg'},
@@ -63,25 +74,47 @@ export default defineComponent({
         {nombre:'Medicina', link:'https://www.google.com/',
         img:'https://s1.significados.com/foto/medicina_sm.jpg'}
     ];
+    */
+
+    //variables
+
+    const carrerasLoaded = ref([]);//guardara las carreras que se traigan de la base de datos
+    const isLoading = ref(true);//para saber si se esta cargando la informacion de la base de datos
 
     //functions
     function getCarreras(){
+        //trae todas las carreras guardadas de la base de datos
         axios.post(props.url_getCarreras)
         .then(function(response){
-            console.log(response.data);
+            const carreras = response.data;
 
+            carreras.forEach(element => {
+                carrerasLoaded.value.push(element);
+            });
+            
         }).catch(function(error){
             console.error(error);
-
         }).finally(function(){
-            console.log("Peticion finalizada...(CarreraList)");
+            isLoading.value = false;
         });
     }
 
+    //para mostrar la informacion de la carrera a eliminar
+    function eliminarCarrera(id,carrera_nombre){
+        console.log(`Eliminando...\nID:${id}\nCarrera:${carrera_nombre}`);
+    }
+
+    function editarCarrera(id,carrera_nombre){
+        console.log(`Editando...\nID:${id}\nCarrera:${carrera_nombre}`);
+    }
+
+
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
-        cartasPrueba,
+        carrerasLoaded,
         getCarreras,
+        eliminarCarrera,
+        editarCarrera,
     };
   },
   mounted(){

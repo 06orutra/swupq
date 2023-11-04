@@ -63,10 +63,29 @@ export default defineComponent({
         {nombre:'Medicina', link:'https://www.google.com/',
         img:'https://s1.significados.com/foto/medicina_sm.jpg'}
     ];
+
+    //functions
+    function getCarreras(){
+        axios.post(props.url_getCarreras)
+        .then(function(response){
+            console.log(response.data);
+
+        }).catch(function(error){
+            console.error(error);
+
+        }).finally(function(){
+            console.log("Peticion finalizada...(CarreraList)");
+        });
+    }
+
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
-        cartasPrueba
+        cartasPrueba,
+        getCarreras,
     };
+  },
+  mounted(){
+    this.getCarreras();
   },
 
   // Lifecycle hooks (opcional)

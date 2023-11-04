@@ -137,11 +137,17 @@ class CarreraController extends Controller
         }
     }
 
-    public function carreras_disponibles(){
-
-        $carreras = Carrera::all();
-
-        return response()->json($carreras);
+    public function get_carreras_disponibles(){
+        
+        $resultados = Carrera::all()->map(function ($registro) {
+            return [
+                'id' => $registro->id,
+                'nombre_carrera'=> json_decode($registro->datos)->nombre_carrera,
+                'objetivos_carrera' => json_decode($registro->datos)->objetivos_carrera->url_imagen,
+            ];
+        });
+        
+        return response()->json($resultados);
     }
 
     public function guardar(Request $request){

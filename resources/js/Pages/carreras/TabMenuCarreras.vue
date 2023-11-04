@@ -1,7 +1,11 @@
 <template>
     <section class="administrador-carreras">
         <tab-view class="p-3">
-          
+            <!--apartado para la ver las carreras registradas-->
+            <tab-panel header="Mis Carreras">
+              <carrera-lista title="Lista de carreras" url_getCarreras="/carreras/carreras-disponibles"/>
+            </tab-panel>
+
             <!--apartado para la seccion de registro de una carrera-->
             <tab-panel :header="headers['registro_carrera']">
               <identidad-carrera title="Paleta de colores" url_insertarCarrera="/carrera-prueba"></identidad-carrera>
@@ -17,8 +21,6 @@
               <carrera-modificar title="Modificar carrera" url_getCarreras="/carreras/carreras-disponibles"
               url_getDataCarrera="/carreras/carrera-informacion"/>
             </tab-panel>  
-            
-        
         </tab-view>  
     </section>
 </template>
@@ -30,6 +32,7 @@ import RegistrarCarrera from '@/Pages/carreras/Components/IdentidadCarrera.vue';
 import CarreraEliminar from '@/Pages/carreras/Components/EliminarCarrera.vue';
 import CarreraModificar from '@/Pages/carreras/Components/ModificarCarrera.vue';
 import TabPanel from 'primevue/tabpanel';
+import CarreraLista from '@/Pages/carreras/Components/CarrerasList.vue';
 
 export default defineComponent({
   // Propiedades del componente (opcional)
@@ -40,6 +43,7 @@ export default defineComponent({
     'identidad-carrera':RegistrarCarrera,
     'carrera-eliminar':CarreraEliminar,
     'carrera-modificar':CarreraModificar,
+    'carrera-lista':CarreraLista,
   },
   props: {
     headers:{

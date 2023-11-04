@@ -186,3 +186,6 @@ Route::delete('carrera/{id}', [CarreraController::class, 'destroy']) -> name('ca
 
 //ruta de insercion de prueba
 Route::post('/carrera-prueba', [CarreraController::class, 'guardar'])->name('carrera.prueba');
+
+//ruta para obtener las carreras disponibles
+Route::post('/carreras-disponibles', [CarreraController::class, 'get_carreras_disponibles'])->name('carrera.disponibles');

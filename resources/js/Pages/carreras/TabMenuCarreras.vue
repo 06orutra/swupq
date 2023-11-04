@@ -3,7 +3,7 @@
         <tab-view class="p-3">
             <!--apartado para la ver las carreras registradas-->
             <tab-panel header="Mis Carreras">
-              <carrera-lista title="Lista de carreras" url_getCarreras="/carreras/carreras-disponibles"/>
+              <carrera-lista title="Lista de carreras" url_getCarreras="/carreras-disponibles"/>
             </tab-panel>
 
             <!--apartado para la seccion de registro de una carrera-->

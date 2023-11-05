@@ -137,6 +137,7 @@ class CarreraController extends Controller
         }
     }
 
+    //retorna las carreras disponibles con su id y sus datos correspondientes
     public function get_carreras_disponibles(){
         
         $resultados = Carrera::all()->map(function ($registro) {
@@ -151,6 +152,17 @@ class CarreraController extends Controller
         return response()->json($resultados);
     }
 
+    //retorna los datos de una carrera en especifico por su id
+    public function get_carrera(Request $request){
+        $carrera = Carrera::find($request->id);
+        $datosCarrera = [
+            'id'=>$carrera->id,
+            'datos'=>json_decode($carrera->datos),
+        ];
+        return response()->json($datosCarrera);
+    }
+
+    //guarda los datos de una carrera 
     public function guardar(Request $request){
 
         $datos = [

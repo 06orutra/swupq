@@ -189,3 +189,6 @@ Route::post('/carrera-prueba', [CarreraController::class, 'guardar'])->name('car
 
 //ruta para obtener las carreras disponibles
 Route::post('/carreras-disponibles', [CarreraController::class, 'get_carreras_disponibles'])->name('carrera.disponibles');
+
+//Ruta para obtener un solo registro de la base de datos
+Route::post('/carreras-unica',[CarreraController::class,'get_carrera'])->name('carrera.unica');

@@ -90,6 +90,24 @@
 
                         </div>
 
+                        <!--perfil de ingreso de la carrera-->
+                        <hr>
+                        <div class="container-perfil-ingreso">
+                            <div class="titulo-apartado centrar">
+                                <h5>Perfil ingreso</h5>
+                            </div>
+                            
+                            <div class="container-conocimientos">
+
+                            </div>
+                            <div class="container-habilidades">
+
+                            </div>
+                            <div class="container-actitudes">
+
+                            </div>
+                        </div>
+
                         <hr>
                         <!--perfil de egreso de la carrera-->
                         <div class="container-perfil-egreso">
@@ -116,13 +134,34 @@
                         <!--plan de estudios y folleto digital-->
                         <hr>
                         <div class="container-plan-estudios-folleto-digital">
+                            <div class="titulo-apartado centrar">
+                                    <strong>Documentos</strong>
+                            </div>
                             <div class="plan-estudios-delete">
-                                <span><strong>Plan de estudios</strong></span>
-                                <p>{{ carreraEliminar.datos.plan_estudios_folleto_digital.plan_estudios }}</p>
+                                <span><strong>{{carreraEliminar.datos.plan_estudios_folleto_digital.plan_estudios.titulo}}</strong></span>
+                                <br>
+                                <span>
+                                    Direccion del documento:
+                                    {{ carreraEliminar.datos.plan_estudios_folleto_digital.plan_estudios.url_documento }}
+                                </span>
+                                <br>
+                                <span>
+                                    Direccion del fondo:
+                                    {{ carreraEliminar.datos.plan_estudios_folleto_digital.plan_estudios.url_imagen_fondo }}
+                                </span>
                             </div>
                             <div class="folleto-digital-delete">
-                                <span><strong>Folleto digital</strong></span>
-                                <p>{{ carreraEliminar.datos.plan_estudios_folleto_digital.folleto_digital }}</p>
+                                <span><strong>{{carreraEliminar.datos.plan_estudios_folleto_digital.folleto_digital.titulo}}</strong></span>
+                                <br>
+                                <span>
+                                    Direccion del documento:
+                                    {{ carreraEliminar.datos.plan_estudios_folleto_digital.folleto_digital.url_documento }}
+                                </span>
+                                <br>
+                                <span>
+                                    Direccion del fondo:
+                                    {{ carreraEliminar.datos.plan_estudios_folleto_digital.folleto_digital.url_imagen_fondo }}
+                                </span>
                             </div>
                         </div>
 

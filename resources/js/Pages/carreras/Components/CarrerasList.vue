@@ -37,6 +37,107 @@
         <div v-else><!--por si no hay ningun registro en la base de datos-->
             <h4><span>NO HAY CARRERAS REGISTRADAS AUN</span></h4>
         </div>
+
+        <!--dialogo para mostrar los datos de la carrera a eliminar-->
+        <dialog-pv v-model:visible="visibleDialogDelete" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
+        :style="{ width: '25vw' }" header="Ver datos relacionados" modal class="p-fluid">
+            <div class="field">
+                <form @submit.prevent="">
+                    <div class="container-datos-relacionados-eliminar">
+                        <div class="titulo-nombre-carrera centrar">
+                            <h3>{{ carreraEliminar.datos.nombre_carrera }}</h3>
+                        </div>
+
+                        <div class="container-palette-colors centrar">
+                            <div class="row-div">
+                                <div class="color-primary item" :style="{backgroundColor: '#'+carreraEliminar.datos.colores.colorPrimario }"></div>
+                                <div class="color-secundary item" :style="{backgroundColor: '#'+carreraEliminar.datos.colores.colorSecundario }"></div>
+                                <div class="color-ternary item" :style="{backgroundColor: '#'+carreraEliminar.datos.colores.colorTerciario }"></div>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="container-objetivos-carrera">
+                            <div class="titulo-apartado centrar">
+                                    <h5>Objetivos de la carrera</h5>
+                            </div>
+
+                            <div class="container-objetivos-plan-estudios">
+                                <!--objetivos de la carrera-->
+                                <div class="objetivos-plan-estudios">
+                                    <span><strong>Objetivos plan de estudios</strong></span>
+                                    <p>{{carreraEliminar.datos.objetivos_carrera.plan_estudios}}</p>
+                                </div>
+                            </div>
+
+                            <!--vision de la carrera-->
+                            <div class="container-vision-carrera">
+                                <!--objetivos de la carrera-->
+                                <div class="vision-eliminar">
+                                    <span><strong>Vision</strong></span>
+                                    <p>{{carreraEliminar.datos.objetivos_carrera.vision}}</p>
+                                </div>
+                            </div>
+
+                            <!--mision de la carrera-->
+                            <div class="container-mision-carrera">
+                                <!--objetivos de la carrera-->
+                                <div class="mision-eliminar">
+                                    <span><strong>Mision</strong></span>
+                                    <p>{{carreraEliminar.datos.objetivos_carrera.mision}}</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <hr>
+                        <!--perfil de egreso de la carrera-->
+                        <div class="container-perfil-egreso">
+                            <div class="perfil-egreso-delete">
+                                <span class="centrar"><strong>Perfil egreso</strong></span>
+                                <p>{{ carreraEliminar.datos.perfil_egreso }}</p>
+                            </div>
+                        </div>
+
+                        <!--ciclos de formacion de la carrera-->
+                        <hr>
+
+                        <div class="container-ciclos-formacion">
+                            <span class="centrar"><strong>Ciclos de formación</strong></span>
+                            <div class="ciclos-formacion-delete">
+                                <div v-for="(ciclo_formacion,index) in carreraEliminar.datos.ciclos_formacion" :key="index">
+                                    <span><strong>{{ ciclo_formacion.numero_ciclo }}</strong></span>
+                                    <p>{{ ciclo_formacion.descripcion }}</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <!--plan de estudios y folleto digital-->
+                        <hr>
+                        <div class="container-plan-estudios-folleto-digital">
+                            <div class="plan-estudios-delete">
+                                <span><strong>Plan de estudios</strong></span>
+                                <p>{{ carreraEliminar.datos.plan_estudios_folleto_digital.plan_estudios }}</p>
+                            </div>
+                            <div class="folleto-digital-delete">
+                                <span><strong>Folleto digital</strong></span>
+                                <p>{{ carreraEliminar.datos.plan_estudios_folleto_digital.folleto_digital }}</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!--boton para confirmar la eliminacion de la carrera-->
+                    <br>
+                    <div class="controls-delete-carrera">
+                        <button-pv label="Eliminar" type="button" @click="ejecutaEliminacion()"/>
+                    </div>
+                </form>
+            </div>
+        </dialog-pv>
+
+
     </section>
 
 </template>
@@ -47,6 +148,7 @@ import { ref } from 'vue';
 //compnentes de primevue
 import Card from 'primevue/card';
 import Button from 'primevue/button';
+import Dialog from 'primevue/dialog';
 
 
 export default defineComponent({
@@ -54,6 +156,7 @@ export default defineComponent({
   components: {
     'card-pv':Card,
     'button-pv':Button,
+    'dialog-pv':Dialog,
   },
   props: {
     title:{
@@ -64,28 +167,22 @@ export default defineComponent({
       type:String,
       required:true,
     },
+    url_getCarreraUnica:{
+        type:String,
+        required:true,
+    }
   },
   // Setup del componente (opcional)
   setup(props) {
 
-    //variables de prueba, para cargar las carreras en la lista de cards
-    /*
-    const cartasPrueba = [
-    {nombre:'Filosofia', link:'https://www.google.com/',
-         img:'https://images.ecestaticos.com/eJpF9C7qs7nMMSPadj5u1uQeukQ=/131x0:863x548/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Ffa6%2Ff7f%2Fe35%2Ffa6f7fe357cc232cf1771a4ce7bc5fb0.jpg'},
-        {nombre:'Gastronomia', link:'https://www.google.com/',
-         img:'https://www.mexicodesconocido.com.mx/wp-content/uploads/2018/07/gastronomia-mexicana-platillos.jpg'},
-        {nombre:'Derecho', link:'https://www.google.com/',
-         img:'https://concepto.de/wp-content/uploads/2012/03/derecho-ley-e1552664252875.jpg'},
-        {nombre:'Medicina', link:'https://www.google.com/',
-        img:'https://s1.significados.com/foto/medicina_sm.jpg'}
-    ];
-    */
-
     //variables
+    const visibleDialogDelete = ref(false);
 
     const carrerasLoaded = ref([]);//guardara las carreras que se traigan de la base de datos
     const isLoading = ref(true);//para saber si se esta cargando la informacion de la base de datos
+
+    const carreraEliminar = ref();//guardara los datos de la carrera que se desea eliminar
+    const carreraEditar = ref();//guardara los datos de la carrera que se desea editar
 
     //functions
     function getCarreras(){
@@ -107,20 +204,53 @@ export default defineComponent({
 
     //para mostrar la informacion de la carrera a eliminar
     function eliminarCarrera(id,carrera_nombre){
+        
         console.log(`Eliminando...\nID:${id}\nCarrera:${carrera_nombre}`);
+        //solicitamos la informacion de la carrera a eliminar
+        axios.post(props.url_getCarreraUnica,{'id':id})
+        .then(function(response){
+            const carreraDatos = response.data;
+            
+            carreraEliminar.value = carreraDatos;
+
+            visibleDialogDelete.value = true;
+
+        }).catch(function(error){
+            console.error(error);
+        }).finally(function(){
+            isLoading.value = false;
+        });
+
+    }
+
+    function ejecutaEliminacion(){
+        console.log('Eliminando la carrera:'+carreraEliminar.value.datos.nombre_carrera);
     }
 
     function editarCarrera(id,carrera_nombre){
         console.log(`Editando...\nID:${id}\nCarrera:${carrera_nombre}`);
+        //solicitamos la informacion de la carrera a actualizar
+        axios.post(props.url_getCarreraUnica,{'id':id})
+        .then(function(response){
+            const carreraDatos = response.data;
+
+        }).catch(function(error){
+            console.error(error);
+        }).finally(function(){
+            isLoading.value = false;
+        });
     }
 
 
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
         carrerasLoaded,
+        visibleDialogDelete,
+        carreraEliminar,
         getCarreras,
         eliminarCarrera,
         editarCarrera,
+        ejecutaEliminacion,
     };
   },
   mounted(){
@@ -141,15 +271,6 @@ export default defineComponent({
   //   Vue.filter('uppercase', (value) => {
   //     return value.toUpperCase();
   //   });
-  // },
-
-  // Watchers (opcional)
-  // Puedes utilizar el método watch para observar cambios en las propiedades o datos del componente.
-  // Ejemplo:
-  // watch: {
-  //   title(newValue, oldValue) {
-  //     console.log('El título ha cambiado de:', oldValue, 'a:', newValue);
-  //   },
   // },
 
   // Directivas (opcional)

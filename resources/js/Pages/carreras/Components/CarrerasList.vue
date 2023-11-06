@@ -98,13 +98,42 @@
                             </div>
 
                             <div class="container-conocimientos">
-
+                                <span><strong>Conocimientos</strong></span>
+                                <ul class="lista-conocimientos">
+                                    <li v-for="(conocimiento_carrera,index) in carreraEliminar.datos.perfil_ingreso.conocimientos"
+                                    :key="conocimiento_carrera.nombre+'_'+index" class="item-conocimiento">
+                                        {{ conocimiento_carrera.nombre  }}
+                                    </li>
+                                </ul>
+                                
                             </div>
+
                             <div class="container-habilidades">
-
+                                <span><strong>Habilidades</strong></span>
+                                <ul class="lista-habilidades">
+                                    <li v-for="(habilidad_carrera,index) in carreraEliminar.datos.perfil_ingreso.habilidades"
+                                    :key="habilidad_carrera+'_'+index" class="item-habilidad">
+                                        {{ habilidad_carrera.nombre  }}
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="container-actitudes">
 
+                            <div class="container-actitudes">
+                                <span><strong>Actitudes</strong></span>
+                                <ul class="lista-actitudes">
+                                    <li v-for="(actitud_carrera,index) in carreraEliminar.datos.perfil_ingreso.actitudes"
+                                    :key="actitud_carrera+'_'+index" class="item-actitud">
+                                        {{ actitud_carrera.nombre  }}
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="video-carrera">
+                                <span><strong>Video</strong></span>
+                                <div class="video-direccion">
+                                    <a href="#" target="_blank">{{ carreraEliminar.datos.perfil_ingreso.video }}</a>
+                                </div>
+                               
                             </div>
                         </div>
 
@@ -165,12 +194,51 @@
                             </div>
                         </div>
 
+                        <!--pagina principal-->
+                        <hr>
+                        <div class="container-pagina-principal">
+                            <div class="imagen-p">
+                                <span><strong>Imagen principal</strong></span>
+                                <br>
+                                <mark>{{carreraEliminar.datos.pagina_principal.url_imagen}}</mark>
+                            </div>
+
+                            <br>
+                            <div class="container-iconos-informativos">
+                                <span><strong>Iconos informativos</strong></span>
+                                <ul class="lista-iconos-informativos">
+                                    <li v-for="(icono,index) in carreraEliminar.datos.pagina_principal.tarjetas_informativas_pp"
+                                    :key="icono.descripcion+'_'+index">
+                                        <details class="item-icono-informativo">
+                                            <summary class="titulo-icono-informativo">{{icono.descripcion}}</summary>
+                                            <div class="direccion-icono-informativo">
+                                                <a href="#" target="_blank"> {{icono.url_direccion_imagen}}</a>
+                                               
+                                            </div>
+                                        </details>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!--
+                            <div>
+                                <details>
+                                    <summary>Esta es la tarjeta</summary>
+                                    <div>
+                                        esta es la descripcion de la tarjeta
+                                    </div>
+                                </details>
+                            </div>
+                            -->
+                        </div>
+
                     </div>
 
                     <!--boton para confirmar la eliminacion de la carrera-->
                     <br>
-                    <div class="controls-delete-carrera">
-                        <button-pv label="Eliminar" type="button" @click="ejecutaEliminacion()"/>
+                    <div class="controls-delete-carrera centrar">
+                        <button-pv label="Eliminar" type="button" @click="ejecutaEliminacion()"
+                        :style="{ width: '50%' }"/>
                     </div>
                 </form>
             </div>
@@ -367,6 +435,13 @@ margin-bottom: 40px;
     margin: 2px 2px 2px 2px;
 }
 
+.lista-iconos-informativos{
+    list-style: none;
+}
+
+.item-icono-informativo:hover{
+    cursor: pointer;
+}
 
 .row-div{
     display: flex;

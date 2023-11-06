@@ -5,7 +5,7 @@ import carruselEstructura from "@/Pages/Componentes/Home/carruselEstructura.vue"
 import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 import estructuraTextos from "@/Pages/Componentes/Home/estructuraTextos.vue";
 import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
-import NotaMascotas from "@/Pages/Componentes/Institucion/institucionAdmin/NotaMascotas.vue";
+/* import NotaMascotas from "@/Pages/Componentes/Institucion/institucionAdmin/NotaMascotas.vue"; */
 import modeloEducativo from './modeloEducativo.vue';
 import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofia.vue";
 import MensajeRector from '@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue';
@@ -22,7 +22,7 @@ export default {
         estructuraTextos,
         estructuraImg,
         MensajeRector,
-        NotaMascotas,
+        /* NotaMascotas, */
         filosofia,
         historia,
         modeloEducativo,

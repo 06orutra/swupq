@@ -1,5 +1,6 @@
 <script>
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
+import axios from 'axios';
 export default {
   components: {
     AppEstructure
@@ -8,17 +9,20 @@ export default {
   mounted() {
     this.cargarDatosRector();
     this.cargarMensaje();
+    this.obtenerPDF();
   },
 
   data() {
     return {
       selectedOption: null,
       datos: [],
+      //Mostrar PDF o no.
+      mostrarPDF: false,
+      //Objeto de los informes
+      informes: [
+      { ruta: "/storage/pdfs/1698694086_Formulario integrales.pdf", mostrar: false },
+      ],
       mensaje: [],
-      /* parrafo1: "Un nuevo año implica nuevos retos, nuevas metas y más empuje. Es por eso que la Unversidad Politécnica de Querétaro (UPQ) está lista para recibir y formar a líderes en la industria automotriz.",
-      parrafo2: "Sin duda, el 2020 y 2021 obligaron a que el sector educativo se reinventara y la UPQ no fue la excepción; relfexionamos, evolucionamos y mejorarmos para adaptarnos a esta nueva normalidad. Hoy, estamos preparados para afianzar nuestro lugar en el sector educativo estatal, nacional e internacional.",
-      parrafo3: "Uno de los motores que nos dará fortaleza este 2022 será la vinculación de nuestros estudiantes con la industria automotriz a través del Modelo de Formación Dual, un sistema característico de nuestra institución. También sabemos que la salud física y mental de nuestros alumnos es primordial, por eso a través de la cultura y el deporte fortaleceremos las destrezas y competencias de nuestros alumnos. Así que ¡vamos, Cardenales! ¡Volemos alto y formemos al talento automotriz que Querétaro y México necesitan!", */
-      /* parrafos: [], */
       pdfLinks: {
         politica: "https://www.upq.mx/igualdad_laboral/assets/pol%c3%adtica-de-igualdad-laboral-y-no-discriminaci%c3%b3n..pdf",
       },
@@ -26,6 +30,18 @@ export default {
   },
 
   methods: {
+    mostrarInforme(index) {
+    this.informes.forEach((informe, i) => {
+      if (i !== index) {
+        informe.mostrar = false; // Oculta los otros informes
+      }
+    });
+    this.informes[index].mostrar = !this.informes[index].mostrar;
+  },
+    mostrarPDF() {
+      this.informes.forEach(informe => informe.mostrar = false);
+      this.mostrarPDF = !this.mostrarPDF;
+    },
     handleSelection() {
       if (this.selectedOption) {
         const pdfPath = `ruta_a_tu_pdf/${this.selectedOption}.pdf`;
@@ -46,6 +62,13 @@ export default {
         console.log(error);
       });
     },
+    /* obtenerPDF() {
+      return axios.post('/informe/bannerData').then((response) => {
+        this.informes = response.data;
+      }).catch((error) => {
+        console.log(error);
+      });
+    }, */
 
   }
 }
@@ -64,7 +87,8 @@ export default {
         <div class="flex items-center justify-center my-1">
           <img v-if="datos.length > 0" class="h-96 w-100 p-8" :src="'/storage/' + datos[0].imagen" alt="">
         </div>
-        <div class="col-md-8 offset-md-8 text-justify  text-aling: center text-xl" style="width: 50%; margin: 0 auto;">
+        <div class="col-md-8 offset-md-8 text-center md:text-justify  text-aling: center text-xl"
+          style="width: 50%; margin: 0 auto;">
           <div style="text-align: center;">
             <h3 style="margin:0">
               <strong v-if="datos.length > 0">{{ datos[0].nombre }}</strong>
@@ -77,23 +101,29 @@ export default {
             </p>
 
           </div>
+          <br><br>
           <div class="bg-white  shadow-6 sm:border-round-lg">
             <div class="card">
               <h1>INFORMES DEL RECTOR</h1>
-
+              <button @click="mostrarPDF">Abrir</button>
+              <iframe v-if="mostrarPDF" src="/storage/pdfs/1698694086_Formulario integrales.pdf" width="100%" height="500px"></iframe>
               <details class="warning">
-                <summary>DOCUMENTOS </summary>
-                <a :href="pdfLinks.politica" target="_blank">Informe 2020</a>
+                <summary>DOCUMENTOS </summary><br>
+                <div v-for="(informe, index) in informes" :key="index">
+                  <button @click="mostrarInforme(index)">Abrir</button>
+                  <iframe v-if="informe.mostrar" :src="informe.ruta" width="100%" height="500px"></iframe>
+                </div>
+
               </details>
             </div>
           </div>
         </div>
+        <br><br>
       </AppEstructure>
 
     </div>
   </div>
-
-</div></template>
+</template>
 
 <style >
 :root {
@@ -200,4 +230,5 @@ summary::before {
     font-size: 16px;
     /* Ajusta el tamaño de la fuente según sea necesario */
   }
-}</style>
+}
+</style>

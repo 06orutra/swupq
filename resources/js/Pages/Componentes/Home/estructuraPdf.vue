@@ -368,7 +368,7 @@ export default {
                         class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
                         Seleccione una nueva foto
                     </button>
-                    <input ref="photoInput" type="file" class="hidden" @change="handleFileUpload">
+                    <input ref="photoInput" type="file" accept=".jpg,.jpeg,.png,.svg" class="hidden" @change="handleFileUpload">
                 </div>
 
                 <div v-if="pdfPreview" class="pdf-preview">
@@ -380,7 +380,7 @@ export default {
                         class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
                         Seleccione un archivo pdf
                     </button>
-                    <input ref="pdf" type="file" class="hidden" @change="handlePdfUpload">
+                    <input ref="pdf" type="file" accept="application/pdf" class="hidden" @change="handlePdfUpload">
                 </div>
 
                 <Button type="submit" id="btnRegisrar" :disabled="isLoading"
@@ -421,7 +421,7 @@ export default {
                         class="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest shadow-sm hover:text-gray-300 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
                         Seleccione una nueva foto
                     </button>
-                    <input ref="photoInput" type="file" class="hidden" @change="handleFileUploadEdit">
+                    <input ref="photoInput" type="file" accept=".jpg,.jpeg,.png,.svg" class="hidden" @change="handleFileUploadEdit">
 
                     <div v-if="pdfPreview" class="pdf-preview">
                         <embed :src="pdfPreview" type="application/pdf" width="100%" height="500px">
@@ -432,7 +432,7 @@ export default {
                             class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
                             Seleccione un archivo pdf
                         </button>
-                        <input ref="pdf" type="file" class="hidden" @change="handlePdfUpload">
+                        <input ref="pdf" type="file" accept="application/pdf" class="hidden" @change="handlePdfUpload">
                     </div>
 
                 </div>

@@ -186,6 +186,16 @@ class CarreraController extends Controller
         return response()->json("Se proceso la carrera exitosamente");
     }
 
+    /*elimina una carrera por su id */
+    public function delete_carrera(Request $request){
+        $carrera = Carrera::find($request->id);
+        if(!$carrera){
+            return response()->json("No se encontro la carrera");
+        }
+        $carrera->delete();
+        return response()->json("Se elimino la carrera exitosamente");
+    }
+
     /**
      * Remove the specified resource from storage.
      */

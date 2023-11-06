@@ -256,6 +256,7 @@ import { ref } from 'vue';
 import Card from 'primevue/card';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
+import axios from 'axios';
 
 
 export default defineComponent({
@@ -277,7 +278,11 @@ export default defineComponent({
     url_getCarreraUnica:{
         type:String,
         required:true,
-    }
+    },
+    url_deleteCarrera:{
+        type:String,
+        required:true,
+    },
   },
   // Setup del componente (opcional)
   setup(props) {
@@ -312,7 +317,6 @@ export default defineComponent({
     //para mostrar la informacion de la carrera a eliminar
     function eliminarCarrera(id,carrera_nombre){
         
-        console.log(`Eliminando...\nID:${id}\nCarrera:${carrera_nombre}`);
         //solicitamos la informacion de la carrera a eliminar
         axios.post(props.url_getCarreraUnica,{'id':id})
         .then(function(response){
@@ -331,7 +335,21 @@ export default defineComponent({
     }
 
     function ejecutaEliminacion(){
+        if(carreraEliminar.value == null || carreraEliminar.value == undefined 
+        || carreraEliminar.value == ''){
+            return;
+        }
         console.log('Eliminando la carrera:'+carreraEliminar.value.datos.nombre_carrera);
+
+        axios.post(props.url_deleteCarrera,{'id':carreraEliminar.value.id})
+        .then(function(response){
+            console.log(response.data);
+        }).catch(function(error){
+            console.error(error);
+        }).finally(function(){
+            isLoading.value = false;
+            this.getCarreras();
+        });
     }
 
     function editarCarrera(id,carrera_nombre){

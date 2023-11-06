@@ -192,3 +192,6 @@ Route::post('/carreras-disponibles', [CarreraController::class, 'get_carreras_di
 
 //Ruta para obtener un solo registro de la base de datos
 Route::post('/carreras-unica',[CarreraController::class,'get_carrera'])->name('carrera.unica');
+
+//Ruta para eliminar un registro de la base de datos
+Route::post('/carrera-eliminar',[CarreraController::class,'delete_carrera'])->name('carrera.eliminar');

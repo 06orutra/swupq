@@ -4,7 +4,8 @@
             <!--apartado para la ver las carreras registradas-->
             <tab-panel header="Mis Carreras">
               <carrera-lista title="Lista de carreras" 
-              url_getCarreras="/carreras-disponibles" url_getCarreraUnica="/carreras-unica"/>
+              url_getCarreras="/carreras-disponibles" url_getCarreraUnica="/carreras-unica"
+              url_deleteCarrera="/carrera-eliminar"/>
             </tab-panel>
 
             <!--apartado para la seccion de registro de una carrera-->

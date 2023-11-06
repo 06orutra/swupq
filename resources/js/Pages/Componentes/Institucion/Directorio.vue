@@ -1,15 +1,4 @@
-<script setup>
-import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
-import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 
-defineProps({
-  canLogin: Boolean,
-  canRegister: Boolean,
-  laravelVersion: String,
-  phpVersion: String,
-});
-
-</script>
 
 <template>
   <div>
@@ -127,8 +116,15 @@ defineProps({
 
 <script>
 import axios from "axios";
+import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
+import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
+
 
 export default {
+  components: {
+    RedesSociales,
+    AppEstructure,
+  },
   data() {
     return {
       dirplan: [],
@@ -256,26 +252,26 @@ export default {
 
 .column {
   flex: 1;
-  padding: 20px;
+  padding: 1.1%;
   box-sizing: border-box;
 }
 
 .column-left {
-  margin-left: 150px;
+  margin-left: 20.25%;
   flex-basis: 5%;
-  margin-right: 15px;
+  margin-right: 1.85%;
 }
 
 .column-center {
   flex: 2;
   flex-basis: 1%;
-  margin-left: 100px;
+  margin-left: 6.5%;
 }
 
 .column-right {
-  margin-right: 300px;
+  margin-right: 17.5%;
   flex-basis: 10%;
-  margin-left: 0px;
+  margin-left: 0%;
 }
 
 h4 {
@@ -288,7 +284,7 @@ ul {
 }
 
 li {
-  margin: 1px 0;
+  margin: 0.55% 0;
 }
 
 .Saltos {
@@ -298,13 +294,13 @@ li {
 
 .pi {
   font-size: 1.2em;
-  margin-right: 8px;
+  margin-right: 1.44%;
   color: #081630;
 }
 
 .phone-icon {
   font-size: 1.2em;
-  margin-right: 8px;
+  margin-right: 1.44%;
   color: #666666;
 }
 
@@ -322,7 +318,7 @@ li {
   .column {
     flex: 1;
     margin: 0;
-    padding: 50px;
+    padding: 3.5%;
   }
 
   .Saltos {

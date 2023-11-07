@@ -1,5 +1,11 @@
+<script setup>
+
+import barra from '@/Pages/Componentes/Institucion/InstalacionesComponentes/barraespaciadora.vue'; 
+</script>
+
 <template>
-  <div class="card">
+  <div>
+    <barra/>
     <!-- Galería principal con imágenes grandes -->
     <Galleria :value="images" :showThumbnails="false" :showIndicatorsOnItem="false" :responsiveOptions="responsiveOptions" :numVisible="5" 
       :circular="true" :autoPlay="true" :transitionInterval="2000" class="centered-image ">
@@ -19,10 +25,11 @@
     <div v-if="selectedImage" class="large-image-modal">
       <img :src="selectedImage.itemImageSrc" :alt="selectedImage.alt" @click="closeLargeImage" />
     </div>
-  </div>
+</div>
 </template>
 
-<script>
+<script >
+
 export default {
   data() {
     return {

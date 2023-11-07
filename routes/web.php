@@ -36,8 +36,8 @@ use App\Http\Controllers\LenguaExtraObjetivosController;
 use App\Http\Controllers\PdfPruebaController;
 use App\Http\Controllers\BannerMascotasController;
 use App\Http\Controllers\BannerInstalacionesController;
+use App\Http\Controllers\ConstitucionDocumentosController;
 use App\Http\Controllers\BannerDirectorioController;
-
 use App\Http\Controllers\DesarrolloHumnPrincController;
 use App\Http\Controllers\DesarrolloHumnTextoController;
 use App\Http\Controllers\DesarrolloHumnDesarrollosController;
@@ -169,6 +169,8 @@ Route::middleware([
         'desarrolloHumnPrinc' => DesarrolloHumnPrincController::class,
         'desarrolloHumnTexto' => DesarrolloHumnTextoController::class,
         'desarrolloHumnDesarrollos' => DesarrolloHumnDesarrollosController::class,
+        'ConstitucionDocumentos' => ConstitucionDocumentosController::class,
+        
     ];
     // se declarar variables, 
 

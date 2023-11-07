@@ -11,6 +11,7 @@ import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofi
 import Instalaciones from "@/Pages/Componentes/Institucion/institucionAdmin/Instalaciones.vue";
 import Directorios from "@/Pages/Componentes/Institucion/institucionAdmin/Directorios.vue";
 import historia from './historia.vue';
+import MarcoJuridico from "@/Pages/Componentes/Institucion/institucionAdmin/MarcoJuridico.vue";
 
 export default {
     components: {
@@ -26,6 +27,7 @@ export default {
         historia,
         Instalaciones,
         Directorios,
+        MarcoJuridico,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -67,6 +69,9 @@ export default {
         </TabPanel>
         <TabPanel header="Directorios">
             <Directorios/>
+        </TabPanel>
+        <TabPanel header="Marco Juridico">
+            <MarcoJuridico/>
         </TabPanel>
     </TabView>
 </template>

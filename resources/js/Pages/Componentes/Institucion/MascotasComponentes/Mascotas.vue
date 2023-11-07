@@ -1,6 +1,8 @@
+
 <template>
   <div class="card">
-    <Carousel :value="datos" :numVisible="5" :numScroll="3" :responsiveOptions="responsiveOptions" circular :autoplayInterval="3000" showArrows="true" showIndicators="true" class="my-carousel">
+    <Carousel :value="datos" :numVisible="5" :numScroll="3" :responsiveOptions="responsiveOptions" circular
+      :autoplayInterval="3000" showArrows="true" showIndicators="true" class="my-carousel">
       <template #item="slotProps">
         <div class="text-center">
           <img :src="'/storage/' + slotProps.data.imagen" :alt="slotProps.data.alt" class="w-12" />
@@ -8,18 +10,18 @@
       </template>
     </Carousel>
     <div>
-          <div class="mascotas-note ">
-            <NoteMascotas />
-            <NoteMPoliPolo />
-          </div>
-        </div>
-        <div Style="center">
-          <Notaspoty />
-        </div>
-        <div class="mascotas-note ">
-          <Spotypoli />
-          <Spotypolo />
-        </div>
+      <div class="mascotas-note ">
+        <NoteMascotas />
+        <NoteMPoliPolo />
+      </div>
+    </div>
+    <div Style="center">
+      <Notaspoty />
+    </div>
+    <div class="mascotas-note ">
+      <Spotypoli />
+      <Spotypolo />
+    </div>
   </div>
 </template>
 
@@ -70,22 +72,28 @@ import Notaspoty from '@/Pages/Componentes/Institucion/MascotasComponentes/Notas
 
 <style scoped>
 .my-carousel {
-  width: 70%; /* El carrusel ocupará el 70% del ancho del contenedor */
-  margin: 0 auto; /* Centra el carrusel horizontalmente */
+  width: 70%;
+  /* El carrusel ocupará el 70% del ancho del contenedor */
+  margin: 0 auto;
+  /* Centra el carrusel horizontalmente */
 }
 
 /* Ajusta el tamaño de los elementos internos del carrusel para que se ajusten al carrusel */
 .my-carousel .w-12 {
-  width: 100%; /* Las imágenes ocuparán el ancho completo del carrusel */
-  max-width: 100%; /* Limita el ancho máximo de las imágenes para que se ajusten automáticamente */
+  width: 100%;
+  /* Las imágenes ocuparán el ancho completo del carrusel */
+  max-width: 100%;
+  /* Limita el ancho máximo de las imágenes para que se ajusten automáticamente */
 }
 
 /* Estilos responsivos para pantallas más pequeñas */
 @media (max-width: 999px) {
   .my-carousel {
-    width: 100%; /* Cambia al 100% en pantallas más pequeñas */
+    width: 100%;
+    /* Cambia al 100% en pantallas más pequeñas */
   }
 }
+
 .colorprincipal {
   background-color: transparent
 }
@@ -119,5 +127,4 @@ import Notaspoty from '@/Pages/Componentes/Institucion/MascotasComponentes/Notas
 
 @media (max-width: 375px) {}
 
-@media (max-width: 320px) {}
-</style>
+@media (max-width: 320px) {}</style>

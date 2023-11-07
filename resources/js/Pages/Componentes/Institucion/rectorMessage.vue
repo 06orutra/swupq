@@ -1,9 +1,11 @@
 <script>
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import axios from 'axios';
+
 export default {
+
   components: {
-    AppEstructure
+    AppEstructure,
   },
 
   mounted() {
@@ -14,14 +16,14 @@ export default {
 
   data() {
     return {
+      selectedInforme: null, // Variable para rastrear el índice del informe seleccionado
+      isModalVisible: false, // Variable para rastrear si el modal está visible
+
+      visible: false,
       selectedOption: null,
       datos: [],
-      //Mostrar PDF o no.
-      mostrarPDF: false,
-      //Objeto de los informes
-      informes: [
-      { ruta: "/storage/pdfs/1698694086_Formulario integrales.pdf", mostrar: false },
-      ],
+
+      informes: [],
       mensaje: [],
       pdfLinks: {
         politica: "https://www.upq.mx/igualdad_laboral/assets/pol%c3%adtica-de-igualdad-laboral-y-no-discriminaci%c3%b3n..pdf",
@@ -31,17 +33,10 @@ export default {
 
   methods: {
     mostrarInforme(index) {
-    this.informes.forEach((informe, i) => {
-      if (i !== index) {
-        informe.mostrar = false; // Oculta los otros informes
-      }
-    });
-    this.informes[index].mostrar = !this.informes[index].mostrar;
-  },
-    mostrarPDF() {
-      this.informes.forEach(informe => informe.mostrar = false);
-      this.mostrarPDF = !this.mostrarPDF;
+      this.selectedInforme = index; // Guarda el índice del informe seleccionado
+      this.isModalVisible = true; // Muestra el modal
     },
+
     handleSelection() {
       if (this.selectedOption) {
         const pdfPath = `ruta_a_tu_pdf/${this.selectedOption}.pdf`;
@@ -62,13 +57,13 @@ export default {
         console.log(error);
       });
     },
-    /* obtenerPDF() {
+    obtenerPDF() {
       return axios.post('/informe/bannerData').then((response) => {
         this.informes = response.data;
       }).catch((error) => {
         console.log(error);
       });
-    }, */
+    },
 
   }
 }
@@ -83,7 +78,6 @@ export default {
     <div class="overflow-hidden shadow-6 sm:border-round-lg">
 
       <AppEstructure :controllerName="'/rectorBanner/bannerData'">
-
         <div class="flex items-center justify-center my-1">
           <img v-if="datos.length > 0" class="h-96 w-100 p-8" :src="'/storage/' + datos[0].imagen" alt="">
         </div>
@@ -96,23 +90,32 @@ export default {
             <h4 v-if="datos.length > 0">{{ datos[0].link }}</h4>
 
             <p v-if="mensaje.length > 0"
+              class="xl:text-4xl lg:text-3xl md:text-xl text-lg"
               style="text-align: justify; white-space: pre-line;margin-top: 2em; margin-bottom:1em;">
               {{ mensaje[0].contenido }}
             </p>
 
           </div>
           <br><br>
-          <div class="bg-white  shadow-6 sm:border-round-lg">
+          <div class="shadow-6 sm:border-round-lg">
             <div class="card">
               <h1>INFORMES DEL RECTOR</h1>
-              <button @click="mostrarPDF">Abrir</button>
-              <iframe v-if="mostrarPDF" src="/storage/pdfs/1698694086_Formulario integrales.pdf" width="100%" height="500px"></iframe>
               <details class="warning">
-                <summary>DOCUMENTOS </summary><br>
+                <summary>DOCUMENTOS </summary>
                 <div v-for="(informe, index) in informes" :key="index">
-                  <button @click="mostrarInforme(index)">Abrir</button>
-                  <iframe v-if="informe.mostrar" :src="informe.ruta" width="100%" height="500px"></iframe>
+                  <Button class="my-2 w-full bg-transparent text-black font-bold text-left text-md md:text-2xl lg:text-3xl"
+                  @click="mostrarInforme(index)"
+                  style="word-break: break-all;">
+                    {{ informe.nombre }}
+                  </Button>
                 </div>
+
+                <Dialog v-if="isModalVisible" v-model:visible="isModalVisible" maximizable modal :header="informes[selectedInforme].nombre"
+                  :style="{ width: '50rem' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
+                  <iframe :src="'/storage/pdfs/' + informes[selectedInforme].pdf" width="100%" height="500px" />
+                </Dialog>
+
+
 
               </details>
             </div>

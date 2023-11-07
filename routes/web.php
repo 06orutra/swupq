@@ -41,6 +41,16 @@ use App\Http\Controllers\BannerDirectorioController;
 use App\Http\Controllers\DesarrolloHumnPrincController;
 use App\Http\Controllers\DesarrolloHumnTextoController;
 use App\Http\Controllers\DesarrolloHumnDesarrollosController;
+use App\Http\Controllers\LeyesEstatalesController;
+use App\Http\Controllers\LeyesFederalesController;
+use App\Http\Controllers\LeyesGeneralesController;
+use App\Http\Controllers\TratadosInternacionalesDocumentosController;
+use App\Http\Controllers\AcuerdosDocumentosController;
+use App\Http\Controllers\CatalogoDocumentosController;
+use App\Http\Controllers\CircularesDocumentosController;
+use App\Http\Controllers\CodigosDocumentosController;
+use App\Http\Controllers\ConveniosInstitucionalesDocumentosController;
+use App\Http\Controllers\DecretosDocumentosController;
 
 
 use Illuminate\Http\Request;
@@ -170,7 +180,17 @@ Route::middleware([
         'desarrolloHumnTexto' => DesarrolloHumnTextoController::class,
         'desarrolloHumnDesarrollos' => DesarrolloHumnDesarrollosController::class,
         'ConstitucionDocumentos' => ConstitucionDocumentosController::class,
-        
+        'LeyesEstatales' => LeyesEstatalesController::class,
+        'LeyesFederales' => LeyesFederalesController::class,
+        'LeyesGenerales' => LeyesGeneralesController::class,
+        'TratadosInternacionalesDocumentos' => TratadosInternacionalesDocumentosController::class,
+        'AcuerdosDocumentos' => AcuerdosDocumentosController::class,
+        'CatalogoDocumentos' => CatalogoDocumentosController::class,
+        'CircularesDocumentos' => CircularesDocumentosController::class,
+        'CodigosDocumentos' => CodigosDocumentosController::class,
+        'ConveniosInstitucionalesDocumentos' => ConveniosInstitucionalesDocumentosController::class,
+        'DecretosDocumentos' => DecretosDocumentosController::class,
+
     ];
     // se declarar variables, 
 

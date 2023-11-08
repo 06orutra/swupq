@@ -196,6 +196,30 @@ class CarreraController extends Controller
         return response()->json("Se elimino la carrera exitosamente");
     }
 
+    /*actualiza la informacion de una carrera*/
+    public function update_carrera(Request $request){
+
+        $carrera_editar = Carrera::find($request->id);
+
+        if(!$carrera_editar){
+            return response()->json("No se encontro la carrera a modificar");
+        }
+
+        try{
+            // Codifica los datos actualizados nuevamente en formato JSON
+            //$json = json_encode($request->datos, JSON_UNESCAPED_SLASHES);
+            $json = $request->datos;
+            // Actualiza el campo 'datos' en la base de datos
+            $carrera_editar->datos = $json;
+            $carrera_editar->save();
+            return response()->json("Se actualizo la carrera exitosamente");
+
+        }catch (Exception $e){
+            throw $e;
+        }
+
+    }
+    
     /**
      * Remove the specified resource from storage.
      */

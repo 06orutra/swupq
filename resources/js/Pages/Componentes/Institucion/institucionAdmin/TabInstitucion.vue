@@ -8,6 +8,7 @@ import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
 import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofia.vue";
 import historia from './historia.vue';
 import Mascotas from "@/Pages/Componentes/Institucion/institucionAdmin/Mascotas.vue";
+import igualdadLaboral from "@/Pages/Componentes/Institucion/institucionAdmin/igualdadLaboral.vue";
 
 export default {
     components: {
@@ -20,6 +21,7 @@ export default {
         filosofia,
         historia,
         Mascotas,
+        igualdadLaboral,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -55,6 +57,9 @@ export default {
         </TabPanel>
         <TabPanel header="Mascotas">
             <Mascotas/>
+        </TabPanel>
+        <TabPanel header="Igualdad laboral">
+            <igualdadLaboral/>
         </TabPanel>
     </TabView>
 </template>

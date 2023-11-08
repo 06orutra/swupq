@@ -38,7 +38,7 @@ export default {
           textColor: '#ffffff',
           label: 'INSTITUCIÓN',
           subMenuItems: [
-            { label: '- Mensaje del rector', path: '/institucion/mascotas/' },
+            { label: '- Mensaje del rector', path: '/institucion/mascotas/' }, //Linea de modificación
             { label: '- Directorio' },
             { label: '- Organigrama' },
             { label: '- Marco jurídico' },

@@ -26,6 +26,7 @@ use App\Http\Controllers\MensajePoliPoloController;
 use App\Http\Controllers\SpotypoliController;
 use App\Http\Controllers\SpotypoloController;
 use App\Http\Controllers\CarruselMascotaController;
+use App\Http\Controllers\IgualdadLaboralPrincipalController;
 use Illuminate\Http\Request;
 
 
@@ -140,6 +141,7 @@ Route::middleware([
         'spotypoli' => SpotypoliController::class,
         'spotypolo' => SpotypoloController::class,
         'Cmascotas' => CarruselMascotaController::class,
+        'igualdadLaboralPrincipal' => IgualdadLaboralPrincipalController::class,
     ];
     // se declarar variables, 
 
@@ -160,6 +162,7 @@ Route::post('/filosofiaVal/bannerData', [FilosofiaValorController::class, 'banne
 Route::post('/filosofiaImg/bannerData', [FilosofiaImgController::class, 'bannerData']);
 Route::post('/filosofias/bannerData', [FilosofiaController::class, 'bannerData']);
 Route::post('/videolenguajes', [ VideoLenguajeController::class, 'bannerData']);
+Route::post('/igualdadLaboralPrin/bannerData', [IgualdadLaboralPrincipalController::class, 'bannerData']);
 
 // Route::post('/obtener-link', [SpotyPoliPoloController::class, 'bannerData']);
 
@@ -168,3 +171,4 @@ Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'banner
 Route::post('/bannerDataprimero', [TbCarruselPrimeroController::class, 'bannerData']);
 Route::post('/bannerDatasegundo', [TbCarruselSegundoController::class, 'bannerData']);
 Route::post('/bannerDatatercero', [TbCarruselTercerController::class, 'bannerData']);
+

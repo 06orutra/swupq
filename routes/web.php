@@ -195,3 +195,6 @@ Route::post('/carreras-unica',[CarreraController::class,'get_carrera'])->name('c
 
 //Ruta para eliminar un registro de la base de datos
 Route::post('/carrera-eliminar',[CarreraController::class,'delete_carrera'])->name('carrera.eliminar');
+
+//Ruta para editar un registro de la base de datos
+Route::post('/carrera-editar',[CarreraController::class,'update_carrera'])->name('carrera.editar');

@@ -3,19 +3,11 @@ import { Head, Link } from '@inertiajs/vue3';
 import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import Mascotas from '@/Pages/Componentes/Institucion/MascotasComponentes/Mascotas.vue';
-import ImagenMascotas from '@/Pages/Componentes/Institucion/MascotasComponentes/ImagenMascotas.vue';
 import NoteMascotas from '@/Pages/Componentes/Institucion/MascotasComponentes/NoteMascotas.vue';
 import NoteMPoliPolo from '@/Pages/Componentes/Institucion/MascotasComponentes/NotePoliPolo.vue';
 import Spotypoli from '@/Pages/Componentes/Institucion/MascotasComponentes/Spotypoli.vue';
 import Spotypolo from '@/Pages/Componentes/Institucion/MascotasComponentes/Spotypolo.vue';
 import Notaspoty from '@/Pages/Componentes/Institucion/MascotasComponentes/Notaspoty.vue';
-
-defineProps({
-  canLogin: Boolean,
-  canRegister: Boolean,
-  laravelVersion: String,
-  phpVersion: String,
-});
 
 </script>
 
@@ -23,9 +15,6 @@ defineProps({
   <div>
     <AppEstructure>
       <div class="colorprincipal">
-        <ImagenMascotas>
-          <p class="textomascota">MASCOTAS</p>
-        </ImagenMascotas>
         <Mascotas />
         <div class="mascotas-note ">
           <NoteMascotas/>
@@ -73,22 +62,12 @@ defineProps({
 }
 }
 @media (max-width: 1440px) {
-  /* Por ejemplo, ajustar el tamaño del texto en pantallas más pequeñas */
-  .textomascota{
-    font-size: 25px;
-  }
+  
 }
 @media (max-width: 1024px) {
-  /* Por ejemplo, ajustar el tamaño del texto en pantallas más pequeñas */
-  .textomascota{
-    font-size: 23px;
-  }
+  
 }
 @media (max-width: 768px) {
-  /* Por ejemplo, ajustar el tamaño del texto en pantallas más pequeñas */
-  .textomascota{
-    font-size: 20px;
-  }
   .Notes{
   margin: 0 0px;
   }
@@ -99,10 +78,6 @@ defineProps({
 }
 }
 @media (max-width: 425px) {
-  /* Por ejemplo, ajustar el tamaño del texto en pantallas más pequeñas */
-  .textomascota{
-    font-size: 15px;
-  }
 }
 @media (max-width: 375px) {
   /* Por ejemplo, ajustar el tamaño del texto en pantallas más pequeñas */
@@ -111,9 +86,5 @@ defineProps({
   }
 }
 @media (max-width: 320px) {
-  /* Por ejemplo, ajustar el tamaño del texto en pantallas más pequeñas */
-  .textomascota{
-    font-size: 8px; 
-  }
 }
 </style>

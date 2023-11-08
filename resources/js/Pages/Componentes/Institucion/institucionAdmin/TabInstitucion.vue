@@ -7,6 +7,7 @@ import estructuraTextos from "@/Pages/Componentes/Home/estructuraTextos.vue";
 import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
 import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofia.vue";
 import historia from './historia.vue';
+import Mascotas from "@/Pages/Componentes/Institucion/institucionAdmin/Mascotas.vue";
 
 export default {
     components: {
@@ -18,6 +19,7 @@ export default {
         estructuraImg,
         filosofia,
         historia,
+        Mascotas,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -50,6 +52,9 @@ export default {
         </TabPanel>
         <TabPanel header="Filosofía">
             <filosofia />
+        </TabPanel>
+        <TabPanel header="Mascotas">
+            <Mascotas/>
         </TabPanel>
     </TabView>
 </template>

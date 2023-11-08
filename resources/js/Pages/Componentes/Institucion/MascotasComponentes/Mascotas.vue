@@ -17,57 +17,46 @@ const images = ref([
   {
     itemImageSrc: 'https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-01.png',
     alt: 'Description for Image 1',
-    title: 'Title 1'
   },
   {
     itemImageSrc: 'https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-02.png',
     alt: 'Description for Image 2',
-    title: 'Title 2'
   },
   {
     itemImageSrc: 'https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-03.png',
     alt: 'Description for Image 3',
-    title: 'Title 3'
   },
   {
     itemImageSrc: 'https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-04.png',
     alt: 'Description for Image 4',
-    title: 'Title 4'
   },
   {
     itemImageSrc: 'https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-05.png',
     alt: 'Description for Image 5',
-    title: 'Title 5'
   },
   {
     itemImageSrc: 'https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-06.png',
     alt: 'Description for Image 6',
-    title: 'Title 6'
   },
   {
     itemImageSrc: 'https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-07.png',
     alt: 'Description for Image 7',
-    title: 'Title 7'
   },
   {
     itemImageSrc: 'https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-08.png',
     alt: 'Description for Image 8',
-    title: 'Title 8'
   },
   {
     itemImageSrc: 'https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-09.png',
     alt: 'Description for Image 9',
-    title: 'Title 9'
   },
   {
     itemImageSrc: 'https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-10.png',
     alt: 'Description for Image 10',
-    title: 'Title 10'
   },
   {
     itemImageSrc: 'https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-11.png',
     alt: 'Description for Image 11',
-    title: 'Title 11'
   },
   ]);
   const responsiveOptions = ref([

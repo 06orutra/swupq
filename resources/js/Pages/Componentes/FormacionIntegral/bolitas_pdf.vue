@@ -60,9 +60,6 @@ export default {
                     text.style.opacity = '1';
                 });
 
-                loader.addEventListener('click', () => {
-                    this.openModal(title[loader.dataset.index], contents[loader.dataset.index]);
-                });
             });
 
             const acordeones = document.querySelectorAll('.acordion-item');

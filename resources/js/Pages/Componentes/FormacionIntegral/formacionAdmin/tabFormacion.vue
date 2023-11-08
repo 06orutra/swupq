@@ -3,6 +3,7 @@ import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
 import lenguaExtranjera from "@/Pages/Componentes/FormacionIntegral/formacionAdmin/lenguaExtranjera.vue";
 import desarrolloHumano from "@/Pages/Componentes/FormacionIntegral/formacionAdmin/desarrolloHumano.vue";
+import Representativos from  "@/Pages/Componentes/FormacionIntegral/formacionAdmin/representativo.vue";
 
 export default {
     components: {
@@ -10,6 +11,7 @@ export default {
         TabPanel,
         lenguaExtranjera,
         desarrolloHumano,
+        Representativos
     },
 }
 </script>
@@ -21,6 +23,9 @@ export default {
         </TabPanel>
         <TabPanel header="Desarrollo Humano">
             <desarrolloHumano/>
+        </TabPanel>
+        <TabPanel header="Representativos">
+            <Representativos/>
         </TabPanel>
 
     </TabView>

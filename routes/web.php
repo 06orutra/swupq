@@ -25,6 +25,8 @@ use App\Http\Controllers\PdfPruebaController;
 use App\Http\Controllers\DesarrolloHumnPrincController;
 use App\Http\Controllers\DesarrolloHumnTextoController;
 use App\Http\Controllers\DesarrolloHumnDesarrollosController;
+use App\Http\Controllers\RepresentativoPrinController;
+use App\Http\Controllers\RepresentativoTextoController;
 
 
 use Illuminate\Http\Request;
@@ -91,6 +93,10 @@ Route::prefix('FormacionIntegral')->group(function () {
     Route::get('DesarrolloHumano', function(){
         return Inertia::render('Componentes/FormacionIntegral/desarrolloHumano');
     });
+
+    Route::get('Representativos', function(){
+        return Inertia::render('Componentes/FormacionIntegral/representativos');
+    });
 });   
 
 
@@ -143,6 +149,8 @@ Route::middleware([
         'desarrolloHumnPrinc' => DesarrolloHumnPrincController::class,
         'desarrolloHumnTexto' => DesarrolloHumnTextoController::class,
         'desarrolloHumnDesarrollos' => DesarrolloHumnDesarrollosController::class,
+        'representativoPrin' => RepresentativoPrinController::class,
+        'representativoTexto' => RepresentativoTextoController::class,
     ];
     // se declarar variables, 
 
@@ -155,6 +163,8 @@ Route::middleware([
         });
     }
 });
+Route::post('/RepresentativoText/bannerData', [RepresentativoTextoController::class, 'bannerData']);
+Route::post('/Representativosprin/bannerData', [RepresentativoPrinController::class, 'bannerData']);
 Route::post('/desarrolloHumnDesarrollo/bannerData', [DesarrolloHumnDesarrollosController::class, 'bannerData']);
 Route::post('/desarrolloHumnTexto/bannerData', [DesarrolloHumnTextoController::class, 'bannerData']);
 Route::post('/desarrolloHumnPrincs/bannerData', [DesarrolloHumnPrincController::class, 'bannerData']);

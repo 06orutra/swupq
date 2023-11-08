@@ -219,17 +219,6 @@
                                     </li>
                                 </ul>
                             </div>
-
-                            <!--
-                            <div>
-                                <details>
-                                    <summary>Esta es la tarjeta</summary>
-                                    <div>
-                                        esta es la descripcion de la tarjeta
-                                    </div>
-                                </details>
-                            </div>
-                            -->
                         </div>
 
                     </div>
@@ -238,10 +227,201 @@
                     <br>
                     <div class="controls-delete-carrera centrar">
                         <button-pv label="Eliminar" type="button" @click="ejecutaEliminacion()"
-                        :style="{ width: '50%' }"/>
+                        :style="{ width: '25%' }"/>
                     </div>
                 </form>
             </div>
+        </dialog-pv>
+
+
+        <!--dialogo para mostrar los datos de la carrera a modificar-->
+        <dialog-pv v-model:visible="visibleDialogEdit" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
+        :style="{ width: '70vw' }" header="Ver datos relacionados" modal class="p-fluid">
+                <div class="field">
+                    <form @submit.prevent="">
+                        <div class="editar-identidad-carrera">
+                            <div class="nombre-carrera-editar">
+                                <b>Nombre de la carrera:</b>    
+                                <input-text-pv :value="carreraEditar.datos.nombre_carrera" class=""/>
+                            </div>
+                            <br>
+                            <div class="container-palete-colors">
+                                <div class="title-section">
+                                    <b>Paleta de colores</b>
+                                </div>
+
+                                <div class="show-color-palete centrar">
+                                    <!--Apartado para mostrar los colores que se estan seleccionando-->
+                                    <div class="card flex gap-1 show-palete-color margin-bottom-custom centrar">
+                                        <div class="item" id="palete-pc" :style="{backgroundColor:'#'+carreraEditar.datos.colores.colorPrimario}"></div> 
+                                        <div class="item" id="palete-sc" :style="{backgroundColor:'#'+carreraEditar.datos.colores.colorSecundario}"></div>
+                                        <div class="item" id="palete-tc" :style="{backgroundColor:'#'+carreraEditar.datos.colores.colorTerciario}"></div>
+                                    </div>
+                                </div>
+                                <!--entradas para seleccionar la paleta de colores-->
+                                <div class="centrar">
+                                    <div class="controls-color-picker" style="width: 40%;">
+                                        <color-picker-pv class="color-primary" 
+                                        style='width: 33%;' v-model="carreraEditar.datos.colores.colorPrimario"></color-picker-pv >
+                                        <color-picker-pv class="color-secundary" 
+                                        style='width: 33%;' v-model="carreraEditar.datos.colores.colorSecundario"></color-picker-pv>
+                                        <color-picker-pv class="color-ternary" 
+                                        style='width: 33%;' v-model="carreraEditar.datos.colores.colorTerciario"></color-picker-pv>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!--apartado para los objetivos de la carrera-->
+                            <hr>
+                            <div class="objetivos-carrera-editar">
+                                <div class="title-section centrar">
+                                    <h5><strong>Objetivos de la carrera</strong></h5>
+                                </div>
+                                <div class="objetivos-plan-estudios">
+                                    <h6>Objetivos plan de estudios</h6>
+                                    <text-area-pv rows="5"  autoResize  placeholder="Objetivos del plan de estudios" 
+                                    class="long-text-area" :value="carreraEditar.datos.objetivos_carrera.plan_estudios"/>
+                                </div>
+
+                                <div class="mision-carrera-editar">
+                                    <h6>Misión</h6>
+                                    <text-area-pv rows="5"  autoResize  placeholder="Misión de la carrera" 
+                                    class="long-text-area" :value="carreraEditar.datos.objetivos_carrera.mision"/>
+                                </div>
+
+                                <div class="vision-carrera-editar">
+                                    <h6>Visión</h6>
+                                    <text-area-pv rows="5"  autoResize  placeholder="Visión de la carrera" 
+                                    class="long-text-area" :value="carreraEditar.datos.objetivos_carrera.vision"/>
+                                </div>
+
+                                <div class="imagen-carrera-editar">
+                                    <h6>Dirección imagen de la carrera</h6>
+                                    <input-text-pv :value="carreraEditar.datos.objetivos_carrera.url_imagen" 
+                                    placeholder="https://ingenieria_autotriz_escudo_imagen"  class=""/>
+                                </div>
+                            </div>
+
+                            <!--apartado para el perfil de ingreso-->
+                            <hr>
+                            <div class="perfil-ingreso">
+                                <div class="title-section centrar">
+                                    <h5><strong>Pefil ingreso</strong></h5>
+                                </div>
+
+
+                                <div class="conocimientos-carrera-editar">
+                                    <h6>Conocimientos</h6>
+                                    <p>{{ carreraEditar.datos.perfil_ingreso.conocimientos }}</p>
+                                </div>
+
+                                <div class="habilidades-carrera-editar">
+                                    <h6>Habilidades</h6>
+                                    <p>{{ carreraEditar.datos.perfil_ingreso.habilidades }}</p>
+                                </div>
+
+                                <div class="actitudes-carrera-editar">
+                                    <h6>Actitudes</h6>
+                                    <p>{{ carreraEditar.datos.perfil_ingreso.actitudes }}</p>
+                                </div>
+
+                                <div class="video-carrera-editar">
+                                    <h6>Video</h6>
+                                    <input-text-pv :value="carreraEditar.datos.perfil_ingreso.video" 
+                                    placeholder="https://www.youtube.com/watch?v=o7oJGLzxikw&ab_channel=CanalOficialUPQ"  class=""/>
+                                </div>
+
+                            </div>
+
+                            <!--apartado para el perfil de egreso-->
+                            <hr>
+                            <div class="perfil-egreso-carrera-e">
+                                <div class="title-section centrar">
+                                    <h5><strong>Pefil egreso</strong></h5>
+                                </div>
+                                <text-area-pv rows="5"  autoResize :value="carreraEditar.datos.perfil_egreso" 
+                                placeholder="Descripción del perfil de egreso"/>
+                            </div>
+
+                            <!--apartado para los documentos follada digital y plan estudios-->
+                            <hr>
+                            <div class="plan-estudios-folleto-digital-editar">
+                                <div class="title-section centrar">
+                                    <h5><strong>Documentos</strong></h5>
+                                </div>
+                                
+                                <div class="plan-estudios-carrera-editar">
+                                    <h6>Titulo:</h6>
+                                    <input-text-pv placeholder="Plan de estudios" 
+                                        :value="carreraEditar.datos.plan_estudios_folleto_digital.plan_estudios.titulo"/>
+                                    
+                                    <h6>Url documento:</h6>
+                                    <input-text-pv placeholder="https://plan-estudios-carrera" 
+                                        :value="carreraEditar.datos.plan_estudios_folleto_digital.plan_estudios.url_documento"/>
+                                    
+                                    <h6>Url imagen de fondo:</h6>
+                                    <input-text-pv placeholder="https://my_background_image" 
+                                        :value="carreraEditar.datos.plan_estudios_folleto_digital.plan_estudios.url_imagen_fondo"/>
+                                </div>
+
+                            </div>
+
+                            <!--apartado para los ciclos de formacion-->
+                            <hr>
+                            <div class="ciclos-formacion-editar">
+                                <div class="title-section centrar">
+                                    <h5><strong>Ciclos de formación</strong></h5>
+                                </div>
+
+                                <div class="container-ciclos-formacion-carrera-editar">
+                                    <div class="entradas-carrera-ciclos-formacion-editar">
+                                        <input-number-pv placeholder="Numero ciclo" style="width: 30%;"/>
+                                        <input-text-pv type="text"  
+                                        placeholder="Descripción" style="width: 70%;"/>
+                                    </div>
+                                    <div class="controls-carrera-ciclos-formacion-editar centrar" style="padding: 1%;">
+                                        <button-pv label="Agregar" type="button" severity="secondary" 
+                                        @click="" style="width: 25%;"/>
+                                    </div>
+                                </div>
+
+                                <div class="container-ciclos-formacion-agregados-editar">
+                                    <p>{{ carreraEditar.datos.ciclos_formacion }}</p>
+                                </div>
+
+                            </div>
+
+                            <!--apartado para la pagina principal con sus iconos informativos-->
+                            <hr>
+                            <div class="iconos-informativos-editar">
+                                <div class="title-section centrar">
+                                    <h5><strong>Página principal</strong></h5>
+                                </div>  
+
+                                <div class="imagen-pp-carrera-editar">
+                                    <h6>Imagen de la pagina principal:</h6>
+                                    <input-text-pv placeholder="https://my_background_main_screen_carrer" 
+                                        :value="carreraEditar.datos.pagina_principal.url_imagen"/>
+
+                                </div>
+                                <br>
+                                <div class="iconos-informativos-carrera-editar">
+                                    <h6>Iconos informativos</h6>
+                                    <p>{{ carreraEditar.datos.pagina_principal.tarjetas_informativas_pp }}</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!--boton para confirmar la edicion de la carrera-->
+                        <br>
+                        <div class="controls-edit-carrera centrar">
+                            <button-pv label="Guardar cambios" type="button" @click=""
+                            :style="{ width: '25%' }"/>
+                        </div>
+                    </form>
+                </div>    
         </dialog-pv>
 
 
@@ -256,6 +436,11 @@ import { ref } from 'vue';
 import Card from 'primevue/card';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
+import InputText from 'primevue/inputtext';
+import InputNumber from 'primevue/inputnumber';
+import Textarea from 'primevue/textarea';
+import Colorpicker from 'primevue/colorpicker';
+
 import axios from 'axios';
 
 
@@ -265,6 +450,10 @@ export default defineComponent({
     'card-pv':Card,
     'button-pv':Button,
     'dialog-pv':Dialog,
+    'input-text-pv':InputText,
+    'input-number-pv':InputNumber,
+    'text-area-pv':Textarea,
+    'color-picker-pv':Colorpicker,
   },
   props: {
     title:{
@@ -289,6 +478,7 @@ export default defineComponent({
 
     //variables
     const visibleDialogDelete = ref(false);
+    const visibleDialogEdit = ref(false);
 
     const carrerasLoaded = ref([]);//guardara las carreras que se traigan de la base de datos
     const isLoading = ref(true);//para saber si se esta cargando la informacion de la base de datos
@@ -358,6 +548,9 @@ export default defineComponent({
         axios.post(props.url_getCarreraUnica,{'id':id})
         .then(function(response){
             const carreraDatos = response.data;
+            //guardamos la informacion de la carrera a editar
+            carreraEditar.value = carreraDatos;
+            visibleDialogEdit.value = true;
 
         }).catch(function(error){
             console.error(error);
@@ -372,6 +565,8 @@ export default defineComponent({
         carrerasLoaded,
         visibleDialogDelete,
         carreraEliminar,
+        carreraEditar,
+        visibleDialogEdit,
         getCarreras,
         eliminarCarrera,
         editarCarrera,
@@ -465,5 +660,9 @@ margin-bottom: 40px;
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.length-input-text{
+    width: 80%;
 }
 </style>

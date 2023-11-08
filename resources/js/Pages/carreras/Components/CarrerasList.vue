@@ -417,7 +417,7 @@
                         <!--boton para confirmar la edicion de la carrera-->
                         <br>
                         <div class="controls-edit-carrera centrar">
-                            <button-pv label="Guardar cambios" type="button" @click=""
+                            <button-pv label="Guardar cambios" type="button" @click="ejecutaEdicion()"
                             :style="{ width: '25%' }"/>
                         </div>
                     </form>
@@ -472,6 +472,10 @@ export default defineComponent({
         type:String,
         required:true,
     },
+    url_editCarrera:{
+        type:String,
+        required:true,
+    }
   },
   // Setup del componente (opcional)
   setup(props) {
@@ -559,6 +563,34 @@ export default defineComponent({
         });
     }
 
+    function ejecutaEdicion(){
+        //mandamos la informacion a la ruta para poder actualizar la informacion de la carrera 
+        if(carreraEditar.value == null || carreraEditar.value == undefined 
+        || carreraEditar.value == ''){
+            return;
+        }         
+        //creamos un objeto de tipo FormData para enviar la informacion de la carrera
+        const formData = new FormData();
+        formData.append('id',carreraEditar.value.id);
+        formData.append('datos',JSON.stringify(carreraEditar.value.datos));
+
+        //enviamos la informacion con el id de la carrera para editarla
+        axios.post(props.url_editCarrera,formData,{
+            headers:{
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(function(response){
+            console.log(response.data);
+
+        }).catch(function(error){
+            console.error(error);
+
+        }).finally(function(){
+            
+        });
+
+    }
+
 
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
@@ -571,6 +603,7 @@ export default defineComponent({
         eliminarCarrera,
         editarCarrera,
         ejecutaEliminacion,
+        ejecutaEdicion,
     };
   },
   mounted(){

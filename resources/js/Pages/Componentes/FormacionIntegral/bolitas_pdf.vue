@@ -98,7 +98,7 @@ export default {
 <template>
     <div>
         <!-- Otros elementos aquí -->
-        <div class="circle-container">
+        <div class="circle-container vertical-column">
             <div v-for="item in valor" :key="item.id" class="circle-wrapper">
                 <div class="background-image circle" @click="openPDFModal(item.pdf, item.nombre)">
                     <img :src="'/storage/' + item.imagen" alt="Valor Image" class="circle-img" />
@@ -240,13 +240,13 @@ embed {
 }
 
 .circle-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 20px;
-    /* Espacio entre los elementos */
-    padding: 0 20px;
-    /* Añadir un poco de padding al contenedor para evitar que los círculos estén demasiado cerca del borde de la pantalla */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  /* Espacio entre los elementos */
+  padding: 0 20px;
+  /* Añadir un poco de padding al contenedor para evitar que los círculos estén demasiado cerca del borde de la pantalla */
 }
 
 .circle-wrapper {
@@ -396,42 +396,17 @@ embed {
 
 
 @media (max-width: 425px) {
-    .vertical-column {
-        flex-direction: column;
-        /* Cambiar a disposición vertical */
-        margin-right: 0;
-        /* Eliminar el margen derecho */
-        margin-bottom: 20px;
-        /* Ajustar el margen inferior en dispositivos más pequeños */
-    }
+  .circle {
+    margin-top: 30px;
+  }
 
-    .circule {
-        margin-top: 30px;
-    }
-
-    .vertical-column {
-        /* Cambia la disposición a vertical */
-        margin-right: 0;
-        /* Elimina el margen derecho */
-        margin-bottom: 20px;
-        /* Ajusta el margen inferior en dispositivos más pequeños */
-        display: initial;
-    }
-
-    .img_1 {
-        max-width: 100%;
-        /* Ajustar el tamaño máximo de la imagen al 100% del contenedor */
-        height: auto;
-        /* Permite que la altura se ajuste automáticamente según el ancho */
-        margin: 0 auto;
-        /* Centrar horizontalmente la imagen */
-        z-index: 1;
-    }
-
-    .toggle-acordion {
-        position: relative;
-        z-index: 0;
-    }
+  .vertical-column {
+    margin-right: 30px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center; 
+    justify-content:center;
+  }
 }
 
 @media (max-width: 768px) and (min-width: 426px) {
@@ -440,21 +415,10 @@ embed {
     .vertical-column {
         flex-direction: row;
         justify-content: space-between;
-    }
-
-    .circle-container {
         display: flex;
         flex-wrap: wrap;
-        /* Permite que los elementos se envuelvan en dos filas */
-        justify-content: space-between;
-
-        gap: 20px;
-        /* Espacio entre los elementos */
-
     }
-
     .circle {
-        display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
@@ -463,38 +427,6 @@ embed {
     }
 }
 
-@media (max-width: 1024px) and (min-width: 768px) {
-
-    /*  Estilo para dividir los círculos en dos grupos  */
-    .vertical-column {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .circle-container {
-        display: flex;
-        justify-content: space-between;
-        /* Espacio entre los círculos */
-    }
-
-    .circle {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 20px;
-        margin-right: 0;
-    }
-
-    .mySwiper {
-        width: 100%;
-        /* Tamaño del carrusel para pantallas grandes */
-        margin: 0 auto;
-        /* Centra el carrusel en la pantalla */
-    }
-}
-
-/* display:initial */
 </style>
 
 

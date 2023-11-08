@@ -97,6 +97,53 @@ import estructuraImg from '@/Pages/Componentes/Home/estructurapdf2.vue';
                 :editBannerUrl="'/DecretosDocumentos/editarBanner'" :deleteBannerUrl="'/DecretosDocumentos/eliminarBanner'" />
                 <hr class="blue-divider">
         </TabPanel>
+
+
+        <TabPanel header="Lineamientos" >
+            <hr class="blue-divider">
+            <p>
+                <span style="color: #007bff; font-weight: bold;">Documentos</span>
+            </p>
+            <estructuraImg :loadDataUrl="'/LineamientosDocumentos/bannerData'" :registerBannerUrl="'/LineamientosDocumentos/registrarBanner'"
+                :editBannerUrl="'/LineamientosDocumentos/editarBanner'" :deleteBannerUrl="'/LineamientosDocumentos/eliminarBanner'" />
+                <hr class="blue-divider">
+        </TabPanel>
+        <TabPanel header="Manuales" >
+            <hr class="blue-divider">
+            <p>
+                <span style="color: #007bff; font-weight: bold;">Documentos</span>
+            </p>
+            <estructuraImg :loadDataUrl="'/ManualesDocumentos/bannerData'" :registerBannerUrl="'/ManualesDocumentos/registrarBanner'"
+                :editBannerUrl="'/ManualesDocumentos/editarBanner'" :deleteBannerUrl="'/ManualesDocumentos/eliminarBanner'" />
+                <hr class="blue-divider">
+        </TabPanel>
+        <TabPanel header="Plan De Desarollo Institucional" >
+            <hr class="blue-divider">
+            <p>
+                <span style="color: #007bff; font-weight: bold;">Documentos</span>
+            </p>
+            <estructuraImg :loadDataUrl="'/PlanDeDesarolloInstitucionalDocumentos/bannerData'" :registerBannerUrl="'/PlanDeDesarolloInstitucionalDocumentos/registrarBanner'"
+                :editBannerUrl="'/PlanDeDesarolloInstitucionalDocumentos/editarBanner'" :deleteBannerUrl="'/PlanDeDesarolloInstitucionalDocumentos/eliminarBanner'" />
+                <hr class="blue-divider">
+        </TabPanel>
+        <TabPanel header="Protocolos" >
+            <hr class="blue-divider">
+            <p>
+                <span style="color: #007bff; font-weight: bold;">Documentos</span>
+            </p>
+            <estructuraImg :loadDataUrl="'/ProtocolosDocumentos/bannerData'" :registerBannerUrl="'/ProtocolosDocumentos/registrarBanner'"
+                :editBannerUrl="'/ProtocolosDocumentos/editarBanner'" :deleteBannerUrl="'/ProtocolosDocumentos/eliminarBanner'" />
+                <hr class="blue-divider">
+        </TabPanel>
+        <TabPanel header="Reglamentos" >
+            <hr class="blue-divider">
+            <p>
+                <span style="color: #007bff; font-weight: bold;">Documentos</span>
+            </p>
+            <estructuraImg :loadDataUrl="'/ReglamentosDocumentos/bannerData'" :registerBannerUrl="'/ReglamentosDocumentos/registrarBanner'"
+                :editBannerUrl="'/ReglamentosDocumentos/editarBanner'" :deleteBannerUrl="'/ReglamentosDocumentos/eliminarBanner'" />
+                <hr class="blue-divider">
+        </TabPanel>
     </TabView>
 </template>
 

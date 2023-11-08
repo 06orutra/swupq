@@ -51,6 +51,12 @@ use App\Http\Controllers\CircularesDocumentosController;
 use App\Http\Controllers\CodigosDocumentosController;
 use App\Http\Controllers\ConveniosInstitucionalesDocumentosController;
 use App\Http\Controllers\DecretosDocumentosController;
+use App\Http\Controllers\LineamientosDocumentosController;
+use App\Http\Controllers\ManualesDocumentosController;
+use App\Http\Controllers\PlanDeDesarolloInstitucionalDocumentosController;
+use App\Http\Controllers\ProtocolosDocumentosController;
+use App\Http\Controllers\ReglamentosDocumentosController;
+
 
 
 use Illuminate\Http\Request;
@@ -190,7 +196,11 @@ Route::middleware([
         'CodigosDocumentos' => CodigosDocumentosController::class,
         'ConveniosInstitucionalesDocumentos' => ConveniosInstitucionalesDocumentosController::class,
         'DecretosDocumentos' => DecretosDocumentosController::class,
-
+        'LineamientosDocumentos' => LineamientosDocumentosController::class,
+        'ManualesDocumentos' => ManualesDocumentosController::class,
+        'PlanDeDesarolloInstitucionalDocumentos' => PlanDeDesarolloInstitucionalDocumentosController::class,
+        'ProtocolosDocumentos' => ProtocolosDocumentosController::class,
+        'ReglamentosDocumentos' => ReglamentosDocumentosController::class,
     ];
     // se declarar variables, 
 

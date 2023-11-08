@@ -149,6 +149,8 @@ export default {
       if (this.activeSubMenuIndex !== null) {
         this.menuItems[this.activeSubMenuIndex].expanded = false;
         this.activeSubMenuIndex = null;
+        this.showMenu = false;
+        this.activeSubMenuIndex = null;
       }
     },
     redirectTo(path) {
@@ -223,8 +225,7 @@ export default {
 .menu .sub-menu-block:hover {
   background-color: rgba(0, 10, 87, 0.8);
 }
-
-@media (min-width: 1024px) and (max-width:1201px) {
+@media (min-width: 521px) and (max-width: 768px) {
   .menu-icon {
     width: 43px;
     height: 43px;
@@ -246,7 +247,6 @@ export default {
   .menu-icon {
     width: 55px;
     height: 55px;
-    transform: translateX(43px) translateY(105px);
   }
 
   .menu {

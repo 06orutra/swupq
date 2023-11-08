@@ -1,79 +1,107 @@
 <template>
+
     <div class="carousel-container">
       <div class="carousel">
         <img v-bind:src="currentImage" alt="Imagen del carrusel" class="carousel-image" />
       </div>
-      <div class="static-image-container">
-        <a href="https://open.spotify.com/playlist/6lPrZ7p7I11sujDcTXqV5J">
-          <img src="https://i1.wp.com/historia-biografia.com/wp-content/uploads/2019/05/Spotify_Badge_large.png?fit=1280%2C469&ssl=1" alt="Imagen Estática" class="static-image" />
+      <div class="static-image-container" v-for="url in  spotifyUrl ">
+        <a :href="url.link" target="_blank">
+          <img
+            src="https://i1.wp.com/historia-biografia.com/wp-content/uploads/2019/05/Spotify_Badge_large.png?fit=1280%2C469&ssl=1"
+            alt="Imagen Estática" class="static-image" />
         </a>
       </div>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        images: [
-          "https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-01.png",
-          "https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-02.png",
-          "https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-03.png",
-          "https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-04.png",
-          "https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-05.png",
-          "https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-06.png",
-        ],
-        currentIndex: 0,
-      };
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      images: [
+        "https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-01.png",
+        "https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-02.png",
+        "https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-03.png",
+        "https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-04.png",
+        "https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-05.png",
+        "https://www.upq.mx/media/pets/POLO_Y_POLI_MASCOTAS-06.png",
+      ],
+      currentIndex: 0,
+      spotifyUrl: [], // Propiedad para almacenar la URL de Spotify
+    };
+  },
+
+  mounted() {
+    this.loadSpotifyUrl();
+  },
+
+  computed: {
+    currentImage() {
+      return this.images[this.currentIndex];
     },
-    computed: {
-      currentImage() {
-        return this.images[this.currentIndex];
-      },
+  },
+  created() {
+    this.startAutoSlide();
+    this.loadSpotifyUrl();
+  },
+
+
+  methods: {
+    startAutoSlide() {
+      setInterval(() => {
+        this.nextImage();
+      }, 3000); // Cambia de imagen cada 3 segundos (3000 ms)
     },
-    created() {
-      this.startAutoSlide();
+    nextImage() {
+      this.currentIndex = (this.currentIndex + 1) % this.images.length;
     },
-    methods: {
-      startAutoSlide() {
-        setInterval(() => {
-          this.nextImage();
-        }, 3000); // Cambia de imagen cada 3 segundos (3000 ms)
-      },
-      nextImage() {
-        this.currentIndex = (this.currentIndex + 1) % this.images.length;
-      },
+    loadSpotifyUrl() {
+      // Realiza una solicitud HTTP para obtener la URL de Spotify desde el controlador de Laravel
+      axios
+        .post('/Spotypolo/bannerData')
+        .then((response) => {
+          this.spotifyUrl = response.data; // Ajusta el acceso al campo según la estructura de tus datos
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
     },
-  };
-  </script>
-  
-  <style>
-  .carousel-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 80px;
-  }
-  
-  .carousel {
-    display: flex;
-    align-items: center;
-  }
-  
-  .carousel-image {
-    max-width: 105px; /* Cambia el tamaño máximo según tus preferencias */
-    height: auto;
-  }
-  
-  .static-image-container {
-    margin-top: 10px;
-    text-align: center;
-  }
-  
-  .static-image {
-    max-width: 150px; /* Tamaño de tu imagen estática */
-    height: auto;
-    margin-bottom: 100px;
-  }
-  </style>
-  
+  },
+};
+</script>
+
+
+
+
+<style>
+.carousel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 80px;
+}
+
+carousel {
+  display: flex;
+  align-items: center;
+}
+
+.carousel-image {
+  max-width: 105px;
+  /* Cambia el tamaño máximo según tus preferencias */
+  height: auto;
+}
+
+.static-image-container {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.static-image {
+  max-width: 150px;
+  /* Tamaño de tu imagen estática */
+  height: auto;
+  margin-bottom: 100px;
+}</style>

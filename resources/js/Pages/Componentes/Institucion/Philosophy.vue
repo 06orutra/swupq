@@ -19,6 +19,11 @@ export default {
     this.cargarValor().then(() => {
       this.$nextTick(this.inicializarInteracciones);
     });
+    this.handleResize();
+    window.addEventListener('resize', this.handleResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.handleResize);
   },
   methods: {
     openModal(title, content) {
@@ -97,6 +102,9 @@ export default {
         });
       });
     },
+      handleResize() {
+      this.shouldShowCarousel = window.innerWidth > 425;
+    },
   },
   setup() {
     return {
@@ -105,6 +113,8 @@ export default {
   },
   data() {
     return {
+      shouldShowCarousel: false,
+      windowWidth: window.innerWidth,
       valor: [],
       img: [],
       texto: [],
@@ -122,8 +132,8 @@ export default {
 
     <div class="p-20">
       <div class="flex">
-        <div class="w-1/3">
-          <div class="img_1 mt-5">
+        <div class="w-1/3" v-if="shouldShowCarousel">
+          <div class="img_1 mt-5" >
             <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
               delay: 2500,
               disableOnInteraction: false,
@@ -136,7 +146,7 @@ export default {
           </div>
         </div>
 
-        <div class="p-1 w-2/3 ml-10">
+        <div class="p-1 w-2/3 ml-10 vertical-column">
           <div class="toggle-acordion">
             <div class="acordion" v-for="(item, index) in acordeones" :key="index">
               <input type="checkbox" :id="'btn-acordion' + index" class="btn-acordion">
@@ -403,6 +413,7 @@ export default {
   max-width: 800px;
   margin: auto;
   margin-top: 15px;
+  justify-content: center;
 }
 
 .toggle-acordion h2 {
@@ -488,26 +499,16 @@ export default {
 }
 
 @media (max-width: 425px) {
-  .vertical-column {
-    flex-direction: column;
-    /* Cambiar a disposición vertical */
-    margin-right: 0;
-    /* Eliminar el margen derecho */
-    margin-bottom: 20px;
-    /* Ajustar el margen inferior en dispositivos más pequeños */
-  }
-
   .circule {
     margin-top: 30px;
   }
 
   .vertical-column {
-    /* Cambia la disposición a vertical */
     margin-right: 0;
-    /* Elimina el margen derecho */
     margin-bottom: 20px;
-    /* Ajusta el margen inferior en dispositivos más pequeños */
     display: initial;
+    align-items: center; 
+    justify-content:center,
   }
 
   .img_1 {
@@ -545,7 +546,6 @@ export default {
   }
 
   .circle {
-    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -554,36 +554,6 @@ export default {
   }
 }
 
-@media (max-width: 1024px) and (min-width: 768px) {
-
-  /*  Estilo para dividir los círculos en dos grupos  */
-  .vertical-column {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .circle-container {
-    display: flex;
-    justify-content: space-between;
-    /* Espacio entre los círculos */
-  }
-
-  .circle {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    margin-right: 0;
-  }
-
-  .mySwiper {
-    width: 100%;
-    /* Tamaño del carrusel para pantallas grandes */
-    margin: 0 auto;
-    /* Centra el carrusel en la pantalla */
-  }
-}
 
 /* display:initial */</style>
 

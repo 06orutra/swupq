@@ -1,7 +1,8 @@
 <template>
         <div class="generic">
                 <a href="https://es.wikipedia.org/wiki/Revoluci%C3%B3n_mexicana" target="_blank" class="link-reset">
-                        <img class="w-full md:h-32 lg:h-64 img-reset" src="storage/img/TourCardenal.svg" alt="altText" />
+                        <img class="w-full md:h-32 lg:h-64 img-reset"
+                                src="/storage/img/TourCardenal.png" alt="altText" />
                 </a>
         </div>
 </template>
@@ -13,3 +14,4 @@
         height: 100%;
 }
 </style>
+    

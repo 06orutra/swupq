@@ -4,11 +4,16 @@ import TabPanel from 'primevue/tabpanel';
 import carruselEstructura from "@/Pages/Componentes/Home/carruselEstructura.vue";
 import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 import estructuraTextos from "@/Pages/Componentes/Home/estructuraTextos.vue";
+import estructuraTexto2 from "@/Pages/Componentes/Home/estructuraTexto2.vue";
 import estructuraImg from "@/Pages/Componentes/Home/estructuraImg.vue";
+import Mascotas from "@/Pages/Componentes/Institucion/institucionAdmin/Mascotas.vue";
 import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofia.vue";
+import Instalaciones from "@/Pages/Componentes/Institucion/institucionAdmin/Instalaciones.vue";
+import Directorios from "@/Pages/Componentes/Institucion/institucionAdmin/Directorios.vue";
 import historia from './historia.vue';
 import Mascotas from "@/Pages/Componentes/Institucion/institucionAdmin/Mascotas.vue";
 import igualdadLaboral from "@/Pages/Componentes/Institucion/institucionAdmin/igualdadLaboral.vue";
+import MarcoJuridico from "@/Pages/Componentes/Institucion/institucionAdmin/MarcoJuridico.vue";
 
 export default {
     components: {
@@ -17,11 +22,16 @@ export default {
         carruselEstructura,
         opcionesCarrusel,
         estructuraTextos,
+        estructuraTexto2,
         estructuraImg,
+        Mascotas,
         filosofia,
         historia,
         Mascotas,
         igualdadLaboral,
+        Instalaciones,
+        Directorios,
+        MarcoJuridico,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -60,6 +70,14 @@ export default {
         </TabPanel>
         <TabPanel header="Igualdad laboral">
             <igualdadLaboral/>
+        <TabPanel header="Instalaciones">
+            <Instalaciones/>
+        </TabPanel>
+        <TabPanel header="Directorios">
+            <Directorios/>
+        </TabPanel>
+        <TabPanel header="Marco Juridico">
+            <MarcoJuridico/>
         </TabPanel>
     </TabView>
 </template>

@@ -314,7 +314,7 @@ export default {
 
                 <div class="field col-12 md:col-12">
                     <label for="minmax">{{ this.Subtitulo }}</label>
-                    <InputText inputId="minmax" v-model="link" :min="0" :max="10000" :showButtons="true" />
+                    <Textarea inputId="minmax" v-model="link" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
@@ -361,8 +361,9 @@ export default {
 
                 <div class="field col-12 md:col-12">
                     <label for="minmax">{{ this.Subtitulo }}</label>
-                    <InputText inputId="minmax" v-model="datosArreglo.link" :min="0" :max="10000" :showButtons="true" />
+                    <Textarea inputId="minmax" v-model="datosArreglo.link" :min="0" :max="10000" :showButtons="true" />
                 </div>
+
 
                 <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
                     style="max-width: 100%; height: auto; border: 1px solid #ccc;" />

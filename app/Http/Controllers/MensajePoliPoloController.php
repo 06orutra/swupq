@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mensaje_PoliPolo;
+use App\Models\MensajePoliPolo;
 use Illuminate\Http\Request;
 
 class MensajePoliPoloController extends Controller
 {
     public function bannerData(){
-        $datosTexto = Mensaje_PoliPolo::all();d
+        $datosTexto = MensajePoliPolo::all();
         return response()->json($datosTexto);
     }
 
@@ -16,11 +16,11 @@ class MensajePoliPoloController extends Controller
         
         $request->validate([
             'titulo' => 'required|string|max:255',
-            'contenido' => 'required|string|max:255',
+            'contenido' => 'required|string|max:10000',
         ]);
 
         // Create a new banner instance
-        $texto = new Mensaje_PoliPolo();
+        $texto = new MensajePoliPolo();
         $texto->titulo = $request->titulo;
         $texto->contenido = $request->contenido;
         $texto->save();
@@ -31,10 +31,10 @@ class MensajePoliPoloController extends Controller
     public function editarBanner(Request $request){
         $request->validate([
             'titulo' => 'required|string|max:255',
-            'contenido' => 'required|string|max:255',
+            'contenido' => 'required|string|max:10000',
         ]);
 
-        $texto = Mensaje_PoliPolo::find($request->id);
+        $texto = MensajePoliPolo::find($request->id);
 
         $texto->titulo = $request->titulo;
         $texto->contenido = $request->contenido;
@@ -46,9 +46,9 @@ class MensajePoliPoloController extends Controller
 
     
     public function eliminarBanner(Request $request){
-        $texto = Mensaje_PoliPolo::find($request->id);
+        $texto = MensajePoliPolo::find($request->id);
         $texto->delete();
 
         return response()->json('Banner deleted successfully');
-    }  
+    }
 }

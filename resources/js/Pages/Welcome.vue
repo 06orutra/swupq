@@ -1,10 +1,12 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import Videos from '@/Pages/Componentes/Home/Videos.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import TourCardenal from '@/Layouts/homeComponents/TourCardenal.vue';
 import SplitterVue from '@/Layouts/homeComponents/Splitter.vue';
 import carruselSecundario from './Componentes/Welcome/carruselSecundario.vue';
 import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
+import Directorio from '@/Layouts/homeComponents/Directorio.vue';
 
 </script>
 
@@ -12,16 +14,13 @@ import CarrierBanner from '@/Pages/Componentes/CarrierBanner.vue';
     <Head title="Welcome" />
     
     <AppEstructure :controllerName="'/bannerData'">          
-        <!-- mandamos a llamar en la principal  -->
 
         <CarrierBanner />
         <carruselSecundario />
         <TourCardenal />
+        <Directorio />
         <SplitterVue />
 
     </AppEstructure>
 
-
 </template>
-
-<style></style>

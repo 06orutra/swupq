@@ -621,15 +621,16 @@ export default defineComponent({
 
     function addConocimiento(){
       //conocimientos_selected.value.push(conocimiento.value);
-      perfil_ingreso.conocimientos.push(conocimiento.value);
+      perfil_ingreso.value.conocimientos.push(conocimiento.value);
       conocimientos.value.push(conocimiento.value);
+
       conocimiento.value = {
         nombre : '',
       };
     }
 
     function addHabilidad(){
-      perfil_ingreso.habilidades.push(habilidad.value);
+      perfil_ingreso.value.habilidades.push(habilidad.value);
       habilidades_selected.value.push(habilidad.value);
       habilidades.value.push(habilidad.value);
       habilidad.value ={
@@ -638,7 +639,7 @@ export default defineComponent({
     }
 
     function addActitud(){
-      perfil_ingreso.actitudes.push(actitud.value);
+      perfil_ingreso.value.actitudes.push(actitud.value);
       actitudes_selected.value.push(actitud.value);
       actitudes.value.push(actitud.value);
       actitud.value = {

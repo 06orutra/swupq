@@ -242,7 +242,7 @@
                         <div class="editar-identidad-carrera">
                             <div class="nombre-carrera-editar">
                                 <b>Nombre de la carrera:</b>    
-                                <input-text-pv :value="carreraEditar.datos.nombre_carrera" class=""/>
+                                <input-text-pv  class="" v-model="carreraEditar.datos.nombre_carrera"/>
                             </div>
                             <br>
                             <div class="container-palete-colors">
@@ -281,25 +281,25 @@
                                 <div class="objetivos-plan-estudios">
                                     <h6>Objetivos plan de estudios</h6>
                                     <text-area-pv rows="5"  autoResize  placeholder="Objetivos del plan de estudios" 
-                                    class="long-text-area" :value="carreraEditar.datos.objetivos_carrera.plan_estudios"/>
+                                    class="long-text-area"   v-model="carreraEditar.datos.objetivos_carrera.plan_estudios"/>
                                 </div>
 
                                 <div class="mision-carrera-editar">
                                     <h6>Misión</h6>
                                     <text-area-pv rows="5"  autoResize  placeholder="Misión de la carrera" 
-                                    class="long-text-area" :value="carreraEditar.datos.objetivos_carrera.mision"/>
+                                    class="long-text-area"   v-model="carreraEditar.datos.objetivos_carrera.mision"/>
                                 </div>
 
                                 <div class="vision-carrera-editar">
                                     <h6>Visión</h6>
                                     <text-area-pv rows="5"  autoResize  placeholder="Visión de la carrera" 
-                                    class="long-text-area" :value="carreraEditar.datos.objetivos_carrera.vision"/>
+                                    class="long-text-area"  v-model="carreraEditar.datos.objetivos_carrera.vision"/>
                                 </div>
 
                                 <div class="imagen-carrera-editar">
                                     <h6>Dirección imagen de la carrera</h6>
-                                    <input-text-pv :value="carreraEditar.datos.objetivos_carrera.url_imagen" 
-                                    placeholder="https://ingenieria_autotriz_escudo_imagen"  class=""/>
+                                    <input-text-pv type="text" placeholder="https://ingenieria_autotriz_escudo_imagen" 
+                                    v-model="carreraEditar.datos.objetivos_carrera.url_imagen" class=""/>
                                 </div>
                             </div>
 
@@ -328,7 +328,7 @@
 
                                 <div class="video-carrera-editar">
                                     <h6>Video</h6>
-                                    <input-text-pv :value="carreraEditar.datos.perfil_ingreso.video" 
+                                    <input-text-pv v-model="carreraEditar.datos.perfil_ingreso.video" 
                                     placeholder="https://www.youtube.com/watch?v=o7oJGLzxikw&ab_channel=CanalOficialUPQ"  class=""/>
                                 </div>
 
@@ -340,8 +340,7 @@
                                 <div class="title-section centrar">
                                     <h5><strong>Pefil egreso</strong></h5>
                                 </div>
-                                <text-area-pv rows="5"  autoResize :value="carreraEditar.datos.perfil_egreso" 
-                                placeholder="Descripción del perfil de egreso"/>
+                                <text-area-pv rows="5"  autoResize placeholder="Descripción del perfil de egreso" v-model="carreraEditar.datos.perfil_egreso"/>
                             </div>
 
                             <!--apartado para los documentos follada digital y plan estudios-->
@@ -354,15 +353,29 @@
                                 <div class="plan-estudios-carrera-editar">
                                     <h6>Titulo:</h6>
                                     <input-text-pv placeholder="Plan de estudios" 
-                                        :value="carreraEditar.datos.plan_estudios_folleto_digital.plan_estudios.titulo"/>
+                                        v-model="carreraEditar.datos.plan_estudios_folleto_digital.plan_estudios.titulo"/>
                                     
                                     <h6>Url documento:</h6>
                                     <input-text-pv placeholder="https://plan-estudios-carrera" 
-                                        :value="carreraEditar.datos.plan_estudios_folleto_digital.plan_estudios.url_documento"/>
+                                        v-model="carreraEditar.datos.plan_estudios_folleto_digital.plan_estudios.url_documento"/>
                                     
                                     <h6>Url imagen de fondo:</h6>
                                     <input-text-pv placeholder="https://my_background_image" 
-                                        :value="carreraEditar.datos.plan_estudios_folleto_digital.plan_estudios.url_imagen_fondo"/>
+                                        v-model="carreraEditar.datos.plan_estudios_folleto_digital.plan_estudios.url_imagen_fondo"/>
+                                </div>
+                                <br>
+                                <div class="folleto-digital-carrera-editar">
+                                    <h6>Titulo:</h6>
+                                    <input-text-pv placeholder="Folleto digital" 
+                                        v-model="carreraEditar.datos.plan_estudios_folleto_digital.folleto_digital.titulo"/>
+                                    
+                                    <h6>Url documento:</h6>
+                                    <input-text-pv placeholder="https://folleto-digital" 
+                                        v-model="carreraEditar.datos.plan_estudios_folleto_digital.folleto_digital.url_documento"/>
+                                    
+                                    <h6>Url imagen de fondo:</h6>
+                                    <input-text-pv placeholder="https://my_background_image" 
+                                        v-model="carreraEditar.datos.plan_estudios_folleto_digital.folleto_digital.url_imagen_fondo"/>
                                 </div>
 
                             </div>
@@ -402,7 +415,7 @@
                                 <div class="imagen-pp-carrera-editar">
                                     <h6>Imagen de la pagina principal:</h6>
                                     <input-text-pv placeholder="https://my_background_main_screen_carrer" 
-                                        :value="carreraEditar.datos.pagina_principal.url_imagen"/>
+                                        v-model="carreraEditar.datos.pagina_principal.url_imagen"/>
 
                                 </div>
                                 <br>
@@ -417,7 +430,7 @@
                         <!--boton para confirmar la edicion de la carrera-->
                         <br>
                         <div class="controls-edit-carrera centrar">
-                            <button-pv label="Guardar cambios" type="button" @click="ejecutaEdicion()"
+                            <button-pv label="Guardar cambios" type="button" @click="confirmaEidicion()"
                             :style="{ width: '25%' }"/>
                         </div>
                     </form>
@@ -436,6 +449,21 @@
 
                 <button-pv label="Cancelar" severity="danger" raised icon="pi pi-times" 
                 class="btn-dialog-actions" @click="visibleDialogConfirmDelete = false"/>
+            </div>
+        </dialog-pv>
+
+        <!--dialogo para confirmar la edicion de la carrera-->
+        <dialog-pv v-model:visible="visibleDialogConfirEdit" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
+            :style="{ width: '70vw' }" header="Aviso!" modal class="p-fluid">
+            <div class="alert-message centrar">
+                <h5>¿Seguro que desea realizar estos cambios en la información de la carrera?</h5>
+            </div>
+            <div class="controls-dialog-confirm-delete row-div  distribucion-uniforme">
+                <button-pv label="Confirmar" severity="success" raised icon="pi pi-check" 
+                class="btn-dialog-actions" @click="ejecutaEdicion()"/>
+
+                <button-pv label="Cancelar" severity="danger" raised icon="pi pi-times" 
+                class="btn-dialog-actions" @click="visibleDialogConfirEdit=false"/>
             </div>
         </dialog-pv>
 
@@ -580,6 +608,10 @@ export default defineComponent({
         });
     }
 
+    function confirmaEidicion(){
+        visibleDialogConfirEdit.value = true;
+    }
+
     function editarCarrera(id,carrera_nombre){
         console.log(`Editando...\nID:${id}\nCarrera:${carrera_nombre}`);
         //solicitamos la informacion de la carrera a actualizar
@@ -615,12 +647,14 @@ export default defineComponent({
             }
         }).then(function(response){
             console.log(response.data);
+            visibleDialogConfirEdit.value = false;
 
         }).catch(function(error){
             console.error(error);
 
         }).finally(function(){
-            
+            isLoading.value = false;
+            confirmEdicionCarrera.value = false;
         });
 
     }
@@ -633,13 +667,16 @@ export default defineComponent({
         carreraEliminar,
         carreraEditar,
         visibleDialogEdit,
+        visibleDialogConfirEdit,
         visibleDialogConfirmDelete,
         confirmEliminacionCarrera,
+        confirmEdicionCarrera,
         getCarreras,
         eliminarCarrera,
         editarCarrera,
         ejecutaEliminacion,
         ejecutaEdicion,
+        confirmaEidicion,
         confirmaEliminacion,
     };
   },
@@ -737,7 +774,7 @@ margin-bottom: 40px;
 }
 
 .btn-dialog-actions{
-    width: 20%;
+    width: 25%;
 }
 
 .distribucion-uniforme{

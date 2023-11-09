@@ -48,6 +48,11 @@
                             <h3>{{ carreraEliminar.datos.nombre_carrera }}</h3>
                         </div>
 
+                        <div class="container-imagen-carrera-eliminar centrar">
+                                <img :src="carreraEliminar.datos.objetivos_carrera.url_imagen" alt="Imagen de la carrera" 
+                                class="imagen-resolucion estilo-imagen" />
+                        </div>
+
                         <div class="container-palette-colors centrar">
                             <div class="row-div">
                                 <div class="color-primary item" :style="{backgroundColor: '#'+carreraEliminar.datos.colores.colorPrimario }"></div>
@@ -226,7 +231,7 @@
                     <!--boton para confirmar la eliminacion de la carrera-->
                     <br>
                     <div class="controls-delete-carrera centrar">
-                        <button-pv label="Eliminar" type="button" @click="confirmaEliminacion()"
+                        <button-pv label="Eliminar" icon="pi pi-trash" type="button" @click="confirmaEliminacion()"
                         :style="{ width: '25%' }"/>
                     </div>
                 </form>
@@ -244,6 +249,12 @@
                                 <b>Nombre de la carrera:</b>    
                                 <input-text-pv  class="" v-model="carreraEditar.datos.nombre_carrera"/>
                             </div>
+
+                            <div class="container-imagen-carrera-editar centrar">
+                                <img :src="carreraEditar.datos.objetivos_carrera.url_imagen" alt="Imagen de la carrera" 
+                                class="imagen-resolucion estilo-imagen" />
+                            </div>
+
                             <br>
                             <div class="container-palete-colors">
                                 <div class="title-section">
@@ -430,7 +441,7 @@
                         <!--boton para confirmar la edicion de la carrera-->
                         <br>
                         <div class="controls-edit-carrera centrar">
-                            <button-pv label="Guardar cambios" type="button" @click="confirmaEidicion()"
+                            <button-pv label="Guardar cambios" icon="pi pi-save" type="button" @click="confirmaEidicion()"
                             :style="{ width: '25%' }"/>
                         </div>
                     </form>
@@ -444,7 +455,7 @@
                 <h4>¿Seguro que desea eliminar esta carrera?</h4>
             </div>
             <div class="controls-dialog-confirm-delete row-div  distribucion-uniforme">
-                <button-pv label="Confirmar" severity="success" raised icon="pi pi-check" 
+                <button-pv label="Confirmar"  severity="success" raised icon="pi pi-check" 
                 class="btn-dialog-actions" @click="ejecutaEliminacion()"/>
 
                 <button-pv label="Cancelar" severity="danger" raised icon="pi pi-times" 
@@ -782,4 +793,14 @@ margin-bottom: 40px;
     justify-content: space-around;
     align-items: center;
 }
+
+
+.container-imagen-carrera-eliminar, .container-imagen-carrera-editar{
+    padding: 1%;
+}
+
+.estilo-imagen{
+    border-radius: 5%;
+}
+ 
 </style>

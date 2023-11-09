@@ -214,6 +214,22 @@ Route::middleware([
     }
 });
 
+Route::post('/ConstitucionDocumentos/bannerData', [ConstitucionDocumentosController::class, 'bannerData']);
+Route::post('/LeyesEstatales/bannerData', [LeyesEstatalesController::class, 'bannerData']);
+Route::post('/LeyesFederales/bannerData', [LeyesFederalesController::class, 'bannerData']);
+Route::post('/LeyesGenerales/bannerData', [LeyesGeneralesController::class, 'bannerData']);
+Route::post('/TratadosInternacionalesDocumentos/bannerData', [TratadosInternacionalesDocumentosController::class, 'bannerData']);
+Route::post('/AcuerdosDocumentos/bannerData', [AcuerdosDocumentosController::class, 'bannerData']);
+Route::post('/CatalogoDocumentos/bannerData', [CatalogoDocumentosController::class, 'bannerData']);
+Route::post('/CircularesDocumentos/bannerData', [CircularesDocumentosController::class, 'bannerData']);
+Route::post('/CodigosDocumentos/bannerData', [CodigosDocumentosController::class, 'bannerData']);
+Route::post('/ConveniosInstitucionalesDocumentos/bannerData', [ConveniosInstitucionalesDocumentosController::class, 'bannerData']);
+Route::post('/DecretosDocumentos/bannerData', [DecretosDocumentosController::class, 'bannerData']);
+Route::post('/LineamientosDocumentos/bannerData', [LineamientosDocumentosController::class, 'bannerData']);
+Route::post('/ManualesDocumentos/bannerData', [ManualesDocumentosController::class, 'bannerData']);
+Route::post('/PlanDeDesarolloInstitucionalDocumentos/bannerData', [PlanDeDesarolloInstitucionalDocumentosController::class, 'bannerData']);
+Route::post('/ProtocolosDocumentos/bannerData', [ProtocolosDocumentosController::class, 'bannerData']);
+Route::post('/ReglamentosDocumentos/bannerData', [ReglamentosDocumentosController::class, 'bannerData']);
 Route::post('/Sadministrativa/bannerData', [SecretariaAdministrativaController::class, 'bannerData']);
 Route::post('/Sacademica/bannerData', [SecretariaAcademicaController::class, 'bannerData']);
 Route::post('/rectoria/bannerData', [RectoriaController::class, 'bannerData']);

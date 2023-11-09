@@ -1,31 +1,17 @@
 <template>
   <div id="app">
-    <img
-      src="/storage/img/icon_menu.svg"
-      alt="Menu Icon"
-      class="menu-icon"
-      @click="showMenu = !showMenu"
-    />
+    <img src="/storage/img/icon_menu.svg" alt="Menu Icon" class="menu-icon" @click="showMenu = !showMenu" />
 
     <ul class="menu" v-show="showMenu" @mouseleave="closeActiveSubMenu">
       <li v-for="(menuItem, index) in menuItems" :key="index">
-        <div
-          @mouseover="expandSubMenu(index)"
-          :style="{ color: menuItem.textColor }"
-          :class="{ 'menu-block': true, 'active': menuItem.expanded }"
-        >
+        <div @mouseover="expandSubMenu(index)" :style="{ color: menuItem.textColor }"
+          :class="{ 'menu-block': true, 'active': menuItem.expanded }">
           {{ menuItem.label }}
         </div>
         <transition name="fade">
           <ul v-if="menuItem.expanded" class="sub-menu">
-            <li
-              v-for="(subMenuItem, subIndex) in menuItem.subMenuItems"
-              :key="subIndex"
-            >
-              <div
-                :style="{ color: subMenuItem.textColor }"
-                :class="{ 'sub-menu-block': true, 'active': subMenuItem.expanded }"
-              >
+            <li v-for="(subMenuItem, subIndex) in menuItem.subMenuItems" :key="subIndex">
+              <div @click="redirectTo(subMenuItem.path)" :style="{ color: subMenuItem.textColor }" class="sub-menu-block">
                 {{ subMenuItem.label }}
               </div>
             </li>
@@ -40,7 +26,7 @@
 export default {
   data() {
     return {
-      menuicon:{
+      menuicon: {
         top: '28.1%', // Ajusta esto a la posición inicial del menú-icon
         left: '10px', // Ajusta esto a la posición inicial del menú-icon
       },
@@ -52,97 +38,97 @@ export default {
           textColor: '#ffffff',
           label: 'INSTITUCIÓN',
           subMenuItems: [
-                { label: '- Mensaje del rector' },
+            { label: '- Mensaje del rector', path: '/institucion/mascotas/' }, //Linea de modificación
             { label: '- Directorio' },
             { label: '- Organigrama' },
             { label: '- Marco jurídico' },
             { label: '- Igualdad Laboral y No Discriminacion' },
             { label: '- Sistema de Gestión de la Calidad' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'CARRERAS',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'POSGRADO',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'EDUCACIÓN CONTINUA',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'DEPORTE Y CULTURA',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'VINCULACIÓN',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'SERVICIOS ESTUDIANTILES',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'CONVOCATORIAS',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-          {
-            expanded: false,
-            textColor: '#ffffff',
-            label: 'CALENDARIO ESCOLAR',
-            subMenuItems: [
-              { label: 'Opción 1' },
-              { label: 'Opción 2' },
-              { label: 'Opción 3' },
-            ],
-          },
-        ],
-      };
-    },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'CARRERAS',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'POSGRADO',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'EDUCACIÓN CONTINUA',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'DEPORTE Y CULTURA',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'VINCULACIÓN',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'SERVICIOS ESTUDIANTILES',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'CONVOCATORIAS',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+        {
+          expanded: false,
+          textColor: '#ffffff',
+          label: 'CALENDARIO ESCOLAR',
+          subMenuItems: [
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ],
+        },
+      ],
+    };
+  },
   methods: {
     expandSubMenu(index) {
       if (this.activeSubMenuIndex !== null) {
@@ -163,40 +149,14 @@ export default {
       if (this.activeSubMenuIndex !== null) {
         this.menuItems[this.activeSubMenuIndex].expanded = false;
         this.activeSubMenuIndex = null;
+        this.showMenu = false;
+        this.activeSubMenuIndex = null;
       }
     },
+    redirectTo(path) {
+      window.location.href = path;
+    },
   },
-methods: {
-  expandSubMenu(index) {
-    if (this.activeSubMenuIndex !== null) {
-      this.menuItems[this.activeSubMenuIndex].expanded = false;
-    }
-    this.menuItems[index].expanded = true;
-    this.activeSubMenuIndex = index;
-  },
-  toggleSubMenu(index) {
-    if (this.activeSubMenuIndex !== null && this.activeSubMenuIndex !== index) {
-      this.menuItems[this.activeSubMenuIndex].expanded = false;
-    }
-
-    this.menuItems[index].expanded = !this.menuItems[index].expanded;
-    this.activeSubMenuIndex = this.menuItems[index].expanded ? index : null;
-  },
-  closeActiveSubMenu() {
-    if (this.activeSubMenuIndex !== null) {
-      this.menuItems[this.activeSubMenuIndex].expanded = false;
-      this.activeSubMenuIndex = null;
-      this.showMenu = false;
-      this.activeSubMenuIndex = null;
-    }
-  },
-  closeMenuAndSubMenu() {
-    if (this.showMenu || this.activeSubMenuIndex !== null) {
-      this.showMenu = false;
-      this.activeSubMenuIndex = null;
-    }
-  },
-},  
 };
 </script>
 
@@ -265,10 +225,9 @@ methods: {
 .menu .sub-menu-block:hover {
   background-color: rgba(0, 10, 87, 0.8);
 }
-
-@media (min-width: 1024px) and (max-width:1201px) {
+@media (min-width: 521px) and (max-width: 768px) {
   .menu-icon {
-    width: 43px ;
+    width: 43px;
     height: 43px;
     cursor: pointer;
     border: 1px solid black;
@@ -276,8 +235,9 @@ methods: {
     z-index: 999;
     transform: translateX(45px) translateY(75px);
   }
+
   .menu {
-    width:20%;
+    width: 20%;
     left: 55px;
     top: 230px;
   }
@@ -287,10 +247,10 @@ methods: {
   .menu-icon {
     width: 55px;
     height: 55px;
-    transform: translateX(43px) translateY(105px);
   }
+
   .menu {
-    width:15%;
+    width: 15%;
     left: 50px;
     top: 247px;
   }
@@ -298,12 +258,13 @@ methods: {
 
 @media (min-width: 1442px) and (max-width: 1499px) {
   .menu-icon {
-    width: 55px ;
+    width: 55px;
     height: 55px;
     transform: translateX(42px) translateY(105px);
   }
+
   .menu {
-    width:15%;
+    width: 15%;
     left: 52px;
     top: 250px;
   }
@@ -311,12 +272,13 @@ methods: {
 
 @media (min-width: 1500px) and (max-width: 1920px) {
   .menu-icon {
-    width: 55px ;
+    width: 55px;
     height: 55px;
     transform: translateX(42px) translateY(103px);
   }
+
   .menu {
-    width:15%;
+    width: 15%;
     left: 53px;
     top: 250px;
   }
@@ -324,12 +286,13 @@ methods: {
 
 @media (min-width: 1921px) and (max-width:2561px) {
   .menu-icon {
-    width: 85px ;
+    width: 85px;
     height: 85px;
     transform: translateX(40px) translateY(150px);
   }
+
   .menu {
-    width:8%;
+    width: 8%;
     left: 50px;
     top: 325px;
   }
@@ -339,13 +302,14 @@ methods: {
 
 @media (min-width:420px) and (max-width: 520px) {
   .menu-icon {
-    width:30px ;
+    width: 30px;
     height: 30px;
     transform: translateX(240px) translateY(10px);
-    margin:.9%;
+    margin: .9%;
   }
+
   .menu {
-    width:40%;
+    width: 40%;
     left: 0%;
     top: 69px;
   }
@@ -353,26 +317,28 @@ methods: {
 
 @media (min-width: 522px) and (max-width: 769px) {
   .menu-icon {
-    width: 43px ;
+    width: 43px;
     height: 43px;
     transform: translateX(46px) translateY(75px);
   }
+
   .menu {
-    width:26%;
-    left:37px;
+    width: 26%;
+    left: 37px;
     top: 235px;
   }
 }
 
 @media (max-width: 320px) {
   .menu-icon {
-    width:30px ;
+    width: 30px;
     height: 30px;
-    margin:0%;
+    margin: 0%;
     transform: translateX(240px) translateY(8px);
   }
+
   .menu {
-    width:40%;
+    width: 40%;
     left: 0%;
     top: 70px;
   }
@@ -384,11 +350,11 @@ methods: {
     height: 30px;
     transform: translateX(240px) translateY(8px);
   }
+
   .menu {
-    width:40%;
+    width: 40%;
     left: 0%;
-    top:70px;
+    top: 70px;
   }
 }
-
 </style>

@@ -14,7 +14,7 @@
         </div>
 
         <!-- Pagination -->
-        <div v-if="paginationEnabled" class="pagination">
+        <div v-if="paginationEnabled && getSlideCount > 1" class="pagination">
             <span @click="goToSlide(index)" v-for="(slide, index) in getSlideCount" :key="index" :class="{ active: index + 1 === currentSlide }">
             </span>
         </div>

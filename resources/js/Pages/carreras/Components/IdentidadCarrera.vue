@@ -230,39 +230,38 @@
 
       <div class="flex flex-column controls-plan-estuidos-folleto-digital">
 
-          <div class="flex flex-column gap-3 plan-estudios-data">
-              <span>Titulo:
-                <pv-input-text placeholder="Plan de estudios" 
+          <div class="flex flex-column  plan-estudios-data">
+              <h6><span>Titulo:</span></h6>
+              <pv-input-text placeholder="Plan de estudios" 
                 v-model="plan_estudios_folleto_digital.plan_estudios.titulo"/>
-              </span>
+              
 
-              <span>Url documento:
-                <pv-input-text placeholder="https://plan-estudios-carrera" class="long-input-url"
+              <h6><span>Url documento:</span></h6>
+              <pv-input-text placeholder="https://plan-estudios-carrera" class=""
                 v-model="plan_estudios_folleto_digital.plan_estudios.url_documento"/>
-              </span>
+              
 
-              <span>Url imagen de fondo:
-                <pv-input-text placeholder="https://my_background_image" class="long-input-url"
+                <h6><span>Url imagen de fondo:</span></h6>
+                <pv-input-text placeholder="https://my_background_image" class=""
                 v-model="plan_estudios_folleto_digital.plan_estudios.url_imagen_fondo"/>
-              </span>
+              
           </div>
           <br>
-
-          <div class="flex flex-column gap-3 folleto-digital-data">
-            <span>Titulo:
-                <pv-input-text placeholder="Folleto digital"
+          <div class="separador"></div>
+          <br>
+          <div class="flex flex-column  folleto-digital-data">
+            <h6><span>Titulo:</span></h6>
+              <pv-input-text placeholder="Folleto digital"
                 v-model="plan_estudios_folleto_digital.folleto_digital.titulo"/>
-              </span>
 
-              <span>Url documento:
-                <pv-input-text placeholder="https://folleto-digital" class="long-input-url"
+              <h6><span>Url documento:</span></h6>
+                <pv-input-text placeholder="https://folleto-digital" class=""
                 v-model="plan_estudios_folleto_digital.folleto_digital.url_documento"/>
-              </span>
-
-              <span>Url imagen de fondo:
-                <pv-input-text placeholder="https://my_background_image" class="long-input-url"
+            
+                <h6><span>Url imagen de fondo:</span></h6>       
+                <pv-input-text placeholder="https://my_background_image" class=""
                 v-model="plan_estudios_folleto_digital.folleto_digital.url_imagen_fondo"/>
-              </span>
+              
           </div>
 
       </div>

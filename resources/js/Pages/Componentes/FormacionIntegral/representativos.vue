@@ -7,6 +7,7 @@ export default {
     },
     mounted() {
         this.cargarTexto();
+        this.cargarDeporte();
     },
     methods: {
         cargarTexto() {
@@ -16,10 +17,18 @@ export default {
                 console.log(error);
             });
         },
+        cargarDeporte() {
+            axios.post('/RepresentativosDeporte/bannerData').then((response) => {
+                this.deporte = response.data;
+            }).catch((error) => {
+                console.log(error);
+            });
+        },
     },
     data() {
         return {
             texto: [],
+            deporte: [],
         };
     },
 }
@@ -30,6 +39,10 @@ export default {
  
 <template>
     <AppEstructure :controllerName="'/Representativosprin/bannerData'">
+        {{ deporte }}
+        <div v-for="depo in deporte">
+        {{ depo.nombre }}
+        </div>
         <div class="h-3rem" style="background-color:rgb(140, 36, 55);"></div>
         <div class="panel">
             <div class="texto px-8" v-for="text in texto">
@@ -62,7 +75,7 @@ export default {
 .texto {
     padding: 50px;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.5rem; 
 }
 </style>
 

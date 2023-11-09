@@ -8,6 +8,12 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import axios from 'axios'; // Asegúrese de que axios esté correctamente importado
 
 export default {
+    props: {
+        loadDataUrl: {
+            type: String,
+            required: true
+        },
+    },
     components: {
         AppEstructure,
         Swiper,
@@ -39,7 +45,7 @@ export default {
             this.acordeones[index].open = !this.acordeones[index].open;
         },
         cargarValor() {
-            return axios.post('/pdfPrueba/bannerData').then((response) => {
+            return axios.post(this.loadDataUrl).then((response) => {
                 this.valor = response.data;
             }).catch((error) => {
                 console.log(error);
@@ -240,13 +246,13 @@ embed {
 }
 
 .circle-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 20px;
-  /* Espacio entre los elementos */
-  padding: 0 20px;
-  /* Añadir un poco de padding al contenedor para evitar que los círculos estén demasiado cerca del borde de la pantalla */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    /* Espacio entre los elementos */
+    padding: 0 20px;
+    /* Añadir un poco de padding al contenedor para evitar que los círculos estén demasiado cerca del borde de la pantalla */
 }
 
 .circle-wrapper {
@@ -396,17 +402,17 @@ embed {
 
 
 @media (max-width: 425px) {
-  .circle {
-    margin-top: 30px;
-  }
+    .circle {
+        margin-top: 30px;
+    }
 
-  .vertical-column {
-    margin-right: 30px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center; 
-    justify-content:center;
-  }
+    .vertical-column {
+        margin-right: 30px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 @media (max-width: 768px) and (min-width: 426px) {
@@ -418,6 +424,7 @@ embed {
         display: flex;
         flex-wrap: wrap;
     }
+
     .circle {
         flex-direction: row;
         align-items: center;
@@ -426,7 +433,6 @@ embed {
         margin-right: 0;
     }
 }
-
 </style>
 
 

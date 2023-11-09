@@ -21,8 +21,8 @@ export default {
                 :editBannerUrl="'/representativoTexto/editarBanner'" :deleteBannerUrl="'/representativoTexto/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Cultura Física, Deporte, y Recreación">
-            <estructuraTextos :Titulo="'Objetivo'" :Subtitulo="'Contenido'" :loadDataUrl="'/representativoTexto/bannerData'" :registerBannerUrl="'/representativoTexto/registrarBanner'"
-                :editBannerUrl="'/representativoTexto/editarBanner'" :deleteBannerUrl="'/representativoTexto/eliminarBanner'" />
+            <estructuraImg :loadDataUrl="'/representativoDeporte/bannerData'" :registerBannerUrl="'/representativoDeporte/registrarBanner'"
+                :editBannerUrl="'/representativoDeporte/editarBanner'" :deleteBannerUrl="'/representativoDeporte/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Difusión Cultural y Artistica (DICART)">
             <estructuraTextos :Titulo="'Objetivo'" :Subtitulo="'Contenido'" :loadDataUrl="'/representativoTexto/bannerData'" :registerBannerUrl="'/representativoTexto/registrarBanner'"

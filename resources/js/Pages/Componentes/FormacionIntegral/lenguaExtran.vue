@@ -208,8 +208,7 @@ export default {
           <hr>
         </header>
       </div>
-      {{ pdf }}
-      <bolitas_pdf />
+      <bolitas_pdf :loadDataUrl="'/pdfPrueba/bannerData'"/>
 
 
       <!-- Modal como un pop-up -->

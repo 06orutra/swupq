@@ -39,5 +39,8 @@ export default {
         <TabPanel header="Pdfs de Etica">
             <estructuraPdf :loadDataUrl="'/IgualdadLaboralPdfEtica/bannerData'" :registerBannerUrl="'/IgualdadLaboralPdfEtica/registrarBanner'" :editBannerUrl="'/IgualdadLaboralPdfEtica/editarBanner'" :deleteBannerUrl="'/IgualdadLaboralPdfEtica/eliminarBanner'" />
         </TabPanel>
+        <TabPanel header="Pdfs de Igualdad">
+            <estructuraPdf :loadDataUrl="'/IgualdadLaboralPdfIgualdad/bannerData'" :registerBannerUrl="'/IgualdadLaboralPdfIgualdad/registrarBanner'" :editBannerUrl="'/IgualdadLaboralPdfIgualdad/editarBanner'" :deleteBannerUrl="'/IgualdadLaboralPdfIgualdad/eliminarBanner'" />
+        </TabPanel>
     </TabView>
 </template>

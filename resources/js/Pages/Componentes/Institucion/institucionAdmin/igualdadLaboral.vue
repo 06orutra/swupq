@@ -31,5 +31,8 @@ export default {
         <TabPanel header="Pdf">
             <estructurapdf2  :loadDataUrl="'/IgualdadLaboralPdf/bannerData'" :registerBannerUrl="'/IgualdadLaboralPdf/registrarBanner'" :editBannerUrl="'/IgualdadLaboralPdf/editarBanner'" :deleteBannerUrl="'/IgualdadLaboralPdf/eliminarBanner'" />
         </TabPanel>
+        <TabPanel header="Imagen Secundaria">
+            <estructuraImg :loadDataUrl="'/IgualdadLaboralImgSecundaria/bannerData'" :registerBannerUrl="'/IgualdadLaboralImgSecundaria/registrarBanner'" :editBannerUrl="'/IgualdadLaboralImgSecundaria/editarBanner'" :deleteBannerUrl="'/IgualdadLaboralImgSecundaria/eliminarBanner'" />
+        </TabPanel>
     </TabView>
 </template>

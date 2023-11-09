@@ -59,7 +59,7 @@ use App\Http\Controllers\ProtocolosDocumentosController;
 use App\Http\Controllers\ReglamentosDocumentosController;
 use App\Http\Controllers\IgualdadLaboralTextosController;
 use App\Http\Controllers\IgualdadLaboralPdfController;
-
+use App\Http\Controllers\IgualdadLaboralImgSecundariaController;
 
 
 use Illuminate\Http\Request;
@@ -219,6 +219,7 @@ Route::middleware([
         'ReglamentosDocumentos' => ReglamentosDocumentosController::class,
         'IgualdadLaboralTextos' => IgualdadLaboralTextosController::class,
         'IgualdadLaboralPdf' => IgualdadLaboralPdfController::class,
+        'IgualdadLaboralImgSecundaria' => IgualdadLaboralImgSecundariaController::class,
     ];
     // se declarar variables, 
 
@@ -265,6 +266,7 @@ Route::post('/videolenguajes', [ VideoLenguajeController::class, 'bannerData']);
 Route::post('/igualdadLaboralPrin/bannerData', [IgualdadLaboralPrincipalController::class, 'bannerData']);
 Route::post('/IgualdadLaboralText/bannerData', [IgualdadLaboralTextosController::class, 'bannerData']);
 Route::post('/IgualdadLaboralPdf/bannerData', [IgualdadLaboralPdfController::class, 'bannerData']);
+Route::post('/IgualdadLaboralImgSecundaria/bannerData', [IgualdadLaboralImgSecundariaController::class, 'bannerData']);
 
 // Route::post('/obtener-link', [SpotyPoliPoloController::class, 'bannerData']);
 

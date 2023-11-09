@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\igualdadLaboralPrincipal;
+use App\Models\igualdadLaboralImgSecundaria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class IgualdadLaboralPrincipalController extends Controller
+class IgualdadLaboralImgSecundariaController extends Controller
 {
     public function bannerData()
     {
-        $datosBanner = igualdadLaboralPrincipal::all();
+        $datosBanner = igualdadLaboralImgSecundaria::all();
         return response()->json($datosBanner);
     }
 
@@ -28,7 +28,7 @@ class IgualdadLaboralPrincipalController extends Controller
         $fotoPath = $request->file('foto')->storeAs('public', $fotoName);
 
         // Create a new banner instance
-        $banner = new igualdadLaboralPrincipal;
+        $banner = new igualdadLaboralImgSecundaria;
         $banner->nombre = $request->nombre;
         $banner->imagen = $fotoName;
         $banner->save();
@@ -45,7 +45,7 @@ class IgualdadLaboralPrincipalController extends Controller
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000000',
         ]);
 
-        $banner =igualdadLaboralPrincipal::find($request->id);
+        $banner =igualdadLaboralImgSecundaria::find($request->id);
 
 
         if ($request->hasFile('foto')) {
@@ -73,7 +73,7 @@ class IgualdadLaboralPrincipalController extends Controller
 
     public function eliminarBanner(Request $request)
     {
-        $banner = igualdadLaboralPrincipal::find($request->id);
+        $banner = igualdadLaboralImgSecundaria::find($request->id);
         //eliminar la imagen del storage
         Storage::delete('public/' . $banner->imagen);
         $banner->delete();

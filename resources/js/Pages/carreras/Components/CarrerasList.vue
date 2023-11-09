@@ -131,7 +131,7 @@
                             <div class="video-carrera">
                                 <span><strong>Video</strong></span>
                                 <div class="video-direccion">
-                                    <a href="#" target="_blank">{{ carreraEliminar.datos.perfil_ingreso.video }}</a>
+                                    <a :href="carreraEliminar.datos.perfil_ingreso.video" target="_blank">{{ carreraEliminar.datos.perfil_ingreso.video }}</a>
                                 </div>
                                
                             </div>
@@ -226,7 +226,7 @@
                     <!--boton para confirmar la eliminacion de la carrera-->
                     <br>
                     <div class="controls-delete-carrera centrar">
-                        <button-pv label="Eliminar" type="button" @click="ejecutaEliminacion()"
+                        <button-pv label="Eliminar" type="button" @click="confirmaEliminacion()"
                         :style="{ width: '25%' }"/>
                     </div>
                 </form>
@@ -424,6 +424,20 @@
                 </div>    
         </dialog-pv>
 
+        <!--dialogo para confirmar la eliminacion de la carrera-->
+        <dialog-pv v-model:visible="visibleDialogConfirmDelete" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
+        :style="{ width: '70vw' }" header="Aviso!" modal class="p-fluid">
+            <div class="alert-message centrar">
+                <h4>¿Seguro que desea eliminar esta carrera?</h4>
+            </div>
+            <div class="controls-dialog-confirm-delete row-div  distribucion-uniforme">
+                <button-pv label="Confirmar" severity="success" raised icon="pi pi-check" 
+                class="btn-dialog-actions" @click="ejecutaEliminacion()"/>
+
+                <button-pv label="Cancelar" severity="danger" raised icon="pi pi-times" 
+                class="btn-dialog-actions" @click="visibleDialogConfirmDelete = false"/>
+            </div>
+        </dialog-pv>
 
     </section>
 
@@ -454,6 +468,7 @@ export default defineComponent({
     'input-number-pv':InputNumber,
     'text-area-pv':Textarea,
     'color-picker-pv':Colorpicker,
+
   },
   props: {
     title:{
@@ -481,8 +496,14 @@ export default defineComponent({
   setup(props) {
 
     //variables
-    const visibleDialogDelete = ref(false);
-    const visibleDialogEdit = ref(false);
+    const visibleDialogDelete = ref(false); //dialogo de alerta para eliminar una carrera
+    const visibleDialogEdit = ref(false); //dialogo de alerta para editar una carrera
+    const visibleDialogConfirmDelete = ref(false); //dialogo de alerta para editar una carrera
+    const visibleDialogConfirEdit = ref(false); //dialogo de alerta para editar una carrera
+
+    //variables para validar si se confirmo la eliminacion o edicion de una carrera
+    const confirmEliminacionCarrera = ref(false);
+    const confirmEdicionCarrera = ref(false);
 
     const carrerasLoaded = ref([]);//guardara las carreras que se traigan de la base de datos
     const isLoading = ref(true);//para saber si se esta cargando la informacion de la base de datos
@@ -490,12 +511,14 @@ export default defineComponent({
     const carreraEliminar = ref();//guardara los datos de la carrera que se desea eliminar
     const carreraEditar = ref();//guardara los datos de la carrera que se desea editar
 
+
     //functions
     function getCarreras(){
         //trae todas las carreras guardadas de la base de datos
         axios.post(props.url_getCarreras)
         .then(function(response){
             const carreras = response.data;
+            carrerasLoaded.value = [];
 
             carreras.forEach(element => {
                 carrerasLoaded.value.push(element);
@@ -528,21 +551,32 @@ export default defineComponent({
 
     }
 
+    function confirmaEliminacion(){
+        visibleDialogConfirmDelete.value = true;
+    }
+
     function ejecutaEliminacion(){
         if(carreraEliminar.value == null || carreraEliminar.value == undefined 
         || carreraEliminar.value == ''){
             return;
         }
+
         console.log('Eliminando la carrera:'+carreraEliminar.value.datos.nombre_carrera);
 
         axios.post(props.url_deleteCarrera,{'id':carreraEliminar.value.id})
         .then(function(response){
             console.log(response.data);
+            visibleDialogConfirmDelete.value = false;
+            visibleDialogDelete.value = false;
+
         }).catch(function(error){
             console.error(error);
+
         }).finally(function(){
             isLoading.value = false;
-            this.getCarreras();
+            confirmEliminacionCarrera.value = false;
+
+            getCarreras();
         });
     }
 
@@ -599,11 +633,14 @@ export default defineComponent({
         carreraEliminar,
         carreraEditar,
         visibleDialogEdit,
+        visibleDialogConfirmDelete,
+        confirmEliminacionCarrera,
         getCarreras,
         eliminarCarrera,
         editarCarrera,
         ejecutaEliminacion,
         ejecutaEdicion,
+        confirmaEliminacion,
     };
   },
   mounted(){
@@ -697,5 +734,15 @@ margin-bottom: 40px;
 
 .length-input-text{
     width: 80%;
+}
+
+.btn-dialog-actions{
+    width: 20%;
+}
+
+.distribucion-uniforme{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 </style>

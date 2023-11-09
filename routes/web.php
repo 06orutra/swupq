@@ -42,6 +42,10 @@ use App\Http\Controllers\BannerDirectorioController;
 use App\Http\Controllers\DesarrolloHumnPrincController;
 use App\Http\Controllers\DesarrolloHumnTextoController;
 use App\Http\Controllers\DesarrolloHumnDesarrollosController;
+use App\Http\Controllers\RepresentativoPrinController;
+use App\Http\Controllers\RepresentativoTextoController;
+use App\Http\Controllers\RepresentativoDeporteController;
+
 use App\Http\Controllers\LeyesEstatalesController;
 use App\Http\Controllers\LeyesFederalesController;
 use App\Http\Controllers\LeyesGeneralesController;
@@ -131,6 +135,10 @@ Route::prefix('FormacionIntegral')->group(function () {
     Route::get('DesarrolloHumano', function(){
         return Inertia::render('Componentes/FormacionIntegral/desarrolloHumano');
     });
+
+    Route::get('Representativos', function(){
+        return Inertia::render('Componentes/FormacionIntegral/representativos');
+    });
 });   
 
 
@@ -202,6 +210,10 @@ Route::middleware([
         'desarrolloHumnPrinc' => DesarrolloHumnPrincController::class,
         'desarrolloHumnTexto' => DesarrolloHumnTextoController::class,
         'desarrolloHumnDesarrollos' => DesarrolloHumnDesarrollosController::class,
+        'representativoPrin' => RepresentativoPrinController::class,
+        'representativoTexto' => RepresentativoTextoController::class,
+        'representativoDeporte' => RepresentativoDeporteController::class,
+
         'ConstitucionDocumentos' => ConstitucionDocumentosController::class,
         'LeyesEstatales' => LeyesEstatalesController::class,
         'LeyesFederales' => LeyesFederalesController::class,
@@ -223,6 +235,8 @@ Route::middleware([
         'IgualdadLaboralImgSecundaria' => IgualdadLaboralImgSecundariaController::class,
         'IgualdadLaboralPdfEtica' => IgualdadLaboralPdfEticaController::class,
         'IgualdadLaboralPdfIgualdad' => IgualdadLaboralPdfIgualdadController::class,
+        
+
     ];
     // se declarar variables, 
 
@@ -235,6 +249,9 @@ Route::middleware([
         });
     }
 });
+Route::post('/RepresentativoText/bannerData', [RepresentativoTextoController::class, 'bannerData']);
+Route::post('/Representativosprin/bannerData', [RepresentativoPrinController::class, 'bannerData']);
+Route::post('/RepresentativosDeporte/bannerData', [RepresentativoDeporteController::class, 'bannerData']);
 
 Route::post('/Sadministrativa/bannerData', [SecretariaAdministrativaController::class, 'bannerData']);
 Route::post('/Sacademica/bannerData', [SecretariaAcademicaController::class, 'bannerData']);

@@ -148,10 +148,6 @@ export default {
     transition: background-color 2s ease;
 }
 
-.circle-container.darken {
-    background-color: black;
-    color: white;
-}
 
 .circle-wrapper {
     flex: 1;
@@ -161,16 +157,6 @@ export default {
     animation-duration: 5s;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
-}
-
-@keyframes oscurecerFondo {
-    from {
-        background-color: #ffffff;
-    }
-
-    to {
-        background-color: #000000;
-    }
 }
 
 
@@ -202,7 +188,7 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.87);
     z-index: 999;
     justify-content: flex-start;
     align-items: center;
@@ -255,8 +241,6 @@ export default {
     border-radius: 50%;
     position: relative;
     overflow: hidden;
-    transition: transform 1.9s ease;
-    background-color: transparent;
     z-index: 2;
     /* Asegura que el loader esté sobre la imagen */
 }
@@ -290,7 +274,7 @@ export default {
 .text {
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.155);
+    background-color: rgb(255, 0, 0);
     color: #fff;
     text-align: center;
     display: flex;
@@ -321,16 +305,7 @@ export default {
     background-size: cover;
 }
 
-.background-image::before {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    position: absolute;
-}
+
 
 .loader.active {
     transform: rotate(360deg) !important;

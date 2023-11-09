@@ -29,7 +29,8 @@ export default {
       texto: 'Somos',
       texto2: 'Multiculturales',
       info: 'En la Universidad Politécnica de Querétaro contamos con el apoyo de nativo hablantes de lengua inglesa, gracias a la vinculación establecida con estos programa internacionales.',
-      showCarousel: true,
+      isSmallScreen: window.innerWidth <=425,
+      
     };
   },
   created() {
@@ -40,6 +41,9 @@ export default {
   },
 
   computed: {
+    windowWidth() {
+      return window.innerWidth;
+    },
     firstDownloadLink() {
       return 'https://www.upq.mx/assets/language/niveles_ingles.svg';
     },
@@ -60,7 +64,7 @@ export default {
 
     window() {
       return this;
-    }
+    },
   },
   mounted() {
     this.cargarImg();
@@ -157,9 +161,9 @@ export default {
     <!-- Carrusel e información -->
     <section>
 
-      <div class="p-20">
+      <div class="p-20 ">
         <div class="flex">
-          <div class="w-2/4" v-if="showCarousel">
+          <div class="w-1/3 hide-carousel" v-bind:class="{'hide-carousel': isSmallScreen}" >
             <div class="img_1  img-container mt-5">
               <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
                 delay: 2500,
@@ -168,13 +172,13 @@ export default {
   clickable: true,
 }" :navigation="false" class="mySwiper">
                 <swiper-slide v-for="datosimg in img"><img :src="'/storage/' + datosimg.imagen"
-                    alt="Card Image" /></swiper-slide>
+                    alt= "Card Image" /></swiper-slide>
               </swiper>
             </div>
-          </div>
+          </div> 
 
 
-          <div class="p-1 w-2/3 ml-10">
+          <div class="p-1 w-2/3 ml-10 acordeon">
             <div class="toggle-acordion">
               <div class="heading-title heading-border-bottom">
                 <h3>
@@ -182,11 +186,12 @@ export default {
                 </h3>
               </div>
               <ul class="list-group box">
-                <li class="list-group-item" v-for="item in objetivoCLEItems"><strong style="margin-right: 5px;">{{
-                  item.title }}</strong>
-                  <p> {{ item.text }}</p>
-                </li>
-              </ul>
+            <li class="list-group-item" v-for="item in objetivoCLEItems">
+              <p>{{ item.title }} 
+                    <p>{{ item.text }}</p>
+                  </p>
+            </li>
+          </ul>
             </div>
           </div>
 
@@ -203,37 +208,8 @@ export default {
           <hr>
         </header>
       </div>
-      {{ pdf }}
-      <bolitas_pdf />
-      <!-- <div class="loader-container">
-        <div class="vertical-column circle-container" >
-          <div class="loader-wrapper" @click="openMapModal('modal1')">
-            <div class="background-image circle"
-              style="background-image: url('https://www.upq.mx/assets/language/1.jpeg')">
-              <div class="loader" id="loader1"></div>
-            </div>
-            <h5 style="text-align:center">Niveles de Inglés</h5>
-            <h6 style="text-align:center">Conoce los niveles de inglés.</h6>
-          </div>
-        </div>
+      <bolitas_pdf :loadDataUrl="'/pdfPrueba/bannerData'"/>
 
-      </div>
-
-      <div class="loader-container">
-        <div class="vertical-column circle-container" v-for="item in pdf" :key="item.id" >
-          <div class="loader-wrapper" @click="openMapModal('modal1')">
-            <div class="background-image circle">
-            <img :src="'/storage/' + item.imagen" alt="Valor Image" class="circle-img" />
-              <div class="loader" id="loader1"></div>
-            </div>
-            <h5 style="text-align:center">Niveles de Inglés</h5>
-            <h6 style="text-align:center">Conoce los niveles de inglés.</h6>
-          </div>
-        </div>
-
-      </div> -->
-
-      
 
       <!-- Modal como un pop-up -->
       <div v-if="showMapModal.modal1" class="popup-modal">
@@ -295,78 +271,10 @@ export default {
 #text1 {
   background-color: rgba(8, 22, 47, 0.8);
 }
-.text {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(140, 36, 55, 0.8);
-  color: #fff;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 2;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-attachment: fixed;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-  font-size: 22px;
-  font-weight: bold;
-}
-#loader2 {
-  border: 13px solid #8C2437;
-  border-top: 13px solid #8C2437;
-  border-right: 13px solid #f3f3f3;
-  border-bottom: 13px solid #f3f3f3;
-  transition: transform 1.9s ease;
-  z-index: 2;
-  /* Asegura que el loader esté sobre la imagen */
-}
-.loader {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  position: relative;
-  overflow: hidden;
-  transition: transform 1.9s ease;
-  background-color: transparent;
-  z-index: 2;
-  /* Asegura que el loader esté sobre la imagen */
-}
-.background-image.circle {
-  position: relative;
-  width: 100%;
-  /* Asegurarse de que cada círculo tenga un ancho responsivo */
-  height: 0;
-  padding-bottom: 100%;
-  /* Mantener la relación de aspecto 1:1 */
-  border-radius: 50%;
-  overflow: hidden;
-}
-.circle-wrapper {
-  flex: 1;
-  max-width: 300px;
-  /* Ancho máximo de cada círculo */
-}
-.circle-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 20px;
-  /* Espacio entre los elementos */
-  padding: 0 20px;
-  /* Añadir un poco de padding al contenedor para evitar que los círculos estén demasiado cerca del borde de la pantalla */
-}
-.circle-img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  /* Asegura que la imagen esté debajo del texto y del loader */
-}
 /* carrusel y texto (section 1)*/
+.acordeon{
+  max-width: 70%;
+}
 .mySwiper {
   max-height: 400px;
   max-width: 100%;
@@ -406,7 +314,6 @@ export default {
   display: flex;
   padding: 0.75rem 1.25rem;
   margin-bottom: -1px;
-  background-color: fff;
   border: 1px solid rgba(0, 0, 0, .125);
   box-sizing: border-box;
 }
@@ -423,9 +330,9 @@ ul.list-group {
 .box {
   color: #666;
   font-family: 'Open Sans', Arial, Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  font-size: 18px;
-  line-height: 1.5;
+
+  font-size: 17px;
+  line-height: 1.3;
   font-weight: 400;
   text-align: left;
   width: 100%
@@ -455,74 +362,6 @@ div.heading-title h3 {
   padding-left: 0;
   padding-right: 15px;
 }
-
-
-/* Loaders (section 2) */
-/* .loader {
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  position: relative;
-  overflow: hidden;
-  transition: transform 1.9s ease;
-  background-color: transparent;
-  z-index: 2;
-
-}
-
-#loader1 {
-  border: 13px solid #222;
-  border-top: 13px solid #222;
-  border-right: 13px solid #f3f3f3;
-  border-bottom: 13px solid #f3f3f3;
-  transition: transform 1.9s ease;
-}
-
-.loader.active:hover {
-  background-color: rgba(50, 50, 50, 0.8);
-}
-
-.vertical-column {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 40px;
-  margin-right: 30px;
-  justify-content: space-around;
-  margin-top: 30px;
-}
-
-.circle {
-  width: 100px;
-  height: 100px;
-  background-color: #f3f3f3;
-}
-
-.background-image {
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  overflow: hidden;
-  position: relative;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.background-image::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  position: absolute;
-}
-
-.loader.active {
-  transform: rotate(360deg) !important;
-} */
-
 /* Contenido dentro del modal */
 .popup-modal {
   position: fixed;
@@ -551,7 +390,6 @@ div.heading-title h3 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   width: 100%;
   overflow: auto;
-  width: 95%;
   max-width: 1000px;
 }
 
@@ -692,14 +530,27 @@ p {
 }
 
 @media (max-width: 425px) {
-  .vertical-column {
-    flex-direction: column;
-    margin-right: 0;
-    margin-bottom: 20px;
+  .img_1 {
+    max-width: 100%;
+    /* Ajustar el tamaño máximo de la imagen al 100% del contenedor */
+    height: auto;
+    /* Permite que la altura se ajuste automáticamente según el ancho */
+    margin: 0 auto;
+    /* Centrar horizontalmente la imagen */
+    z-index: 1;
   }
-
-  .container {
-    max-width: 576px;
+  .toggle-acordion {
+    position: relative;
+    z-index: 0;
+  }
+  .hide-carousel {
+    display: none;
+  }
+  .acordeon{
+    max-width: 80%;
+  }
+  list-group-item {
+    font-size: 16px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
   }
 }
 
@@ -713,19 +564,5 @@ p {
     margin-bottom: 30px;
     justify-content: space-between;
   }
-
-/*   .circle {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    margin-right: 0;
-  } */
-
-/*   .circle-container {
-    display: flex;
-    justify-content: space-between;
-  } */
 }
 </style>

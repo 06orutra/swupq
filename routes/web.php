@@ -60,7 +60,7 @@ use App\Http\Controllers\ReglamentosDocumentosController;
 use App\Http\Controllers\IgualdadLaboralTextosController;
 use App\Http\Controllers\IgualdadLaboralPdfController;
 use App\Http\Controllers\IgualdadLaboralImgSecundariaController;
-
+use App\Http\Controllers\IgualdadLaboralPdfEticaController;
 
 use Illuminate\Http\Request;
 
@@ -220,6 +220,7 @@ Route::middleware([
         'IgualdadLaboralTextos' => IgualdadLaboralTextosController::class,
         'IgualdadLaboralPdf' => IgualdadLaboralPdfController::class,
         'IgualdadLaboralImgSecundaria' => IgualdadLaboralImgSecundariaController::class,
+        'IgualdadLaboralPdfEtica' => IgualdadLaboralPdfEticaController::class,
     ];
     // se declarar variables, 
 
@@ -267,6 +268,7 @@ Route::post('/igualdadLaboralPrin/bannerData', [IgualdadLaboralPrincipalControll
 Route::post('/IgualdadLaboralText/bannerData', [IgualdadLaboralTextosController::class, 'bannerData']);
 Route::post('/IgualdadLaboralPdf/bannerData', [IgualdadLaboralPdfController::class, 'bannerData']);
 Route::post('/IgualdadLaboralImgSecundaria/bannerData', [IgualdadLaboralImgSecundariaController::class, 'bannerData']);
+Route::post('/IgualdadLaboralPdfEtica/bannerData', [IgualdadLaboralPdfEticaController::class, 'bannerData']);
 
 // Route::post('/obtener-link', [SpotyPoliPoloController::class, 'bannerData']);
 

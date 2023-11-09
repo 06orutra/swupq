@@ -6,6 +6,7 @@ import opcionesCarrusel from "@/Pages/Componentes/Home/opcionesCarrusel.vue";
 import estructuraImg from '../../Home/estructuraImg.vue';
 import estructuraTextos from '../../Home/estructuraTextos.vue';
 import estructurapdf2 from '../../Home/estructurapdf2.vue';
+import estructuraPdf from '../../Home/estructuraPdf.vue';
 
 export default {
     components: {
@@ -15,7 +16,8 @@ export default {
         opcionesCarrusel,
         estructuraImg,
         estructuraTextos,
-        estructurapdf2
+        estructurapdf2,
+        estructuraPdf,
     },
 }
 </script>
@@ -33,6 +35,9 @@ export default {
         </TabPanel>
         <TabPanel header="Imagen Secundaria">
             <estructuraImg :loadDataUrl="'/IgualdadLaboralImgSecundaria/bannerData'" :registerBannerUrl="'/IgualdadLaboralImgSecundaria/registrarBanner'" :editBannerUrl="'/IgualdadLaboralImgSecundaria/editarBanner'" :deleteBannerUrl="'/IgualdadLaboralImgSecundaria/eliminarBanner'" />
+        </TabPanel>
+        <TabPanel header="Pdfs de Etica">
+            <estructuraPdf :loadDataUrl="'/IgualdadLaboralPdfEtica/bannerData'" :registerBannerUrl="'/IgualdadLaboralPdfEtica/registrarBanner'" :editBannerUrl="'/IgualdadLaboralPdfEtica/editarBanner'" :deleteBannerUrl="'/IgualdadLaboralPdfEtica/eliminarBanner'" />
         </TabPanel>
     </TabView>
 </template>

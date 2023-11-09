@@ -498,7 +498,16 @@
                                 </div>
 
                                 <div class="container-ciclos-formacion-agregados-editar">
-                                    <p>{{ carreraEditar.datos.ciclos_formacion }}</p>
+                                    <!--<p>{{ carreraEditar.datos.ciclos_formacion }}</p>-->
+
+                                    <div> <!--class="card"-->
+                                        <table-pv :value="carreraEditar.datos.ciclos_formacion" 
+                                        showGridlines tableStyle="min-width: 50rem">
+                                            <column-pv field="numero_ciclo" header="Número de ciclo"></column-pv>
+                                            <column-pv field="descripcion" header="Descripción"></column-pv>
+                                        </table-pv>
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -580,8 +589,10 @@ import InputText from 'primevue/inputtext';
 import InputNumber from 'primevue/inputnumber';
 import Textarea from 'primevue/textarea';
 import Colorpicker from 'primevue/colorpicker';
-
 import MultiSelect from 'primevue/multiselect';
+
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
 
 
 import axios from 'axios';
@@ -598,6 +609,8 @@ export default defineComponent({
     'text-area-pv':Textarea,
     'color-picker-pv':Colorpicker,
     'multi-select-pv':MultiSelect,
+    'table-pv':DataTable,
+    'column-pv':Column,
 
   },
   props: {

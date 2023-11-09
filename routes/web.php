@@ -45,7 +45,6 @@ use App\Http\Controllers\DesarrolloHumnDesarrollosController;
 use App\Http\Controllers\RepresentativoPrinController;
 use App\Http\Controllers\RepresentativoTextoController;
 use App\Http\Controllers\RepresentativoDeporteController;
-
 use App\Http\Controllers\LeyesEstatalesController;
 use App\Http\Controllers\LeyesFederalesController;
 use App\Http\Controllers\LeyesGeneralesController;
@@ -235,8 +234,6 @@ Route::middleware([
         'IgualdadLaboralImgSecundaria' => IgualdadLaboralImgSecundariaController::class,
         'IgualdadLaboralPdfEtica' => IgualdadLaboralPdfEticaController::class,
         'IgualdadLaboralPdfIgualdad' => IgualdadLaboralPdfIgualdadController::class,
-        
-
     ];
     // se declarar variables, 
 

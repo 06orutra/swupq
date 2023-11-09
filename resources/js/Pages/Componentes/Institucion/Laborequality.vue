@@ -30,7 +30,15 @@ export default {
     },
     redirectToPDF(pdfUrl) {
       window.open(pdfUrl, '_blank');
-    }
+    },
+    openPDFModal(pdf, name) {
+      this.currentPDF = '/storage/pdfs/' + pdf;
+      this.currentPDFName = name;
+      this.showPDFModal = true;
+    },
+    closePDFModal() {
+      this.showPDFModal = false;
+    },
 
   },
   data() {
@@ -38,6 +46,7 @@ export default {
       texto: [],
       pdfs: [],
       sugerenciasLink: 'https://mail.google.com/mail/u/0/#inbox',
+      showPDFModal: false,
 
       images: {
         banner: "https://www.upq.mx/igualdad_laboral/images/270320_banner-igualdad-2020.jpg?crc=3862696609",
@@ -96,17 +105,30 @@ export default {
           </div>
           </p>
         </div>
+
+        <div v-if="showPDFModal" class="pdf-modal">
+          <div class="pdf-container">
+            <button @click="closePDFModal" class="close-x">&#10005;</button>
+            <div class="pdf-header" :style="{ backgroundColor: '#8c2437' }">
+              {{ currentPDFName }}
+            </div>
+            <embed :src="currentPDF" type="application/pdf" width="100%" height="500px">
+            <div class="pdf-buttons">
+              <button @click="closePDFModal" class="close-button">Cerrar</button>
+              <a :href="currentPDF" download :download="currentPDFName" class="download-button">
+                Descargar
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div class="contenedoor">
           <div class="parallax" :style="{ backgroundImage: 'url(' + images.fondo1 + ')' }">
-            <div class="caja">
-              <a :href="pdfLinks.politica" target="_blank">
-                <p><strong>CONSULTA AQUÍ</strong></p>
-                <P class="font-normal" style="line-height: 1.5;">
-                  <div v-for="pdf in pdfs">
-                    {{ pdf.nombre }}
-                  </div>
-                </P>
-              </a>
+            <div v-for="pdf in pdfs" @click="openPDFModal(pdf.pdf, pdf.nombre)" class="caja">
+              <p><strong>CONSULTA AQUÍ</strong></p>
+              <P class="font-normal" style="line-height: 1.5;">
+                {{ pdf.nombre }}
+              </P>
             </div>
           </div>
         </div>
@@ -244,6 +266,91 @@ export default {
 </template>
 
 <style scoped>
+.pdf-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.close-x {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    color: black;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-x:hover {
+    color: #ffffff;
+}
+
+.pdf-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.pdf-container {
+    position: relative;
+    width: 75%;
+    height: 80%;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-header {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: white;
+    font-size: medium;
+    font-weight: bold;
+}
+
+embed {
+    width: 100%;
+    height: calc(100vh - 80px);
+}
+
+.pdf-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.close-button {
+    background-color: grey;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.download-button {
+    background-color: #8c2437;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
 .banner_eq {
   background-color: #800020;
   text-align: center;

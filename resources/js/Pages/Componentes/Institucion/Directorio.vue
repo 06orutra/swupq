@@ -1,16 +1,3 @@
-<script setup>
-import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
-import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
-
-defineProps({
-  canLogin: Boolean,
-  canRegister: Boolean,
-  laravelVersion: String,
-  phpVersion: String,
-});
-
-</script>
-
 <template>
   <div>
     <AppEstructure :controllerName="'/BannerDirectorio/bannerData'">
@@ -127,8 +114,12 @@ defineProps({
 
 <script>
 import axios from "axios";
+import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 
 export default {
+  components: {
+        AppEstructure,
+    },
   data() {
     return {
       dirplan: [],

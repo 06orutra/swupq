@@ -45,6 +45,7 @@ use App\Http\Controllers\DesarrolloHumnDesarrollosController;
 use App\Http\Controllers\RepresentativoPrinController;
 use App\Http\Controllers\RepresentativoTextoController;
 use App\Http\Controllers\RepresentativoDeporteController;
+use App\Http\Controllers\RepresentativoCulturaController;
 
 use App\Http\Controllers\LeyesEstatalesController;
 use App\Http\Controllers\LeyesFederalesController;
@@ -64,6 +65,7 @@ use App\Http\Controllers\ReglamentosDocumentosController;
 use App\Http\Controllers\IgualdadLaboralTextosController;
 use App\Http\Controllers\IgualdadLaboralPdfController;
 use App\Http\Controllers\IgualdadLaboralImgSecundariaController;
+
 
 
 use Illuminate\Http\Request;
@@ -212,6 +214,7 @@ Route::middleware([
         'representativoPrin' => RepresentativoPrinController::class,
         'representativoTexto' => RepresentativoTextoController::class,
         'representativoDeporte' => RepresentativoDeporteController::class,
+        'representativoCultura' => RepresentativoCulturaController::class,
 
         'ConstitucionDocumentos' => ConstitucionDocumentosController::class,
         'LeyesEstatales' => LeyesEstatalesController::class,
@@ -249,6 +252,7 @@ Route::middleware([
 Route::post('/RepresentativoText/bannerData', [RepresentativoTextoController::class, 'bannerData']);
 Route::post('/Representativosprin/bannerData', [RepresentativoPrinController::class, 'bannerData']);
 Route::post('/RepresentativosDeporte/bannerData', [RepresentativoDeporteController::class, 'bannerData']);
+Route::post('/RepresentativosCultura/bannerData', [RepresentativoCulturaController::class, 'bannerData']);
 
 Route::post('/Sadministrativa/bannerData', [SecretariaAdministrativaController::class, 'bannerData']);
 Route::post('/Sacademica/bannerData', [SecretariaAcademicaController::class, 'bannerData']);

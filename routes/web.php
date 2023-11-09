@@ -57,6 +57,8 @@ use App\Http\Controllers\ManualesDocumentosController;
 use App\Http\Controllers\PlanDeDesarolloInstitucionalDocumentosController;
 use App\Http\Controllers\ProtocolosDocumentosController;
 use App\Http\Controllers\ReglamentosDocumentosController;
+use App\Http\Controllers\IgualdadLaboralTextosController;
+use App\Http\Controllers\IgualdadLaboralPdfController;
 
 
 
@@ -169,7 +171,6 @@ Route::middleware([
         'spotypoli' => SpotypoliController::class,
         'spotypolo' => SpotypoloController::class,
         'mensaje' => MensajePoliPoloController::class,
-        'Cmascotas' => CarruselMascotaController::class,
         'filosofia' => FilosofiaController::class,
         'filosofiaImg' => FilosofiaImgController::class,
         'filosofiaValor' => FilosofiaValorController::class,
@@ -216,6 +217,8 @@ Route::middleware([
         'PlanDeDesarolloInstitucionalDocumentos' => PlanDeDesarolloInstitucionalDocumentosController::class,
         'ProtocolosDocumentos' => ProtocolosDocumentosController::class,
         'ReglamentosDocumentos' => ReglamentosDocumentosController::class,
+        'IgualdadLaboralTextos' => IgualdadLaboralTextosController::class,
+        'IgualdadLaboralPdf' => IgualdadLaboralPdfController::class,
     ];
     // se declarar variables, 
 
@@ -260,6 +263,8 @@ Route::post('/filosofiaImg/bannerData', [FilosofiaImgController::class, 'bannerD
 Route::post('/filosofias/bannerData', [FilosofiaController::class, 'bannerData']);
 Route::post('/videolenguajes', [ VideoLenguajeController::class, 'bannerData']);
 Route::post('/igualdadLaboralPrin/bannerData', [IgualdadLaboralPrincipalController::class, 'bannerData']);
+Route::post('/IgualdadLaboralText/bannerData', [IgualdadLaboralTextosController::class, 'bannerData']);
+Route::post('/IgualdadLaboralPdf/bannerData', [IgualdadLaboralPdfController::class, 'bannerData']);
 
 // Route::post('/obtener-link', [SpotyPoliPoloController::class, 'bannerData']);
 

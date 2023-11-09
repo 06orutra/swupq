@@ -11,7 +11,6 @@ import filosofia from "@/Pages/Componentes/Institucion/institucionAdmin/filosofi
 import Instalaciones from "@/Pages/Componentes/Institucion/institucionAdmin/Instalaciones.vue";
 import Directorios from "@/Pages/Componentes/Institucion/institucionAdmin/Directorios.vue";
 import historia from './historia.vue';
-import Mascotas from "@/Pages/Componentes/Institucion/institucionAdmin/Mascotas.vue";
 import igualdadLaboral from "@/Pages/Componentes/Institucion/institucionAdmin/igualdadLaboral.vue";
 import MarcoJuridico from "@/Pages/Componentes/Institucion/institucionAdmin/MarcoJuridico.vue";
 
@@ -27,7 +26,6 @@ export default {
         Mascotas,
         filosofia,
         historia,
-        Mascotas,
         igualdadLaboral,
         Instalaciones,
         Directorios,
@@ -70,6 +68,7 @@ export default {
         </TabPanel>
         <TabPanel header="Igualdad laboral">
             <igualdadLaboral/>
+        </TabPanel>
         <TabPanel header="Instalaciones">
             <Instalaciones/>
         </TabPanel>

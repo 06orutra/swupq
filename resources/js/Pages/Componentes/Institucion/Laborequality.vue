@@ -6,19 +6,37 @@ export default {
     AppEstructure
   },
 
+  mounted() {
+    this.cargarTexto();
+    this.cargarPdf();
+  },
+
   name: 'BannerComponent',
   /* método que te dirreccionan a los pdfs */
   methods: {
+    cargarTexto() {
+      axios.post('/IgualdadLaboralText/bannerData').then((response) => {
+        this.texto = response.data;
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    cargarPdf() {
+      axios.post('/IgualdadLaboralPdf/bannerData').then((response) => {
+        this.pdfs = response.data;
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
     redirectToPDF(pdfUrl) {
       window.open(pdfUrl, '_blank');
-
     }
 
   },
   data() {
     return {
-      title: "POLÍTICA DE IGUALDAD LABORAL Y NO DISCRIMINACIÓN",
-      parrafo1: "La Universidad Politécnica de Querétaro manifiesta el compromiso con la promoción, respeto y protección de los derechos humanos, por lo que en la esfera de su competencia garantizará la igualdad sustantiva entre mujeres y hombres en el ejercicio de sus derechos laborales y la no discriminación en los servicios que ofrece así como en sus condiciones de trabajo, quedando prohibido el maltrato, violencia y segregación de las autoridades hacia el personal y entre el personal en materia de cualquier forma de distinción, exclusión o restricción basada en el origen étnico o nacional, apariencia física, cultura, sexo, género, idioma, edad, discapacidad, condición social, economía, de salud o jurídica, embarazo, lengua, religión, opiniones, preferencias sexuales, estado civil o conyugal, situación migratoria o cualquier otra, que tenga por efecto impedir o anular el reconocimiento o el ejercicio de los derechos y la igualdad real de oportunidades a los miembros de la Comunidad Universitaria dentro de sus instalaciones.",
+      texto: [],
+      pdfs: [],
       sugerenciasLink: 'https://mail.google.com/mail/u/0/#inbox',
 
       images: {
@@ -59,22 +77,23 @@ export default {
   <AppEstructure :controllerName="'/igualdadLaboralPrin/bannerData'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div>
-      <div class="img_laboreq">
-        <img class=" h-full w-full " :src="images.banner" alt="">
-      </div>
-
       <div class=" banner_eq w-full">
         <h2><b>IGUALDAD LABORAL Y NO DISCRIMINACIÓN</b></h2>
       </div>
 
-      <div class="title pt-14">
-        <p>{{ title }}</p>
+      <div class="title pt-3">
+        <div v-for="text in texto">
+          {{ text.titulo }}
+        </div>
         <div class="line" style="margin: 20px auto; width: 70%;">
         </div>
 
-        <div class="text-align: center; col-md-8 offset-md-2 text-justify text-xl" style="width: 80%; margin: 0 auto;">
+        <div class="text-align: center; col-md-8 offset-md-2 text-justify text-xl pb-20"
+          style="width: 80%; margin: 0 auto;">
           <p class="font-normal" style="margin-top: 2em; margin-bottom:1em; color: black; width: 100%">
-            {{ parrafo1 }}
+          <div v-for="text in texto">
+            {{ text.contenido }}
+          </div>
           </p>
         </div>
         <div class="contenedoor">
@@ -82,7 +101,10 @@ export default {
             <div class="caja">
               <a :href="pdfLinks.politica" target="_blank">
                 <p><strong>CONSULTA AQUÍ</strong></p>
-                <P class="font-normal" style="line-height: 1.5;">POLITICA DE IGUALAD LABORAL Y NO DISCRIMINACIÓN A DETALLE
+                <P class="font-normal" style="line-height: 1.5;">
+                  <div v-for="pdf in pdfs">
+                    {{ pdf.nombre }}
+                  </div>
                 </P>
               </a>
             </div>
@@ -367,7 +389,7 @@ main {
   overflow: hidden;
   position: relative;
   display: flex;
-  z-index: 999;
+  z-index: 500;
   top: 0px;
   left: 0px;
 }
@@ -440,7 +462,7 @@ main {
   /* Cambiado a 600px */
   position: relative;
   display: flex;
-  z-index: 999;
+  z-index: 500;
   top: 30px;
   left: 0;
 }

@@ -21,11 +21,12 @@
                 </template>
                 <template #footer>
 
-                    <button-pv icon="pi pi-pencil" class="p-button p-button-warning" 
-                    @click="editarCarrera(carreraCard.id,carreraCard.nombre_carrera)"/>
-                    <button-pv icon="pi pi-trash" class="p-button p-button-danger" 
-                    @click="eliminarCarrera(carreraCard.id,carreraCard.nombre_carrera)" />
-
+                    <div class="controls-operations-carrera ">
+                        <button-pv icon="pi pi-pencil" class="p-button p-button-warning" 
+                        @click="editarCarrera(carreraCard.id,carreraCard.nombre_carrera)"/>
+                        <button-pv icon="pi pi-trash" class="p-button p-button-danger" 
+                        @click="eliminarCarrera(carreraCard.id,carreraCard.nombre_carrera)" />
+                    </div>
                 </template>
                 <template #empty>
                     <div class="flex justify-center align-middle text-xl">
@@ -324,17 +325,103 @@
 
                                 <div class="conocimientos-carrera-editar">
                                     <h6>Conocimientos</h6>
-                                    <p>{{ carreraEditar.datos.perfil_ingreso.conocimientos }}</p>
+                                    <!--<p>{{ carreraEditar.datos.perfil_ingreso.conocimientos }}</p>-->
+                                    <div class="agregar-conocimientos-carrera-editar ">
+                                        <div class="entrada-conocimiento-carrera-editar">
+                                            <span> Nombre del conocimiento:</span>
+                                            <input-text-pv placeholder="ejem. Física" class="medium-input-lenght"/>&nbsp
+                                        </div>
+
+                                        <div class="btn-agregar-conocimiento-carrera-editar " >
+                                                <button-pv label="Agregar conocimiento" type="button" severity="secondary"  
+                                                  @click=""/>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="selector-conocimientos-carrera-editar">
+                                        <span>Seleccionar conocimientos:</span>
+                                        <multi-select-pv v-model="carreraEditar.datos.perfil_ingreso.conocimientos" 
+                                        :options="carreraEditar.datos.perfil_ingreso.conocimientos" filter optionLabel="nombre" 
+                                        placeholder="Selecciona conocimientos"
+                                        :maxSelectedLabels="3" class="w-full md:w-20rem" />
+                                    </div>
+
+                                    <div class="container-conocimientos-seleccionados-carrera-editar">
+                                        <!--mostrar los conocimientos que se ha agregado-->
+                                        <strong>conocimientos seleccionados</strong>
+                                        <ul>
+                                            <li v-for="(conocimiento,index) in carreraEditar.datos.perfil_ingreso.conocimientos" 
+                                            :key="index">{{ conocimiento.nombre }}</li>
+                                        </ul>
+                                    </div>
                                 </div>
 
                                 <div class="habilidades-carrera-editar">
                                     <h6>Habilidades</h6>
-                                    <p>{{ carreraEditar.datos.perfil_ingreso.habilidades }}</p>
+                                    <!--<p>{{ carreraEditar.datos.perfil_ingreso.habilidades }}</p>-->
+                                    
+                                    <div class="agregar-habilidades-carrera-editar ">
+                                        <div class="entrada-habilidad-carrera-editar">
+                                            <span> Nombre de la habilidad:</span>
+                                            <input-text-pv placeholder="ejem. Creatividad" class="medium-input-lenght"/>&nbsp
+                                        </div>
+
+                                        <div class="btn-agregar-habilidad-carrera-editar " >
+                                                <button-pv label="Agregar habilidad" type="button" severity="secondary"  
+                                                  @click=""/>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="selector-habilidades-carrera-editar">
+                                        <span>Seleccionar habilidades:</span>
+                                        <multi-select-pv v-model="carreraEditar.datos.perfil_ingreso.habilidades" 
+                                        :options="carreraEditar.datos.perfil_ingreso.habilidades" filter optionLabel="nombre" 
+                                        placeholder="Selecciona habilidades"
+                                        :maxSelectedLabels="3" class="w-full md:w-20rem" />
+                                    </div>
+
+                                    <div class="container-habilidades-seleccionadas-carrera-editar">
+                                        <!--mostrar los conocimientos que se ha agregado-->
+                                        <strong>habilidades seleccionadas</strong>
+                                        <ul>
+                                            <li v-for="(habilidad,index) in carreraEditar.datos.perfil_ingreso.habilidades" 
+                                            :key="index">{{ habilidad.nombre }}</li>
+                                        </ul>
+                                    </div>
                                 </div>
 
                                 <div class="actitudes-carrera-editar">
                                     <h6>Actitudes</h6>
-                                    <p>{{ carreraEditar.datos.perfil_ingreso.actitudes }}</p>
+                                    <!--<p>{{ carreraEditar.datos.perfil_ingreso.actitudes }}</p>-->
+                                    <div class="agregar-actitudes-carrera-editar ">
+                                        <div class="entrada-actitud-carrera-editar">
+                                            <span> Nombre de la actitud:</span>
+                                            <input-text-pv placeholder="ejem. Compromiso" class="medium-input-lenght"/>&nbsp
+                                        </div>
+
+                                        <div class="btn-agregar-actitud-carrera-editar " >
+                                                <button-pv label="Agregar actitud" type="button" severity="secondary"  
+                                                  @click=""/>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="selector-actitudes-carrera-editar">
+                                        <span>Seleccionar actitudes:</span>
+                                        <multi-select-pv v-model="carreraEditar.datos.perfil_ingreso.actitudes" 
+                                        :options="carreraEditar.datos.perfil_ingreso.actitudes" filter optionLabel="nombre" 
+                                        placeholder="Selecciona actitudes"
+                                        :maxSelectedLabels="3" class="w-full md:w-20rem" />
+                                    </div>
+
+                                    <div class="container-actitudes-seleccionadas-carrera-editar">
+                                        <!--mostrar los conocimientos que se ha agregado-->
+                                        <strong>actitudes seleccionadas</strong>
+                                        <ul>
+                                            <li v-for="(actitud,index) in carreraEditar.datos.perfil_ingreso.actitudes" 
+                                            :key="index">{{ actitud.nombre }}</li>
+                                        </ul>
+                                    </div>
+                                    
                                 </div>
 
                                 <div class="video-carrera-editar">
@@ -494,6 +581,9 @@ import InputNumber from 'primevue/inputnumber';
 import Textarea from 'primevue/textarea';
 import Colorpicker from 'primevue/colorpicker';
 
+import MultiSelect from 'primevue/multiselect';
+
+
 import axios from 'axios';
 
 
@@ -507,6 +597,7 @@ export default defineComponent({
     'input-number-pv':InputNumber,
     'text-area-pv':Textarea,
     'color-picker-pv':Colorpicker,
+    'multi-select-pv':MultiSelect,
 
   },
   props: {
@@ -666,6 +757,7 @@ export default defineComponent({
         }).finally(function(){
             isLoading.value = false;
             confirmEdicionCarrera.value = false;
+            getCarreras();
         });
 
     }

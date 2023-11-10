@@ -599,6 +599,11 @@
                 v-model="cicloEditarSelected.numero_ciclo"/>
                 <input-text-pv type="text"  
                 placeholder="Descripción" style="width: 70%;" v-model="cicloEditarSelected.descripcion"/>
+                
+                <div class="btn-delete-ciclo-edit " style="padding-top: 1%;">
+                    <button-pv type="button" label="Eliminar" severity="danger" icon="pi pi-trash" 
+                    @click="deleteCicloEdit()"></button-pv>
+                </div>
 
             </div>
         </dialog-pv>
@@ -611,6 +616,11 @@
                 v-model="iconEditarSelected.descripcion"/>
                 <input-text-pv type="text" placeholder="ejem. https://iconos8.es/icon/IjiO3OXCb817/peligro-de-electricidad" 
                 style="width: 70%;" v-model="iconEditarSelected.url_direccion_imagen"/>
+
+                <div class="btn-delete-icon-edit " style="padding-top: 1%;">
+                    <button-pv type="button" label="Eliminar" severity="danger" icon="pi pi-trash" 
+                    @click="deleteIconEdit()"></button-pv>
+                </div>
 
             </div>
         </dialog-pv>
@@ -702,6 +712,10 @@ export default defineComponent({
     //para modificar los ciclos e iconos informativos de la pagina principal
     const cicloEditarSelected = ref();//guardara el ciclo seleccionado para editar
     const iconEditarSelected = ref();//guarda el icono informativo que se desea editar
+
+    //para guardar los indices de los ciclos e iconos informativos modificandose
+    let indexDataEditing = 0;
+    
     //functions
     function getCarreras(){
         //trae todas las carreras guardadas de la base de datos
@@ -825,45 +839,72 @@ export default defineComponent({
     //funciones para cuando se selecciona o deselecciona un ciclo
     function onCicloSelect(event){
         cicloEditarSelected.value = event.data;
+        indexDataEditing = event.index;
+        /*
         console.log(cicloEditarSelected.value.numero_ciclo);
         console.log(cicloEditarSelected.value.descripcion);
+        */
 
         visibleDialogEditCicloFormacion.value = true;
     }
 
     function onCicloUnselect(event){
         
-        console.log(`${event.data.numero_ciclo}(deseleccionado)`);
-        console.log(`${event.data.descripcion}(deseleccionado)`);
     }
 
     //funciones para cuando se selecciona o deselecciona un icono informativo
     function onIconInfoSelect(event){
         iconEditarSelected.value = event.data;
+        indexDataEditing = event.index;
+        /*
         console.log(iconEditarSelected.value.url_direccion_imagen);
         console.log(iconEditarSelected.value.descripcion);
+        */
         visibleDialogEditIconInfo.value = true;
     }
 
     function onIconInfoUnselect(event){
         iconEditarSelected.value = null;
+        /*
         console.log(`${event.data.descripcion}(deseleccionado)`);
         console.log(`${event.data.url_direccion_imagen}(deseleccionado)`);
+        */
     }
 
 
     //funcion para cuando se cierra el dialog para editar un ciclo de formacion
     function closeDialogEditCiclo(){
         cicloEditarSelected.value = null;
-        console.log('Cerrando dialogo...');
+        //console.log('Cerrando dialogo...');
     }
 
     //funcion para cuando se cierra el dialog para editar un icono informativo
     function closeDialogEditIcon(){
         iconEditarSelected.value = null;
-        console.log('Cerrando dialogo...');
+        //console.log('Cerrando dialogo...');
     }
 
+
+    //funciones para editar o eliminar un ciclo seleccionado
+    function deleteCicloEdit(){
+        try {
+            carreraEditar.value.datos.ciclos_formacion.splice(indexDataEditing,1);
+            visibleDialogEditCicloFormacion.value = false;
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    function deleteIconEdit(){
+        try {
+            carreraEditar.value.datos.pagina_principal.tarjetas_informativas_pp.splice(indexDataEditing,1);
+            visibleDialogEditIconInfo.value = false;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    
 
 
     // Retornar datos y métodos que deseas utilizar en la plantilla
@@ -894,6 +935,8 @@ export default defineComponent({
         confirmaEliminacion,
         closeDialogEditCiclo,
         closeDialogEditIcon,
+        deleteCicloEdit,
+        deleteIconEdit,
     };
   },
   mounted(){

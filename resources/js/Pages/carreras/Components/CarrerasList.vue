@@ -503,7 +503,7 @@
                                     <div> <!--class="card"-->
                                         <table-pv :value="carreraEditar.datos.ciclos_formacion" 
                                         showGridlines tableStyle="min-width: 50rem">
-                                            <column-pv field="numero_ciclo" header="Número de ciclo"></column-pv>
+                                            <column-pv field="numero_ciclo" header="Número de ciclo" style="width: 20%;"></column-pv>
                                             <column-pv field="descripcion" header="Descripción"></column-pv>
                                         </table-pv>
                                     </div>
@@ -528,7 +528,19 @@
                                 <br>
                                 <div class="iconos-informativos-carrera-editar">
                                     <h6>Iconos informativos</h6>
-                                    <p>{{ carreraEditar.datos.pagina_principal.tarjetas_informativas_pp }}</p>
+                                    <!--<p>{{ carreraEditar.datos.pagina_principal.tarjetas_informativas_pp }}</p>-->
+                                    <div class="agregar-icono-informativo-carrera-editar">
+
+                                    </div>
+
+                                    <div class="iconos-informativos-agregados">
+                                        <table-pv :value="carreraEditar.datos.pagina_principal.tarjetas_informativas_pp" 
+                                        showGridlines tableStyle="min-width: 50rem">
+                                            <column-pv field="descripcion" header="Descripción"></column-pv>
+                                            <column-pv field="url_direccion_imagen" header="Dirección icono"></column-pv>
+                                        </table-pv>
+                                    </div>
+
                                 </div>
 
                             </div>

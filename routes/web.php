@@ -33,6 +33,7 @@ use App\Http\Controllers\DireccionVinculacionController;
 use App\Http\Controllers\LenguaExtraImgPrincipalController;
 use App\Http\Controllers\LenguaExtraImgSecundarioController;
 use App\Http\Controllers\LenguaExtraObjetivosController;
+use App\Http\Controllers\MascotasController;
 use App\Http\Controllers\PdfPruebaController;
 use App\Http\Controllers\IgualdadLaboralPrincipalController;
 use App\Http\Controllers\BannerMascotasController;
@@ -199,6 +200,7 @@ Route::middleware([
         'lenguaExtraImgPrincipal' => LenguaExtraImgPrincipalController::class,
         'lenguaExtraImgSecundario' => LenguaExtraImgSecundarioController::class,
         'lenguaExtraObjetivo' => LenguaExtraObjetivosController::class,
+        'Mascotas' => MascotasController::class,
         'pdfPrueba' => PdfPruebaController::class,
         'mensaje' => MensajePoliPoloController::class,
         'spotypoli' => SpotypoliController::class,

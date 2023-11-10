@@ -79,7 +79,7 @@ export default {
         <h2><b>IGUALDAD LABORAL Y NO DISCRIMINACIÓN</b></h2>
       </div>
 
-      <div class="title pt-3">
+      <div class="title pt-20">
         <div v-for="text in texto">
           {{ text.titulo }}
         </div>

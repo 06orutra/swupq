@@ -75,6 +75,8 @@ use App\Http\Controllers\ReglamentosDocumentosController;
 use App\Http\Controllers\IgualdadLaboralTextosController;
 use App\Http\Controllers\IgualdadLaboralPdfController;
 use App\Http\Controllers\IgualdadLaboralImgSecundariaController;
+use App\Http\Controllers\CarreraController;
+
 use Illuminate\Http\Request;
 
 /*
@@ -354,3 +356,37 @@ Route::post('/bannerDataprimero', [TbCarruselPrimeroController::class, 'bannerDa
 Route::post('/bannerDatasegundo', [TbCarruselSegundoController::class, 'bannerData']);
 Route::post('/bannerDatatercero', [TbCarruselTercerController::class, 'bannerData']);
 
+
+
+/* rutas para el apartado de carreras*/
+// Ruta para mostrar el json de los archivos subidos
+Route::get('data', [CarreraController::class, 'index']) -> name('data');
+
+//Ruta para mostrar el formulario de carreras
+Route::get('carrera', [CarreraController::class, 'myform']) -> name('carrera');
+//Ruta para subir el formulario de carreras
+Route::post('/carrera-insertar', [CarreraController::class, 'store']);
+
+//Ruta para actualizar el formulario de carreras
+Route::get('carrera/{id}/edit', [CarreraController::class, 'edit']) -> name('carrera.edit');
+
+//Ruta para actualizar el formulario de carreras
+Route::put('carrera/{id}', [CarreraController::class, 'update']) -> name('carrera.update');
+
+//Ruta para eliminar el formulario de carreras
+Route::delete('carrera/{id}', [CarreraController::class, 'destroy']) -> name('carrera.destroy');
+
+//ruta de insercion de prueba
+Route::post('/carrera-prueba', [CarreraController::class, 'guardar'])->name('carrera.prueba');
+
+//ruta para obtener las carreras disponibles
+Route::post('/carreras-disponibles', [CarreraController::class, 'get_carreras_disponibles'])->name('carrera.disponibles');
+
+//Ruta para obtener un solo registro de la base de datos
+Route::post('/carreras-unica',[CarreraController::class,'get_carrera'])->name('carrera.unica');
+
+//Ruta para eliminar un registro de la base de datos
+Route::post('/carrera-eliminar',[CarreraController::class,'delete_carrera'])->name('carrera.eliminar');
+
+//Ruta para editar un registro de la base de datos
+Route::post('/carrera-editar',[CarreraController::class,'update_carrera'])->name('carrera.editar');

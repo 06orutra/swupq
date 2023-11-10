@@ -31,7 +31,7 @@ const router = createRouter({
                 {
                     path: '/carreras',
                     name: 'carreras',
-                    component: () => import('@/Pages/Dashboard.vue')
+                    component: () => import('@/Pages/carreras/TabMenuCarreras.vue')
                 },
                 {
                     path: '/posgrado',

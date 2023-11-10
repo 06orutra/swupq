@@ -502,7 +502,9 @@
 
                                     <div> <!--class="card"-->
                                         <table-pv :value="carreraEditar.datos.ciclos_formacion" 
-                                        showGridlines tableStyle="min-width: 50rem">
+                                        showGridlines tableStyle="min-width: 50rem" selectionMode="single" dataKey="descripcion" :metaKeySelection="false"
+                                        @rowSelect="onCicloSelect" @rowUnselect="onCicloUnselect"  v-model:selection="cicloEditarSelected">
+
                                             <column-pv field="numero_ciclo" header="Número de ciclo" style="width: 20%;"></column-pv>
                                             <column-pv field="descripcion" header="Descripción"></column-pv>
                                         </table-pv>
@@ -535,7 +537,10 @@
 
                                     <div class="iconos-informativos-agregados">
                                         <table-pv :value="carreraEditar.datos.pagina_principal.tarjetas_informativas_pp" 
-                                        showGridlines tableStyle="min-width: 50rem">
+                                        showGridlines tableStyle="min-width: 50rem"
+                                        selectionMode="single" dataKey="url_direccion_imagen" :metaKeySelection="false"
+                                        @rowSelect="onIconInfoSelect" @rowUnselect="onIconInfoUnselect"  v-model:selection="cicloEditarSelected">
+
                                             <column-pv field="descripcion" header="Descripción"></column-pv>
                                             <column-pv field="url_direccion_imagen" header="Dirección icono"></column-pv>
                                         </table-pv>
@@ -666,7 +671,9 @@ export default defineComponent({
     const carreraEliminar = ref();//guardara los datos de la carrera que se desea eliminar
     const carreraEditar = ref();//guardara los datos de la carrera que se desea editar
 
-
+    //para modificar los ciclos e iconos informativos de la pagina principal
+    const cicloEditarSelected = ref();//guardara el ciclo seleccionado para editar
+    const iconEditarSelected = ref();//guarda el icono informativo que se desea editar
     //functions
     function getCarreras(){
         //trae todas las carreras guardadas de la base de datos
@@ -787,6 +794,29 @@ export default defineComponent({
 
     }
 
+    function onCicloSelect(event){
+        cicloEditarSelected.value = event.data;
+        console.log(cicloEditarSelected.value.numero_ciclo);
+        console.log(cicloEditarSelected.value.descripcion);
+    }
+
+    function onCicloUnselect(event){
+        cicloEditarSelected.value = null;
+        console.log(`${event.data.numero_ciclo}(deseleccionado)`);
+        console.log(`${event.data.descripcion}(deseleccionado)`);
+    }
+
+    function onIconInfoSelect(event){
+        iconEditarSelected.value = event.data;
+        console.log(iconEditarSelected.value.url_direccion_imagen);
+        console.log(iconEditarSelected.value.descripcion);
+    }
+
+    function onIconInfoUnselect(event){
+        iconEditarSelected.value = null;
+        console.log(`${event.data.descripcion}(deseleccionado)`);
+        console.log(`${event.data.url_direccion_imagen}(deseleccionado)`);
+    }
 
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
@@ -799,6 +829,12 @@ export default defineComponent({
         visibleDialogConfirmDelete,
         confirmEliminacionCarrera,
         confirmEdicionCarrera,
+        cicloEditarSelected,//para modificar los ciclos 
+        iconEditarSelected,//para modificar los iconos informativos
+        onCicloSelect,
+        onCicloUnselect,
+        onIconInfoSelect,
+        onIconInfoUnselect,
         getCarreras,
         eliminarCarrera,
         editarCarrera,

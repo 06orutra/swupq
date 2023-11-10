@@ -4,13 +4,20 @@
 
     <ul class="menu" v-show="showMenu" @mouseleave="closeActiveSubMenu">
       <li v-for="(menuItem, index) in menuItems" :key="index">
-        <div @mouseover="expandSubMenu(index)" :style="{ color: menuItem.textColor }"
-          :class="{ 'menu-block': true, 'active': menuItem.expanded }">
+        <div 
+        @mouseover="expandSubMenu(index)"
+        @click="toggleSubMenu(index)"
+        :style="{ color: menuItem.textColor }"
+        :class="{ 'menu-block': true, 'active': menuItem.expanded }"
+        >
           {{ menuItem.label }}
         </div>
         <transition name="fade">
           <ul v-if="menuItem.expanded" class="sub-menu">
-            <li v-for="(subMenuItem, subIndex) in menuItem.subMenuItems" :key="subIndex">
+            <li
+             v-for="(subMenuItem, subIndex) in menuItem.subMenuItems" 
+             :key="subIndex"
+             >
               <div @click="redirectTo(subMenuItem.path)" :style="{ color: subMenuItem.textColor }" class="sub-menu-block">
                 {{ subMenuItem.label }}
               </div>
@@ -39,9 +46,15 @@ export default {
           label: 'INSTITUCIÓN',
           subMenuItems: [
             { label: '- Mensaje del rector', path: '/institucion/mascotas/' },
-            { label: '- Directorio' },
-            { label: '- Organigrama' },
-            { label: '- Marco jurídico' },
+            { label: '- Historia', path: '/institucion/historia/'},
+            { label: '- Filosofía', path: '/institucion/filosofia/'},
+            { label: '- Modelo educativo', path: '/institucion/modeloEducacional/'},
+            { label: '- Mascotas', path: '/institucion/mascotas/'},
+            { label: '- Marco jurídico', path: '/institucion/marcoJuridico'},
+            { label: '- Organigrama', path: '/institucion/mascotas/'},
+            { label: '- Directorio', path: '/institucion/directorio/'},
+            { label: '- Ubicación', path: '/institucion/ubicacion/'},
+            { label: '- Instalaciones', path: '/institucion/instalaciones/'},
             { label: '- Igualdad Laboral y No Discriminacion' },
             { label: '- Sistema de Gestión de la Calidad' },
           ],
@@ -81,7 +94,7 @@ export default {
           textColor: '#ffffff',
           label: 'DEPORTE Y CULTURA',
           subMenuItems: [
-            { label: 'Opción 1' },
+            { label: 'Lengua extranjera', path:'/FormacionIntegral/lenguaExtranjera/' },
             { label: 'Opción 2' },
             { label: 'Opción 3' },
           ],
@@ -145,34 +158,9 @@ export default {
       this.menuItems[index].expanded = !this.menuItems[index].expanded;
       this.activeSubMenuIndex = this.menuItems[index].expanded ? index : null;
     },
-    closeActiveSubMenu() {
-      if (this.activeSubMenuIndex !== null) {
-        this.menuItems[this.activeSubMenuIndex].expanded = false;
-        this.activeSubMenuIndex = null;
-        this.showMenu = false;
-        this.activeSubMenuIndex = null;
-      }
-    },
     redirectTo(path) {
       window.location.href = path;
     },
-  },
-  methods: {
-    expandSubMenu(index) {
-      if (this.activeSubMenuIndex !== null) {
-        this.menuItems[this.activeSubMenuIndex].expanded = false;
-      }
-      this.menuItems[index].expanded = true;
-      this.activeSubMenuIndex = index;
-    },
-    toggleSubMenu(index) {
-      if (this.activeSubMenuIndex !== null && this.activeSubMenuIndex !== index) {
-        this.menuItems[this.activeSubMenuIndex].expanded = false;
-      }
-
-      this.menuItems[index].expanded = !this.menuItems[index].expanded;
-      this.activeSubMenuIndex = this.menuItems[index].expanded ? index : null;
-    },
     closeActiveSubMenu() {
       if (this.activeSubMenuIndex !== null) {
         this.menuItems[this.activeSubMenuIndex].expanded = false;
@@ -180,7 +168,6 @@ export default {
         this.showMenu = false;
         this.activeSubMenuIndex = null;
       }
-      
     },
     closeMenuAndSubMenu() {
       if (this.showMenu || this.activeSubMenuIndex !== null) {
@@ -224,6 +211,9 @@ export default {
   display: block;
   background: transparent;
   color: #fff;
+  position: relative;
+  background: rgba(0, 10, 87, 0.8);
+  width: 100%;
 }
 
 .menu .menu-block {
@@ -240,7 +230,7 @@ export default {
 .menu .sub-menu {
   position: absolute;
   left: 100%;
-  top: 0;
+  top: 0.1rem;
   margin-left: 0;
   padding: 0;
   width: 300px;
@@ -257,6 +247,7 @@ export default {
 .menu .sub-menu-block:hover {
   background-color: rgba(0, 10, 87, 0.8);
 }
+
 @media (min-width: 521px) and (max-width: 768px) {
   .menu-icon {
     width: 6vh;

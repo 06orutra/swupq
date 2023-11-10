@@ -1,7 +1,7 @@
 <template>
   <div class="contenedor">
     <div class="superior">
-      <img src="/storage/img/icon_logo_UPQ.svg" class="logo-img" alt="Logo" />
+      <img src="/storage/img/icon_logo_UPQ.svg" class="logo-img" alt="Logo" href="http://127.0.0.1:8000/#/" />
     </div>
 
     <div class="inferior">

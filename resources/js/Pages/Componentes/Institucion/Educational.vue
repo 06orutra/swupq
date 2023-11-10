@@ -261,7 +261,7 @@ export default {
 </AppEstructure>
 </template>
 
-<style>
+<style scoped>
 .container {
   width: 100%;
   padding-right: 15px;

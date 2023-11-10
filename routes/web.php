@@ -75,13 +75,6 @@ use App\Http\Controllers\ReglamentosDocumentosController;
 use App\Http\Controllers\IgualdadLaboralTextosController;
 use App\Http\Controllers\IgualdadLaboralPdfController;
 use App\Http\Controllers\IgualdadLaboralImgSecundariaController;
-
-
-
-use App\Http\Controllers\MensajePoliPoloController;
-use App\Http\Controllers\SpotypoliController;
-use App\Http\Controllers\SpotypoloController;
-use App\Http\Controllers\CarruselMascotaController;
 use Illuminate\Http\Request;
 
 /*
@@ -143,7 +136,7 @@ Route::prefix('institucion')->group(function () {
     Route::get('mascotas', function () {
         return Inertia::render('Componentes/Institucion/mascotasPrincipal');
     });
-    Route::get('/modelo-educativo', function () {
+    Route::get('modelo-educativo', function () {
         return Inertia::render('Componentes/Institucion/Educational');
     });
     Route::get('filosofia', function () {
@@ -159,7 +152,7 @@ Route::prefix('institucion')->group(function () {
     Route::get('ubicacion', function () {
         return Inertia::render('Componentes/Institucion/location');
     });
-});
+
 
 //¿Esto qué es xd?
 Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
@@ -174,7 +167,7 @@ Route::get('lenguaExtranjera', function () {
     Route::get('marcoJuridico', function(){
         return Inertia::render('Componentes/Institucion/LegalFramework');
     });
- 
+
 
 Route::prefix('FormacionIntegral')->group(function () {
 

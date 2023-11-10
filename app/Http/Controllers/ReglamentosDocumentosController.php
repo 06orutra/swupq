@@ -39,7 +39,8 @@ class ReglamentosDocumentosController extends Controller
             'pdf' => 'mimes:pdf|max:1000000',
         ]);
 
-        $banner = ReglamentosDocumentos::find($ReglamentosDocumentos
+        $banner = ReglamentosDocumentos::find($request->id);
+
         if ($request->hasFile('pdf')) {
             $pdfName = time() . '_' . $request->file('pdf')->getClientOriginalName();
             $pdfPath = $request->file('pdf')->storeAs('public/pdfs', $pdfName);

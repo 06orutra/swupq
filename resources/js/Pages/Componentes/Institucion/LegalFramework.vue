@@ -1,32 +1,70 @@
 <script>
 import 'primeflex/primeflex.css';
+import 'primeicons/primeicons.css'
 
 export default {
   data() {
     return {
       showModal: false,
       modalTitle: "",
-      docSize: "",
       docUrl: "",
       activeAccordion: null,
+      showPDFModal: false,
+      currentPDF: '',
+      currentPDFName: '',
+      ConstitucionDocumentos: [],
+      LeyesEstatales: [],
     };
   },
+
+  mounted() {
+    this.loadConstitucionDocumentos();
+    this.loadLeyesEstatales();
+  },
+
   methods: {
-    openModal(docClass, docSize, modalTitle, docUrl) {
-      this.docSize = docSize;
-      this.modalTitle = modalTitle;
+    openModal(docUrl, modalTitle) {
       this.docUrl = docUrl;
+      this.modalTitle = modalTitle;
       this.showModal = true;
+    },
+    closePDFModal() {
+      this.showPDFModal = false;
+    },
+    openPDFModal(pdf, name) {
+      this.currentPDF = '/storage/pdfs/' + pdf;
+      this.currentPDFName = name;
+      this.showPDFModal = true;
     },
     closeModal() {
       this.showModal = false;
     },
     toggleAccordion(accordion) {
-    if (this.activeAccordion === accordion) {
-      this.activeAccordion = null;
-    } else {
-      this.activeAccordion = accordion;
-    }
+      if (this.activeAccordion === accordion) {
+        this.activeAccordion = null;
+      } else {
+        this.activeAccordion = accordion;
+      }
+    },
+    loadConstitucionDocumentos() {
+      axios
+        .post('/ConstitucionDocumentos/bannerData')
+        .then((response) => {
+          this.ConstitucionDocumentos = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
+    loadLeyesEstatales() {
+      axios
+        .post('/LeyesEstatales/bannerData')
+        .then((response) => {
+          this.LeyesEstatales = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
     },
   },
 };
@@ -35,8 +73,8 @@ export default {
 <template>
   <div class="container">
     <div class="portafolio-gutter">
-<br>
-    <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
+      <br>
+      <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
         <h4>Constitución</h4>
         <div class="toggle toggle-transparent-body toggle-acordion">
           <div class="toggle" :class="{ active: activeAccordion === 'constitucion' }">
@@ -47,24 +85,35 @@ export default {
                 :class="{ rotated: activeAccordion === 'constitucion' }"
               ></span>
             </label>
-            <div class="toggle-content" v-show="activeAccordion === 'constitucion'">
+            <div class="toggle-content" v-show="activeAccordion === 'constitucion'"  v-for="msj in ConstitucionDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','2.1&nbsp;MB','CONSTITUCIÓN POLÍTICA DE LOS ESTADOS UNIDOS MEXICANOS','https://www.upq.mx/media/legal/docs/CONSTITUCION_POLITICA_DE_LOS_ESTADOS_UNIDOS_MEXICANOS.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;CONSTITUCIÓN POLÍTICA DE LOS ESTADOS UNIDOS MEXICANOS.
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  
                 </a>
-              </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','356.3&nbsp;MB','CONSTITUCIÓN POLÍTICA DEL ESTADO LIBRE Y SOBREANO DE QUERÉTARO','https://www.upq.mx/media/legal/docs/CONSTITUCION_POLITICA_DE_QUER%C3%89TARO.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;CONSTITUCIÓN POLÍTICA DEL ESTADO LIBRE Y SOBREANO DE QUERÉTARO.
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
             </div>
-
+          </div>
+        </div>
+      </div>
+      <div v-if="showPDFModal" class="pdf-modal">
+        <div class="pdf-container">
+          <button @click="closePDFModal" class="close-x">&#10005;</button>
+          <div class="pdf-header" :style="{ backgroundColor: '#8c2437' }">
+            {{ currentPDFName }}
+          </div>
+          <embed :src="currentPDF" type="application/pdf" width="100%" height="500px">
+          <div class="pdf-buttons">
+            <button @click="closePDFModal" class="close-button">Cerrar</button>
+            <a :href="currentPDF" download :download="currentPDFName" class="download-button">
+              Descargar
+            </a>
           </div>
         </div>
       </div>
 
-      <br>
       <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
         <h4>Tratados Internacionales</h4>
         <div class="toggle toggle-transparent-body toggle-acordion">
@@ -76,39 +125,31 @@ export default {
                 :class="{ rotated: activeAccordion === 'tratados' }"
               ></span>
             </label>
-            <div class="toggle-content" v-show="activeAccordion === 'tratados'">
+            <div class="toggle-content" v-show="activeAccordion === 'tratados'"  v-for="msj in LeyesEstatales" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','29.4&nbsp;MB','CONVENCIÓN INTERAMERICANA PARA PREVENIR, SANCIONAR Y ERRADICAR LA VIOLENCIA CONTRA LA MUJER','https://www.upq.mx/media/legal/docs/convencioninteramericanabelemdoparaprevenirsancionar.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;CONVENCIÓN INTERAMERICANA PARA PREVENIR, SANCIONAR Y ERRADICAR LA VIOLENCIA CONTRA LA MUJER.
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  
+                </a>
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','54.3&nbsp;MB',' CONVENCIÓN SOBRE LA ELIMINACIÓN DE TODAS LAS FORMAS DE DISCRIMINACIÓN CONTRA LA MUJER','https://www.upq.mx/media/legal/docs/convencioneliminaciondiscriminacionmujer.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp; CONVENCIÓN SOBRE LA ELIMINACIÓN DE TODAS LAS FORMAS DE DISCRIMINACIÓN CONTRA LA MUJER.
-                </a>
-              </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                  <a @click="openModal('.pdf','211.4&nbsp;MB','PACTO INTERNACIONAL DE DERECHOS CIVILES Y POLÍTICOS','https://www.upq.mx/media/legal/docs/pactointernacionalderechoscivilesypoliticos.pdf')" style="color:#151830">
-                    <i class="fa fa-book"></i>&nbsp; PACTO INTERNACIONAL DE DERECHOS CIVILES Y POLÍTICOS.
-                  </a>
-                </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','167.5&nbsp;MB','CONVENCIÓN AMERICANA SOBRE DERECHOS HUMANOS','https://www.upq.mx/media/legal/docs/convencionamericanasobrederechoshumanos.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp; CONVENCIÓN AMERICANA SOBRE DERECHOS HUMANOS.
-                </a>
-              </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','31.2&nbsp;MB','PACTO INTERNACIONAL DE DERECHOS ECONÓMICOS, SOCIALES Y CULTURALES','https://www.upq.mx/media/legal/docs/pactointernacderechoseconomicossocculturales.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp; PACTO INTERNACIONAL DE DERECHOS ECONÓMICOS, SOCIALES Y CULTURALES.
-                </a>
-              </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','25.0&nbsp;MB','DECLARACIÓN UNIVERSAL DE LOS DERECHOS HUMANOS','https://www.upq.mx/media/legal/docs/declaracionuniversalderechoshumanos.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp; DECLARACIÓN UNIVERSAL DE LOS DERECHOS HUMANOS.
-                </a>
-              </p>
-              
             </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="showPDFModal" class="pdf-modal">
+        <div class="pdf-container">
+          <button @click="closePDFModal" class="close-x">&#10005;</button>
+          <div class="pdf-header" :style="{ backgroundColor: '#8c2437' }">
+            {{ currentPDFName }}
+          </div>
+          <embed :src="currentPDF" type="application/pdf" width="100%" height="500px">
+          <div class="pdf-buttons">
+            <button @click="closePDFModal" class="close-button">Cerrar</button>
+            <a :href="currentPDF" download :download="currentPDFName" class="download-button">
+              Descargar
+            </a>
           </div>
         </div>
       </div>
@@ -603,7 +644,7 @@ div.toggle > label:hover {
 }
 div.toggle div.toggle-content{
   margin-top: -5px;
-  padding: 15px 20px;
+  padding: 0px 20px;
   border-radius: 0;
 }
 .font-lato{
@@ -796,4 +837,89 @@ button{
   background-color: #C02942;
   COLOR: #fff !important;
 }
+.pdf-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.close-x {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    color: black;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-x:hover {
+    color: #ffffff;
+}
+
+.pdf-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.pdf-container {
+    position: relative;
+    width: 75%;
+    height: 80%;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-header {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: white;
+    font-size: medium;
+    font-weight: bold;
+}
+
+embed {
+    width: 100%;
+    height: calc(100vh - 80px);
+}
+
+.pdf-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.close-button {
+    background-color: grey;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.download-button {
+    background-color: #8c2437;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
 </style>

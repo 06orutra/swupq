@@ -14,6 +14,10 @@ use App\Http\Controllers\SpotypoloController;
 use App\Http\Controllers\MensajePoliPoloController;
 use App\Http\Controllers\ImgPruebaController;
 use App\Http\Controllers\CarruselMascotaController;
+use App\Http\Controllers\NotaMascotaController;
+use App\Http\Controllers\MensajeRectorController;
+use App\Http\Controllers\CicloController;
+use App\Http\Controllers\ModEduModalController;
 use App\Http\Controllers\FilosofiaController;
 use App\Http\Controllers\FilosofiaImgController;
 use App\Http\Controllers\FilosofiaValorController;
@@ -21,6 +25,11 @@ use App\Http\Controllers\FilosofiaImgPrincController;
 use App\Http\Controllers\HistoriaImgPrincController;
 use App\Http\Controllers\HistoriaTextoController;
 use App\Http\Controllers\HistoriaCarruselController;
+use App\Http\Controllers\UbicacionController;
+use App\Http\Controllers\InformeRectorController;
+use App\Http\Controllers\RectorBannerController;
+use App\Http\Controllers\RectorParagraphsController;
+use App\Http\Controllers\EducationalBannersController;
 use App\Http\Controllers\VideoLenguajeController;
 use App\Http\Controllers\RectoriaController;
 use App\Http\Controllers\CarruselInstalacionesController;
@@ -69,8 +78,11 @@ use App\Http\Controllers\IgualdadLaboralImgSecundariaController;
 
 
 
+use App\Http\Controllers\MensajePoliPoloController;
+use App\Http\Controllers\SpotypoliController;
+use App\Http\Controllers\SpotypoloController;
+use App\Http\Controllers\CarruselMascotaController;
 use Illuminate\Http\Request;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -84,19 +96,28 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-
-    ]);
+    return Inertia::render('Welcome', []);
 });
 
+Route::prefix('servicios-universitarios')->group(function () {
+    Route::get('/movilidad-academica', function () {
+        return Inertia::render('Componentes/Servicios_Universitarios/movilidadAcademica');
+    });
+});
+//Institución: Ordenado Alfabéticamente
 Route::prefix('institucion')->group(function () {
+    Route::get('filosofia', function () {
+        return Inertia::render('Componentes/Institucion/Philosophy');
+    });
     Route::get('mascotas', function () {
         return Inertia::render('Componentes/Institucion/mascotasPrincipal');
+    });
+    Route::get('laborEq', function () {
+        return Inertia::render('Componentes/Institucion/Laborequality');
     });
     Route::get('instalaciones', function () {
         return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
     });
-
     Route::get('laborEq', function () {
         return Inertia::render('Componentes/Institucion/Laborequality');
     });
@@ -106,6 +127,7 @@ Route::prefix('institucion')->group(function () {
     Route::get('mensajeRector', function () {
         return Inertia::render('Componentes/Institucion/rectorMessage');
     });
+
     Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
 
     Route::get('ubicacion', function () {
@@ -114,7 +136,14 @@ Route::prefix('institucion')->group(function () {
     Route::get('historia', function () {
         return Inertia::render('Componentes/Institucion/Historia');
     });
-    Route::get('modeloEducacional', function () {
+
+    Route::get('instalaciones', function () {
+        return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
+    });
+    Route::get('mascotas', function () {
+        return Inertia::render('Componentes/Institucion/mascotasPrincipal');
+    });
+    Route::get('/modelo-educativo', function () {
         return Inertia::render('Componentes/Institucion/Educational');
     });
     Route::get('filosofia', function () {
@@ -127,6 +156,25 @@ Route::prefix('institucion')->group(function () {
         return Inertia::render('Componentes/Institucion/Directorio');
     });
 });   
+    Route::get('ubicacion', function () {
+        return Inertia::render('Componentes/Institucion/location');
+    });
+});
+
+//¿Esto qué es xd?
+Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
+
+Route::get('marcoJuridico', function () {
+    return Inertia::render('Componentes/Institucion/LegalFramework');
+});
+Route::get('lenguaExtranjera', function () {
+    return Inertia::render('Componentes/Institucion/Foreignlanguage');
+});
+
+    Route::get('marcoJuridico', function(){
+        return Inertia::render('Componentes/Institucion/LegalFramework');
+    });
+ 
 
 Route::prefix('FormacionIntegral')->group(function () {
 
@@ -182,6 +230,10 @@ Route::middleware([
         'spotypoli' => SpotypoliController::class,
         'spotypolo' => SpotypoloController::class,
         'mensaje' => MensajePoliPoloController::class,
+        'Nmascota' => NotaMascotaController::class,
+        'rector' => MensajeRectorController::class,
+        'ciclo' => CicloController::class,
+        'modalModEdu' => ModEduModalController::class,
         'filosofia' => FilosofiaController::class,
         'filosofiaImg' => FilosofiaImgController::class,
         'filosofiaValor' => FilosofiaValorController::class,
@@ -197,6 +249,11 @@ Route::middleware([
         'DPlanneacion' => DireccionPlaneacionController::class,
         'DTecInfCom' => DireccionTecnologiaInfomacionComunicacionController::class,
         'Dvinculacion' => DireccionVinculacionController::class,
+        'ubicacion' => UbicacionController::class,
+        'informe' => InformeRectorController::class,
+        'rectorBanner' => RectorBannerController::class,
+        'rectorParrafo' => RectorParagraphsController::class,
+        'educationalBanner' => EducationalBannersController::class,
         'lenguaExtraImgPrincipal' => LenguaExtraImgPrincipalController::class,
         'lenguaExtraImgSecundario' => LenguaExtraImgSecundarioController::class,
         'lenguaExtraObjetivo' => LenguaExtraObjetivosController::class,
@@ -278,6 +335,11 @@ Route::post('/pdfPrueba/bannerData', [PdfPruebaController::class, 'bannerData'])
 Route::post('/lenguaExtraObjetivo/bannerData', [LenguaExtraObjetivosController::class, 'bannerData']);
 Route::post('/lenguaExtraImgSecundario/bannerData', [LenguaExtraImgSecundarioController::class, 'bannerData']);
 Route::post('/lenguaExtraImgPrincipal/bannerData', [LenguaExtraImgPrincipalController::class, 'bannerData']);
+
+//Ruta de modelo educativo
+Route::post('/modeduCiclo/bannerData', [CicloController::class, 'bannerData']);
+
+//Rutas por defecto?
 Route::post('/historiaCarrusels/bannerData', [HistoriaCarruselController::class, 'bannerData']);
 Route::post('/historiaTextos/bannerData', [HistoriaTextoController::class, 'bannerData']);
 Route::post('/historiaImgPrinc/bannerData', [HistoriaImgPrincController::class, 'bannerData']);

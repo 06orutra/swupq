@@ -539,7 +539,7 @@
                                         <table-pv :value="carreraEditar.datos.pagina_principal.tarjetas_informativas_pp" 
                                         showGridlines tableStyle="min-width: 50rem"
                                         selectionMode="single" dataKey="url_direccion_imagen" :metaKeySelection="false"
-                                        @rowSelect="onIconInfoSelect" @rowUnselect="onIconInfoUnselect"  v-model:selection="cicloEditarSelected">
+                                        @rowSelect="onIconInfoSelect" @rowUnselect="onIconInfoUnselect"  v-model:selection="iconEditarSelected">
 
                                             <column-pv field="descripcion" header="Descripción"></column-pv>
                                             <column-pv field="url_direccion_imagen" header="Dirección icono"></column-pv>
@@ -590,6 +590,31 @@
                 class="btn-dialog-actions" @click="visibleDialogConfirEdit=false"/>
             </div>
         </dialog-pv>
+
+        <!--dialogo para editar un ciclo de formacion de la carrera-->
+        <dialog-pv v-model:visible="visibleDialogEditCicloFormacion" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
+            :style="{ width: '70vw' }" header="Edición" modal class="p-fluid" @hide="closeDialogEditCiclo()">
+            <div class="controls-dialog-edit-ciclo-formacion">
+                <input-number-pv placeholder="Numero ciclo" style="width: 30%;"
+                v-model="cicloEditarSelected.numero_ciclo"/>
+                <input-text-pv type="text"  
+                placeholder="Descripción" style="width: 70%;" v-model="cicloEditarSelected.descripcion"/>
+
+            </div>
+        </dialog-pv>
+
+        <!--dialogo para editar un icono informativo de la carrera(pagina principal)-->
+        <dialog-pv v-model:visible="visibleDialogEditIconInfo" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
+            :style="{ width: '70vw' }" header="Edición" modal class="p-fluid" @hide="closeDialogEditIcon()">
+            <div class="controls-dialog-edit-icono-informativo">
+                <input-text-pv placeholder="Descripcion" style="width: 30%;"
+                v-model="iconEditarSelected.descripcion"/>
+                <input-text-pv type="text" placeholder="ejem. https://iconos8.es/icon/IjiO3OXCb817/peligro-de-electricidad" 
+                style="width: 70%;" v-model="iconEditarSelected.url_direccion_imagen"/>
+
+            </div>
+        </dialog-pv>
+
 
     </section>
 
@@ -660,6 +685,9 @@ export default defineComponent({
     const visibleDialogEdit = ref(false); //dialogo de alerta para editar una carrera
     const visibleDialogConfirmDelete = ref(false); //dialogo de alerta para editar una carrera
     const visibleDialogConfirEdit = ref(false); //dialogo de alerta para editar una carrera
+
+    const visibleDialogEditCicloFormacion = ref(false); //dialogo de alerta para editar un ciclo de formacion
+    const visibleDialogEditIconInfo = ref(false); //dialogo de alerta para editar un icono informativo
 
     //variables para validar si se confirmo la eliminacion o edicion de una carrera
     const confirmEliminacionCarrera = ref(false);
@@ -794,22 +822,27 @@ export default defineComponent({
 
     }
 
+    //funciones para cuando se selecciona o deselecciona un ciclo
     function onCicloSelect(event){
         cicloEditarSelected.value = event.data;
         console.log(cicloEditarSelected.value.numero_ciclo);
         console.log(cicloEditarSelected.value.descripcion);
+
+        visibleDialogEditCicloFormacion.value = true;
     }
 
     function onCicloUnselect(event){
-        cicloEditarSelected.value = null;
+        
         console.log(`${event.data.numero_ciclo}(deseleccionado)`);
         console.log(`${event.data.descripcion}(deseleccionado)`);
     }
 
+    //funciones para cuando se selecciona o deselecciona un icono informativo
     function onIconInfoSelect(event){
         iconEditarSelected.value = event.data;
         console.log(iconEditarSelected.value.url_direccion_imagen);
         console.log(iconEditarSelected.value.descripcion);
+        visibleDialogEditIconInfo.value = true;
     }
 
     function onIconInfoUnselect(event){
@@ -817,6 +850,21 @@ export default defineComponent({
         console.log(`${event.data.descripcion}(deseleccionado)`);
         console.log(`${event.data.url_direccion_imagen}(deseleccionado)`);
     }
+
+
+    //funcion para cuando se cierra el dialog para editar un ciclo de formacion
+    function closeDialogEditCiclo(){
+        cicloEditarSelected.value = null;
+        console.log('Cerrando dialogo...');
+    }
+
+    //funcion para cuando se cierra el dialog para editar un icono informativo
+    function closeDialogEditIcon(){
+        iconEditarSelected.value = null;
+        console.log('Cerrando dialogo...');
+    }
+
+
 
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
@@ -831,6 +879,8 @@ export default defineComponent({
         confirmEdicionCarrera,
         cicloEditarSelected,//para modificar los ciclos 
         iconEditarSelected,//para modificar los iconos informativos
+        visibleDialogEditCicloFormacion,
+        visibleDialogEditIconInfo,
         onCicloSelect,
         onCicloUnselect,
         onIconInfoSelect,
@@ -842,6 +892,8 @@ export default defineComponent({
         ejecutaEdicion,
         confirmaEidicion,
         confirmaEliminacion,
+        closeDialogEditCiclo,
+        closeDialogEditIcon,
     };
   },
   mounted(){

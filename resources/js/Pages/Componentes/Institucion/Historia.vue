@@ -160,6 +160,7 @@ export default {
 .swiper-container {
     margin: 0;
 }
+
 .img-carrusel img {
     width: 100%;
     /* o el ancho que prefieras */
@@ -214,4 +215,5 @@ export default {
     .ml-5 {
         margin-left: 0 !important;
     }
-}</style>
+}
+</style>

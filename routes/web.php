@@ -76,6 +76,8 @@ use App\Http\Controllers\IgualdadLaboralTextosController;
 use App\Http\Controllers\IgualdadLaboralPdfController;
 use App\Http\Controllers\IgualdadLaboralImgSecundariaController;
 use App\Http\Controllers\CarreraController;
+use App\Http\Controllers\IgualdadLaboralPdfEticaController;
+use App\Http\Controllers\IgualdadLaboralPdfIgualdadController;
 
 use Illuminate\Http\Request;
 
@@ -289,8 +291,8 @@ Route::middleware([
         'IgualdadLaboralTextos' => IgualdadLaboralTextosController::class,
         'IgualdadLaboralPdf' => IgualdadLaboralPdfController::class,
         'IgualdadLaboralImgSecundaria' => IgualdadLaboralImgSecundariaController::class,
-        
-
+        'IgualdadLaboralPdfEtica' => IgualdadLaboralPdfEticaController::class,
+        'IgualdadLaboralPdfIgualdad' => IgualdadLaboralPdfIgualdadController::class,
     ];
     // se declarar variables, 
 
@@ -308,6 +310,22 @@ Route::post('/Representativosprin/bannerData', [RepresentativoPrinController::cl
 Route::post('/RepresentativosDeporte/bannerData', [RepresentativoDeporteController::class, 'bannerData']);
 Route::post('/RepresentativosCultura/bannerData', [RepresentativoCulturaController::class, 'bannerData']);
 
+Route::post('/ConstitucionDocumentos/bannerData', [ConstitucionDocumentosController::class, 'bannerData']);
+Route::post('/LeyesEstatales/bannerData', [LeyesEstatalesController::class, 'bannerData']);
+Route::post('/LeyesFederales/bannerData', [LeyesFederalesController::class, 'bannerData']);
+Route::post('/LeyesGenerales/bannerData', [LeyesGeneralesController::class, 'bannerData']);
+Route::post('/TratadosInternacionalesDocumentos/bannerData', [TratadosInternacionalesDocumentosController::class, 'bannerData']);
+Route::post('/AcuerdosDocumentos/bannerData', [AcuerdosDocumentosController::class, 'bannerData']);
+Route::post('/CatalogoDocumentos/bannerData', [CatalogoDocumentosController::class, 'bannerData']);
+Route::post('/CircularesDocumentos/bannerData', [CircularesDocumentosController::class, 'bannerData']);
+Route::post('/CodigosDocumentos/bannerData', [CodigosDocumentosController::class, 'bannerData']);
+Route::post('/ConveniosInstitucionalesDocumentos/bannerData', [ConveniosInstitucionalesDocumentosController::class, 'bannerData']);
+Route::post('/DecretosDocumentos/bannerData', [DecretosDocumentosController::class, 'bannerData']);
+Route::post('/LineamientosDocumentos/bannerData', [LineamientosDocumentosController::class, 'bannerData']);
+Route::post('/ManualesDocumentos/bannerData', [ManualesDocumentosController::class, 'bannerData']);
+Route::post('/PlanDeDesarolloInstitucionalDocumentos/bannerData', [PlanDeDesarolloInstitucionalDocumentosController::class, 'bannerData']);
+Route::post('/ProtocolosDocumentos/bannerData', [ProtocolosDocumentosController::class, 'bannerData']);
+Route::post('/ReglamentosDocumentos/bannerData', [ReglamentosDocumentosController::class, 'bannerData']);
 Route::post('/Sadministrativa/bannerData', [SecretariaAdministrativaController::class, 'bannerData']);
 Route::post('/Sacademica/bannerData', [SecretariaAcademicaController::class, 'bannerData']);
 Route::post('/rectoria/bannerData', [RectoriaController::class, 'bannerData']);
@@ -347,6 +365,8 @@ Route::post('/igualdadLaboralPrin/bannerData', [IgualdadLaboralPrincipalControll
 Route::post('/IgualdadLaboralText/bannerData', [IgualdadLaboralTextosController::class, 'bannerData']);
 Route::post('/IgualdadLaboralPdf/bannerData', [IgualdadLaboralPdfController::class, 'bannerData']);
 Route::post('/IgualdadLaboralImgSecundaria/bannerData', [IgualdadLaboralImgSecundariaController::class, 'bannerData']);
+Route::post('/IgualdadLaboralPdfEtica/bannerData', [IgualdadLaboralPdfEticaController::class, 'bannerData']);
+Route::post('/IgualdadLaboralPdfIgualdad/bannerData', [IgualdadLaboralPdfIgualdadController::class, 'bannerData']);
 
 // Route::post('/obtener-link', [SpotyPoliPoloController::class, 'bannerData']);
 
@@ -390,3 +410,4 @@ Route::post('/carrera-eliminar',[CarreraController::class,'delete_carrera'])->na
 
 //Ruta para editar un registro de la base de datos
 Route::post('/carrera-editar',[CarreraController::class,'update_carrera'])->name('carrera.editar');
+Route::post('/bannerDatatercero', [TbCarruselTercerController::class, 'bannerData']);

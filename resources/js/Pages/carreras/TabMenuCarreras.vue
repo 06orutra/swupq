@@ -13,16 +13,22 @@
               <identidad-carrera title="Paleta de colores" url_insertarCarrera="/carrera-prueba"></identidad-carrera>
             </tab-panel>
 
+            
             <!--apartado para la seccion para elminar una carrera-->
+            <!--
             <tab-panel header="Eliminar carrera">
                 <carrera-eliminar title="Eliminar carrera" url_getCarreras="/carreras/carreras-disponibles"/>
             </tab-panel>
+            -->
 
             <!--apartado para la seccion para modificar una carrera-->
+            <!--
             <tab-panel header="Modificar carrera">
               <carrera-modificar title="Modificar carrera" url_getCarreras="/carreras/carreras-disponibles"
               url_getDataCarrera="/carreras/carrera-informacion"/>
             </tab-panel>  
+            -->
+          
         </tab-view>  
     </section>
 </template>

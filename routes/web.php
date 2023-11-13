@@ -198,3 +198,15 @@ Route::post('/carrera-eliminar',[CarreraController::class,'delete_carrera'])->na
 
 //Ruta para editar un registro de la base de datos
 Route::post('/carrera-editar',[CarreraController::class,'update_carrera'])->name('carrera.editar');
+
+//ruta para obtener los conocimientos disponibles de las carreras
+Route::post('/carrera-conocimientos',[CarreraController::class,'get_carrera_conocimientos'])->name('carrera.conocimientos');
+
+//ruta para obtener las habilidades disponibles de las carreras
+Route::post('/carrera-habilidades',[CarreraController::class,'get_carrera_habilidades'])->name('carrera.habilidades');
+
+//ruta para obtener las actitudes disponibles de las carreras
+Route::post('/carrera-actitudes',[CarreraController::class,'get_carrera_actitudes'])->name('carrera.actitudes');
+
+
+

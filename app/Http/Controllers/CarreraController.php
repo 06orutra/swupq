@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Carrera;
+use App\Models\Conocimiento;
+use App\Models\Habilidad;
+use App\Models\Actitud;
 
 class CarreraController extends Controller
 {
@@ -218,6 +221,41 @@ class CarreraController extends Controller
             throw $e;
         }
 
+    }
+
+
+    //para obtener los conocimientos que se pueden agregar a una carrera
+    public function get_carrera_conocimientos(){
+
+        $conocimientos = Conocimiento::all()->map(function ($registro) {
+            return [
+                'nombre'=>$registro->nombre,
+            ];
+        });
+        
+        return response()->json($conocimientos);
+    }
+
+    //para obtener las habilidades  que se pueden agregar a una carrera
+    public function get_carrera_habilidades(){
+        $habilidades = Habilidad::all()->map(function ($registro) {
+            return [
+                'nombre'=>$registro->nombre,
+            ];
+        });
+        
+        return response()->json($habilidades);
+    }
+
+    //para obtener las actitudes que se pueden agregar a una carrera
+    public function get_carrera_actitudes(){
+        $actitudes = Actitud::all()->map(function ($registro) {
+            return [
+                'nombre'=>$registro->nombre,
+            ];
+        });
+        
+        return response()->json($actitudes);
     }
     
     /**

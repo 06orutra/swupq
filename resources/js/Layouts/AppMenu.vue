@@ -16,6 +16,7 @@ const model = ref([
             { label: 'Formación Integral', icon: 'pi pi-fw pi-briefcase', to: '/FormacionIntegral' },
             { label: 'Posgrado', icon: 'pi pi-fw pi-briefcase', to: '/posgrado' },
             { label: 'Noticias', icon: 'pi pi-fw pi-megaphone', to: '/noticias' },
+            { label: 'Chatbot', icon: 'pi pi-fw pi-inbox', to: '/ChatBot'},
         ]
     }
 ]);

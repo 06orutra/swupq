@@ -24,6 +24,11 @@ const router = createRouter({
                     component:() => import('@/Pages/Componentes/Institucion/institucionAdmin/TabInstitucion.vue')
                 },
                 {
+                    path:'/ChatBot',
+                    name:'ChatBot',
+                    component:() => import('@/Pages/Componentes/Chat/ChatAdmin/TabChatbot.vue')
+                },
+                {
                     path:'/FormacionIntegral',
                     name:'FormacionIntegral',
                     component:() => import('@/Pages/Componentes/FormacionIntegral/formacionAdmin/tabFormacion.vue'),

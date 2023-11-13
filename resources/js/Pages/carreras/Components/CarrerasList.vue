@@ -41,7 +41,7 @@
 
         <!--dialogo para mostrar los datos de la carrera a eliminar-->
         <dialog-pv v-model:visible="visibleDialogDelete" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
-        :style="{ width: '70vw' }" header="Ver datos relacionados" modal class="p-fluid">
+        :style="{ width: '70vw' }" header="Ver datos relacionados" modal class="p-fluid" maximizable >
             <div class="field">
                 <form @submit.prevent="">
                     <div class="container-datos-relacionados-eliminar">
@@ -242,7 +242,7 @@
 
         <!--dialogo para mostrar los datos de la carrera a modificar-->
         <dialog-pv v-model:visible="visibleDialogEdit" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
-        :style="{ width: '70vw' }" header="Ver datos relacionados" modal class="p-fluid">
+        :style="{ width: '70vw' }" header="Ver datos relacionados" modal class="p-fluid" maximizable >
                 <div class="field">
                     <form @submit.prevent="">
                         <div class="editar-identidad-carrera">

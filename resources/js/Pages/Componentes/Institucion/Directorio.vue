@@ -1,6 +1,9 @@
 <script setup>
 import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
+import barra from '@/Pages/Componentes/Institucion/InstalacionesComponentes/barraespaciadora.vue'; 
+
+
 
 defineProps({
   canLogin: Boolean,
@@ -14,6 +17,7 @@ defineProps({
 <template>
   <div>
     <AppEstructure :controllerName="'/BannerDirectorio/bannerData'">
+      <barra/>
       <div class="directory">
         <div class="column column-left">
           <h4>RECTORÍA</h4>

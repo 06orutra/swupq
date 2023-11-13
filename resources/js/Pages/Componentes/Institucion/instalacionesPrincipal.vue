@@ -3,7 +3,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import CarruselInstitucion from '@/Pages/Componentes/Institucion/InstalacionesComponentes/CarruselInstitucion.vue';
-import barra from '@/Pages/Componentes/Institucion/InstalacionesComponentes/barraespaciadora.vue'; 
+
 
 
 
@@ -13,6 +13,7 @@ import barra from '@/Pages/Componentes/Institucion/InstalacionesComponentes/barr
   <div>
     <AppEstructure :controllerName="'/BannerInstalaciones/bannerData'">
       <div>
+        
         <CarruselInstitucion/>
       </div>
     </AppEstructure>

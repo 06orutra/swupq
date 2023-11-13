@@ -1,6 +1,7 @@
 <script setup>
 import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
+import barra from '@/Pages/Componentes/Institucion/InstalacionesComponentes/barraespaciadora.vue';
 </script>
 
 <script>
@@ -247,7 +248,9 @@ export default {
 <template>
   
   <AppEstructure :controllerName="'/BannerMarcoJuridico/bannerData'">
+    <barra/>
   <div class="container">
+    
     <div class="portafolio-gutter">
       <br>
 

@@ -4,6 +4,7 @@ import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import Mascotas from '@/Pages/Componentes/Institucion/MascotasComponentes/Mascotas.vue';
 
+
 defineProps({
   canLogin: Boolean,
   canRegister: Boolean,

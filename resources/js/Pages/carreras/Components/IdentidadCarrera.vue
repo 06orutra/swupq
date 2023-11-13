@@ -462,7 +462,19 @@ export default defineComponent({
     url_insertarCarrera:{
       type:String,
       required:true,
-    }
+    },
+    url_carreraConocimientos:{
+      type:String,
+      required:true,
+    },
+    url_carreraHabilidades:{
+      type:String,
+      required:true,
+    },
+    url_carreraActitudes:{
+      type:String,
+      required:true,
+    },
 
   },
 
@@ -661,6 +673,53 @@ export default defineComponent({
       window.open(url_imagen, '_blank');
     }
 
+    function loadConocimientos(){
+      //obtener los conocimientos de la base de datos
+      axios.post(props.url_carreraConocimientos)
+      .then(function(response){
+        const conocimientosLoaded = response.data;
+        conocimientos.value = conocimientosLoaded;
+
+      }).catch(function(error){
+
+        console.error(error);
+
+      }).finally(function(){
+
+      });
+    }
+
+    function loadHabilidades(){
+      //obtener las habilidades de la base de datos
+      axios.post(props.url_carreraHabilidades)
+      .then(function(response){
+        const habilidadesLoaded = response.data;
+        habilidades.value = habilidadesLoaded;
+
+      }).catch(function(error){
+
+        console.error(error);
+
+      }).finally(function(){
+      });
+    }
+
+    function loadActitudes(){
+      //obtener las actitudes de la base de datos
+      axios.post(props.url_carreraActitudes)
+      .then(function(response){
+        const actitudesLoaded = response.data; 
+        actitudes.value = actitudesLoaded;
+
+      }).catch(function(error){
+
+        console.error(error);
+
+      }).finally(function(){
+
+      });
+    }
+
 
     function submitForm(){
       //document.getElementById('form-carreras').submit();
@@ -712,6 +771,7 @@ export default defineComponent({
 
     }
 
+
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
       nombre_carrera,
@@ -742,7 +802,18 @@ export default defineComponent({
       addTarjetaInformativa,
       mostrarImagen,
       submitForm,
+      //cargar conocimientos, habilidades y actitudes de la base de datos
+      loadConocimientos,
+      loadHabilidades,
+      loadActitudes,
     };
+  },
+
+  beforeMount(){
+    //cargamos las listas de conocimientos, habilidades y actitudes
+    this.loadConocimientos();
+    this.loadHabilidades();
+    this.loadActitudes();
   },
 
   // Lifecycle hooks (opcional)

@@ -56,6 +56,7 @@ use App\Http\Controllers\ManualesDocumentosController;
 use App\Http\Controllers\PlanDeDesarolloInstitucionalDocumentosController;
 use App\Http\Controllers\ProtocolosDocumentosController;
 use App\Http\Controllers\ReglamentosDocumentosController;
+use App\Http\Controllers\BannerMarcoJuridicoController;
 
 
 
@@ -201,6 +202,7 @@ Route::middleware([
         'PlanDeDesarolloInstitucionalDocumentos' => PlanDeDesarolloInstitucionalDocumentosController::class,
         'ProtocolosDocumentos' => ProtocolosDocumentosController::class,
         'ReglamentosDocumentos' => ReglamentosDocumentosController::class,
+        'BannerMarcoJuridico' => BannerMarcoJuridicoController::class,
     ];
     // se declarar variables, 
 
@@ -214,6 +216,7 @@ Route::middleware([
     }
 });
 
+Route::post('/BannerMarcoJuridico/bannerData', [BannerMarcoJuridicoController::class, 'bannerData']);
 Route::post('/ConstitucionDocumentos/bannerData', [ConstitucionDocumentosController::class, 'bannerData']);
 Route::post('/LeyesEstatales/bannerData', [LeyesEstatalesController::class, 'bannerData']);
 Route::post('/LeyesFederales/bannerData', [LeyesFederalesController::class, 'bannerData']);

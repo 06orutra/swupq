@@ -1,6 +1,12 @@
+<script setup>
+import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
+import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
+</script>
+
 <script>
 import 'primeflex/primeflex.css';
-import 'primeicons/primeicons.css'
+import 'primeicons/primeicons.css';
+import axios from 'axios';
 
 export default {
   data() {
@@ -13,13 +19,41 @@ export default {
       currentPDF: '',
       currentPDFName: '',
       ConstitucionDocumentos: [],
+      TratadosInternacionalesDocumentos: [],
       LeyesEstatales: [],
+      LeyesFederales: [],
+      LeyesGenerales: [],
+      CodigosDocumentos: [],
+      AcuerdosDocumentos: [],
+      ConveniosInstitucionalesDocumentos: [],
+      CircularesDocumentos: [],
+      CatalogoDocumentos: [],
+      DecretosDocumentos: [],
+      LineamientosDocumentos: [],
+      ManualesDocumentos: [],
+      ReglamentosDocumentos: [],
+      ProtocolosDocumentos: [],
+      PlanDeDesarolloInstitucionalDocumentos: [],
     };
   },
 
   mounted() {
     this.loadConstitucionDocumentos();
+    this.loadTratadosInternacionalesDocumentos();
     this.loadLeyesEstatales();
+    this.loadLeyesFederales();
+    this.loadLeyesGenerales();
+    this.loadCodigosDocumentos();
+    this.loadAcuerdosDocumentos();
+    this.loadConveniosInstitucionalesDocumentos();
+    this.loadCircularesDocumentos();
+    this.loadCatalogoDocumentos();
+    this.loadDecretosDocumentos();
+    this.loadLineamientosDocumentos();
+    this.loadManualesDocumentos();
+    this.loadReglamentosDocumentos();
+    this.loadProtocolosDocumentos();
+    this.loadPlanDeDesarolloInstitucionalDocumentos();
   },
 
   methods: {
@@ -56,6 +90,16 @@ export default {
           console.error("Error en la solicitud Axios: ", error);
         });
     },
+    loadTratadosInternacionalesDocumentos() {
+      axios
+        .post('/TratadosInternacionalesDocumentos/bannerData')
+        .then((response) => {
+          this.TratadosInternacionalesDocumentos = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
     loadLeyesEstatales() {
       axios
         .post('/LeyesEstatales/bannerData')
@@ -66,14 +110,163 @@ export default {
           console.error("Error en la solicitud Axios: ", error);
         });
     },
+    loadLeyesFederales() {
+      axios
+        .post('/LeyesFederales/bannerData')
+        .then((response) => {
+          this.LeyesFederales = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
+    loadLeyesGenerales() {
+      axios
+        .post('/LeyesGenerales/bannerData')
+        .then((response) => {
+          this.LeyesGenerales = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
+    loadCodigosDocumentos() {
+      axios
+        .post('/CodigosDocumentos/bannerData')
+        .then((response) => {
+          this.CodigosDocumentos = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
+    loadAcuerdosDocumentos() {
+      axios
+        .post('/AcuerdosDocumentos/bannerData')
+        .then((response) => {
+          this.AcuerdosDocumentos = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
+    loadConveniosInstitucionalesDocumentos() {
+      axios
+        .post('/ConveniosInstitucionalesDocumentos/bannerData')
+        .then((response) => {
+          this.ConveniosInstitucionalesDocumentos = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
+    loadCircularesDocumentos() {
+      axios
+        .post('/CircularesDocumentos/bannerData')
+        .then((response) => {
+          this.CircularesDocumentos = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
+    loadCatalogoDocumentos() {
+      axios
+        .post('/CatalogoDocumentos/bannerData')
+        .then((response) => {
+          this.CatalogoDocumentos = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
+    loadDecretosDocumentos() {
+      axios
+        .post('/DecretosDocumentos/bannerData')
+        .then((response) => {
+          this.DecretosDocumentos = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
+    loadLineamientosDocumentos() {
+      axios
+        .post('/LineamientosDocumentos/bannerData')
+        .then((response) => {
+          this.LineamientosDocumentos = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
+    loadManualesDocumentos() {
+      axios
+        .post('/ManualesDocumentos/bannerData')
+        .then((response) => {
+          this.ManualesDocumentos = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
+    loadReglamentosDocumentos() {
+      axios
+        .post('/ReglamentosDocumentos/bannerData')
+        .then((response) => {
+          this.ReglamentosDocumentos = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
+    loadProtocolosDocumentos() {
+      axios
+        .post('/ProtocolosDocumentos/bannerData')
+        .then((response) => {
+          this.ProtocolosDocumentos = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
+    loadPlanDeDesarolloInstitucionalDocumentos() {
+      axios
+        .post('/PlanDeDesarolloInstitucionalDocumentos/bannerData')
+        .then((response) => {
+          this.PlanDeDesarolloInstitucionalDocumentos = response.data;
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud Axios: ", error);
+        });
+    },
   },
 };
 </script>
 
 <template>
+  
+  <AppEstructure :controllerName="'/BannerMarcoJuridico/bannerData'">
   <div class="container">
     <div class="portafolio-gutter">
       <br>
+
+      <div v-if="showPDFModal" class="pdf-modal">
+        <div class="pdf-container">
+          <button @click="closePDFModal" class="close-x">&#10005;</button>
+          <div class="pdf-header" :style="{ backgroundColor: '#8c2437' }">
+            {{ currentPDFName }}
+          </div>
+          <embed :src="currentPDF" type="application/pdf" width="100%" height="500px">
+          <div class="pdf-buttons">
+            <button @click="closePDFModal" class="close-button">Cerrar</button>
+            <a :href="currentPDF" download :download="currentPDFName" class="download-button">
+              Descargar
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
         <h4>Constitución</h4>
         <div class="toggle toggle-transparent-body toggle-acordion">
@@ -88,28 +281,12 @@ export default {
             <div class="toggle-content" v-show="activeAccordion === 'constitucion'"  v-for="msj in ConstitucionDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
                 <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
-                  
                 </a>
                 <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
             </div>
-          </div>
-        </div>
-      </div>
-      <div v-if="showPDFModal" class="pdf-modal">
-        <div class="pdf-container">
-          <button @click="closePDFModal" class="close-x">&#10005;</button>
-          <div class="pdf-header" :style="{ backgroundColor: '#8c2437' }">
-            {{ currentPDFName }}
-          </div>
-          <embed :src="currentPDF" type="application/pdf" width="100%" height="500px">
-          <div class="pdf-buttons">
-            <button @click="closePDFModal" class="close-button">Cerrar</button>
-            <a :href="currentPDF" download :download="currentPDFName" class="download-button">
-              Descargar
-            </a>
           </div>
         </div>
       </div>
@@ -125,10 +302,9 @@ export default {
                 :class="{ rotated: activeAccordion === 'tratados' }"
               ></span>
             </label>
-            <div class="toggle-content" v-show="activeAccordion === 'tratados'"  v-for="msj in LeyesEstatales" :key="msj.id">
+            <div class="toggle-content" v-show="activeAccordion === 'tratados'"  v-for="msj in TratadosInternacionalesDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
                 <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
-                  
                 </a>
                 <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
@@ -138,444 +314,350 @@ export default {
           </div>
         </div>
       </div>
-      <div v-if="showPDFModal" class="pdf-modal">
-        <div class="pdf-container">
-          <button @click="closePDFModal" class="close-x">&#10005;</button>
-          <div class="pdf-header" :style="{ backgroundColor: '#8c2437' }">
-            {{ currentPDFName }}
-          </div>
-          <embed :src="currentPDF" type="application/pdf" width="100%" height="500px">
-          <div class="pdf-buttons">
-            <button @click="closePDFModal" class="close-button">Cerrar</button>
-            <a :href="currentPDF" download :download="currentPDFName" class="download-button">
-              Descargar
-            </a>
-          </div>
-        </div>
-      </div>
 
-      <br>
       <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
         <h4>Leyes</h4>
         <div class="toggle toggle-transparent-body toggle-acordion">
-          <div class="toggle" :class="{ active: activeAccordion === 'leyes' }">
-            <label @click="toggleAccordion('leyes')">
-              GENERALES.
-              <span
-                class="arrow pi pi-chevron-down arrow-custom"
-                :class="{ rotated: activeAccordion === 'leyes' }"
-              ></span>
-            </label>
-            <div class="toggle-content" v-show="activeAccordion === 'leyes'">
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','441.0&nbsp;MB','LEY GENERAL DE ARCHIVOS','https://www.upq.mx/media/legal/docs/LEY_GENERAL_DE_ARCHIVOS.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;LEY GENERAL DE ARCHIVOS.
-                </a>
-              </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','637.8&nbsp;MB','LEY GENERAL DE EDUCACIÓN','https://www.upq.mx/media/legal/docs/LEY_GENERAL_DE_EDUCACI%C3%93N.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp; LEY GENERAL DE EDUCACIÓN.
-                </a>
-              </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                  <a @click="openModal('.pdf','286.1&nbsp;MB','LEY GENERAL DE LA INFRAESTRUCUTRA FÍSICA EDUCATIVA','https://www.upq.mx/media/legal/docs/LGIFE_190118ley_genraldeinfraestructurafisicaeducativa.pdf')" style="color:#151830">
-                    <i class="fa fa-book"></i>&nbsp; LEY GENERAL DE LA INFRAESTRUCTURA FÍSICA EDUCATIVA.
-                  </a>
-                </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','435.3&nbsp;MB','LEY GENERAL DE EDUCACIÓN SUPERIOR','https://www.upq.mx/media/legal/docs/LGES.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp; LEY DE EDUCACIÓN SUPERIOR.
-                </a>
-              </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','586.8&nbsp;MB','LEY GENERAL DE RESPONSABILIDADES ADMINISTRATIVAS','https://www.upq.mx/media/legal/docs/LGRA_200521.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp; LEY GENERAL DE RESPONSABILIDADES ADMINISTRATIVAS.
-                </a>
-              </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','740.3&nbsp;MB','LEY GENERAL DE TRANSPARENCIA Y ACCESO A LA INFORMACIÓN PÚBLICA','https://www.upq.mx/media/legal/docs/LGTAIP_200521.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp; LEY GENERAL DE TRANSPARENCIA Y ACCESO A LA INFORMACIÓN PÚBLICA.
-                </a>
-              </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','102.5&nbsp;MB','LEY GENERAL DEL SISTEMA ANTICORRUPCIÓN','https://www.upq.mx/media/legal/docs/LEY_GENERAL_DEL_SISTEMA_NACIONAL_ANTICORRUPCION.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp; LEY GENERAL DEL SISTEMA ANTICORRUPCIÓN.
-                </a>
-              </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','480.1&nbsp;MB','LEY GENERAL DE PROTECCIÓN DE DATOS PERSONALES EN POSESIÓN DE SUJETOS OBLIGADOS','https://www.upq.mx/media/legal/docs/LEY_GENERAL_DE_PROTECCI%C3%93N_DE_DATOS_PERSONALES_EN_POSESION_DE_SUJETOS_OBLIGADOS.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp; LEY GENERAL DE PROTECCIÓN DE DATOS PERSONALES EN POSESIÓN DE SUJETOS OBLIGADOS.
-                </a>
-              </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','501.0&nbsp;MB','LEY GENERAL DE DISCIPLINA FINANCIERA DE LAS ENTIDADES FEDERATIVAS Y LOS MUNICIPIOS','https://www.upq.mx/media/legal/docs/LEY_DE_DISCIPLINA_FINANCIERA_DELAS_ENTIDADE_FEDERTIVAS_Y_LOS_MUNICIPIOS.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp; LEY GENERAL DE DISCIPLINA FINANCIERA DE LAS ENTIDADES FEDERATIVAS Y LOS MUNICIPIOS.
-                </a>
-              </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','1.4&nbsp;MB','LEY ORGÁNICA DE LA ADMINISTRACIÓN PÚBLICA FEDERAL','https://www.upq.mx/media/legal/docs/LEYORGANICADELAADMINISTRACIONPUBLICAFEDERAL.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp; LEY ORGÁNICA DE LA ADMINISTRACIÓN PÚBLICA FEDERAL.
-                </a>
-              </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','237.7&nbsp;MB','LEY GENERAL DE BIBLIOTECAS','https://www.upq.mx/media/legal/docs/LGB_010621.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp; LEY GENERAL DE BIBLIOTECAS.
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="toggle toggle-transparent-body toggle-acordion">
-          <div class="toggle" :class="{ active: activeAccordion === 'leyes1' }">
-            <label @click="toggleAccordion('leyes1')">
-              FEDERALES.
-              <span
-                class="arrow pi pi-chevron-down arrow-custom"
-                :class="{ rotated: activeAccordion === 'leyes1' }"
-              ></span>
-            </label>
-            <div class="toggle-content" v-show="activeAccordion === 'leyes1'">
-              <p class="font-lato" style="margin-bottom: 1em;">
-                  <a @click="openModal('.pdf','286.1&nbsp;MB','LEY GENERAL DE LA INFRAESTRUCUTRA FÍSICA EDUCATIVA','https://www.upq.mx/media/legal/docs/LGIFE_190118ley_genraldeinfraestructurafisicaeducativa.pdf')" style="color:#151830">
-                    <i class="fa fa-book"></i>&nbsp; LEY...
-                  </a>
-                </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','435.3&nbsp;MB','LEY GENERAL DE EDUCACIÓN SUPERIOR','https://www.upq.mx/media/legal/docs/LGES.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp; LEY DE...
-                </a>
-              </p>
-
-            </div>
-          </div>
-        </div>
-        <div class="toggle toggle-transparent-body toggle-acordion">
           <div class="toggle" :class="{ active: activeAccordion === 'leyes2' }">
             <label @click="toggleAccordion('leyes2')">
-              ESTATALES.
+              Estatales
               <span
                 class="arrow pi pi-chevron-down arrow-custom"
                 :class="{ rotated: activeAccordion === 'leyes2' }"
               ></span>
             </label>
-            <div class="toggle-content" v-show="activeAccordion === 'leyes2'">
+            <div class="toggle-content" v-show="activeAccordion === 'leyes2'"  v-for="msj in LeyesEstatales" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                  <a @click="openModal('.pdf','286.1&nbsp;MB','LEY GENERAL DE LA INFRAESTRUCUTRA FÍSICA EDUCATIVA','https://www.upq.mx/media/legal/docs/LGIFE_190118ley_genraldeinfraestructurafisicaeducativa.pdf')" style="color:#151830">
-                    <i class="fa fa-book"></i>&nbsp; LEY...
-                  </a>
-                </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','435.3&nbsp;MB','LEY GENERAL DE EDUCACIÓN SUPERIOR','https://www.upq.mx/media/legal/docs/LGES.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp; LEY DE...
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                </a>
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
-
             </div>
           </div>
         </div>
       </div>
 
-      <br>
+      <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
+        <div class="toggle toggle-transparent-body toggle-acordion">
+          <div class="toggle" :class="{ active: activeAccordion === 'leyes1' }">
+            <label @click="toggleAccordion('leyes1')">
+              Federales
+              <span
+                class="arrow pi pi-chevron-down arrow-custom"
+                :class="{ rotated: activeAccordion === 'leyes1' }"
+              ></span>
+            </label>
+            <div class="toggle-content" v-show="activeAccordion === 'leyes1'"  v-for="msj in LeyesFederales" :key="msj.id">
+              <p class="font-lato" style="margin-bottom: 1em;">
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 "> 
+                </a>
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
+        <div class="toggle toggle-transparent-body toggle-acordion">
+          <div class="toggle" :class="{ active: activeAccordion === 'leyes' }">
+            <label @click="toggleAccordion('leyes')">
+              Generales
+              <span
+                class="arrow pi pi-chevron-down arrow-custom"
+                :class="{ rotated: activeAccordion === 'leyes' }"
+              ></span>
+            </label>
+            <div class="toggle-content" v-show="activeAccordion === 'leyes'"  v-for="msj in LeyesGenerales" :key="msj.id">
+              <p class="font-lato" style="margin-bottom: 1em;">
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 "> 
+                </a>
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
         <h4>Códigos</h4>
         <div class="toggle toggle-transparent-body toggle-acordion">
           <div class="toggle" :class="{ active: activeAccordion === 'codigos' }">
             <label @click="toggleAccordion('codigos')">
-              Documentos.
+              Documentos
               <span
                 class="arrow pi pi-chevron-down arrow-custom"
                 :class="{ rotated: activeAccordion === 'codigos' }"
               ></span>
             </label>
-            <div class="toggle-content" v-show="activeAccordion === 'codigos'">              
+            <div class="toggle-content" v-show="activeAccordion === 'codigos'"  v-for="msj in CodigosDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','2.1&nbsp;MB','CONSTITUCIÓN POLÍTICA DE LOS ESTADOS UNIDOS MEXICANOS','https://www.upq.mx/media/legal/docs/CONSTITUCION_POLITICA_DE_LOS_ESTADOS_UNIDOS_MEXICANOS.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;CÓDIGO...
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
                 </a>
-              </p>
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','356.3&nbsp;MB','CONSTITUCIÓN POLÍTICA DEL ESTADO LIBRE Y SOBREANO DE QUERÉTARO','https://www.upq.mx/media/legal/docs/CONSTITUCION_POLITICA_DE_QUER%C3%89TARO.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;CÓDIGO...
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
             </div>
-
           </div>
         </div>
       </div>
 
-      <br>
       <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
         <h4>Acuerdos</h4>
         <div class="toggle toggle-transparent-body toggle-acordion">
           <div class="toggle" :class="{ active: activeAccordion === 'acuerdos' }">
             <label @click="toggleAccordion('acuerdos')">
-              Documentos.
+              Documentos
               <span
                 class="arrow pi pi-chevron-down arrow-custom"
                 :class="{ rotated: activeAccordion === 'acuerdos' }"
               ></span>
             </label>
-            <div class="toggle-content" v-show="activeAccordion === 'acuerdos'">
+            <div class="toggle-content" v-show="activeAccordion === 'acuerdos'"  v-for="msj in AcuerdosDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','21.2&nbsp;MB','ACUERDO QUE ESTABLECE LAS DISPOSICIONES EN MATERIA DE CONTROL INTERNO, PARA LOS SUJETOS OBLIGADOS DEL PODER EJECUTIVO DEL ESTADO DE QUERÉTARO','https://www.upq.mx/media/legal/docs/Acuerdo_queestablecendispoenmateri_controlinterno.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;ACUERDO QUE ESTABLECE LAS DISPOSICIONES EN MATERIA DE CONTROL INTERNO, PARA LOS SUJETOS OBLIGADOS DEL PODER EJECUTIVO DEL ESTADO DE QUERÉTARO.
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                </a>
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
             </div>
-
           </div>
         </div>
       </div>
-      
-      <br>
+
       <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
         <h4>Convenios Institucionales</h4>
         <div class="toggle toggle-transparent-body toggle-acordion">
-          <div class="toggle" :class="{ active: activeAccordion === 'convenio' }">
-            <label @click="toggleAccordion('convenio')">
-              Documentos.
+          <div class="toggle" :class="{ active: activeAccordion === 'Convenios' }">
+            <label @click="toggleAccordion('Convenios')">
+              Documentos
               <span
                 class="arrow pi pi-chevron-down arrow-custom"
-                :class="{ rotated: activeAccordion === 'convenio' }"
+                :class="{ rotated: activeAccordion === 'Convenios' }"
               ></span>
             </label>
-            <div class="toggle-content" v-show="activeAccordion === 'convenio'">
+            <div class="toggle-content" v-show="activeAccordion === 'Convenios'"  v-for="msj in ConveniosInstitucionalesDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','950.7&nbsp;MB',' CONVENIO DE COORDINACIÓN CREACIÓN PARA LA CREACIÓN Y APOYO FINANCIERO.','https://www.upq.mx/media/legal/docs/CONVENIO_DE_COORDINACION_CREACION_PARA_LA_CREACION_Y_APOYO_FINANCIERO_CjFiJ8M.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;  CONVENIO DE COORDINACIÓN CREACIÓN PARA LA CREACIÓN Y APOYO FINANCIERO.
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                </a>
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
             </div>
-
           </div>
         </div>
       </div>
 
-      <br>
       <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
         <h4>Circulares</h4>
         <div class="toggle toggle-transparent-body toggle-acordion">
-          <div class="toggle" :class="{ active: activeAccordion === 'circulares' }">
-            <label @click="toggleAccordion('circulares')">
-              Documentos.
+          <div class="toggle" :class="{ active: activeAccordion === 'Circulares' }">
+            <label @click="toggleAccordion('Circulares')">
+              Documentos
               <span
                 class="arrow pi pi-chevron-down arrow-custom"
-                :class="{ rotated: activeAccordion === 'circulares' }"
+                :class="{ rotated: activeAccordion === 'Circulares' }"
               ></span>
             </label>
-            <div class="toggle-content" v-show="activeAccordion === 'circulares'">
+            <div class="toggle-content" v-show="activeAccordion === 'Circulares'"  v-for="msj in CircularesDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','21.2&nbsp;MB','','https://www.upq.mx/media/legal/docs/Acuerdo_queestablecendispoenmateri_controlinterno.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;""
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 "> 
+                </a>
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
             </div>
-
           </div>
         </div>
       </div>
 
-      <br>
+
       <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
-        <h4>Catágolo</h4>
+        <h4>Catálogo </h4>
         <div class="toggle toggle-transparent-body toggle-acordion">
-          <div class="toggle" :class="{ active: activeAccordion === 'catagolo' }">
-            <label @click="toggleAccordion('catagolo')">
-              Documentos.
+          <div class="toggle" :class="{ active: activeAccordion === 'CatalogoDocumentos' }">
+            <label @click="toggleAccordion('CatalogoDocumentos')">
+              Documentos
               <span
                 class="arrow pi pi-chevron-down arrow-custom"
-                :class="{ rotated: activeAccordion === 'catalogo' }"
+                :class="{ rotated: activeAccordion === 'CatalogoDocumentos'}"
               ></span>
             </label>
-            <div class="toggle-content" v-show="activeAccordion === 'catalogo'">
+            <div class="toggle-content" v-show="activeAccordion === 'CatalogoDocumentos'"  v-for="msj in CatalogoDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','21.2&nbsp;MB','','https://www.upq.mx/media/legal/docs/Acuerdo_queestablecendispoenmateri_controlinterno.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;""
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                </a>
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
             </div>
-
           </div>
         </div>
       </div>
 
-      <br>
       <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
-        <h4>Decretos</h4>
+        <h4>Decretos </h4>
         <div class="toggle toggle-transparent-body toggle-acordion">
-          <div class="toggle" :class="{ active: activeAccordion === 'decreto' }">
-            <label @click="toggleAccordion('decreto')">
-              Documentos.
+          <div class="toggle" :class="{ active: activeAccordion === 'CatalogoDoDecretosDocumentos' }">
+            <label @click="toggleAccordion('CatalogoDoDecretosDocumentos')">
+              Documentos
               <span
                 class="arrow pi pi-chevron-down arrow-custom"
-                :class="{ rotated: activeAccordion === 'decreto' }"
+                :class="{ rotated: activeAccordion === 'CatalogoDoDecretosDocumentos'}"
               ></span>
             </label>
-            <div class="toggle-content" v-show="activeAccordion === 'decreto'">
+            <div class="toggle-content" v-show="activeAccordion === 'CatalogoDoDecretosDocumentos'"  v-for="msj in DecretosDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','21.2&nbsp;MB','','https://www.upq.mx/media/legal/docs/Acuerdo_queestablecendispoenmateri_controlinterno.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;""
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                </a>
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
             </div>
-
           </div>
         </div>
       </div>
-
-      <br>
-      <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
-        <h4>Lineamientos</h4>
-        <div class="toggle toggle-transparent-body toggle-acordion">
-          <div class="toggle" :class="{ active: activeAccordion === 'lineamientos' }">
-            <label @click="toggleAccordion('lineamientos')">
-              Documentos.
-              <span
-                class="arrow pi pi-chevron-down arrow-custom"
-                :class="{ rotated: activeAccordion === 'lineamientos' }"
-              ></span>
-            </label>
-            <div class="toggle-content" v-show="activeAccordion === 'lineamientos'">
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','21.2&nbsp;MB','','https://www.upq.mx/media/legal/docs/Acuerdo_queestablecendispoenmateri_controlinterno.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;""
-                </a>
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <br>
-      <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
-        <h4>Manuales</h4>
-        <div class="toggle toggle-transparent-body toggle-acordion">
-          <div class="toggle" :class="{ active: activeAccordion === 'manuales' }">
-            <label @click="toggleAccordion('manuales')">
-              Documentos.
-              <span
-                class="arrow pi pi-chevron-down arrow-custom"
-                :class="{ rotated: activeAccordion === 'manuales' }"
-              ></span>
-            </label>
-            <div class="toggle-content" v-show="activeAccordion === 'manuales'">
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','21.2&nbsp;MB','','https://www.upq.mx/media/legal/docs/Acuerdo_queestablecendispoenmateri_controlinterno.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;""
-                </a>
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <br>
-      <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
-        <h4>Reglamentos</h4>
-        <div class="toggle toggle-transparent-body toggle-acordion">
-          <div class="toggle" :class="{ active: activeAccordion === 'regla' }">
-            <label @click="toggleAccordion('regla')">
-              Documentos.
-              <span
-                class="arrow pi pi-chevron-down arrow-custom"
-                :class="{ rotated: activeAccordion === 'regla' }"
-              ></span>
-            </label>
-            <div class="toggle-content" v-show="activeAccordion === 'regla'">
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','21.2&nbsp;MB','','https://www.upq.mx/media/legal/docs/Acuerdo_queestablecendispoenmateri_controlinterno.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;""
-                </a>
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <br>
-      <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
-        <h4>Protocolos</h4>
-        <div class="toggle toggle-transparent-body toggle-acordion">
-          <div class="toggle" :class="{ active: activeAccordion === 'protocolo' }">
-            <label @click="toggleAccordion('protocolo')">
-              Documentos.
-              <span
-                class="arrow pi pi-chevron-down arrow-custom"
-                :class="{ rotated: activeAccordion === 'protocolo' }"
-              ></span>
-            </label>
-            <div class="toggle-content" v-show="activeAccordion === 'protocolo'">
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <h4>1.- Protocolos:</h4>
-                <a @click="openModal('.pdf','21.2&nbsp;MB','','https://www.upq.mx/media/legal/docs/Acuerdo_queestablecendispoenmateri_controlinterno.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;""
-                </a>
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <br>
-      <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
-        <h4>Plan de Desarrollo Institucional</h4>
-        <div class="toggle toggle-transparent-body toggle-acordion">
-          <div class="toggle" :class="{ active: activeAccordion === 'plan' }">
-            <label @click="toggleAccordion('plan')">
-              Documentos.
-              <span
-                class="arrow pi pi-chevron-down arrow-custom"
-                :class="{ rotated: activeAccordion === 'plan' }"
-              ></span>
-            </label>
-            <div class="toggle-content" v-show="activeAccordion === 'plan'">
-              <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal('.pdf','21.2&nbsp;MB','','https://www.upq.mx/media/legal/docs/Acuerdo_queestablecendispoenmateri_controlinterno.pdf')" style="color:#151830">
-                  <i class="fa fa-book"></i>&nbsp;""
-                </a>
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <br><br><hr><br>
       
-      <!-- Modal -->
-      <div id="modalContainer" :style="{ display: showModal ? 'block' : 'none' }" v-if="showModal" class="center-modal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 id="modal_Title" class="modal-title">{{ modalTitle }}</h4>
-            </div>
-            <div class="modal-body">
-              <div class="containerr">
-                <div class="text-center">
-                  <a id="doc_url" :href="docUrl" class="btn btn-featured btn-red" target="_blank" download="">
-                    <span class="btn-content">
-                      <i class="pi pi-file-pdf"></i> DESCARGAR DOCUMENTO
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" @click="closeModal">Cerrar</button>
+      <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
+        <h4>Lineamientos </h4>
+        <div class="toggle toggle-transparent-body toggle-acordion">
+          <div class="toggle" :class="{ active: activeAccordion === 'LineamientosDocumentos' }">
+            <label @click="toggleAccordion('LineamientosDocumentos')">
+              Documentos
+              <span
+                class="arrow pi pi-chevron-down arrow-custom"
+                :class="{ rotated: activeAccordion === 'LineamientosDocumentos'}"
+              ></span>
+            </label>
+            <div class="toggle-content" v-show="activeAccordion === 'LineamientosDocumentos'"  v-for="msj in LineamientosDocumentos" :key="msj.id">
+              <p class="font-lato" style="margin-bottom: 1em;">
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                </a>
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
+                </a>
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      
+      <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
+        <h4>Manuales </h4>
+        <div class="toggle toggle-transparent-body toggle-acordion">
+          <div class="toggle" :class="{ active: activeAccordion === 'ManualesDocumentos' }">
+            <label @click="toggleAccordion('ManualesDocumentos')">
+              Documentos
+              <span
+                class="arrow pi pi-chevron-down arrow-custom"
+                :class="{ rotated: activeAccordion === 'ManualesDocumentos'}"
+              ></span>
+            </label>
+            <div class="toggle-content" v-show="activeAccordion === 'ManualesDocumentos'"  v-for="msj in ManualesDocumentos" :key="msj.id">
+              <p class="font-lato" style="margin-bottom: 1em;">
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                </a>
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
+        <h4>Reglamentos </h4>
+        <div class="toggle toggle-transparent-body toggle-acordion">
+          <div class="toggle" :class="{ active: activeAccordion === 'ReglamentosDocumentos' }">
+            <label @click="toggleAccordion('ReglamentosDocumentos')">
+              Documentos
+              <span
+                class="arrow pi pi-chevron-down arrow-custom"
+                :class="{ rotated: activeAccordion === 'ReglamentosDocumentos'}"
+              ></span>
+            </label>
+            <div class="toggle-content" v-show="activeAccordion === 'ReglamentosDocumentos'"  v-for="msj in ReglamentosDocumentos" :key="msj.id">
+              <p class="font-lato" style="margin-bottom: 1em;">
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                </a>
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
+        <h4>Protocolos </h4>
+        <div class="toggle toggle-transparent-body toggle-acordion">
+          <div class="toggle" :class="{ active: activeAccordion === 'ProtocolosDocumentos' }">
+            <label @click="toggleAccordion('ProtocolosDocumentos')">
+              Documentos
+              <span
+                class="arrow pi pi-chevron-down arrow-custom"
+                :class="{ rotated: activeAccordion === 'ProtocolosDocumentos'}"
+              ></span>
+            </label>
+            <div class="toggle-content" v-show="activeAccordion === 'ProtocolosDocumentos'"  v-for="msj in ProtocolosDocumentos" :key="msj.id">
+              <p class="font-lato" style="margin-bottom: 1em;">
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                </a>
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 col-sm-12" style="margin-bottom: 1em;">
+        <h4>Plan De Desarollo Institucional </h4>
+        <div class="toggle toggle-transparent-body toggle-acordion">
+          <div class="toggle" :class="{ active: activeAccordion === 'PlanDeDesarolloInstitucionalDocumentos' }">
+            <label @click="toggleAccordion('PlanDeDesarolloInstitucionalDocumentos')">
+              Documentos
+              <span
+                class="arrow pi pi-chevron-down arrow-custom"
+                :class="{ rotated: activeAccordion === 'PlanDeDesarolloInstitucionalDocumentos'}"
+              ></span>
+            </label>
+            <div class="toggle-content" v-show="activeAccordion === 'PlanDeDesarolloInstitucionalDocumentos'"  v-for="msj in PlanDeDesarolloInstitucionalDocumentos" :key="msj.id">
+              <p class="font-lato" style="margin-bottom: 1em;">
+                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                </a>
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                  <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+
     </div>
   </div>
+  
+</AppEstructure>
+  <RedesSociales />
 </template>
 
 <style scoped>

@@ -59,6 +59,9 @@ import ObjetivosCarrera from '@/carreras/objetivos/ObjetivosCarrera.vue';
 import DescargasCarrera from '@/carreras/objetivos/DescargasCarrera.vue';
 import MainScreen from '@/carreras/main_screen/MainScreen.vue';
 
+
+import axios from 'axios';
+
 export default defineComponent({
     name:'Carreras',
     components:{
@@ -70,25 +73,74 @@ export default defineComponent({
     },
   // Propiedades del componente (opcional)
   props: {
-
+    id_carreraSolicitada:{
+        type:Number,
+        required:true
+      },
+      carrera_solicitada:{
+        type:String,
+        default:''
+      },
+      direccion_getCarrera:{
+        type:String,
+        required:true
+      },
+      direccion_menuCarreras:{
+        type:String,
+        required:true,
+      }
   },
   // Setup del componente (opcional)
   setup(props) {
 
-    return {
+    function loadCarreraInformation(){
+      //trae toda la informacion de la carrera relacionada al id desde la base de datos
 
+      axios.post(props.direccion_getCarrera,{'id':props.id_carreraSolicitada})
+      .then(function(response){
+
+        const carreraSolicitada = response.data;
+        console.log(carreraSolicitada);
+
+      }).catch(function(error){
+          console.error(error);
+
+      }).finally(function(){
+ 
+      });
+    }
+
+    //carga todas las carreras disponibles de la base de datos para mostrarlas en el menu
+    function loadCarrerasMenu(){
+      axios.post(props.direccion_menuCarreras)
+      .then(function(response){
+
+        const menuCarreras = response.data;
+        console.log(menuCarreras);
+
+      }).catch(function(error){
+          console.error(error);
+
+      }).finally(function(){
+ 
+      });
+    }
+    
+    return {
+      loadCarreraInformation,
+      loadCarrerasMenu,
     };
   },
+
+  beforeMount(){
+    this.loadCarreraInformation();
+    this.loadCarrerasMenu();
+  }
 
 
 });
 </script>
 
 <style scoped>
-/*
-* {
-  margin:0;
-  padding:0;
-}
-*/
+
 </style>

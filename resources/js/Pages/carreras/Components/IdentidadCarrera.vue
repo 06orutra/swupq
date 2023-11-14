@@ -123,7 +123,7 @@
           Selccionar conocimientos:
           <multi-select v-model="perfil_ingreso.conocimientos" display="chip" :options="conocimientos" 
           optionLabel="nombre" placeholder="Selecciona conocimientos"
-            :maxSelectedLabels="3" class="w-full md:w-30rem"  />
+            :maxSelectedLabels="3" class="w-full md:w-30rem"  filter/>
         </div>
 
 
@@ -158,7 +158,7 @@
           Selccionar habilidad:
           <multi-select v-model="perfil_ingreso.habilidades" display="chip" :options="habilidades" 
           optionLabel="nombre" placeholder="Selecciona habilidades"
-            :maxSelectedLabels="3" class="w-full md:w-30rem"  />
+            :maxSelectedLabels="3" class="w-full md:w-30rem"  filter/>
         </div>
 
         <div class="view-selected-habilidades">
@@ -191,7 +191,7 @@
           Selccionar actitud:
           <multi-select v-model="perfil_ingreso.actitudes" display="chip" :options="actitudes" 
           optionLabel="nombre" placeholder="Selecciona actitudes"
-            :maxSelectedLabels="3" class="w-full md:w-30rem"  />
+            :maxSelectedLabels="3" class="w-full md:w-30rem"  filter/>
         </div>
 
         <div class="view-selected-actitudes">

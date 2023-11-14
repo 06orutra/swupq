@@ -155,6 +155,19 @@ class CarreraController extends Controller
         return response()->json($resultados);
     }
 
+    //retorna las carreras disponibles pero solo el nombre y su id para poder mostrarlos en el menu
+    public function get_carrera_disponibles_menu(){
+
+        $carreras_disponibles = Carrera::all()->map(function ($registro) {
+            return [
+                'id' => $registro->id,
+                'nombre_carrera'=> json_decode($registro->datos)->nombre_carrera,
+            ];
+        });
+        
+        return response()->json($carreras_disponibles); 
+    }
+
     //retorna los datos de una carrera en especifico por su id
     public function get_carrera(Request $request){
         $carrera = Carrera::find($request->id);

@@ -208,5 +208,9 @@ Route::post('/carrera-habilidades',[CarreraController::class,'get_carrera_habili
 //ruta para obtener las actitudes disponibles de las carreras
 Route::post('/carrera-actitudes',[CarreraController::class,'get_carrera_actitudes'])->name('carrera.actitudes');
 
+//ruta para obtener la lista de carreras disponibles para mostrar en el menu
+Route::post('/carrera-menu',[CarreraController::class,'get_carrera_disponibles_menu'])->name('carrera.menu');
+
+
 
 

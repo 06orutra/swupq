@@ -1,7 +1,7 @@
 <template>
   <div class="contenedor">
     <div class="superior">
-      <img src="/storage/img/icon_logo_UPQ.svg" class="logo-img" alt="Logo" href="http://127.0.0.1:8000/#/" />
+      <img src="/storage/img/icon_logo_UPQ.svg" class="logo-img" alt="Logo" @click="redirectTo('/')" />
     </div>
 
     <div class="inferior">
@@ -20,6 +20,11 @@ export default {
   components: {
     menuvue,
     polovue,
+  },
+  methods: {
+    redirectTo(path) {
+      window.location.href = path;
+    },
   },
 };
 </script>

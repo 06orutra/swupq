@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <img src="/storage/img/icon_menu.svg" alt="Menu Icon" class="menu-icon" @click="showMenu = !showMenu" />
+      <img src="/storage/img/icon_menu.svg"  alt="Menu Icon" class="menu-icon" @click="showMenu = !showMenu" />
 
+    
     <ul class="menu" v-show="showMenu" @mouseleave="closeActiveSubMenu">
       <li v-for="(menuItem, index) in menuItems" :key="index">
         <div 

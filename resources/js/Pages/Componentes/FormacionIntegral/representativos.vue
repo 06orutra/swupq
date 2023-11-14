@@ -1,10 +1,10 @@
 <script>
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import Carousel from 'primevue/carousel';
-
 export default {
     components: {
         AppEstructure,
+
     },
     mounted() {
         this.cargarTexto();
@@ -12,6 +12,10 @@ export default {
         this.cargarCultura();
     },
     methods: {
+        imageClick(index) {
+            this.activeIndex = index;
+            this.displayCustom = true;
+        },
         cargarTexto() {
             axios.post('/RepresentativoText/bannerData').then((response) => {
                 this.texto = response.data;
@@ -33,17 +37,12 @@ export default {
                 console.log(error);
             });
         },
-        imageClick(index) {
-            this.activeIndex = index;
-            this.displayCustom = true;
-        },
     },
     data() {
         return {
             texto: [],
             deporte: [],
             cultura: [],
-            activeIndex: 0,
             displayCustom: false,
             responsiveOption: [
                 {
@@ -59,28 +58,23 @@ export default {
                     numVisible: 1
                 }
             ],
+            images: [],
+            activeIndex: 0,
             responsiveOptions: [
                 {
-                    breakpoint: '1400px',
-                    numVisible: 2,
-                    numScroll: 1
+                    breakpoint: '1024px',
+                    numVisible: 5
                 },
                 {
-                    breakpoint: '1199px',
-                    numVisible: 3,
-                    numScroll: 1
+                    breakpoint: '768px',
+                    numVisible: 3
                 },
                 {
-                    breakpoint: '767px',
-                    numVisible: 2,
-                    numScroll: 1
-                },
-                {
-                    breakpoint: '575px',
-                    numVisible: 1,
-                    numScroll: 1
+                    breakpoint: '560px',
+                    numVisible: 1
                 }
-            ]
+            ],
+            displayCustom: false
         };
     },
 }
@@ -148,28 +142,6 @@ export default {
             </Carousel>
         </div>
 
-        <div>
-            <div class="card flex justify-content-center">
-                <Galleria v-model:activeIndex="activeIndex" v-model:visible="displayCustom" :value="cultura"
-                    :responsiveOptions="responsiveOption" :numVisible="2" containerStyle="max-width: 850px"
-                    :circular="true" :fullScreen="true" :showItemNavigators="true" :showThumbnails="false">
-                    <template #item="slotProps">
-                        <img :src="'/storage/' + slotProps.data.imagen" alt="Card Image"
-                            style="width: 100%; display: block" />
-                    </template>
-                    <template #thumbnail="slotProps">
-                        <img :src="'/storage/' + slotProps.data.imagen" alt="Card Image" style="display: block" />
-                    </template>
-                </Galleria>
-
-                <div v-if="cultura" class="grid" style="max-width: 400px">
-                    <div v-for="(image, index) of cultura" :key="index" class="col-4">
-                        <img :src="image.thumbnailImageSrc" :alt="image.alt" style="cursor: pointer"
-                            @click="imageClick(index)" />
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
     </AppEstructure>
@@ -186,6 +158,5 @@ export default {
     padding: 50px;
     text-align: center;
     font-size: 1.5rem;
-}
-</style>
+}</style>
 

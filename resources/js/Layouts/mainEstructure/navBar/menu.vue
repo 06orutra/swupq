@@ -96,8 +96,8 @@ export default {
           label: 'DEPORTE Y CULTURA',
           subMenuItems: [
             { label: 'Lengua extranjera', path:'/FormacionIntegral/lenguaExtranjera/' },
-            { label: 'Opción 2' },
-            { label: 'Opción 3' },
+            { label: 'Desarrollo Humano', path:'/FormacionIntegral/DesarrolloHumano/' },
+            { label: 'Representativos', path:'/FormacionIntegral/Representativos/' },
           ],
         },
         {

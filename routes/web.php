@@ -96,10 +96,6 @@ Route::get('/', function () {
     return Inertia::render('Welcome', []);
 });
 
-Route::get('/carga', function () {
-    return Inertia::render('carga', []);
-});
-
 Route::prefix('servicios-universitarios')->group(function () {
     Route::get('/movilidad-academica', function () {
         return Inertia::render('Componentes/Servicios_Universitarios/movilidadAcademica');

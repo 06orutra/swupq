@@ -147,7 +147,7 @@ export default {
       <div class="contenedoor">
         <div class="parallax2" :style="{ backgroundImage: 'url(' + images.fondo2 + ')' }">
           <div class="caja">
-            <a :href="sugerenciasLink" target="_blank">
+            <a :href="'https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox'" target="_blank">
               <p><strong>ASESORÍA Y DENUNCIAS</strong></p>
               <P class="font-normal" style="line-height: 1;">ENVIANOS UN MENSAJE </P>
               <P class="font-normal" style="line-height: 1;">comite.de.etica@upq.edu.mx </P>
@@ -456,7 +456,7 @@ main {
   }
 }
 
-
+/* 
 @media (min-width: 400px){
   .main-menu {
     margin-top: 100px;
@@ -501,5 +501,5 @@ main {
   .main-menu {
     margin-top: 200px;
   }
-}
+} */
 </style>

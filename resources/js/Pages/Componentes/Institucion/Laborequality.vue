@@ -455,4 +455,51 @@ main {
     /* Altura deseada para pantallas pequeñas */
   }
 }
+
+
+@media (min-width: 400px){
+  .main-menu {
+    margin-top: 100px;
+  }
+}
+@media (min-width: 490px){
+  .main-menu {
+    margin-top: 150px;
+  }
+}
+@media (min-width: 500px){
+  .main-menu {
+    margin-top: 200px;
+  }
+}
+@media (min-width: 600px){
+  .main-menu {
+    margin-top: 250px;
+  }
+}
+@media (min-width: 700px){
+  .main-menu {
+    margin-top: 300px;
+  }
+}
+@media (min-width: 770px) and (max-width: 799px){
+  .main-menu {
+    margin-top: 30px;
+  }
+}
+@media (min-width: 800px) and (max-width: 889px){
+  .main-menu {
+    margin-top: 100px;
+  }
+}
+@media (min-width: 890px) and (max-width: 949px){
+  .main-menu {
+    margin-top: 200px;
+  }
+}
+@media (min-width: 950px) and (max-width: 2000px){
+  .main-menu {
+    margin-top: 200px;
+  }
+}
 </style>

@@ -71,6 +71,15 @@ export default {
         <TabPanel header="Igualdad Laboral">
             <igualdadLaboral />
         </TabPanel>
+        <TabPanel header="Directorios">
+            <Directorios />
+        </TabPanel>
+        <TabPanel header="Marco Juridico">
+            <MarcoJuridico />
+        </TabPanel>
+        <TabPanel header="Instalaciones">
+            <Instalaciones />
+        </TabPanel>
 
     </TabView>
 </template>

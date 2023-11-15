@@ -1,335 +1,505 @@
 <script>
-export default {
-            name: 'BannerComponent',
-    methods: {
-      redirectToPDF(pdfUrl) {
-        window.open(pdfUrl, '_blank');
+import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
+import carruselPrincipalLogic from '@/Pages/Componentes/Welcome/carruselPrincipalLogic.vue';
+import bolitas_pdf from '@/Pages/Componentes/FormacionIntegral/bolitas_pdf.vue';
 
-          }
-        
-        },
-      data() {
-        return {
-        title: "POLÍTICA DE IGUALDAD LABORAL Y NO DISCRIMINACIÓN",
-        parrafo1: "La Universidad Politécnica de Querétaro manifiesta el compromiso con la promoción, respeto y protección de los derechos humanos, por lo que en la esfera de su competencia garantizará la igualdad sustantiva entre mujeres y hombres en el ejercicio de sus derechos laborales y la no discriminación en los servicios que ofrece así como en sus condiciones de trabajo, quedando prohibido el maltrato, violencia y segregación de las autoridades hacia el personal y entre el personal en materia de cualquier forma de distinción, exclusión o restricción basada en el origen étnico o nacional, apariencia física, cultura, sexo, género, idioma, edad, discapacidad, condición social, economía, de salud o jurídica, embarazo, lengua, religión, opiniones, preferencias sexuales, estado civil o conyugal, situación migratoria o cualquier otra, que tenga por efecto impedir o anular el reconocimiento o el ejercicio de los derechos y la igualdad real de oportunidades a los miembros de la Comunidad Universitaria dentro de sus instalaciones.",
-        }
-    }};
+export default {
+  components: {
+    AppEstructure,
+    carruselPrincipalLogic,
+    bolitas_pdf,
+  },
+
+  mounted() {
+    this.cargarTexto();
+    this.cargarPdf();
+    this.cargarBanner;
+  },
+
+  name: 'BannerComponent',
+  /* método que te dirreccionan a los pdfs */
+  methods: {
+    cargarTexto() {
+      axios.post('/IgualdadLaboralText/bannerData').then((response) => {
+        this.texto = response.data;
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    cargarPdf() {
+      axios.post('/IgualdadLaboralPdf/bannerData').then((response) => {
+        this.pdfs = response.data;
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    cargarBanner() {
+      axios.post(this.controllerName).then((response) => {
+        this.banner = response.data;
+        this.assignConsecutiveIDs();
+        this.isBannerLoaded = true;
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    openPDFModal(pdf, name) {
+      this.currentPDF = '/storage/pdfs/' + pdf;
+      this.currentPDFName = name;
+      this.showPDFModal = true;
+    },
+    closePDFModal() {
+      this.showPDFModal = false;
+    },
+
+  },
+  data() {
+    return {
+      texto: [],
+      pdfs: [],
+      banner: [],
+      showPDFModal: false,
+
+      images: {
+        letrero: "https://www.upq.mx/igualdad_laboral/images/letrero_comite.svg?crc=369507292",
+        fondo1: "https://www.upq.mx/igualdad_laboral/images/fondo_banner_2-01.svg?crc=3799554246",
+        fondo2: "https://www.upq.mx/igualdad_laboral/images/fondo_banner_3-01.svg?crc=4066401794",
+      }
+    }
+  }
+};
 
 </script>
 
 
 <template>
+  <AppEstructure :controllerName="'/igualdadLaboralPrin/bannerData'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div>
-        <div class="img_laboreq">                         
-            <img class=" h-full w-full " src="https://www.upq.mx/igualdad_laboral/images/270320_banner-igualdad-2020.jpg?crc=3862696609" alt="" >
-        </div>  
-    
-        <div class=" banner_eq w-full" >
-            <h2 ><b>IGUALDAD LABORAL Y NO DISCRIMINACIÓN</b></h2>  
+      <div class=" banner_eq w-full">
+        <h2><b>IGUALDAD LABORAL Y NO DISCRIMINACIÓN</b></h2>
+      </div>
+      <div class="title pt-20">
+        <div v-for="text in texto">
+          {{ text.titulo }}
+        </div>
+        <div class="line" style="margin: 20px auto; width: 70%;">
         </div>
 
-        <div class="title pt-14">
-            <p>{{ title }}</p>
-                <div class="line" style="margin: 20px auto; width: 70%;">
-                </div>
+        <div class="text-align: center; col-md-8 offset-md-2 text-justify text-xl pb-20"
+          style="width: 80%; margin: 0 auto;">
+          <p class="font-normal" style="margin-top: 2em; margin-bottom:1em; color: black; width: 100%">
+          <div class="text-content">
+            <div v-for="text in texto">
+              {{ text.contenido }}
+            </div>
+          </div>
+          </p>
+        </div>
+      </div>
 
-                <div class="text-align: center; col-md-8 offset-md-2 text-justify text-xl" style="width: 80%; margin: 0 auto;">
-                    <p class="font-normal" style="margin-top: 2em; margin-bottom:1em; color: black; width: 100%">
-                      {{parrafo1}}
-                    </p>
-                </div>
+      <div v-if="showPDFModal" class="pdf-modal">
+        <div class="pdf-container">
+          <button @click="closePDFModal" class="close-x">&#10005;</button>
+          <div class="pdf-header" :style="{ backgroundColor: '#8c2437' }">
+            {{ currentPDFName }}
+          </div>
+          <embed :src="currentPDF" type="application/pdf" width="100%" height="500px">
+          <div class="pdf-buttons">
+            <button @click="closePDFModal" class="close-button">Cerrar</button>
+            <a :href="currentPDF" download :download="currentPDFName" class="download-button">
+              Descargar
+            </a>
+          </div>
+        </div>
+      </div>
 
-              
+      <div class="contenedoor">
+        <div class="parallax" :style="{ backgroundImage: 'url(' + images.fondo1 + ')' }">
+          <div v-for="pdf in pdfs" @click="openPDFModal(pdf.pdf, pdf.nombre)" class="caja">
+            <p><strong>CONSULTA AQUÍ</strong></p>
+            <P class="font-normal" style="line-height: 1.5;">
+              {{ pdf.nombre }}
+            </P>
+          </div>
+        </div>
+      </div>
 
-                <div class="contenedorrr relative w-full h-96 overflow-hidden items">
-                  <img class="absolute inset-0 w-full h-full object-cover z-1 " src="https://www.upq.mx/igualdad_laboral/images/fondo_banner_2-01.svg?crc=3799554246" alt="Fondo de banner">
-                  <div class="flex justify-center items-center h-full">
-                      <div class="text-center">
-                          <button class="bg-blue-800 bg-opacity-100 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded z-2 absolute" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/pol%c3%adtica-de-igualdad-laboral-y-no-discriminaci%c3%b3n..pdf')">
-                              CONSULTA AQUÍ
-                              <p class="text-xs">POLÍTICA DE IGUALDAD LABORAL Y NO DISCRIMINACIÓN A DETALLE</p>
-                          </button>
-                      </div>
-                  </div>
-              </div>
-              
+      <div class="contenedoor2 ">
+        <div class="parallax3">
+          <carruselPrincipalLogic :controllerName="'/IgualdadLaboralImgSecundaria/bannerData'" />
+          <div v-for="img in banner">
+            {{ img.img }}
+          </div>
+          <div class="caja2">
+            <img class="letrero" :src="images.letrero" alt="" style="opacity: 0.8;">
+          </div>
+        </div>
+      </div>
 
-                <div class="contenedor  relative ">
-                  <img src="https://www.upq.mx/igualdad_laboral/images/comiteeticanov2021.jpg?crc=449875955" alt="Imagen 1" class="imagen grande" >
-                  <img src="https://www.upq.mx/igualdad_laboral/images/letrero_comite.svg?crc=369507292" alt="Imagen 2" class="imagen pequena" >
-                </div> 
+      <div class="flex justify-between button-container">
+        <div class="main-menu">
+          <bolitas_pdf :loadDataUrl="'/IgualdadLaboralPdfEtica/bannerData'" />
+        </div>
+      </div>
+      <div class="title2 pb-5">
+        <p class="text-black text-content pt-14"><strong>POLÍTICA DE IGUALDAD LABORAL Y NO DISCRIMINACIÓN</strong></p>
+      </div>
+      <div class="contenedoor">
+        <div class="parallax2" :style="{ backgroundImage: 'url(' + images.fondo2 + ')' }">
+          <div class="caja">
+            <a :href="'https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox'" target="_blank">
+              <p><strong>ASESORÍA Y DENUNCIAS</strong></p>
+              <P class="font-normal" style="line-height: 1;">ENVIANOS UN MENSAJE </P>
+              <P class="font-normal" style="line-height: 1;">comite.de.etica@upq.edu.mx </P>
+            </a>
+          </div>
+        </div>
+      </div>
 
-                <div  class="flex justify-between button-container"> 
-                  <div class="main-menu">
-
-                    <!-- Acta de instalación -->
-                      <div class="">
-                          <div
-                            class="option2 bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
-                            style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-01.svg?crc=4137336014');">
-                            <button clasx s="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/miembros-del-comit%c3%a9-de-%c3%a9tica-upq_2021.docx.pdf')"></button>
-                            
-                          </div>
-                        <div class="button-text font-light">Acta de instalación</div>
-                      </div>
-                    <!-- Código de Ética  -->
-                      <div class="">
-                        <div
-                          class="option bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
-                          style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-02.svg?crc=533964385');">
-                          <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/miembros-del-comit%c3%a9-de-%c3%a9tica-upq_2021.docx.pdf')"></button>
-                          
-                        </div>
-                       <div class="button-text font-light">Código de Etica</div>
-                      </div>
-                    <!-- Lineamientos -->
-                    <div class="">
-                      <div
-                        class="option2 bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
-                        style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-03.svg?crc=3860671546');">
-                        <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/miembros-del-comit%c3%a9-de-%c3%a9tica-upq_2021.docx.pdf')"></button>
-                        
-                       </div>
-                     <div class="button-text font-light">Lineamientos</div>
-                    </div>
-                  </div>
-                      
-                </div>
-
-                <div class="contenedorrr relative w-full h-96 overflow-hidden items">
-                  <img class="absolute inset-0 w-full h-full object-cover z-1 " src="https://www.upq.mx/igualdad_laboral/images/fondo_banner_3-01.svg?crc=4066401794" alt="Fondo de banner">
-                  <div class="flex justify-center items-center h-full">
-                      <div class="text-center">
-                          <button class="bg-red-800 bg-opacity-100 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded z-2 absolute" @click="redirectToPDF('https://mail.google.com/mail/u/0/#inbox')">
-                              ASESORÍA Y DENUNCIAS
-                              <p class="text-xs">ENVIANOS UN MENSAJE </p>
-                              comite.de.etica@upq.edu.mx
-                          </button>
-                      </div>
-                  </div>
-              </div>
-              <div  class="flex justify-between button-container"> 
-                <div class="main-menu">
-
-                  <!-- Protocolo de Violencia Laboral -->
-                    <div class="">
-                        <div
-                          class="option2 bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
-                          style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-06.svg?crc=292774967');">
-                          <button clasx s="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/')"></button>
-                          
-                        </div>
-                      <div class="button-text font-light">Protocolo de Violencia Laboral</div>
-                    </div>
-                  <!-- Protocolo de Hostigamiento y Acoso Sexual -->
-                    <div class="">
-                      <div
-                        class="option bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
-                        style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-04.svg?crc=378829962');">
-                        <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/')"></button>
-                        
-                      </div>
-                     <div class="button-text font-light">Protocolo de Hostigamiento y Acoso Sexual</div>
-                    </div>
-                  <!-- Protocolo para Discriminacion -->
-                  <div class="">
-                    <div
-                      class="option2 bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
-                      style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-05.svg?crc=505331560');">
-                      <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/')"></button>
-                      
-                     </div>
-                   <div class="button-text font-light">Protocolo para Discriminacion</div>
-                  </div>
-                </div>
-              </div>
-
-              <div  class="flex justify-between button-container"> 
-                <div class="main-menu">
-
-                  <!-- Plan de Accesibilidad -->
-                    <div class="">
-                        <div
-                          class="option2 bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
-                          style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-07.svg?crc=423873761');">
-                          <button clasx s="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/plan-de-accesibilidad-upq_2021.pdf')"></button>
-                          
-                        </div>
-                      <div class="button-text font-light">Plan de Accesibilidad</div>
-                    </div>
-                  <!-- Programa de Protección Civil  -->
-                    <div class="">
-                      <div
-                        class="option bg-no-repeat border-circle bg-center w-12rem h-12rem z-4 relative shadow-md"
-                        style="background-image: url('https://www.upq.mx/igualdad_laboral/images/icono_pagina-08.svg?crc=4225580983');">
-                        <button class="pdf-button" @click="redirectToPDF('https://www.upq.mx/igualdad_laboral/assets/programa-interno-de-protecci%c3%b3n-civil-de-la-upq%2c-13-de-julio.pdf')"></button>
-                        
-                      </div>
-                     <div class="button-text font-light">Programa de Protección Civil</div>
-                    </div>
-                </div>
-              </div>
-                
-                
-
-
-               
-                    
-                </div>
+      <div class="flex justify-between button-container">
+        <div class="main-menu">
+          <bolitas_pdf :loadDataUrl="'/IgualdadLaboralPdfIgualdad/bannerData'" />
+        </div>
+      </div>
     </div>
-    
+
+  </AppEstructure>
 </template>
 
-<style scoped>
-    .banner_eq {
-        background-color: #800020;
-        text-align: center;
-        padding: 20px;
-        box-shadow: 0px 4px 8px rgba(50, 0, 0, 0.15); /* Ajusta los valores para personalizar la sombra */
-    }
-    h2 {
-        color: white;
-    }
-    .title {
-        color: #881337;
-        text-align: center;
-        font-weight: 700;
-        box-shadow: 0px 4px 8px rgba(50, 50, 0, 0.15);
-        font-size: 1.5rem; /* 24px */
-        line-height: 2rem; /* 32px */
-    }
-    .line {
-        border-top: 3px solid #881337;
-        margin: 20px 0;
-        width: 80%;
-    }
-    .pdf-button {
-      width: 100%;
-      height: 100%;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-    .shadow-md {
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .button-text {
-      margin-top: 0.5rem;
-      color: black;
-      font-style: not-italic;
-  
-    }
-    /*FHGJBFJC*/
-    *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      text-decoration: none;
-      font-family: sans-serif;
-    }
-    main{
-      width: 100%;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .title{
-      text-align: center;
-      margin-top: 80px;
-    }
-    
-    .main-menu {
-      width: 100%;
-      margin: auto;
-      margin-top: 40px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-    }
-    
-    .main-menu a{
-      cursor: default;
-    }
-    
-    .main-menu .option{
-      width: 200px;
-      height: 200px;
-      background: #f1f1f1;
-      margin: 20px;
-      padding: 20px;
-      text-align: center;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 300ms;
-    }
-    
-    .main-menu .option2{
-      width: 200px;
-      height: 200px;
-      background: #f1f1f1;
-      margin: 20px;
-      padding: 20px;
-      text-align: center;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 300ms;
-  }
-    .main-menu .option:hover{
-      box-shadow: 5px 5px 0px 0px #800020, 10px 10px 14px #CC365B;
-      transform: translate(-5px, -5px);
-    }
-    .main-menu .option2:hover{
-      box-shadow: 5px 5px 0px 0px #08162fe6, 10px 10px 14px #3d67afe6;
-      transform: translate(-5px, -5px);
-  }
-    
-    .button-container {
-      display: flex;
-      justify-content: space-between;
-    }    
-  
- 
+<style lang="scss">
+.pdf-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
 
-  .contenedor {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    min-height: 100vh;
-    position: relative;
-  }
+.close-x {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  color: black;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
 
-  .imagen {
-    width: 100%;
+.close-x:hover {
+  color: #ffffff;
+}
+
+.pdf-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.pdf-container {
+  position: relative;
+  width: 75%;
+  height: 80%;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.pdf-header {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: white;
+  font-size: medium;
+  font-weight: bold;
+}
+
+embed {
+  width: 100%;
+  height: calc(100vh - 80px);
+}
+
+.pdf-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.close-button {
+  background-color: grey;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.download-button {
+  background-color: #8c2437;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+/* Estilos de Caro */
+.banner_eq {
+  background-color: #800020;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(50, 0, 0, 0.15);
+  /* Ajusta los valores para personalizar la sombra */
+}
+
+h2 {
+  color: white;
+}
+
+.title {
+  color: #881337;
+  text-align: center;
+  font-weight: 700;
+  box-shadow: 0px 4px 8px rgba(50, 50, 0, 0.15);
+  font-size: 1.5rem;
+  /* 24px */
+  line-height: 2rem;
+  /* 32px */
+}
+
+.line {
+  border-top: 3px solid #881337;
+  margin: 20px 0;
+  width: 80%;
+}
+
+/*estilos del contenedor para los botones circulares*/
+* {
+  margin: 0.5;
+  padding: 0.5;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: sans-serif;
+}
+
+main {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.title2 {
+  color: #000000;
+  text-align: center;
+  font-weight: 700;
+  box-shadow: 0px 4px 8px rgba(50, 50, 0, 0.15);
+  font-size: 1.5rem;
+  /* 24px */
+  line-height: 2rem;
+  /* 32px */
+}
+
+.dark-mode .text-content {
+  color: white;
+}
+
+.dark-mode .title {
+  color: white;
+}
+
+.main-menu {
+  width: 100%;
+  margin: auto;
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+/*estilos para los contenedores de los banners con imagen en movimiento*/
+.contenedoor {
+  width: 100%;
+  height: 300px;
+  max-height: 100%;
+  /* Evita que el contenedor supere su altura máxima */
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  z-index: 1;
+  top: 0px;
+  left: 0px;
+}
+
+.parallax {
+  background-size: cover;
+  background-attachment: fixed;
+  /* Esto crea el efecto de parallax */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -10;
+  background-position: center center;
+}
+
+.parallax2 {
+  background-size: cover;
+  background-attachment: fixed;
+  /* Esto crea el efecto de parallax */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -10;
+  background-position: center center;
+}
+
+.caja {
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+  /* Centra el contenido */
+  padding: 20px;
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 5px;
+  color: white;
+  transition: border-color 0.3s, background-color 0.3s;
+  z-index: -2;
+}
+
+.caja:hover {
+  border-color: rgb(19, 18, 18);
+  /* Cambia el color del borde a rojo al pasar el mouse */
+  background-color: rgba(255, 255, 255, 0.571);
+  /* Cambia el fondo a blanco al pasar el mouse */
+  color: rgb(19, 18, 18);
+}
+
+.caja a {
+  text-decoration: none;
+  /* Quita el subrayado del enlace */
+  color: inherit;
+  /* Hereda el color del texto de la caja */
+  display: block;
+  /* Hace que el enlace ocupe todo el espacio de la caja */
+  width: 100%;
+  height: 100%;
+}
+
+/*estilos para el contenedor del coite de ética*/
+.contenedoor2 {
+  width: 100%;
+  height: 600px;
+  /* Cambiado a 600px */
+  position: relative;
+  display: flex;
+  z-index: 1;
+  top: 30px;
+  left: 0;
+}
+
+.parallax3 {
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  /* Cambiado a 100% */
+  max-height: 100%;
+  position: relative;
+  z-index: -10;
+  background-position: center center;
+}
+
+.caja2 {
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  width: 80%;
+}
+
+.letrero {
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+}
+
+@media (max-width: 767px) {
+  .caja {
+    padding: 1%;
+    font-size: 16px;
+    /* Ajusta el tamaño de la fuente según sea necesario */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .contenedoor2 {
     height: auto;
-    max-width: 100%;
-    max-height: 100%;
+    /* Cambiado a auto */
   }
 
-  .grande {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
+  .parallax3 {
+    height: 300px;
+    /* Altura deseada para pantallas pequeñas */
   }
+}
 
-  .pequena {
-    width: 83.3333%;
-    position: absolute;
-    top: 87.8%;
-    left: 40%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    opacity: 0.8;
+/* 
+@media (min-width: 400px){
+  .main-menu {
+    margin-top: 100px;
   }
-  .contenedorrr:hover .imagen {-webkit-transform:scale(1.3);transform:scale(1.3);}
-   .contenedorrr {overflow:hidden;}
-  
-  
-    </style>
-      
-      
-      
-      
-      
+}
+@media (min-width: 490px){
+  .main-menu {
+    margin-top: 150px;
+  }
+}
+@media (min-width: 500px){
+  .main-menu {
+    margin-top: 200px;
+  }
+}
+@media (min-width: 600px){
+  .main-menu {
+    margin-top: 250px;
+  }
+}
+@media (min-width: 700px){
+  .main-menu {
+    margin-top: 300px;
+  }
+}
+@media (min-width: 770px) and (max-width: 799px){
+  .main-menu {
+    margin-top: 30px;
+  }
+}
+@media (min-width: 800px) and (max-width: 889px){
+  .main-menu {
+    margin-top: 100px;
+  }
+}
+@media (min-width: 890px) and (max-width: 949px){
+  .main-menu {
+    margin-top: 200px;
+  }
+}
+@media (min-width: 950px) and (max-width: 2000px){
+  .main-menu {
+    margin-top: 200px;
+  }
+} */
+</style>

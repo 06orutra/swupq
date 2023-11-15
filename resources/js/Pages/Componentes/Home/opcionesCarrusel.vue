@@ -1,4 +1,5 @@
 <template>
+    <h5>Configuración carrusel</h5>
     <div class="card flex flex-wrap justify-content-center gap-3">
         <div class="flex align-items-center">
             <label class="ml-2">Flechas: </label><input type="checkbox" v-model="navigation">

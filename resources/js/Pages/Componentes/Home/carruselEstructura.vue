@@ -22,7 +22,7 @@ export default {
             type: String,
             required: true
         },
-        Subtitulo:{
+        Subtitulo: {
             type: String,
             required: true
         },
@@ -187,8 +187,6 @@ export default {
             const data = {
                 id: this.datosArreglo.id,
             };
-
-
             axios.post(this.deleteBannerUrl, data).then((response) => {
                 this.cargarBanner();
                 this.eliminarDialog = false;
@@ -316,7 +314,7 @@ export default {
 
                 <div class="field col-12 md:col-12">
                     <label for="minmax">{{ this.Subtitulo }}</label>
-                    <InputText inputId="minmax" v-model="link" :min="0" :max="10000" :showButtons="true" />
+                    <Textarea inputId="minmax" v-model="link" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
@@ -327,7 +325,7 @@ export default {
                         class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
                         Seleccione una nueva foto
                     </button>
-                    <input ref="photoInput" type="file" class="hidden" @change="handleFileUpload">
+                    <input ref="photoInput" accept=".jpg,.jpeg,.png,.svg" type="file" class="hidden" @change="handleFileUpload">
 
                 </div>
 
@@ -363,8 +361,9 @@ export default {
 
                 <div class="field col-12 md:col-12">
                     <label for="minmax">{{ this.Subtitulo }}</label>
-                    <InputText inputId="minmax" v-model="datosArreglo.link" :min="0" :max="10000" :showButtons="true" />
+                    <Textarea inputId="minmax" v-model="datosArreglo.link" :min="0" :max="10000" :showButtons="true" />
                 </div>
+
 
                 <img v-if="imagePreview" :src="imagePreview" alt="Previsualización" class="my-4"
                     style="max-width: 100%; height: auto; border: 1px solid #ccc;" />
@@ -374,7 +373,7 @@ export default {
                         class="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest shadow-sm hover:text-gray-300 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition">
                         Seleccione una nueva foto
                     </button>
-                    <input ref="photoInput" type="file" class="hidden" @change="handleFileUploadEdit">
+                    <input ref="photoInput" type="file" accept=".jpg,.jpeg,.png,.svg" class="hidden" @change="handleFileUploadEdit">
 
                 </div>
 

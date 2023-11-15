@@ -198,8 +198,8 @@ export default {
     <!-- Cartas en admin -->
     <div class="cards-container">
         <Card v-for="datosTexto in filteredBanner" style="width: 40em; margin-bottom: 40px;">
-            <template #title> {{ datosTexto.titulo }} </template>
-            <template #subtitle> {{ datosTexto.contenido }} </template>
+            <template #title> Titulo: {{ datosTexto.titulo }} </template>
+            <template #subtitle> Contenido: {{ datosTexto.contenido }} </template>
             <template #footer>
                 <Button icon="pi pi-pencil" class="p-button p-button-warning !mr-6" @click="editarSelect(datosTexto)" />
                 <Button icon="pi pi-trash" class="p-button p-button-danger" @click="confirmarEliminar(datosTexto)" />

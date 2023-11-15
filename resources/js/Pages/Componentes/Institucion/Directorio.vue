@@ -1,8 +1,7 @@
-
-
 <template>
   <div>
     <AppEstructure :controllerName="'/BannerDirectorio/bannerData'">
+      <barra/>
       <div class="directory">
         <div class="column column-left">
           <h4>RECTORÍA</h4>
@@ -118,12 +117,14 @@
 import axios from "axios";
 import RedesSociales from '@/Pages/Componentes/Home/RedesSociales.vue';
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
+import barra from '@/Pages/Componentes/Institucion/InstalacionesComponentes/barraespaciadora.vue'; 
 
 
 export default {
   components: {
     RedesSociales,
     AppEstructure,
+    barra,
   },
   data() {
     return {
@@ -235,6 +236,8 @@ export default {
   },
 };
 </script>
+
+
 
 <style scoped>
 .directory {

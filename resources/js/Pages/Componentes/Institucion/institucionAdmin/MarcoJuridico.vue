@@ -1,15 +1,20 @@
 <script setup>
-import estructuraImg from '@/Pages/Componentes/Home/estructurapdf2.vue';
+import estructuraImg from '@/Pages/Componentes/Home/estructuraImg.vue';
+import estructurapdf2 from '@/Pages/Componentes/Home/estructurapdf2.vue';
 </script>
 
 <template>
     <TabView ref="tabview1" class="p-3">
+        <TabPanel header="Banner Marco Jurídico" >
+            <estructuraImg :loadDataUrl="'/BannerMarcoJuridico/bannerData'" :registerBannerUrl="'/BannerMarcoJuridico/registrarBanner'"
+                :editBannerUrl="'/BannerMarcoJuridico/editarBanner'" :deleteBannerUrl="'/BannerMarcoJuridico/eliminarBanner'" />
+        </TabPanel>
         <TabPanel header="Constitucion" >
             <hr class="blue-divider">
             <p>
                 <span style="color: #007bff; font-weight: bold;">Documentos</span>
             </p>
-            <estructuraImg :loadDataUrl="'/ConstitucionDocumentos/bannerData'" :registerBannerUrl="'/ConstitucionDocumentos/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/ConstitucionDocumentos/bannerData'" :registerBannerUrl="'/ConstitucionDocumentos/registrarBanner'"
                 :editBannerUrl="'/ConstitucionDocumentos/editarBanner'" :deleteBannerUrl="'/ConstitucionDocumentos/eliminarBanner'" />
                 <hr class="blue-divider">
         </TabPanel>
@@ -18,7 +23,7 @@ import estructuraImg from '@/Pages/Componentes/Home/estructurapdf2.vue';
             <p>
                 <span style="color: #007bff; font-weight: bold;">Documentos</span>
             </p>
-            <estructuraImg :loadDataUrl="'/TratadosInternacionalesDocumentos/bannerData'" :registerBannerUrl="'/TratadosInternacionalesDocumentos/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/TratadosInternacionalesDocumentos/bannerData'" :registerBannerUrl="'/TratadosInternacionalesDocumentos/registrarBanner'"
                 :editBannerUrl="'/TratadosInternacionalesDocumentos/editarBanner'" :deleteBannerUrl="'/TratadosInternacionalesDocumentos/eliminarBanner'" />
                 <hr class="blue-divider">
         </TabPanel>
@@ -27,19 +32,19 @@ import estructuraImg from '@/Pages/Componentes/Home/estructurapdf2.vue';
             <p>
                 <span style="color: #007bff; font-weight: bold;">Estatales</span>
             </p>
-            <estructuraImg :loadDataUrl="'/LeyesEstatales/bannerData'" :registerBannerUrl="'/LeyesEstatales/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/LeyesEstatales/bannerData'" :registerBannerUrl="'/LeyesEstatales/registrarBanner'"
                 :editBannerUrl="'/LeyesEstatales/editarBanner'" :deleteBannerUrl="'/LeyesEstatales/eliminarBanner'" />
                 <hr class="blue-divider">
                 <p>
                 <span style="color: #007bff; font-weight: bold;">Generales</span>
             </p>
-            <estructuraImg :loadDataUrl="'/LeyesGenerales/bannerData'" :registerBannerUrl="'/LeyesGenerales/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/LeyesGenerales/bannerData'" :registerBannerUrl="'/LeyesGenerales/registrarBanner'"
                 :editBannerUrl="'/LeyesGenerales/editarBanner'" :deleteBannerUrl="'/LeyesGenerales/eliminarBanner'" />
                 <hr class="blue-divider">
                 <p>
                 <span style="color: #007bff; font-weight: bold;">Federales</span>
             </p>
-            <estructuraImg :loadDataUrl="'/LeyesFederales/bannerData'" :registerBannerUrl="'/LeyesFederales/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/LeyesFederales/bannerData'" :registerBannerUrl="'/LeyesFederales/registrarBanner'"
                 :editBannerUrl="'/LeyesFederales/editarBanner'" :deleteBannerUrl="'/LeyesFederales/eliminarBanner'" />
                 <hr class="blue-divider">
         </TabPanel>
@@ -48,7 +53,7 @@ import estructuraImg from '@/Pages/Componentes/Home/estructurapdf2.vue';
             <p>
                 <span style="color: #007bff; font-weight: bold;">Documentos</span>
             </p>
-            <estructuraImg :loadDataUrl="'/AcuerdosDocumentos/bannerData'" :registerBannerUrl="'/AcuerdosDocumentos/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/AcuerdosDocumentos/bannerData'" :registerBannerUrl="'/AcuerdosDocumentos/registrarBanner'"
                 :editBannerUrl="'/AcuerdosDocumentos/editarBanner'" :deleteBannerUrl="'/AcuerdosDocumentos/eliminarBanner'" />
                 <hr class="blue-divider">
         </TabPanel>
@@ -57,7 +62,7 @@ import estructuraImg from '@/Pages/Componentes/Home/estructurapdf2.vue';
             <p>
                 <span style="color: #007bff; font-weight: bold;">Documentos</span>
             </p>
-            <estructuraImg :loadDataUrl="'/CatalogoDocumentos/bannerData'" :registerBannerUrl="'/CatalogoDocumentos/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/CatalogoDocumentos/bannerData'" :registerBannerUrl="'/CatalogoDocumentos/registrarBanner'"
                 :editBannerUrl="'/CatalogoDocumentos/editarBanner'" :deleteBannerUrl="'/CatalogoDocumentos/eliminarBanner'" />
                 <hr class="blue-divider">
         </TabPanel>
@@ -66,7 +71,7 @@ import estructuraImg from '@/Pages/Componentes/Home/estructurapdf2.vue';
             <p>
                 <span style="color: #007bff; font-weight: bold;">Documentos</span>
             </p>
-            <estructuraImg :loadDataUrl="'/CircularesDocumentos/bannerData'" :registerBannerUrl="'/CircularesDocumentos/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/CircularesDocumentos/bannerData'" :registerBannerUrl="'/CircularesDocumentos/registrarBanner'"
                 :editBannerUrl="'/CircularesDocumentos/editarBanner'" :deleteBannerUrl="'/CircularesDocumentos/eliminarBanner'" />
                 <hr class="blue-divider">
         </TabPanel>
@@ -75,7 +80,7 @@ import estructuraImg from '@/Pages/Componentes/Home/estructurapdf2.vue';
             <p>
                 <span style="color: #007bff; font-weight: bold;">Documentos</span>
             </p>
-            <estructuraImg :loadDataUrl="'/ConveniosInstitucionalesDocumentos/bannerData'" :registerBannerUrl="'/ConveniosInstitucionalesDocumentos/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/ConveniosInstitucionalesDocumentos/bannerData'" :registerBannerUrl="'/ConveniosInstitucionalesDocumentos/registrarBanner'"
                 :editBannerUrl="'/ConveniosInstitucionalesDocumentos/editarBanner'" :deleteBannerUrl="'/ConveniosInstitucionalesDocumentos/eliminarBanner'" />
                 <hr class="blue-divider">
         </TabPanel>
@@ -84,7 +89,7 @@ import estructuraImg from '@/Pages/Componentes/Home/estructurapdf2.vue';
             <p>
                 <span style="color: #007bff; font-weight: bold;">Documentos</span>
             </p>
-            <estructuraImg :loadDataUrl="'/CodigosDocumentos/bannerData'" :registerBannerUrl="'/CodigosDocumentos/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/CodigosDocumentos/bannerData'" :registerBannerUrl="'/CodigosDocumentos/registrarBanner'"
                 :editBannerUrl="'/CodigosDocumentos/editarBanner'" :deleteBannerUrl="'/CodigosDocumentos/eliminarBanner'" />
                 <hr class="blue-divider">
         </TabPanel>
@@ -93,7 +98,7 @@ import estructuraImg from '@/Pages/Componentes/Home/estructurapdf2.vue';
             <p>
                 <span style="color: #007bff; font-weight: bold;">Documentos</span>
             </p>
-            <estructuraImg :loadDataUrl="'/DecretosDocumentos/bannerData'" :registerBannerUrl="'/DecretosDocumentos/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/DecretosDocumentos/bannerData'" :registerBannerUrl="'/DecretosDocumentos/registrarBanner'"
                 :editBannerUrl="'/DecretosDocumentos/editarBanner'" :deleteBannerUrl="'/DecretosDocumentos/eliminarBanner'" />
                 <hr class="blue-divider">
         </TabPanel>
@@ -104,7 +109,7 @@ import estructuraImg from '@/Pages/Componentes/Home/estructurapdf2.vue';
             <p>
                 <span style="color: #007bff; font-weight: bold;">Documentos</span>
             </p>
-            <estructuraImg :loadDataUrl="'/LineamientosDocumentos/bannerData'" :registerBannerUrl="'/LineamientosDocumentos/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/LineamientosDocumentos/bannerData'" :registerBannerUrl="'/LineamientosDocumentos/registrarBanner'"
                 :editBannerUrl="'/LineamientosDocumentos/editarBanner'" :deleteBannerUrl="'/LineamientosDocumentos/eliminarBanner'" />
                 <hr class="blue-divider">
         </TabPanel>
@@ -113,7 +118,7 @@ import estructuraImg from '@/Pages/Componentes/Home/estructurapdf2.vue';
             <p>
                 <span style="color: #007bff; font-weight: bold;">Documentos</span>
             </p>
-            <estructuraImg :loadDataUrl="'/ManualesDocumentos/bannerData'" :registerBannerUrl="'/ManualesDocumentos/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/ManualesDocumentos/bannerData'" :registerBannerUrl="'/ManualesDocumentos/registrarBanner'"
                 :editBannerUrl="'/ManualesDocumentos/editarBanner'" :deleteBannerUrl="'/ManualesDocumentos/eliminarBanner'" />
                 <hr class="blue-divider">
         </TabPanel>
@@ -122,7 +127,7 @@ import estructuraImg from '@/Pages/Componentes/Home/estructurapdf2.vue';
             <p>
                 <span style="color: #007bff; font-weight: bold;">Documentos</span>
             </p>
-            <estructuraImg :loadDataUrl="'/PlanDeDesarolloInstitucionalDocumentos/bannerData'" :registerBannerUrl="'/PlanDeDesarolloInstitucionalDocumentos/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/PlanDeDesarolloInstitucionalDocumentos/bannerData'" :registerBannerUrl="'/PlanDeDesarolloInstitucionalDocumentos/registrarBanner'"
                 :editBannerUrl="'/PlanDeDesarolloInstitucionalDocumentos/editarBanner'" :deleteBannerUrl="'/PlanDeDesarolloInstitucionalDocumentos/eliminarBanner'" />
                 <hr class="blue-divider">
         </TabPanel>
@@ -131,7 +136,7 @@ import estructuraImg from '@/Pages/Componentes/Home/estructurapdf2.vue';
             <p>
                 <span style="color: #007bff; font-weight: bold;">Documentos</span>
             </p>
-            <estructuraImg :loadDataUrl="'/ProtocolosDocumentos/bannerData'" :registerBannerUrl="'/ProtocolosDocumentos/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/ProtocolosDocumentos/bannerData'" :registerBannerUrl="'/ProtocolosDocumentos/registrarBanner'"
                 :editBannerUrl="'/ProtocolosDocumentos/editarBanner'" :deleteBannerUrl="'/ProtocolosDocumentos/eliminarBanner'" />
                 <hr class="blue-divider">
         </TabPanel>
@@ -140,7 +145,7 @@ import estructuraImg from '@/Pages/Componentes/Home/estructurapdf2.vue';
             <p>
                 <span style="color: #007bff; font-weight: bold;">Documentos</span>
             </p>
-            <estructuraImg :loadDataUrl="'/ReglamentosDocumentos/bannerData'" :registerBannerUrl="'/ReglamentosDocumentos/registrarBanner'"
+            <estructurapdf2 :loadDataUrl="'/ReglamentosDocumentos/bannerData'" :registerBannerUrl="'/ReglamentosDocumentos/registrarBanner'"
                 :editBannerUrl="'/ReglamentosDocumentos/editarBanner'" :deleteBannerUrl="'/ReglamentosDocumentos/eliminarBanner'" />
                 <hr class="blue-divider">
         </TabPanel>

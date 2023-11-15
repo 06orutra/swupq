@@ -78,6 +78,9 @@ use App\Http\Controllers\IgualdadLaboralImgSecundariaController;
 use App\Http\Controllers\CarreraController;
 use App\Http\Controllers\IgualdadLaboralPdfEticaController;
 use App\Http\Controllers\IgualdadLaboralPdfIgualdadController;
+use App\Http\Controllers\BannerMarcoJuridicoController;
+
+
 
 use Illuminate\Http\Request;
 
@@ -293,6 +296,7 @@ Route::middleware([
         'IgualdadLaboralImgSecundaria' => IgualdadLaboralImgSecundariaController::class,
         'IgualdadLaboralPdfEtica' => IgualdadLaboralPdfEticaController::class,
         'IgualdadLaboralPdfIgualdad' => IgualdadLaboralPdfIgualdadController::class,
+        'BannerMarcoJuridico' => BannerMarcoJuridicoController::class,
     ];
     // se declarar variables, 
 
@@ -310,6 +314,7 @@ Route::post('/Representativosprin/bannerData', [RepresentativoPrinController::cl
 Route::post('/RepresentativosDeporte/bannerData', [RepresentativoDeporteController::class, 'bannerData']);
 Route::post('/RepresentativosCultura/bannerData', [RepresentativoCulturaController::class, 'bannerData']);
 
+Route::post('/BannerMarcoJuridico/bannerData', [BannerMarcoJuridicoController::class, 'bannerData']);
 Route::post('/ConstitucionDocumentos/bannerData', [ConstitucionDocumentosController::class, 'bannerData']);
 Route::post('/LeyesEstatales/bannerData', [LeyesEstatalesController::class, 'bannerData']);
 Route::post('/LeyesFederales/bannerData', [LeyesFederalesController::class, 'bannerData']);

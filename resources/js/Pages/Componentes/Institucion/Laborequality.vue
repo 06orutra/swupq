@@ -78,7 +78,6 @@ export default {
       <div class=" banner_eq w-full">
         <h2><b>IGUALDAD LABORAL Y NO DISCRIMINACIÓN</b></h2>
       </div>
-
       <div class="title pt-20">
         <div v-for="text in texto">
           {{ text.titulo }}
@@ -89,8 +88,10 @@ export default {
         <div class="text-align: center; col-md-8 offset-md-2 text-justify text-xl pb-20"
           style="width: 80%; margin: 0 auto;">
           <p class="font-normal" style="margin-top: 2em; margin-bottom:1em; color: black; width: 100%">
-          <div v-for="text in texto">
-            {{ text.contenido }}
+          <div class="text-content">
+            <div v-for="text in texto">
+              {{ text.contenido }}
+            </div>
           </div>
           </p>
         </div>
@@ -141,7 +142,7 @@ export default {
         </div>
       </div>
       <div class="title2 pb-5">
-        <p class="text-black pt-14"><strong>POLÍTICA DE IGUALDAD LABORAL Y NO DISCRIMINACIÓN</strong></p>
+        <p class="text-black text-content pt-14"><strong>POLÍTICA DE IGUALDAD LABORAL Y NO DISCRIMINACIÓN</strong></p>
       </div>
       <div class="contenedoor">
         <div class="parallax2" :style="{ backgroundImage: 'url(' + images.fondo2 + ')' }">
@@ -165,7 +166,7 @@ export default {
   </AppEstructure>
 </template>
 
-<style scoped>
+<style lang="scss">
 .pdf-iframe {
   width: 100%;
   height: 100%;
@@ -307,6 +308,14 @@ main {
   /* 32px */
 }
 
+.dark-mode .text-content {
+  color: white;
+}
+
+.dark-mode .title {
+  color: white;
+}
+
 .main-menu {
   width: 100%;
   margin: auto;
@@ -444,6 +453,53 @@ main {
   .parallax3 {
     height: 300px;
     /* Altura deseada para pantallas pequeñas */
+  }
+}
+
+
+@media (min-width: 400px){
+  .main-menu {
+    margin-top: 100px;
+  }
+}
+@media (min-width: 490px){
+  .main-menu {
+    margin-top: 150px;
+  }
+}
+@media (min-width: 500px){
+  .main-menu {
+    margin-top: 200px;
+  }
+}
+@media (min-width: 600px){
+  .main-menu {
+    margin-top: 250px;
+  }
+}
+@media (min-width: 700px){
+  .main-menu {
+    margin-top: 300px;
+  }
+}
+@media (min-width: 770px) and (max-width: 799px){
+  .main-menu {
+    margin-top: 30px;
+  }
+}
+@media (min-width: 800px) and (max-width: 889px){
+  .main-menu {
+    margin-top: 100px;
+  }
+}
+@media (min-width: 890px) and (max-width: 949px){
+  .main-menu {
+    margin-top: 200px;
+  }
+}
+@media (min-width: 950px) and (max-width: 2000px){
+  .main-menu {
+    margin-top: 200px;
   }
 }
 </style>

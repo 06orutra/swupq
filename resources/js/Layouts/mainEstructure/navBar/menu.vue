@@ -57,7 +57,7 @@ export default {
             { label: '- Ubicación', path: '/institucion/ubicacion/'},
             { label: '- Instalaciones', path: '/institucion/instalaciones/'},
             { label: '- Igualdad Laboral y No Discriminacion', path:'/institucion/laborEq/' },
-            { label: '- Sistema de Gestión de la Calidad' },
+            { label: '- Sistema de Gestión de la Calidad', path:'/institucion/sistemaGestion/' },
           ],
         },
         {

@@ -68,6 +68,9 @@ export default {
         <TabPanel header="Ubicación">
             <ubicacion />
         </TabPanel>
+        <TabPanel header="Igualdad Laboral">
+            <igualdadLaboral />
+        </TabPanel>
 
     </TabView>
 </template>

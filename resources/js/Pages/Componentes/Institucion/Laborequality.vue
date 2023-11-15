@@ -60,7 +60,6 @@ export default {
       showPDFModal: false,
 
       images: {
-        letrero: "https://www.upq.mx/igualdad_laboral/images/letrero_comite.svg?crc=369507292",
         fondo1: "https://www.upq.mx/igualdad_laboral/images/fondo_banner_2-01.svg?crc=3799554246",
         fondo2: "https://www.upq.mx/igualdad_laboral/images/fondo_banner_3-01.svg?crc=4066401794",
       }
@@ -129,9 +128,6 @@ export default {
           <carruselPrincipalLogic :controllerName="'/IgualdadLaboralImgSecundaria/bannerData'" />
           <div v-for="img in banner">
             {{ img.img }}
-          </div>
-          <div class="caja2">
-            <img class="letrero" :src="images.letrero" alt="" style="opacity: 0.8;">
           </div>
         </div>
       </div>
@@ -423,19 +419,6 @@ main {
   background-position: center center;
 }
 
-.caja2 {
-  position: absolute;
-  bottom: 0;
-  left: 0%;
-  width: 80%;
-}
-
-.letrero {
-  position: absolute;
-  bottom: 0;
-  left: 0%;
-}
-
 @media (max-width: 767px) {
   .caja {
     padding: 1%;
@@ -456,7 +439,7 @@ main {
   }
 }
 
-/* 
+
 @media (min-width: 400px){
   .main-menu {
     margin-top: 100px;
@@ -501,5 +484,5 @@ main {
   .main-menu {
     margin-top: 200px;
   }
-} */
+}
 </style>

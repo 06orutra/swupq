@@ -230,7 +230,7 @@ export default {
 
                 <div class="field col-12 md:col-12">
                     <label for="minmax">{{ this.Titulo }}</label>
-                    <InputText inputId="minmax" v-model="titulo" :min="0" :max="10000" :showButtons="true" />
+                    <Textarea inputId="minmax" v-model="titulo" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <div class="field col-12 md:col-12">
@@ -268,7 +268,7 @@ export default {
 
                 <div class="field col-12 md:col-12">
                     <label for="minmax">{{ this.Titulo }}</label>
-                    <InputText inputId="minmax" v-model="datosArreglo.titulo" :min="0" :max="10000" :showButtons="true" />
+                    <Textarea inputId="minmax" v-model="datosArreglo.titulo" :min="0" :max="10000" :showButtons="true" />
                 </div>
 
                 <div class="field col-12 md:col-12">

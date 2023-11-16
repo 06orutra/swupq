@@ -11,7 +11,7 @@
                 //Se mantiene oculto el chatbot al cargar la página
                 showChatbot: false,
                 respuestas: [],
-                messages: [],
+                messages: [], //jUNTA RESPUESTAS CON CURRENTBUTTONS EN UNO SOLO
                 //newMessageText: '',
                 showButtons: true,
                 currentButtons: [],
@@ -80,9 +80,7 @@
                 bg-gradient-to-r from-red-800 to-blue-900 hover:from-blue-900 hover:to-red-800
                 dark:bg-gradient-to-r dark:from-red-900 dark:to-purple-900 dark:hover:from-purple-900 dark:hover:to-red-900
                 h-3rem flex items-center justify-between px-4 py-4 text-white sticky top-0 z-20
-                text-3xl text-center
-                
-                ">
+                text-3xl text-center">
                 <a>Poli & Polo</a>
                 <!-- Botón para cerrar el chat, su única función es hacer un toggleChatbot
                         mientras el chat esté abierto. Y cambia de colorcito por el hover owo -->
@@ -100,13 +98,13 @@
 
             <div class="px-4 py-6 z-10 ">    
                 <div v-for="message in messages" :key="message.id" class="flex flex-grow-1">
-                    <p v-if="message.text" class='rounded-lg py-3 px-4 inline-block mb-2 relative text-2xl font-sans
+                    <a v-if="message.text" class='rounded-lg py-3 px-4 inline-block mb-2 relative text-2xl font-sans
                         bg-gray-100 text-gray-800 hover:bg-white float-left ml-2 mr-20 mt-2
                         dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500' style="white-space: pre-line">{{
-                            message.text }}</p>
+                            message.text }}</a>
                     <a v-if="message.link" :href="message.link" target="_blank" class="rounded-lg py-2 px-4 inline-block mb-2 relative text-2xl 
                         bg-gray-400 text-gray-900 hover:bg-white float-left ml-2 mr-20 mt-2
-                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">{{ message.option }}</a>                    
+                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500" style="white-space: pre-line">{{ message.option }}</a>                    
                 </div>
             </div>
 
@@ -120,7 +118,7 @@
                 <button v-for="button in currentButtons" :key="button.id" @click="handleButtonClick(button)"
                     class="m-1 rounded-sm w-auto h-auto relative bottom-2 mt-6 text-2xl cursor-pointer p-2.5
                     bg-gradient-to-r from-gray-300 to-gray-500 hover:from-red-500 hover:to-blue-500 text-black
-                    dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-600 dark:hover:from-blue-900 dark:hover:to-purple-900 dark:text-white">
+                    dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-600 dark:hover:from-blue-900 dark:hover:to-purple-900 dark:text-white" style="white-space: pre-line">
                     {{ button.titulo }}
                 </button>
             </div>

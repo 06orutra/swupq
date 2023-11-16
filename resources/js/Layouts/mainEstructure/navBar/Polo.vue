@@ -4,23 +4,14 @@
     export default {
         mounted() {
             this.cargarBotones();
+            this.cargarRespuestas();
         },
         data() {
             return {
                 //Se mantiene oculto el chatbot al cargar la página
                 showChatbot: false,
-                //Mensajes del bot nada más iniciar
-                messages: [
-                    {
-                        id: 1, //Identificador meramente para interpretación del código
-                        text: '¡Bienvenido! Somos Poli y Polo.\n¿Necesitas que te demos un ala?', //Textos a mostrar
-                        link: '', //Hipervínculos que tendrán algunos mensajes
-                        option: '',//Texto de los mensajes de hipervínculo. Estos tienen un formato levemente diferente y se llaman sólo si existe una adición link y option en el javascript
-                        user: ''
-                    }, //Los mensajes del usuario, solamente un reflejo del botón de selección.
-    
-                    //Próximamente reemplazable para conectar con una Base de datos
-                ],
+                respuestas: [],
+                messages: [],
                 //newMessageText: '',
                 showButtons: true,
                 currentButtons: [],
@@ -31,218 +22,40 @@
                 return axios.post('/chatButtons/bannerData').then((response) => {
                     this.currentButtons = response.data;
                 }).catch((error) => {
-                    console.log(error);
+                    console.log('Error al cargar los botones: ', error);
+                });
+            },
+            cargarRespuestas() {
+                return axios.post('/chatResponse/bannerData').then((response) => {
+                    this.respuestas = response.data;
+                }).catch((error) => {
+                    console.log('Error al cargar las respuestas: ', error);
                 });
             },
             toggleChatbot() {
                 this.showChatbot = !this.showChatbot;
             },
-    
             handleButtonClick(button) {
-    
-                switch (button.identificador) {
-                    case 1:
+                // Agregar el mensaje del botón seleccionado
+                this.messages.push({
+                    id: this.messages.length,
+                    text: button.contenido,
+                });
+                //Repetir solamente cuando haya un button.identificador igual a respuesta.correlacion
+                this.respuestas.forEach((respuesta) => {
+                    if (respuesta.correlacion == button.identificador) {
                         this.messages.push({
-                             
-                            text: 'Nuestra oferta educativa se conforma por 5 ingenierías:\nMecatrónica, Tecnología Automotriz, Tecnologías de Manufactura, Sistemas Computacionales y Redes y Telecomunicaciones.\nAsí como dos licenciaturas:\nNegocios Internacionales y Administración y Gestión Empresarial.',
+                            id: this.messages.length,
+                            option: respuesta.nombre,
+                            link: respuesta.enlace,
                         });
-                        this.messages.push({
-                             
-                            option: 'Mecatrónica',
-                            link: 'https://www.upq.mx/media/curriculum_pdf/mapa_mecatronica_2021.pdf',
-                        });
-                        this.messages.push({
-                             
-                            option: 'Tecnología Automotriz',
-                            link: 'https://www.upq.mx/media/curriculum_pdf/mapa_automotriz.pdf',
-                        });
-                        this.messages.push({
-                             
-                            option: 'Tecnologías de Manufactura',
-                            link: 'https://www.upq.mx/media/curriculum_pdf/mapa_manufactura_2021.pdf',
-                        });
-                        this.messages.push({
-                             
-                            option: 'Sistemas Computacionales',
-                            link: 'https://www.upq.mx/media/curriculum_pdf/mapa_sistemas.pdf',
-                        });
-                        this.messages.push({
-                             
-                            option: 'Redes y Telecomunicaciones',
-                            link: 'https://www.upq.mx/media/curriculum_pdf/MAPA_REDES_Y_TELECOMUNICACIONES.pdf',
-                        });
-                        this.messages.push({
-                             
-                            option: 'Negocios Internacionales',
-                            link: 'https://www.upq.mx/media/curriculum_pdf/mapa_negocios.pdf',
-                        });
-                        this.messages.push({
-                             
-                            option: 'Administración y Gestión Empresarial',
-                            link: 'https://www.upq.mx/media/curriculum_pdf/UPQ_Mapa_Curricular_LAGE.pdf',
-                        });
-    
-                        break;
-                    //EN TEORÍA debería mandarse un link... EN TEORÍA >:(
-                    case 2:
-                        this.messages.push({
-                             
-                            text: 'Te comentamos que al año contamos con dos procesos de admisión. La segunda convocatoria ya se encuentra abierta ¡Regístrate!\n\nEl costo del proceso de admisión ronda los 1,500 pesos y el cuatrimestre (una vez admitida) asciende a alrededor de 3,800 pesos.\n\nNuestras carreras se cursan en modalidad escolarizada: es decir, de lunes a viernes, durante el primer año todos los estudiantes cursan el turno matutino (07:00 a 13:40 hrs.), a partir del segundo año puede que curses estudios en el horario vespertino (14:00 a 20:40 hrs.). \nPara más información puedes consultar aquí en la página web o al teléfono:\n442 101 9000 ext. 352, 353 o 354',
-                        });
-                        this.messages.push({
-                             
-                            link: 'https://drive.google.com/file/d/1YN8lvzfVsKPE1vPHGTxASkxXE77usYhu/view',
-                            //Acá favor de no usar acortadores de links :(
-                            //Ah, y de actualizar las fechas del pdf, que dice 2022 aún :C
-                            option: 'Convocatoria',
-                        });
-                        /* this.currentButtons.splice(0, this.currentButtons.length);
-                        this.currentButtons.push({
-                            text: 'Inscripciones a la universidad',
-                            value: 2.1,
-                        });
-                        this.currentButtons.push({
-                            text: 'Becas y apoyos económicos',
-                            value: 2.2,
-                        });
-                        this.currentButtons.push({
-                            text: 'Movilidad estudiantil',
-                            value: 2.3,
-                        }); */
-                        break;
-                    case 3:
-                        this.messages.push({
-                             
-                            text: 'El proceso de admisión consta del examen de conocimientos , examen de habilidades del pensamiento y cursos de inducción.\n\nLos cursos (al igual que todas las facetas del proceso de admisión) son sumamente importantes para el cumplimiento exitoso de tu ingreso. Te recomendamos mínimo asistir a 3 de las 4 sesiones.\n\nRecuerda que todo el proceso es en línea. Para más información puedes navegar en la página o preguntar al teléfono 442 101 9000 ext. 352, 353 o 354.',
-                        });
-                        /* this.currentButtons.splice(0, this.currentButtons.length);
-                        this.currentButtons.push({
-                            text: 'Convenios y tratos',
-                            value: 3.1,
-                        });
-                        this.currentButtons.push({
-                            text: 'Ver más información general',
-                            value: 3.2,
-                        }); */
-                        break;
-                    case 4:
-                        this.messages.push({
-                             
-                            text: 'Gracias por tu interés en los recorridos en nuestras instalaciones, te pedimos que puedas responder este cuestionario y mandarnos una captura de pantalla de que lo has respondido al correo captacion@upq.edu.mx.\n\nPor el momento solo los días martes y jueves se estarán realizando.',
-                        });
-                        this.messages.push({
-                             
-                            link: "https://forms.gle/M9jtADLP34Zhj2yk6",
-                            option: "Formulario"
-                        })
-                        break;
-                    case 5:
-                        this.messages.push({
-                             
-                            text: "Sé parte de nuestro Centro de Idiomas UPQ.\n¡Es abierto al público en general a partir de los 15 años!\n\nInscríbete en alguno de nuestros niveles. Más información:\neducacion.continua@upq.edu.mx"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://bit.ly/3iQoNFv",
-                            option: "Inglés"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://bit.ly/3uAPmUK",
-                            option: "Francés"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://bit.ly/38fOA8f",
-                            option: "Alemán"
-                        });
-                        break;
-    
-                    case 6:
-                        this.messages.push({
-                             
-                            text: "¿Qué tramite te gustaría realizar?"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://bit.ly/3iQoNFv",
-                            option: "Inscripción"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://www.upq.mx/servicios-estudiantiles/",
-                            option: "Becas"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://www.upq.mx/media/services/03.pdf",
-                            option: "Comprobantes de Estudios"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://www.upq.mx/servicios-estudiantiles/",
-                            option: "Equivalencias"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://www.upq.mx/media/services/01.pdf",
-                            option: "Estacionamiento"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://www.upq.mx/media/services/05.pdf",
-                            option: "Facturación"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://www.upq.mx/media/services/06.pdf",
-                            option: "Reactivar/Liberar pagos"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://www.upq.mx/servicios-estudiantiles/",
-                            option: "Reinscripción"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://www.upq.mx/media/services/04.pdf",
-                            option: "Reposición de credencial"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://www.upq.mx//media/services/02_OIWrE5D.pdf",
-                            option: "Seguro Facultativo"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://www.upq.mx/servicios-estudiantiles/",
-                            option: "Titulación"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://www.upq.mx/transporte/",
-                            option: "Transporte"
-                        });
-                        break;
-                    case 7:
-                        this.messages.push({
-                             
-                            text: "¡Dale un vistazo a nuestras maestrías!"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://www.upq.mx/maestria/assets/mapa_curricular_maestria.pdf",
-                            option: "MAESTRÍA EN INGENIERÍA EN SISTEMAS PRODUCTIVOS E INDUSTRIA 4.0"
-                        });
-                        this.messages.push({
-                             
-                            link: "https://www.upq.mx/maestria_admin/",
-                            option: "MAESTRÍA EN INGENIERÍA ADMINISTRATIVA"
-                        });
-                    default:
-                        break;
-                }
+                    }
+                });
+                
             },
+            
+
+    
             closeChatAndReset() {
                 this.showChatbot = false;
                 this.messages = [];
@@ -257,13 +70,10 @@
     <div>
         <div class="fixed">
             <button class="chatButton" @click="toggleChatbot">
-                <img src='/storage/img/boton_chatbot.svg'
-                    alt="Chatbot Icon">
+                <img src='/storage/img/boton_chatbot.svg' alt="Chatbot Icon">
             </button>
         </div>
-        <div v-if="showChatbot" class="chatbot-container z-10
-                dark:bg-[url('/public/img/FondoOscuroChatBot.jpg')]
-                bg-[url('/public/img/FondoClaroChatBot.jpg')]">
+        <div v-if="showChatbot" class="chatbot-container z-10 dark:bg-[url('/public/img/FondoOscuroChatBot.jpg')] bg-[url('/public/img/FondoClaroChatBot.jpg')]">
             <!-- CHATBOT CONTENIDO EN EL DESTE -->
             <!-- Header del chatbot container -->
             <div class="
@@ -285,35 +95,36 @@
 
 
             </div>
-            <div class="px-4 py-6 z-10 ">
-                <!-- Z-10 y Z-20 son las posiciones "delante de..." 
-                    Se crea un div conm un FOR de los mensajes que se agreguen
-                a una key llamada "message.id", que será el número de mensaje actual-->
+
+
+
+            <div class="px-4 py-6 z-10 ">    
                 <div v-for="message in messages" :key="message.id" class="flex flex-grow-1">
-                    <!-- Este flex grow ayuda a que no se encimen las cosas-->
-                    <!-- <pre> sirve para... la neta no sé, pero carga un estilo diferente y deja usar saltos de línea en objetos :D De mientras lo quito porque se bugea lo demás xD. La opción definitiva es la propiedad style="white-space: pre-line"-->
                     <p v-if="message.text" class='rounded-lg py-3 px-4 inline-block mb-2 relative text-2xl font-sans
                         bg-gray-100 text-gray-800 hover:bg-white float-left ml-2 mr-20 mt-2
                         dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500' style="white-space: pre-line">{{
                             message.text }}</p>
                     <a v-if="message.link" :href="message.link" target="_blank" class="rounded-lg py-2 px-4 inline-block mb-2 relative text-2xl 
                         bg-gray-400 text-gray-900 hover:bg-white float-left ml-2 mr-20 mt-2
-                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">{{ message.option }}</a>
-                    <!-- Ya viendo esto, se puede decir que se pueden agregar muchas
-                        cosas por cada array del javascript para mandar acá, incluso en mensajes separados y acoplados a diferentes partes.-->
+                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">{{ message.option }}</a>                    
                 </div>
             </div>
+
+
+
+
             <!-- BOTONES DEL CHAT -->
             <div v-if="showButtons" class="px-4 py-3 text-center">
                 <!-- Generar los botones que están guardados en un array como "currentButtons"
                     Recibiendo así "handleButtonClick como disparador para la siguiente acción" -->
-                <button v-for="button in currentButtons" :key="button.text" @click="handleButtonClick(button)"
+                <button v-for="button in currentButtons" :key="button.id" @click="handleButtonClick(button)"
                     class="m-1 rounded-sm w-auto h-auto relative bottom-2 mt-6 text-2xl cursor-pointer p-2.5
                     bg-gradient-to-r from-gray-300 to-gray-500 hover:from-red-500 hover:to-blue-500 text-black
                     dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-600 dark:hover:from-blue-900 dark:hover:to-purple-900 dark:text-white">
                     {{ button.titulo }}
                 </button>
             </div>
+
             <!-- Pequeña leyenda de que el chatbot es hecho en UPQ -->
             <a class="fixed bottom-0 right-6 mb-4 mr-4 text-gray-500
                     font-bold text-xs
@@ -445,6 +256,7 @@
         max-height: 1080px;
         max-width: 640px;
         top:195px;
+        right: 20px;
     }
     .chatButton img {
         width: 85px;
@@ -462,11 +274,13 @@
     }
     .chatbot-container {
         bottom: 10px;
-        right: 10px;
+        top: 13.5%;
+        left: 5px;
+        right: 5px;
         /* Ajusta la posición a tu preferencia */
         max-width: 360px;
         /* Ajusta el ancho máximo a tu preferencia */
-        max-height: 100%;
+        max-height: 85%;
         /* Permite que el chat se expanda verticalmente */
         overflow-y: auto;
         /* Agrega scroll si el contenido es largo */
@@ -504,7 +318,8 @@
     }
     .chatbot-container {
         bottom: 10px;
-        right: 10px;
+        right: 5px;
+        left: 5px;
         /* Ajusta la posición a tu preferencia */
         max-width: 360px;
         /* Ajusta el ancho máximo a tu preferencia */

@@ -36,6 +36,7 @@ use App\Http\Controllers\SpotypoliController;
 use App\Http\Controllers\SpotypoloController;
 use App\Http\Controllers\CarruselMascotaController;
 use App\Http\Controllers\ChatButtonsController;
+use App\Http\Controllers\ChatResponseController;
 use Illuminate\Http\Request;
 
 /*
@@ -191,6 +192,7 @@ Route::middleware([
         'spotypolo' => SpotypoloController::class,
         'Cmascotas' => CarruselMascotaController::class,
         'chatButtons' => ChatButtonsController::class,
+        'chatResponse' => ChatResponseController::class,
     ];
     // se declarar variables, 
 

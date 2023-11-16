@@ -43,7 +43,7 @@ export default {
             { label: '- Organigrama' },
             { label: '- Marco jurídico' },
             { label: '- Igualdad Laboral y No Discriminacion' },
-            { label: '- Sistema de Gestión de la Calidad' },
+            { label: '- Sistema de Gestión de la Calidad', path: '/institucion/sistemaCalidad/' },
           ],
         },
         {

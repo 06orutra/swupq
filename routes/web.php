@@ -97,7 +97,7 @@ Route::prefix('institucion')->group(function () {
     Route::get('laborEq', function () {
         return Inertia::render('Componentes/Institucion/Laborequality');
     });
-    Route::get('sistemaGestion', function () {
+    Route::get('sistemaCalidad', function () {
         return Inertia::render('Componentes/Institucion/qualityManagement');
     });
     Route::get('mensajeRector', function () {

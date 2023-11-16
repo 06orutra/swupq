@@ -65,5 +65,8 @@ export default {
         <TabPanel header="Marco Juridico">
             <MarcoJuridico/>
         </TabPanel>
+        <TabPanel header="Sistema de calidad">
+            <MarcoJuridico/>
+        </TabPanel>
     </TabView>
 </template>

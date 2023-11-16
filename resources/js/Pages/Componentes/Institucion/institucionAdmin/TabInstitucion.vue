@@ -13,6 +13,9 @@ import Directorios from "@/Pages/Componentes/Institucion/institucionAdmin/Direct
 import historia from './historia.vue';
 import igualdadLaboral from "@/Pages/Componentes/Institucion/institucionAdmin/igualdadLaboral.vue";
 import MarcoJuridico from "@/Pages/Componentes/Institucion/institucionAdmin/MarcoJuridico.vue";
+import MensajeRector from '@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue';
+import ubicacion from "@/Pages/Componentes/Institucion/institucionAdmin/ubicacion.vue";
+import modeloEducativo from "@/Pages/Componentes/Institucion/institucionAdmin/modeloEducativo.vue";
 
 export default {
     components: {
@@ -30,6 +33,9 @@ export default {
         Instalaciones,
         Directorios,
         MarcoJuridico,
+        ubicacion,
+        modeloEducativo,
+        MensajeRector,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -39,34 +45,44 @@ export default {
             this.timeout = settings.timeout;
         }
     }
-}
+};
 </script>
 
 <template>
     <TabView ref="tabview1" class="p-3">
+        <TabPanel header="Rector">
+            <MensajeRector/>
+        </TabPanel>
         <TabPanel header="Historia">
             <historia />
         </TabPanel>
         <TabPanel header="Filosofía">
             <filosofia />
         </TabPanel>
+        <TabPanel header="Modelo Educativo">
+            <modeloEducativo />
+        </TabPanel>
         <TabPanel header="Mascotas">
             <Mascotas/>
         </TabPanel>
-        <TabPanel header="Igualdad laboral">
-            <igualdadLaboral/>
+        <TabPanel header="Ubicación">
+            <ubicacion />
         </TabPanel>
-        <TabPanel header="Instalaciones">
-            <Instalaciones/>
+        <TabPanel header="Igualdad Laboral">
+            <igualdadLaboral />
         </TabPanel>
         <TabPanel header="Directorios">
-            <Directorios/>
+            <Directorios />
         </TabPanel>
         <TabPanel header="Marco Juridico">
-            <MarcoJuridico/>
+            <MarcoJuridico />
         </TabPanel>
         <TabPanel header="Sistema de calidad">
             <MarcoJuridico/>
         </TabPanel>
+        <TabPanel header="Instalaciones">
+            <Instalaciones />
+        </TabPanel>
+
     </TabView>
 </template>

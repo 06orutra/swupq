@@ -1,15 +1,29 @@
 <script>
+
+import axios from 'axios';
+import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
+
 export default {
+
+  components: {
+    AppEstructure,
+  },
+
   data() {
     return {
-      imageUrl: 'https://www.upq.mx/assets/images/banners/location-map.png',
       direccion: 'Carretera Estatal 420 SN El Marqués Querétaro',
-      telefono: '+52 (442) - 101 - 9000',
-      email: 'recepcion@upq.mx',
+      datos: [],
       showMapModal: false, 
     };
   },
   methods: {
+    cargarDatos() {
+      return axios.post('/ubicacion/bannerData').then((response) => {
+        this.datos = response.data[0];
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
     openInNewTab(url) {
       window.open(url, '_blank');
     },
@@ -19,16 +33,20 @@ export default {
     closeMapModal() {
       this.showMapModal = false;
     },
-  }
+  },
+  mounted() {
+    this.cargarDatos();
+  },
 }
 </script>
 
 <template>
+  <AppEstructure>
   <div class="container">
     <div class="row">
       <!-- Div que contiene la imagen -->
       <div class="image-and-contact">
-        <img :src="imageUrl" class="img-fluid" style="width: 100%;">
+        <img :src="'/storage/' + datos.imagen" class="img-fluid" style="width: 100%;">
       </div>
       <!-- fin del div imagen -->
       <!-- Div para la información y los botones -->
@@ -50,7 +68,7 @@ export default {
                 <i class="pi pi-phone"></i>
                 Teléfono:
               </strong>
-              {{ telefono }}
+              {{ datos.nombre }}
             </span>
 
             <span class="block">
@@ -58,7 +76,7 @@ export default {
                 <i class="pi pi-envelope"></i>
                 Email:
               </strong>
-              <a :href="'mailto:' + email">{{ email }}</a>
+              <a :href="'mailto:' + datos.link">{{ datos.link }}</a>
             </span>
           </p>
         </div>
@@ -96,6 +114,7 @@ export default {
     </div>
   </div>
 </div>
+</AppEstructure>
 </template>
 
 <style scoped>

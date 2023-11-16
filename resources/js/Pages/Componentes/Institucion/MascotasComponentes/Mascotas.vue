@@ -1,6 +1,7 @@
 
 <template>
-  <div class="card">
+  <div >
+    <barra/>
     <Carousel :value="datos" :numVisible="5" :numScroll="3" :responsiveOptions="responsiveOptions" circular
       :autoplayInterval="3000" showArrows="true" showIndicators="true" class="my-carousel">
       <template #item="slotProps">
@@ -10,6 +11,7 @@
       </template>
     </Carousel>
     <div>
+      
       <div class="mascotas-note ">
         <NoteMascotas />
         <NoteMPoliPolo />
@@ -26,6 +28,7 @@
 </template>
 
 <script setup>
+import barra from '@/Pages/Componentes/Institucion/InstalacionesComponentes/barraespaciadora.vue'; 
 import { ref, onMounted } from "vue";
 import axios from "axios";
 

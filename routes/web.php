@@ -14,6 +14,10 @@ use App\Http\Controllers\SpotypoloController;
 use App\Http\Controllers\MensajePoliPoloController;
 use App\Http\Controllers\ImgPruebaController;
 use App\Http\Controllers\CarruselMascotaController;
+use App\Http\Controllers\NotaMascotaController;
+use App\Http\Controllers\MensajeRectorController;
+use App\Http\Controllers\CicloController;
+use App\Http\Controllers\ModEduModalController;
 use App\Http\Controllers\FilosofiaController;
 use App\Http\Controllers\FilosofiaImgController;
 use App\Http\Controllers\FilosofiaValorController;
@@ -21,6 +25,11 @@ use App\Http\Controllers\FilosofiaImgPrincController;
 use App\Http\Controllers\HistoriaImgPrincController;
 use App\Http\Controllers\HistoriaTextoController;
 use App\Http\Controllers\HistoriaCarruselController;
+use App\Http\Controllers\UbicacionController;
+use App\Http\Controllers\InformeRectorController;
+use App\Http\Controllers\RectorBannerController;
+use App\Http\Controllers\RectorParagraphsController;
+use App\Http\Controllers\EducationalBannersController;
 use App\Http\Controllers\VideoLenguajeController;
 use App\Http\Controllers\RectoriaController;
 use App\Http\Controllers\CarruselInstalacionesController;
@@ -33,6 +42,7 @@ use App\Http\Controllers\DireccionVinculacionController;
 use App\Http\Controllers\LenguaExtraImgPrincipalController;
 use App\Http\Controllers\LenguaExtraImgSecundarioController;
 use App\Http\Controllers\LenguaExtraObjetivosController;
+use App\Http\Controllers\MascotasController;
 use App\Http\Controllers\PdfPruebaController;
 use App\Http\Controllers\IgualdadLaboralPrincipalController;
 use App\Http\Controllers\BannerMascotasController;
@@ -45,6 +55,8 @@ use App\Http\Controllers\DesarrolloHumnDesarrollosController;
 use App\Http\Controllers\RepresentativoPrinController;
 use App\Http\Controllers\RepresentativoTextoController;
 use App\Http\Controllers\RepresentativoDeporteController;
+use App\Http\Controllers\RepresentativoCulturaController;
+
 use App\Http\Controllers\LeyesEstatalesController;
 use App\Http\Controllers\LeyesFederalesController;
 use App\Http\Controllers\LeyesGeneralesController;
@@ -63,11 +75,14 @@ use App\Http\Controllers\ReglamentosDocumentosController;
 use App\Http\Controllers\IgualdadLaboralTextosController;
 use App\Http\Controllers\IgualdadLaboralPdfController;
 use App\Http\Controllers\IgualdadLaboralImgSecundariaController;
+use App\Http\Controllers\CarreraController;
 use App\Http\Controllers\IgualdadLaboralPdfEticaController;
 use App\Http\Controllers\IgualdadLaboralPdfIgualdadController;
+use App\Http\Controllers\BannerMarcoJuridicoController;
 
+use App\Http\Controllers\ChatButtonsController;
+use App\Http\Controllers\ChatResponseController;
 use Illuminate\Http\Request;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -81,19 +96,28 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-
-    ]);
+    return Inertia::render('Welcome', []);
 });
 
+Route::prefix('servicios-universitarios')->group(function () {
+    Route::get('/movilidad-academica', function () {
+        return Inertia::render('Componentes/Servicios_Universitarios/movilidadAcademica');
+    });
+});
+//Institución: Ordenado Alfabéticamente
 Route::prefix('institucion')->group(function () {
+    Route::get('filosofia', function () {
+        return Inertia::render('Componentes/Institucion/Philosophy');
+    });
     Route::get('mascotas', function () {
         return Inertia::render('Componentes/Institucion/mascotasPrincipal');
+    });
+    Route::get('laborEq', function () {
+        return Inertia::render('Componentes/Institucion/Laborequality');
     });
     Route::get('instalaciones', function () {
         return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
     });
-
     Route::get('laborEq', function () {
         return Inertia::render('Componentes/Institucion/Laborequality');
     });
@@ -103,6 +127,7 @@ Route::prefix('institucion')->group(function () {
     Route::get('mensajeRector', function () {
         return Inertia::render('Componentes/Institucion/rectorMessage');
     });
+
     Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
 
     Route::get('ubicacion', function () {
@@ -111,7 +136,14 @@ Route::prefix('institucion')->group(function () {
     Route::get('historia', function () {
         return Inertia::render('Componentes/Institucion/Historia');
     });
-    Route::get('modeloEducacional', function () {
+
+    Route::get('instalaciones', function () {
+        return Inertia::render('Componentes/Institucion/instalacionesPrincipal');
+    });
+    Route::get('mascotas', function () {
+        return Inertia::render('Componentes/Institucion/mascotasPrincipal');
+    });
+    Route::get('modelo-educativo', function () {
         return Inertia::render('Componentes/Institucion/Educational');
     });
     Route::get('filosofia', function () {
@@ -124,6 +156,25 @@ Route::prefix('institucion')->group(function () {
         return Inertia::render('Componentes/Institucion/Directorio');
     });
 });   
+    Route::get('ubicacion', function () {
+        return Inertia::render('Componentes/Institucion/location');
+    });
+
+
+//¿Esto qué es xd?
+Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
+
+Route::get('marcoJuridico', function () {
+    return Inertia::render('Componentes/Institucion/LegalFramework');
+});
+Route::get('lenguaExtranjera', function () {
+    return Inertia::render('Componentes/Institucion/Foreignlanguage');
+});
+
+    Route::get('marcoJuridico', function(){
+        return Inertia::render('Componentes/Institucion/LegalFramework');
+    });
+
 
 Route::prefix('FormacionIntegral')->group(function () {
 
@@ -179,6 +230,10 @@ Route::middleware([
         'spotypoli' => SpotypoliController::class,
         'spotypolo' => SpotypoloController::class,
         'mensaje' => MensajePoliPoloController::class,
+        'Nmascota' => NotaMascotaController::class,
+        'rector' => MensajeRectorController::class,
+        'ciclo' => CicloController::class,
+        'modalModEdu' => ModEduModalController::class,
         'filosofia' => FilosofiaController::class,
         'filosofiaImg' => FilosofiaImgController::class,
         'filosofiaValor' => FilosofiaValorController::class,
@@ -194,9 +249,15 @@ Route::middleware([
         'DPlanneacion' => DireccionPlaneacionController::class,
         'DTecInfCom' => DireccionTecnologiaInfomacionComunicacionController::class,
         'Dvinculacion' => DireccionVinculacionController::class,
+        'ubicacion' => UbicacionController::class,
+        'informe' => InformeRectorController::class,
+        'rectorBanner' => RectorBannerController::class,
+        'rectorParrafo' => RectorParagraphsController::class,
+        'educationalBanner' => EducationalBannersController::class,
         'lenguaExtraImgPrincipal' => LenguaExtraImgPrincipalController::class,
         'lenguaExtraImgSecundario' => LenguaExtraImgSecundarioController::class,
         'lenguaExtraObjetivo' => LenguaExtraObjetivosController::class,
+        'Mascotas' => MascotasController::class,
         'pdfPrueba' => PdfPruebaController::class,
         'mensaje' => MensajePoliPoloController::class,
         'spotypoli' => SpotypoliController::class,
@@ -212,6 +273,7 @@ Route::middleware([
         'representativoPrin' => RepresentativoPrinController::class,
         'representativoTexto' => RepresentativoTextoController::class,
         'representativoDeporte' => RepresentativoDeporteController::class,
+        'representativoCultura' => RepresentativoCulturaController::class,
 
         'ConstitucionDocumentos' => ConstitucionDocumentosController::class,
         'LeyesEstatales' => LeyesEstatalesController::class,
@@ -234,6 +296,9 @@ Route::middleware([
         'IgualdadLaboralImgSecundaria' => IgualdadLaboralImgSecundariaController::class,
         'IgualdadLaboralPdfEtica' => IgualdadLaboralPdfEticaController::class,
         'IgualdadLaboralPdfIgualdad' => IgualdadLaboralPdfIgualdadController::class,
+        'BannerMarcoJuridico' => BannerMarcoJuridicoController::class,
+        'chatButtons' => ChatButtonsController::class,
+        'chatResponse' => ChatResponseController::class,
     ];
     // se declarar variables, 
 
@@ -249,7 +314,9 @@ Route::middleware([
 Route::post('/RepresentativoText/bannerData', [RepresentativoTextoController::class, 'bannerData']);
 Route::post('/Representativosprin/bannerData', [RepresentativoPrinController::class, 'bannerData']);
 Route::post('/RepresentativosDeporte/bannerData', [RepresentativoDeporteController::class, 'bannerData']);
+Route::post('/RepresentativosCultura/bannerData', [RepresentativoCulturaController::class, 'bannerData']);
 
+Route::post('/BannerMarcoJuridico/bannerData', [BannerMarcoJuridicoController::class, 'bannerData']);
 Route::post('/ConstitucionDocumentos/bannerData', [ConstitucionDocumentosController::class, 'bannerData']);
 Route::post('/LeyesEstatales/bannerData', [LeyesEstatalesController::class, 'bannerData']);
 Route::post('/LeyesFederales/bannerData', [LeyesFederalesController::class, 'bannerData']);
@@ -288,6 +355,11 @@ Route::post('/pdfPrueba/bannerData', [PdfPruebaController::class, 'bannerData'])
 Route::post('/lenguaExtraObjetivo/bannerData', [LenguaExtraObjetivosController::class, 'bannerData']);
 Route::post('/lenguaExtraImgSecundario/bannerData', [LenguaExtraImgSecundarioController::class, 'bannerData']);
 Route::post('/lenguaExtraImgPrincipal/bannerData', [LenguaExtraImgPrincipalController::class, 'bannerData']);
+
+//Ruta de modelo educativo
+Route::post('/modeduCiclo/bannerData', [CicloController::class, 'bannerData']);
+
+//Rutas por defecto?
 Route::post('/historiaCarrusels/bannerData', [HistoriaCarruselController::class, 'bannerData']);
 Route::post('/historiaTextos/bannerData', [HistoriaTextoController::class, 'bannerData']);
 Route::post('/historiaImgPrinc/bannerData', [HistoriaImgPrincController::class, 'bannerData']);
@@ -309,4 +381,40 @@ Route::post('/bannerData', [HomeController::class, 'bannerData']);
 Route::post('/bannerDataNoticias', [TbCarruselNoticiasController::class, 'bannerDatafilter']);
 Route::post('/bannerDataprimero', [TbCarruselPrimeroController::class, 'bannerData']);
 Route::post('/bannerDatasegundo', [TbCarruselSegundoController::class, 'bannerData']);
+Route::post('/bannerDatatercero', [TbCarruselTercerController::class, 'bannerData']);
+
+
+
+/* rutas para el apartado de carreras*/
+// Ruta para mostrar el json de los archivos subidos
+Route::get('data', [CarreraController::class, 'index']) -> name('data');
+
+//Ruta para mostrar el formulario de carreras
+Route::get('carrera', [CarreraController::class, 'myform']) -> name('carrera');
+//Ruta para subir el formulario de carreras
+Route::post('/carrera-insertar', [CarreraController::class, 'store']);
+
+//Ruta para actualizar el formulario de carreras
+Route::get('carrera/{id}/edit', [CarreraController::class, 'edit']) -> name('carrera.edit');
+
+//Ruta para actualizar el formulario de carreras
+Route::put('carrera/{id}', [CarreraController::class, 'update']) -> name('carrera.update');
+
+//Ruta para eliminar el formulario de carreras
+Route::delete('carrera/{id}', [CarreraController::class, 'destroy']) -> name('carrera.destroy');
+
+//ruta de insercion de prueba
+Route::post('/carrera-prueba', [CarreraController::class, 'guardar'])->name('carrera.prueba');
+
+//ruta para obtener las carreras disponibles
+Route::post('/carreras-disponibles', [CarreraController::class, 'get_carreras_disponibles'])->name('carrera.disponibles');
+
+//Ruta para obtener un solo registro de la base de datos
+Route::post('/carreras-unica',[CarreraController::class,'get_carrera'])->name('carrera.unica');
+
+//Ruta para eliminar un registro de la base de datos
+Route::post('/carrera-eliminar',[CarreraController::class,'delete_carrera'])->name('carrera.eliminar');
+
+//Ruta para editar un registro de la base de datos
+Route::post('/carrera-editar',[CarreraController::class,'update_carrera'])->name('carrera.editar');
 Route::post('/bannerDatatercero', [TbCarruselTercerController::class, 'bannerData']);

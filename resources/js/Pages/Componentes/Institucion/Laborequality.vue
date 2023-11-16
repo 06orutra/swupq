@@ -456,7 +456,7 @@ main {
   }
 }
 
-/* 
+
 @media (min-width: 400px){
   .main-menu {
     margin-top: 100px;
@@ -501,5 +501,5 @@ main {
   .main-menu {
     margin-top: 200px;
   }
-} */
+} 
 </style>

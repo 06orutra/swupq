@@ -7,7 +7,7 @@
                   <img :src="url_imagen" alt="Somos UPQ">
               </div>
           </div>        
-          <div class="content-section">
+          <div class="content-section" >
               <h1>OBJETIVOS DEL PLAN DE ESTUDIOS</h1>
               <p>{{ objetivos }}</p>
               <h1>MISIÓN</h1>
@@ -16,9 +16,7 @@
               <p>{{ vision }}</p>
           </div>
       </div>
-    </section>
-   
-  
+    </section>  
   </template>
   
   <script>
@@ -77,42 +75,42 @@
           padding: 3%;
   }
           
-          .image-section {
-              flex: 0 0 30%; 
-              background-color: transparent;  
-          }
-          
-          .image-section img {
-              width: 550px;
-              height: 600px;
-          }
-          
-          .content-section {
-              flex: 1;
-              padding: 20px; 
-              background-color: transparent;
-              text-align: justify;
-          }
-  
-          .image-container {
-              width: 100%;  
-              height: 100%; 
-              overflow: hidden;  
-          }
-          
-          .image-container img {
-              width: 100%;
-              height: 100%;
-          }
-          h1 {
-              font-family: Arial Black;
-              font-size: 30px;
-              color: purple;
-          }
-          p {
-              font-family: Arial Black;
-              font-size: 20px;
-              color: rgb(0, 0, 0);
-          }
+.image-section {
+    flex: 0 0 30%; 
+    background-color: transparent;  
+}
+
+.image-section img {
+    width: 550px;
+    height: 600px;
+}
+
+.content-section {
+    flex: 1;
+    padding: 20px; 
+    background-color: transparent;
+    text-align: justify;
+}
+
+.image-container {
+    width: 100%;  
+    height: 100%; 
+    overflow: hidden;  
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+}
+h1 {
+    font-family: Arial Black;
+    font-size: 30px;
+    color: purple;
+}
+p {
+    font-family: Arial Black;
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+}
   </style>
   

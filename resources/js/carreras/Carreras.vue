@@ -23,26 +23,19 @@
               >
       </perfiles-carrera>
 
-      <descargas-carrera titulo_img1="PLAN DE ESTUDIO (MATERIAS)" 
-              titulo_img2="DESCARGA EL FOLLETO DIGITAL">
-      </descargas-carrera>
 
 
-  
-      <!--
-    <objetivos-carrera
-                objetivos="Formar profesionistas competentes para desarrollar sistemas y componentes automotrices de 
-                acuerdo al mercado, así como, desarrollar tecnología en sistemas automotrices , implementarla y 
-                validarla"
-                mision="Formar profesionistas en tecnología automotriz mediante el modelo basado en competencias, de 
-                pensamiento crítico y alta conciencia ciudadana, humanistas, con capacidad de liderazgo, 
-                capaces de generar, aplicar y difundir el conocimiento, comprometidos con la institución y su vocación de servicio"
-                vision="Ser la principal opción de los ingenieros en tecnología automotriz debido al liderazgo y desarrollo tecnológico
-                como agentes de cambio y a sus valores éticos, cívicos y de servicio a la sociedad"
-            >
-    </objetivos-carrera>
-    -->
-    
+      <div class="descargas-carrera documentos-carrera">
+        <descargas-carrera 
+          :titulo_img1="plan_estudios_folleto_digital.plan_estudios.titulo" 
+          :url_imagen_1="plan_estudios_folleto_digital.plan_estudios.url_imagen_fondo"
+          :url_target_1="plan_estudios_folleto_digital.plan_estudios.url_documento"
+          :titulo_img2="plan_estudios_folleto_digital.folleto_digital.titulo"
+          :url_imagen_2="plan_estudios_folleto_digital.folleto_digital.url_imagen_fondo"
+          :url_target_2="plan_estudios_folleto_digital.folleto_digital.url_documento"
+          >
+        </descargas-carrera>
+      </div>
     
     <div class="objetivos-carrera">
       <objetivos-carrera :objetivos="objetivos_carrera.plan_estudios" :mision="objetivos_carrera.mision" 
@@ -109,12 +102,25 @@ export default defineComponent({
     let datosCarrera = ref();
     let ciclos_formacion_carrera = ref(['No hay todavia']);
     let colores_carrera = ref(['#000000']);
-    
+
     let objetivos_carrera = ref({
       plan_estudios:'',
       mision:'',
       vision:'',
       url_imagen:''
+    });
+
+    let plan_estudios_folleto_digital = ref({
+      plan_estudios:{
+        titulo:'',
+        url_documento:'',
+        url_imagen_fondo:''
+      },
+      folleto_digital:{
+        titulo:'',
+        url_documento:'',
+        url_imagen_fondo:''
+      }
     });
 
     const ciclos_prueba = [
@@ -134,6 +140,7 @@ export default defineComponent({
         colores_carrera.value = datosCarrera.value.datos.colores;
 
         objetivos_carrera.value = datosCarrera.value.datos.objetivos_carrera;
+        plan_estudios_folleto_digital.value = datosCarrera.value.datos.plan_estudios_folleto_digital;
         
 
       }).catch(function(error){
@@ -167,6 +174,7 @@ export default defineComponent({
       ciclos_prueba,
       colores_carrera,
       objetivos_carrera,
+      plan_estudios_folleto_digital,
       //metodos
       loadCarreraInformation,
       loadCarrerasMenu,

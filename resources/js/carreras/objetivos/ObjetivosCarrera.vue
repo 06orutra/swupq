@@ -8,11 +8,11 @@
               </div>
           </div>        
           <div class="content-section" >
-              <h1>OBJETIVOS DEL PLAN DE ESTUDIOS</h1>
+              <h1 :style="{color:'#'+paleta_colores.colorPrimario}">OBJETIVOS DEL PLAN DE ESTUDIOS</h1>
               <p>{{ objetivos }}</p>
-              <h1>MISIÓN</h1>
+              <h1 :style="{color:'#'+paleta_colores.colorPrimario}">MISIÓN</h1>
               <p>{{ mision }}</p>
-              <h1>VISIÓN</h1>
+              <h1 :style="{color:'#'+paleta_colores.colorPrimario}">VISIÓN</h1>
               <p>{{ vision }}</p>
           </div>
       </div>
@@ -41,6 +41,10 @@
       url_imagen:{
           type:String,
           default:'https://rrnoticias.mx/wp-content/uploads/2022/07/S6-scaled.jpg',
+      },
+      paleta_colores:{
+        type:Object,
+        required:true
       }
     },
   

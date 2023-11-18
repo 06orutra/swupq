@@ -18,21 +18,21 @@
   
       </div>
       <div class="contenedor-lista">
-          <h1>PERFIL DE INGRESO</h1>
-              <h2>Conocimientos</h2> 
+          <h1 :style="{color:'#'+paleta_colores.colorPrimario}">PERFIL DE INGRESO</h1>
+              <h2 :style="{color:'#'+paleta_colores.colorSecundario}">Conocimientos</h2> 
               <ol>
-                  <li v-for="conocimiento in conocimientos" :key="conocimiento">{{ conocimiento }}</li>
+                  <li v-for="conocimiento in conocimientos" :key="conocimiento.nombre">{{ conocimiento.nombre }}</li>
               </ol>
-              <h2>HABILIDADES</h2> 
+              <h2 :style="{color:'#'+paleta_colores.colorSecundario}">HABILIDADES</h2> 
               <ol>
-                  <li v-for="habilidad in habilidades" :key="habilidad">{{ habilidad }}</li>
+                  <li v-for="habilidad in habilidades" :key="habilidad.nombre">{{ habilidad.nombre }}</li>
               </ol>
-              <h2>ACTITUDES</h2> 
+              <h2 :style="{color:'#'+paleta_colores.colorSecundario}">ACTITUDES</h2> 
               <ol>
-                  <li v-for="actitud in actitudes" :key="actitud">{{ actitud }}</li>
+                  <li v-for="actitud in actitudes" :key="actitud.nombre">{{ actitud.nombre }}</li>
               </ol>
-              <h1>PERFIL DE EGRESO</h1>
-              <p>{{ perfil_egreso }}</p>
+              <h1 :style="{color:'#'+paleta_colores.colorSecundario}">PERFIL DE EGRESO</h1>
+              <p class="text-justify">{{ perfil_egreso }}</p>
       </div>
   
     </div>
@@ -74,6 +74,10 @@
           type:String,
           required:true
       },
+      paleta_colores:{
+        type:Object,
+        required:true
+      }
     },
   
     // Setup del componente (opcional)
@@ -150,8 +154,9 @@
   }
   
   .contenedor-lista h1, .contenedor-lista h2 {
-      color: #9400D3;
+      border: 0;
   }
+
   @media (max-width: 700px) {
       .contenedor-principal {
         width: 90%;
@@ -184,5 +189,9 @@
           font-weight: bold;
       }
     }
+
+.text-justify{
+    text-align: justify;
+}    
   </style>
   

@@ -11,6 +11,7 @@
       </main-carrer-screen>
 
 
+      <!---
       <perfiles-carrera video_url="https://www.youtube.com/embed/vmxIjmP6xS0?si=z8Z80Jg6rkfo31Em" 
               :conocimientos = "['Aritmética','Dominio de TIC','Física','Química','Álgebra']" 
               :habilidades="['Creatividad','Entendimiento de la Ciencia','Lectura y Redacción','Pensamiento Matemático','Relaciones Humana']" 
@@ -22,7 +23,18 @@
               laboral."    
               >
       </perfiles-carrera>
+    -->
 
+
+    <div class="perfiles-carrera">
+      <perfiles-carrera :video_url="pefil_ingreso.video"
+      :conocimientos="pefil_ingreso.conocimientos"
+      :habilidades="pefil_ingreso.habilidades"
+      :actitudes="pefil_ingreso.actitudes"
+      :perfil_egreso="perfil_egreso"
+      :paleta_colores="colores_carrera">
+      </perfiles-carrera>
+    </div>
 
 
       <div class="descargas-carrera documentos-carrera">
@@ -39,7 +51,8 @@
     
     <div class="objetivos-carrera">
       <objetivos-carrera :objetivos="objetivos_carrera.plan_estudios" :mision="objetivos_carrera.mision" 
-      :vision="objetivos_carrera.vision" :url_imagen="objetivos_carrera.url_imagen">
+      :vision="objetivos_carrera.vision" :url_imagen="objetivos_carrera.url_imagen"
+      :paleta_colores="colores_carrera">
       </objetivos-carrera>
     </div>
     
@@ -110,6 +123,14 @@ export default defineComponent({
       url_imagen:''
     });
 
+    let pefil_ingreso = ref({
+      conocimientos:[],
+      habilidades:[],
+      actitudes:[],
+      video:''
+    });
+    let perfil_egreso = ref('');
+
     let plan_estudios_folleto_digital = ref({
       plan_estudios:{
         titulo:'',
@@ -141,7 +162,8 @@ export default defineComponent({
 
         objetivos_carrera.value = datosCarrera.value.datos.objetivos_carrera;
         plan_estudios_folleto_digital.value = datosCarrera.value.datos.plan_estudios_folleto_digital;
-        
+        pefil_ingreso.value = datosCarrera.value.datos.perfil_ingreso;
+        perfil_egreso.value = datosCarrera.value.datos.perfil_egreso;
 
       }).catch(function(error){
           console.error(error);
@@ -175,6 +197,8 @@ export default defineComponent({
       colores_carrera,
       objetivos_carrera,
       plan_estudios_folleto_digital,
+      pefil_ingreso,
+      perfil_egreso,
       //metodos
       loadCarreraInformation,
       loadCarrerasMenu,

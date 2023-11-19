@@ -19,7 +19,7 @@
   -->
       <!--Contenido de los iconos con detalle-->
   
-  
+ <!-- 
       <div class="square-container">  
           <div class="square strong">
               <div class="aspect-ratio"></div>
@@ -92,15 +92,19 @@
               </div>
           </div>
       </div>
-  
-  
-      <!--
-      <div class="items_icon" v-for="(item,index) in iconos_info" :key="index">
-          <span>{{ item.descripcion }}</span> <br>
-          <span>{{ item.url_imagen }}</span><br>
-          <span>{{ item.background_color }}</span> <br>
-      </div>
   -->
+  
+    <div class="square-container">
+        <div class="square " v-for="(info,index) in iconos_info" :key="index">
+            <div class="aspect-ratio" 
+            :style="{background: index % 2 == 0 ? '#'+lista_colores_carrera.colorPrimario :'#'+lista_colores_carrera.colorSecundario}"></div>
+            <div class="content">
+                <img :src="info.url_direccion_imagen" alt="Descripción" class="content-image">
+                {{info.descripcion}}
+            </div>
+        </div>   
+    </div>
+
   
   </template>
   
@@ -119,11 +123,10 @@
           //recibe un arreglo con la informacion de cada uno de los iconos
           type:Array,
           required:false,
-          /*
-          validator:(value) => {
-             return value.every(item=>item instanceof DescriptionCarrer);     
-          }
-          */
+      },
+      lista_colores_carrera:{
+        type:Object,
+        required:true,
       }
     },
   

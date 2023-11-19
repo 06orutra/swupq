@@ -4,12 +4,13 @@
       para cambiar su informacion de manera dinamica
       -->
 
+      <!--
       <main-carrer-screen 
     url_img_carrer="https://www.upq.mx/media/careers/banner/BANNER_SISTEMAS_1200X500.png"
     >
 
       </main-carrer-screen>
-
+    -->
 
       <!---
       <perfiles-carrera video_url="https://www.youtube.com/embed/vmxIjmP6xS0?si=z8Z80Jg6rkfo31Em" 
@@ -24,6 +25,14 @@
               >
       </perfiles-carrera>
     -->
+
+    <div class="pagina-principal-carrera">
+      <main-carrer-screen :url_img_carrer="pagina_principal.url_imagen" 
+      :iconos_info="pagina_principal.tarjetas_informativas_pp"
+      :lista_colores_carrera="colores_carrera">
+      
+      </main-carrer-screen>
+    </div>
 
 
     <div class="perfiles-carrera">
@@ -144,6 +153,11 @@ export default defineComponent({
       }
     });
 
+    let pagina_principal = ref({
+      url_imagen:'',
+      tarjetas_informativas_pp:[],
+    });
+
     const ciclos_prueba = [
       {numero_ciclo : 1,descripcion:'Proporcionar mantenimiento y soporte al sistema y equipos de cómputo para garantizar el correcto funcionamiento de la organización mediante el diagnóstico preventivo / correctivo de componentes (hardware/software).'},
 
@@ -164,6 +178,7 @@ export default defineComponent({
         plan_estudios_folleto_digital.value = datosCarrera.value.datos.plan_estudios_folleto_digital;
         pefil_ingreso.value = datosCarrera.value.datos.perfil_ingreso;
         perfil_egreso.value = datosCarrera.value.datos.perfil_egreso;
+        pagina_principal.value = datosCarrera.value.datos.pagina_principal;
 
       }).catch(function(error){
           console.error(error);
@@ -199,6 +214,7 @@ export default defineComponent({
       plan_estudios_folleto_digital,
       pefil_ingreso,
       perfil_egreso,
+      pagina_principal,
       //metodos
       loadCarreraInformation,
       loadCarrerasMenu,

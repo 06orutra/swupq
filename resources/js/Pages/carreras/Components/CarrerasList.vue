@@ -487,13 +487,13 @@
 
                                 <div class="container-ciclos-formacion-carrera-editar">
                                     <div class="entradas-carrera-ciclos-formacion-editar">
-                                        <input-number-pv placeholder="Numero ciclo" style="width: 30%;"/>
+                                        <input-number-pv placeholder="Numero ciclo" style="width: 30%;" v-model="cicloFormacionAgregar.numero_ciclo"/>
                                         <input-text-pv type="text"  
-                                        placeholder="Descripción" style="width: 70%;"/>
+                                        placeholder="Descripción" style="width: 70%;" v-model="cicloFormacionAgregar.descripcion"/>
                                     </div>
                                     <div class="controls-carrera-ciclos-formacion-editar centrar" style="padding: 1%;">
                                         <button-pv label="Agregar" type="button" severity="secondary" 
-                                        @click="" style="width: 25%;"/>
+                                        @click="addCicloFormacion()" style="width: 25%;"/>
                                     </div>
                                 </div>
 
@@ -531,10 +531,25 @@
                                 <div class="iconos-informativos-carrera-editar">
                                     <h6>Iconos informativos</h6>
                                     <!--<p>{{ carreraEditar.datos.pagina_principal.tarjetas_informativas_pp }}</p>-->
-                                    <div class="agregar-icono-informativo-carrera-editar">
+                                    <div class="agregar-icono-informativo-carrera-editar flex flex-column gap-3">
+                                            <div class="entrada-descripcion-carrera-editar ">
+                                                <span>Descripción:</span>
+                                                <input-text-pv placeholder="ejem. Titulación automatica" 
+                                                    v-model="iconoInformativoAgregar.descripcion"/>
+                                            </div>
 
+                                            <div class="entrada-direccion-imagen-carrera-editar">
+                                                <span>Dirección imagen:</span>
+                                                <input-text-pv placeholder="https://cdn-icons-png.flaticon.com/512/686/686051.png" 
+                                                    v-model="iconoInformativoAgregar.url_direccion_imagen"/>
+                                            </div>
+
+                                            <div class="button-add-icono-informativo centrar">
+                                                <button-pv label="Agregar" type="button" severity="secondary"
+                                                style="width: 25%;" @click="addIconoInformativo()"></button-pv>
+                                            </div>
                                     </div>
-
+                                    <br>
                                     <div class="iconos-informativos-agregados">
                                         <table-pv :value="carreraEditar.datos.pagina_principal.tarjetas_informativas_pp" 
                                         showGridlines tableStyle="min-width: 50rem"
@@ -733,6 +748,18 @@ export default defineComponent({
     const conocimientosCarrera = ref([]);//guardara los conocimientos disponibles
     const habilidadesCarrera = ref([]);//guardara las habilidades disponibles
     const actitudesCarrera = ref([]);//guardara las actitudes disponibles
+
+
+    //para guardar la entrada de un ciclo de formacion que se quiera agregar
+    const cicloFormacionAgregar = ref({
+        numero_ciclo:1,
+        descripcion:'',
+    });
+
+    const iconoInformativoAgregar = ref({
+        descripcion:'',
+        url_direccion_imagen:'',
+    });
     
     //functions
     function getCarreras(){
@@ -971,6 +998,23 @@ export default defineComponent({
 
       });
     }
+
+    //funciones para agregar un ciclo de formacion o un icono informativo en la edicion
+    function addCicloFormacion(){
+        carreraEditar.value.datos.ciclos_formacion.push(cicloFormacionAgregar.value);
+        cicloFormacionAgregar.value = {
+            numero_ciclo:1,
+            descripcion:'',
+        };
+    }
+
+    function addIconoInformativo(){
+        carreraEditar.value.datos.pagina_principal.tarjetas_informativas_pp.push(iconoInformativoAgregar.value);
+        iconoInformativoAgregar.value = {
+            numero_ciclodescripcion:'',
+            url_direccion_imagen:'',
+        };
+    }
     
 
 
@@ -992,6 +1036,8 @@ export default defineComponent({
         conocimientosCarrera,
         habilidadesCarrera,
         actitudesCarrera,
+        cicloFormacionAgregar,
+        iconoInformativoAgregar,
         onCicloSelect,
         onCicloUnselect,
         onIconInfoSelect,
@@ -1011,6 +1057,8 @@ export default defineComponent({
         loadConocimientos,
         loadHabilidades,
         loadActitudes,
+        addCicloFormacion,
+        addIconoInformativo
     };
   },
   beforeMount(){

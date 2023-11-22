@@ -327,7 +327,8 @@ export default {
     border: 1px solid black;
     position: fixed;
     z-index: 999;
-    transform: translateX(80px) translateY(105px);
+    transform: translateX(82px) translateY(105px);
+    left: 1.05%;
 }
 
 
@@ -359,7 +360,7 @@ export default {
         width: 43px;
         height: 43px;
         margin-left: 2%;
-        transform: translateX(77px) translateY(75px);
+        transform: translateX(60px) translateY(75px);
     }
 
     .chatbot-container {
@@ -381,7 +382,7 @@ export default {
     }
 }
 
-@media (min-width: 1201px) and (max-width: 1441px) {
+@media (min-width: 1202px) and (max-width: 1438px) {
     .chatButton {
         width: 55px;
         height: 55px;
@@ -399,12 +400,12 @@ export default {
     }
 }
 
-@media (min-width: 1442px) and (max-width: 1499px) {
+@media (min-width: 1439px) and (max-width: 1499px) {
     .chatButton {
         width: 55px;
         height: 55px;
         margin-left: 1.5%;
-        transform: translateX(80px) translateY(105px);
+        transform: translateX(78px) translateY(105px);
     }
 
     .chatbot-container {
@@ -413,7 +414,8 @@ export default {
     }
 }
 
-@media (min-width: 1500px) and (max-width: 1920px) {
+/* Vista para lpatop "normal" */
+@media (min-width: 1500px) and (max-width: 1900px) {
     .chatButton {
         width: 55px;
         height: 55px;
@@ -427,12 +429,27 @@ export default {
     }
 }
 
+/* Vista para monitores */
+@media (min-width: 1901px) and (max-width: 1920px) {
+    .chatButton {
+        width: 55px;
+        height: 55px;
+        margin-left: 1.5%;
+        transform: translateX(65px) translateY(103px);
+    }
+
+    .chatbot-container {
+        max-height: 1080px;
+        max-width: 640px;
+    }
+}
+
 @media (min-width: 1921px) and (max-width: 2561px) {
     .chatButton {
         width: 85px;
         height: 85px;
         margin-left: 2%;
-        transform: translateX(80px) translateY(150px);
+        transform: translateX(65px) translateY(150px);
     }
 
     .chatbot-container {
@@ -447,11 +464,13 @@ export default {
     }
 }
 
-@media (min-width: 321px) and (max-width: 415px) {
+/* Vistas moviles */
+
+@media (min-width: 374px) and (max-width: 415px) {
     .chatButton {
         width: 30px;
         height: 30px;
-        transform: translateX(190px) translateY(5px);
+        transform: translateX(260px) translateY(5px);
         margin: .9%;
     }
     .chatbot-container {
@@ -472,7 +491,7 @@ export default {
     .chatButton {
         width: 30px;
         height: 30px;
-        transform: translateX(195px) translateY(10px);
+        transform: translateX(310px) translateY(10px);
         margin: .9%;
     }
     .chatbot-container {
@@ -493,7 +512,7 @@ export default {
     .chatButton {
         width: 30px;
         height: 30px;
-        transform: translateX(195px) translateY(4px);
+        transform: translateX(210px) translateY(4px);
         margin: .9%;
     }
     .chatbot-container {

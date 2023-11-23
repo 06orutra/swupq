@@ -16,6 +16,7 @@ import MarcoJuridico from "@/Pages/Componentes/Institucion/institucionAdmin/Marc
 import MensajeRector from '@/Pages/Componentes/Institucion/institucionAdmin/mensajeRector.vue';
 import ubicacion from "@/Pages/Componentes/Institucion/institucionAdmin/ubicacion.vue";
 import modeloEducativo from "@/Pages/Componentes/Institucion/institucionAdmin/modeloEducativo.vue";
+import sistemaCalidad from "@/Pages/Componentes/Institucion/institucionAdmin/sistemaCalidad.vue";
 
 export default {
     components: {
@@ -36,6 +37,7 @@ export default {
         ubicacion,
         modeloEducativo,
         MensajeRector,
+        sistemaCalidad,
     },
     methods: {
         updateCarouselSettings(settings) {
@@ -78,7 +80,7 @@ export default {
             <MarcoJuridico />
         </TabPanel>
         <TabPanel header="Sistema de calidad">
-            <MarcoJuridico/>
+            <sistemaCalidad/>
         </TabPanel>
         <TabPanel header="Instalaciones">
             <Instalaciones />

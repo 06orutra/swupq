@@ -162,6 +162,9 @@ export default {
             this.datosArreglo = {};
             this.submitted = false;
             this.dialogTable = true;
+
+            this.titulo = null;
+            this.contenido = null;
         },
         //metodo para input 
 

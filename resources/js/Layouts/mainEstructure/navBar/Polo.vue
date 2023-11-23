@@ -1,5 +1,5 @@
     
-    <script>
+<script>
     import "/node_modules/primeflex/primeflex.css";
     export default {
         mounted() {
@@ -51,11 +51,17 @@
                         });
                     }
                 });
-                
+                this.$nextTick(() => {
+                    const messages = this.$refs.messages;
+                    const lastMessage = messages[messages.length - 1 ];
+                    if (lastMessage) {
+                        lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                    }
+                });
             },
-            
 
-    
+
+
             closeChatAndReset() {
                 this.showChatbot = false;
                 this.messages = [];
@@ -63,7 +69,7 @@
             }
         },
     };
-    </script>
+</script>
 
     
 <template>
@@ -73,7 +79,8 @@
                 <img src='/storage/img/boton_chatbot.svg' alt="Chatbot Icon">
             </button>
         </div>
-        <div v-if="showChatbot" class="chatbot-container z-10 dark:bg-[url('/public/img/FondoOscuroChatBot.jpg')] bg-[url('/public/img/FondoClaroChatBot.jpg')]">
+        <div v-if="showChatbot"
+            class="chatbot-container z-10 dark:bg-[url('/public/img/FondoOscuroChatBot.jpg')] bg-[url('/public/img/FondoClaroChatBot.jpg')]">
             <!-- CHATBOT CONTENIDO EN EL DESTE -->
             <!-- Header del chatbot container -->
             <div class="
@@ -88,15 +95,17 @@
                 Pero si utilizamos "p" o "span" sí se respetan a medias.
                 Con  "a" se respetan al completo. -->
                 <button
+                    class="pi pi-times w-24 h-10 bg-red-600 hover:bg-red-400 text-white text-sm font-semibold rounded-full shadow-md cursor-pointer transform hover:scale-105"
+                    @click="closeChatAndReset" />
+                <!-- <button
                     class="w-32 h-10 bg-red-600 hover:bg-red-400 text-white text-sm font-semibold rounded-full shadow-md cursor-pointer transform hover:scale-105"
-                    @click="closeChatAndReset">Cerrar Chat <span class="ml-1">✕</span></button>
-
+                    @click="closeChatAndReset">Cerrar Chat <span class="ml-1">✕</span></button> -->
 
             </div>
 
 
 
-            <div class="px-4 py-6 z-10 ">    
+            <div class="px-4 py-6 z-10 ">
                 <div v-for="message in messages" :key="message.id" class="flex flex-grow-1">
                     <a v-if="message.text" class='rounded-lg py-3 px-4 inline-block mb-2 relative text-2xl font-sans
                         bg-gray-100 text-gray-800 hover:bg-white float-left ml-2 mr-20 mt-2
@@ -104,7 +113,8 @@
                             message.text }}</a>
                     <a v-if="message.link" :href="message.link" target="_blank" class="rounded-lg py-2 px-4 inline-block mb-2 relative text-2xl 
                         bg-gray-400 text-gray-900 hover:bg-white float-left ml-2 mr-20 mt-2
-                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500" style="white-space: pre-line">{{ message.option }}</a>                    
+                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500" style="white-space: pre-line">{{
+                            message.option }}</a>
                 </div>
             </div>
 
@@ -116,9 +126,9 @@
                 <!-- Generar los botones que están guardados en un array como "currentButtons"
                     Recibiendo así "handleButtonClick como disparador para la siguiente acción" -->
                 <button v-for="button in currentButtons" :key="button.id" @click="handleButtonClick(button)"
-                    class="m-1 rounded-sm w-auto h-auto relative bottom-2 mt-6 text-2xl cursor-pointer p-2.5
+                    class="m-1 rounded-sm w-auto h-auto relative bottom-2 mt-2 text-2xl cursor-pointer p-2.5
                     bg-gradient-to-r from-gray-300 to-gray-500 hover:from-red-500 hover:to-blue-500 text-black
-                    dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-600 dark:hover:from-blue-900 dark:hover:to-purple-900 dark:text-white" style="white-space: pre-line">
+                    dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-600 dark:hover:from-blue-900 dark:hover:to-purple-900 dark:text-white" style="white-space: pre-line" :data-index="index"  ref="messages">
                     {{ button.titulo }}
                 </button>
             </div>
@@ -126,8 +136,8 @@
             <!-- Pequeña leyenda de que el chatbot es hecho en UPQ -->
             <a class="fixed bottom-0 right-6 mb-4 mr-4 text-gray-500
                     font-bold text-xs
-                    hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" href="https://www.upq.mx/">Hecho
-                en UPQ</a>
+                    hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" href="https://www.upq.mx/">
+                    Hecho en UPQ</a>
             <!-- CONTENIDO DEL SHAT -->
         </div>
     </div>
@@ -179,7 +189,7 @@
 
     .chatbot-container {
         max-height: 1080px;
-        max-width: 360px;
+        max-width: 400px;
     }
 }
 
@@ -190,6 +200,7 @@
         margin-left: 1.5%;
         transform: translateX(77px) translateY(75px);
     }
+
     .chatbot-container {
         max-height: 1080px;
         max-width: 480px;
@@ -203,6 +214,7 @@
         margin-left: 1.5%;
         transform: translateX(82px) translateY(105px);
     }
+
     .chatButton img {
         width: 100%;
         height: 100%;
@@ -253,9 +265,10 @@
     .chatbot-container {
         max-height: 1080px;
         max-width: 640px;
-        top:195px;
+        top: 195px;
         right: 20px;
     }
+
     .chatButton img {
         width: 85px;
         height: 85px;
@@ -270,6 +283,7 @@
         transform: translateX(190px) translateY(5px);
         margin: .9%;
     }
+
     .chatbot-container {
         bottom: 10px;
         top: 13.5%;
@@ -293,6 +307,7 @@
         transform: translateX(195px) translateY(10px);
         margin: .9%;
     }
+
     .chatbot-container {
         bottom: 10px;
         right: 10px;
@@ -307,13 +322,14 @@
     }
 }
 
-@media(max-width: 320px){
+@media(max-width: 320px) {
     .chatButton {
         width: 30px;
         height: 30px;
         transform: translateX(195px) translateY(4px);
         margin: .9%;
     }
+
     .chatbot-container {
         bottom: 10px;
         right: 5px;

@@ -156,9 +156,12 @@ Route::prefix('institucion')->group(function () {
         return Inertia::render('Componentes/Institucion/Directorio');
     });
 
-    //rutas para carreras
+    //rutas para carreras, ruta que devuelve la vista de las carreras, le pasa el id de la carrera que debe consultar sus datos
     Route::get('carreras-information/{id}', function ($id) {
-        return Inertia::render('Componentes/Carrers/Carreras',['id_carreraSolicitada' => $id]);
+        return Inertia::render('Componentes/Carrers/Carreras',[
+            'id_carreraSolicitada' => $id,  //pasamos el id de la carrera que se solicito
+            'direccion_getCarrera'=> "/carreras-unica", //pasamos la direccion a la que se debe hacer la peticion
+        ]);
     });
 
 });   

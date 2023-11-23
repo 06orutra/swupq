@@ -72,7 +72,7 @@ export default {
           textColor: '#ffffff',
           label: 'CARRERAS',
           subMenuItems: [
-            {label: "Mecatronica", path: '/institucion/carreras-information/'}, //opcion de prueba
+            //{label: "Mecatronica", path: '/institucion/carreras-information/'}, //opcion de prueba
           ],
         },
         {

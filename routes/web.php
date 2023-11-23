@@ -156,18 +156,18 @@ Route::prefix('institucion')->group(function () {
         return Inertia::render('Componentes/Institucion/Directorio');
     });
 
-    //rutas para carreras, ruta que devuelve la vista de las carreras, le pasa el id de la carrera que debe consultar sus datos
-    Route::get('carreras-information/{id}', function ($id) {
-        return Inertia::render('Componentes/Carrers/Carreras',[
-            'id_carreraSolicitada' => $id,  //pasamos el id de la carrera que se solicito
-            'direccion_getCarrera'=> "/carreras-unica", //pasamos la direccion a la que se debe hacer la peticion
-        ]);
-    });
+    
 
 });   
     Route::get('ubicacion', function () {
         return Inertia::render('Componentes/Institucion/location');
     });
+
+
+//rutas para carreras, ruta que devuelve la vista de las carreras, le pasa el id de la carrera que debe consultar sus datos
+Route::prefix('carreras')->group(function () {
+    Route::get('informes/{nombre_carrera}-{id}',[CarreraController::class,'get_carrera_view']);
+});
 
 
 //¿Esto qué es xd?
@@ -392,7 +392,7 @@ Route::post('/bannerDatatercero', [TbCarruselTercerController::class, 'bannerDat
 
 
 
-/* rutas para el apartado de carreras*/
+/* rutas para el apartado de carreras (proteger para que solo puedo utilizarlas en admin)*/
 // Ruta para mostrar el json de los archivos subidos
 Route::get('data', [CarreraController::class, 'index']) -> name('data');
 

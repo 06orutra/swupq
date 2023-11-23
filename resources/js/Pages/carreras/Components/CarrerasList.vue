@@ -640,6 +640,15 @@
             </div>
         </dialog-pv>
 
+        <!--dialogo para mostrar un mensaje-->
+        <dialog-pv v-model:visible="visibleDialogMessage" :style="{ width: '50vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+         header="Aviso!" modal class="p-fluid" >
+            <div class="content-message centrar" :severity="messageDialog.severityActual">
+                <h2>{{ messageDialog.message }}</h2>
+                <button-pv label="Aceptar" @click="visibleDialogMessage = false"></button-pv>
+            </div>
+        </dialog-pv>
+
 
     </section>
 
@@ -726,6 +735,8 @@ export default defineComponent({
     const visibleDialogEditCicloFormacion = ref(false); //dialogo de alerta para editar un ciclo de formacion
     const visibleDialogEditIconInfo = ref(false); //dialogo de alerta para editar un icono informativo
 
+    const visibleDialogMessage = ref(false);
+
     //variables para validar si se confirmo la eliminacion o edicion de una carrera
     const confirmEliminacionCarrera = ref(false);
     const confirmEdicionCarrera = ref(false);
@@ -749,6 +760,11 @@ export default defineComponent({
     const habilidadesCarrera = ref([]);//guardara las habilidades disponibles
     const actitudesCarrera = ref([]);//guardara las actitudes disponibles
 
+    const messageDialog = ref({
+        message:'This message dialog',
+        severityValues:['success',"error","warn","info"],
+        severityActual: 'success'
+    });
 
     //para guardar la entrada de un ciclo de formacion que se quiera agregar
     const cicloFormacionAgregar = ref({
@@ -869,6 +885,8 @@ export default defineComponent({
         }).then(function(response){
             console.log(response.data);
             visibleDialogConfirEdit.value = false;
+            setAlertMessage(response.data,0);
+            visibleDialogMessage.value = true;
 
         }).catch(function(error){
             console.error(error);
@@ -879,6 +897,12 @@ export default defineComponent({
             getCarreras();
         });
 
+    }
+
+    //para configurar la informacion del mensaje de alerta
+    function setAlertMessage(message,severity){
+        messageDialog.value.message = message;
+        messageDialog.value.severityActual = messageDialog.value.severityValues[severity];
     }
 
     //funciones para cuando se selecciona o deselecciona un ciclo
@@ -1033,11 +1057,13 @@ export default defineComponent({
         iconEditarSelected,//para modificar los iconos informativos
         visibleDialogEditCicloFormacion,
         visibleDialogEditIconInfo,
+        visibleDialogMessage,
         conocimientosCarrera,
         habilidadesCarrera,
         actitudesCarrera,
         cicloFormacionAgregar,
         iconoInformativoAgregar,
+        messageDialog,
         onCicloSelect,
         onCicloUnselect,
         onIconInfoSelect,

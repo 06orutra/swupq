@@ -155,6 +155,12 @@ Route::prefix('institucion')->group(function () {
     Route::get('directorio', function(){
         return Inertia::render('Componentes/Institucion/Directorio');
     });
+
+    //rutas para carreras
+    Route::get('carreras-information/{id}', function ($id) {
+        return Inertia::render('Componentes/Carrers/Carreras',['id_carreraSolicitada' => $id]);
+    });
+
 });   
     Route::get('ubicacion', function () {
         return Inertia::render('Componentes/Institucion/location');
@@ -427,6 +433,7 @@ Route::post('/carrera-actitudes',[CarreraController::class,'get_carrera_actitude
 
 //ruta para obtener la lista de carreras disponibles para mostrar en el menu
 Route::post('/carrera-menu',[CarreraController::class,'get_carrera_disponibles_menu'])->name('carrera.menu');
+
 
 
 

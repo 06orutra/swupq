@@ -1,31 +1,5 @@
 <template>
     <section class="carreras">
-      <!--Esta informacion es estatica para fines de prueba, aunque los componentes estan diseniados
-      para cambiar su informacion de manera dinamica
-      -->
-
-      <!--
-      <main-carrer-screen 
-    url_img_carrer="https://www.upq.mx/media/careers/banner/BANNER_SISTEMAS_1200X500.png"
-    >
-
-      </main-carrer-screen>
-    -->
-
-      <!---
-      <perfiles-carrera video_url="https://www.youtube.com/embed/vmxIjmP6xS0?si=z8Z80Jg6rkfo31Em" 
-              :conocimientos = "['Aritmética','Dominio de TIC','Física','Química','Álgebra']" 
-              :habilidades="['Creatividad','Entendimiento de la Ciencia','Lectura y Redacción','Pensamiento Matemático','Relaciones Humana']" 
-              :actitudes="['Compromiso','Proactivo','Respeto','Responsabilidad']" 
-              perfil_egreso="La Ingeniera e Ingeniero en Tecnología Automotriz son profesionistas con capacidad de diseñar, 
-              analizar e impulsar el desarrollo tecnológico de productos, sistemas, componentes y tecnologías 
-              aplicadas en la industria automotriz. Además de desarrollar, implementar y validar nuevos sistemas, 
-              tecnología y componentes automotrices a partir de la necesidad y tendencias del mercado 
-              laboral."    
-              >
-      </perfiles-carrera>
-    -->
-
     <div class="pagina-principal-carrera">
       <main-carrer-screen :url_img_carrer="pagina_principal.url_imagen" 
       :iconos_info="pagina_principal.tarjetas_informativas_pp"

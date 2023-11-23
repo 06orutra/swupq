@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use App\Models\Carrera;
 use App\Models\Conocimiento;
 use App\Models\Habilidad;
@@ -269,6 +270,20 @@ class CarreraController extends Controller
         });
         
         return response()->json($actitudes);
+    }
+
+    //para retornar la pagina de las carreras
+    public function get_carrera_view($nombre_carrera,$id){
+        $carreraSolicitada = Carrera::find($id);
+        //si no se encuentra la carrera solicitada, entonces devolvemos la vista 404
+        if(!$carreraSolicitada){
+            return ("No encontrado");
+        }
+
+        return Inertia::render('Componentes/Carrers/Carreras',[
+            'id_carreraSolicitada' => $id,  //pasamos el id de la carrera que se solicito
+            'direccion_getCarrera'=> "/carreras-unica", //pasamos la direccion a la que se debe hacer la peticion
+        ]);
     }
     
     /**

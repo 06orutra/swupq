@@ -9,9 +9,11 @@
 
       <div class="content-ciclos-formacion container-row">
           <div class="button-column-numero-ciclo button-column">
+                
                 <button v-for="(ciclo,index) in lista_ciclos_formacion" :key="index+'_'+ciclo.numero_ciclo"
                 @click="showText(index,'Ciclo_'+ciclo.numero_ciclo)" 
-                :style="{backgroundColor: ciclo_seleccionado == index ? '#'+lista_colores_carrera.colorPrimario : '#'+lista_colores_carrera.colorTerciario}">
+                :style="{backgroundColor: ciclo_seleccionado == index ? '#'+lista_colores_carrera.colorPrimario : '#'+lista_colores_carrera.colorTerciario}"
+                class="button-ciclo">
                   {{ciclo.numero_ciclo}}º
                 </button>
           </div>
@@ -38,8 +40,13 @@
 <script>
 import { defineComponent,ref } from 'vue';
 
+
 export default defineComponent({
   // Propiedades del componente (opcional)
+  name: 'CiclosDeFormacion',
+  components: {
+
+  },
   props: {
     lista_ciclos_formacion:{
         type:Array,
@@ -115,6 +122,11 @@ button-column-numero-ciclo = button-column
   padding: 1%;
 }
 
+.button-ciclo{
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
 .container-title > h1{
   /*
   color: purple;
@@ -172,12 +184,14 @@ button-column-numero-ciclo = button-column
 
   .text-section {
     flex: 1;
-    padding: 8%;
+    padding: 4%;
     /*
     background-color: purple;
     color: white;
     */
-    font-size: 15px;
+    
+    
+    font-size: 1.3em;
     font-family: Arial;
     text-align: justify;
 }

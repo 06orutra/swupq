@@ -77,6 +77,8 @@ use App\Http\Controllers\IgualdadLaboralImgSecundariaController;
 use App\Http\Controllers\SistemaCalidadImgPrincipalController;
 use App\Http\Controllers\SistemaCalidadTextoController;
 use App\Http\Controllers\SistemaCalidadImgSecundariaController;
+use App\Http\Controllers\SistemaCalidadPdfController;
+use App\Http\Controllers\SistemaCalidadPdfConsultaController;
 use App\Http\Controllers\CarreraController;
 use App\Http\Controllers\IgualdadLaboralPdfEticaController;
 use App\Http\Controllers\IgualdadLaboralPdfIgualdadController;
@@ -299,6 +301,8 @@ Route::middleware([
         'SistemaCalidadImgPrincipal' => SistemaCalidadImgPrincipalController::class,
         'SistemaCalidadTexto' => SistemaCalidadTextoController::class,
         'SistemaCalidadImgSecundaria' => SistemaCalidadImgSecundariaController::class,
+        'SistemaCalidadPdf' => SistemaCalidadPdfController::class,
+        'SistemaCalidadPdfConsulta' => SistemaCalidadPdfConsultaController::class,
         'BannerMarcoJuridico' => BannerMarcoJuridicoController::class,
         'chatButtons' => ChatButtonsController::class,
         'chatResponse' => ChatResponseController::class,
@@ -379,6 +383,8 @@ Route::post('/IgualdadLaboralPdfIgualdad/bannerData', [IgualdadLaboralPdfIgualda
 Route::post('/SistemaCalidadImgPrincipal/bannerData', [SistemaCalidadImgPrincipalController::class, 'bannerData']);
 Route::post('/SistemaCalidadTexto/bannerData', [SistemaCalidadTextoController::class, 'bannerData']);
 Route::post('/SistemaCalidadImgSecundaria/bannerData', [SistemaCalidadImgSecundariaController::class, 'bannerData']);
+Route::post('/SistemaCalidadPdf/bannerData', [SistemaCalidadPdfController::class, 'bannerData']);
+Route::post('/SistemaCalidadPdfConsulta/bannerData', [SistemaCalidadPdfConsultaController::class, 'bannerData']);
 
 // Route::post('/obtener-link', [SpotyPoliPoloController::class, 'bannerData']);
 

@@ -4,6 +4,8 @@ import TabPanel from 'primevue/tabpanel';
 import estructuraImg from '../../Home/estructuraImg.vue';
 import estructuraTextos from '../../Home/estructuraTextos.vue';
 import OpcionesCarrusel from '../../Home/opcionesCarrusel.vue';
+import estructuraPdf from '../../Home/estructuraPdf.vue';
+import estructurapdf2 from '../../Home/estructurapdf2.vue';
 
 
 export default {
@@ -12,7 +14,9 @@ export default {
     TabPanel,
     estructuraImg,
     estructuraTextos,
-    OpcionesCarrusel
+    OpcionesCarrusel,
+    estructuraPdf,
+    estructurapdf2,
 },
     methods: {
         updateCarouselSettings(settings) {
@@ -45,6 +49,12 @@ export default {
                 :registerBannerUrl="'/SistemaCalidadImgSecundaria/registrarBanner'"
                 :editBannerUrl="'/SistemaCalidadImgSecundaria/editarBanner'"
                 :deleteBannerUrl="'/SistemaCalidadImgSecundaria/eliminarBanner'" />
+        </TabPanel>
+        <TabPanel header="Pdf">
+            <estructuraPdf :loadDataUrl="'/SistemaCalidadPdf/bannerData'" :registerBannerUrl="'/SistemaCalidadPdf/registrarBanner'" :editBannerUrl="'/SistemaCalidadPdf/editarBanner'" :deleteBannerUrl="'/SistemaCalidadPdf/eliminarBanner'" />
+        </TabPanel>
+        <TabPanel header="Pdf Consulta Aqui">
+            <estructurapdf2 :loadDataUrl="'/SistemaCalidadPdfConsulta/bannerData'" :registerBannerUrl="'/SistemaCalidadPdfConsulta/registrarBanner'" :editBannerUrl="'/SistemaCalidadPdfConsulta/editarBanner'" :deleteBannerUrl="'/SistemaCalidadPdfConsulta/eliminarBanner'" />
         </TabPanel>
     </TabView>
 </template>

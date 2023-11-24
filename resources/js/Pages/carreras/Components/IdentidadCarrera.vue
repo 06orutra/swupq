@@ -131,7 +131,11 @@
         <div class="view-selected-conocimientos">
           <!--mostrar los conocimientos que se ha agregado-->
           <strong>conocimientos seleccionados</strong>
+
           <ul>
+            <mark v-show="perfil_ingreso.conocimientos.length < 1">
+                Aun no se han seleccionado conocimientos
+            </mark>
             <li v-for="(elm,index) in perfil_ingreso.conocimientos" :key="index">{{ elm.nombre }}</li>
           </ul>
         </div>
@@ -165,6 +169,9 @@
           <!--mostrar las habilidaes que se ha agregado-->
           <strong>habilidades seleccionadas</strong>
           <ul>
+            <mark v-show="perfil_ingreso.habilidades.length < 1">
+                Aun no se han seleccionado habilidades
+            </mark>
             <li v-for="(elm,index) in perfil_ingreso.habilidades" :key="index">{{ elm.nombre }}</li>
           </ul>
         </div>
@@ -198,6 +205,9 @@
           <!--mostrar las actitudes que se ha agregado-->
           <strong>actitudes seleccionadas</strong>
           <ul>
+            <mark v-show="perfil_ingreso.actitudes.length < 1">
+                Aun no se han seleccionado actitudes
+            </mark>
             <li v-for="(elm,index) in perfil_ingreso.actitudes" :key="index">{{ elm.nombre }}</li>
           </ul>
         </div>
@@ -308,7 +318,12 @@
       <br>
 
       <div class="card ciclos-agregados">
-        <data-table :value="ciclos_formacion" showGridlines tableStyle="min-width: 50rem">
+
+        <data-table :value="mensaje_tabla_ciclos_formacion" v-show="ciclos_formacion.length < 1" showGridlines tableStyle="min-width: 50rem">
+          <column-dt header="Lista de ciclos agregados" field='message'></column-dt>
+        </data-table>
+
+        <data-table :value="ciclos_formacion" v-show="ciclos_formacion.length > 0" showGridlines tableStyle="min-width: 50rem">
             <column-dt field="numero_ciclo" header="Número de ciclo" style="width: 20%;"></column-dt>
             <column-dt field="descripcion" header="Descripción"></column-dt>
         </data-table>
@@ -521,19 +536,20 @@ export default defineComponent({
     /*estructura para la lista de ciclos agregadas */
     /*Informacion estatica de prueba para mostrar los ciclos de formacion*/
     const ciclos_formacion = ref([
-        {
-          numero_ciclo: 1,
-          descripcion: 'Ciclo de formación 1',
-        },
-      {
-        numero_ciclo: 2,
-        descripcion: 'Ciclo de formación 2',
-      },
-      {
-        numero_ciclo: 3,
-        descripcion: 'Ciclo de formación 3',
-      }
+
     ]);
+
+    /* mensaje para la tabla de ciclos de formacion cuando se 
+    encuentre vacia (la neta me da hueva buscar entre los atributos para dar otra solucion)
+    */
+   const mensaje_tabla_ciclos_formacion = [
+      {
+        descripcion:'',
+        message:'Por favor agregue ciclos de formacion',
+        numero_ciclo:'',
+
+      }
+    ];
 
     /* modelo para el conocimiento entrante*/
     let conocimiento = ref({
@@ -780,6 +796,7 @@ export default defineComponent({
       perfil_egreso,
       ciclo_form,
       ciclos_formacion,
+      mensaje_tabla_ciclos_formacion,
       conocimientos,
       conocimiento,
       conocimientos_selected,

@@ -608,7 +608,7 @@
 
         <!--dialogo para editar un ciclo de formacion de la carrera-->
         <dialog-pv v-model:visible="visibleDialogEditCicloFormacion" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
-            :style="{ width: '70vw' }" header="Edición" modal class="p-fluid" @hide="closeDialogEditCiclo()">
+            :style="{ width: '70vw' }" header="Edición" modal class="p-fluid" >
             <div class="controls-dialog-edit-ciclo-formacion">
                 <input-number-pv placeholder="Numero ciclo" style="width: 30%;"
                 v-model="cicloEditarSelected.numero_ciclo"/>
@@ -625,7 +625,7 @@
 
         <!--dialogo para editar un icono informativo de la carrera(pagina principal)-->
         <dialog-pv v-model:visible="visibleDialogEditIconInfo" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
-            :style="{ width: '70vw' }" header="Edición" modal class="p-fluid" @hide="closeDialogEditIcon()">
+            :style="{ width: '70vw' }" header="Edición" modal class="p-fluid">
             <div class="controls-dialog-edit-icono-informativo">
                 <input-text-pv placeholder="Descripcion" style="width: 30%;"
                 v-model="iconEditarSelected.descripcion"/>
@@ -651,6 +651,14 @@
         </dialog-pv>
 
 
+        <!--dialogo para mostrar un progress spinner-->
+        <dialog-pv v-model:visible="visibleSpinnerDialog" :style="{ width: '50vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+         header="Cargando..." modal class="p-fluid" :closable="false">
+         <div class="container-spinner centrar" style="margin:2%">
+            <progress-spinner />
+         </div>
+        </dialog-pv>
+
     </section>
 
 </template>
@@ -671,6 +679,8 @@ import MultiSelect from 'primevue/multiselect';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Message from 'primevue/message';
+import ProgressSpinner from 'primevue/progressspinner';
+
 
 import axios from 'axios';
 
@@ -689,6 +699,7 @@ export default defineComponent({
     'table-pv':DataTable,
     'column-pv':Column,
     'message':Message,
+    'progress-spinner':ProgressSpinner,
 
   },
   props: {
@@ -738,6 +749,7 @@ export default defineComponent({
     const visibleDialogEditIconInfo = ref(false); //dialogo de alerta para editar un icono informativo
 
     const visibleDialogMessage = ref(false);
+    const visibleSpinnerDialog = ref(false); //para el spinner de carga
 
     //variables para validar si se confirmo la eliminacion o edicion de una carrera
     const confirmEliminacionCarrera = ref(false);
@@ -782,6 +794,8 @@ export default defineComponent({
     //functions
     function getCarreras(){
         //trae todas las carreras guardadas de la base de datos
+        visibleSpinnerDialog.value = true;
+
         axios.post(props.url_getCarreras)
         .then(function(response){
             const carreras = response.data;
@@ -790,8 +804,12 @@ export default defineComponent({
             carreras.forEach(element => {
                 carrerasLoaded.value.push(element);
             });
-            
+
+            visibleSpinnerDialog.value = false;
+
         }).catch(function(error){
+            setAlertMessage(error,1);
+            visibleDialogMessage.value = true;
             console.error(error);
         }).finally(function(){
             isLoading.value = false;
@@ -800,20 +818,21 @@ export default defineComponent({
 
     //para mostrar la informacion de la carrera a eliminar
     function eliminarCarrera(id,carrera_nombre){
+        visibleSpinnerDialog.value = true;
         
         //solicitamos la informacion de la carrera a eliminar
         axios.post(props.url_getCarreraUnica,{'id':id})
         .then(function(response){
             const carreraDatos = response.data;
-            
+    
             carreraEliminar.value = carreraDatos;
-
+            visibleSpinnerDialog.value = false;
             visibleDialogDelete.value = true;
-
         }).catch(function(error){
+            setAlertMessage(error,1);
+            visibleSpinnerDialog.value = false;
+            visibleDialogMessage.value = true;
             console.error(error);
-        }).finally(function(){
-            isLoading.value = false;
         });
 
     }
@@ -823,24 +842,29 @@ export default defineComponent({
     }
 
     function ejecutaEliminacion(){
+        
         if(carreraEliminar.value == null || carreraEliminar.value == undefined 
         || carreraEliminar.value == ''){
             return;
         }
 
-        console.log('Eliminando la carrera:'+carreraEliminar.value.datos.nombre_carrera);
+        visibleSpinnerDialog.value = true;
 
         axios.post(props.url_deleteCarrera,{'id':carreraEliminar.value.id})
         .then(function(response){
-            console.log(response.data);
+            setAlertMessage(response.data,0);
             visibleDialogConfirmDelete.value = false;
             visibleDialogDelete.value = false;
+            visibleDialogMessage.value = true;
 
         }).catch(function(error){
+            setAlertMessage(error,1);
+            visibleDialogMessage.value = true;
             console.error(error);
 
         }).finally(function(){
             isLoading.value = false;
+            visibleSpinnerDialog.value = false;
             confirmEliminacionCarrera.value = false;
 
             getCarreras();
@@ -852,7 +876,8 @@ export default defineComponent({
     }
 
     function editarCarrera(id,carrera_nombre){
-        console.log(`Editando...\nID:${id}\nCarrera:${carrera_nombre}`);
+        visibleSpinnerDialog.value = true;
+
         //solicitamos la informacion de la carrera a actualizar
         axios.post(props.url_getCarreraUnica,{'id':id})
         .then(function(response){
@@ -862,9 +887,12 @@ export default defineComponent({
             visibleDialogEdit.value = true;
 
         }).catch(function(error){
+            setAlertMessage(error,1);
+            visibleDialogMessage.value = true;
             console.error(error);
         }).finally(function(){
             isLoading.value = false;
+            visibleSpinnerDialog.value = false;
         });
     }
 
@@ -879,23 +907,26 @@ export default defineComponent({
         formData.append('id',carreraEditar.value.id);
         formData.append('datos',JSON.stringify(carreraEditar.value.datos));
 
+        visibleSpinnerDialog.value = true; //mostramos el spinner de carga
+
         //enviamos la informacion con el id de la carrera para editarla
         axios.post(props.url_editCarrera,formData,{
             headers:{
                 'Content-Type': 'multipart/form-data'
             }
         }).then(function(response){
-            console.log(response.data);
             visibleDialogConfirEdit.value = false;
             setAlertMessage(response.data,0);
             visibleDialogMessage.value = true;
 
         }).catch(function(error){
             setAlertMessage(error,1);
+            visibleDialogMessage.value = true;
             console.error(error);
 
         }).finally(function(){
             isLoading.value = false;
+            visibleSpinnerDialog.value = false;
             confirmEdicionCarrera.value = false;
             getCarreras();
         });
@@ -912,10 +943,6 @@ export default defineComponent({
     function onCicloSelect(event){
         cicloEditarSelected.value = event.data;
         indexDataEditing = event.index;
-        /*
-        console.log(cicloEditarSelected.value.numero_ciclo);
-        console.log(cicloEditarSelected.value.descripcion);
-        */
 
         visibleDialogEditCicloFormacion.value = true;
     }
@@ -928,32 +955,11 @@ export default defineComponent({
     function onIconInfoSelect(event){
         iconEditarSelected.value = event.data;
         indexDataEditing = event.index;
-        /*
-        console.log(iconEditarSelected.value.url_direccion_imagen);
-        console.log(iconEditarSelected.value.descripcion);
-        */
         visibleDialogEditIconInfo.value = true;
     }
 
     function onIconInfoUnselect(event){
         iconEditarSelected.value = null;
-        /*
-        console.log(`${event.data.descripcion}(deseleccionado)`);
-        console.log(`${event.data.url_direccion_imagen}(deseleccionado)`);
-        */
-    }
-
-
-    //funcion para cuando se cierra el dialog para editar un ciclo de formacion
-    function closeDialogEditCiclo(){
-        cicloEditarSelected.value = null;
-        //console.log('Cerrando dialogo...');
-    }
-
-    //funcion para cuando se cierra el dialog para editar un icono informativo
-    function closeDialogEditIcon(){
-        iconEditarSelected.value = null;
-        //console.log('Cerrando dialogo...');
     }
 
 
@@ -1067,6 +1073,7 @@ export default defineComponent({
         cicloFormacionAgregar,
         iconoInformativoAgregar,
         messageDialog,
+        visibleSpinnerDialog,
         onCicloSelect,
         onCicloUnselect,
         onIconInfoSelect,
@@ -1078,8 +1085,6 @@ export default defineComponent({
         ejecutaEdicion,
         confirmaEidicion,
         confirmaEliminacion,
-        closeDialogEditCiclo,
-        closeDialogEditIcon,
         deleteCicloEdit,
         deleteIconEdit,
         //metodos para cargar los conocimientos, habilidades y actitudes de la base de datos

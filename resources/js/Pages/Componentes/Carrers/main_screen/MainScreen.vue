@@ -1,118 +1,46 @@
 <template>
     <!-- Contenido del componente -->
+    <!--
       <section class="container">
               <img :src="url_img_carrer" alt="Nuestras carreras Universitarias" class="background-image">
       </section>
+    -->
   
-      <!--
-      <div class="square-container" v-for="(icon,index) in iconos_info" :key="index">
-  
-          <div class="square strong" >
-              <div class="aspect-ratio"></div>
-              <div class="content" v-setcolor="icon.background_color">
-                  <img :src="icon.url_imagen" alt="Descripción" class="content-image">
-                  {{icon.descripcion}}
-              </div>
-          </div>   
-  
-      </div>
-  -->
-      <!--Contenido de los iconos con detalle-->
-  
- <!-- 
-      <div class="square-container">  
-          <div class="square strong">
-              <div class="aspect-ratio"></div>
-              <div class="content">
-                  <img src="" alt="Descripción" class="content-image">
-                  Duracion: 3 años y 4 meses
-              </div>
-          </div>        
-          <div class="square light">
-              <div class="aspect-ratio"></div>
-              <div class="content">
-                  <img src="" alt="Descripción" class="content-image">
-                  Titulación automática
-              </div>
-          </div>
-          <div class="square strong">
-              <div class="aspect-ratio"></div>
-              <div class="content">
-                  <img src="" alt="Descripción" class="content-image">
-                  Periodos cuatrimestrales
-              </div>
-          </div>        
-          <div class="square light">
-              <div class="aspect-ratio"></div>
-              <div class="content">
-                  <img src="" alt="Descripción" class="content-image">
-                  Movilidad nacional e internacional
-              </div>
-          </div>
-          <div class="square strong">
-              <div class="aspect-ratio"></div>
-              <div class="content">
-                  <img src="" alt="Descripción" class="content-image">
-                  Pertenencia al sector productivo
-              </div>
-          </div>        
-          <div class="square light">
-              <div class="aspect-ratio"></div>
-              <div class="content">
-                  <img src="" alt="Descripción" class="content-image">
-                  Periodos de prácticas profesionales: estancias y estadías
-              </div>
-          </div>
-          <div class="square strong">
-              <div class="aspect-ratio"></div>
-              <div class="content">
-                  <img src="" alt="Descripción" class="content-image">
-                  Modelo basado en competencias
-              </div>
-          </div>        
-          <div class="square light">
-              <div class="aspect-ratio"></div>
-              <div class="content">
-                  <img src="" alt="Descripción" class="content-image">
-                  Formación integral
-              </div>
-          </div>
-          <div class="square strong">
-              <div class="aspect-ratio"></div>
-              <div class="content">
-                  <img src=" " alt="Descripción" class="content-image">
-                  Ingles, aleman y frances.
-              </div>
-          </div>        
-          <div class="square light">
-              <div class="aspect-ratio"></div>
-              <div class="content">
-                  <img src="" alt="Descripción" class="content-image">
-                  Actividades deportivas, artisticas y culturales
-              </div>
-          </div>
-      </div>
-  -->
-  
-    <div class="square-container">
-        <div class="square " v-for="(info,index) in iconos_info" :key="index">
-            <div class="aspect-ratio" 
-            :style="{background: index % 2 == 0 ? '#'+lista_colores_carrera.colorPrimario :'#'+lista_colores_carrera.colorSecundario}"></div>
-            <div class="content">
-                <img :src="info.url_direccion_imagen" alt="Descripción" class="content-image">
-                {{info.descripcion}}
-            </div>
-        </div>   
-    </div>
-
+    <section class="conatiner-main-screen">
+        
+        <div class="container-main-image">
+            <image-pv :src="url_img_carrer" alt="Nuestras carreras Universitarias" draggable="false"
+            class="main-image" />
+        </div>
+        
+        <!--Contenido de los iconos con detalle-->
+        <div class="square-container">
+            <div class="square " v-for="(info,index) in iconos_info" :key="index">
+                <div class="aspect-ratio" 
+                :style="{background: index % 2 == 0 ? '#'+lista_colores_carrera.colorPrimario :'#'+lista_colores_carrera.colorSecundario}"></div>
+                <div class="content">
+                    <img :src="info.url_direccion_imagen" alt="Descripción" class="content-image">
+                    {{info.descripcion}}
+                </div>
+            </div>   
+        </div>
+        
+    </section>
   
   </template>
   
   <script>
   import { defineComponent } from 'vue';
+  
+  import Image from 'primevue/image';
+
   //import DescriptionCarrer from '@/components/main_screen/DescripcionCarrera.js'
   
   export default defineComponent({
+    name: 'MainScreen',
+    components: {
+      'image-pv':Image,
+    },
     // Propiedades del componente (opcional)
     props: {
       url_img_carrer:{
@@ -162,13 +90,31 @@
   </script>
   
   <style scoped>
-  /* Estilos de la imagen de hasta arriba */
   /*
   *{
       margin: 0;
       padding: 0;
   }
   */
+/* cambiar los estilos para que no se corte la imagen de la parte de arriba y cubra todo el ancho de la pantalla*/
+  .conatiner-main-screen{
+    margin-top: 3.4%;
+  }
+
+.container-main-image{
+    width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+    
+}
+
+  .main-image{
+    width: 100%;
+    height: 100%;
+    /*object-fit: fill;   */
+  }
+
   .container {
       position: relative;
   }

@@ -643,10 +643,11 @@
         <!--dialogo para mostrar un mensaje-->
         <dialog-pv v-model:visible="visibleDialogMessage" :style="{ width: '50vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
          header="Aviso!" modal class="p-fluid" >
-            <div class="content-message centrar" :severity="messageDialog.severityActual">
+            <message class="content-message centrar" :closable="false" :severity="messageDialog.severityActual"
+            style="width: 100%;">
                 <h2>{{ messageDialog.message }}</h2>
-                <button-pv label="Aceptar" @click="visibleDialogMessage = false"></button-pv>
-            </div>
+            </message>
+            <button-pv label="Aceptar" @click="visibleDialogMessage = false"></button-pv>
         </dialog-pv>
 
 
@@ -669,7 +670,7 @@ import MultiSelect from 'primevue/multiselect';
 
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
-
+import Message from 'primevue/message';
 
 import axios from 'axios';
 
@@ -687,6 +688,7 @@ export default defineComponent({
     'multi-select-pv':MultiSelect,
     'table-pv':DataTable,
     'column-pv':Column,
+    'message':Message,
 
   },
   props: {
@@ -889,6 +891,7 @@ export default defineComponent({
             visibleDialogMessage.value = true;
 
         }).catch(function(error){
+            setAlertMessage(error,1);
             console.error(error);
 
         }).finally(function(){
@@ -1035,7 +1038,7 @@ export default defineComponent({
     function addIconoInformativo(){
         carreraEditar.value.datos.pagina_principal.tarjetas_informativas_pp.push(iconoInformativoAgregar.value);
         iconoInformativoAgregar.value = {
-            numero_ciclodescripcion:'',
+            descripcion:'',
             url_direccion_imagen:'',
         };
     }

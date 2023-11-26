@@ -327,6 +327,7 @@
             <column-dt field="numero_ciclo" header="Número de ciclo" style="width: 20%;"></column-dt>
             <column-dt field="descripcion" header="Descripción"></column-dt>
         </data-table>
+
       </div>
 
     </section>
@@ -403,7 +404,8 @@
             </thead>
 
             <tbody>
-              <tr v-for="(elem,index) in tarjetas_informativas" :key="index">
+
+              <tr v-for="(elem,index) in pagina_principal.tarjetas_informativas_pp" :key="index">
                 <td>{{ elem.descripcion }}</td>
                 <td>{{ elem.url_direccion_imagen }}</td>
                 <td align="center">
@@ -411,6 +413,11 @@
                   @:click="mostrarImagen(elem.url_direccion_imagen)" />
                 </td>
               </tr>
+
+              <tr v-show="pagina_principal.tarjetas_informativas_pp.length < 1">
+                <td colspan="3" class="centrar-texto">Por favor agregue un icono informativo</td>
+              </tr>
+
             </tbody>
           </table>
 
@@ -418,9 +425,6 @@
 
     </section>
     
-
-
-
     <br>
 
     <div class="control-submit">
@@ -620,22 +624,6 @@ export default defineComponent({
       tarjetas_informativas_pp:[],
     });
 
-    /*Informacion estatica de prueba para mostrar las tarjetas informativas agregadas*/
-    const tarjetas_informativas = ref([
-        {
-          descripcion: "Tarjeta informativa 1",
-          url_direccion_imagen: 'https://ejemplo_icono_1',
-        },
-      {
-        descripcion: "Tarjeta informativa 2",
-          url_direccion_imagen: 'https://ejemplo_icono_2',      
-      },
-      {
-        descripcion: "Tarjeta informativa 3",
-          url_direccion_imagen: 'https://ejemplo_icono_3',      
-      }
-    ]);
-
     /*  funciones */
 
     function addCicloFormacion(){
@@ -676,7 +664,7 @@ export default defineComponent({
 
     function addTarjetaInformativa(){
       //alert(`agregando tarjeta informativa...\n${tarjeta_informativa.value.descripcion}\n${tarjeta_informativa.value.url_direccion_imagen}`);
-      tarjetas_informativas.value.push(tarjeta_informativa.value);
+
       pagina_principal.value.tarjetas_informativas_pp.push(tarjeta_informativa.value);
 
       tarjeta_informativa.value = {
@@ -810,7 +798,6 @@ export default defineComponent({
       plan_estudios_folleto_digital,
       pagina_principal,
       tarjeta_informativa,
-      tarjetas_informativas,
       //metodos
       addCicloFormacion,
       addConocimiento,
@@ -884,6 +871,10 @@ export default defineComponent({
 
 .centrar{
   justify-content: center;
+}
+
+.centrar-texto{
+  text-align: center;
 }
 
 .item {

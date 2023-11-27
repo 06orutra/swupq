@@ -56,7 +56,6 @@ use App\Http\Controllers\RepresentativoPrinController;
 use App\Http\Controllers\RepresentativoTextoController;
 use App\Http\Controllers\RepresentativoDeporteController;
 use App\Http\Controllers\RepresentativoCulturaController;
-
 use App\Http\Controllers\LeyesEstatalesController;
 use App\Http\Controllers\LeyesFederalesController;
 use App\Http\Controllers\LeyesGeneralesController;
@@ -79,9 +78,9 @@ use App\Http\Controllers\CarreraController;
 use App\Http\Controllers\IgualdadLaboralPdfEticaController;
 use App\Http\Controllers\IgualdadLaboralPdfIgualdadController;
 use App\Http\Controllers\BannerMarcoJuridicoController;
-
 use App\Http\Controllers\ChatButtonsController;
 use App\Http\Controllers\ChatResponseController;
+use App\Http\Controllers\RepresentativoImagenesController;
 use Illuminate\Http\Request;
 
 /*
@@ -299,6 +298,8 @@ Route::middleware([
         'BannerMarcoJuridico' => BannerMarcoJuridicoController::class,
         'chatButtons' => ChatButtonsController::class,
         'chatResponse' => ChatResponseController::class,
+        'RepresentativoImagenes' => RepresentativoImagenesController::class,
+
     ];
     // se declarar variables, 
 
@@ -311,11 +312,12 @@ Route::middleware([
         });
     }
 });
+
+Route::post('/RepresentativoImagenes/bannerData', [RepresentativoImagenesController::class, 'bannerData']);
 Route::post('/RepresentativoText/bannerData', [RepresentativoTextoController::class, 'bannerData']);
 Route::post('/Representativosprin/bannerData', [RepresentativoPrinController::class, 'bannerData']);
 Route::post('/RepresentativosDeporte/bannerData', [RepresentativoDeporteController::class, 'bannerData']);
 Route::post('/RepresentativosCultura/bannerData', [RepresentativoCulturaController::class, 'bannerData']);
-
 Route::post('/BannerMarcoJuridico/bannerData', [BannerMarcoJuridicoController::class, 'bannerData']);
 Route::post('/ConstitucionDocumentos/bannerData', [ConstitucionDocumentosController::class, 'bannerData']);
 Route::post('/LeyesEstatales/bannerData', [LeyesEstatalesController::class, 'bannerData']);

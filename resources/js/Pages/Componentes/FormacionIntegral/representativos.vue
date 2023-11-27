@@ -1,6 +1,7 @@
 <script>
 import AppEstructure from '@/Layouts/mainEstructure/AppEstructure.vue';
 import Carousel from 'primevue/carousel';
+import 'primeicons/primeicons.css';
 export default {
     components: {
         AppEstructure,
@@ -10,6 +11,7 @@ export default {
         this.cargarTexto();
         this.cargarDeporte();
         this.cargarCultura();
+        this.cargarDatosDesdeLaBaseDeDatos();
     },
     methods: {
         imageClick(index) {
@@ -36,6 +38,52 @@ export default {
             }).catch((error) => {
                 console.log(error);
             });
+        },
+        cargarDatosDesdeLaBaseDeDatos() {
+            // Hacer todas las solicitudes simultáneamente
+            Promise.all([
+                axios.post('/RepresentativoImagenes/bannerData'),
+                axios.post('/RepresentativosCultura/bannerData'),
+                axios.post('/RepresentativosDeporte/bannerData')
+            ])
+                .then(([imagenesResponse, culturaResponse, deporteResponse]) => {
+                    // Procesar la respuesta de RepresentativoImagenes
+                    const imagenesImages = imagenesResponse.data.map(item => ({
+                        itemImageSrc: '/storage/' + item.imagen,
+                        alt: item.alt,
+                        // Otras propiedades si las tienes en tu base de datos
+                    }));
+
+                    // Procesar la respuesta de RepresentativosCultura
+                    const culturaImages = culturaResponse.data.map(item => ({
+                        itemImageSrc: '/storage/' + item.imagen,
+                        alt: item.alt,
+                        // Otras propiedades si las tienes en tu base de datos
+                    }));
+
+                    // Procesar la respuesta de RepresentativosDeporte
+                    const deporteImages = deporteResponse.data.map(item => ({
+                        itemImageSrc: '/storage/' + item.imagen,
+                        alt: item.alt,
+                        // Otras propiedades si las tienes en tu base de datos
+                    }));
+
+                    // Combinar las tres listas de imágenes
+                    this.imagess = imagenesImages.concat(deporteImages, culturaImages);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        },
+
+
+        showImageInLarge(image) {
+            // Abre la imagen en una vista en grande cuando se hace clic en una miniatura.
+            this.selectedImage = image;
+        },
+        closeLargeImage() {
+            // Cierra la vista en grande de la imagen.
+            this.selectedImage = null;
         },
     },
     data() {
@@ -74,8 +122,11 @@ export default {
                     numVisible: 1
                 }
             ],
-            displayCustom: false
+            displayCustom: false,
+            imagess: [],
+            selectedImage: null,
         };
+
     },
 }
 
@@ -140,6 +191,21 @@ export default {
                     </div>
                 </template>
             </Carousel>
+            <!-- Cuadrícula estática con miniaturas de las imágenes -->
+            <div class="grid-gallery">
+                <div v-for="(image, index) in imagess" :key="index" class="grid-item" @click="showImageInLarge(image)">
+                    <img :src="image.itemImageSrc" :alt="image.alt" class="grid-image" />
+                </div>
+            </div>
+
+<!-- Vista en grande de la imagen seleccionada -->
+<div v-if="selectedImage" class="large-image-modal" @click="closeLargeImage">
+  <button class="close-button">
+    <!-- Puedes cambiar el icono a tu elección -->
+    <i class="pi pi-times"></i>
+  </button>
+  <img :src="selectedImage.itemImageSrc" :alt="selectedImage.alt" />
+</div>
         </div>
 
 
@@ -148,15 +214,139 @@ export default {
 </template>
 
 <style scoped>
-.panel {
-    height: auto;
-    color: white;
-    background-color: rgb(21, 24, 48);
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff; /* Cambia el color según tu diseño */
+  font-size: 20px;
 }
 
-.texto {
-    padding: 50px;
+.grid-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* Tamaño de las columnas */
+    gap: 10px;
+    /* Espacio entre elementos */
+    margin-top: 20px;
+    /* Espacio superior para separación de la galería principal */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 5 imágenes por fila */
     text-align: center;
-    font-size: 1.5rem;
-}</style>
+    /* Centra las miniaturas en la fila */
+    padding: 10px;
+    /* Agrega padding al segundo conjunto de imágenes */
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    /* Fondo de los elementos */
+    border: 1px solid transparent;
+    /* Borde de los elementos */
+    padding: 10px;
+    cursor: pointer;
+}
+
+.grid-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Estilos para la vista en grande de la imagen */
+.large-image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.large-image-modal img {
+    max-width: 80%;
+    max-height: 80%;
+    cursor: pointer;
+}
+
+
+
+@media (max-width: 2560px) {
+
+    .grid-gallery {
+        grid-template-columns: repeat(7, 1fr);
+    }
+}
+
+@media (max-width: 2000px) {
+
+    .grid-gallery {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+@media (max-width: 1440px) {
+    .grid-gallery {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (max-width: 1024px) {
+    .grid-gallery {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-gallery {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    .grid-gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 425px) {
+    .grid-gallery {
+        grid-template-columns: repeat(1, 1fr);
+        padding-right: 3%;
+        padding-left: 3%;
+    }
+}
+
+@media (max-width: 375px) {
+    .grid-gallery {
+        grid-template-columns: repeat(1, 1fr);
+        padding-right: 3%;
+        padding-left: 3%;
+        padding: 0px;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 320px) {
+    .grid-gallery {
+        grid-template-columns: repeat(1, 1fr);
+        padding-right: 3%;
+        padding-left: 3%;
+        padding: 0px;
+        margin-top: 10px;
+    }
+}
+</style>
 

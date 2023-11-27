@@ -178,7 +178,7 @@ export default {
       <br> <br>
       <div class="text-center">
         <header>
-          <h1 class="text-center" style="color: #414141;">Valores</h1><br>
+          <h1 class="text-center">Valores</h1><br>
           <hr>
         </header>
       </div>
@@ -437,7 +437,6 @@ export default {
   display: block;
   padding: 20px;
   font-size: 20px;
-  color: black;
   cursor: pointer;
   margin-bottom: 2px;
   transition: all 300ms ease;

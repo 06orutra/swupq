@@ -328,7 +328,6 @@ ul.list-group {
 }
 
 .box {
-  color: #666;
   font-family: 'Open Sans', Arial, Arial, Helvetica, sans-serif;
 
   font-size: 17px;

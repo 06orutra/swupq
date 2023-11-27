@@ -36,4 +36,13 @@ export default {
             :editBannerUrl="'/representativoCultura/editarBanner'"
             :deleteBannerUrl="'/representativoCultura/eliminarBanner'" />
     </TabPanel>
+
+    <TabPanel header="Imagenes Miniatura">
+        <estructuraImg :loadDataUrl="'/RepresentativoImagenes/bannerData'"
+            :registerBannerUrl="'/RepresentativoImagenes/registrarBanner'"
+            :editBannerUrl="'/RepresentativoImagenes/editarBanner'"
+            :deleteBannerUrl="'/RepresentativoImagenes/eliminarBanner'" />
+    </TabPanel>
+
+    
 </TabView></template>

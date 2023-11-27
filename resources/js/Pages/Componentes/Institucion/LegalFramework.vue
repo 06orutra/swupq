@@ -283,9 +283,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'constitucion'"  v-for="msj in ConstitucionDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openModal(msj.pdf, msj.nombre)">
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)">
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -307,9 +307,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'tratados'"  v-for="msj in TratadosInternacionalesDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openModal(msj.pdf, msj.nombre)" >
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" >
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -331,9 +331,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'leyes2'"  v-for="msj in LeyesEstatales" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openModal(msj.pdf, msj.nombre)" >
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" >
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -354,9 +354,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'leyes1'"  v-for="msj in LeyesFederales" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 "> 
+                <a @click="openModal(msj.pdf, msj.nombre)" > 
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" >
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -377,9 +377,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'leyes'"  v-for="msj in LeyesGenerales" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 "> 
+                <a @click="openModal(msj.pdf, msj.nombre)" > 
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" >
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -401,9 +401,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'codigos'"  v-for="msj in CodigosDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openModal(msj.pdf, msj.nombre)" >
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" >
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -425,9 +425,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'acuerdos'"  v-for="msj in AcuerdosDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openModal(msj.pdf, msj.nombre)" >
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" >
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -449,9 +449,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'Convenios'"  v-for="msj in ConveniosInstitucionalesDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openModal(msj.pdf, msj.nombre)" >
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" >
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -473,9 +473,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'Circulares'"  v-for="msj in CircularesDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 "> 
+                <a @click="openModal(msj.pdf, msj.nombre)" > 
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" >
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -498,9 +498,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'CatalogoDocumentos'"  v-for="msj in CatalogoDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openModal(msj.pdf, msj.nombre)" >
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" >
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -522,9 +522,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'CatalogoDoDecretosDocumentos'"  v-for="msj in DecretosDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openModal(msj.pdf, msj.nombre)" >
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" >
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -546,9 +546,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'LineamientosDocumentos'"  v-for="msj in LineamientosDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openModal(msj.pdf, msj.nombre)" >
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" >
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -570,9 +570,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'ManualesDocumentos'"  v-for="msj in ManualesDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openModal(msj.pdf, msj.nombre)" >
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" >
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -593,9 +593,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'ReglamentosDocumentos'"  v-for="msj in ReglamentosDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openModal(msj.pdf, msj.nombre)" >
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" >
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -617,9 +617,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'ProtocolosDocumentos'"  v-for="msj in ProtocolosDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openModal(msj.pdf, msj.nombre)" >
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" >
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -641,9 +641,9 @@ export default {
             </label>
             <div class="toggle-content" v-show="activeAccordion === 'PlanDeDesarolloInstitucionalDocumentos'"  v-for="msj in PlanDeDesarolloInstitucionalDocumentos" :key="msj.id">
               <p class="font-lato" style="margin-bottom: 1em;">
-                <a @click="openModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openModal(msj.pdf, msj.nombre)" >
                 </a>
-                <a @click="openPDFModal(msj.pdf, msj.nombre)" style="color:#151830 ">
+                <a @click="openPDFModal(msj.pdf, msj.nombre)" >
                   <i class="fa fa-eye pi pi-file-pdf"></i> {{ msj.nombre }} 
                 </a>
               </p>
@@ -690,7 +690,6 @@ h4 {
   margin-inline-end: 0px;
   font-family: 'Open Sans',Arial,Helvetica,sans-serif;
   font-weight: 600;
-  color: #414141;
   position: relative;
   line-height: 1.5;
   z-index: 0;
@@ -707,7 +706,6 @@ label{
   margin-bottom: 0.5rem;
 }
 div.toggle > label {
-    color: #333;
     cursor: pointer;
     font-size: 16px;
     font-weight: normal;

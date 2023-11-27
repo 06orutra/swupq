@@ -12,6 +12,7 @@ import barra from '@/Pages/Componentes/Institucion/InstalacionesComponentes/barr
       <template #item="slotProps">
         <img :src="slotProps.item.itemImageSrc" :alt="slotProps.item.alt" class="main-image" />
       </template>
+      
     </Galleria>
 
     <!-- Cuadrícula estática con miniaturas de las imágenes -->
@@ -22,9 +23,13 @@ import barra from '@/Pages/Componentes/Institucion/InstalacionesComponentes/barr
     </div>
 
     <!-- Vista en grande de la imagen seleccionada -->
-    <div v-if="selectedImage" class="large-image-modal">
-      <img :src="selectedImage.itemImageSrc" :alt="selectedImage.alt" @click="closeLargeImage" />
-    </div>
+<div v-if="selectedImage" class="large-image-modal" @click="closeLargeImage">
+  <button class="close-button">
+    <!-- Puedes cambiar el icono a tu elección -->
+    <i class="pi pi-times"></i>
+  </button>
+  <img :src="selectedImage.itemImageSrc" :alt="selectedImage.alt" />
+</div>
 </div>
 </template>
 
@@ -89,6 +94,17 @@ export default {
 </script>
 
 <style scoped>
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff; /* Cambia el color según tu diseño */
+  font-size: 20px;
+}
 .grid-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Tamaño de las columnas */
@@ -153,6 +169,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
 }
 
 .large-image-modal img {

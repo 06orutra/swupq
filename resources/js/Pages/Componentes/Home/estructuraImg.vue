@@ -198,6 +198,10 @@ export default {
             this.submitted = false;
             this.dialogTable = true;
             this.imagePreview = null;
+
+            this.nombre = null;
+            this.link = null;
+            this.foto = null;
         },
         selectNewPhoto() {
             this.$refs.photoInput.click();

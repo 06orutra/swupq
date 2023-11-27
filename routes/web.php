@@ -74,6 +74,11 @@ use App\Http\Controllers\ReglamentosDocumentosController;
 use App\Http\Controllers\IgualdadLaboralTextosController;
 use App\Http\Controllers\IgualdadLaboralPdfController;
 use App\Http\Controllers\IgualdadLaboralImgSecundariaController;
+use App\Http\Controllers\SistemaCalidadImgPrincipalController;
+use App\Http\Controllers\SistemaCalidadTextoController;
+use App\Http\Controllers\SistemaCalidadImgSecundariaController;
+use App\Http\Controllers\SistemaCalidadPdfController;
+use App\Http\Controllers\SistemaCalidadPdfConsultaController;
 use App\Http\Controllers\CarreraController;
 use App\Http\Controllers\IgualdadLaboralPdfEticaController;
 use App\Http\Controllers\IgualdadLaboralPdfIgualdadController;
@@ -120,7 +125,7 @@ Route::prefix('institucion')->group(function () {
     Route::get('laborEq', function () {
         return Inertia::render('Componentes/Institucion/Laborequality');
     });
-    Route::get('sistemaGestion', function () {
+    Route::get('sistemaCalidad', function () {
         return Inertia::render('Componentes/Institucion/qualityManagement');
     });
     Route::get('mensajeRector', function () {
@@ -273,7 +278,6 @@ Route::middleware([
         'representativoTexto' => RepresentativoTextoController::class,
         'representativoDeporte' => RepresentativoDeporteController::class,
         'representativoCultura' => RepresentativoCulturaController::class,
-
         'ConstitucionDocumentos' => ConstitucionDocumentosController::class,
         'LeyesEstatales' => LeyesEstatalesController::class,
         'LeyesFederales' => LeyesFederalesController::class,
@@ -295,6 +299,11 @@ Route::middleware([
         'IgualdadLaboralImgSecundaria' => IgualdadLaboralImgSecundariaController::class,
         'IgualdadLaboralPdfEtica' => IgualdadLaboralPdfEticaController::class,
         'IgualdadLaboralPdfIgualdad' => IgualdadLaboralPdfIgualdadController::class,
+        'SistemaCalidadImgPrincipal' => SistemaCalidadImgPrincipalController::class,
+        'SistemaCalidadTexto' => SistemaCalidadTextoController::class,
+        'SistemaCalidadImgSecundaria' => SistemaCalidadImgSecundariaController::class,
+        'SistemaCalidadPdf' => SistemaCalidadPdfController::class,
+        'SistemaCalidadPdfConsulta' => SistemaCalidadPdfConsultaController::class,
         'BannerMarcoJuridico' => BannerMarcoJuridicoController::class,
         'chatButtons' => ChatButtonsController::class,
         'chatResponse' => ChatResponseController::class,
@@ -376,6 +385,11 @@ Route::post('/IgualdadLaboralPdf/bannerData', [IgualdadLaboralPdfController::cla
 Route::post('/IgualdadLaboralImgSecundaria/bannerData', [IgualdadLaboralImgSecundariaController::class, 'bannerData']);
 Route::post('/IgualdadLaboralPdfEtica/bannerData', [IgualdadLaboralPdfEticaController::class, 'bannerData']);
 Route::post('/IgualdadLaboralPdfIgualdad/bannerData', [IgualdadLaboralPdfIgualdadController::class, 'bannerData']);
+Route::post('/SistemaCalidadImgPrincipal/bannerData', [SistemaCalidadImgPrincipalController::class, 'bannerData']);
+Route::post('/SistemaCalidadTexto/bannerData', [SistemaCalidadTextoController::class, 'bannerData']);
+Route::post('/SistemaCalidadImgSecundaria/bannerData', [SistemaCalidadImgSecundariaController::class, 'bannerData']);
+Route::post('/SistemaCalidadPdf/bannerData', [SistemaCalidadPdfController::class, 'bannerData']);
+Route::post('/SistemaCalidadPdfConsulta/bannerData', [SistemaCalidadPdfConsultaController::class, 'bannerData']);
 
 // Route::post('/obtener-link', [SpotyPoliPoloController::class, 'bannerData']);
 

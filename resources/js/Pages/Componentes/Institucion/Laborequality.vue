@@ -166,7 +166,7 @@ export default {
   </AppEstructure>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .pdf-iframe {
   width: 100%;
   height: 100%;

@@ -323,7 +323,11 @@
           <column-dt header="Lista de ciclos agregados" field='message'></column-dt>
         </data-table>
 
-        <data-table :value="ciclos_formacion" v-show="ciclos_formacion.length > 0" showGridlines tableStyle="min-width: 50rem">
+        <data-table :value="ciclos_formacion" v-show="ciclos_formacion.length > 0" 
+          showGridlines tableStyle="min-width: 50rem" v-model:selection="cicloEditarSelected"
+          selectionMode="single" dataKey="descripcion" :metaKeySelection="false"
+          @rowSelect="onCicloSelect" @rowUnselect="">
+
             <column-dt field="numero_ciclo" header="Número de ciclo" style="width: 20%;"></column-dt>
             <column-dt field="descripcion" header="Descripción"></column-dt>
         </data-table>
@@ -424,6 +428,26 @@
       </div>
 
     </section>
+
+    <section class="container-dialogs-edition">
+          <!--dialogo para editar un ciclo de formacion de la carrera-->
+          <dialog-pv v-model:visible="visibleDialogEditCicloFormacion" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
+            :style="{ width: '70vw' }" header="Editar ciclo de formación" modal class="p-fluid" @hide="onCloseCicloEdit">
+
+            <div class="controls-dialog-edit-ciclo-formacion">
+                <pv-input-number placeholder="Numero ciclo" style="width: 30%;"
+                v-model="cicloEditarSelected.numero_ciclo"/>
+                <pv-input-text type="text"  
+                placeholder="Descripción" style="width: 70%;" v-model="cicloEditarSelected.descripcion"/>
+
+                <div class="btn-delete-ciclo-edit " style="padding-top: 1%;">
+                    <pv-button type="button" label="Eliminar" severity="danger" icon="pi pi-trash" 
+                    @click="deleteCicloEdit()"></pv-button>
+                </div>
+            </div>
+
+        </dialog-pv>
+    </section>
     
     <br>
 
@@ -453,7 +477,7 @@ import Column from 'primevue/column';
 import ColumnGroup from 'primevue/columngroup';   // optional
 import Row from 'primevue/row';       
 import MultiSelect from 'primevue/multiselect';
-
+import Dialog from 'primevue/dialog';
 import axios from 'axios';
 
 
@@ -472,6 +496,7 @@ export default defineComponent({
     'column-group-dt':ColumnGroup,
     'row-dt':Row,
     'multi-select':MultiSelect,
+    'dialog-pv':Dialog,
   },
   props: {
     title: {
@@ -502,6 +527,11 @@ export default defineComponent({
 
     /*v-models para campos del formualrio*/
     let nombre_carrera = ref('');
+
+
+    /*para los dialogos de alerta*/
+    let visibleDialogEditCicloFormacion = ref(false);
+    let indexDataEditing = -1;
 
     /*colores de la carrera por defecto de los colorpicker*/
     const colores_carrera = ref({
@@ -542,6 +572,30 @@ export default defineComponent({
     const ciclos_formacion = ref([
 
     ]);
+    /*para el ciclo de formacion que se va a editar*/
+    const cicloEditarSelected = ref();
+
+
+    /*Para el ciclo a editar que fue seleccionado*/
+    function onCicloSelect(event) {
+      cicloEditarSelected.value = event.data;
+      indexDataEditing = event.index;
+      visibleDialogEditCicloFormacion.value = true;
+    }
+
+    function onCloseCicloEdit() {
+      cicloEditarSelected.value = null;
+    }
+
+    function deleteCicloEdit(){
+      try {
+            ciclos_formacion.value.splice(indexDataEditing,1);
+            visibleDialogEditCicloFormacion.value = false;
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     /* mensaje para la tabla de ciclos de formacion cuando se 
     encuentre vacia (la neta me da hueva buscar entre los atributos para dar otra solucion)
@@ -784,6 +838,7 @@ export default defineComponent({
       perfil_egreso,
       ciclo_form,
       ciclos_formacion,
+      cicloEditarSelected,
       mensaje_tabla_ciclos_formacion,
       conocimientos,
       conocimiento,
@@ -798,8 +853,12 @@ export default defineComponent({
       plan_estudios_folleto_digital,
       pagina_principal,
       tarjeta_informativa,
+      visibleDialogEditCicloFormacion,
       //metodos
       addCicloFormacion,
+      onCicloSelect,
+      onCloseCicloEdit,
+      deleteCicloEdit,
       addConocimiento,
       addHabilidad,
       addActitud,

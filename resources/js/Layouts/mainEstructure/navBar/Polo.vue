@@ -127,12 +127,12 @@
                 <div v-for="message in messages" :key="message.id" class="flex flex-grow-1">
                     <a v-if="message.text" class='rounded-lg py-3 px-4 inline-block mb-2 relative text-2xl font-sans
                         bg-gray-100 text-gray-800 hover:bg-white float-left ml-2 mr-20 mt-2
-                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500' style="white-space: pre-line">{{
-                            message.text }}</a>
+                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500' style="white-space: pre-line">
+                        {{ message.text }}</a>
                     <a v-if="message.link" :href="message.link" target="_blank" class="rounded-lg py-2 px-4 inline-block mb-2 relative text-2xl 
                         bg-gray-400 text-gray-900 hover:bg-white float-left ml-2 mr-20 mt-2
-                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500" style="white-space: pre-line">{{
-                            message.option }}</a>
+                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500" style="white-space: pre-line">
+                        {{ message.option }}</a>
                 </div>
             </div>
 

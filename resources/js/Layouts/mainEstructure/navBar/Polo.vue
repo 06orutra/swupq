@@ -3,6 +3,7 @@
     import "/node_modules/primeflex/primeflex.css";
     export default {
         mounted() {
+            this.cargarBienvenida();
             this.cargarBotones();
             this.cargarRespuestas();
         },
@@ -15,9 +16,17 @@
                 //newMessageText: '',
                 showButtons: true,
                 currentButtons: [],
+                welcomeMessages: [],
             };
         },
         methods: {
+            cargarBienvenida() {
+                return axios.post('/chatWelcome/bannerData').then((response) => {
+                    this.welcomeMessages = response.data;
+                }).catch((error) => {
+                    console.log('Error al cargar los datos: ', error);
+                });
+            },
             cargarBotones() {
                 return axios.post('/chatButtons/bannerData').then((response) => {
                     this.currentButtons = response.data;
@@ -104,8 +113,17 @@
             </div>
 
 
+            <div class="px-4 pt-6 z-10 ">
+                <div v-for="text in welcomeMessages" class="flex flex-grow-1">
+                    <a v-if="text.contenido" class='rounded-lg py-3 px-4 inline-block mb-2 relative text-2xl font-sans
+                        bg-gray-100 text-gray-800 hover:bg-white float-left ml-2 mr-20 mt-2
+                        dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500' style="white-space: pre-line">
+                        {{ text.contenido }}</a>
+                </div>
+            </div>
 
-            <div class="px-4 py-6 z-10 ">
+
+            <div class="px-4 py-2 z-10 ">
                 <div v-for="message in messages" :key="message.id" class="flex flex-grow-1">
                     <a v-if="message.text" class='rounded-lg py-3 px-4 inline-block mb-2 relative text-2xl font-sans
                         bg-gray-100 text-gray-800 hover:bg-white float-left ml-2 mr-20 mt-2
@@ -122,7 +140,7 @@
 
 
             <!-- BOTONES DEL CHAT -->
-            <div v-if="showButtons" class="px-4 py-3 text-center">
+            <div v-if="showButtons" class="px-4 py-5 text-center">
                 <!-- Generar los botones que están guardados en un array como "currentButtons"
                     Recibiendo así "handleButtonClick como disparador para la siguiente acción" -->
                 <button v-for="button in currentButtons" :key="button.id" @click="handleButtonClick(button)"

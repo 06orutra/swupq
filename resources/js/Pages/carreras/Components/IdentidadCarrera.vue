@@ -395,6 +395,26 @@
       <!--en este aprtado se mostraran las tarjetas informativas que se vayan agregando-->
       <div class="card tarjetas-informativas-agregadas centrar">
 
+        <div class="card tarjetas-informativas-agregadas">
+
+          <!--
+          <data-table :value="mensaje_tabla_ciclos_formacion" v-show="ciclos_formacion.length < 1" showGridlines tableStyle="min-width: 50rem">
+            <column-dt header="Lista de ciclos agregados" field='message'></column-dt>
+          </data-table>
+          -->
+
+          <data-table :value="pagina_principal.tarjetas_informativas_pp"  
+            showGridlines tableStyle="min-width: 50rem" v-model:selection="iconoInfoEditarSelected"
+            selectionMode="single" dataKey="url_direccion_imagen" :metaKeySelection="false"
+            @rowSelect="onIconoInfoSelect" @rowUnselect="">
+
+              <column-dt field="descripcion" header="Descripción" style="width: 20%;"></column-dt>
+              <column-dt field="url_direccion_imagen" header="Dirección de imagen"></column-dt>
+          </data-table>
+
+          </div>
+
+          <!--
           <table border='1' class="table-tarjetas-informativas">
             <colgroup>
               <col style="width: 20%;">
@@ -424,11 +444,13 @@
 
             </tbody>
           </table>
+          -->
 
       </div>
 
     </section>
 
+    <!--seccion para los dialogos para editar un ciclo de formacion y un icono informativo-->
     <section class="container-dialogs-edition">
           <!--dialogo para editar un ciclo de formacion de la carrera-->
           <dialog-pv v-model:visible="visibleDialogEditCicloFormacion" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
@@ -447,6 +469,33 @@
             </div>
 
         </dialog-pv>
+
+
+          <!--dialogo para editar un icono informativo de la pagina principal-->
+          <dialog-pv v-model:visible="visibleDialogEditIconoInfo" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
+            :style="{ width: '70vw' }" header="Editar icono descriptivo" modal class="p-fluid" @hide="onCloseIconInfoEdit">
+
+            <div class="controls-dialog-edit-icono-info container-column">
+              <div class="controls-edit-icon-info">
+                <pv-input-text placeholder="Descripción" style="width: 30%;"
+                v-model="iconoInfoEditarSelected.descripcion"/>
+                <pv-input-text type="text"  
+                placeholder="https://my_icono" style="width: 70%;" v-model="iconoInfoEditarSelected.url_direccion_imagen"/>
+              </div>
+
+                <div class="container-image-icon-info centrar-container">
+                  <img :src="iconoInfoEditarSelected.url_direccion_imagen" draggable="false" 
+                  class="image-icon"/>
+                </div>
+
+                <div class="btn-delete-icon-edit " style="padding-top: 1%;">
+                    <pv-button type="button" label="Eliminar" severity="danger" icon="pi pi-trash" 
+                    @click="deleteIconInfo"></pv-button>
+                </div>
+            </div>
+
+        </dialog-pv>
+
     </section>
     
     <br>
@@ -531,6 +580,7 @@ export default defineComponent({
 
     /*para los dialogos de alerta*/
     let visibleDialogEditCicloFormacion = ref(false);
+    let visibleDialogEditIconoInfo = ref(false);
     let indexDataEditing = -1;
 
     /*colores de la carrera por defecto de los colorpicker*/
@@ -574,6 +624,8 @@ export default defineComponent({
     ]);
     /*para el ciclo de formacion que se va a editar*/
     const cicloEditarSelected = ref();
+    /*para el incono descriptivo seleccionado a editar*/
+    const iconoInfoEditarSelected = ref();
 
 
     /*Para el ciclo a editar que fue seleccionado*/
@@ -587,10 +639,32 @@ export default defineComponent({
       cicloEditarSelected.value = null;
     }
 
+    /*metodos para la edicion de los iconos informativos */
+
+    function onIconoInfoSelect(event){
+      iconoInfoEditarSelected.value = event.data;
+      indexDataEditing = event.index;
+      visibleDialogEditIconoInfo.value = true;
+    }
+
+    function onCloseIconInfoEdit() {
+      iconoInfoEditarSelected.value = null;
+    }
+
     function deleteCicloEdit(){
       try {
             ciclos_formacion.value.splice(indexDataEditing,1);
             visibleDialogEditCicloFormacion.value = false;
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    function deleteIconInfo(){
+      try {
+            pagina_principal.value.tarjetas_informativas_pp.splice(indexDataEditing,1);
+            visibleDialogEditIconoInfo.value = false;
 
         } catch (error) {
             console.error(error);
@@ -854,11 +928,16 @@ export default defineComponent({
       pagina_principal,
       tarjeta_informativa,
       visibleDialogEditCicloFormacion,
+      visibleDialogEditIconoInfo,
+      iconoInfoEditarSelected,
       //metodos
       addCicloFormacion,
       onCicloSelect,
       onCloseCicloEdit,
       deleteCicloEdit,
+      onIconoInfoSelect,
+      onCloseIconInfoEdit,
+      deleteIconInfo,
       addConocimiento,
       addHabilidad,
       addActitud,
@@ -928,12 +1007,31 @@ export default defineComponent({
 
 <style scoped>
 
+.container-image-icon-info{
+  padding: 10px;
+}
+
+.image-icon{
+  width: 25%;
+  height: auto;
+  border: 1px solid #00FF00;
+  border-radius: 14px;
+  padding: 1% 1% 1% 1%;
+}
+
+.container-column{
+  display: flex;
+  flex-direction: column;
+}
+
 .centrar{
   justify-content: center;
 }
 
-.centrar-texto{
-  text-align: center;
+.centrar-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .item {

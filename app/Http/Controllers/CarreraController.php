@@ -285,7 +285,66 @@ class CarreraController extends Controller
             'direccion_getCarrera'=> "/carreras-unica", //pasamos la direccion a la que se debe hacer la peticion
         ]);
     }
-    
+
+    /*metodos para insertar conocimientos, habilidades y actitudes*/
+    public function set_conocimiento(array $conocimientos){
+        try{
+            foreach ($conocimientos as $conocimientoEntrante) {
+                // Verifica si el conocimiento ya existe en la base de datos
+                $conocimientoExistente = Conocimiento::where('nombre', $conocimientoEntrante)->first();
+                if (!$conocimientoExistente) {
+                    // Si el conocimiento no existe, crea un nuevo registro
+                    $conocimientoAdd = new Conocimiento();
+                    $conocimientoAdd->nombre = $conocimientoEntrante;
+                    $conocimientoAdd->save();
+                }
+            }
+            return response()->json("Se agrego el conocimiento(s) exitosamente");
+            
+        }catch (Exception $e){
+            throw $e;
+        }
+    }
+
+    public function set_habilidades(array $habilidades){
+        try{
+            foreach ($habilidades as $habilidadEntrante) {
+                // Verifica si el conocimiento ya existe en la base de datos
+                $habilidadExistente = Habilidad::where('nombre', $habilidadEntrante)->first();
+                if (!$habilidadExistente) {
+                    // Si el conocimiento no existe, crea un nuevo registro
+                    $habilidadAdd = new Habilidad();
+                    $habilidadAdd->nombre = $habilidadEntrante;
+                    $habilidadAdd->save();
+                }
+            }
+            return response()->json("Se agrego la habilidad(es) exitosamente");
+            
+        }catch (Exception $e){
+            throw $e;
+        }
+    }
+
+    public function set_actitud(array $actitudes){
+        try{
+            foreach ($actitudes as $actitudEntrante) {
+                // Verifica si el conocimiento ya existe en la base de datos
+                $actitudExistente = Actitud::where('nombre', $actitudEntrante)->first();
+                if (!$actitudExistente) {
+                    // Si el conocimiento no existe, crea un nuevo registro
+                    $actitudAdd = new Actitud();
+                    $actitudAdd->nombre = $actitudEntrante;
+                    $actitudAdd->save();
+                }
+            }
+            return response()->json("Se agrego la actitud(es) exitosamente");
+            
+        }catch (Exception $e){
+            throw $e;
+        }
+    }
+
+
     /**
      * Remove the specified resource from storage.
      */

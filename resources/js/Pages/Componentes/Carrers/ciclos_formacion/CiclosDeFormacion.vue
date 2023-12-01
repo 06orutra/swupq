@@ -20,7 +20,8 @@
 
           <div class="container-informacion-ciclo-formacion text-section" v-if="lista_ciclos_formacion.length > 0" 
             :style="{backgroundColor: '#'+lista_colores_carrera.colorSecundario}">
-              <div> {{ lista_ciclos_formacion[ciclo_seleccionado].descripcion }} </div>
+              <div :style="{color:getColorFontContraste(lista_colores_carrera.colorSecundario,true)}"> 
+                {{ lista_ciclos_formacion[ciclo_seleccionado].descripcion }} </div>
           </div>
           <div v-else>
             <h3>No se encontro informacion relacionada a los ciclos</h3>
@@ -67,41 +68,45 @@ export default defineComponent({
       ciclo_seleccionado.value = index;
     }
 
+    /*calcula el color contraste*/
+    function getColorFontContraste(hexColor,getWithNumeral = false){
+      if(hexColor == null || hexColor == undefined || hexColor == ''){
+        return '#000000';
+      }
+
+      // Eliminar el # si está presente
+      if (hexColor.startsWith('#')) {
+          hexColor = hexColor.slice(1);
+      }
+
+      // Convertir el color hexadecimal a valores RGB
+      const r = parseInt(hexColor.substr(0, 2), 16);
+      const g = parseInt(hexColor.substr(2, 2), 16);
+      const b = parseInt(hexColor.substr(4, 2), 16);
+
+      // Calcular la luminancia
+      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+      // Devolver negro (#000000) o blanco (#FFFFFF) dependiendo de la luminancia
+      if(getWithNumeral){
+        return luminance > 0.5 ? '#000000' : '#FFFFFF';
+      }
+      return luminance > 0.5 ? '000000' : 'FFFFFF';
+      
+  }
     return {
       //variables
       ciclo_seleccionado,
       //metodos
       showText,
+      getColorFontContraste,
+      
     };
   },
-
-  // Watchers (opcional)
-  // Puedes utilizar el método watch para observar cambios en las propiedades o datos del componente.
-  // Ejemplo:
-  // watch: {
-  //   title(newValue, oldValue) {
-  //     console.log('El título ha cambiado de:', oldValue, 'a:', newValue);
-  //   },
-  // },
-
-  // Directivas (opcional)
-  // Puedes definir directivas personalizadas para este componente.
-  // Ejemplo:
-  // directives: {
-  //   focus: {
-  //     // Definición de la directiva
-  //     // ...
-  //   },
-  // },
-
-  // Otras opciones del componente (opcional)
-  // Puedes definir otras opciones según tus necesidades.
 });
 </script>
 
 <style scoped>
-
-
 
 /*
 button-column-numero-ciclo = button-column
@@ -177,10 +182,7 @@ button-column-numero-ciclo = button-column
     color: white;
     cursor: pointer;
   }
-  .button-column-selected{
-    /*agregar color de la paleta de colores*/ 
-    background-color:#f731c5;
-  }
+ 
 
   .text-section {
     flex: 1;
@@ -195,8 +197,6 @@ button-column-numero-ciclo = button-column
     font-family: Arial;
     text-align: justify;
 }
-
-
 .container-informacion-ciclo-formacion{
   border: 1px solid;
   border-radius: 15px;

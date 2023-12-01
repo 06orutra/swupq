@@ -497,7 +497,29 @@
         </dialog-pv>
 
     </section>
+
+    <section class="container-dialog-spinner">
+        <!--dialogo para mostrar un progress spinner-->
+        <dialog-pv v-model:visible="visibleSpinnerDialog" :style="{ width: '50vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+         header="Cargando..." modal class="p-fluid" :closable="false">
+         <div class="container-spinner centrar" style="margin:2%">
+            <progress-spinner />
+         </div>
+        </dialog-pv>
+    </section>
     
+    <section class="dialog-message-request">
+        <!--dialogo para mostrar un mensaje-->
+        <dialog-pv v-model:visible="visibleDialogMessage" :style="{ width: '50vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+         header="Aviso!" modal class="p-fluid" >
+            <message class="content-message centrar" :closable="false" :severity="messageDialog.severityActual"
+            style="width: 100%;">
+                <h2>{{ messageDialog.message }}</h2>
+            </message>
+            <pv-button label="Aceptar" @click="visibleDialogMessage = false"></pv-button>
+        </dialog-pv>
+    </section>
+
     <br>
 
     <div class="control-submit">
@@ -527,6 +549,8 @@ import ColumnGroup from 'primevue/columngroup';   // optional
 import Row from 'primevue/row';       
 import MultiSelect from 'primevue/multiselect';
 import Dialog from 'primevue/dialog';
+import ProgressSpinner from 'primevue/progressspinner';
+import Message from 'primevue/message';
 import axios from 'axios';
 
 
@@ -546,6 +570,8 @@ export default defineComponent({
     'row-dt':Row,
     'multi-select':MultiSelect,
     'dialog-pv':Dialog,
+    'progress-spinner':ProgressSpinner,
+    'message':Message,
   },
   props: {
     title: {
@@ -617,6 +643,16 @@ export default defineComponent({
       descripcion : '',
     });
 
+    /*para mostrar el dialogo de carga cuando se realizan operaciones*/
+    let visibleSpinnerDialog = ref(false);
+    let visibleDialogMessage = ref(false);
+
+
+    const messageDialog = ref({
+        message:'This message dialog',
+        severityValues:['success',"error","warn","info"],
+        severityActual: 'success'
+    });
     /*estructura para la lista de ciclos agregadas */
     /*Informacion estatica de prueba para mostrar los ciclos de formacion*/
     const ciclos_formacion = ref([
@@ -627,6 +663,11 @@ export default defineComponent({
     /*para el incono descriptivo seleccionado a editar*/
     const iconoInfoEditarSelected = ref();
 
+    //para configurar la informacion del mensaje de alerta
+    function setAlertMessage(message,severity){
+        messageDialog.value.message = message;
+        messageDialog.value.severityActual = messageDialog.value.severityValues[severity];
+    }
 
     /*Para el ciclo a editar que fue seleccionado*/
     function onCicloSelect(event) {
@@ -752,6 +793,12 @@ export default defineComponent({
       tarjetas_informativas_pp:[],
     });
 
+
+    /*lista para los conocimientos, habilidades y actitudes que se van a agregar*/
+    let conocimientos_to_add = [];
+    let habilidades_to_add = [];
+    let actitudes_to_add = [];
+
     /*  funciones */
 
     function addCicloFormacion(){
@@ -766,28 +813,41 @@ export default defineComponent({
       //conocimientos_selected.value.push(conocimiento.value);
       perfil_ingreso.value.conocimientos.push(conocimiento.value);
       conocimientos.value.push(conocimiento.value);
-
+      /*agregamos el nuevo conocimiento a la lista de conocimientos para agregarlo a la base de datos*/
+      conocimientos_to_add.push({
+        nombre:conocimiento.value.nombre,
+      });
       conocimiento.value = {
         nombre : '',
       };
+
+      console.log(conocimientos_to_add);
     }
 
     function addHabilidad(){
       perfil_ingreso.value.habilidades.push(habilidad.value);
       habilidades_selected.value.push(habilidad.value);
       habilidades.value.push(habilidad.value);
+      habilidades_to_add.push({
+        nombre:habilidad.value.nombre,
+      }); 
       habilidad.value ={
         nombre : '',
       }
+      console.log(habilidades_to_add);
     }
 
     function addActitud(){
       perfil_ingreso.value.actitudes.push(actitud.value);
       actitudes_selected.value.push(actitud.value);
       actitudes.value.push(actitud.value);
+      actitudes_to_add.push({
+        nombre:actitud.value.nombre,
+      });
       actitud.value = {
         nombre:'',
       }
+      console.log(actitudes_to_add);
     }
 
     function addTarjetaInformativa(){
@@ -854,7 +914,9 @@ export default defineComponent({
 
 
     function submitForm(){
-      //document.getElementById('form-carreras').submit();
+    //mostramos el spinner de carga
+    visibleSpinnerDialog.value = true;
+
     const formData = new FormData();
     formData.append('nombre', nombre_carrera.value); //agregamos el nombre de la carrera
     formData.append('colores', JSON.stringify(colores_carrera.value)); //agregamos los colores de la carrera
@@ -866,40 +928,31 @@ export default defineComponent({
     //agregamos la informacion de la pagina principal e iconos de informacion
     formData.append('pagina_principal',JSON.stringify(pagina_principal.value));
 
+    //agregamos los conocimientos, habilidades y actitudes que se agregaran a la base de datos
+    formData.append('news_conocimientos',JSON.stringify(conocimientos_to_add));
+    formData.append('news_habilidades',JSON.stringify(habilidades_to_add));
+    formData.append('news_actitudes',JSON.stringify(actitudes_to_add));
+
       axios.post(props.url_insertarCarrera,formData,{
         headers:{
           'Content-Type': 'multipart/form-data'
         }
       }).then(function(response){
         
-        console.log(response);
+        setAlertMessage(response.data,0);
+        visibleSpinnerDialog.value = false;
+        visibleDialogMessage.value = true;
 
       }).catch(function(error){
+
         console.error(error);
+        setAlertMessage(response.data,1);
+        visibleSpinnerDialog.value = false;
+        visibleDialogMessage.value = true;
 
       }).finally(function(){
         console.log("Peticion finalizada...");
       })
-
-
-      /*
-      //formatemos los datos para enviarlos al backend
-      const formData = new FormData();
-      formData.append('nombre', this.nombre); //llave-valor
-
-      axios.post('url_de_la_ruta_para_guardar_la_carrera',
-          formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-      }).then(function (response) {
-          console.log(response);
-      }).catch(function (error) {
-          console.log(error);
-      }).finally(function () {
-          //limpiamos los campos del formulario
-      });
-      */
 
     }
 
@@ -930,6 +983,9 @@ export default defineComponent({
       visibleDialogEditCicloFormacion,
       visibleDialogEditIconoInfo,
       iconoInfoEditarSelected,
+      visibleSpinnerDialog,
+      visibleDialogMessage,
+      messageDialog,
       //metodos
       addCicloFormacion,
       onCicloSelect,
@@ -1007,6 +1063,16 @@ export default defineComponent({
 
 <style scoped>
 
+.container-spinner{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content-message{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .container-image-icon-info{
   padding: 10px;
 }

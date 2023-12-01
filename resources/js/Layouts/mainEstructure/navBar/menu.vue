@@ -47,9 +47,9 @@ export default {
           label: 'INSTITUCIÓN',
           subMenuItems: [
             { label: '- Mensaje del rector', path: '/institucion/mensajeRector/' },
-            { label: '- Historia', path: '/institucion/mensajeRector/' },
-            { label: '- Filosofia', path: '/institucion/mensajeRector/' },
-            { label: '- Modelo educativo', path: '/institucion/mensajeRector/' },
+            { label: '- Historia', path: '/institucion/historia/' },
+            { label: '- Filosofia', path: '/institucion/filosofia/' },
+            { label: '- Modelo educativo', path: '/institucion/modelo-educativo/' },
             { label: '- Mascotas', path: '/institucion/mascotas/' },
             { label: '- Marco jurídico', path: '/institucion/marcoJuridico/' },
             { label: '- Organigrama' },

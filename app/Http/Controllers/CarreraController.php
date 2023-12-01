@@ -200,6 +200,24 @@ class CarreraController extends Controller
         $carrera->datos = $json;
         $carrera->save();
 
+        /* se requiere cambiar las migraciones de las habilidades, para agregar los campos timestap */
+        //por si vienen conocimientos, habilidades y actitudes nuevos
+        /*foreach (json_decode($request->input('news_conocimientos')) as $conocimientoNuevo) {
+            $this->set_conocimiento($conocimientoNuevo->nombre);
+        }*/
+ 
+        /*
+        foreach (json_decode($request->input('news_habilidades')) as $habilidadNuevo) {
+            $this->set_habilidades($habilidadNuevo->nombre);
+        }*/
+
+
+        /*
+        foreach (json_decode($request->input('news_actitudes')) as $actitudNuevo) {
+            $this->set_actitud($actitudNuevo->nombre);
+        }
+        */
+
         return response()->json("Se proceso la carrera exitosamente");
     }
 
@@ -287,58 +305,56 @@ class CarreraController extends Controller
     }
 
     /*metodos para insertar conocimientos, habilidades y actitudes*/
-    public function set_conocimiento(array $conocimientos){
+    public function set_conocimiento($conocimiento){
         try{
-            foreach ($conocimientos as $conocimientoEntrante) {
-                // Verifica si el conocimiento ya existe en la base de datos
-                $conocimientoExistente = Conocimiento::where('nombre', $conocimientoEntrante)->first();
-                if (!$conocimientoExistente) {
-                    // Si el conocimiento no existe, crea un nuevo registro
-                    $conocimientoAdd = new Conocimiento();
-                    $conocimientoAdd->nombre = $conocimientoEntrante;
-                    $conocimientoAdd->save();
-                }
+            // Verifica si el conocimiento ya existe en la base de datos
+            $conocimientoExistente = Conocimiento::where('nombre', $conocimiento)->first();
+            if (!$conocimientoExistente) {
+                // Si el conocimiento no existe, crea un nuevo registro
+                $conocimientoAdd = new Conocimiento();
+                $conocimientoAdd->nombre = $conocimiento;
+                $conocimientoAdd->save();
+                return response()->json("Se agrego el conocimiento(s) exitosamente");
+            }else{
+                return response()->json("El conocimiento ya existe");
             }
-            return response()->json("Se agrego el conocimiento(s) exitosamente");
+        }catch (Exception $e){
+            throw $e;
+        }
+    }
+
+    public function set_habilidades($habilidad){
+
+        try{
+            $habilidadExistente = Habilidad::where('nombre', $habilidad)->first();
+            if (!$habilidadExistente) {
+                // Si el conocimiento no existe, crea un nuevo registro
+                $habilidadAdd = new Habilidad();
+                $habilidadAdd->nombre = $habilidad;
+                $habilidadAdd->save();
+                return response()->json("Se agrego la habilidad(es) exitosamente");
+            }else{
+                return response()->json("La habilidad ya existe");
+            }    
             
         }catch (Exception $e){
             throw $e;
         }
     }
 
-    public function set_habilidades(array $habilidades){
+    public function set_actitud($actitud){
         try{
-            foreach ($habilidades as $habilidadEntrante) {
-                // Verifica si el conocimiento ya existe en la base de datos
-                $habilidadExistente = Habilidad::where('nombre', $habilidadEntrante)->first();
-                if (!$habilidadExistente) {
-                    // Si el conocimiento no existe, crea un nuevo registro
-                    $habilidadAdd = new Habilidad();
-                    $habilidadAdd->nombre = $habilidadEntrante;
-                    $habilidadAdd->save();
-                }
+            // Verifica si el conocimiento ya existe en la base de datos
+            $actitudExistente = Actitud::where('nombre', $actitud)->first();
+            if (!$actitudExistente) {
+                // Si el conocimiento no existe, crea un nuevo registro
+                $actitudAdd = new Actitud();
+                $actitudAdd->nombre = $actitudEntrante;
+                $actitudAdd->save();
+                return response()->json("Se agrego la actitud(es) exitosamente");
+            }else{
+                return response()->json("La actitud ya existe");
             }
-            return response()->json("Se agrego la habilidad(es) exitosamente");
-            
-        }catch (Exception $e){
-            throw $e;
-        }
-    }
-
-    public function set_actitud(array $actitudes){
-        try{
-            foreach ($actitudes as $actitudEntrante) {
-                // Verifica si el conocimiento ya existe en la base de datos
-                $actitudExistente = Actitud::where('nombre', $actitudEntrante)->first();
-                if (!$actitudExistente) {
-                    // Si el conocimiento no existe, crea un nuevo registro
-                    $actitudAdd = new Actitud();
-                    $actitudAdd->nombre = $actitudEntrante;
-                    $actitudAdd->save();
-                }
-            }
-            return response()->json("Se agrego la actitud(es) exitosamente");
-            
         }catch (Exception $e){
             throw $e;
         }

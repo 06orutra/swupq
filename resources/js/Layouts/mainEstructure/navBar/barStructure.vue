@@ -1,7 +1,7 @@
 <template>
   <div class="contenedor">
     <div class="superior">
-      <img src="/storage/img/icon_logo_UPQ.svg" class="logo-img" alt="Logo" @click="redirectTo('/')" />
+      <img src="/storage/img/icon_logo_UPQ.svg" class="logo-img" alt="Logo" />
     </div>
 
     <div class="inferior">
@@ -70,7 +70,7 @@ export default {
   margin-top: -30%;
 }
 
-@media (min-width: 1024px) and (max-width:1201px) {
+@media (min-width: 1023px) and (max-width:1201px) {
   .contenedor{
     display: flex;
     flex-direction: column;

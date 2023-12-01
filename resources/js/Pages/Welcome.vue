@@ -16,11 +16,11 @@ import Karo from '@/Layouts/homeComponents/Karo.vue'
     
     <AppEstructure :controllerName="'/bannerData'">          
 
-        <CarrierBanner />
+        <!-- <CarrierBanner />
         <carruselSecundario />
-        <TourCardenal />
+        <TourCardenal /> -->
         <Directorio />
-        <SplitterVue />
+        <!-- <SplitterVue /> -->
 
     </AppEstructure>
 

@@ -2,7 +2,7 @@
   <div id="app">
     <img src="/storage/img/icon_menu.svg" alt="Menu Icon" class="menu-icon" @click="showMenu = !showMenu" />
 
-    <ul class="combined-menu" v-show="showMenu" @mouseleave="closeActiveSubMenu">
+    <ul class="combined-menu" v-show="showMenu" @mouseenter="resetTimer" @mouseleave="closeActiveSubMenu">
       <li v-for="(menuItem, index) in menuItems.concat(menuus)" :key="index">
         <div v-if="menuItem.subMenuItems" @mouseover="expandSubMenu(index)" @click="toggleSubMenu(index)"
           :style="{ color: menuItem.textColor }" :class="{ 'menu-block': true, 'active': menuItem.expanded }">
@@ -32,6 +32,7 @@
 export default {
   data() {
     return {
+      hideMenuTimeout: null,
       menuicon: {
         top: '28.1%', // Ajusta esto a la posición inicial del menú-icon
         left: '10px', // Ajusta esto a la posición inicial del menú-icon
@@ -156,9 +157,23 @@ export default {
       if (this.activeSubMenuIndex !== null) {
         this.menuItems[this.activeSubMenuIndex].expanded = false;
         this.activeSubMenuIndex = null;
-        setTimeout(() => {
+        
+        // Borrar el temporizador existente si hay uno
+        if (this.hideMenuTimeout) {
+          clearTimeout(this.hideMenuTimeout);
+        }
+
+        // Configurar un nuevo temporizador
+        this.hideMenuTimeout = setTimeout(() => {
           this.showMenu = false;
         }, 2000);
+      }
+    },
+    resetTimer() {
+      // Reiniciar el temporizador cuando vuelves al menú
+      if (this.hideMenuTimeout) {
+        clearTimeout(this.hideMenuTimeout);
+        this.hideMenuTimeout = null; // Restablecer la variable del temporizador
       }
     },
     closeMenuAndSubMenu() {
@@ -227,7 +242,7 @@ export default {
   padding: 0;
   width: 250px;
   z-index: 2;
-  background-color: rgba(0, 26, 226, 0.8);
+  background-color: rgba(0, 26, 226, 0.712);
 }
 
 .combined-menu .sub-menu-block {

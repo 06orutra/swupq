@@ -158,6 +158,24 @@ setup(props) {
     });
   }
 
+  function getColorFontContraste(){
+      // Eliminar el # si está presente
+      if (hexColor.startsWith('#')) {
+          hexColor = hexColor.slice(1);
+      }
+
+      // Convertir el color hexadecimal a valores RGB
+      const r = parseInt(hexColor.substr(0, 2), 16);
+      const g = parseInt(hexColor.substr(2, 2), 16);
+      const b = parseInt(hexColor.substr(4, 2), 16);
+
+      // Calcular la luminancia
+      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+      // Devolver negro (#000000) o blanco (#FFFFFF) dependiendo de la luminancia
+      return luminance > 0.5 ? '#000000' : '#FFFFFF';
+  }
+
   return {
     //variables
     datosCarrera,

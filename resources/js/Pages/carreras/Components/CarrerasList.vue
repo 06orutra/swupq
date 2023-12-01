@@ -700,7 +700,6 @@ export default defineComponent({
     'column-pv':Column,
     'message':Message,
     'progress-spinner':ProgressSpinner,
-
   },
   props: {
     title:{

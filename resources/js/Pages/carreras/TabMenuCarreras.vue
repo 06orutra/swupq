@@ -5,12 +5,16 @@
             <tab-panel header="Mis Carreras">
               <carrera-lista title="Lista de carreras" 
               url_getCarreras="/carreras-disponibles" url_getCarreraUnica="/carreras-unica"
-              url_deleteCarrera="/carrera-eliminar" url_editCarrera="/carrera-editar"/>
+              url_deleteCarrera="/carrera-eliminar" url_editCarrera="/carrera-editar"
+              url_carreraConocimientos="/carrera-conocimientos" url_carreraHabilidades="/carrera-habilidades"
+              url_carreraActitudes="/carrera-actitudes"/>
             </tab-panel>
 
             <!--apartado para la seccion de registro de una carrera-->
             <tab-panel :header="headers['registro_carrera']">
-              <identidad-carrera title="Paleta de colores" url_insertarCarrera="/carrera-prueba"></identidad-carrera>
+              <identidad-carrera title="Paleta de colores" url_insertarCarrera="/carrera-prueba"
+              url_carreraConocimientos="/carrera-conocimientos" url_carreraHabilidades="/carrera-habilidades" 
+              url_carreraActitudes="/carrera-actitudes"></identidad-carrera>
             </tab-panel>
 
             

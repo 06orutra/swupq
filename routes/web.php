@@ -155,10 +155,19 @@ Route::prefix('institucion')->group(function () {
     Route::get('directorio', function(){
         return Inertia::render('Componentes/Institucion/Directorio');
     });
+
+    
+
 });   
     Route::get('ubicacion', function () {
         return Inertia::render('Componentes/Institucion/location');
     });
+
+
+//rutas para carreras, ruta que devuelve la vista de las carreras, le pasa el id de la carrera que debe consultar sus datos
+Route::prefix('carreras')->group(function () {
+    Route::get('informes/{nombre_carrera}-{id}',[CarreraController::class,'get_carrera_view']);
+});
 
 
 //¿Esto qué es xd?
@@ -385,7 +394,7 @@ Route::post('/bannerDatatercero', [TbCarruselTercerController::class, 'bannerDat
 
 
 
-/* rutas para el apartado de carreras*/
+/* rutas para el apartado de carreras (proteger para que solo puedo utilizarlas en admin)*/
 // Ruta para mostrar el json de los archivos subidos
 Route::get('data', [CarreraController::class, 'index']) -> name('data');
 
@@ -417,4 +426,21 @@ Route::post('/carrera-eliminar',[CarreraController::class,'delete_carrera'])->na
 
 //Ruta para editar un registro de la base de datos
 Route::post('/carrera-editar',[CarreraController::class,'update_carrera'])->name('carrera.editar');
+
+//ruta para obtener los conocimientos disponibles de las carreras
+Route::post('/carrera-conocimientos',[CarreraController::class,'get_carrera_conocimientos'])->name('carrera.conocimientos');
+
+//ruta para obtener las habilidades disponibles de las carreras
+Route::post('/carrera-habilidades',[CarreraController::class,'get_carrera_habilidades'])->name('carrera.habilidades');
+
+//ruta para obtener las actitudes disponibles de las carreras
+Route::post('/carrera-actitudes',[CarreraController::class,'get_carrera_actitudes'])->name('carrera.actitudes');
+
+//ruta para obtener la lista de carreras disponibles para mostrar en el menu
+Route::post('/carrera-menu',[CarreraController::class,'get_carrera_disponibles_menu'])->name('carrera.menu');
+
+
+
+
+
 Route::post('/bannerDatatercero', [TbCarruselTercerController::class, 'bannerData']);

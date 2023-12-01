@@ -123,7 +123,7 @@
           Selccionar conocimientos:
           <multi-select v-model="perfil_ingreso.conocimientos" display="chip" :options="conocimientos" 
           optionLabel="nombre" placeholder="Selecciona conocimientos"
-            :maxSelectedLabels="3" class="w-full md:w-30rem"  />
+            :maxSelectedLabels="3" class="w-full md:w-30rem"  filter/>
         </div>
 
 
@@ -131,7 +131,11 @@
         <div class="view-selected-conocimientos">
           <!--mostrar los conocimientos que se ha agregado-->
           <strong>conocimientos seleccionados</strong>
+
           <ul>
+            <mark v-show="perfil_ingreso.conocimientos.length < 1">
+                Aun no se han seleccionado conocimientos
+            </mark>
             <li v-for="(elm,index) in perfil_ingreso.conocimientos" :key="index">{{ elm.nombre }}</li>
           </ul>
         </div>
@@ -158,13 +162,16 @@
           Selccionar habilidad:
           <multi-select v-model="perfil_ingreso.habilidades" display="chip" :options="habilidades" 
           optionLabel="nombre" placeholder="Selecciona habilidades"
-            :maxSelectedLabels="3" class="w-full md:w-30rem"  />
+            :maxSelectedLabels="3" class="w-full md:w-30rem"  filter/>
         </div>
 
         <div class="view-selected-habilidades">
           <!--mostrar las habilidaes que se ha agregado-->
           <strong>habilidades seleccionadas</strong>
           <ul>
+            <mark v-show="perfil_ingreso.habilidades.length < 1">
+                Aun no se han seleccionado habilidades
+            </mark>
             <li v-for="(elm,index) in perfil_ingreso.habilidades" :key="index">{{ elm.nombre }}</li>
           </ul>
         </div>
@@ -191,13 +198,16 @@
           Selccionar actitud:
           <multi-select v-model="perfil_ingreso.actitudes" display="chip" :options="actitudes" 
           optionLabel="nombre" placeholder="Selecciona actitudes"
-            :maxSelectedLabels="3" class="w-full md:w-30rem"  />
+            :maxSelectedLabels="3" class="w-full md:w-30rem"  filter/>
         </div>
 
         <div class="view-selected-actitudes">
           <!--mostrar las actitudes que se ha agregado-->
           <strong>actitudes seleccionadas</strong>
           <ul>
+            <mark v-show="perfil_ingreso.actitudes.length < 1">
+                Aun no se han seleccionado actitudes
+            </mark>
             <li v-for="(elm,index) in perfil_ingreso.actitudes" :key="index">{{ elm.nombre }}</li>
           </ul>
         </div>
@@ -308,10 +318,20 @@
       <br>
 
       <div class="card ciclos-agregados">
-        <data-table :value="ciclos_formacion" showGridlines tableStyle="min-width: 50rem">
+
+        <data-table :value="mensaje_tabla_ciclos_formacion" v-show="ciclos_formacion.length < 1" showGridlines tableStyle="min-width: 50rem">
+          <column-dt header="Lista de ciclos agregados" field='message'></column-dt>
+        </data-table>
+
+        <data-table :value="ciclos_formacion" v-show="ciclos_formacion.length > 0" 
+          showGridlines tableStyle="min-width: 50rem" v-model:selection="cicloEditarSelected"
+          selectionMode="single" dataKey="descripcion" :metaKeySelection="false"
+          @rowSelect="onCicloSelect" @rowUnselect="">
+
             <column-dt field="numero_ciclo" header="Número de ciclo" style="width: 20%;"></column-dt>
             <column-dt field="descripcion" header="Descripción"></column-dt>
         </data-table>
+
       </div>
 
     </section>
@@ -375,6 +395,26 @@
       <!--en este aprtado se mostraran las tarjetas informativas que se vayan agregando-->
       <div class="card tarjetas-informativas-agregadas centrar">
 
+        <div class="card tarjetas-informativas-agregadas">
+
+          <!--
+          <data-table :value="mensaje_tabla_ciclos_formacion" v-show="ciclos_formacion.length < 1" showGridlines tableStyle="min-width: 50rem">
+            <column-dt header="Lista de ciclos agregados" field='message'></column-dt>
+          </data-table>
+          -->
+
+          <data-table :value="pagina_principal.tarjetas_informativas_pp"  
+            showGridlines tableStyle="min-width: 50rem" v-model:selection="iconoInfoEditarSelected"
+            selectionMode="single" dataKey="url_direccion_imagen" :metaKeySelection="false"
+            @rowSelect="onIconoInfoSelect" @rowUnselect="">
+
+              <column-dt field="descripcion" header="Descripción" style="width: 20%;"></column-dt>
+              <column-dt field="url_direccion_imagen" header="Dirección de imagen"></column-dt>
+          </data-table>
+
+          </div>
+
+          <!--
           <table border='1' class="table-tarjetas-informativas">
             <colgroup>
               <col style="width: 20%;">
@@ -388,7 +428,8 @@
             </thead>
 
             <tbody>
-              <tr v-for="(elem,index) in tarjetas_informativas" :key="index">
+
+              <tr v-for="(elem,index) in pagina_principal.tarjetas_informativas_pp" :key="index">
                 <td>{{ elem.descripcion }}</td>
                 <td>{{ elem.url_direccion_imagen }}</td>
                 <td align="center">
@@ -396,15 +437,88 @@
                   @:click="mostrarImagen(elem.url_direccion_imagen)" />
                 </td>
               </tr>
+
+              <tr v-show="pagina_principal.tarjetas_informativas_pp.length < 1">
+                <td colspan="3" class="centrar-texto">Por favor agregue un icono informativo</td>
+              </tr>
+
             </tbody>
           </table>
+          -->
 
       </div>
 
     </section>
+
+    <!--seccion para los dialogos para editar un ciclo de formacion y un icono informativo-->
+    <section class="container-dialogs-edition">
+          <!--dialogo para editar un ciclo de formacion de la carrera-->
+          <dialog-pv v-model:visible="visibleDialogEditCicloFormacion" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
+            :style="{ width: '70vw' }" header="Editar ciclo de formación" modal class="p-fluid" @hide="onCloseCicloEdit">
+
+            <div class="controls-dialog-edit-ciclo-formacion">
+                <pv-input-number placeholder="Numero ciclo" style="width: 30%;"
+                v-model="cicloEditarSelected.numero_ciclo"/>
+                <pv-input-text type="text"  
+                placeholder="Descripción" style="width: 70%;" v-model="cicloEditarSelected.descripcion"/>
+
+                <div class="btn-delete-ciclo-edit " style="padding-top: 1%;">
+                    <pv-button type="button" label="Eliminar" severity="danger" icon="pi pi-trash" 
+                    @click="deleteCicloEdit()"></pv-button>
+                </div>
+            </div>
+
+        </dialog-pv>
+
+
+          <!--dialogo para editar un icono informativo de la pagina principal-->
+          <dialog-pv v-model:visible="visibleDialogEditIconoInfo" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
+            :style="{ width: '70vw' }" header="Editar icono descriptivo" modal class="p-fluid" @hide="onCloseIconInfoEdit">
+
+            <div class="controls-dialog-edit-icono-info container-column">
+              <div class="controls-edit-icon-info">
+                <pv-input-text placeholder="Descripción" style="width: 30%;"
+                v-model="iconoInfoEditarSelected.descripcion"/>
+                <pv-input-text type="text"  
+                placeholder="https://my_icono" style="width: 70%;" v-model="iconoInfoEditarSelected.url_direccion_imagen"/>
+              </div>
+
+                <div class="container-image-icon-info centrar-container">
+                  <img :src="iconoInfoEditarSelected.url_direccion_imagen" draggable="false" 
+                  class="image-icon"/>
+                </div>
+
+                <div class="btn-delete-icon-edit " style="padding-top: 1%;">
+                    <pv-button type="button" label="Eliminar" severity="danger" icon="pi pi-trash" 
+                    @click="deleteIconInfo"></pv-button>
+                </div>
+            </div>
+
+        </dialog-pv>
+
+    </section>
+
+    <section class="container-dialog-spinner">
+        <!--dialogo para mostrar un progress spinner-->
+        <dialog-pv v-model:visible="visibleSpinnerDialog" :style="{ width: '50vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+         header="Cargando..." modal class="p-fluid" :closable="false">
+         <div class="container-spinner centrar" style="margin:2%">
+            <progress-spinner />
+         </div>
+        </dialog-pv>
+    </section>
     
-
-
+    <section class="dialog-message-request">
+        <!--dialogo para mostrar un mensaje-->
+        <dialog-pv v-model:visible="visibleDialogMessage" :style="{ width: '50vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+         header="Aviso!" modal class="p-fluid" >
+            <message class="content-message centrar" :closable="false" :severity="messageDialog.severityActual"
+            style="width: 100%;">
+                <h2>{{ messageDialog.message }}</h2>
+            </message>
+            <pv-button label="Aceptar" @click="visibleDialogMessage = false"></pv-button>
+        </dialog-pv>
+    </section>
 
     <br>
 
@@ -434,7 +548,9 @@ import Column from 'primevue/column';
 import ColumnGroup from 'primevue/columngroup';   // optional
 import Row from 'primevue/row';       
 import MultiSelect from 'primevue/multiselect';
-
+import Dialog from 'primevue/dialog';
+import ProgressSpinner from 'primevue/progressspinner';
+import Message from 'primevue/message';
 import axios from 'axios';
 
 
@@ -453,6 +569,9 @@ export default defineComponent({
     'column-group-dt':ColumnGroup,
     'row-dt':Row,
     'multi-select':MultiSelect,
+    'dialog-pv':Dialog,
+    'progress-spinner':ProgressSpinner,
+    'message':Message,
   },
   props: {
     title: {
@@ -462,7 +581,19 @@ export default defineComponent({
     url_insertarCarrera:{
       type:String,
       required:true,
-    }
+    },
+    url_carreraConocimientos:{
+      type:String,
+      required:true,
+    },
+    url_carreraHabilidades:{
+      type:String,
+      required:true,
+    },
+    url_carreraActitudes:{
+      type:String,
+      required:true,
+    },
 
   },
 
@@ -471,6 +602,12 @@ export default defineComponent({
 
     /*v-models para campos del formualrio*/
     let nombre_carrera = ref('');
+
+
+    /*para los dialogos de alerta*/
+    let visibleDialogEditCicloFormacion = ref(false);
+    let visibleDialogEditIconoInfo = ref(false);
+    let indexDataEditing = -1;
 
     /*colores de la carrera por defecto de los colorpicker*/
     const colores_carrera = ref({
@@ -506,22 +643,86 @@ export default defineComponent({
       descripcion : '',
     });
 
+    /*para mostrar el dialogo de carga cuando se realizan operaciones*/
+    let visibleSpinnerDialog = ref(false);
+    let visibleDialogMessage = ref(false);
+
+
+    const messageDialog = ref({
+        message:'This message dialog',
+        severityValues:['success',"error","warn","info"],
+        severityActual: 'success'
+    });
     /*estructura para la lista de ciclos agregadas */
     /*Informacion estatica de prueba para mostrar los ciclos de formacion*/
     const ciclos_formacion = ref([
-        {
-          numero_ciclo: 1,
-          descripcion: 'Ciclo de formación 1',
-        },
-      {
-        numero_ciclo: 2,
-        descripcion: 'Ciclo de formación 2',
-      },
-      {
-        numero_ciclo: 3,
-        descripcion: 'Ciclo de formación 3',
-      }
+
     ]);
+    /*para el ciclo de formacion que se va a editar*/
+    const cicloEditarSelected = ref();
+    /*para el incono descriptivo seleccionado a editar*/
+    const iconoInfoEditarSelected = ref();
+
+    //para configurar la informacion del mensaje de alerta
+    function setAlertMessage(message,severity){
+        messageDialog.value.message = message;
+        messageDialog.value.severityActual = messageDialog.value.severityValues[severity];
+    }
+
+    /*Para el ciclo a editar que fue seleccionado*/
+    function onCicloSelect(event) {
+      cicloEditarSelected.value = event.data;
+      indexDataEditing = event.index;
+      visibleDialogEditCicloFormacion.value = true;
+    }
+
+    function onCloseCicloEdit() {
+      cicloEditarSelected.value = null;
+    }
+
+    /*metodos para la edicion de los iconos informativos */
+
+    function onIconoInfoSelect(event){
+      iconoInfoEditarSelected.value = event.data;
+      indexDataEditing = event.index;
+      visibleDialogEditIconoInfo.value = true;
+    }
+
+    function onCloseIconInfoEdit() {
+      iconoInfoEditarSelected.value = null;
+    }
+
+    function deleteCicloEdit(){
+      try {
+            ciclos_formacion.value.splice(indexDataEditing,1);
+            visibleDialogEditCicloFormacion.value = false;
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    function deleteIconInfo(){
+      try {
+            pagina_principal.value.tarjetas_informativas_pp.splice(indexDataEditing,1);
+            visibleDialogEditIconoInfo.value = false;
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    /* mensaje para la tabla de ciclos de formacion cuando se 
+    encuentre vacia (la neta me da hueva buscar entre los atributos para dar otra solucion)
+    */
+   const mensaje_tabla_ciclos_formacion = [
+      {
+        descripcion:'',
+        message:'Por favor agregue ciclos de formacion',
+        numero_ciclo:'',
+
+      }
+    ];
 
     /* modelo para el conocimiento entrante*/
     let conocimiento = ref({
@@ -592,21 +793,11 @@ export default defineComponent({
       tarjetas_informativas_pp:[],
     });
 
-    /*Informacion estatica de prueba para mostrar las tarjetas informativas agregadas*/
-    const tarjetas_informativas = ref([
-        {
-          descripcion: "Tarjeta informativa 1",
-          url_direccion_imagen: 'https://ejemplo_icono_1',
-        },
-      {
-        descripcion: "Tarjeta informativa 2",
-          url_direccion_imagen: 'https://ejemplo_icono_2',      
-      },
-      {
-        descripcion: "Tarjeta informativa 3",
-          url_direccion_imagen: 'https://ejemplo_icono_3',      
-      }
-    ]);
+
+    /*lista para los conocimientos, habilidades y actitudes que se van a agregar*/
+    let conocimientos_to_add = [];
+    let habilidades_to_add = [];
+    let actitudes_to_add = [];
 
     /*  funciones */
 
@@ -622,33 +813,46 @@ export default defineComponent({
       //conocimientos_selected.value.push(conocimiento.value);
       perfil_ingreso.value.conocimientos.push(conocimiento.value);
       conocimientos.value.push(conocimiento.value);
-
+      /*agregamos el nuevo conocimiento a la lista de conocimientos para agregarlo a la base de datos*/
+      conocimientos_to_add.push({
+        nombre:conocimiento.value.nombre,
+      });
       conocimiento.value = {
         nombre : '',
       };
+
+      console.log(conocimientos_to_add);
     }
 
     function addHabilidad(){
       perfil_ingreso.value.habilidades.push(habilidad.value);
       habilidades_selected.value.push(habilidad.value);
       habilidades.value.push(habilidad.value);
+      habilidades_to_add.push({
+        nombre:habilidad.value.nombre,
+      }); 
       habilidad.value ={
         nombre : '',
       }
+      console.log(habilidades_to_add);
     }
 
     function addActitud(){
       perfil_ingreso.value.actitudes.push(actitud.value);
       actitudes_selected.value.push(actitud.value);
       actitudes.value.push(actitud.value);
+      actitudes_to_add.push({
+        nombre:actitud.value.nombre,
+      });
       actitud.value = {
         nombre:'',
       }
+      console.log(actitudes_to_add);
     }
 
     function addTarjetaInformativa(){
       //alert(`agregando tarjeta informativa...\n${tarjeta_informativa.value.descripcion}\n${tarjeta_informativa.value.url_direccion_imagen}`);
-      tarjetas_informativas.value.push(tarjeta_informativa.value);
+
       pagina_principal.value.tarjetas_informativas_pp.push(tarjeta_informativa.value);
 
       tarjeta_informativa.value = {
@@ -661,9 +865,58 @@ export default defineComponent({
       window.open(url_imagen, '_blank');
     }
 
+    function loadConocimientos(){
+      //obtener los conocimientos de la base de datos
+      axios.post(props.url_carreraConocimientos)
+      .then(function(response){
+        const conocimientosLoaded = response.data;
+        conocimientos.value = conocimientosLoaded;
+
+      }).catch(function(error){
+
+        console.error(error);
+
+      }).finally(function(){
+
+      });
+    }
+
+    function loadHabilidades(){
+      //obtener las habilidades de la base de datos
+      axios.post(props.url_carreraHabilidades)
+      .then(function(response){
+        const habilidadesLoaded = response.data;
+        habilidades.value = habilidadesLoaded;
+
+      }).catch(function(error){
+
+        console.error(error);
+
+      }).finally(function(){
+      });
+    }
+
+    function loadActitudes(){
+      //obtener las actitudes de la base de datos
+      axios.post(props.url_carreraActitudes)
+      .then(function(response){
+        const actitudesLoaded = response.data; 
+        actitudes.value = actitudesLoaded;
+
+      }).catch(function(error){
+
+        console.error(error);
+
+      }).finally(function(){
+
+      });
+    }
+
 
     function submitForm(){
-      //document.getElementById('form-carreras').submit();
+    //mostramos el spinner de carga
+    visibleSpinnerDialog.value = true;
+
     const formData = new FormData();
     formData.append('nombre', nombre_carrera.value); //agregamos el nombre de la carrera
     formData.append('colores', JSON.stringify(colores_carrera.value)); //agregamos los colores de la carrera
@@ -675,42 +928,34 @@ export default defineComponent({
     //agregamos la informacion de la pagina principal e iconos de informacion
     formData.append('pagina_principal',JSON.stringify(pagina_principal.value));
 
+    //agregamos los conocimientos, habilidades y actitudes que se agregaran a la base de datos
+    formData.append('news_conocimientos',JSON.stringify(conocimientos_to_add));
+    formData.append('news_habilidades',JSON.stringify(habilidades_to_add));
+    formData.append('news_actitudes',JSON.stringify(actitudes_to_add));
+
       axios.post(props.url_insertarCarrera,formData,{
         headers:{
           'Content-Type': 'multipart/form-data'
         }
       }).then(function(response){
         
-        console.log(response);
+        setAlertMessage(response.data,0);
+        visibleSpinnerDialog.value = false;
+        visibleDialogMessage.value = true;
 
       }).catch(function(error){
+
         console.error(error);
+        setAlertMessage(response.data,1);
+        visibleSpinnerDialog.value = false;
+        visibleDialogMessage.value = true;
 
       }).finally(function(){
         console.log("Peticion finalizada...");
       })
 
-
-      /*
-      //formatemos los datos para enviarlos al backend
-      const formData = new FormData();
-      formData.append('nombre', this.nombre); //llave-valor
-
-      axios.post('url_de_la_ruta_para_guardar_la_carrera',
-          formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-      }).then(function (response) {
-          console.log(response);
-      }).catch(function (error) {
-          console.log(error);
-      }).finally(function () {
-          //limpiamos los campos del formulario
-      });
-      */
-
     }
+
 
     // Retornar datos y métodos que deseas utilizar en la plantilla
     return {
@@ -720,6 +965,8 @@ export default defineComponent({
       perfil_egreso,
       ciclo_form,
       ciclos_formacion,
+      cicloEditarSelected,
+      mensaje_tabla_ciclos_formacion,
       conocimientos,
       conocimiento,
       conocimientos_selected,
@@ -733,16 +980,38 @@ export default defineComponent({
       plan_estudios_folleto_digital,
       pagina_principal,
       tarjeta_informativa,
-      tarjetas_informativas,
+      visibleDialogEditCicloFormacion,
+      visibleDialogEditIconoInfo,
+      iconoInfoEditarSelected,
+      visibleSpinnerDialog,
+      visibleDialogMessage,
+      messageDialog,
       //metodos
       addCicloFormacion,
+      onCicloSelect,
+      onCloseCicloEdit,
+      deleteCicloEdit,
+      onIconoInfoSelect,
+      onCloseIconInfoEdit,
+      deleteIconInfo,
       addConocimiento,
       addHabilidad,
       addActitud,
       addTarjetaInformativa,
       mostrarImagen,
       submitForm,
+      //cargar conocimientos, habilidades y actitudes de la base de datos
+      loadConocimientos,
+      loadHabilidades,
+      loadActitudes,
     };
+  },
+
+  beforeMount(){
+    //cargamos las listas de conocimientos, habilidades y actitudes
+    this.loadConocimientos();
+    this.loadHabilidades();
+    this.loadActitudes();
   },
 
   // Lifecycle hooks (opcional)
@@ -794,8 +1063,41 @@ export default defineComponent({
 
 <style scoped>
 
+.container-spinner{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content-message{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container-image-icon-info{
+  padding: 10px;
+}
+
+.image-icon{
+  width: 25%;
+  height: auto;
+  border: 1px solid #00FF00;
+  border-radius: 14px;
+  padding: 1% 1% 1% 1%;
+}
+
+.container-column{
+  display: flex;
+  flex-direction: column;
+}
+
 .centrar{
   justify-content: center;
+}
+
+.centrar-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .item {

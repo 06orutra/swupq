@@ -32,8 +32,15 @@
 
 <script>
 export default {
+  props: {
+    url_menu_carreras:{
+      type: String,
+      default: '/carrera-menu',
+    },
+  },
   data() {
     return {
+      carrerasMenuList: [],
       menuicon: {
         top: '28.1%', // Ajusta esto a la posición inicial del menú-icon
         left: '10px', // Ajusta esto a la posición inicial del menú-icon
@@ -65,9 +72,7 @@ export default {
           textColor: '#ffffff',
           label: 'CARRERAS',
           subMenuItems: [
-            { label: 'Opción 1' },
-            { label: 'Opción 2' },
-            { label: 'Opción 3' },
+            //{label: "Mecatronica", path: '/institucion/carreras-information/'}, //opcion de prueba
           ],
         },
         {
@@ -176,7 +181,36 @@ export default {
         this.activeSubMenuIndex = null;
       }
     },
+
+    //carga todas las carreras disponibles de la base de datos para mostrarlas en el menu
+    loadCarrerasMenu(){
+      axios.post(this.url_menu_carreras)
+      .then(this.getResponse).catch(this.getErrorResponse);
+    },
+    //manejo de respuesta y errores de la peticion
+    getResponse(response){
+        const menuCarreras = response.data;
+        this.carrerasMenuList = menuCarreras;
+
+        for (let index = 0; index < this.carrerasMenuList.length; index++) {
+          this.menuItems[1].subMenuItems.push({
+            label:this.carrerasMenuList[index].nombre_carrera,
+            path: '/carreras/informes/' + this.carrerasMenuList[index].nombre_carrera +'-'+this.carrerasMenuList[index].id,
+          }); 
+        }
+    },
+
+    getErrorResponse(error){
+        console.error(error);
+    },
+
   },
+  
+  beforeMount(){
+    this.loadCarrerasMenu();
+  },
+
+  
 };
 </script>
 

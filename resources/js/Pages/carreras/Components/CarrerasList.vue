@@ -41,7 +41,7 @@
 
         <!--dialogo para mostrar los datos de la carrera a eliminar-->
         <dialog-pv v-model:visible="visibleDialogDelete" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
-        :style="{ width: '70vw' }" header="Ver datos relacionados" modal class="p-fluid">
+        :style="{ width: '70vw' }" header="Ver datos relacionados" modal class="p-fluid" maximizable >
             <div class="field">
                 <form @submit.prevent="">
                     <div class="container-datos-relacionados-eliminar">
@@ -242,7 +242,7 @@
 
         <!--dialogo para mostrar los datos de la carrera a modificar-->
         <dialog-pv v-model:visible="visibleDialogEdit" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
-        :style="{ width: '70vw' }" header="Ver datos relacionados" modal class="p-fluid">
+        :style="{ width: '70vw' }" header="Ver datos relacionados" modal class="p-fluid" maximizable >
                 <div class="field">
                     <form @submit.prevent="">
                         <div class="editar-identidad-carrera">
@@ -341,7 +341,7 @@
                                     <div class="selector-conocimientos-carrera-editar">
                                         <span>Seleccionar conocimientos:</span>
                                         <multi-select-pv v-model="carreraEditar.datos.perfil_ingreso.conocimientos" 
-                                        :options="carreraEditar.datos.perfil_ingreso.conocimientos" filter optionLabel="nombre" 
+                                        :options="conocimientosCarrera" filter optionLabel="nombre" 
                                         placeholder="Selecciona conocimientos"
                                         :maxSelectedLabels="3" class="w-full md:w-20rem" />
                                     </div>
@@ -375,7 +375,7 @@
                                     <div class="selector-habilidades-carrera-editar">
                                         <span>Seleccionar habilidades:</span>
                                         <multi-select-pv v-model="carreraEditar.datos.perfil_ingreso.habilidades" 
-                                        :options="carreraEditar.datos.perfil_ingreso.habilidades" filter optionLabel="nombre" 
+                                        :options="habilidadesCarrera" filter optionLabel="nombre" 
                                         placeholder="Selecciona habilidades"
                                         :maxSelectedLabels="3" class="w-full md:w-20rem" />
                                     </div>
@@ -408,7 +408,7 @@
                                     <div class="selector-actitudes-carrera-editar">
                                         <span>Seleccionar actitudes:</span>
                                         <multi-select-pv v-model="carreraEditar.datos.perfil_ingreso.actitudes" 
-                                        :options="carreraEditar.datos.perfil_ingreso.actitudes" filter optionLabel="nombre" 
+                                        :options="actitudesCarrera" filter optionLabel="nombre" 
                                         placeholder="Selecciona actitudes"
                                         :maxSelectedLabels="3" class="w-full md:w-20rem" />
                                     </div>
@@ -487,13 +487,13 @@
 
                                 <div class="container-ciclos-formacion-carrera-editar">
                                     <div class="entradas-carrera-ciclos-formacion-editar">
-                                        <input-number-pv placeholder="Numero ciclo" style="width: 30%;"/>
+                                        <input-number-pv placeholder="Numero ciclo" style="width: 30%;" v-model="cicloFormacionAgregar.numero_ciclo"/>
                                         <input-text-pv type="text"  
-                                        placeholder="Descripción" style="width: 70%;"/>
+                                        placeholder="Descripción" style="width: 70%;" v-model="cicloFormacionAgregar.descripcion"/>
                                     </div>
                                     <div class="controls-carrera-ciclos-formacion-editar centrar" style="padding: 1%;">
                                         <button-pv label="Agregar" type="button" severity="secondary" 
-                                        @click="" style="width: 25%;"/>
+                                        @click="addCicloFormacion()" style="width: 25%;"/>
                                     </div>
                                 </div>
 
@@ -531,10 +531,25 @@
                                 <div class="iconos-informativos-carrera-editar">
                                     <h6>Iconos informativos</h6>
                                     <!--<p>{{ carreraEditar.datos.pagina_principal.tarjetas_informativas_pp }}</p>-->
-                                    <div class="agregar-icono-informativo-carrera-editar">
+                                    <div class="agregar-icono-informativo-carrera-editar flex flex-column gap-3">
+                                            <div class="entrada-descripcion-carrera-editar ">
+                                                <span>Descripción:</span>
+                                                <input-text-pv placeholder="ejem. Titulación automatica" 
+                                                    v-model="iconoInformativoAgregar.descripcion"/>
+                                            </div>
 
+                                            <div class="entrada-direccion-imagen-carrera-editar">
+                                                <span>Dirección imagen:</span>
+                                                <input-text-pv placeholder="https://cdn-icons-png.flaticon.com/512/686/686051.png" 
+                                                    v-model="iconoInformativoAgregar.url_direccion_imagen"/>
+                                            </div>
+
+                                            <div class="button-add-icono-informativo centrar">
+                                                <button-pv label="Agregar" type="button" severity="secondary"
+                                                style="width: 25%;" @click="addIconoInformativo()"></button-pv>
+                                            </div>
                                     </div>
-
+                                    <br>
                                     <div class="iconos-informativos-agregados">
                                         <table-pv :value="carreraEditar.datos.pagina_principal.tarjetas_informativas_pp" 
                                         showGridlines tableStyle="min-width: 50rem"
@@ -593,28 +608,56 @@
 
         <!--dialogo para editar un ciclo de formacion de la carrera-->
         <dialog-pv v-model:visible="visibleDialogEditCicloFormacion" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
-            :style="{ width: '70vw' }" header="Edición" modal class="p-fluid" @hide="closeDialogEditCiclo()">
+            :style="{ width: '70vw' }" header="Edición" modal class="p-fluid" >
             <div class="controls-dialog-edit-ciclo-formacion">
                 <input-number-pv placeholder="Numero ciclo" style="width: 30%;"
                 v-model="cicloEditarSelected.numero_ciclo"/>
                 <input-text-pv type="text"  
                 placeholder="Descripción" style="width: 70%;" v-model="cicloEditarSelected.descripcion"/>
+                
+                <div class="btn-delete-ciclo-edit " style="padding-top: 1%;">
+                    <button-pv type="button" label="Eliminar" severity="danger" icon="pi pi-trash" 
+                    @click="deleteCicloEdit()"></button-pv>
+                </div>
 
             </div>
         </dialog-pv>
 
         <!--dialogo para editar un icono informativo de la carrera(pagina principal)-->
         <dialog-pv v-model:visible="visibleDialogEditIconInfo" :breakpoits="{ '960px': '75vw', '640px': '85vw' }" 
-            :style="{ width: '70vw' }" header="Edición" modal class="p-fluid" @hide="closeDialogEditIcon()">
+            :style="{ width: '70vw' }" header="Edición" modal class="p-fluid">
             <div class="controls-dialog-edit-icono-informativo">
                 <input-text-pv placeholder="Descripcion" style="width: 30%;"
                 v-model="iconEditarSelected.descripcion"/>
                 <input-text-pv type="text" placeholder="ejem. https://iconos8.es/icon/IjiO3OXCb817/peligro-de-electricidad" 
                 style="width: 70%;" v-model="iconEditarSelected.url_direccion_imagen"/>
 
+                <div class="btn-delete-icon-edit " style="padding-top: 1%;">
+                    <button-pv type="button" label="Eliminar" severity="danger" icon="pi pi-trash" 
+                    @click="deleteIconEdit()"></button-pv>
+                </div>
+
             </div>
         </dialog-pv>
 
+        <!--dialogo para mostrar un mensaje-->
+        <dialog-pv v-model:visible="visibleDialogMessage" :style="{ width: '50vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+         header="Aviso!" modal class="p-fluid" >
+            <message class="content-message centrar" :closable="false" :severity="messageDialog.severityActual"
+            style="width: 100%;">
+                <h2>{{ messageDialog.message }}</h2>
+            </message>
+            <button-pv label="Aceptar" @click="visibleDialogMessage = false"></button-pv>
+        </dialog-pv>
+
+
+        <!--dialogo para mostrar un progress spinner-->
+        <dialog-pv v-model:visible="visibleSpinnerDialog" :style="{ width: '50vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+         header="Cargando..." modal class="p-fluid" :closable="false">
+         <div class="container-spinner centrar" style="margin:2%">
+            <progress-spinner />
+         </div>
+        </dialog-pv>
 
     </section>
 
@@ -635,6 +678,8 @@ import MultiSelect from 'primevue/multiselect';
 
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
+import Message from 'primevue/message';
+import ProgressSpinner from 'primevue/progressspinner';
 
 
 import axios from 'axios';
@@ -653,6 +698,8 @@ export default defineComponent({
     'multi-select-pv':MultiSelect,
     'table-pv':DataTable,
     'column-pv':Column,
+    'message':Message,
+    'progress-spinner':ProgressSpinner,
 
   },
   props: {
@@ -675,7 +722,19 @@ export default defineComponent({
     url_editCarrera:{
         type:String,
         required:true,
-    }
+    },   
+    url_carreraConocimientos:{
+      type:String,
+      required:true,
+    },
+    url_carreraHabilidades:{
+      type:String,
+      required:true,
+    },
+    url_carreraActitudes:{
+      type:String,
+      required:true,
+    },
   },
   // Setup del componente (opcional)
   setup(props) {
@@ -688,6 +747,9 @@ export default defineComponent({
 
     const visibleDialogEditCicloFormacion = ref(false); //dialogo de alerta para editar un ciclo de formacion
     const visibleDialogEditIconInfo = ref(false); //dialogo de alerta para editar un icono informativo
+
+    const visibleDialogMessage = ref(false);
+    const visibleSpinnerDialog = ref(false); //para el spinner de carga
 
     //variables para validar si se confirmo la eliminacion o edicion de una carrera
     const confirmEliminacionCarrera = ref(false);
@@ -702,9 +764,38 @@ export default defineComponent({
     //para modificar los ciclos e iconos informativos de la pagina principal
     const cicloEditarSelected = ref();//guardara el ciclo seleccionado para editar
     const iconEditarSelected = ref();//guarda el icono informativo que se desea editar
+
+    //para guardar los indices de los ciclos e iconos informativos modificandose
+    let indexDataEditing = 0;
+
+    //para guardar los conocimientos, habilidades y actitudes disponibles
+
+    const conocimientosCarrera = ref([]);//guardara los conocimientos disponibles
+    const habilidadesCarrera = ref([]);//guardara las habilidades disponibles
+    const actitudesCarrera = ref([]);//guardara las actitudes disponibles
+
+    const messageDialog = ref({
+        message:'This message dialog',
+        severityValues:['success',"error","warn","info"],
+        severityActual: 'success'
+    });
+
+    //para guardar la entrada de un ciclo de formacion que se quiera agregar
+    const cicloFormacionAgregar = ref({
+        numero_ciclo:1,
+        descripcion:'',
+    });
+
+    const iconoInformativoAgregar = ref({
+        descripcion:'',
+        url_direccion_imagen:'',
+    });
+    
     //functions
     function getCarreras(){
         //trae todas las carreras guardadas de la base de datos
+        visibleSpinnerDialog.value = true;
+
         axios.post(props.url_getCarreras)
         .then(function(response){
             const carreras = response.data;
@@ -713,8 +804,12 @@ export default defineComponent({
             carreras.forEach(element => {
                 carrerasLoaded.value.push(element);
             });
-            
+
+            visibleSpinnerDialog.value = false;
+
         }).catch(function(error){
+            setAlertMessage(error,1);
+            visibleDialogMessage.value = true;
             console.error(error);
         }).finally(function(){
             isLoading.value = false;
@@ -723,20 +818,21 @@ export default defineComponent({
 
     //para mostrar la informacion de la carrera a eliminar
     function eliminarCarrera(id,carrera_nombre){
+        visibleSpinnerDialog.value = true;
         
         //solicitamos la informacion de la carrera a eliminar
         axios.post(props.url_getCarreraUnica,{'id':id})
         .then(function(response){
             const carreraDatos = response.data;
-            
+    
             carreraEliminar.value = carreraDatos;
-
+            visibleSpinnerDialog.value = false;
             visibleDialogDelete.value = true;
-
         }).catch(function(error){
+            setAlertMessage(error,1);
+            visibleSpinnerDialog.value = false;
+            visibleDialogMessage.value = true;
             console.error(error);
-        }).finally(function(){
-            isLoading.value = false;
         });
 
     }
@@ -746,24 +842,29 @@ export default defineComponent({
     }
 
     function ejecutaEliminacion(){
+        
         if(carreraEliminar.value == null || carreraEliminar.value == undefined 
         || carreraEliminar.value == ''){
             return;
         }
 
-        console.log('Eliminando la carrera:'+carreraEliminar.value.datos.nombre_carrera);
+        visibleSpinnerDialog.value = true;
 
         axios.post(props.url_deleteCarrera,{'id':carreraEliminar.value.id})
         .then(function(response){
-            console.log(response.data);
+            setAlertMessage(response.data,0);
             visibleDialogConfirmDelete.value = false;
             visibleDialogDelete.value = false;
+            visibleDialogMessage.value = true;
 
         }).catch(function(error){
+            setAlertMessage(error,1);
+            visibleDialogMessage.value = true;
             console.error(error);
 
         }).finally(function(){
             isLoading.value = false;
+            visibleSpinnerDialog.value = false;
             confirmEliminacionCarrera.value = false;
 
             getCarreras();
@@ -775,7 +876,8 @@ export default defineComponent({
     }
 
     function editarCarrera(id,carrera_nombre){
-        console.log(`Editando...\nID:${id}\nCarrera:${carrera_nombre}`);
+        visibleSpinnerDialog.value = true;
+
         //solicitamos la informacion de la carrera a actualizar
         axios.post(props.url_getCarreraUnica,{'id':id})
         .then(function(response){
@@ -785,9 +887,12 @@ export default defineComponent({
             visibleDialogEdit.value = true;
 
         }).catch(function(error){
+            setAlertMessage(error,1);
+            visibleDialogMessage.value = true;
             console.error(error);
         }).finally(function(){
             isLoading.value = false;
+            visibleSpinnerDialog.value = false;
         });
     }
 
@@ -802,68 +907,148 @@ export default defineComponent({
         formData.append('id',carreraEditar.value.id);
         formData.append('datos',JSON.stringify(carreraEditar.value.datos));
 
+        visibleSpinnerDialog.value = true; //mostramos el spinner de carga
+
         //enviamos la informacion con el id de la carrera para editarla
         axios.post(props.url_editCarrera,formData,{
             headers:{
                 'Content-Type': 'multipart/form-data'
             }
         }).then(function(response){
-            console.log(response.data);
             visibleDialogConfirEdit.value = false;
+            setAlertMessage(response.data,0);
+            visibleDialogMessage.value = true;
 
         }).catch(function(error){
+            setAlertMessage(error,1);
+            visibleDialogMessage.value = true;
             console.error(error);
 
         }).finally(function(){
             isLoading.value = false;
+            visibleSpinnerDialog.value = false;
             confirmEdicionCarrera.value = false;
             getCarreras();
         });
 
     }
 
+    //para configurar la informacion del mensaje de alerta
+    function setAlertMessage(message,severity){
+        messageDialog.value.message = message;
+        messageDialog.value.severityActual = messageDialog.value.severityValues[severity];
+    }
+
     //funciones para cuando se selecciona o deselecciona un ciclo
     function onCicloSelect(event){
         cicloEditarSelected.value = event.data;
-        console.log(cicloEditarSelected.value.numero_ciclo);
-        console.log(cicloEditarSelected.value.descripcion);
+        indexDataEditing = event.index;
 
         visibleDialogEditCicloFormacion.value = true;
     }
 
     function onCicloUnselect(event){
         
-        console.log(`${event.data.numero_ciclo}(deseleccionado)`);
-        console.log(`${event.data.descripcion}(deseleccionado)`);
     }
 
     //funciones para cuando se selecciona o deselecciona un icono informativo
     function onIconInfoSelect(event){
         iconEditarSelected.value = event.data;
-        console.log(iconEditarSelected.value.url_direccion_imagen);
-        console.log(iconEditarSelected.value.descripcion);
+        indexDataEditing = event.index;
         visibleDialogEditIconInfo.value = true;
     }
 
     function onIconInfoUnselect(event){
         iconEditarSelected.value = null;
-        console.log(`${event.data.descripcion}(deseleccionado)`);
-        console.log(`${event.data.url_direccion_imagen}(deseleccionado)`);
     }
 
 
-    //funcion para cuando se cierra el dialog para editar un ciclo de formacion
-    function closeDialogEditCiclo(){
-        cicloEditarSelected.value = null;
-        console.log('Cerrando dialogo...');
+    //funciones para editar o eliminar un ciclo seleccionado
+    function deleteCicloEdit(){
+        try {
+            carreraEditar.value.datos.ciclos_formacion.splice(indexDataEditing,1);
+            visibleDialogEditCicloFormacion.value = false;
+
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    //funcion para cuando se cierra el dialog para editar un icono informativo
-    function closeDialogEditIcon(){
-        iconEditarSelected.value = null;
-        console.log('Cerrando dialogo...');
+    function deleteIconEdit(){
+        try {
+            carreraEditar.value.datos.pagina_principal.tarjetas_informativas_pp.splice(indexDataEditing,1);
+            visibleDialogEditIconInfo.value = false;
+        } catch (error) {
+            console.error(error);
+        }
     }
 
+    //funciones para cargar los conocimientos, habilidades y actitudes de la base de datos
+
+    function loadConocimientos(){
+      //obtener los conocimientos de la base de datos
+      axios.post(props.url_carreraConocimientos)
+      .then(function(response){
+        const conocimientosLoaded = response.data;
+        conocimientosCarrera.value = conocimientosLoaded;
+
+      }).catch(function(error){
+
+        console.error(error);
+
+      }).finally(function(){
+
+      });
+    }
+
+    function loadHabilidades(){
+      //obtener las habilidades de la base de datos
+      axios.post(props.url_carreraHabilidades)
+      .then(function(response){
+        const habilidadesLoaded = response.data;
+        habilidadesCarrera.value = habilidadesLoaded;
+
+      }).catch(function(error){
+
+        console.error(error);
+
+      }).finally(function(){
+      });
+    }
+
+    function loadActitudes(){
+      //obtener las actitudes de la base de datos
+      axios.post(props.url_carreraActitudes)
+      .then(function(response){
+        const actitudesLoaded = response.data; 
+        actitudesCarrera.value = actitudesLoaded;
+
+      }).catch(function(error){
+
+        console.error(error);
+
+      }).finally(function(){
+
+      });
+    }
+
+    //funciones para agregar un ciclo de formacion o un icono informativo en la edicion
+    function addCicloFormacion(){
+        carreraEditar.value.datos.ciclos_formacion.push(cicloFormacionAgregar.value);
+        cicloFormacionAgregar.value = {
+            numero_ciclo:1,
+            descripcion:'',
+        };
+    }
+
+    function addIconoInformativo(){
+        carreraEditar.value.datos.pagina_principal.tarjetas_informativas_pp.push(iconoInformativoAgregar.value);
+        iconoInformativoAgregar.value = {
+            descripcion:'',
+            url_direccion_imagen:'',
+        };
+    }
+    
 
 
     // Retornar datos y métodos que deseas utilizar en la plantilla
@@ -881,6 +1066,14 @@ export default defineComponent({
         iconEditarSelected,//para modificar los iconos informativos
         visibleDialogEditCicloFormacion,
         visibleDialogEditIconInfo,
+        visibleDialogMessage,
+        conocimientosCarrera,
+        habilidadesCarrera,
+        actitudesCarrera,
+        cicloFormacionAgregar,
+        iconoInformativoAgregar,
+        messageDialog,
+        visibleSpinnerDialog,
         onCicloSelect,
         onCicloUnselect,
         onIconInfoSelect,
@@ -892,12 +1085,21 @@ export default defineComponent({
         ejecutaEdicion,
         confirmaEidicion,
         confirmaEliminacion,
-        closeDialogEditCiclo,
-        closeDialogEditIcon,
+        deleteCicloEdit,
+        deleteIconEdit,
+        //metodos para cargar los conocimientos, habilidades y actitudes de la base de datos
+        loadConocimientos,
+        loadHabilidades,
+        loadActitudes,
+        addCicloFormacion,
+        addIconoInformativo
     };
   },
-  mounted(){
-    this.getCarreras();
+  beforeMount(){
+    this.getCarreras(); //cargar todos los registros de las carreras guardadas
+    this.loadConocimientos();//cargar los conocimientos de la base de datos
+    this.loadHabilidades();//cargar las habilidades de la base de datos
+    this.loadActitudes();//cargar las actitudes de la base de datos
   },
 
   // Lifecycle hooks (opcional)

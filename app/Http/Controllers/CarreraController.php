@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use App\Models\Carrera;
+use App\Models\Conocimiento;
+use App\Models\Habilidad;
+use App\Models\Actitud;
 
 class CarreraController extends Controller
 {
@@ -152,6 +156,19 @@ class CarreraController extends Controller
         return response()->json($resultados);
     }
 
+    //retorna las carreras disponibles pero solo el nombre y su id para poder mostrarlos en el menu
+    public function get_carrera_disponibles_menu(){
+
+        $carreras_disponibles = Carrera::all()->map(function ($registro) {
+            return [
+                'id' => $registro->id,
+                'nombre_carrera'=> json_decode($registro->datos)->nombre_carrera,
+            ];
+        });
+        
+        return response()->json($carreras_disponibles); 
+    }
+
     //retorna los datos de una carrera en especifico por su id
     public function get_carrera(Request $request){
         $carrera = Carrera::find($request->id);
@@ -182,6 +199,24 @@ class CarreraController extends Controller
         $carrera = new Carrera();
         $carrera->datos = $json;
         $carrera->save();
+
+        /* se requiere cambiar las migraciones de las habilidades, para agregar los campos timestap */
+        //por si vienen conocimientos, habilidades y actitudes nuevos
+        /*foreach (json_decode($request->input('news_conocimientos')) as $conocimientoNuevo) {
+            $this->set_conocimiento($conocimientoNuevo->nombre);
+        }*/
+ 
+        /*
+        foreach (json_decode($request->input('news_habilidades')) as $habilidadNuevo) {
+            $this->set_habilidades($habilidadNuevo->nombre);
+        }*/
+
+
+        /*
+        foreach (json_decode($request->input('news_actitudes')) as $actitudNuevo) {
+            $this->set_actitud($actitudNuevo->nombre);
+        }
+        */
 
         return response()->json("Se proceso la carrera exitosamente");
     }
@@ -219,7 +254,113 @@ class CarreraController extends Controller
         }
 
     }
-    
+
+
+    //para obtener los conocimientos que se pueden agregar a una carrera
+    public function get_carrera_conocimientos(){
+
+        $conocimientos = Conocimiento::all()->map(function ($registro) {
+            return [
+                'nombre'=>$registro->nombre,
+            ];
+        });
+        
+        return response()->json($conocimientos);
+    }
+
+    //para obtener las habilidades  que se pueden agregar a una carrera
+    public function get_carrera_habilidades(){
+        $habilidades = Habilidad::all()->map(function ($registro) {
+            return [
+                'nombre'=>$registro->nombre,
+            ];
+        });
+        
+        return response()->json($habilidades);
+    }
+
+    //para obtener las actitudes que se pueden agregar a una carrera
+    public function get_carrera_actitudes(){
+        $actitudes = Actitud::all()->map(function ($registro) {
+            return [
+                'nombre'=>$registro->nombre,
+            ];
+        });
+        
+        return response()->json($actitudes);
+    }
+
+    //para retornar la pagina de las carreras
+    public function get_carrera_view($nombre_carrera,$id){
+        $carreraSolicitada = Carrera::find($id);
+        //si no se encuentra la carrera solicitada, entonces devolvemos la vista 404
+        if(!$carreraSolicitada){
+            return ("No encontrado");
+        }
+
+        return Inertia::render('Componentes/Carrers/Carreras',[
+            'id_carreraSolicitada' => $id,  //pasamos el id de la carrera que se solicito
+            'direccion_getCarrera'=> "/carreras-unica", //pasamos la direccion a la que se debe hacer la peticion
+        ]);
+    }
+
+    /*metodos para insertar conocimientos, habilidades y actitudes*/
+    public function set_conocimiento($conocimiento){
+        try{
+            // Verifica si el conocimiento ya existe en la base de datos
+            $conocimientoExistente = Conocimiento::where('nombre', $conocimiento)->first();
+            if (!$conocimientoExistente) {
+                // Si el conocimiento no existe, crea un nuevo registro
+                $conocimientoAdd = new Conocimiento();
+                $conocimientoAdd->nombre = $conocimiento;
+                $conocimientoAdd->save();
+                return response()->json("Se agrego el conocimiento(s) exitosamente");
+            }else{
+                return response()->json("El conocimiento ya existe");
+            }
+        }catch (Exception $e){
+            throw $e;
+        }
+    }
+
+    public function set_habilidades($habilidad){
+
+        try{
+            $habilidadExistente = Habilidad::where('nombre', $habilidad)->first();
+            if (!$habilidadExistente) {
+                // Si el conocimiento no existe, crea un nuevo registro
+                $habilidadAdd = new Habilidad();
+                $habilidadAdd->nombre = $habilidad;
+                $habilidadAdd->save();
+                return response()->json("Se agrego la habilidad(es) exitosamente");
+            }else{
+                return response()->json("La habilidad ya existe");
+            }    
+            
+        }catch (Exception $e){
+            throw $e;
+        }
+    }
+
+    public function set_actitud($actitud){
+        try{
+            // Verifica si el conocimiento ya existe en la base de datos
+            $actitudExistente = Actitud::where('nombre', $actitud)->first();
+            if (!$actitudExistente) {
+                // Si el conocimiento no existe, crea un nuevo registro
+                $actitudAdd = new Actitud();
+                $actitudAdd->nombre = $actitudEntrante;
+                $actitudAdd->save();
+                return response()->json("Se agrego la actitud(es) exitosamente");
+            }else{
+                return response()->json("La actitud ya existe");
+            }
+        }catch (Exception $e){
+            throw $e;
+        }
+    }
+
+
     /**
      * Remove the specified resource from storage.
      */

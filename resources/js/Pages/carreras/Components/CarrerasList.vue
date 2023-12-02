@@ -1186,10 +1186,6 @@ margin-bottom: 40px;
     align-items: center;
 }
 
-.length-input-text{
-    width: 80%;
-}
-
 .btn-dialog-actions{
     width: 25%;
 }
@@ -1199,7 +1195,6 @@ margin-bottom: 40px;
     justify-content: space-around;
     align-items: center;
 }
-
 
 .container-imagen-carrera-eliminar, .container-imagen-carrera-editar{
     padding: 1%;

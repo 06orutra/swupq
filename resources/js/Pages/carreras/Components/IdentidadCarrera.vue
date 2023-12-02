@@ -29,7 +29,7 @@
                 <color-picker  inputId="cp-primary-color" v-model="colores_carrera.colorPrimario" 
                 ></color-picker> &nbsp
                 <pv-input-text type="text" placeholder="ff0048" 
-                  class="input-color " v-model="colores_carrera.colorPrimario" />
+                  class="input-color " v-model="colores_carrera.colorPrimario" :maxlength="6"/>
               </span>
             </div>
 
@@ -40,7 +40,7 @@
                 <color-picker  inputId="cp-secundary-color" v-model="colores_carrera.colorSecundario"
               ></color-picker>&nbsp
               <pv-input-text type="text" placeholder="f700ff" 
-                  class="input-color" v-model="colores_carrera.colorSecundario"/>
+                  class="input-color" v-model="colores_carrera.colorSecundario" :maxlength="6"/>
               </span>
             </div>
 
@@ -50,7 +50,7 @@
                 <color-picker  inputId="cp-terciary-color" v-model="colores_carrera.colorTerciario"
                 ></color-picker>&nbsp
                 <pv-input-text type="text" placeholder="ff001a" 
-                  class="input-color" v-model="colores_carrera.colorTerciario"/>
+                  class="input-color" v-model="colores_carrera.colorTerciario" :maxlength="6"/>
               </span>
             </div>
           </div>

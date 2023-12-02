@@ -29,7 +29,8 @@
                 <color-picker  inputId="cp-primary-color" v-model="colores_carrera.colorPrimario" 
                 ></color-picker> &nbsp
                 <pv-input-text type="text" placeholder="ff0048" 
-                  class="input-color " v-model="colores_carrera.colorPrimario" :maxlength="6"/>
+                  class="input-color " v-model="colores_carrera.colorPrimario" :maxlength="6" 
+                  />
               </span>
             </div>
 

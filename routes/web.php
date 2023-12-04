@@ -86,6 +86,7 @@ use App\Http\Controllers\BannerMarcoJuridicoController;
 use App\Http\Controllers\ChatButtonsController;
 use App\Http\Controllers\ChatResponseController;
 use App\Http\Controllers\RepresentativoImagenesController;
+use App\Http\Controllers\BannerUbicacionController;
 use Illuminate\Http\Request;
 
 /*
@@ -308,6 +309,8 @@ Route::middleware([
         'chatButtons' => ChatButtonsController::class,
         'chatResponse' => ChatResponseController::class,
         'RepresentativoImagenes' => RepresentativoImagenesController::class,
+        'BannerUbicacion' => BannerUbicacionController::class,
+
 
     ];
     // se declarar variables, 
@@ -322,6 +325,7 @@ Route::middleware([
     }
 });
 
+Route::post('/BannerUbicacion/bannerData', [BannerUbicacionController::class, 'bannerData']);
 Route::post('/RepresentativoImagenes/bannerData', [RepresentativoImagenesController::class, 'bannerData']);
 Route::post('/RepresentativoText/bannerData', [RepresentativoTextoController::class, 'bannerData']);
 Route::post('/Representativosprin/bannerData', [RepresentativoPrinController::class, 'bannerData']);

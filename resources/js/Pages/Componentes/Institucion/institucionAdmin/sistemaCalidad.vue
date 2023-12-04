@@ -38,6 +38,9 @@ export default {
                 :deleteBannerUrl="'/SistemaCalidadImgPrincipal/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Textos">
+            <span style="display: inline-block; text-align: center; width: 100%;">
+                    <span style="color: rgb(255, 0, 0); font-weight: bold; ">"Solo se puede tener un registro"</span>
+                </span>
             <estructuraTextos :Titulo="'Titulo:'" :Subtitulo="'Contenido:'" :loadDataUrl="'/SistemaCalidadTexto/bannerData'"
                 :registerBannerUrl="'/SistemaCalidadTexto/registrarBanner'"
                 :editBannerUrl="'/SistemaCalidadTexto/editarBanner'"
@@ -51,9 +54,15 @@ export default {
                 :deleteBannerUrl="'/SistemaCalidadImgSecundaria/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Pdf">
+            <span style="display: inline-block; text-align: center; width: 100%;">
+                    <span style="color: rgb(255, 0, 0); font-weight: bold; ">"Solo se puede tener un registro"</span>
+                </span>
             <estructuraPdf :loadDataUrl="'/SistemaCalidadPdf/bannerData'" :registerBannerUrl="'/SistemaCalidadPdf/registrarBanner'" :editBannerUrl="'/SistemaCalidadPdf/editarBanner'" :deleteBannerUrl="'/SistemaCalidadPdf/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Pdf Consulta Aqui">
+            <span style="display: inline-block; text-align: center; width: 100%;">
+                    <span style="color: rgb(255, 0, 0); font-weight: bold; ">"Solo se puede tener un registro"</span>
+                </span>
             <estructurapdf2 :loadDataUrl="'/SistemaCalidadPdfConsulta/bannerData'" :registerBannerUrl="'/SistemaCalidadPdfConsulta/registrarBanner'" :editBannerUrl="'/SistemaCalidadPdfConsulta/editarBanner'" :deleteBannerUrl="'/SistemaCalidadPdfConsulta/eliminarBanner'" />
         </TabPanel>
     </TabView>

@@ -41,9 +41,10 @@ export default {
 </script>
 
 <template>
-  <AppEstructure>
-  <div class="container">
+  <AppEstructure :controllerName="'/BannerUbicacion/bannerData'">
+  
     <div class="row">
+      <div class="container">
       <!-- Div que contiene la imagen -->
       <div class="image-and-contact">
         <img :src="'/storage/' + datos.imagen" class="img-fluid" style="width: 100%;">
@@ -94,7 +95,6 @@ export default {
         </a>
       </div>
       <hr>
-    </div>
   </div>
   
 <!-- Modal como un pop-up -->
@@ -114,10 +114,22 @@ export default {
     </div>
   </div>
 </div>
+</div>
 </AppEstructure>
 </template>
 
 <style scoped>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Agregamos una nueva clase para reducir el ancho a la mitad */
+.half-width {
+  width: 50%;
+}
 .row{
   display:flex;
   justify-content: center;
@@ -128,8 +140,6 @@ export default {
   display: flex;
   align-items: center;
   max-width: 100%;
-  padding-left: 50px;
-  padding-right: 50px;
 }
 .contact-and-buttons{
   display: flex;
@@ -174,7 +184,6 @@ export default {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   line-height: 1.5;
-  color: #666;
 }
 .strong {
   font-weight: bolder;
@@ -272,6 +281,7 @@ export default {
   padding-left: 50px;
   padding-right: 50px;
   text-align: center; /* Centra la imagen en pantallas pequeñas */
+  padding-bottom: 50px;
 }
 
 .contact-and-buttons {
@@ -288,7 +298,14 @@ export default {
 .contact-info {
   text-align: center; /* Centra la información en pantallas pequeñas */
 }
+.container {
+    flex-direction: column; /* Cambiamos el flujo a columna en pantallas pequeñas */
+  }
 
+  .image-and-contact,
+  .contact-and-buttons {
+    width: 100%; /* Aseguramos que ambos ocupen el 100% del ancho en pantallas pequeñas */
+  }
 .btn-flotante {
   font-size: 16px;
   text-transform: uppercase;

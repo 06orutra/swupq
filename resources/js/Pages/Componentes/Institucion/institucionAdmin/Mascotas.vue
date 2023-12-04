@@ -11,6 +11,11 @@ import estructuraImg from '@/Pages/Componentes/Home/estructuraImg.vue';
                 :editBannerUrl="'/BannerMascotas/editarBanner'" :deleteBannerUrl="'/BannerMascotas/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Mensaje Poli&Polo">
+            <p>
+                <span style="display: inline-block; text-align: center; width: 100%;">
+                    <span style="color: rgb(255, 0, 0); font-weight: bold; ">"Solo se puede tener un registro"</span>
+                </span>
+            </p>
             <estructuraTextos :loadDataUrl="'/mensaje/bannerData'" :registerBannerUrl="'/mensaje/registrarBanner'"
                 :editBannerUrl="'/mensaje/editarBanner'" :deleteBannerUrl="'/mensaje/eliminarBanner'" />
         </TabPanel>

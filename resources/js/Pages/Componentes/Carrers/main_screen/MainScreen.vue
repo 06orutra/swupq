@@ -1,16 +1,9 @@
 <template>
     <!-- Contenido del componente -->
-    <!--
-      <section class="container">
-              <img :src="url_img_carrer" alt="Nuestras carreras Universitarias" class="background-image">
-      </section>
-    -->
-  
     <section class="conatiner-main-screen">
         
         <div class="container-main-image">
-            <image-pv :src="url_img_carrer" alt="Nuestras carreras Universitarias" draggable="false"
-            class="main-image" />
+            <img :src="url_img_carrer" alt="Nuestras carreras Universitarias" class="main-image" draggable="false"/>
         </div>
         
         <!--Contenido de los iconos con detalle-->
@@ -32,14 +25,12 @@
   <script>
   import { defineComponent } from 'vue';
   
-  import Image from 'primevue/image';
-
   //import DescriptionCarrer from '@/components/main_screen/DescripcionCarrera.js'
   
   export default defineComponent({
     name: 'MainScreen',
     components: {
-      'image-pv':Image,
+
     },
     // Propiedades del componente (opcional)
     props: {
@@ -60,21 +51,8 @@
   
     // Setup del componente (opcional)
     setup(props) {
-      // Lógica del componente y definición de datos
-      // Puedes utilizar las funciones reactivas de Vue para definir el estado del componente.
-      // Ejemplo:
-      // const count = ref(0);
-  
-      // Métodos personalizados
-      // Ejemplo:
-      // function increment() {
-      //   count.value++;
-      // }
-  
-      // Retornar datos y métodos que deseas utilizar en la plantilla
       return {
-        // count,
-        // increment,
+
       };
     },
   
@@ -90,64 +68,30 @@
   </script>
   
   <style scoped>
-  /*
-  *{
-      margin: 0;
-      padding: 0;
-  }
-  */
-/* cambiar los estilos para que no se corte la imagen de la parte de arriba y cubra todo el ancho de la pantalla*/
+
   .conatiner-main-screen{
     margin-top: 3.4%;
   }
 
 .container-main-image{
+    padding-top: 5px;
+    position: relative ;
     width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
+    height: auto;
+    background-position: center center;
+    background-repeat: repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
 }
 
   .main-image{
     width: 100%;
     height: 100%;
-    /*object-fit: fill;   */
   }
 
-  .container {
-      position: relative;
-  }
-  
-  .background-image {
-      width: 100%; 
-      height: auto;
-  }
-  
-     
-  .overlay {
-      position: fixed;
-      top: 25px;  
-      left: 15px;
-      z-index: 1000; 
-  }        
-  
-  .large-image {
-      width: 100px;
-      height: 115px;
-  }
-  
-  .small-images {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-  }
-  
-  .small-image {
-      width: 45px;
-      height: 45px;
-  }
-  
   .square-container {
       display: grid;
       grid-template-columns: repeat(10, 1fr);
@@ -169,14 +113,6 @@
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-  }
-  
-  .strong .aspect-ratio {
-      background-color: purple;
-  }
-  
-  .light .aspect-ratio {
-      background-color: rgb(202, 76, 202);
   }
   
   .content {

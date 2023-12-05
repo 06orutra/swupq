@@ -169,7 +169,7 @@ Route::prefix('institucion')->group(function () {
 
 //rutas para carreras, ruta que devuelve la vista de las carreras, le pasa el id de la carrera que debe consultar sus datos
 Route::prefix('carreras')->group(function () {
-    Route::get('informes/{nombre_carrera}-{id}',[CarreraController::class,'get_carrera_view']);
+    Route::get('informes/{nombre_carrera}&{id}',[CarreraController::class,'get_carrera_view']);
 });
 
 

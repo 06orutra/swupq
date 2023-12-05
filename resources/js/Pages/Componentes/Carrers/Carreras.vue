@@ -1,12 +1,11 @@
 <template>
 
 <app-estructure controllerName="/carreras/controller">
-  <section class="carreras">
+  <section class="carreras" v-show="!isLoading">
   <div class="pagina-principal-carrera">
     <main-carrer-screen :url_img_carrer="pagina_principal.url_imagen" 
     :iconos_info="pagina_principal.tarjetas_informativas_pp"
     :lista_colores_carrera="colores_carrera">
-    
     </main-carrer-screen>
   </div>
 
@@ -49,6 +48,13 @@
   </div>
 
   </section>
+
+  <section class="spinner-loading" v-show="isLoading">
+    <div class="container-spinner centrar">
+      <progress-spinner/>
+    </div>
+  </section>
+
 </app-estructure>
 
   
@@ -60,6 +66,7 @@ import PerfilesCarrera from '@/Pages/Componentes/Carrers/perfiles/PerfilesCarrer
 import ObjetivosCarrera from '@/Pages/Componentes/Carrers/objetivos/ObjetivosCarrera.vue';
 import DescargasCarrera from '@/Pages/Componentes/Carrers/objetivos/DescargasCarrera.vue';
 import MainScreen from '@/Pages/Componentes/Carrers/main_screen/MainScreen.vue';
+import ProgressSpinner from 'primevue/progressspinner';
 
 //reconstruccion de componentes hijos
 import CiclosFormacionCarrera from '@/Pages/Componentes/Carrers/ciclos_formacion/CiclosDeFormacion.vue';
@@ -76,6 +83,7 @@ export default defineComponent({
     'objetivos-carrera':ObjetivosCarrera,
     'ciclos-de-formacion':CiclosFormacionCarrera,
     'app-estructure':AppEstructure,
+    'progress-spinner':ProgressSpinner,
   },
 // Propiedades del componente (opcional)
 props: {
@@ -98,6 +106,7 @@ setup(props) {
   let datosCarrera = ref();
   let ciclos_formacion_carrera = ref(['No hay todavia']);
   let colores_carrera = ref(['#000000']);
+  let isLoading = ref(true);  
 
   let objetivos_carrera = ref({
     plan_estudios:'',
@@ -150,30 +159,14 @@ setup(props) {
       perfil_egreso.value = datosCarrera.value.datos.perfil_egreso;
       pagina_principal.value = datosCarrera.value.datos.pagina_principal;
 
+      isLoading.value = false;
+
     }).catch(function(error){
         console.error(error);
 
     }).finally(function(){
 
     });
-  }
-
-  function getColorFontContraste(){
-      // Eliminar el # si está presente
-      if (hexColor.startsWith('#')) {
-          hexColor = hexColor.slice(1);
-      }
-
-      // Convertir el color hexadecimal a valores RGB
-      const r = parseInt(hexColor.substr(0, 2), 16);
-      const g = parseInt(hexColor.substr(2, 2), 16);
-      const b = parseInt(hexColor.substr(4, 2), 16);
-
-      // Calcular la luminancia
-      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-
-      // Devolver negro (#000000) o blanco (#FFFFFF) dependiendo de la luminancia
-      return luminance > 0.5 ? '#000000' : '#FFFFFF';
   }
 
   return {
@@ -186,6 +179,7 @@ setup(props) {
     pefil_ingreso,
     perfil_egreso,
     pagina_principal,
+    isLoading,
     //metodos
     loadCarreraInformation,
   };
@@ -199,5 +193,10 @@ mounted(){
 </script>
 
 <style scoped>
+  .centrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
 </style>

@@ -27,7 +27,10 @@
             <div class="color-primario">  
               <span>Color primario:
                 <color-picker  inputId="cp-primary-color" v-model="colores_carrera.colorPrimario" 
-                ></color-picker>
+                ></color-picker> &nbsp
+                <pv-input-text type="text" placeholder="ff0048" 
+                  class="input-color " v-model="colores_carrera.colorPrimario" :maxlength="6" 
+                  />
               </span>
             </div>
 
@@ -36,7 +39,9 @@
             <div class="color-secundario">
               <span>Color secundario:
                 <color-picker  inputId="cp-secundary-color" v-model="colores_carrera.colorSecundario"
-              ></color-picker>
+              ></color-picker>&nbsp
+              <pv-input-text type="text" placeholder="f700ff" 
+                  class="input-color" v-model="colores_carrera.colorSecundario" :maxlength="6"/>
               </span>
             </div>
 
@@ -44,7 +49,9 @@
             <div class="color-terciario">
               <span>Color terciario:
                 <color-picker  inputId="cp-terciary-color" v-model="colores_carrera.colorTerciario"
-                ></color-picker>
+                ></color-picker>&nbsp
+                <pv-input-text type="text" placeholder="ff001a" 
+                  class="input-color" v-model="colores_carrera.colorTerciario" :maxlength="6"/>
               </span>
             </div>
           </div>
@@ -912,7 +919,6 @@ export default defineComponent({
       });
     }
 
-
     function submitForm(){
     //mostramos el spinner de carga
     visibleSpinnerDialog.value = true;
@@ -1063,6 +1069,12 @@ export default defineComponent({
 
 <style scoped>
 
+
+.input-color{
+
+  width:48%;
+}
+
 .container-spinner{
   display: flex;
     justify-content: center;
@@ -1119,11 +1131,6 @@ export default defineComponent({
   justify-content: space-around;
 }
 
-.distribuir-justamente{
-  display: flex;
-  justify-content: space-between;
-}
-
 .margin-bottom-custom{
   margin-bottom: 1rem;
 }
@@ -1136,11 +1143,6 @@ export default defineComponent({
 .long-input-text-ciclo{
   width: 50vw;
 }
-
-.long-input-url{
-  width: 40vw;
-}
-
 .long-input-url-2{
   width: 55vw;
 }
@@ -1155,30 +1157,6 @@ export default defineComponent({
   border-radius: 2px;
 }
 
-.table-tarjetas-informativas {
-    border-collapse: collapse;
-    width: 100%;
-    border: 2px solid #333; /* Borde exterior de la tabla */
-  }
-
-  .table-tarjetas-informativas th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd; /* Borde inferior para las celdas */
-  }
-
-  .table-tarjetas-informativas th {
-    background-color: #333; /* Fondo para los encabezados */
-    color: white; /* Color de texto para los encabezados */
-  }
-
-  .table-tarjetas-informativas tr:nth-child(even) {
-    background-color: #f2f2f2; /* Fondo alternado para filas pares */
-  }
-
-  .table-tarjetas-informativas tr:hover {
-    background-color: #ddd; /* Fondo cuando el cursor está sobre una fila */
-  }
 
 
 </style>

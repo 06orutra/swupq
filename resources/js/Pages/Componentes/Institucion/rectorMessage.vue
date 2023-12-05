@@ -90,7 +90,7 @@ export default {
             <h4 v-if="datos.length > 0">{{ datos[0].link }}</h4>
 
             <p v-if="mensaje.length > 0"
-              class="xl:text-4xl lg:text-3xl md:text-xl text-lg"
+              class="mensajeFuente xl:text-4xl lg:text-3xl md:text-xl text-lg"
               style="text-align: justify; white-space: pre-line;margin-top: 2em; margin-bottom:1em;">
               {{ mensaje[0].contenido }}
             </p>
@@ -137,6 +137,9 @@ export default {
 
 }
 
+.mensajeFuente{
+  font-family: "Times New Roman", Times, serif;
+}
 
 .card {
   margin-bottom: 40px;

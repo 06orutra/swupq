@@ -195,7 +195,7 @@ export default {
         for (let index = 0; index < this.carrerasMenuList.length; index++) {
           this.menuItems[1].subMenuItems.push({
             label:this.carrerasMenuList[index].nombre_carrera,
-            path: '/carreras/informes/' + this.carrerasMenuList[index].nombre_carrera +'-'+this.carrerasMenuList[index].id,
+            path: '/carreras/informes/' + this.carrerasMenuList[index].slug +'&'+this.carrerasMenuList[index].id,
           }); 
         }
     },

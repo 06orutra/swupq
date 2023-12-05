@@ -89,7 +89,7 @@
             </button>
         </div>
         <div v-if="showChatbot"
-            class="chatbot-container z-10 dark:bg-[url('/public/img/FondoOscuroChatBot.jpg')] bg-[url('/public/img/FondoClaroChatBot.jpg')]">
+            class="chatbot-container z-10 bg-[url('/public/img/FondoChatBot.jpg')]">
             <!-- CHATBOT CONTENIDO EN EL DESTE -->
             <!-- Header del chatbot container -->
             <div class="
@@ -115,8 +115,8 @@
 
             <div class="px-4 pt-6 z-10 ">
                 <div v-for="text in welcomeMessages" class="flex flex-grow-1">
-                    <a v-if="text.contenido" class='rounded-lg py-3 px-4 inline-block mb-2 relative text-2xl font-sans
-                        bg-gray-100 text-gray-800 hover:bg-white float-left ml-2 mr-20 mt-2
+                    <a v-if="text.contenido" class='rounded-lg py-3 px-4 inline-block mb-2 relative text-lg md:text-xl xl:text-2xl
+                    font-sans bg-gray-100 text-gray-800 hover:bg-white float-left ml-2 mr-20 mt-2
                         dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500' style="white-space: pre-line">
                         {{ text.contenido }}</a>
                 </div>
@@ -125,12 +125,12 @@
 
             <div class="px-4 py-2 z-10 ">
                 <div v-for="message in messages" :key="message.id" class="flex flex-grow-1">
-                    <a v-if="message.text" class='rounded-lg py-3 px-4 inline-block mb-2 relative text-2xl font-sans
+                    <a v-if="message.text" class='rounded-lg py-3 px-4 inline-block mb-2 relative text-lg md:text-xl xl:text-2xl font-sans
                         bg-gray-100 text-gray-800 hover:bg-white float-left ml-2 mr-20 mt-2
                         dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500' style="white-space: pre-line">
                         {{ message.text }}</a>
-                    <a v-if="message.link" :href="message.link" target="_blank" class="rounded-lg py-2 px-4 inline-block mb-2 relative text-2xl 
-                        bg-gray-400 text-gray-900 hover:bg-white float-left ml-2 mr-20 mt-2
+                    <a v-if="message.link" :href="message.link" target="_blank" class="rounded-lg py-2 px-4 inline-block mb-2 relative 
+                    text-lg md:text-xl xl:text-2xl bg-gray-400 text-gray-900 hover:bg-white float-left ml-2 mr-20 mt-2
                         dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500" style="white-space: pre-line">
                         {{ message.option }}</a>
                 </div>
@@ -144,7 +144,7 @@
                 <!-- Generar los botones que están guardados en un array como "currentButtons"
                     Recibiendo así "handleButtonClick como disparador para la siguiente acción" -->
                 <button v-for="button in currentButtons" :key="button.id" @click="handleButtonClick(button)"
-                    class="m-1 rounded-sm w-auto h-auto relative bottom-2 mt-2 text-2xl cursor-pointer p-2.5
+                    class="m-1 rounded-sm w-auto h-auto relative bottom-2 mt-2 text-md md:text-xl xl:text-2xl cursor-pointer p-2.5
                     bg-gradient-to-r from-gray-300 to-gray-500 hover:from-red-500 hover:to-blue-500 text-black
                     dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-600 dark:hover:from-blue-900 dark:hover:to-purple-900 dark:text-white" style="white-space: pre-line" :data-index="index"  ref="messages">
                     {{ button.titulo }}
@@ -206,12 +206,14 @@
     }
 
     .chatbot-container {
+        top: 15%;
+        bottom: 2%;
         max-height: 1080px;
         max-width: 400px;
     }
 }
 
-@media (min-width: 1024px) and (max-width:1201px) {
+@media (min-width: 770px) and (max-width:1201px) {
     .chatButton {
         width: 43px;
         height: 43px;
@@ -220,6 +222,7 @@
     }
 
     .chatbot-container {
+        top: 25%;
         max-height: 1080px;
         max-width: 480px;
     }
@@ -242,6 +245,11 @@
         left: 0;
         z-index: 999;
     }
+    .chatbot-container {
+        top: 20%;
+        max-height: 1920px;
+        max-width: 520px;
+    }
 }
 
 @media (min-width: 1442px) and (max-width: 1499px) {
@@ -253,6 +261,7 @@
     }
 
     .chatbot-container {
+        top: 20%;
         max-height: 1080px;
         max-width: 640px;
     }
@@ -303,9 +312,9 @@
     }
 
     .chatbot-container {
-        bottom: 10px;
-        top: 13.5%;
-        left: 5px;
+        bottom: 2%;
+        top: 20%;
+        left: 10%;
         right: 5px;
         /* Ajusta la posición a tu preferencia */
         max-width: 360px;
@@ -318,7 +327,7 @@
     }
 }
 
-@media (min-width: 420px) and (max-width: 520px) {
+@media (min-width: 419px) and (max-width: 520px) {
     .chatButton {
         width: 30px;
         height: 30px;
@@ -327,7 +336,8 @@
     }
 
     .chatbot-container {
-        bottom: 10px;
+        bottom: 2%;
+        top: 20%;
         right: 10px;
         /* Ajusta la posición a tu preferencia */
         max-width: 360px;
@@ -349,9 +359,10 @@
     }
 
     .chatbot-container {
-        bottom: 10px;
+        bottom: 5%;
+        top: 25%;
         right: 5px;
-        left: 5px;
+        left: 10%;
         /* Ajusta la posición a tu preferencia */
         max-width: 360px;
         /* Ajusta el ancho máximo a tu preferencia */

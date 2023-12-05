@@ -5,8 +5,14 @@
         <div class="centrar title">
             <h4>Carreras</h4>
         </div>
+        <div class="container-search-carrera" style="padding: 0px 0px 0px 15px;"><!--display: flex;align-items:end; justify-content: end;-->
+            <span class="p-input-icon-left input-icon">
+                <i class="pi pi-search" />
+                <input-text-pv  class="input-search-carrera" placeholder="Search" v-model="searchCarrera"/>
+            </span>
+        </div>
         <div class="cards-container" v-if="carrerasLoaded">
-            <card-pv v-for="carreraCard in carrerasLoaded" :key="carreraCard.id" class="card"> <!--v-for="datosCard in filteredBanner"-->
+            <card-pv v-for="carreraCard in filteredCarrer" :key="carreraCard.id" class="card"> <!--v-for="datosCard in filteredBanner"-->
                 <template #header>
                     <!--<img :src="carreraCard.img" alt="Card Image" class="imagen-resolucion" />--> <!--'/storage/' + carreraCard.img-->
                     <img :src="carreraCard.url_imagen" alt="Card Image" class="imagen-resolucion" />
@@ -766,6 +772,10 @@ export default defineComponent({
 
     //para guardar los indices de los ciclos e iconos informativos modificandose
     let indexDataEditing = 0;
+    
+    
+    //para buscar una carrera en especifico
+    let searchCarrera = ref('');
 
     //para guardar los conocimientos, habilidades y actitudes disponibles
 
@@ -1073,6 +1083,7 @@ export default defineComponent({
         iconoInformativoAgregar,
         messageDialog,
         visibleSpinnerDialog,
+        searchCarrera,
         onCicloSelect,
         onCicloUnselect,
         onIconInfoSelect,
@@ -1100,6 +1111,16 @@ export default defineComponent({
     this.loadHabilidades();//cargar las habilidades de la base de datos
     this.loadActitudes();//cargar las actitudes de la base de datos
   },
+  computed: {
+    filteredCarrer() {
+        if (!this.searchCarrera) {
+            return this.carrerasLoaded;
+        }
+        return this.carrerasLoaded.filter(item =>
+            item.nombre_carrera.toLowerCase().includes(this.searchCarrera.toLowerCase())
+        );
+    }
+}
 
   // Lifecycle hooks (opcional)
   // Puedes utilizar los hooks como onCreated, onMounted, onUpdated, etc.

@@ -70,7 +70,7 @@ export default {
   margin-top: -30%;
 }
 
-@media (min-width: 1024px) and (max-width:1201px) {
+@media (min-width: 1023px) and (max-width:1201px) {
   .contenedor{
     display: flex;
     flex-direction: column;

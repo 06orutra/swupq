@@ -2,24 +2,22 @@
   <div id="app">
       <img src="/storage/img/icon_menu.svg"  alt="Menu Icon" class="menu-icon" @click="showMenu = !showMenu" />
 
-    
-    <ul class="menu" v-show="showMenu" @mouseleave="closeActiveSubMenu">
-      <li v-for="(menuItem, index) in menuItems" :key="index">
-        <div 
-        @mouseover="expandSubMenu(index)"
-        @click="toggleSubMenu(index)"
-        :style="{ color: menuItem.textColor }"
-        :class="{ 'menu-block': true, 'active': menuItem.expanded }"
-        >
+    <ul class="combined-menu" v-show="showMenu" @mouseenter="resetTimer" @mouseleave="closeActiveSubMenu">
+      <li v-for="(menuItem, index) in menuItems.concat(menuus)" :key="index">
+        <div v-if="menuItem.subMenuItems" @mouseover="expandSubMenu(index)" @click="toggleSubMenu(index)"
+          :style="{ color: menuItem.textColor }" :class="{ 'menu-block': true, 'active': menuItem.expanded }">
           {{ menuItem.label }}
         </div>
+
+        <div v-else @click="redirectTo(menuItem.path)" :style="{ color: menuItem.textColor }" class="menu-block">
+          {{ menuItem.label }}
+        </div>
+
         <transition name="fade">
-          <ul v-if="menuItem.expanded" class="sub-menu">
-            <li
-             v-for="(subMenuItem, subIndex) in menuItem.subMenuItems" 
-             :key="subIndex"
-             >
-              <div @click="redirectTo(subMenuItem.path)" :style="{ color: subMenuItem.textColor }" class="sub-menu-block">
+          <ul v-if="menuItem.expanded && menuItem.subMenuItems" class="sub-menu">
+            <li v-for="(subMenuItem, subIndex) in menuItem.subMenuItems" :key="subIndex">
+              <div @click="redirectTo(subMenuItem.path)" :style="{ color: subMenuItem.textColor }"
+                class="sub-menu-block">
                 {{ subMenuItem.label }}
               </div>
             </li>
@@ -40,7 +38,7 @@ export default {
   },
   data() {
     return {
-      carrerasMenuList: [],
+      hideMenuTimeout: null,
       menuicon: {
         top: '28.1%', // Ajusta esto a la posición inicial del menú-icon
         left: '10px', // Ajusta esto a la posición inicial del menú-icon
@@ -105,47 +103,33 @@ export default {
             { label: 'Representativos', path:'/FormacionIntegral/Representativos/' },
           ],
         },
-        {
+      ],
+      menuus: [
+      {
           expanded: false,
           textColor: '#ffffff',
           label: 'VINCULACIÓN',
-          subMenuItems: [
-            { label: 'Opción 1' },
-            { label: 'Opción 2' },
-            { label: 'Opción 3' },
-          ],
+          path: 'https://guao.org/sites/default/files/biblioteca/Álgebra%20de%20Baldor.pdf',
         },
         {
           expanded: false,
           textColor: '#ffffff',
           label: 'SERVICIOS ESTUDIANTILES',
-          subMenuItems: [
-            { label: 'Opción 1' },
-            { label: 'Opción 2' },
-            { label: 'Opción 3' },
-          ],
+          path: 'https://guao.org/sites/default/files/biblioteca/Álgebra%20de%20Baldor.pdf',
         },
         {
           expanded: false,
           textColor: '#ffffff',
           label: 'CONVOCATORIAS',
-          subMenuItems: [
-            { label: 'Opción 1' },
-            { label: 'Opción 2' },
-            { label: 'Opción 3' },
-          ],
+          path: 'https://guao.org/sites/default/files/biblioteca/Álgebra%20de%20Baldor.pdf',
         },
         {
           expanded: false,
           textColor: '#ffffff',
           label: 'CALENDARIO ESCOLAR',
-          subMenuItems: [
-            { label: 'Opción 1' },
-            { label: 'Opción 2' },
-            { label: 'Opción 3' },
-          ],
+          path: 'https://guao.org/sites/default/files/biblioteca/Álgebra%20de%20Baldor.pdf',
         },
-      ],
+      ]
     };
   },
   methods: {
@@ -165,14 +149,35 @@ export default {
       this.activeSubMenuIndex = this.menuItems[index].expanded ? index : null;
     },
     redirectTo(path) {
-      window.location.href = path;
+      if (path.startsWith('/')) {
+        // Si es una ruta interna, redirige internamente
+        window.location.href = path;
+      } else {
+        // Si es un enlace externo, redirige a la URL externa
+        window.open(path);
+      }
     },
     closeActiveSubMenu() {
       if (this.activeSubMenuIndex !== null) {
         this.menuItems[this.activeSubMenuIndex].expanded = false;
         this.activeSubMenuIndex = null;
-        this.showMenu = false;
-        this.activeSubMenuIndex = null;
+        
+        // Borrar el temporizador existente si hay uno
+        if (this.hideMenuTimeout) {
+          clearTimeout(this.hideMenuTimeout);
+        }
+
+        // Configurar un nuevo temporizador
+        this.hideMenuTimeout = setTimeout(() => {
+          this.showMenu = false;
+        }, 2000);
+      }
+    },
+    resetTimer() {
+      // Reiniciar el temporizador cuando vuelves al menú
+      if (this.hideMenuTimeout) {
+        clearTimeout(this.hideMenuTimeout);
+        this.hideMenuTimeout = null; // Restablecer la variable del temporizador
       }
     },
     closeMenuAndSubMenu() {
@@ -215,6 +220,7 @@ export default {
 </script>
 
 <style scoped>
+
 .menu-icon {
   cursor: pointer;
   width: 7vh;
@@ -230,7 +236,7 @@ export default {
   /* Resto de los estilos para el contenido principal */
 }
 
-.menu {
+.combined-menu {
   list-style-type: none;
   padding: 0;
   position: fixed;
@@ -238,48 +244,47 @@ export default {
   top: calc(32% + 1vh);
   z-index: 999;
   width: 15%;
-  background-color: rgba(0, 10, 87, 0.8);
+  background: rgba(0, 10, 87, 0.8);
   transition: transform 0.5s ease;
 }
 
-.menu li {
+.combined-menu li {
   display: block;
   background: transparent;
   color: #fff;
   position: relative;
-  background: rgba(0, 10, 87, 0.8);
   width: 100%;
 }
 
-.menu .menu-block {
+.combined-menu .menu-block {
   display: block;
   padding: 10px;
   transition: background-color 0.3s;
 }
 
-.menu .menu-block:hover {
+.combined-menu .menu-block:hover {
   background-color: rgba(0, 30, 255, 0.8);
 }
 
 /* Corrección de posición y recursividad */
-.menu .sub-menu {
+.combined-menu .sub-menu {
   position: absolute;
   left: 100%;
   top: 0.1rem;
   margin-left: 0;
   padding: 0;
-  width: 300px;
+  width: 250px;
   z-index: 2;
-  background-color: rgba(0, 26, 226, 0.8);
+  background-color: rgba(0, 26, 226, 0.712);
 }
 
-.menu .sub-menu-block {
+.combined-menu .sub-menu-block {
   display: block;
   padding: 10px;
   transition: background-color 0.3s;
 }
 
-.menu .sub-menu-block:hover {
+.combined-menu .sub-menu-block:hover {
   background-color: rgba(0, 10, 87, 0.8);
 }
 
@@ -293,7 +298,7 @@ export default {
     z-index: 999;
     transform: translateX(45px) translateY(75px);
   }
-  .menu {
+  .combined-menu {
     width:20%;
     left: 55px;
     top: 230px;
@@ -311,20 +316,20 @@ export default {
     transform: translateX(45px) translateY(75px);
   }
 
-  .menu {
+  .combined-menu {
     width: 20%;
     left: 55px;
     top: 230px;
   }
 }
 
-@media (min-width: 1201px) and (max-width: 1441px) {
+@media (min-width: 1202px) and (max-width: 1441px) {
   .menu-icon {
     width: 55px;
     height: 55px;
   }
 
-  .menu {
+  .combined-menu {
     width: 15%;
     left: 50px;
     top: 247px;
@@ -338,7 +343,7 @@ export default {
     transform: translateX(42px) translateY(105px);
   }
 
-  .menu {
+  .combined-menu {
     width: 15%;
     left: 52px;
     top: 250px;
@@ -352,7 +357,7 @@ export default {
     transform: translateX(42px) translateY(103px);
   }
 
-  .menu {
+  .combined-menu {
     width: 15%;
     left: 53px;
     top: 250px;
@@ -366,7 +371,7 @@ export default {
     transform: translateX(40px) translateY(150px);
   }
 
-  .menu {
+  .combined-menu {
     width: 8%;
     left: 50px;
     top: 325px;
@@ -383,7 +388,7 @@ export default {
     margin: .9%;
   }
 
-  .menu {
+  .combined-menu {
     width: 40%;
     left: 0%;
     top: 69px;
@@ -397,7 +402,7 @@ export default {
     transform: translateX(46px) translateY(75px);
   }
 
-  .menu {
+  .combined-menu {
     width: 26%;
     left: 37px;
     top: 235px;
@@ -412,7 +417,7 @@ export default {
     transform: translateX(240px) translateY(8px);
   }
 
-  .menu {
+  .combined-menu {
     width: 40%;
     left: 0%;
     top: 70px;
@@ -426,7 +431,7 @@ export default {
     transform: translateX(240px) translateY(8px);
   }
 
-  .menu {
+  .combined-menu {
     width: 40%;
     left: 0%;
     top: 70px;

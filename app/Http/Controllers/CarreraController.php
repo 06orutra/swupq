@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 use App\Models\Carrera;
 use App\Models\Conocimiento;
@@ -163,6 +164,8 @@ class CarreraController extends Controller
             return [
                 'id' => $registro->id,
                 'nombre_carrera'=> json_decode($registro->datos)->nombre_carrera,
+                //devolvemos el slug para construir la url de la carrera
+                'slug'=> json_decode($registro->datos)->slug,
             ];
         });
         
@@ -191,6 +194,7 @@ class CarreraController extends Controller
             'perfil_egreso' => $request->input('perfil_egreso'),   
             'ciclos_formacion'=> json_decode($request->input('ciclos_formacion')),
             'pagina_principal' => json_decode($request->input('pagina_principal')),
+            'slug' => Str::slug($request->input('nombre')), 
         ];
 
         $json = json_encode($datos, JSON_UNESCAPED_SLASHES);
@@ -243,7 +247,15 @@ class CarreraController extends Controller
         try{
             // Codifica los datos actualizados nuevamente en formato JSON
             //$json = json_encode($request->datos, JSON_UNESCAPED_SLASHES);
-            $json = $request->datos;
+
+            //actualizamos el slug
+            $slug = Str::slug(json_decode($request->datos)->nombre_carrera);
+            
+            $json = json_decode($request->datos);
+            $json->slug = $slug;
+            //volvemos a codificar el json para poder realizar el cambio en la base de datos
+            $json = json_encode($json, JSON_UNESCAPED_SLASHES);
+
             // Actualiza el campo 'datos' en la base de datos
             $carrera_editar->datos = $json;
             $carrera_editar->save();

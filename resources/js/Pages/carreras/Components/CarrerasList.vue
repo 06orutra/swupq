@@ -8,7 +8,8 @@
         <div class="container-search-carrera" style="padding: 0px 0px 0px 15px;"><!--display: flex;align-items:end; justify-content: end;-->
             <span class="p-input-icon-left input-icon">
                 <i class="pi pi-search" />
-                <input-text-pv  class="input-search-carrera" placeholder="Search" v-model="searchCarrera"/>
+                <input-text-pv  class="input-search-carrera" placeholder="Search" style="width:85% ;"
+                v-model="searchCarrera"/>
             </span>
         </div>
         <div class="cards-container" v-if="carrerasLoaded">

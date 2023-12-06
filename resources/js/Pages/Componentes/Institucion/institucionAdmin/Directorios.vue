@@ -4,40 +4,41 @@ import estructuraImg from '@/Pages/Componentes/Home/estructuraImg.vue';
 </script>
 
 <template>
-     <TabView ref="tabview1" class="p-3">
+    <TabView ref="tabview1" class="p-3">
         <TabPanel header="Banner Directorio">
-            <estructuraImg :loadDataUrl="'/BannerDirectorio/bannerData'" :registerBannerUrl="'/BannerDirectorio/registrarBanner'"
-        :editBannerUrl="'/BannerDirectorio/editarBanner'" :deleteBannerUrl="'/BannerDirectorio/eliminarBanner'" />
+            <p>Este componente solo aceptara el <span style="color: red; font-weight: bold; ">Primer</span> elemento del registro</p>
+            <estructuraImg :loadDataUrl="'/BannerDirectorio/bannerData'"
+                :registerBannerUrl="'/BannerDirectorio/registrarBanner'" :editBannerUrl="'/BannerDirectorio/editarBanner'"
+                :deleteBannerUrl="'/BannerDirectorio/eliminarBanner'" />
         </TabPanel>
-        <TabPanel header="Rectorpìa">
-            <estructuraTextos :loadDataUrl="'/rectoria/bannerData'" :registerBannerUrl="'/rectoria/registrarBanner'"
-        :editBannerUrl="'/rectoria/editarBanner'" :deleteBannerUrl="'/rectoria/eliminarBanner'" />
+        <TabPanel header="Rectoría">
+            <estructuraTextos :Titulo="'Titulo:'" :Subtitulo="'Numero:'" :loadDataUrl="'/rectoria/bannerData'" :registerBannerUrl="'/rectoria/registrarBanner'"
+                :editBannerUrl="'/rectoria/editarBanner'" :deleteBannerUrl="'/rectoria/eliminarBanner'" />
         </TabPanel>
-        <TabPanel header="Secretarìa Acadèmica">
-            <estructuraTextos :loadDataUrl="'/Sacademica/bannerData'" :registerBannerUrl="'/Sacademica/registrarBanner'"
-        :editBannerUrl="'/Sacademica/editarBanner'" :deleteBannerUrl="'/Sacademica/eliminarBanner'" />
+        <TabPanel header="Secretaría Académica">
+            <estructuraTextos :Titulo="'Titulo:'" :Subtitulo="'Numero:'" :loadDataUrl="'/Sacademica/bannerData'" :registerBannerUrl="'/Sacademica/registrarBanner'"
+                :editBannerUrl="'/Sacademica/editarBanner'" :deleteBannerUrl="'/Sacademica/eliminarBanner'" />
         </TabPanel>
-        <TabPanel header="Secretarìa Administrativa">
-            <estructuraTextos :loadDataUrl="'/Sadministrativa/bannerData'" :registerBannerUrl="'/Sadministrativa/registrarBanner'"
-        :editBannerUrl="'/Sadministrativa/editarBanner'" :deleteBannerUrl="'/Sadministrativa/eliminarBanner'" />
+        <TabPanel header="Secretaría Administrativa">
+            <estructuraTextos :Titulo="'Titulo:'" :Subtitulo="'Numero:'" :loadDataUrl="'/Sadministrativa/bannerData'"
+                :registerBannerUrl="'/Sadministrativa/registrarBanner'" :editBannerUrl="'/Sadministrativa/editarBanner'"
+                :deleteBannerUrl="'/Sadministrativa/eliminarBanner'" />
         </TabPanel>
-        <TabPanel header="Direcciòn De Planeaciòn">
-            <estructuraTextos :loadDataUrl="'/DPlanneacion/bannerData'" :registerBannerUrl="'/DPlanneacion/registrarBanner'"
-        :editBannerUrl="'/DPlanneacion/editarBanner'" :deleteBannerUrl="'/DPlanneacion/eliminarBanner'" />
+        <TabPanel header="Dirección De Planeación">
+            <estructuraTextos :Titulo="'Titulo:'" :Subtitulo="'Numero:'" :loadDataUrl="'/DPlanneacion/bannerData'" :registerBannerUrl="'/DPlanneacion/registrarBanner'"
+                :editBannerUrl="'/DPlanneacion/editarBanner'" :deleteBannerUrl="'/DPlanneacion/eliminarBanner'" />
         </TabPanel>
         <TabPanel header="Abogado General">
-            <estructuraTextos :loadDataUrl="'/AboGeneral/bannerData'" :registerBannerUrl="'/AboGeneral/registrarBanner'"
-        :editBannerUrl="'/AboGeneral/editarBanner'" :deleteBannerUrl="'/AboGeneral/eliminarBanner'" />
+            <estructuraTextos :Titulo="'Titulo:'" :Subtitulo="'Numero:'" :loadDataUrl="'/AboGeneral/bannerData'" :registerBannerUrl="'/AboGeneral/registrarBanner'"
+                :editBannerUrl="'/AboGeneral/editarBanner'" :deleteBannerUrl="'/AboGeneral/eliminarBanner'" />
         </TabPanel>
-        <TabPanel header="Direcciòn De Tecnologìas De Informaciòn Y Comunicaciòn">
-            <estructuraTextos :loadDataUrl="'/DTecInfCom/bannerData'" :registerBannerUrl="'/DTecInfCom/registrarBanner'"
-        :editBannerUrl="'/DTecInfCom/editarBanner'" :deleteBannerUrl="'/DTecInfCom/eliminarBanner'" />
+        <TabPanel header="Dirección De Tecnologías De Información Y Comunicación">
+            <estructuraTextos :Titulo="'Titulo:'" :Subtitulo="'Numero:'" :loadDataUrl="'/DTecInfCom/bannerData'" :registerBannerUrl="'/DTecInfCom/registrarBanner'"
+                :editBannerUrl="'/DTecInfCom/editarBanner'" :deleteBannerUrl="'/DTecInfCom/eliminarBanner'" />
         </TabPanel>
-        <TabPanel header="Direcciòn De Vinculaciòn">
-            <estructuraTextos :loadDataUrl="'/Dvinculacion/bannerData'" :registerBannerUrl="'/Dvinculacion/registrarBanner'"
-        :editBannerUrl="'/Dvinculacion/editarBanner'" :deleteBannerUrl="'/Dvinculacion/eliminarBanner'" />
+        <TabPanel header="Dirección De Vinculación">
+            <estructuraTextos :Titulo="'Titulo:'" :Subtitulo="'Numero:'" :loadDataUrl="'/Dvinculacion/bannerData'" :registerBannerUrl="'/Dvinculacion/registrarBanner'"
+                :editBannerUrl="'/Dvinculacion/editarBanner'" :deleteBannerUrl="'/Dvinculacion/eliminarBanner'" />
         </TabPanel>
     </TabView>
-    
-    
 </template>

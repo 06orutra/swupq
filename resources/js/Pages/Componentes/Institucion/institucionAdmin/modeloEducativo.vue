@@ -9,6 +9,7 @@
 <template>
     <TabView ref="tabview1" class="p-3">
         <TabPanel header="Ciclo Alumnado">
+            <p>Este componente solo aceptara el <span style="color: red; font-weight: bold; ">Primer</span> elemento del registro</p>
             <cicloAlumnado/>
         </TabPanel>
         <TabPanel header="Modal">

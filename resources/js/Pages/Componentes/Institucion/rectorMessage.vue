@@ -103,7 +103,7 @@ export default {
               <details class="warning">
                 <summary>DOCUMENTOS </summary>
                 <div v-for="(informe, index) in informes" :key="index">
-                  <Button class="my-2 w-full bg-transparent text-black font-bold text-left text-md md:text-2xl lg:text-3xl"
+                  <Button class="my-2 w-full bg-transparent text-black font-bold text-left text-md md:text-2xl lg:text-3xl link"
                   @click="mostrarInforme(index)"
                   style="word-break: break-all;">
                     {{ informe.nombre }}
@@ -129,6 +129,28 @@ export default {
 </template>
 
 <style >
+Button.link:hover {
+  color: #000000 !important;
+}
+
+.dark-mode h1 {
+  color: white;
+}
+
+.dark-mode .warning {
+  background-color: rgb(192, 192, 192);
+}
+
+.p-button{
+  border: 1px solid transparent;
+}
+
+.p-button:hover{
+  border: 1px solid transparent !important;
+}
+
+/* Estilos */
+
 :root {
   --color-bg: #EEEDEB;
   --color-title: #0E1C4E;

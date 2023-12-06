@@ -85,6 +85,7 @@ use App\Http\Controllers\IgualdadLaboralPdfIgualdadController;
 use App\Http\Controllers\BannerMarcoJuridicoController;
 use App\Http\Controllers\ChatButtonsController;
 use App\Http\Controllers\ChatResponseController;
+use App\Http\Controllers\ChatWelcomeController;
 use Illuminate\Http\Request;
 
 /*
@@ -306,6 +307,7 @@ Route::middleware([
         'BannerMarcoJuridico' => BannerMarcoJuridicoController::class,
         'chatButtons' => ChatButtonsController::class,
         'chatResponse' => ChatResponseController::class,
+        'chatWelcome' => ChatWelcomeController::class,
     ];
     // se declarar variables, 
 

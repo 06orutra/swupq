@@ -468,7 +468,6 @@
         /* Permite que el chat se expanda verticalmente */
         overflow-y: auto;
         /* Agrega scroll si el contenido es largo */
-        /* Otros estilos aquí... */
     }
 }
 

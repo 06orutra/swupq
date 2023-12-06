@@ -155,6 +155,9 @@ Route::prefix('institucion')->group(function () {
     Route::get('directorio', function(){
         return Inertia::render('Componentes/Institucion/Directorio');
     });
+    Route::get('prensa', function(){
+        return Inertia::render('Componentes/Institucion/Noticias');
+    });
 });   
     Route::get('ubicacion', function () {
         return Inertia::render('Componentes/Institucion/location');

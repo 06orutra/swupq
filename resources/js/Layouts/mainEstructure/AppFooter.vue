@@ -68,10 +68,10 @@ const onChangeTheme = (theme, mode) => {
                 <div class="footer-col">
                     <h4></h4>
                     <ul>
-                        <li><a href="#">Historia</a></li>
-                        <li><a href="#">Filosofía</a></li>
-                        <li><a href="#">Ubicación</a></li>
-                        <li><a href="#">Directorio</a></li>
+                        <li><a href="/institucion/historia/">Historia</a></li>
+                        <li><a href="/institucion/filosofia/">Filosofía</a></li>
+                        <li><a href="/institucion/ubicacion/">Ubicación</a></li>
+                        <li><a href="/institucion/directorio/">Directorio</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">

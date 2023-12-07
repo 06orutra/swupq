@@ -108,7 +108,7 @@
         </div>
       </div>
     </AppEstructure>
-    <RedesSociales />a
+    <RedesSociales />
   </div>
 </template>
 

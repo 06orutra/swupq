@@ -1,24 +1,17 @@
 <template>
   <div id="app">
-      <img src="/storage/img/icon_menu.svg"  alt="Menu Icon" class="menu-icon" @click="showMenu = !showMenu" />
+    <img src="/storage/img/icon_menu.svg" alt="Menu Icon" class="menu-icon" @click="showMenu = !showMenu" />
 
-    
+
     <ul class="menu" v-show="showMenu" @mouseleave="closeActiveSubMenu">
       <li v-for="(menuItem, index) in menuItems" :key="index">
-        <div 
-        @mouseover="expandSubMenu(index)"
-        @click="toggleSubMenu(index)"
-        :style="{ color: menuItem.textColor }"
-        :class="{ 'menu-block': true, 'active': menuItem.expanded }"
-        >
+        <div @mouseover="expandSubMenu(index)" @click="toggleSubMenu(index)" :style="{ color: menuItem.textColor }"
+          :class="{ 'menu-block': true, 'active': menuItem.expanded }">
           {{ menuItem.label }}
         </div>
         <transition name="fade">
           <ul v-if="menuItem.expanded" class="sub-menu">
-            <li
-             v-for="(subMenuItem, subIndex) in menuItem.subMenuItems" 
-             :key="subIndex"
-             >
+            <li v-for="(subMenuItem, subIndex) in menuItem.subMenuItems" :key="subIndex">
               <div @click="redirectTo(subMenuItem.path)" :style="{ color: subMenuItem.textColor }" class="sub-menu-block">
                 {{ subMenuItem.label }}
               </div>
@@ -95,9 +88,9 @@ export default {
           textColor: '#ffffff',
           label: 'DEPORTE Y CULTURA',
           subMenuItems: [
-            { label: 'Lengua extranjera', path:'/FormacionIntegral/lenguaExtranjera/' },
-            { label: 'Desarrollo Humano', path:'/FormacionIntegral/DesarrolloHumano/' },
-            { label: 'Representativos', path:'/FormacionIntegral/Representativos/' },
+            { label: 'Lengua extranjera', path: '/FormacionIntegral/lenguaExtranjera/' },
+            { label: 'Desarrollo Humano', path: '/FormacionIntegral/DesarrolloHumano/' },
+            { label: 'Representativos', path: '/FormacionIntegral/Representativos/' },
           ],
         },
         {
@@ -185,7 +178,6 @@ export default {
   cursor: pointer;
   width: 7vh;
   height: 7vh;
-  border: 1px solid black;
   position: fixed;
   z-index: 999;
   transform: translateX(40px) translateY(105px);
@@ -254,13 +246,13 @@ export default {
     width: 6vh;
     height: 43px;
     cursor: pointer;
-    border: 1px solid black;
     position: fixed;
     z-index: 999;
     transform: translateX(45px) translateY(75px);
   }
+
   .menu {
-    width:20%;
+    width: 20%;
     left: 55px;
     top: 230px;
   }
@@ -271,7 +263,6 @@ export default {
     width: 43px;
     height: 43px;
     cursor: pointer;
-    border: 1px solid black;
     position: fixed;
     z-index: 999;
     transform: translateX(45px) translateY(75px);

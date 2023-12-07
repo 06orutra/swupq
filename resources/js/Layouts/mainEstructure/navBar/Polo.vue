@@ -167,7 +167,7 @@
     cursor: pointer;
     width: 7vh;
     height: 7vh;
-    border: 1px solid black;
+    border: 1px solid transparent;
     position: fixed;
     z-index: 999;
     transform: translateX(80px) translateY(105px);

@@ -129,6 +129,10 @@ export default {
 </template>
 
 <style >
+.link{
+  font-family: "Times New Roman", Times, serif;
+}
+
 Button.link:hover {
   color: #000000 !important;
 }

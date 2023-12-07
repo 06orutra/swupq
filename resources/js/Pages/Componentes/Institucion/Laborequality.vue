@@ -74,9 +74,6 @@ export default {
   <AppEstructure :controllerName="'/igualdadLaboralPrin/bannerData'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div>
-      <div class=" banner_eq w-full">
-        <h2><b>IGUALDAD LABORAL Y NO DISCRIMINACIÓN</b></h2>
-      </div>
       <div class="title pt-20">
         <div v-for="text in texto">
           {{ text.titulo }}
@@ -158,7 +155,6 @@ export default {
         </div>
       </div>
     </div>
-
   </AppEstructure>
 </template>
 
@@ -249,13 +245,6 @@ embed {
 }
 
 /* Estilos de Caro */
-.banner_eq {
-  background-color: #800020;
-  text-align: center;
-  padding: 20px;
-  box-shadow: 0px 4px 8px rgba(50, 0, 0, 0.15);
-  /* Ajusta los valores para personalizar la sombra */
-}
 
 h2 {
   color: white;
@@ -314,12 +303,13 @@ main {
 
 .main-menu {
   width: 100%;
-  margin: auto;
   margin-top: 40px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-  justify-content: space-evenly;
 }
+
 
 /*estilos para los contenedores de los banners con imagen en movimiento*/
 .contenedoor {
@@ -440,47 +430,55 @@ main {
 }
 
 
-@media (min-width: 400px){
+@media (min-width: 400px) {
   .main-menu {
     margin-top: 100px;
   }
 }
-@media (min-width: 490px){
+
+@media (min-width: 490px) {
   .main-menu {
     margin-top: 150px;
   }
 }
-@media (min-width: 500px){
+
+@media (min-width: 500px) {
   .main-menu {
     margin-top: 200px;
   }
 }
-@media (min-width: 600px){
+
+@media (min-width: 600px) {
   .main-menu {
     margin-top: 250px;
   }
 }
-@media (min-width: 700px){
+
+@media (min-width: 700px) {
   .main-menu {
     margin-top: 300px;
   }
 }
-@media (min-width: 770px) and (max-width: 799px){
+
+@media (min-width: 770px) and (max-width: 799px) {
   .main-menu {
     margin-top: 30px;
   }
 }
-@media (min-width: 800px) and (max-width: 889px){
+
+@media (min-width: 800px) and (max-width: 889px) {
   .main-menu {
     margin-top: 100px;
   }
 }
-@media (min-width: 890px) and (max-width: 949px){
+
+@media (min-width: 890px) and (max-width: 949px) {
   .main-menu {
     margin-top: 200px;
   }
 }
-@media (min-width: 950px) and (max-width: 2000px){
+
+@media (min-width: 950px) and (max-width: 2000px) {
   .main-menu {
     margin-top: 200px;
   }

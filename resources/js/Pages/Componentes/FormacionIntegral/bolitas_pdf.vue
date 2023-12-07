@@ -136,7 +136,6 @@ export default {
     </div>
     <hr>
 </template>
-   
 
 <style scoped>
 .pdf-iframe {
@@ -253,7 +252,6 @@ embed {
     justify-content: space-around;
     gap: 20px;
     /* Espacio entre los elementos */
-    padding: 0 20px;
     /* Añadir un poco de padding al contenedor para evitar que los círculos estén demasiado cerca del borde de la pantalla */
 }
 
@@ -323,7 +321,6 @@ embed {
     flex-direction: row;
     align-items: center;
     margin-bottom: 40px;
-    margin-right: 30px;
     justify-content: space-around;
     margin-top: 30px;
 }
@@ -409,7 +406,6 @@ embed {
     }
 
     .vertical-column {
-        margin-right: 30px;
         margin-bottom: 20px;
         display: flex;
         align-items: center;
@@ -436,6 +432,3 @@ embed {
     }
 }
 </style>
-
-
-

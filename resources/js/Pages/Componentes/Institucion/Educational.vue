@@ -84,7 +84,7 @@ export default {
         console.log(error);
       });
     },
-    
+
     inicializarInteracciones() {
       const loaders = document.querySelectorAll('.loader');
       loaders.forEach(loader => {
@@ -112,162 +112,168 @@ export default {
 
 <template>
   <AppEstructure :controllerName="'/educationalBanner/bannerData'">
-  <div class="mx-auto">
+    <div class="mx-auto">
 
-    <div class="w-full" style="background-color: #800020; text-align: left; padding: 20px; ">
-      <h2 style="color: white;"><b>MODELO EDUCATIVO</b></h2>
-    </div>
-
-    <!--loader y los modales. El color del background se define por el id%2
+      <!--loader y los modales. El color del background se define por el id%2
         La imagen (aún no) la obtiene desde lo subido a la tabla modalModEdu
         la descripción al abrir el modal la obtiene del apartado "Link" en la tabla
         Y finalmente, el título, tanto dentro como fuera del Modal, se obtiene por el
         apartado "nombre" en la tabla modalModEdu-->
-    <section>
-      <br>
-      <div class="circle-container">
-        <div v-for="(item, index) in modal" :key="item.id" class="circle-wrapper">
-          <div class="background-image circle" data-index="0" @click="openModal(item.nombre, item.link)">
-            <img :src="'/storage/' + item.imagen" alt="Valor Image" class="circle-img" />
-            <div class="loader" :id="'loader' + getIndex(index)">
-              <div class="text" :id="'text' + getIndex(index)">{{ item.nombre }}</div>
+      <section>
+        <br>
+        <div class="circle-container">
+          <div v-for="(item, index) in modal" :key="item.id" class="circle-wrapper">
+            <div class="background-image circle" data-index="0" @click="openModal(item.nombre, item.link)">
+              <img :src="'/storage/' + item.imagen" alt="Valor Image" class="circle-img" />
+              <div class="loader" :id="'loader' + getIndex(index)">
+                <div class="text" :id="'text' + getIndex(index)">{{ item.nombre }}</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-  <div class="modal" :class="{ 'active': showModal }">
-    <div class="modal-content">
-      <div class="modal-body">
-        <h3 style="margin-bottom: 2em; text-align: center; color:#fff"><b>{{ modalTitle }}</b></h3>
-        <p>{{ modalContent }}</p>
-      </div>
-      <div class="modal-button" style="margin-top: 30px;">
-        <button type="button" class="btn btn-primary" @click="closeModal" style="border-radius: 0">CERRAR</button>
-      </div>
-    </div>
-  </div>
-  <br><br><br>
-  </section>
+        <div class="modal" :class="{ 'active': showModal }">
+          <div class="modal-content">
+            <div class="modal-body">
+              <h3 style="margin-bottom: 2em; text-align: center; color:#fff"><b>{{ modalTitle }}</b></h3>
+              <p>{{ modalContent }}</p>
+            </div>
+            <div class="modal-button" style="margin-top: 30px;">
+              <button type="button" class="btn btn-primary" @click="closeModal" style="border-radius: 0">CERRAR</button>
+            </div>
+          </div>
+        </div>
+        <br><br><br>
+      </section>
 
-  <!-- Carreras -->
-  <section>
-    <hr>
-    <br> <br>
-    <div v-for="datosTexto in texto" class="container text-center">
-      <header>
-        <!-- Esto mostrará solamente el contenido de la primera tabla
+      <!-- Carreras -->
+      <section>
+        <hr>
+        <br> <br>
+        <div v-for="datosTexto in texto" class="container text-center">
+          <header>
+            <!-- Esto mostrará solamente el contenido de la primera tabla
               de la sección en la base de datos, es decir, solamente el
               primer (y en teoría, único) registro en el admin. -->
-        <h1 style="color: #414141;"> {{ datosTexto.titulo }}
-          <br>
-          {{ datosTexto.contenido }}
-          <br>
-        </h1>
-        <hr>
-      </header>
+            <h1 class="titulo"> {{ datosTexto.titulo }}
+              <br>
+              {{ datosTexto.contenido }}
+              <br>
+            </h1>
+            <hr>
+          </header>
+        </div>
+
+        <div>
+          <div class=" row box-gadient box-blue">
+            <div class="col-xs-6 col-sm-6 col-3 col-md-3"
+              style="background:#6D0A16; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
+              <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-05.png"
+                style="max-height: 100px; margin:0 0 16px 0;">
+              <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter1">
+                770
+              </h2>
+              <p style="font-size: 1.3em; margin: 0;">Ingeniería Mecatrónica</p>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-3 col-md-3"
+              style="background:#37A6DE; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
+              <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-02.png"
+                style="max-height: 100px; margin: 0 0 16px 0;">
+              <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter2">
+                474
+              </h2>
+              <p style="font-size: 1.3em; ;">Ingeniería en Sistemas Computacionales</p>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-3 col-md-3"
+              style="background:#3e0b60; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
+              <img src="https://www.upq.mx/media/careers/logo_white/AUTOMOTRIZ.png"
+                style="max-height: 100px; margin: 0 0 16px 0;">
+              <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter3">
+                659
+              </h2>
+              <p style="font-size: 1.3em;;">Ingeniería en Tecnología Automotriz</p>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-3 col-md-3"
+              style="background:#182353; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
+              <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-041.png"
+                style="max-height: 100px; margin: 0 0 16px 0">
+              <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter4">
+                587
+              </h2>
+              <p style="font-size: 1.3em;">Ingeniería en Tecnología de Manufactura</p>
+            </div>
+
+          </div>
+
+          <div class=" row box-gadient box-blue">
+
+            <div class="col-xs-6 col-sm-6 col-3 col-md-3"
+              style="background:#8eae25; -webkit-transition: background 1s; transition: background 1s; color: white; text-align:center;">
+              <img src="https://www.upq.mx/media/careers/logo_white/REDES-01white.png"
+                style="max-height: 100px; margin:0 0 16px 0;">
+              <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive; " id="counter5">
+                208
+              </h2>
+              <p style="font-size: 1.3em;">Ingeniería en Redes y Telecomunicaciones</p>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-3 col-md-3"
+              style="background:#ce172d; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
+              <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-06_1.png"
+                style="max-height: 100px; margin:0 0 16px 0;">
+              <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive;" id="counter6">
+                541
+              </h2>
+              <p style="font-size: 1.3em;">Licenciatura en Administración y Gestión Empresarial</p>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-3 col-md-3"
+              style="background:#000000; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
+              <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-07.png"
+                style="max-height: 100px; margin:0 0 16px 0;">
+              <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive;" id="counter7">
+                985
+              </h2>
+              <p style="font-size: 1.3em;">Licenciatura en Negocios Internacionales</p>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-3 col-md-3"
+              style="background:#8C2437; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
+              <img src="https://www.upq.mx/assets/logos/logo-white.svg" style="max-height: 100px; margin:0 0 16px 0;">
+              <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive;" id="counter8">
+                4229
+              </h2>
+              <p style="font-size: 1.3em;">Total del Alumnado inscrito</p>
+            </div>
+          </div>
+        </div>
+        <hr><br>
+      </section>
+
     </div>
-
-    <div>
-      <div class=" row box-gadient box-blue">
-        <div class="col-xs-6 col-sm-6 col-3 col-md-3"
-          style="background:#6D0A16; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
-          <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-05.png"
-            style="max-height: 100px; margin:0 0 16px 0;">
-          <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter1">
-            770
-          </h2>
-          <p style="font-size: 1.3em; margin: 0;">Ingeniería Mecatrónica</p>
-        </div>
-
-        <div class="col-xs-12 col-sm-6 col-3 col-md-3"
-          style="background:#37A6DE; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
-          <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-02.png"
-            style="max-height: 100px; margin: 0 0 16px 0;">
-          <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter2">
-            474
-          </h2>
-          <p style="font-size: 1.3em; ;">Ingeniería en Sistemas Computacionales</p>
-        </div>
-
-        <div class="col-xs-6 col-sm-6 col-3 col-md-3"
-          style="background:#3e0b60; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
-          <img src="https://www.upq.mx/media/careers/logo_white/AUTOMOTRIZ.png"
-            style="max-height: 100px; margin: 0 0 16px 0;">
-          <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter3">
-            659
-          </h2>
-          <p style="font-size: 1.3em;;">Ingeniería en Tecnología Automotriz</p>
-        </div>
-
-        <div class="col-xs-6 col-sm-6 col-3 col-md-3"
-          style="background:#182353; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
-          <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-041.png"
-            style="max-height: 100px; margin: 0 0 16px 0">
-          <h2 class="font-raleway" data-speed="3000" style="font-family: cursive;" id="counter4">
-            587
-          </h2>
-          <p style="font-size: 1.3em;">Ingeniería en Tecnología de Manufactura</p>
-        </div>
-
-      </div>
-
-      <div class=" row box-gadient box-blue">
-
-        <div class="col-xs-6 col-sm-6 col-3 col-md-3"
-          style="background:#8eae25; -webkit-transition: background 1s; transition: background 1s; color: white; text-align:center;">
-          <img src="https://www.upq.mx/media/careers/logo_white/REDES-01white.png"
-            style="max-height: 100px; margin:0 0 16px 0;">
-          <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive; " id="counter5">
-            208
-          </h2>
-          <p style="font-size: 1.3em;">Ingeniería en Redes y Telecomunicaciones</p>
-        </div>
-
-        <div class="col-xs-6 col-sm-6 col-3 col-md-3"
-          style="background:#ce172d; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
-          <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-06_1.png"
-            style="max-height: 100px; margin:0 0 16px 0;">
-          <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive;" id="counter6">
-            541
-          </h2>
-          <p style="font-size: 1.3em;">Licenciatura en Administración y Gestión Empresarial</p>
-        </div>
-
-        <div class="col-xs-6 col-sm-6 col-3 col-md-3"
-          style="background:#000000; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
-          <img src="https://www.upq.mx/media/careers/logo_white/LOGOSCARRERAS-07.png"
-            style="max-height: 100px; margin:0 0 16px 0;">
-          <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive;" id="counter7">
-            985
-          </h2>
-          <p style="font-size: 1.3em;">Licenciatura en Negocios Internacionales</p>
-        </div>
-
-        <div class="col-xs-6 col-sm-6 col-3 col-md-3"
-          style="background:#8C2437; -webkit-transition: background 1s; transition: background 1s; color: white; text-align: center;">
-          <img src="https://www.upq.mx/assets/logos/logo-white.svg" style="max-height: 100px; margin:0 0 16px 0;">
-          <h2 class="font-raleway" data-speed="3000" style="color: white; font-family: cursive;" id="counter8">
-            4229
-          </h2>
-          <p style="font-size: 1.3em;">Total del Alumnado inscrito</p>
-        </div>
-      </div>
-    </div>
-    <hr><br>
-  </section>
-
-  </div>
-</AppEstructure>
+  </AppEstructure>
 </template>
 
 <style scoped>
+.titulo{
+  color: #414141;
+}
+.dark-mode .titulo {
+  color: white;
+}
 .container {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.dark-mode h1 {
+  color: white;
 }
 
 /* Espacio de cada cuadrado */
@@ -337,8 +343,7 @@ h2 {
   text-align: justify;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   margin-top: 10%;
-  margin-bottom:10%
-  
+  margin-bottom: 10%
 }
 
 .modal-body {
@@ -616,6 +621,4 @@ h2 {
     /* Espacio inferior entre cuadros */
   }
 }
-
-
 </style>

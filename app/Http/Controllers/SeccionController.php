@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\seccion;
 use Illuminate\Http\Request;
-
+/* tambien esta cambiando*/
 class SeccionController extends Controller
 {
     public function index()

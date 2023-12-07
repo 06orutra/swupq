@@ -46,7 +46,7 @@ const router = createRouter({
                 {
                     path: '/noticias',
                     name: 'noticias',
-                    component: () => import('@/Pages/Dashboard.vue')
+                    component: () => import('@/Pages/Componentes/noticias/noticiasAdmin/noticias.vue')
                 },
                 {
                     path: '/profile',

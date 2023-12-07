@@ -86,6 +86,7 @@ use App\Http\Controllers\BannerMarcoJuridicoController;
 use App\Http\Controllers\ChatButtonsController;
 use App\Http\Controllers\ChatResponseController;
 use App\Http\Controllers\ChatWelcomeController;
+use App\Http\Controllers\PrensaController;
 use Illuminate\Http\Request;
 
 /*
@@ -132,11 +133,10 @@ Route::prefix('institucion')->group(function () {
         return Inertia::render('Componentes/Institucion/rectorMessage');
     });
 
-    Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
-
     Route::get('ubicacion', function () {
         return Inertia::render('Componentes/Institucion/location');
     });
+
     Route::get('historia', function () {
         return Inertia::render('Componentes/Institucion/Historia');
     });
@@ -153,30 +153,27 @@ Route::prefix('institucion')->group(function () {
     Route::get('filosofia', function () {
         return Inertia::render('Componentes/Institucion/Philosophy');
     });
-    Route::get('marcoJuridico', function(){
+    Route::get('marcoJuridico', function () {
         return Inertia::render('Componentes/Institucion/LegalFramework');
     });
-    Route::get('directorio', function(){
+    Route::get('directorio', function () {
         return Inertia::render('Componentes/Institucion/Directorio');
     });
 
-    Route::get('prensa', function(){
+    Route::get('prensa', function () {
         return Inertia::render('Componentes/Institucion/Noticias');
     });
-});   
-    Route::get('ubicacion', function () {
-        return Inertia::render('Componentes/Institucion/location');
-    });
+});
+Route::get('ubicacion', function () {
+    return Inertia::render('Componentes/Institucion/location');
+});
 
 
 //rutas para carreras, ruta que devuelve la vista de las carreras, le pasa el id de la carrera que debe consultar sus datos
 Route::prefix('carreras')->group(function () {
-    Route::get('informes/{nombre_carrera}&{id}',[CarreraController::class,'get_carrera_view']);
+    Route::get('informes/{nombre_carrera}&{id}', [CarreraController::class, 'get_carrera_view']);
 });
 
-
-//¿Esto qué es xd?
-Route::get('products', 'AdminController@listProducts'); // Ruta sería: /admin/products 
 
 Route::get('marcoJuridico', function () {
     return Inertia::render('Componentes/Institucion/LegalFramework');
@@ -185,25 +182,20 @@ Route::get('lenguaExtranjera', function () {
     return Inertia::render('Componentes/Institucion/Foreignlanguage');
 });
 
-    Route::get('marcoJuridico', function(){
-        return Inertia::render('Componentes/Institucion/LegalFramework');
-    });
-
-
 Route::prefix('FormacionIntegral')->group(function () {
 
-    Route::get('lenguaExtranjera', function(){
+    Route::get('lenguaExtranjera', function () {
         return Inertia::render('Componentes/FormacionIntegral/lenguaExtran');
     });
 
-    Route::get('DesarrolloHumano', function(){
+    Route::get('DesarrolloHumano', function () {
         return Inertia::render('Componentes/FormacionIntegral/desarrolloHumano');
     });
 
-    Route::get('Representativos', function(){
+    Route::get('Representativos', function () {
         return Inertia::render('Componentes/FormacionIntegral/representativos');
     });
-});   
+});
 
 
 /*
@@ -231,6 +223,12 @@ Route::middleware([
 
 
     // ---------- Rutas Home ------------
+
+    Route::post('/prensa', [PrensaController::class, 'index']);
+    Route::get('/prensa/{id}', [PrensaController::class, 'show']);
+    Route::post('/prensas', [PrensaController::class, 'store']);
+    Route::put('/prensa/{id}', [PrensaController::class, 'update']);
+    Route::delete('/prensa/{id}', [PrensaController::class, 'destroy']);
 
     $controllers = [
         'home' => HomeController::class,
@@ -385,7 +383,7 @@ Route::post('/filosofiaImgPrinc/bannerData', [FilosofiaImgPrincController::class
 Route::post('/filosofiaVal/bannerData', [FilosofiaValorController::class, 'bannerData']);
 Route::post('/filosofiaImg/bannerData', [FilosofiaImgController::class, 'bannerData']);
 Route::post('/filosofias/bannerData', [FilosofiaController::class, 'bannerData']);
-Route::post('/videolenguajes', [ VideoLenguajeController::class, 'bannerData']);
+Route::post('/videolenguajes', [VideoLenguajeController::class, 'bannerData']);
 Route::post('/igualdadLaboralPrin/bannerData', [IgualdadLaboralPrincipalController::class, 'bannerData']);
 Route::post('/IgualdadLaboralText/bannerData', [IgualdadLaboralTextosController::class, 'bannerData']);
 Route::post('/IgualdadLaboralPdf/bannerData', [IgualdadLaboralPdfController::class, 'bannerData']);
@@ -410,21 +408,21 @@ Route::post('/bannerDatatercero', [TbCarruselTercerController::class, 'bannerDat
 
 /* rutas para el apartado de carreras (proteger para que solo puedo utilizarlas en admin)*/
 // Ruta para mostrar el json de los archivos subidos
-Route::get('data', [CarreraController::class, 'index']) -> name('data');
+Route::get('data', [CarreraController::class, 'index'])->name('data');
 
 //Ruta para mostrar el formulario de carreras
-Route::get('carrera', [CarreraController::class, 'myform']) -> name('carrera');
+Route::get('carrera', [CarreraController::class, 'myform'])->name('carrera');
 //Ruta para subir el formulario de carreras
 Route::post('/carrera-insertar', [CarreraController::class, 'store']);
 
 //Ruta para actualizar el formulario de carreras
-Route::get('carrera/{id}/edit', [CarreraController::class, 'edit']) -> name('carrera.edit');
+Route::get('carrera/{id}/edit', [CarreraController::class, 'edit'])->name('carrera.edit');
 
 //Ruta para actualizar el formulario de carreras
-Route::put('carrera/{id}', [CarreraController::class, 'update']) -> name('carrera.update');
+Route::put('carrera/{id}', [CarreraController::class, 'update'])->name('carrera.update');
 
 //Ruta para eliminar el formulario de carreras
-Route::delete('carrera/{id}', [CarreraController::class, 'destroy']) -> name('carrera.destroy');
+Route::delete('carrera/{id}', [CarreraController::class, 'destroy'])->name('carrera.destroy');
 
 //ruta de insercion de prueba
 Route::post('/carrera-prueba', [CarreraController::class, 'guardar'])->name('carrera.prueba');
@@ -433,25 +431,25 @@ Route::post('/carrera-prueba', [CarreraController::class, 'guardar'])->name('car
 Route::post('/carreras-disponibles', [CarreraController::class, 'get_carreras_disponibles'])->name('carrera.disponibles');
 
 //Ruta para obtener un solo registro de la base de datos
-Route::post('/carreras-unica',[CarreraController::class,'get_carrera'])->name('carrera.unica');
+Route::post('/carreras-unica', [CarreraController::class, 'get_carrera'])->name('carrera.unica');
 
 //Ruta para eliminar un registro de la base de datos
-Route::post('/carrera-eliminar',[CarreraController::class,'delete_carrera'])->name('carrera.eliminar');
+Route::post('/carrera-eliminar', [CarreraController::class, 'delete_carrera'])->name('carrera.eliminar');
 
 //Ruta para editar un registro de la base de datos
-Route::post('/carrera-editar',[CarreraController::class,'update_carrera'])->name('carrera.editar');
+Route::post('/carrera-editar', [CarreraController::class, 'update_carrera'])->name('carrera.editar');
 
 //ruta para obtener los conocimientos disponibles de las carreras
-Route::post('/carrera-conocimientos',[CarreraController::class,'get_carrera_conocimientos'])->name('carrera.conocimientos');
+Route::post('/carrera-conocimientos', [CarreraController::class, 'get_carrera_conocimientos'])->name('carrera.conocimientos');
 
 //ruta para obtener las habilidades disponibles de las carreras
-Route::post('/carrera-habilidades',[CarreraController::class,'get_carrera_habilidades'])->name('carrera.habilidades');
+Route::post('/carrera-habilidades', [CarreraController::class, 'get_carrera_habilidades'])->name('carrera.habilidades');
 
 //ruta para obtener las actitudes disponibles de las carreras
-Route::post('/carrera-actitudes',[CarreraController::class,'get_carrera_actitudes'])->name('carrera.actitudes');
+Route::post('/carrera-actitudes', [CarreraController::class, 'get_carrera_actitudes'])->name('carrera.actitudes');
 
 //ruta para obtener la lista de carreras disponibles para mostrar en el menu
-Route::post('/carrera-menu',[CarreraController::class,'get_carrera_disponibles_menu'])->name('carrera.menu');
+Route::post('/carrera-menu', [CarreraController::class, 'get_carrera_disponibles_menu'])->name('carrera.menu');
 
 
 

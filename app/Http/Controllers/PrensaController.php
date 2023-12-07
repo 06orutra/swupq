@@ -6,7 +6,8 @@ use App\Models\prensa;
 use Illuminate\Http\Request;
 use App\Models\Seccion;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Log;
+/* sigue cambiando*/ 
 class PrensaController extends Controller
 {
     public function index()
@@ -20,73 +21,40 @@ class PrensaController extends Controller
         $request->validate([
             'titulo' => 'required|string|max:255',
             'contenido' => 'required|string',
-            'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'nombre_seccion' => 'required|string|max:255'
+            'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Asumiendo que manejas la carga de archivos
+            'id_seccion' => 'required|integer'
         ]);
 
-        // Manejar la sección
-        $seccion = Seccion::firstOrCreate(['nombre' => $request->nombre_seccion]);
-
+        // Crear un nuevo registro de Prensa
         $prensa = new Prensa;
         $prensa->titulo = $request->titulo;
         $prensa->contenido = $request->contenido;
-        $prensa->id_seccion = $seccion->id;
+        $prensa->id_seccion = $request->id_seccion;
 
-        // Manejar la imagen
         if ($request->hasFile('imagen')) {
-            $imageName = $request->file('imagen')->store('prensa', 'public');
-            $prensa->imagen = $imageName;
+            $prensa->imagen = $request->file('imagen')->store('prensa', 'public');
         }
 
         $prensa->save();
-        return response()->json('Prensa added successfully');
+        return response()->json('Prensa creada con éxito');
+    }
+
+    public function show($id)
+    {
+        $prensa = Prensa::findOrFail($id);
+        return response()->json($prensa);
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'titulo' => 'string|max:255',
-            'contenido' => 'string',
-            'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'nombre_seccion' => 'string|max:255'
-        ]);
-
         $prensa = Prensa::findOrFail($id);
-
-        // Actualizar sección si es necesario
-        if ($request->has('nombre_seccion')) {
-            $seccion = Seccion::firstOrCreate(['nombre' => $request->nombre_seccion]);
-            $prensa->id_seccion = $seccion->id;
-        }
-
-        // Actualizar otros campos
-        $prensa->fill($request->only('titulo', 'contenido'));
-
-        // Manejar la actualización de la imagen
-        if ($request->hasFile('imagen')) {
-            // Eliminar imagen antigua si existe
-            if ($prensa->imagen) {
-                Storage::delete('public/' . $prensa->imagen);
-            }
-
-            $imageName = $request->file('imagen')->store('prensa', 'public');
-            $prensa->imagen = $imageName;
-        }
-
-        $prensa->save();
-        return response()->json('Prensa updated successfully');
+        $prensa->update($request->all());
+        return response()->json('Prensa actualizada con éxito');
     }
 
     public function destroy($id)
     {
-        $prensa = Prensa::findOrFail($id);
-
-        // Eliminar imagen si existe
-        if ($prensa->imagen) {
-            Storage::delete('public/' . $prensa->imagen);
-        }
-
-        $prensa->delete();
-        return response()->json('Prensa deleted successfully');
+        Prensa::destroy($id);
+        return response()->json('Prensa eliminada con éxito');
     }
 }

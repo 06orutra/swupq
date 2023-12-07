@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class prensa extends Model
+class Prensa extends Model
 {
-    protected $table = 'prensa';
+    protected $table = 'prensas';
 
     protected $fillable = [
         'titulo', 'contenido', 'imagen', 'id_seccion'

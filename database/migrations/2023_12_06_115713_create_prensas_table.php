@@ -16,11 +16,9 @@ return new class extends Migration
             $table->string('titulo');
             $table->longText('contenido');
             $table->string('imagen')->nullable();
-            /* falta agregar
             $table->boolean('estado')->default(false);  // estado por defecto es false
             $table->datetime('fecha_activacion')->nullable();  // nueva columna de fecha de activación
             $table->datetime('fecha_desactivacion')->nullable();  // fecha de desactivación
-            */ 
             $table->foreignId('id_seccion')->constrained('seccions');
             $table->timestamps();
         });

@@ -87,6 +87,7 @@ use App\Http\Controllers\ChatButtonsController;
 use App\Http\Controllers\ChatResponseController;
 use App\Http\Controllers\ChatWelcomeController;
 use App\Http\Controllers\PrensaController;
+use App\Http\Controllers\SeccionController;
 use Illuminate\Http\Request;
 
 /*
@@ -102,6 +103,13 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', []);
+});
+
+Route::get('prensa', function () {
+    return Inertia::render('Componentes/noticias/NoticiasGenerales');
+});
+Route::get('prensa/{any?}/{id}', function () {
+    return Inertia::render('Componentes/noticias/Noticias');
 });
 
 Route::prefix('servicios-universitarios')->group(function () {
@@ -161,7 +169,7 @@ Route::prefix('institucion')->group(function () {
     });
 
     Route::get('prensa', function () {
-        return Inertia::render('Componentes/Institucion/Noticias');
+        return Inertia::render('Componentes/noticias/Noticias');
     });
 });
 Route::get('ubicacion', function () {
@@ -225,10 +233,11 @@ Route::middleware([
     // ---------- Rutas Home ------------
 
     Route::post('/prensa', [PrensaController::class, 'index']);
-    Route::get('/prensa/{id}', [PrensaController::class, 'show']);
     Route::post('/prensas', [PrensaController::class, 'store']);
-    Route::put('/prensa/{id}', [PrensaController::class, 'update']);
-    Route::delete('/prensa/{id}', [PrensaController::class, 'destroy']);
+    Route::post('/prensa/edit', [PrensaController::class, 'update']);
+    Route::post('/prensa/destroy', [PrensaController::class, 'destroy']);
+
+    Route::post('/secciones', [SeccionController::class, 'index']);
 
     $controllers = [
         'home' => HomeController::class,
@@ -328,6 +337,9 @@ Route::middleware([
         });
     }
 });
+Route::post('/prensa', [PrensaController::class, 'index']);
+Route::post('/prensa/{id}', [PrensaController::class, 'indexId']);
+
 Route::post('/RepresentativoText/bannerData', [RepresentativoTextoController::class, 'bannerData']);
 Route::post('/Representativosprin/bannerData', [RepresentativoPrinController::class, 'bannerData']);
 Route::post('/RepresentativosDeporte/bannerData', [RepresentativoDeporteController::class, 'bannerData']);

@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\seccion;
 use Illuminate\Http\Request;
 /* tambien esta cambiando*/
+
 class SeccionController extends Controller
 {
     public function index()
     {
         $secciones = Seccion::all();
         return response()->json($secciones);
+
     }
 
     public function store(Request $request)

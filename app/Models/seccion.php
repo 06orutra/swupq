@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Seccion extends Model
 {
     protected $table = 'seccions';
-    protected $hidden = ['created_at', 'updated_at','id'];
+    protected $hidden = ['created_at', 'updated_at'];
 
     protected $fillable = [
         'nombre',

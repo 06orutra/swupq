@@ -88,7 +88,7 @@ export default {
           textColor: '#ffffff',
           label: 'EDUCACIÓN CONTINUA',
           subMenuItems: [
-            { label: 'Opción 1' },
+            { label: 'Prensa',  path:'/prensa' },
             { label: 'Opción 2' },
             { label: 'Opción 3' },
           ],
